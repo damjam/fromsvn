@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cims" default="zipAndUpload" basedir=".">
+	
+	<!--将部署文件压缩在此目录-->
+	<property name="projectPath" value="D:\project\.metadata\.me_tcat\webapps\cims"></property>
+	<property name="targetPath" value="D:\project\.metadata\.me_tcat\webapps"></property>
+	<property name="serverpath24" value="/usr/local/tomcat7-2/webapps/cims"></property>
+	<tstamp>
+       <format property="TODAY" pattern="MMdd" locale="en"/>
+    </tstamp>
+	<target name="clean">
+		<delete file="${targetPath}\cims${TODAY}.zip" 
+		/>
+	</target>	
+	
+	<target name="zipProject" depends="clean">
+		<zip destfile="${targetPath}\cims${TODAY}.zip" 
+			basedir="${projectPath}"
+			update="true"
+			duplicate="add"
+			includes="pages/**/*.jsp,js/**/*.js,js/*.js,WEB-INF/classes/**/*.class,
+			WEB-INF/classes/com/ylink/cim/**/*.xml,
+			WEB-INF/classes/*.xml,
+			WEB-INF/classes/log4j.properties,
+			WEB-INF/classes/filter.xml,
+			WEB-INF/struts-config*.xml,
+			WEB-INF/classes/com/ylink/cim/admin/view/LoginAction.class"
+			excludes="WEB-INF/classes/constantConfig.xml"
+		/>
+	</target>
+	<target name="zipAndUpload" depends="zipProject">
+			<ftp action="put" password="root" server="168.33.120.24" userid="root" remotedir="${serverpath24}"  binary="true" ignoreNoncriticalErrors="true" depends="true" verbose="true" passive="true">
+				<fileset file="${targetPath}\cims${TODAY}.zip">
+				</fileset>
+			</ftp>
+		</target>
+</project>

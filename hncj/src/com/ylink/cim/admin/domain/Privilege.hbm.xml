@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding='GB2312'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.Privilege" table="PRIVILEGE">
+        <id name="limitId" column="LIMIT_ID" type="string">
+            <generator class="assigned"/>
+        </id>
+ 
+        <property name="limitName" column="LIMIT_NAME" type="string"  not-null="true" />
+        <property name="parent" column="PARENT" type="string" />
+        <property name="isMenu" column="IS_MENU" type="string"  not-null="true" />
+        <property name="menuOrder" column="MENU_ORDER" type="integer" />
+        <property name="ifAudit" column="IF_AUDIT" type="string"  not-null="true" />
+    </class>
+    
+</hibernate-mapping>

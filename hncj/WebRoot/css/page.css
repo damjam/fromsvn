@@ -1,0 +1,144 @@
+/* -----------------------------------------------------------------------
+
+                Wucss 银联商务网上服务系统跨浏览器兼容CSS框架
+ 
+   * Copyright 2010-Present. See Website For More Info.
+   * 文件名称：Wucss网站CSS样式框架
+   * 兼容浏览器：IE6\IE7\火狐3\遨游2\世界之窗2\谷歌浏览器2\opera9\Safari4
+   * 设计师：FangZhengWu
+   * 技术支持：4008-333-222  www.gnete.com 
+   * 广州银联网络支付有限公司 
+   * 主要功能：对银联网络多渠道资金归集处理系统界面进行统一的跨浏览器样式控制
+
+----------------------------------------------------------------------- */
+
+/* 处理整体重置 */
+html, body, div, span, object, iframe, h1, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead,{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-family:inherit;vertical-align:baseline;}
+a img {border:none;}
+img {vertical-align:text-bottom;}
+
+* { margin:0; padding:0;list-style:none;}
+html,body { height:100%;}
+
+body {font-size:12px;color:#222;background:#fff; font-family:Tahoma, Geneva, sans-serif;}
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
+li ul, li ol {margin:0px;}
+ul, ol {margin:0 0 0 1.5em;}
+ul { list-style:none;}
+
+.clearfix:after, .head:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix, .head {display:block;}
+.clear {clear:both;}
+.clearing {clear: both; display: block; font-size:0px; display:none; overflow:hidden; line-height:0; height:0px}
+body.fullwidth {min-width:960px;}
+.bottom { position:relative; clear:both;height:26px;line-height:26px; vertical-align:middle; padding-top:20px;}
+
+/* 内容控制 */
+.location{width:100%; overflow:hidden; height:30px; line-height:30px; vertical-align:middle; border-bottom:1px solid #e5e5e5;}
+.okbox{ float:left; width:99%; overflow:hidden; padding-top:30px;}
+.processbox{ float:left; width:99%; overflow:hidden; }
+.processtitle{width:100%; margin-top:30px; overflow:hidden; float:left;}
+.processtitleimg{float:left;height:41px;padding-left:23px; padding-right:10px;}
+.processtitletx{float:left; height:41px; line-height:41px; vertical-align:middle; font-size:14px; font-weight:bold; overflow:hidden;}
+.processbz{padding:10px 0px 0px 33px; display:inline-block; overflow:hidden;}
+
+.userbox{float:left; width:99%; padding-top:30px;padding-bottom:30px;font-family:Tahoma, Geneva, sans-serif;}
+.userbox_bt{background:url(../images/inputbg_text.gif) repeat-x;width:158px;height:21px;border:1px solid #c3c3c3;overflow:hidden; padding:2px 0px 0px 5px; *padding:2px 0px 0px 5px; _padding:2px 0px 0px 5px; line-height:21px; vertical-align:middle;font-family:Tahoma, Geneva, sans-serif;}
+
+input:focus, input.sffocus {background: #cfc;border:1px solid #090;font-family:Tahoma, Geneva, sans-serif;}
+
+.userbt{ border:0px; background:url(../images/btbg.gif) no-repeat; width:96px; height:24px; line-height:24px; vertical-align:middle; overflow:hidden; cursor:pointer;}
+
+.tablebox{float:left; width:99%; padding-bottom:30px; margin-top:10px}
+.tablebox .titlebg{ background:url(../images/tabletitle.gif) repeat-x; height:34px; line-height:34px;  font-weight:bold;}
+
+.tablebox table{ border-collapse:collapse; }
+.tablebox th{ border:#ccc solid 1px; hite-space:nowrap;word-break:keep-all;}
+.tablebox td{border:#ccc solid 1px; height:25px; line-height:25px; vertical-align:middle; padding-left:3px;hite-space:nowrap;word-break:keep-all;}
+.tablebox .eee{ background:#fff;}
+.tablebox .ddd{ background:#f7f7f7;}
+.tablebox .on{ background:#d3ffaf}
+.tablebox .click{ background:#007a8a;color:#fff;}
+.table_navi{float:left; width:99%; overflow:hidden; padding-top:20px; text-align:right;}
+
+/* 通用圆角矩形 */
+.b1, .b2, .b3, .b4{font-size:1px; overflow:hidden; display:block;}
+.b1 {height:1px; background:#d9d6d6; margin:0 5px;}
+.b2 {height:1px; background:#fafafa; border-right:2px solid #d9d6d6; border-left:2px solid #d9d6d6; margin:0 3px;}
+.b3 {height:1px; background:#fafafa; border-right:1px solid #d9d6d6; border-left:1px solid #d9d6d6; margin:0 2px;}
+.b4 {height:2px; background:#fafafa; border-right:1px solid #d9d6d6; border-left:1px solid #d9d6d6; margin:0 1px;}
+.contentb {background: #fafafa; border-right:1px solid #d9d6d6; border-left:1px solid #d9d6d6;}
+.contentb div{ padding:3px;}
+
+/* 通用按钮定义 */
+.inp_L1,.inp_L2,.inp_L3,.inp_L4{background:url(../images/bt_bg.gif) no-repeat; cursor:pointer; margin:0px; font-size:12px;}
+.inp_L1{ width:67px; height:23px; background-position:-4px -4px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
+.inp_L2{ width:67px; height:23px; background-position:-4px -30px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
+.inp_L3{ width:96px; height:24px; background-position:-4px -55px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
+.inp_L4{ width:96px; height:24px; background-position:-4px -80px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
+
+/* 通用链接色 */
+a:link {color: #333333;text-decoration: none;}
+a:visited {color: #333333;text-decoration: none;}
+a:hover {color: #ff0000; text-decoration:underline;}
+a:focus{ outline:0;}
+
+/* 特殊红色文字 */
+.redfont {color: #ff0000;}
+/* 专用红色链接 */
+.redlink a:link {font-size: 12px;color: #ff0000;text-decoration: underline;}
+.redlink a:visited {font-size: 12px;color: #ff0000;text-decoration:none;}
+.redlink a:hover {font-size: 12px;color: #4c4948; text-decoration:none;}
+
+/* 专用红色链接14像素字体 */
+.redlinku14 a:link {font-size: 14px;color: #ff0000;text-decoration: underline;}
+.redlinku14 a:visited {font-size: 14px;color: #ff0000;text-decoration:underline;}
+.redlinku14 a:hover {font-size: 14px;color: #4c4948; text-decoration:none;}
+
+/* 带下划线红色链接 */
+.redlinku a:link {font-size: 12px;color: #ff0000;text-decoration: underline;}
+.redlinku a:visited {font-size: 12px;color: #ff0000;text-decoration:underline;}
+.redlinku a:hover {font-size: 12px;color: #ff0000; text-decoration:none;}
+
+/* 特殊红色文字 */
+.redfont {color: #ff0000;}
+
+/* 表格相关 */
+caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:left;}
+.form_grid td {height:30px}
+.form_grid select{width:166px;}
+.data_grid {border-collapse: collapse;}
+.data_grid th {background:url(../images/tabletitle.gif) repeat-x; height:34px; line-height:34px;  font-weight:bold;};
+.data_grid_text {text-align:left};
+.data_grid_sn {text-align:right};
+.data_grid_num {text-align:right};
+.break {word-break: break-all; word-wrap: break-word;}
+
+/* 分页 */
+.pageinputtext {text-align:center; width:40px;}
+.pagenavbtn {margin-left:5px}
+.pageNavigation {float:left; width:99%; overflow:hidden; padding:10px 0 3px 0; text-align:right;}
+
+/* 边距相关 */
+.mt10 {margin-top:10px};
+.mL5 {margin-left:5px};
+
+/* 表单提示信息样式 */
+.field_tipinfo, .error_tipinfo {width:250px; line-height:30px; font-size:12px; text-indent:2em; padding: 3px 5px 3px 20px;}
+.field_tipinfo {color:#666; border:0px solid #fff;}
+.error_tipinfo {color:#333; background:#FFF2E9 url(../images/fault.gif) no-repeat 1px; border:1px solid #FF6600; display:none}
+.nes {background: url(../images/redstar.gif) no-repeat right;}
+.formlabel {text-align:right; padding-right:5px; width:100px}
+.msg {background:#FDFFCE none repeat scroll 0%; border:1px solid #FFBA43; margin-top:5px; padding:10px; width:350px;}
+.readonly {color:#666666}
+.btnbox {height:30px; margin-top:5px;margin-left: 55px;}
+.btnbox input {margin-right:20px}
+
+/* 明细信息表格 */
+.detail_grid {border-color:#B6B6C0; background-color:#f2f2f7; border-collapse:collapse;}
+.detail_grid td {font-size:12px; vertical-align:middle;}
+.headcell {text-align:left; padding-left:3px; height:25px;}
+.valuecell {text-align:left; padding-left:3px; height:25px; background-color:#FFF;}
+td.tdnum {text-align: right; padding-right: 5px;}
+/*用于包装分页列表的div*/
+.list_table_wrap{width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom: 18px;min-height: 100px;}

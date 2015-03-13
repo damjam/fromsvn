@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="investInfoActionForm"
+			type="com.ylink.cim.invest.view.InvestInfoActionForm"></form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/investPlanAction" name="investInfoActionForm" attribute="investInfoActionForm"
+			type="com.ylink.cim.invest.view.InvestPlanAction" parameter="action"
+			scope="request">
+		</action>
+		<action path="/investQueryAction" type="com.ylink.cim.invest.view.InvestQueryAction"
+			name="investInfoActionForm" attribute="investInfoActionForm" parameter="action"
+			scope="request">
+		</action>
+		<action path="/investAcctAction" type="com.ylink.cim.invest.view.InvestAcctAction"
+			name="investInfoActionForm" attribute="investInfoActionForm" parameter="action"
+			scope="request">
+		</action>
+		<action path="/investFundAction" type="com.ylink.cim.invest.view.InvestFundAction"
+			name="investInfoActionForm" attribute="investInfoActionForm" parameter="action"
+			scope="request">
+		</action>
+		<action path="/investGoldAction" type="com.ylink.cim.invest.view.InvestGoldAction"
+			name="investInfoActionForm" attribute="investInfoActionForm" parameter="action"
+			scope="request">
+		</action>
+	</action-mappings>
+
+</struts-config>

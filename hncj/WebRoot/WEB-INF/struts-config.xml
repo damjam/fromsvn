@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	
+	<form-beans>
+	</form-beans>
+	
+	<global-exceptions />
+	<global-forwards>
+		<forward name="success" path="/success.jsp"></forward>
+		<forward name="failure" path="/error.jsp"></forward>
+		<forward name="overtime" path="/pages/common/overtime.jsp"></forward>
+		<forward name="invalid" path="/pages/common/invalid.jsp"></forward>
+		<forward name="index" path="/index.jsp" />
+	</global-forwards>
+	
+	<action-mappings>
+		<!-- 用户登录 -->
+		<action path="/login"
+			parameter="action"
+			type="com.ylink.cim.admin.view.LoginAction">
+			<forward name="changePwd" path="/pages/admin/changePassword.jsp" />
+			<forward name="index" path="/index.jsp" />
+			<forward name="toLoginPage" path="/index_old.jsp" />
+			<forward name="toMainPage"  path="/main.jsp" />
+<!--			<forward name="toMainPage"  path="/mp/index.jsp" />-->
+		</action>
+	</action-mappings>
+	
+	
+</struts-config>

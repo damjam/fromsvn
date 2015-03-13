@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hncj"
+  id="myeclipse.1310545036865"
+  context-root="/cims"
+  j2ee-spec="5.0"
+  archive="hncj.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

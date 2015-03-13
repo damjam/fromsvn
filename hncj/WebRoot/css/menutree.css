@@ -1,0 +1,12 @@
+*,body,ul,li,h1,h2{ margin:0; padding:0; list-style:none;}
+body{font:12px "ËÎÌו"; padding-top:0px;}
+#menu { width:205px; margin:auto; padding:0 0 0 4px}
+#menu h1 { cursor:pointer; color:#FFF; font-size:12px; font-weight:normal;padding:0px 0px 0px 10px; background:url(../images/menu1bg.gif) no-repeat; height:33px; line-height:33px; vertical-align:middle;}
+#menu h2 { cursor:pointer; color:#333; font-size:12px; font-weight:normal; padding:0px 0px 0px 20px; background:url(../images/menu2bg.gif) no-repeat;margin-top:-3px; height:33px; line-height:33px; vertical-align:middle;}
+#menu ul { padding-left:15px; border-top:none;overflow:auto; background-color:#FFF; width:184px; margin-top:-2px; margin-bottom:3px;}
+#menu ul a{  display:block;}
+#menu ul a:link {color: #333333;text-decoration: none;}
+#menu ul a:visited {color: #333333;text-decoration: none;}
+#menu ul a:hover {color: #ff0000; text-decoration:none;}
+#menu ul li {padding:5px 0px 3px 30px;}
+.no{ display:none;}

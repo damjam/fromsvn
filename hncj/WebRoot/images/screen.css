@@ -1,0 +1,109 @@
+/* -----------------------------------------------------------------------
+
+                Wucss 银联商务网上服务系统跨浏览器兼容CSS框架
+ 
+   * Copyright 2010-Present. See Website For More Info.
+   * 文件名称：Wucss网站CSS样式框架
+   * 兼容浏览器：IE6\IE7\火狐3\遨游2\世界之窗2\谷歌浏览器2\opera9\Safari4
+   * 设计师：FangZhengWu
+   * 技术支持：4008-333-222  www.gnete.com 
+   * 广州银联网络支付有限公司 
+   * 主要功能：对银联网络多渠道资金归集处理系统界面进行统一的跨浏览器样式控制
+
+----------------------------------------------------------------------- */
+
+/* 处理整体重置 */
+html, body, div, span, object, iframe, h1, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead,{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-family:inherit;vertical-align:baseline;}
+a img {border:none;}
+img {vertical-align:text-bottom;}
+
+* { margin:0; padding:0;list-style:none;}
+html { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; padding:0px; overflow:hidden;overflow-x: hidden; }
+html,body { height:100%;}
+
+body {font-size:12px;color:#222;background:#fff; font-family:Tahoma, Geneva, sans-serif;}
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
+li ul, li ol {margin:0px;}
+ul, ol {margin:0 0 0 1.5em;}
+ul { list-style:none;}
+
+.clearfix:after, .head:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix, .head {display:block;}
+.clear {clear:both;}
+.clearing {clear: both; display: block; font-size:0px; display:none; overflow:hidden; line-height:0; height:0px}
+body.fullwidth {min-width:960px;}
+
+/* DIV模拟框架 */
+.top { position:relative; height:120px; background:#fbfbfb;background:url(topline.jpg) repeat-x; overflow:hidden;}
+.side { position:relative;background:#0b429d;  height:100%;overflow:auto; width:209px; float:left; margin-right:0 !important;overflow:auto;}
+.main { position:relative; overflow:auto; height:100%; background:#fff; margin-left:0px; _margin-left:0; z-index:2;}
+
+
+/* 顶部元素定义 */
+.top_box{ float:left; width:100%; height:81px;}
+.top_logo{float:left; background:url(logo.gif) no-repeat; width:307px;height:81px; overflow:hidden;position:absolute;}
+.top_right{float:right;background:url(top_right.gif) no-repeat; width:400px;height:81px; overflow:hidden; text-align:right;}
+.toptext{ float:right; padding:18px 18px 0px 0px;}
+.toptext a{ padding:0px 10px 0px 10px;}
+
+/* 横向菜单定义 */
+.top_menu{ float:left; width:100%; height:39px;}
+.top_menutime{ float:left;width:208px;  height:39px;line-height:39px; vertical-align:middle; text-align:center; color:#fff;}
+.top_menutext{ float:left;height:39px; overflow:hidden;line-height:39px;vertical-align:middle; color:#FFF;}
+.top_fenge{float:left; width:3px;overflow:hidden;}
+.top_button{ float:left;_margin-left:-16px;}
+.top_menutext a{ display:block;width:100px; height:39px; margin-left:16px;overflow:hidden; background:url(topmenubg.gif) no-repeat; float:left;color:#FFF; text-align:center;}
+.top_menutext a:link {color: #fff;text-decoration: none;}
+.top_menutext a:visited {color: #fff;text-decoration:none;}
+.top_menutext a:hover {color: #fff; text-decoration:none;background:url(topmenubg_over.gif) no-repeat;}
+
+.top_menuuser{ float:right; color:#FFF; padding-right:10px;height:39px;line-height:39px; vertical-align:middle; overflow:hidden; _padding-top:10px;}
+
+/* 左边菜单定义 */
+.leftbox{position:relative;width:209px; float:left; margin:0px; padding:0px;overflow:hidden; }
+.leftmenua{ float:left; overflow:hidden; width:209px; height:32px; padding-top:5px;}
+.leftmenua a{ display:block;width:193px; height:32px; line-height:32px; _line-height:26px; _height:26px; _padding-top:6px; padding-right:16px; vertical-align:middle;  text-align:right; color:#FFF; background: url(leftmenua.gif) no-repeat; font-weight:bold;}
+.leftmenua a:link {color: #fff;text-decoration: none;}
+.leftmenua a:visited {color: #fff;text-decoration:none;}
+.leftmenua a:hover {color: #fff; text-decoration:none;}
+.leftmenub{ float:left; overflow:hidden; width:209px; height:27px; line-height:27px; vertical-align:middle;  text-align:right; color:#FFF;}
+.leftmenub a{ display:block;width:169px; height:27px; line-height:27px; padding-right:40px; vertical-align:middle;  text-align:right; color:#FFF; }
+.leftmenub a:link {color: #fff;text-decoration: none;}
+.leftmenub a:visited {color: #fff;text-decoration:none;}
+.leftmenub a:hover {color: #fff; text-decoration:none;background: url(leftmenub.gif) no-repeat; font-weight:bold;}
+
+.leftmenub_over{background: url(leftmenub.gif) no-repeat; float:left; overflow:hidden; width:209px; height:27px; line-height:27px; vertical-align:middle;  text-align:right; color:#FFF;}
+.leftmenub_over a{background: url(leftmenub.gif) no-repeat;  display:block;width:169px; height:27px; line-height:27px; padding-right:40px; vertical-align:middle;  text-align:right; color:#FFF; }
+.leftmenub_over a:link {color: #fff; text-decoration:none;background: url(leftmenub.gif) no-repeat; font-weight:bold;}
+.leftmenub_over a:visited {color: #fff; text-decoration:none;background: url(leftmenub.gif) no-repeat; font-weight:bold;}
+.leftmenub_over a:hover {color: #fff; text-decoration:none;background: url(leftmenub.gif) no-repeat; font-weight:bold;}
+
+/* 右边内容定义 */
+.main_bt{float:left; margin:0px; padding:180px 10px 0px 0px; _padding-right:5px;}
+.main iframe { position:absolute; height:100%; width:100%; background:#fff; left:0; top:0;}
+
+/* 通用链接色 */
+a:link {color: #333333;text-decoration: none;}
+a:visited {color: #333333;text-decoration: none;}
+a:hover {color: #ff0000; text-decoration:underline;}
+a:focus{ outline:0;}
+
+/* 特殊红色文字 */
+.redfont {color: #ff0000;}
+/* 专用红色链接 */
+.redlink a:link {font-size: 12px;color: #ff0000;text-decoration: none;}
+.redlink a:visited {font-size: 12px;color: #ff0000;text-decoration:none;}
+.redlink a:hover {font-size: 12px;color: #4c4948; text-decoration:underline;}
+
+/* 专用红色链接14像素字体 */
+.redlinku14 a:link {font-size: 14px;color: #ff0000;text-decoration: underline;}
+.redlinku14 a:visited {font-size: 14px;color: #ff0000;text-decoration:underline;}
+.redlinku14 a:hover {font-size: 14px;color: #4c4948; text-decoration:none;}
+
+/* 带下划线红色链接 */
+.redlinku a:link {font-size: 12px;color: #ff0000;text-decoration: underline;}
+.redlinku a:visited {font-size: 12px;color: #ff0000;text-decoration:underline;}
+.redlinku a:hover {font-size: 12px;color: #ff0000; text-decoration:none;}
+
+/* 特殊红色文字 */
+.redfont {color: #ff0000;}

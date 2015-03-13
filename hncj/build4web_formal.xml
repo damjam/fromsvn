@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cims" default="zipAndUpload" basedir=".">
+	
+	<!--将部署文件压缩在此目录
+	<property name="projectPath" value="D:\ylink\tomcat\apache-tomcat-6.0.14\webapps\cims"></property>
+	<property name="targetPath" value="c:\deploy"></property>
+	<property name="serverpath24" value="/usr/local/tomcat7-2/webapps/cims"></property>
+	<tstamp>
+       <format property="TODAY" pattern="MMdd" locale="en"/>
+    </tstamp>
+	<target name="clean">
+		<delete file="${targetPath}\cims${TODAY}.zip" 
+		/>
+	</target>	
+	
+	<target name="zipProject" depends="clean">
+		<zip destfile="${targetPath}\cims${TODAY}.zip" 
+			basedir="${projectPath}"
+			update="true"
+			duplicate="add"
+			includes="pages/**/*.jsp,WEB-INF/classes/**/*.class,*.jsp,images/*.*
+						WEB-INF/classes/com/ylink/cim/**/*.xml"
+			excludes="WEB-INF/classes/constantConfig.xml,WEB-INF/classes/com/ylink/cim/common/util/SendMailUtil.class"
+		/>
+	</target>
+	<target name="zipAndUpload" depends="zipProject">
+			<ftp action="put" password="root" server="168.33.120.24" userid="root" remotedir="${serverpath24}" port="22" binary="true" ignoreNoncriticalErrors="true" depends="true" verbose="true" passive="true">
+				<fileset file="${targetPath}\cims${TODAY}.zip">
+				</fileset>
+			</ftp>
+		</target>
+	
+	-->
+	<!--将部署文件压缩在此目录-->
+		<property name="projectPath" value="D:\ylink\tomcat\apache-tomcat-6.0.14\webapps\cims">
+		</property>
+		<property name="targetPath" value="c:\deploy">
+		</property>
+		<property name="userName" value="root">
+		</property>
+		<property name="password" value="root">
+		</property>
+		<property name="uploadMachine" value="168.33.120.24">
+		</property>
+		<property name="serverpath24" value="/usr/local/tomcat7-2/webapps/cims">
+		</property>
+		<tstamp>
+			<format property="TODAY" pattern="MMdd" locale="en" />
+		</tstamp>
+		<target name="clean">
+			<delete file="${targetPath}\cims${TODAY}.zip" />
+		</target>
+
+		<target name="zipProject" depends="clean">
+			<zip destfile="${targetPath}\cims${TODAY}.zip" basedir="${projectPath}" update="true" duplicate="add" 
+				includes="pages/**/*.jsp,WEB-INF/classes/**/*.class,*.jsp,
+							WEB-INF/classes/com/ylink/cim/**/*.xml"
+				excludes="WEB-INF/classes/constantConfig.xml,WEB-INF/classes/com/ylink/cim/common/util/SendMailUtil.class"
+			/>
+		</target>
+		<target name="zipAndUpload" depends="zipProject">
+			<echo message="zip文件上传服务器开始" />
+			<scp todir="${userName}:${password}@${uploadMachine}:${serverpath24}" port="22" trust="true" verbose="true">
+				<fileset file="${targetPath}\cims${TODAY}.zip" />
+			</scp>
+			<echo message="zip文件上传服务器结束" />
+		</target>
+</project>
+
+
