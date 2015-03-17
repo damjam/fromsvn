@@ -34,6 +34,7 @@ public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingB
 		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		return super.getPageData(helper, pager);
 	}
@@ -57,6 +58,7 @@ public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingB
 		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
 		helper.append("and state = ?", BillState.PAID.getValue());
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
 		if (sumInfo.get("amt") == null) {
 			sumInfo.put("amt", 0d);

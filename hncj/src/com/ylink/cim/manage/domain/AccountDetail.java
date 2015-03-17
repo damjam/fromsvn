@@ -25,7 +25,17 @@ public class AccountDetail implements java.io.Serializable {
 	private String ownerName;
 	private String inoutType;
 	private String remark;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	
 	
 	// Constructors

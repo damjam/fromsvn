@@ -21,7 +21,19 @@ public class Account implements java.io.Serializable {
 	private Date createDate;
 	private String state;
 	private String houseSn;
-	// Constructors
+	private String branchNo;
+	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+
+
 
 	/** default constructor */
 	public Account() {

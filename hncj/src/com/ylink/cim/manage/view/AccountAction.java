@@ -68,6 +68,7 @@ public class AccountAction extends BaseDispatchAction {
 		map.put("state", actionForm.getState());
 		map.put("ownerName", actionForm.getOwnerName());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = accountDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		return forward("/pages/manage/account/accountList.jsp");

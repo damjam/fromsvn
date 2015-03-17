@@ -77,18 +77,6 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		
 		houseInfoDao.save(houseInfo);
 	}
-	public void test() throws BizException {
-		//addhouseInfo();
-		
-		//addownerInfo();
-		
-		//addWR();
-		
-		//addBi();
-		//updat();
-		//setRem();
-		//update();
-	}
 	
 	
 	private void update() {

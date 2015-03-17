@@ -76,6 +76,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		accountJournal.setBillId(billId);
 		accountJournal.setInoutType(inoutType);
 		accountJournal.setTradeType(tradeType);
+		accountJournal.setBranchNo(userInfo.getBranchNo());
 		accountJournalDao.save(accountJournal);
 	}
 

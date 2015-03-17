@@ -18,7 +18,11 @@ public class TradeType extends AbstractType {
 	public static final TradeType DECORATE = new TradeType("装修服务费", "04");
 	public static final TradeType PARKING = new TradeType("车位维护费", "05");
 	public static final TradeType INNER_DEPOSIT = new TradeType("内部充值", "06");
-	public static final TradeType IN_OTHER = new TradeType("其他收入", "09");
+	public static final TradeType CARD_FEE = new TradeType("智能卡办理费", "07");
+	public static final TradeType PASS_FEE = new TradeType("临时出入证办理费", "08");
+	public static final TradeType IN_OTHER = new TradeType("其他", "98");
+	public static final TradeType AD_RENT = new TradeType("广告位租赁费", "20");
+	public static final TradeType IC_DEPOSIT = new TradeType("IC卡充值", "21");
 	
 	public static final TradeType REFUND = new TradeType("退押金", "10");
 	public static final TradeType ELECTRIC = new TradeType("交电费", "11");
@@ -29,7 +33,7 @@ public class TradeType extends AbstractType {
 	public static final TradeType WITHDRAW = new TradeType("退业主预存款", "16");
 	public static final TradeType INNER_WITHDRAW = new TradeType("清算提现", "17");
 	public static final TradeType IN_REVERSE = new TradeType("冲正交易", "18");
-	public static final TradeType OUT_OTHER = new TradeType("其他支出", "19");
+	public static final TradeType OUT_OTHER = new TradeType("其他", "99");
 	
 	protected TradeType(String name, String value) {
 		super(name, value);

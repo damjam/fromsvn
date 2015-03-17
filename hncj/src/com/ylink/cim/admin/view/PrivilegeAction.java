@@ -20,6 +20,7 @@ import com.ylink.cim.admin.service.PrivilegeService;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 
+import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.Symbol;
 import flink.util.LogUtils;
@@ -123,7 +124,7 @@ public class PrivilegeAction extends BaseDispatchAction {
 			Integer menuOrder = privilegeDao.getNextIndex(privilegeActionForm.getParent());
 			p.setMenuOrder(menuOrder);
 			p.setIfAudit(Symbol.NO);
-			privilegeDao.saveOrUpdate(p);
+			privilegeService.savePrivilege(p);
 			setResult(true, "操作成功", request);
 			privilegeActionForm.setLimitId(null);
 			privilegeActionForm.setLimitName(null);
@@ -134,8 +135,9 @@ public class PrivilegeAction extends BaseDispatchAction {
 			setResult(false, "操作失败:"+e.getMessage(), request);
 			String msg = LogUtils.r("添加子权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
+			return toEditPrivilege(mapping, form, request, response);
 		}
-		return toEditPrivilege(mapping, form, request, response);
+		return listPrivs(mapping, form, request, response);
 	}
 	
 	//修改权限资源
@@ -162,17 +164,20 @@ public class PrivilegeAction extends BaseDispatchAction {
 			PrivilegeResource p = null;
 			if (privilegeActionForm.getId() != null) {
 				 p = privilegeDao.findById(PrivilegeResource.class, privilegeActionForm.getId());
+				 BeanUtils.copyProperties(p, privilegeActionForm);
 			} else {
 				p = new PrivilegeResource();
+				BeanUtils.copyProperties(p, privilegeActionForm);
+				String id = idFactoryService.generateId(Constants.PRIVILEGE_RESOURCE_ID);
+				p.setId(Long.parseLong(id));
 			}
-			BeanUtils.copyProperties(p, privilegeActionForm);
 			privilegeResourceService.savePrivilegeResource(p);
 			setResult(true, "操作成功", request);
 			String msg = LogUtils.r("修改子权限成功,修改内容为：{?}",FeildUtils.toString(p));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 		} catch (Exception e) {
 			setResult(false, "操作失败:"+e.getMessage(), request);
-//			e.printStackTrace();
+			e.printStackTrace();
 			String msg = LogUtils.r("修改子权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 		}

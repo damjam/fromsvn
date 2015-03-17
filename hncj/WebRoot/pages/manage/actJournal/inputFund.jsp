@@ -75,7 +75,7 @@
 						    <td>
 						    	<html:select property="tradeType" styleId="tradeType">
 						    		<html:option value="06">内部充值</html:option>
-						    		<html:option value="09">其他入账</html:option>
+						    		<html:option value="09">其他</html:option>
 						    	</html:select>
 						    </td>
 					   </tr>

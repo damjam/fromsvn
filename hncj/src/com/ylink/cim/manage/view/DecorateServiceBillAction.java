@@ -72,6 +72,7 @@ public class DecorateServiceBillAction extends BaseDispatchAction {
 		map.put("state", actionForm.getState());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = decorateServiceBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = decorateServiceBillDao.findSumInfo(map);

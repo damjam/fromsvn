@@ -42,6 +42,7 @@ public class AccountJournalAction extends BaseDispatchAction {
 		map.put("startCreateDate", actionForm.getStartCreateDate());
 		map.put("endCreateDate", actionForm.getEndCreateDate());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = accountJournalDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = accountJournalDao.findSumInfo(map);

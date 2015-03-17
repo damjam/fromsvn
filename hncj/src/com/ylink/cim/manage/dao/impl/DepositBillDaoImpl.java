@@ -39,6 +39,7 @@ public class DepositBillDaoImpl extends BaseDaoHibernateImpl implements DepositB
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.id desc");
 		return super.getPageData(helper, pager);
 	}
@@ -75,6 +76,7 @@ public class DepositBillDaoImpl extends BaseDaoHibernateImpl implements DepositB
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		//helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
 		Map<String, Object> sumInfo = new HashMap<String, Object>();

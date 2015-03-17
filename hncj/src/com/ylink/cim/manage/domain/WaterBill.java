@@ -35,7 +35,17 @@ public class WaterBill implements java.io.Serializable {
 	private String remark;
 	private Double balance;
 	private Double paidAmt;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	// Constructors
 	
 	public Double getPaidAmt() {

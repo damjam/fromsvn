@@ -336,7 +336,7 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 	protected UserInfo getSessionUser(final HttpServletRequest request) {
 		return (UserInfo) WebUtils.getSessionAttribute(request, Constants.SESSION_USER);
 	}
-
+	
 	/**
 	 * 获取当前用户编号.
 	 *
@@ -436,6 +436,9 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 	protected BranchType getSessionBranch(HttpServletRequest request) {
 		String tag = getSessionBranchTag(request);
 		return BranchType.getByTag(tag);
+	}
+	protected String getSessionBranchNo(HttpServletRequest request) {
+		return getSessionUser(request).getBranchNo();
 	}
 	protected String[] getSessionInvestAcctNos(HttpServletRequest request) {
 		return (String[])WebUtils.getSessionAttribute(request, Constants.INVEST_ACCT_NOS);

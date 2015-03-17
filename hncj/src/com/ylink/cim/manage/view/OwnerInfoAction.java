@@ -97,6 +97,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
 		map.put("ownerName", actionForm.getOwnerName());
 		map.put("houseSn", actionForm.getHouseSn());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		return forward("/pages/manage/owner/ownerInfoList.jsp");

@@ -21,7 +21,17 @@ public class AccountJournal implements java.io.Serializable {
 	private String createUser;
 	private String remark;
 	private String billId;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	// Constructors
 	
 	public String getBillId() {

@@ -52,5 +52,8 @@
 		<property name="remark" type="java.lang.String">
 			<column name="REMARK" length="50" />
 		</property>
+		<property name="branchNo" type="java.lang.String">
+			<column name="BRANCH_NO" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

@@ -20,7 +20,17 @@ public class CarInfo implements java.io.Serializable {
 	private String createUser;
 	private Date updateDate;
 	private String updateUser;
+	private String branchNo;
+	
+	public String getBranchNo() {
+		return branchNo;
+	}
 
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	// Constructors
 
 	/** default constructor */

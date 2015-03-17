@@ -227,4 +227,7 @@ public abstract class ParaManager {
 	public static String getWaterPrice() {
 		return getPara("1100");
 	}
+	public static String getBillPrice() {
+		return getPara("1101");
+	}
 }

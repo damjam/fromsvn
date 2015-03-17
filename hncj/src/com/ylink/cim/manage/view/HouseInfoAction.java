@@ -27,7 +27,6 @@ public class HouseInfoAction extends BaseDispatchAction {
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);
-		houseInfoService.test();
 		return forward("/pages/manage/house/houseInfoAdd.jsp");
 	}
 	
@@ -60,6 +59,7 @@ public class HouseInfoAction extends BaseDispatchAction {
 		map.put("buildingNo", actionForm.getBuildingNo());
 		map.put("unitNo", actionForm.getUnitNo());
 		map.put("floor", actionForm.getFloor());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = houseInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);

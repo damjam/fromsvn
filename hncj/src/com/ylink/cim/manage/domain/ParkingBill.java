@@ -34,7 +34,17 @@ public class ParkingBill implements java.io.Serializable {
 	
 	// Constructors
 	
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	public String getRemark() {
 		return remark;
 	}

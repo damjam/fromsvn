@@ -78,6 +78,16 @@
 								<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>
+					   <tr>
+					    	<td class="formlabel nes">所属机构</td>
+						     <td>
+								<html:select property="branchNo" styleClass="{required:true}" >
+									<html:option value="">---请选择---</html:option>
+									<html:options collection="branchTypes" labelProperty="value" property="key"  />
+								</html:select>
+								<span class="field_tipinfo">不能为空</span>
+							</td>
+					   </tr>
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="提交" onclick="save()"/>

@@ -87,6 +87,7 @@ public class WaterRecordAction extends BaseDispatchAction {
 		map.put("startCreateDate", actionForm.getStartCreateDate());
 		map.put("endCreateDate", actionForm.getEndCreateDate());
 		map.put("houseSn", actionForm.getHouseSn());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = waterRecordDao.findWaterRecordPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		return forward("/pages/manage/meter/water/waterRecordList.jsp");

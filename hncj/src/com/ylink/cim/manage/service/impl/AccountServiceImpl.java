@@ -1,11 +1,9 @@
 package com.ylink.cim.manage.service.impl;
 
-import java.security.acl.Owner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -62,6 +60,7 @@ public class AccountServiceImpl implements AccountService {
 		account.setCreateUser(sessionUser.getUserName());
 		account.setHouseSn(ownerInfo.getHouseSn());
 		account.setState(OwnerState.NORMAL.getValue());
+		account.setBranchNo(sessionUser.getBranchNo());
 		accountDao.save(account);
 		ownerInfo.setHasAcct(Symbol.YES);
 		ownerInfoDao.update(ownerInfo);
@@ -83,6 +82,7 @@ public class AccountServiceImpl implements AccountService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("houseSn", houseSn);
 		params.put("states", new String[] {BillState.PART_PAID.getValue(), BillState.UNPAY.getValue()});
+		params.put("branchNo", userInfo.getBranchNo());
 		List<WaterBill> bills = waterBillDao.findBills(params);
 		Account account = accountDao.findByIdWithLock(no);
 		for (int i = 0; i < bills.size(); i++) {
@@ -150,6 +150,7 @@ public class AccountServiceImpl implements AccountService {
 		detail.setType(type);
 		detail.setInoutType(inoutType);
 		detail.setRemark(remark);
+		detail.setBranchNo(userInfo.getBranchNo());
 		accountDao.save(detail);
 		return id;
 	}

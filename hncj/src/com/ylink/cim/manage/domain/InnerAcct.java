@@ -20,7 +20,17 @@ public class InnerAcct implements java.io.Serializable {
 	private Long inTimes;
 	private Long outTimes;
 	private Long times;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	public Long getInTimes() {
 		return inTimes;
 	}

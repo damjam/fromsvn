@@ -8,21 +8,28 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
+import com.ylink.cim.common.type.IcCardType;
 import com.ylink.cim.common.type.InputTradeType;
 import com.ylink.cim.common.type.OutputTradeType;
+import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.manage.dao.AccountDao;
+import com.ylink.cim.manage.dao.AdRentBillDao;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
+import com.ylink.cim.manage.dao.GeneralBillDao;
+import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.dao.ParkingBillDao;
 import com.ylink.cim.manage.dao.WaterBillDao;
 import com.ylink.cim.manage.domain.Account;
+import com.ylink.cim.manage.domain.AdRent;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
-import com.ylink.cim.manage.domain.HouseInfo;
+import com.ylink.cim.manage.domain.GeneralBill;
+import com.ylink.cim.manage.domain.IcDeposit;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.ParkingBill;
 import com.ylink.cim.manage.domain.WaterBill;
@@ -35,7 +42,6 @@ import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.etc.Symbol;
-import flink.util.AmountUtils;
 import flink.util.DateUtil;
 @Component("billService")
 public class BillServiceImpl implements BillService {
@@ -59,6 +65,12 @@ public class BillServiceImpl implements BillService {
 	private AccountDao accountDao;
 	@Autowired
 	private AccountJournalService accountJournalService;
+	@Autowired
+	private GeneralBillDao generalBillDao;
+	@Autowired
+	private IcDepositDao icDepositDao;
+	@Autowired
+	private AdRentBillDao adRentBillDao;
 	public void chargeWaterFee(String id, UserInfo userInfo) throws BizException {
 		WaterBill bill = waterBillDao.findByIdWithLock(id);
 		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn());
@@ -83,6 +95,7 @@ public class BillServiceImpl implements BillService {
 		bill.setChargeDate(DateUtil.getCurrent());
 		bill.setChargeUser(userInfo.getUserName());
 		bill.setRemark(remark);
+		bill.setBranchNo(userInfo.getBranchNo());
 		waterBillDao.save(bill);
 		if (flag) {
 			accountService.payBill(ownerInfo.getId(), acctPayAmt, bill.getId(), "扣除水费"+MoneyUtil.getFormatStr2(acctPayAmt)+"元", userInfo);
@@ -96,6 +109,7 @@ public class BillServiceImpl implements BillService {
 		parkingBill.setCreateDate(DateUtil.getCurrent());
 		parkingBill.setCreateUser(userInfo.getUserName());
 		parkingBill.setState(BillState.UNPAY.getValue());
+		parkingBill.setBranchNo(userInfo.getBranchNo());
 		parkingBillDao.save(parkingBill);
 	}
 	public void saveServiceBill(CommonServiceBill commonServiceBill, UserInfo userInfo) throws BizException {
@@ -104,8 +118,8 @@ public class BillServiceImpl implements BillService {
 		commonServiceBill.setCreateDate(DateUtil.getCurrent());
 		commonServiceBill.setCreateUser(userInfo.getUserName());
 		commonServiceBill.setState(BillState.UNPAY.getValue());
+		commonServiceBill.setBranchNo(userInfo.getBranchNo());
 		commonServiceBillDao.save(commonServiceBill);
-		//
 	}
 	public void chargeCommonFee(String id, UserInfo userInfo) throws BizException {
 		CommonServiceBill commonServiceBill = commonServiceBillDao.findByIdWithLock(id);
@@ -185,6 +199,7 @@ public class BillServiceImpl implements BillService {
 		String id = idFactoryService.generateId(Constants.BILL_ID);
 		depositBill.setId(id);
 		depositBill.setState(BillState.UNPAY.getValue());
+		depositBill.setBranchNo(userInfo.getBranchNo());
 		depositBillDao.save(depositBill);
 	}
 
@@ -194,6 +209,7 @@ public class BillServiceImpl implements BillService {
 		bill.setCreateDate(DateUtil.getCurrent());
 		bill.setCreateUser(userInfo.getUserName());
 		bill.setState(BillState.UNPAY.getValue());
+		bill.setBranchNo(userInfo.getBranchNo());
 		decorateServiceBillDao.save(bill);
 		if (StringUtils.isNotBlank(bill.getCsBillId())) {
 			CommonServiceBill csBill = commonServiceBillDao.findById(bill.getCsBillId());
@@ -205,6 +221,7 @@ public class BillServiceImpl implements BillService {
 				newCsBill.setChargeUser(null);
 				newCsBill.setRemark("补缴20%已减免物业费");
 				newCsBill.setTotalAmount(csBill.getTotalAmount()*0.25);
+				newCsBill.setBranchNo(userInfo.getBranchNo());
 				saveServiceBill(newCsBill, userInfo);
 			} catch (Exception e) {
 				throw new BizException("保存补缴物业费单据失败!");
@@ -212,4 +229,56 @@ public class BillServiceImpl implements BillService {
 		}
 	}
 
+	public void saveAdRentBill(AdRent adRent, UserInfo sessionUser) throws BizException {
+		String id = idFactoryService.generateId(Constants.BILL_ID);
+		adRent.setId(id);
+		adRent.setState(BillState.UNPAY.getValue());
+		adRent.setBranchNo(sessionUser.getBranchNo());
+		adRentBillDao.save(adRent);
+	}
+
+
+	public void saveGeneralBill(GeneralBill generalBill, UserInfo userInfo) throws BizException {
+		String id = idFactoryService.generateId(Constants.BILL_ID);
+		generalBill.setId(id);
+		generalBill.setState(BillState.UNPAY.getValue());
+		generalBill.setBranchNo(userInfo.getBranchNo());
+		generalBillDao.save(generalBill);
+	}
+
+	public void chargeGeneralBill(String id, UserInfo userInfo) throws BizException {
+		GeneralBill bill = generalBillDao.findByIdWithLock(id);
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setCreateDate(DateUtil.getCurrent());
+		generalBillDao.update(bill);
+		accountJournalService.add(bill.getTradeType(), bill.getPaidAmt(), id, "收"+bill.getPayerName()+TradeType.valueOf(bill.getTradeType()).getName(), userInfo);
+	}
+
+	public void chargeIcDeposit(String id, UserInfo userInfo) throws BizException {
+		IcDeposit bill = icDepositDao.findByIdWithLock(id);
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setDepositDate(DateUtil.getCurrent());
+		icDepositDao.update(bill);
+		accountJournalService.add(TradeType.IC_DEPOSIT.getValue(), bill.getAmount(), bill.getId(), "收"+bill.getPayerName()+IcCardType.valueOf(bill.getCardType()).getName()+"充值款", userInfo);
+	}
+	
+	public void saveIcDeposit(IcDeposit icDeposit, UserInfo userInfo) throws BizException {
+		String id = idFactoryService.generateId(Constants.BILL_ID);
+		icDeposit.setId(id);
+		icDeposit.setState(BillState.UNPAY.getValue());
+		icDeposit.setBranchNo(userInfo.getBranchName());
+		generalBillDao.save(icDeposit);
+	}
+
+
+	public void chargeAdRent(String id, UserInfo userInfo) throws BizException {
+		AdRent bill = adRentBillDao.findByIdWithLock(id);
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setCreateDate(DateUtil.getCurrent());
+		adRentBillDao.update(bill);
+		accountJournalService.add(TradeType.AD_RENT.getValue(), bill.getAmount(), id, "收"+bill.getPayerName()+"广告位租赁费", userInfo);
+	}
 }

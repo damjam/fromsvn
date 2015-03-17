@@ -185,9 +185,9 @@ public class UserInfoAction extends BaseDispatchAction {
 	 
 	
 	public void initSelect(HttpServletRequest request) throws Exception{
-		/*
-		ParaManager.setDictInReq(request, SysDictType.BranchType, "branchTypes");
-		ParaManager.setDictInReq(request, new SysDictType[]{SysDictType.BranchType});*/
+		
+		//ParaManager.setDictInReq(request, SysDictType.BranchType, "branchTypes");
+		ParaManager.setDictInReq(request, new SysDictType[]{SysDictType.BranchType});
 		Map<String, String> map = ParaManager.getSysDict(SysDictType.UserType.getValue());
 		Map<String, String> userTypes = new HashMap<String, String>();
 		userTypes.putAll(map);

@@ -11,5 +11,4 @@ public interface HouseInfoService {
 
 	void add(HouseInfo houseInfo, UserInfo sessionUser) throws BizException;
 	
-	void test() throws BizException;
 }

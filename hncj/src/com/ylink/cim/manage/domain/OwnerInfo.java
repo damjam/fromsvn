@@ -35,7 +35,17 @@ public class OwnerInfo implements java.io.Serializable {
 	private String cancelUser;
 	private String hasAcct;
 	private Double area;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	
 	
 	// Constructors

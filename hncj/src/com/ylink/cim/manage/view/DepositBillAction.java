@@ -20,7 +20,11 @@ import com.ylink.cim.manage.service.BillService;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
-
+/**
+ * ÊÕÑº½ð
+ * @author libaozhu
+ * @date 2015-3-16
+ */
 public class DepositBillAction extends BaseDispatchAction {
 	private DepositBillDao depositBillDao = (DepositBillDao)getService("depositBillDao");
 	private BillService billService = (BillService)getService("billService");
@@ -62,6 +66,7 @@ public class DepositBillAction extends BaseDispatchAction {
 		map.put("endRefundDate", actionForm.getEndRefundDate());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = depositBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = depositBillDao.findSumInfo(map);

@@ -27,7 +27,17 @@ public class DecorateServiceBill implements java.io.Serializable {
 	private String ownerName;
 	private Double supFee;
 	private String csBillId;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	
 	// Constructors
 	

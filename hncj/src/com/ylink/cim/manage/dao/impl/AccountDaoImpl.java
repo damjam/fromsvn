@@ -30,6 +30,7 @@ public class AccountDaoImpl extends BaseDaoHibernateImpl implements AccountDao {
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and ownerName = ?", MapUtils.getString(params, "ownerName"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}

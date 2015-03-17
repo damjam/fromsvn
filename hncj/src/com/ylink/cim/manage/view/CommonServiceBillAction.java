@@ -73,6 +73,7 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 		map.put("state", actionForm.getState());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = commonServiceBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = commonServiceBillDao.findSumInfo(map);
@@ -155,7 +156,6 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 			String lightPrice = request.getParameter("lightPrice");
 			//String houseSn = request.getParameter("houseSn");
 			String areaStr = request.getParameter("area");
-			String checkinState = request.getParameter("checkinState");
 			Double area = Double.parseDouble(areaStr);
 			//HouseInfo houseInfo = commonServiceBillDao.findById(HouseInfo.class, houseSn);
 			Integer monthNum = Integer.parseInt(monthNumStr);

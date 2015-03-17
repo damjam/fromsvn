@@ -67,6 +67,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 		map.put("parkingSn", actionForm.getParkingSn());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);

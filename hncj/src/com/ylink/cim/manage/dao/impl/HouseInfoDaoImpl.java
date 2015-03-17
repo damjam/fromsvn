@@ -3,7 +3,6 @@ package com.ylink.cim.manage.dao.impl;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +22,7 @@ public class HouseInfoDaoImpl extends BaseDaoHibernateImpl implements HouseInfoD
 		helper.append("and t.buildingNo = ?", params.get("buildingNo"));
 		helper.append("and t.unitNo = ?", params.get("unitNo"));
 		helper.append("and t.floor = ?", params.get("floor"));
+		helper.append("and t.branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		return super.getPageData(helper, pager);
 	}

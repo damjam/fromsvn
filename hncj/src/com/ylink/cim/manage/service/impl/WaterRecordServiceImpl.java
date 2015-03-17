@@ -49,6 +49,7 @@ public class WaterRecordServiceImpl implements WaterRecordService{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("houseSn", waterRecord.getHouseSn());
 		params.put("recordMonth", recordMonth);
+		params.put("branchNo", userInfo.getBranchNo());
 		Assert.isEmpty(waterRecordDao.findPreRecords(params), "月份"+recordMonth+"的记录已存在");
 		waterRecord.setId(idFactoryService.generateId(Constants.WATER_RECORD_ID));
 		waterRecord.setCreateDate(DateUtil.getCurrent());
@@ -131,6 +132,7 @@ public class WaterRecordServiceImpl implements WaterRecordService{
 	public Integer checkAllRecord(UserInfo userInfo) throws BizException {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("state", RecordState.UNCHECK.getValue());
+		params.put("branchNo", userInfo.getBranchNo());
 		List<WaterRecord> list = waterRecordDao.findRecords(params);
 		int k = 0;
 		for (int i = 0; i < list.size(); i++) {

@@ -24,7 +24,17 @@ public class DepositBill implements java.io.Serializable {
 	private String purpose;
 	private String payerName;
 	private String remark;
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	// Constructors
 
 	

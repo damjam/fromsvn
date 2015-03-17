@@ -36,6 +36,7 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
@@ -83,6 +84,7 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		helper.append("from WaterBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and state in ?", (String[])params.get("states"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id");
 		return super.getList(helper);
 	}
@@ -99,6 +101,7 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		//helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
 		Map<String, Object> sumInfo = new HashMap<String, Object>();

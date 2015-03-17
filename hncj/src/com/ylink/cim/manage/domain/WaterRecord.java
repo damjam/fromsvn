@@ -27,7 +27,17 @@ public class WaterRecord implements java.io.Serializable {
 	private String remark;
 	// Constructors
 	
+	private String branchNo;
 	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	/** default constructor */
 	public WaterRecord() {
 	}

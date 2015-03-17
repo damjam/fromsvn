@@ -22,6 +22,17 @@ public class HouseInfo implements java.io.Serializable {
 	private Date createDate;
 	private String houseDesc;
 	private String remark;
+	private String branchNo;
+	
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	// Constructors
 
 	/** default constructor */

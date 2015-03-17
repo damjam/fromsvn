@@ -79,5 +79,8 @@
 		<property name="cancelDate" type="java.util.Date">
 			<column name="CANCEL_DATE" length="10" />
 		</property>
+		<property name="branchNo" type="java.lang.String">
+			<column name="BRANCH_NO" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>
