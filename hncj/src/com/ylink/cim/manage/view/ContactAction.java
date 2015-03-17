@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionMapping;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.manage.dao.ContactDao;
-import com.ylink.cim.manage.domain.Account;
 import com.ylink.cim.manage.domain.Contact;
 import com.ylink.cim.manage.service.ContactService;
 
@@ -28,9 +27,9 @@ public class ContactAction extends BaseDispatchAction {
 			HttpServletResponse response) throws Exception {
 		YesNoType.setInReq(request);
 		ContactActionForm actionForm = (ContactActionForm)form;
-		String acctNo = request.getParameter("id");
-		Account account = (Account)contactDao.findById(acctNo);
-		BeanUtils.copyProperties(actionForm, account);
+		String id = request.getParameter("id");
+		Contact contact = (Contact)contactDao.findById(id);
+		BeanUtils.copyProperties(actionForm, contact);
 		return forward("/pages/manage/contact/contact.jsp");
 	}
 	public ActionForward doEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
