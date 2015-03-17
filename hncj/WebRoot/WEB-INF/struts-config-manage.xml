@@ -11,6 +11,10 @@
 			type="com.ylink.cim.manage.view.WaterRecordActionForm" />
 		<form-bean name="waterBillActionForm"
 			type="com.ylink.cim.manage.view.WaterBillActionForm" />
+		<form-bean name="ElecRecordActionForm"
+			type="com.ylink.cim.manage.view.ElecRecordActionForm" />
+		<form-bean name="ElecBillActionForm"
+			type="com.ylink.cim.manage.view.ElecBillActionForm" />
 		<form-bean name="houseInfoActionForm"
 			type="com.ylink.cim.manage.view.HouseInfoActionForm" />
 		<form-bean name="ownerInfoActionForm"
@@ -26,7 +30,21 @@
 		<form-bean name="accountActionForm"
 			type="com.ylink.cim.manage.view.AccountActionForm" />	
 		<form-bean name="accountJournalActionForm"
-			type="com.ylink.cim.manage.view.AccountJournalActionForm" />						
+			type="com.ylink.cim.manage.view.AccountJournalActionForm" />
+		<form-bean name="merchantInfoActionForm"
+			type="com.ylink.cim.manage.view.MerchantInfoActionForm" />
+		<form-bean name="adRentActionForm"
+			type="com.ylink.cim.manage.view.AdRentActionForm" />
+		<form-bean name="generalBillActionForm"
+			type="com.ylink.cim.manage.view.GeneralBillActionForm" />
+		<form-bean name="contactActionForm"
+			type="com.ylink.cim.manage.view.ContactActionForm" />
+		<form-bean name="icDepositActionForm"
+			type="com.ylink.cim.manage.view.IcDepositActionForm" />
+		<form-bean name="elecRecordActionForm"
+			type="com.ylink.cim.manage.view.ElecRecordActionForm" />
+		<form-bean name="elecBillActionForm"
+			type="com.ylink.cim.manage.view.ElecBillActionForm" />	
 	</form-beans>
 	<action-mappings>
 		<action path="/waterRecord" name="waterRecordActionForm"
@@ -76,6 +94,34 @@
 		<action path="/accountJournal" name="accountJournalActionForm"
 			type="com.ylink.cim.manage.view.AccountJournalAction" parameter="action"
 			scope="request">
+		</action>	
+		<action path="/merchantInfo" name="merchantInfoActionForm"
+			type="com.ylink.cim.manage.view.MerchantInfoAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/adRentBill" name="adRentActionForm"
+			type="com.ylink.cim.manage.view.AdRentAction" parameter="action"
+			scope="request">
+		</action>
+		<action path="/contact" name="contactActionForm"
+			type="com.ylink.cim.manage.view.ContactAction" parameter="action"
+			scope="request">
+		</action>
+		<action path="/generalBill" name="generalBillActionForm"
+			type="com.ylink.cim.manage.view.GeneralBillAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/icDeposit" name="icDepositActionForm"
+			type="com.ylink.cim.manage.view.IcDepositAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/elecRecord" name="elecRecordActionForm"
+			type="com.ylink.cim.manage.view.ElecRecordAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/elecBill" name="elecBillActionForm"
+			type="com.ylink.cim.manage.view.ElecBillAction" parameter="action"
+			scope="request"> 
 		</action>
 	</action-mappings>
 </struts-config>
