@@ -14,11 +14,39 @@ public class IcDepositActionForm extends ActionForm {
 	private String ownerName;
 	private String payerName;
 	private String chargeUser;
+	private String createUser;
 	private String payType;
 	private String state;
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
+	private String cardType;
+	private String remark;
+	
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
 
 	public String getYear() {
 		return year;

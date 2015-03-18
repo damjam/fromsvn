@@ -20,11 +20,20 @@ public class IcDeposit implements java.io.Serializable {
 	private Date chargeDate;
 	private String chargeUser;
 	private String createUser;
-	private String createDate;
+	private Date createDate;
 	private String payType;
 	private String state;
 	private String cardType;
 	private String branchNo;
+	private String remark;
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	/** default constructor */
 	public IcDeposit() {
@@ -54,9 +63,6 @@ public class IcDeposit implements java.io.Serializable {
 		return this.chargeUser;
 	}
 
-	public String getCreateDate() {
-		return createDate;
-	}
 
 	public String getCreateUser() {
 		return createUser;
@@ -106,10 +112,6 @@ public class IcDeposit implements java.io.Serializable {
 		this.chargeUser = chargeUser;
 	}
 
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
@@ -138,4 +140,12 @@ public class IcDeposit implements java.io.Serializable {
 		this.state = state;
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	
 }

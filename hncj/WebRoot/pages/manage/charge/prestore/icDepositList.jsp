@@ -31,7 +31,7 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/depositBill.do?action=toAdd');
+					gotoUrl('/icDeposit.do?action=toAdd');
 				});
 				
 			});
@@ -55,7 +55,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/depositBill.do?action=list" styleId="queryForm">
+		<html:form action="/icDeposit.do?action=list" styleId="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -76,8 +76,6 @@
 								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-						</tr>
-						<tr>
 							<td class="formlabel nes">状态</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
@@ -85,6 +83,8 @@
 						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
 						    </td>
+						</tr>
+						<tr>
 							<td class="formlabel">
 								账单号
 							</td>
@@ -95,7 +95,7 @@
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>	
 						<tr>
@@ -133,7 +133,7 @@
 						<td align="center"><bean:write name="sumInfo" property="gasAmt" format="##0.00"/></td>
 						<td align="center">${sumInfo.waterCnt}</td>
 						<td align="center"><bean:write name="sumInfo" property="waterAmt" format="##0.00"/></td>
-						<td align="center">${sumInfo.totatCnt}</td>
+						<td align="center">${sumInfo.totalCnt}</td>
 						<td align="center"><bean:write name="sumInfo" property="totalAmt" format="##0.00"/></td>
 					</tr>
 				</table>
@@ -164,7 +164,7 @@
 								<td>${element.payerName}</td>
 								<td width="120"><bean:write name="element" property="chargeDate" format="yyyy-MM-dd HH:mm:ss"/></td>
 								<td><bean:write name="element" property="amount" format="##0.00"/></td>
-								<td><f:type className="IcCardType" value="${element.icCardType}" /> </td>
+								<td><f:type className="IcCardType" value="${element.cardType}" /> </td>
 								<td>${element.chargeUser}</td>
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />

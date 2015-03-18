@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.BranchType;
+import com.ylink.cim.common.type.IcCardType;
 import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.domain.IcDeposit;
 
@@ -62,12 +63,12 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("select new map(count(id) as cnt, sum(amount) as sumAmt) from IcDeposit where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startDepositDate"))) {
-			helper.append("and depositDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startDepositDate")));
+		helper.append("select new map(count(id) as cnt, sum(amount) as sumAmt, cardType as cardType) from IcDeposit where 1=1");
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endDepositDate"))) {
-			helper.append("and depositDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endDepositDate")));
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
+			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		
@@ -78,11 +79,17 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		}
-		helper.append("group by state");
+		helper.append("group by cardType");
 		List<Map<String, Object>> sumList = super.getList(helper);
 		Map<String, Object> sumInfo = new HashMap<String, Object>();
 		Long totalCnt = 0L;
 		Double totalAmt = 0d;
+		Long elecCnt = 0L;
+		Double elecAmt = 0d;
+		Long waterCnt = 0L;
+		Double waterAmt = 0d;
+		Long gasCnt = 0L;
+		Double gasAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
 			Long cnt = (Long)map.get("cnt");
@@ -93,9 +100,25 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 			if (sumAmt == null) {
 				sumAmt = 0d;
 			}
+			if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.ELEC.getValue())) {
+				elecCnt = cnt;
+				elecAmt = sumAmt;
+			}else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+				waterCnt = cnt;
+				waterAmt = sumAmt;
+			}else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+				gasCnt = cnt;
+				gasAmt = sumAmt;
+			}
 			totalCnt += cnt;
 			totalAmt += sumAmt;
 		}
+		sumInfo.put("elecCnt", elecCnt);
+		sumInfo.put("elecAmt", elecAmt);
+		sumInfo.put("waterCnt", waterCnt);
+		sumInfo.put("waterAmt", waterAmt);
+		sumInfo.put("gasCnt", gasCnt);
+		sumInfo.put("gasAmt", gasAmt);
 		sumInfo.put("totalCnt", totalCnt);
 		sumInfo.put("totalAmt", totalAmt);
 		return sumInfo;

@@ -114,13 +114,13 @@ public class BillServiceImpl implements BillService {
 		accountJournalService.add(InputTradeType.DECORATE.getValue(), decorateServiceBill.getAmount(), id, "收"+decorateServiceBill.getHouseSn()+"业主"+decorateServiceBill.getOwnerName()+"装修服务费", userInfo);
 	}
 	public void chargeDepositFee(String id, UserInfo userInfo) throws BizException {
-		DepositBill depositBill = depositBillDao.findByIdWithLock(id);
-		Assert.equals(BillState.UNPAY.getValue(), depositBill.getState(), "状态已变更");
-		depositBill.setDepositDate(DateUtil.getCurrent());
-		depositBill.setDepositUser(userInfo.getUserName());
-		depositBill.setState(BillState.PAID.getValue());
-		depositBillDao.update(depositBill);
-		accountJournalService.add(InputTradeType.SECURITY.getValue(), depositBill.getAmount(), id, "收"+depositBill.getHouseSn()+"业主"+depositBill.getPayerName()+"押金", userInfo);
+		IcDeposit bill = icDepositDao.findByIdWithLock(id);
+		Assert.equals(BillState.UNPAY.getValue(), bill.getState(), "状态已变更");
+		bill.setChargeDate(DateUtil.getCurrent());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setState(BillState.PAID.getValue());
+		depositBillDao.update(bill);
+		accountJournalService.add(InputTradeType.SECURITY.getValue(), bill.getAmount(), id, "收"+bill.getHouseSn()+"业主"+bill.getPayerName()+"押金", userInfo);
 	}
 	public void chargeGeneralBill(String id, UserInfo userInfo) throws BizException {
 		GeneralBill bill = generalBillDao.findByIdWithLock(id);
@@ -185,6 +185,7 @@ public class BillServiceImpl implements BillService {
 		accountJournalService.add(InputTradeType.WATER.getValue(), bill.getAmount(), id, "收"+bill.getHouseSn()+"业主"+ownerInfo.getOwnerName()+"水费", userInfo);
 	}
 
+	
 	public void deleteBill(Class clazz, String id, UserInfo userInfo) throws BizException {
 		Object object = waterBillDao.findById(clazz, id);
 		if (object != null) {
@@ -261,8 +262,8 @@ public class BillServiceImpl implements BillService {
 		String id = idFactoryService.generateId(Constants.BILL_ID);
 		icDeposit.setId(id);
 		icDeposit.setState(BillState.UNPAY.getValue());
-		icDeposit.setBranchNo(userInfo.getBranchName());
-		icDeposit.setCreateDate(DateUtil.getCurrentDate());
+		icDeposit.setBranchNo(userInfo.getBranchNo());
+		icDeposit.setCreateDate(DateUtil.getCurrent());
 		icDeposit.setCreateUser(userInfo.getUserName());
 		generalBillDao.save(icDeposit);
 	}

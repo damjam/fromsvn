@@ -17,7 +17,7 @@
             <column name="HOUSE_SN" length="20" not-null="true" />
         </property>
         <property name="ownerName" type="java.lang.String">
-            <column name="OWNER_NAME" length="20" not-null="true" />
+            <column name="OWNER_NAME" length="20" />
         </property>
         <property name="payerName" type="java.lang.String">
             <column name="PAYER_NAME" length="50" not-null="true" />
@@ -45,6 +45,9 @@
         </property>
         <property name="branchNo" type="java.lang.String">
 			<column name="BRANCH_NO" length="20" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" length="50" />
 		</property>
     </class>
 </hibernate-mapping>

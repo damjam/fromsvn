@@ -30,7 +30,7 @@ public class IcDepositAction extends BaseDispatchAction {
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		IcCardType.setInReq(request);
-		return forward("/pages/manage/charge/prestore/icDeposit.jsp");
+		return forward("/pages/manage/charge/prestore/icDepositAdd.jsp");
 	}
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
