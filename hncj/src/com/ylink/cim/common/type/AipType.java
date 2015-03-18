@@ -20,9 +20,8 @@ public class AipType extends AbstractType {
 	public static final AipType MODE_1 = new AipType("日均定投", "1");
 	public static final AipType MODE_2 = new AipType("指定日定投", "2");
 
-	protected AipType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("aipTypes", AipType.ALL.values());
 	}
 
 	public static AipType valueOf(String value) throws Exception {
@@ -34,7 +33,8 @@ public class AipType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("aipTypes", AipType.ALL.values());
+	protected AipType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

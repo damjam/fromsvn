@@ -67,16 +67,23 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 
-	public Double deposit(String no, Double amount, UserInfo userInfo) throws BizException {
-		Account account = accountDao.findByIdWithLock(no);
-		account.setBalance(AmountUtils.add(account.getBalance(), amount));
-		accountDao.update(account);
-		String billId = addAccountDetail(account, amount, AccountChangeType.DEPOSIT.getValue(), InoutType.TYPE_IN.getValue(), "", "", userInfo);
-		OwnerInfo ownerInfo = ownerInfoDao.findById(no);
-		Assert.notNull(ownerInfo, "找不到业主信息");
-		String houseSn = ownerInfo.getHouseSn();
-		accountJournalService.add(InputTradeType.DEPOSIT.getValue(), amount, billId,houseSn+"业主"+ownerInfo.getOwnerName()+"充值", userInfo);
-		return checkDebt(no, houseSn, userInfo);
+	public String addAccountDetail(Account account, Double amount, String type, String inoutType, String billId, String remark, UserInfo userInfo) throws BizException {
+		AccountDetail detail = new AccountDetail();
+		String id = idFactoryService.generateId(Constants.ACCOUNT_DETAIL_ID);
+		detail.setId(id);
+		detail.setBillId(billId);
+		detail.setAmount(amount);
+		detail.setBalance(account.getBalance());
+		detail.setAcctNo(account.getId());
+		detail.setOwnerName(account.getOwnerName());
+		detail.setCreateDate(DateUtil.getCurrent());
+		detail.setCreateUser(userInfo.getUserName());
+		detail.setType(type);
+		detail.setInoutType(inoutType);
+		detail.setRemark(remark);
+		detail.setBranchNo(userInfo.getBranchNo());
+		accountDao.save(detail);
+		return id;
 	}
 	private Double checkDebt(String no, String houseSn, UserInfo userInfo) throws BizException{
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -125,6 +132,27 @@ public class AccountServiceImpl implements AccountService {
 		}
 		return account.getBalance();
 	}
+	public Double deposit(String no, Double amount, UserInfo userInfo) throws BizException {
+		Account account = accountDao.findByIdWithLock(no);
+		account.setBalance(AmountUtils.add(account.getBalance(), amount));
+		accountDao.update(account);
+		String billId = addAccountDetail(account, amount, AccountChangeType.DEPOSIT.getValue(), InoutType.TYPE_IN.getValue(), "", "", userInfo);
+		OwnerInfo ownerInfo = ownerInfoDao.findById(no);
+		Assert.notNull(ownerInfo, "找不到业主信息");
+		String houseSn = ownerInfo.getHouseSn();
+		accountJournalService.add(InputTradeType.DEPOSIT.getValue(), amount, billId,houseSn+"业主"+ownerInfo.getOwnerName()+"充值", userInfo);
+		return checkDebt(no, houseSn, userInfo);
+	}
+	
+	public void payBill(String no, Double amount, String billId, String remark, UserInfo userInfo) throws BizException {
+		Account account = accountDao.findByIdWithLock(no);
+		Double balance = AmountUtils.subtract(account.getBalance(), amount);
+		account.setBalance(balance);
+		accountDao.update(account);
+		addAccountDetail(account, amount, AccountChangeType.WATER_FEE.getValue(), InoutType.TYPE_OUT.getValue(), billId, remark, userInfo);
+		
+	}
+
 	public void withdraw(String no, Double amount, UserInfo userInfo) throws BizException {
 		Account account = accountDao.findByIdWithLock(no);
 		Double balance = AmountUtils.subtract(account.getBalance(), amount);
@@ -134,34 +162,6 @@ public class AccountServiceImpl implements AccountService {
 		String billId = addAccountDetail(account, amount, AccountChangeType.WITHDRAW.getValue(), InoutType.TYPE_OUT.getValue(), "", "", userInfo);
 		OwnerInfo ownerInfo = ownerInfoDao.findById(account.getId());
 		accountJournalService.deduct(OutputTradeType.WITHDRAW.getValue(), amount, billId, "退"+ownerInfo.getHouseSn()+"业主"+ownerInfo.getOwnerName()+"预存水费", userInfo);
-	}
-	
-	public String addAccountDetail(Account account, Double amount, String type, String inoutType, String billId, String remark, UserInfo userInfo) throws BizException {
-		AccountDetail detail = new AccountDetail();
-		String id = idFactoryService.generateId(Constants.ACCOUNT_DETAIL_ID);
-		detail.setId(id);
-		detail.setBillId(billId);
-		detail.setAmount(amount);
-		detail.setBalance(account.getBalance());
-		detail.setAcctNo(account.getId());
-		detail.setOwnerName(account.getOwnerName());
-		detail.setCreateDate(DateUtil.getCurrent());
-		detail.setCreateUser(userInfo.getUserName());
-		detail.setType(type);
-		detail.setInoutType(inoutType);
-		detail.setRemark(remark);
-		detail.setBranchNo(userInfo.getBranchNo());
-		accountDao.save(detail);
-		return id;
-	}
-
-	public void payBill(String no, Double amount, String billId, String remark, UserInfo userInfo) throws BizException {
-		Account account = accountDao.findByIdWithLock(no);
-		Double balance = AmountUtils.subtract(account.getBalance(), amount);
-		account.setBalance(balance);
-		accountDao.update(account);
-		addAccountDetail(account, amount, AccountChangeType.WATER_FEE.getValue(), InoutType.TYPE_OUT.getValue(), billId, remark, userInfo);
-		
 	}
 	
 	

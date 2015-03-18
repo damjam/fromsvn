@@ -238,6 +238,7 @@ public class ReportAction extends BaseDispatchAction {
 		Map<String, Object> params = getParaMap();
 		params.put("gatherWay", gatherWay);
 		params.put("gatherPeriod", gatherPeriod);
+		params.put("branchNo", getSessionBranchNo(request));
 		List<Map<String, Object>> sumList = accountJournalDao.findGatherInfo(params);
 		List<Map<String, Object>> inList = new LinkedList<Map<String, Object>>();
 		List<Map<String, Object>> outList = new LinkedList<Map<String, Object>>();

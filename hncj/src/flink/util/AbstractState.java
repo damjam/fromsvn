@@ -15,13 +15,6 @@ import org.apache.commons.lang.ArrayUtils;
  *
  */
 public abstract class AbstractState implements State {
-	private NameValuePair nameValue = new NameValuePair();
-	
-	protected AbstractState(String name, String value) {
-		this.nameValue.setName(name);
-		this.nameValue.setValue(value);
-	}
-	
 	@SuppressWarnings("unchecked")
 	protected static List getOrderedList(Map all) {
 		List orderedList = new ArrayList();
@@ -38,38 +31,6 @@ public abstract class AbstractState implements State {
 		
 		return orderedList;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.flink.model.State#getName()
-	 */
-	public String getName() {
-		return this.nameValue.getName();
-	}
-
-	/* (non-Javadoc)
-	 * @see com.flink.model.State#getValue()
-	 */
-	public String getValue() {
-		return this.nameValue.getValue();
-	}
-	
-	
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		
-		if (obj.getClass() != this.getClass()) {
-			return false;
-		}
-		
-		return this.nameValue.getValue().equals(((State) obj).getValue());
-	}
-
-	
-	public int hashCode() {
-		return this.nameValue.getValue().hashCode();
-	}
 	
 	public static String[] values(State[] states) {
 		if (ArrayUtils.isEmpty(states)) {
@@ -83,6 +44,45 @@ public abstract class AbstractState implements State {
 		}
 		
 		return result;
+	}
+	
+	private NameValuePair nameValue = new NameValuePair();
+
+	protected AbstractState(String name, String value) {
+		this.nameValue.setName(name);
+		this.nameValue.setValue(value);
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+		
+		return this.nameValue.getValue().equals(((State) obj).getValue());
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see com.flink.model.State#getName()
+	 */
+	public String getName() {
+		return this.nameValue.getName();
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see com.flink.model.State#getValue()
+	 */
+	public String getValue() {
+		return this.nameValue.getValue();
+	}
+	
+	public int hashCode() {
+		return this.nameValue.getValue().hashCode();
 	}
 
 	

@@ -37,35 +37,35 @@ public class OwnerInfoAction extends BaseDispatchAction {
 	private OwnerInfoService ownerInfoService = (OwnerInfoService)getService("ownerInfoService");
 	private AccountService accountService = (AccountService)getService("accountService");
 	private HouseInfoDao houseInfoDao = (HouseInfoDao)getService("houseInfoDao");
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		initSelect(request);
-		return forward("/pages/manage/owner/ownerInfoAdd.jsp");
-	}
-	public ActionForward toUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		initSelect(request);
-		String id = request.getParameter("id");
-		OwnerInfo ownerInfo = OwnerInfoDao.findById(id);
-		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
-		BeanUtils.copyProperties(actionForm, ownerInfo);
-		return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
-	}
-	public ActionForward doUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
-			OwnerInfo ownerInfo = OwnerInfoDao.findById(actionForm.getId());
-			OwnerInfo owner = (OwnerInfo)BeanUtils.cloneBean(ownerInfo);
-			BeanUtils.copyProperties(ownerInfo, actionForm);
-			ownerInfo.setCreateDate(owner.getCreateDate());
-			ownerInfo.setCreateUser(owner.getCreateUser());
-			ownerInfoService.update(ownerInfo, getSessionUser(request));
-			setResult(false, "修改成功", request);
+			String id = request.getParameter("id");
+			ownerInfoService.cancel(id, getSessionUser(request));
+			setResult(true, "操作成功", request);
+		} catch (BizException e) {
+			setResult(false, e.getMessage(), request);
 		} catch (Exception e) {
-			setResult(false, "修改失败", request);
+			e.printStackTrace();
+			setResult(false, "操作失败", request);
 		}
-		return toUpdate(mapping, form, request, response);
+		return list(mapping, form, request, response);
+	}
+	private void clearForm(OwnerInfoActionForm actionForm) {
+		actionForm.setOwnerName(null);
+		actionForm.setHouseSn(null);
+	}
+	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String id = request.getParameter("id");
+			ownerInfoService.delete(id, getSessionUser(request));
+			setResult(true, "操作成功", request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setResult(false, "操作失败", request);
+		}
+		return list(mapping, form, request, response);
 	}
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -86,68 +86,6 @@ public class OwnerInfoAction extends BaseDispatchAction {
 			return toAdd(mapping, form, request, response);
 		}
 		return list(mapping, form, request, response);
-	}
-	private void clearForm(OwnerInfoActionForm actionForm) {
-		actionForm.setOwnerName(null);
-		actionForm.setHouseSn(null);
-	}
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		Map<String, Object> map = getParaMap();
-		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
-		map.put("ownerName", actionForm.getOwnerName());
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
-		saveQueryResult(request, paginater);
-		return forward("/pages/manage/owner/ownerInfoList.jsp");
-	}
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			String id = request.getParameter("id");
-			ownerInfoService.delete(id, getSessionUser(request));
-			setResult(true, "操作成功", request);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setResult(false, "操作失败", request);
-		}
-		return list(mapping, form, request, response);
-	}
-	public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			String id = request.getParameter("id");
-			ownerInfoService.cancel(id, getSessionUser(request));
-			setResult(true, "操作成功", request);
-		} catch (BizException e) {
-			setResult(false, e.getMessage(), request);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setResult(false, "操作失败", request);
-		}
-		return list(mapping, form, request, response);
-	}
-	public ActionForward openAcct(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			String id = request.getParameter("id");
-			accountService.add(id, getSessionUser(request));
-			setResult(true, "操作成功", request);
-		} catch (Exception e) {
-			e.printStackTrace();
-			setResult(false, "操作失败", request);
-		}
-		return list(mapping, form, request, response);
-	}
-	public void initSelect(HttpServletRequest request) throws Exception {
-		SexType.setInReq(request);
-		OwnerGrade.setInReq(request);
-	}
-	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/manage/owner/ownerInfoImport.jsp");
 	}
 	public ActionForward doImport(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -236,5 +174,67 @@ public class OwnerInfoAction extends BaseDispatchAction {
 			setResult(false, "操作失败:" + e.getMessage(), request);
 		}
 		return forward("/pages/manage/owner/ownerInfoImport.jsp");
+	}
+	public ActionForward doUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+			OwnerInfo ownerInfo = OwnerInfoDao.findById(actionForm.getId());
+			OwnerInfo owner = (OwnerInfo)BeanUtils.cloneBean(ownerInfo);
+			BeanUtils.copyProperties(ownerInfo, actionForm);
+			ownerInfo.setCreateDate(owner.getCreateDate());
+			ownerInfo.setCreateUser(owner.getCreateUser());
+			ownerInfoService.update(ownerInfo, getSessionUser(request));
+			setResult(false, "修改成功", request);
+		} catch (Exception e) {
+			setResult(false, "修改失败", request);
+		}
+		return toUpdate(mapping, form, request, response);
+	}
+	public void initSelect(HttpServletRequest request) throws Exception {
+		SexType.setInReq(request);
+		OwnerGrade.setInReq(request);
+	}
+	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		Map<String, Object> map = getParaMap();
+		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+		map.put("ownerName", actionForm.getOwnerName());
+		map.put("houseSn", actionForm.getHouseSn());
+		map.put("branchNo", getSessionBranchNo(request));
+		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
+		saveQueryResult(request, paginater);
+		return forward("/pages/manage/owner/ownerInfoList.jsp");
+	}
+	public ActionForward openAcct(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String id = request.getParameter("id");
+			accountService.add(id, getSessionUser(request));
+			setResult(true, "操作成功", request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setResult(false, "操作失败", request);
+		}
+		return list(mapping, form, request, response);
+	}
+	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		initSelect(request);
+		return forward("/pages/manage/owner/ownerInfoAdd.jsp");
+	}
+	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		return forward("/pages/manage/owner/ownerInfoImport.jsp");
+	}
+	public ActionForward toUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		initSelect(request);
+		String id = request.getParameter("id");
+		OwnerInfo ownerInfo = OwnerInfoDao.findById(id);
+		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+		BeanUtils.copyProperties(actionForm, ownerInfo);
+		return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
 	}
 }

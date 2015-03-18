@@ -63,5 +63,4 @@ public class ContactAction extends BaseDispatchAction {
 		return forward("/pages/manage/contact/contactList.jsp");
 	}
 	
-	
 }

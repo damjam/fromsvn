@@ -14,6 +14,17 @@ import org.apache.struts.util.LabelValueBean;
  * 
  */
 public class EnumUtil {
+	public static void main(String[] args) {
+		EnumUtil test = new EnumUtil(new String[]{"v1","v2"},new String[]{"name1","name2"});
+		List<LabelValueBean> list = test.getLabelValues();
+		for(LabelValueBean l:list){
+			System.out.println("name:"+l.getLabel()+"  value:"+l.getValue());
+		}
+		
+		System.out.println("v1:"+test.getName("v1"));
+		System.out.println("v2:"+test.getName("v2"));
+	}
+
 	/**
 	 * 所有的值
 	 */
@@ -44,7 +55,7 @@ public class EnumUtil {
 		this.values = values;
 		this.showNames = showNames;
 	}
-
+	
 	/**
 	 * 获取下拉框列表
 	 * 
@@ -55,22 +66,6 @@ public class EnumUtil {
 			this.init();
 		}
 		return this.labelValues;
-	}
-	
-	/**
-	 * 获取子EnumUtil
-	 * @param subObjs
-	 * @return
-	 */
-	public EnumUtil getSubEnumUtil(Object[] subObjs){
-		if(subObjs == null || subObjs.length ==0){
-			return null;
-		}
-		String[] subShowNames = new String[subObjs.length];
-		for(int i=0;i<subObjs.length;i++){
-			subShowNames[i] = this.getName(subObjs[i]);
-		}
-		return new EnumUtil(subObjs,subShowNames);
 	}
 	
 
@@ -100,6 +95,22 @@ public class EnumUtil {
 	}
 
 	/**
+	 * 获取子EnumUtil
+	 * @param subObjs
+	 * @return
+	 */
+	public EnumUtil getSubEnumUtil(Object[] subObjs){
+		if(subObjs == null || subObjs.length ==0){
+			return null;
+		}
+		String[] subShowNames = new String[subObjs.length];
+		for(int i=0;i<subObjs.length;i++){
+			subShowNames[i] = this.getName(subObjs[i]);
+		}
+		return new EnumUtil(subObjs,subShowNames);
+	}
+	
+	/**
 	 * 初始化
 	 * 
 	 */
@@ -110,17 +121,6 @@ public class EnumUtil {
 			labelValues.add(new LabelValueBean(showNames[i], String.valueOf(values[i])));
 			map.put(values[i], showNames[i]);
 		}
-	}
-	
-	public static void main(String[] args) {
-		EnumUtil test = new EnumUtil(new String[]{"v1","v2"},new String[]{"name1","name2"});
-		List<LabelValueBean> list = test.getLabelValues();
-		for(LabelValueBean l:list){
-			System.out.println("name:"+l.getLabel()+"  value:"+l.getValue());
-		}
-		
-		System.out.println("v1:"+test.getName("v1"));
-		System.out.println("v2:"+test.getName("v2"));
 	}
 
 }

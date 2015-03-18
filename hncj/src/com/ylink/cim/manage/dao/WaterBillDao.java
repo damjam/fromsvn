@@ -13,12 +13,12 @@ import flink.util.Paginater;
 public interface WaterBillDao extends BaseDao {
 
 	public Paginater findWaterBillPager(Map<String, Object> params, Pager pager);
-	
+
 	public List<WaterBill> findBills(Map<String, Object> params);
 
 	public Map<String, Object> findSumInfo(Map<String, Object> map);
 
 	public List findErr();
-	
+
 	public AccountDetail getstDeta(String id);
 }

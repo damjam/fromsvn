@@ -27,7 +27,7 @@ public class PushPlanDaoImpl extends BaseDaoHibernateImpl implements PushPlanDao
 		if (map.get("endCreateDate") != null) {
 			helper.append("and createTime <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(map, "endCreateDate")));
 		}
-		if (!BranchType.SZGOLD.getValue().equals(map.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(map.get("branchNo"))) {
 			helper.append("and branchNo = ?", map.get("branchNo"));
 		}
 		helper.append("order by createTime desc");

@@ -11,6 +11,7 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.dao.WaterBillDao;
 import com.ylink.cim.manage.domain.AccountDetail;
@@ -24,48 +25,6 @@ import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("waterBillDao")
 public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillDao{
-	public Paginater findWaterBillPager(Map<String, Object> params, Pager pager){
-		QueryHelper helper = new QueryHelper();
-		helper.append("from WaterBill t where 1=1");
-		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
-		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
-		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
-		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
-		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
-		helper.append("and state = ?", MapUtils.getString(params, "state"));
-		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		helper.append("order by t.createDate desc");
-		Paginater paginater = super.getPageData(helper, pager);
-		Collections.sort(paginater.getList(), new java.util.Comparator() {
-			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
-			public int compare(Object o1, Object o2) {
-				try {
-					WaterBill record1 = (WaterBill) o1;
-					WaterBill record2 = (WaterBill) o2;
-					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
-					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
-					if (!h1.getBuildingNo().equals(h2.getBuildingNo())) {
-						return Integer.parseInt(h1.getBuildingNo()) - Integer.parseInt(h2.getBuildingNo());
-					}
-					if (!h1.getUnitNo().equals(h2.getUnitNo())) {
-						return Integer.parseInt(h1.getUnitNo()) - Integer.parseInt(h2.getUnitNo());
-					}
-					if (!h1.getPosition().equals(h2.getPosition())) {
-						return Integer.parseInt(h1.getPosition()) - Integer.parseInt(h2.getPosition());
-					}
-					return 0;
-				} catch (Exception e) {
-					return 0;
-				}
-				
-			}
-		});
-		return paginater;
-	}
-
 	private void addYearFilter(QueryHelper helper, String year) {
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);
@@ -74,18 +33,21 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		}
 	}
 
-	@Override
-	protected Class getModelClass() {
-		return WaterBill.class;
-	}
-
 	public List<WaterBill> findBills(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from WaterBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and state in ?", (String[])params.get("states"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("order by id");
+		return super.getList(helper);
+	}
+
+	public List findErr() {
+		QueryHelper helper = new QueryHelper();
+		helper.append("select new map(w.id as id) from WaterBill w, WaterBill w2 where 1=1 and w.recordMonth = w2.recordMonth and w.id>w2.id and w.houseSn=w2.houseSn");
 		return super.getList(helper);
 	}
 
@@ -150,10 +112,53 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		return sumInfo;
 	}
 
-	public List findErr() {
+	public Paginater findWaterBillPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
-		helper.append("select new map(w.id as id) from WaterBill w, WaterBill w2 where 1=1 and w.recordMonth = w2.recordMonth and w.id>w2.id and w.houseSn=w2.houseSn");
-		return super.getList(helper);
+		helper.append("from WaterBill t where 1=1");
+		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
+		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
+		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
+		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
+		addYearFilter(helper, MapUtils.getString(params, "year"));
+		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and state = ?", MapUtils.getString(params, "state"));
+		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		helper.append("order by t.createDate desc");
+		Paginater paginater = super.getPageData(helper, pager);
+		Collections.sort(paginater.getList(), new java.util.Comparator() {
+			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
+			public int compare(Object o1, Object o2) {
+				try {
+					WaterBill record1 = (WaterBill) o1;
+					WaterBill record2 = (WaterBill) o2;
+					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
+					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
+					if (!h1.getBuildingNo().equals(h2.getBuildingNo())) {
+						return Integer.parseInt(h1.getBuildingNo()) - Integer.parseInt(h2.getBuildingNo());
+					}
+					if (!h1.getUnitNo().equals(h2.getUnitNo())) {
+						return Integer.parseInt(h1.getUnitNo()) - Integer.parseInt(h2.getUnitNo());
+					}
+					if (!h1.getPosition().equals(h2.getPosition())) {
+						return Integer.parseInt(h1.getPosition()) - Integer.parseInt(h2.getPosition());
+					}
+					return 0;
+				} catch (Exception e) {
+					return 0;
+				}
+				
+			}
+		});
+		return paginater;
+	}
+
+	@Override
+	protected Class getModelClass() {
+		return WaterBill.class;
 	}
 
 	public AccountDetail getstDeta(String id) {

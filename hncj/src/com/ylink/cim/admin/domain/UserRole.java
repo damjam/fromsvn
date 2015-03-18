@@ -23,36 +23,36 @@ public class UserRole implements Serializable {
 		return id;
 	}
 
-	public void setId(UserRoleId id) {
-		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getLoginId() {
 		return loginId;
-	}
-
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
 	}
 
 	public String getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public String getUserName() {
+		return userName;
 	}
 
 	public String getUserType() {
 		return userType;
+	}
+
+	public void setId(UserRoleId id) {
+		this.id = id;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public void setUserType(String userType) {

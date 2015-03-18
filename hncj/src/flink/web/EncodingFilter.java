@@ -22,11 +22,6 @@ public class EncodingFilter extends HttpServlet implements Filter {
 		super.destroy(); 
 	}
 
-    public void init(FilterConfig filterConfig) throws ServletException {
-        this.encoding = filterConfig.getInitParameter("encoding");
-        this.filterConfig = filterConfig;
-    }	
-
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) {
         try {
         	String encode = request.getParameter("encode");
@@ -44,5 +39,10 @@ public class EncodingFilter extends HttpServlet implements Filter {
         } catch (IOException iox) {
             filterConfig.getServletContext().log(iox.getMessage());
         }
+    }	
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+        this.encoding = filterConfig.getInitParameter("encoding");
+        this.filterConfig = filterConfig;
     }    
 }

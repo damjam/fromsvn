@@ -35,21 +35,15 @@ import org.w3c.dom.Text;
 public class XMLMessage {
 	private static final Logger logger = Logger.getLogger(XMLMessage.class);
 	
-	public XMLMessage(String name) {
-		try {
-			DocumentBuilderFactory bf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = bf.newDocumentBuilder();
-			xmlDoc = db.newDocument();
-			Element root = xmlDoc.createElement(name);
-			xmlDoc.appendChild(root);
+	public static Element getField(Element parent, String fieldName) {
+		Collection fields = getFields(parent, fieldName);
+		Iterator iter = fields.iterator();
+		if (iter.hasNext()) {
+			return (Element)iter.next();
 		}
-		catch(Exception e) {
-			logger.error(e, e);
+		else {
+			return null;
 		}
-	}
-	
-	public Element root() {
-		return xmlDoc.getDocumentElement();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -67,70 +61,12 @@ public class XMLMessage {
 		return result;
 	}
 	
-	public static Element getField(Element parent, String fieldName) {
-		Collection fields = getFields(parent, fieldName);
-		Iterator iter = fields.iterator();
-		if (iter.hasNext()) {
-			return (Element)iter.next();
-		}
-		else {
-			return null;
-		}
-	}
-	
 	public static String getFieldValue(Element parent, String fieldName) {
 		Element field = getField(parent, fieldName);
 		if (field == null) return null;
 		Text text = getTextNode(field);
 		if (text == null) return "";
 		return text.getNodeValue().trim();
-	}
-	
-	public Integer getFieldIntValue(Element parent, String fieldName) {
-		String value = getFieldValue(parent, fieldName);
-		return Integer.valueOf(value);
-	}
-	
-	public Long getFieldLongValue(Element parent, String fieldName) {
-		String value = getFieldValue(parent, fieldName);
-		return Long.valueOf(value);
-	}
-	
-	public Double getFieldDoubleValue(Element parent, String fieldName) {
-		String value = getFieldValue(parent, fieldName);
-		return Double.valueOf(value);
-	}
-	
-	public Date getFieldDateValue(Element parent, String fieldName, String dateFormat) 
-	throws ParseException{
-		String value = getFieldValue(parent, fieldName);
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-		return sdf.parse(value);
-	}
-	
-	protected XMLMessage() {
-	}
-	
-	public String getName() {
-		if (xmlDoc == null) return null;
-		Element root = xmlDoc.getDocumentElement();
-		if (root == null) return null;
-		return root.getTagName();
-	}
-	
-	public static XMLMessage parse(byte[] msg) {
-		try {
-			DocumentBuilderFactory bf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = bf.newDocumentBuilder();
-			Document doc =  db.parse(new ByteArrayInputStream(msg));
-			XMLMessage result = new XMLMessage();
-			result.xmlDoc = doc;
-			return result;
-		}
-		catch(Exception e) {
-			logger.error(e, e);
-			return null;
-		}
 	}
 	
 	public static Text getTextNode(Element element) {
@@ -144,51 +80,33 @@ public class XMLMessage {
 		return null;
 	}
 	
-	public void setFieldValue(Element parent, String fieldName, String fieldValue) {
-		Collection fields = getFields(parent, fieldName);
-		Iterator iter = fields.iterator();
-		if (iter.hasNext()) {
-			Element field = (Element)iter.next();
-			Text textNode = xmlDoc.createTextNode(fieldValue);
-			Text oldTextNode = getTextNode(field);
-			field.replaceChild(textNode, oldTextNode);
-		}
-		else {
-			addField(parent, fieldName, fieldValue);
-		}
-	}
-	
-	public Element addField(Element parent, String fieldName, String fieldValue) {
-		if (fieldValue == null) {
-			fieldValue = "";
-		}
-		Element field = xmlDoc.createElement(fieldName);
-		Text value = xmlDoc.createTextNode(fieldValue);
-		field.appendChild(value);
-		parent.appendChild(field);
-		return field;
-	}
-
-	//child可以来自于另一个XML报文
-	public void addElement(Element parent, Element child) {
-		String childName = child.getTagName();
-		Text textNode = getTextNode(child);
-		String value;
-		if (textNode == null) {
-			value = "";
-		}
-		else {
-			value = textNode.getNodeValue();
-		}
-		Element newChild = addField(parent, childName, value);
+	public static void main(String[] args) throws Exception {
+		String msg = "<?xml version=\"1.0\" encoding=\"GB2312\"?>" +
+				"<Message>" +
+				" <MsgName>Order</MsgName>" +
+				" <SeqNo>1234</SeqNo>" +
+				" <Sender>XXXXXXXXXXXX</Sender>" +
+				" <MobileNo>13828838899</MobileNo>" +
+				" <Amount>120.00</Amount>" +
+				" <TimesTamp>20060801231020</TimesTamp>" +
+				" <Signature>1234ABCD</Signature>" +
+				"</Message>";
+		XMLMessage xmlMsg = XMLMessage.parse(msg.getBytes("GBK"));
+//		String msg1 = "<?xml version=\"1.0\" encoding=\"GBK\"?>" +
+//		"<Response>" +
+//		"<Signature>" +
+//		"abcdefgh" +
+//		"</Signature>" +
+//		"<Timestamp>2006-06-02 10:05:28" +
+//		"</Timestamp>" +
+//		"</Response>";
+		//XMLMessage xmlMsg1 = XMLMessage.parse(msg1.getBytes("GBK"));
 		
-		NodeList nodeList = child.getChildNodes();
-		for (int i=0; i<nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
-			if (node instanceof Element) {
-				addElement(newChild, (Element)node);
-			}
-		}
+		//xmlMsg.addElement(XMLMessage.getField(xmlMsg.root(), "Timestamp"), xmlMsg1.root());
+		Element root = xmlMsg.root();
+		root.setAttribute("test", "test");
+		
+		System.out.println(xmlMsg.toString());
 	}
 	
 	public static String nodeToString(Node node, boolean indent) 
@@ -221,23 +139,94 @@ public class XMLMessage {
 		ret = new String(buffer);
 		return ret;
 	}
-		
-	public String toString() {
-		return toString(true);
+	
+	public static XMLMessage parse(byte[] msg) {
+		try {
+			DocumentBuilderFactory bf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = bf.newDocumentBuilder();
+			Document doc =  db.parse(new ByteArrayInputStream(msg));
+			XMLMessage result = new XMLMessage();
+			result.xmlDoc = doc;
+			return result;
+		}
+		catch(Exception e) {
+			logger.error(e, e);
+			return null;
+		}
 	}
 	
-	public String toString(boolean indent) {
+	public Document xmlDoc;
+	
+	protected XMLMessage() {
+	}
+	
+	public XMLMessage(String name) {
 		try {
-			return nodeToString(xmlDoc, indent);
+			DocumentBuilderFactory bf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = bf.newDocumentBuilder();
+			xmlDoc = db.newDocument();
+			Element root = xmlDoc.createElement(name);
+			xmlDoc.appendChild(root);
 		}
 		catch(Exception e) {
 			logger.error(e, e);
 		}
+	}
+	
+	//child可以来自于另一个XML报文
+	public void addElement(Element parent, Element child) {
+		String childName = child.getTagName();
+		Text textNode = getTextNode(child);
+		String value;
+		if (textNode == null) {
+			value = "";
+		}
+		else {
+			value = textNode.getNodeValue();
+		}
+		Element newChild = addField(parent, childName, value);
 		
-		return null;
+		NodeList nodeList = child.getChildNodes();
+		for (int i=0; i<nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof Element) {
+				addElement(newChild, (Element)node);
+			}
+		}
+	}
+	
+	public Element addField(Element parent, String fieldName, String fieldValue) {
+		if (fieldValue == null) {
+			fieldValue = "";
+		}
+		Element field = xmlDoc.createElement(fieldName);
+		Text value = xmlDoc.createTextNode(fieldValue);
+		field.appendChild(value);
+		parent.appendChild(field);
+		return field;
+	}
+	
+	public Date getFieldDateValue(Element parent, String fieldName, String dateFormat) 
+	throws ParseException{
+		String value = getFieldValue(parent, fieldName);
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		return sdf.parse(value);
+	}
+	
+	public Double getFieldDoubleValue(Element parent, String fieldName) {
+		String value = getFieldValue(parent, fieldName);
+		return Double.valueOf(value);
+	}
+	
+	public Integer getFieldIntValue(Element parent, String fieldName) {
+		String value = getFieldValue(parent, fieldName);
+		return Integer.valueOf(value);
 	}
 
-	public Document xmlDoc;
+	public Long getFieldLongValue(Element parent, String fieldName) {
+		String value = getFieldValue(parent, fieldName);
+		return Long.valueOf(value);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public Vector getFields(){
@@ -260,6 +249,21 @@ public class XMLMessage {
 		}
 		return vet;
 	}
+		
+	public String getName() {
+		if (xmlDoc == null) return null;
+		Element root = xmlDoc.getDocumentElement();
+		if (root == null) return null;
+		return root.getTagName();
+	}
+	
+	public String getNodeValue(Element field) {
+		if (field == null) return "";
+		Text text = getTextNode(field);
+		if (text == null) return "";
+		return text.getNodeValue();
+	}
+
 	@SuppressWarnings("unchecked")
 	public Hashtable putListItem(Element node){
 		Hashtable hash = null;
@@ -285,39 +289,35 @@ public class XMLMessage {
 		}
 		return hash;
 	}
-	public String getNodeValue(Element field) {
-		if (field == null) return "";
-		Text text = getTextNode(field);
-		if (text == null) return "";
-		return text.getNodeValue();
+	
+	public Element root() {
+		return xmlDoc.getDocumentElement();
 	}
-	public static void main(String[] args) throws Exception {
-		String msg = "<?xml version=\"1.0\" encoding=\"GB2312\"?>" +
-				"<Message>" +
-				" <MsgName>Order</MsgName>" +
-				" <SeqNo>1234</SeqNo>" +
-				" <Sender>XXXXXXXXXXXX</Sender>" +
-				" <MobileNo>13828838899</MobileNo>" +
-				" <Amount>120.00</Amount>" +
-				" <TimesTamp>20060801231020</TimesTamp>" +
-				" <Signature>1234ABCD</Signature>" +
-				"</Message>";
-		XMLMessage xmlMsg = XMLMessage.parse(msg.getBytes("GBK"));
-//		String msg1 = "<?xml version=\"1.0\" encoding=\"GBK\"?>" +
-//		"<Response>" +
-//		"<Signature>" +
-//		"abcdefgh" +
-//		"</Signature>" +
-//		"<Timestamp>2006-06-02 10:05:28" +
-//		"</Timestamp>" +
-//		"</Response>";
-		//XMLMessage xmlMsg1 = XMLMessage.parse(msg1.getBytes("GBK"));
+	public void setFieldValue(Element parent, String fieldName, String fieldValue) {
+		Collection fields = getFields(parent, fieldName);
+		Iterator iter = fields.iterator();
+		if (iter.hasNext()) {
+			Element field = (Element)iter.next();
+			Text textNode = xmlDoc.createTextNode(fieldValue);
+			Text oldTextNode = getTextNode(field);
+			field.replaceChild(textNode, oldTextNode);
+		}
+		else {
+			addField(parent, fieldName, fieldValue);
+		}
+	}
+	public String toString() {
+		return toString(true);
+	}
+	public String toString(boolean indent) {
+		try {
+			return nodeToString(xmlDoc, indent);
+		}
+		catch(Exception e) {
+			logger.error(e, e);
+		}
 		
-		//xmlMsg.addElement(XMLMessage.getField(xmlMsg.root(), "Timestamp"), xmlMsg1.root());
-		Element root = xmlMsg.root();
-		root.setAttribute("test", "test");
-		
-		System.out.println(xmlMsg.toString());
+		return null;
 	}
 	
 }

@@ -47,12 +47,13 @@ public class GeneralBillAction extends BaseDispatchAction {
 			HttpServletResponse response) throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		WaterBillActionForm actionForm = (WaterBillActionForm)form;
-		map.put("startCreateDate", actionForm.getStartCreateDate());
-		map.put("endCreateDate", actionForm.getEndCreateDate());
+		GeneralBillActionForm actionForm = (GeneralBillActionForm)form;
+		map.put("startChargeDate", actionForm.getStartChargeDate());
+		map.put("endChargeDate", actionForm.getEndChargeDate());
 		map.put("state", actionForm.getState());
 		map.put("id", actionForm.getId());
 		map.put("branchNo", getSessionBranchNo(request));
+		map.put("keyword", actionForm.getKeyword());
 		Paginater paginater = generalBillDao.findBillPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = generalBillDao.findSumInfo(map);

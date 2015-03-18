@@ -1,7 +1,6 @@
 package com.ylink.cim.manage.domain;
 
 import java.util.Date;
-// default package
 
 
 /**
@@ -14,7 +13,9 @@ public class GeneralBill implements java.io.Serializable {
 
 	private String id;
 	private Date createDate;
+	private String createUser;
 	private String chargeUser;
+	private Date chargeDate;
 	private String tradeType;
 	private Double unitPrice;
 	private Integer num;
@@ -25,6 +26,31 @@ public class GeneralBill implements java.io.Serializable {
 	private String payerName;
 	private String branchNo;
 	
+	
+	
+	public String getCreateUser() {
+		return createUser;
+	}
+
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+
+
+	public Date getChargeDate() {
+		return chargeDate;
+	}
+
+
+
+	public void setChargeDate(Date chargeDate) {
+		this.chargeDate = chargeDate;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}

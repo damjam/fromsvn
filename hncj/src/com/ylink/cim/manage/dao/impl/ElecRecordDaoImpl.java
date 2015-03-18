@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ElecRecordDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.ElecRecord;
@@ -34,6 +35,9 @@ public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecor
 		helper.append("and curRecordDate >= ?", MapUtils.getString(params, "startRecordDate"));
 		helper.append("and curRecordDate <= ?", MapUtils.getString(params, "endRecordDate"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
@@ -88,14 +92,18 @@ public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecor
 		helper.append("from ElecRecord where 1=1");
 		helper.append("and houseSn = ?", params.get("houseSn"));
 		helper.append("and recordMonth = ?", params.get("recordMonth"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		return super.getList(helper);
 	}
 	public List<ElecRecord> findRecords(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecRecord where 1=1");
 		helper.append("and state = ?", params.get("state"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		return super.getList(helper);
 	}
 	

@@ -1,7 +1,5 @@
 package com.ylink.cim.admin.view;
 
-import java.util.Collection;
-
 import org.apache.struts.action.ActionForm;
 
 public class PrivilegeActionForm extends ActionForm {

@@ -16,9 +16,8 @@ public class CustFromType extends AbstractType {
 	public static final CustFromType TYPE_1 = new CustFromType("金赢在线", "1");
 	public static final CustFromType TYPE_2 = new CustFromType("其他", "2");
 
-	protected CustFromType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("custFromTypes", CustFromType.ALL.values());
 	}
 
 	public static CustFromType valueOf(String value) throws Exception {
@@ -30,7 +29,8 @@ public class CustFromType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("custFromTypes", CustFromType.ALL.values());
+	protected CustFromType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

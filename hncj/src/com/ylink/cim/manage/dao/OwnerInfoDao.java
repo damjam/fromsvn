@@ -11,9 +11,9 @@ import flink.util.Paginater;
 
 public interface OwnerInfoDao extends BaseDao {
 
-	public Paginater findPager(Map<String, Object> params, Pager pager);
-	
 	List<OwnerInfo> findByInfos(Map<String, Object> params);
+	
+	public Paginater findPager(Map<String, Object> params, Pager pager);
 	
 	OwnerInfo getNormalOwner(String houseSn);
 }

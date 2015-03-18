@@ -36,25 +36,25 @@ public class CustInfo implements java.io.Serializable {
 	private String vMailStr;
 	private String state;
 	private String activeState;
-	//所属机构
+	// 所属机构
 	private String branchNo;
 	private String extend;
 	private String column1;
 	private String column2;
 	private String column3;
-	//非数据库表字段
+	// 非数据库表字段
 	private String loginPwd;
-	
+
 	private String payChnlType;
-	
+
 	private String payChnlNo;
 	private String acctNo;
-	
+
 	private String signState;
-	
+
 	private String busiType;
 	private String areaCode;
-	
+
 	public String getActiveState() {
 		return activeState;
 	}
@@ -86,7 +86,6 @@ public class CustInfo implements java.io.Serializable {
 	public void setPayChnlNo(String payChnlNo) {
 		this.payChnlNo = payChnlNo;
 	}
-	
 
 	public String getBranchNo() {
 		return branchNo;
@@ -135,7 +134,6 @@ public class CustInfo implements java.io.Serializable {
 	public void setSignState(String signState) {
 		this.signState = signState;
 	}
-
 
 	public String getAcctNo() {
 		return acctNo;
@@ -319,5 +317,4 @@ public class CustInfo implements java.io.Serializable {
 		this.column3 = column3;
 	}
 
-	
 }

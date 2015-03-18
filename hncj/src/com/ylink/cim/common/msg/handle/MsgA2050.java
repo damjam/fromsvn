@@ -6,9 +6,6 @@ public class MsgA2050 {
 
 	};
 
-	public static MsgField[] A2050RES = { 
-		MsgField.prod_code, 
-		MsgField.prod_name
-	};
+	public static MsgField[] A2050RES = { MsgField.prod_code, MsgField.prod_name };
 
 }

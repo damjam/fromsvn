@@ -71,9 +71,9 @@
 									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									尊敬的用户，您已经成功登陆物业管理系统，请通过左侧导航菜单进行相应功能操作！
+									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
 									如果您在使用过程中有疑问，请拨打
-									<span class="redfont">24小时客服热线：<strong></strong>
+									<span class="redfont">技术支持电话：18520827190<strong></strong>
 									</span>
 								</p>
 							</td>
@@ -159,7 +159,7 @@
 								<strong>步骤二</strong>：
 								<br />
 								<br />
-								在打开的窗口中点击“浏览”按钮xxxx。
+								在打开的窗口中输入查询条件，点击“查询”按钮进行查询。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
@@ -168,7 +168,7 @@
 								<strong>步骤三</strong>：
 								<br />
 								<br />
-								
+								在编辑页面输入要新增/修改的内容，点击“保存”按钮。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />

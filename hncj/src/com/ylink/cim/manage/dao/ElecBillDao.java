@@ -16,9 +16,9 @@ public interface ElecBillDao extends BaseDao {
 	
 	public List<ElecBill> findBills(Map<String, Object> params);
 
-	public Map<String, Object> findSumInfo(Map<String, Object> map);
-
 	public List findErr();
+
+	public Map<String, Object> findSumInfo(Map<String, Object> map);
 	
 	public AccountDetail getstDeta(String id);
 }

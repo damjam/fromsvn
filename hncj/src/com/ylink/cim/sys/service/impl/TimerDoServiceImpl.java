@@ -15,7 +15,6 @@ import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
 
 import flink.etc.BizException;
-import flink.util.SpringContext;
 
 @Component("timerDoService")
 public class TimerDoServiceImpl implements TimerDoService{

@@ -45,6 +45,8 @@ public class ElecBillAction extends BaseDispatchAction {
 		ElecBillActionForm actionForm = (ElecBillActionForm)form;
 		map.put("startCreateDate", actionForm.getStartCreateDate());
 		map.put("endCreateDate", actionForm.getEndCreateDate());
+		map.put("startChargeDate", actionForm.getStartChargeDate());
+		map.put("endChargeDate", actionForm.getEndChargeDate());
 		map.put("houseSn", actionForm.getHouseSn());
 		map.put("state", actionForm.getState());
 		map.put("id", actionForm.getId());

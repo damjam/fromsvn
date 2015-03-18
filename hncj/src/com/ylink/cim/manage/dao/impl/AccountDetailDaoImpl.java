@@ -17,9 +17,12 @@ import flink.util.Paginater;
 @Repository("accountDetailDao")
 public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements AccountDetailDao {
 
-	@Override
-	protected Class getModelClass() {
-		return AccountDetail.class;
+	private void addYearFilter(QueryHelper helper, String year) {
+		if (!StringUtils.isBlank(year)) {
+			helper.append("and createDate >= ?", year);
+			Integer yearInt = Integer.parseInt(year);
+			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+		}
 	}
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
@@ -38,12 +41,9 @@ public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements Accoun
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}
-	private void addYearFilter(QueryHelper helper, String year) {
-		if (!StringUtils.isBlank(year)) {
-			helper.append("and createDate >= ?", year);
-			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
-		}
+	@Override
+	protected Class getModelClass() {
+		return AccountDetail.class;
 	}
 
 	

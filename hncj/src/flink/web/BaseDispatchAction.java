@@ -58,12 +58,12 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 
 	private static final Logger logger = Logger.getLogger(BaseDispatchAction.class);
  
-	private SysLogService sysLogService = (SysLogService)getService("sysLogService");
-	private UserLogService userLogService = (UserLogService)getService("userLogService");
-	protected IdFactoryService idFactoryService = (IdFactoryService)getService("idFactoryService");
 	protected static Object getService(final String serviceName) {
 		return SpringContext.getService(serviceName);
 	}
+	private SysLogService sysLogService = (SysLogService)getService("sysLogService");
+	private UserLogService userLogService = (UserLogService)getService("userLogService");
+	protected IdFactoryService idFactoryService = (IdFactoryService)getService("idFactoryService");
 
 
 	protected static final String GBK_TEXT_HTML = "text/html;charset=GBK";
@@ -76,18 +76,6 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 	private static final String LOG = "BIZ_LOG";
 
 	private static final String FORWARD = "FORWARD_URL";
-
-	/**
-	 * 保存业务处理的结果，前台可以取得
-	 *
-	 * @param success
-	 * @param message
-	 * @param request
-	 */
-	public void setResult(final String result, final String message, final HttpServletRequest request) {
-		request.setAttribute("result", result);
-		request.setAttribute("msg", message);
-	}
 
 	/**
 	 * 获取系统日志对象
@@ -146,19 +134,150 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 
 		return failure(mapping);
 	}
-	protected void logErrorWithReason(final HttpServletRequest request, final String limitId, final String content,
-			final String errorReason) throws BizException {
-		StringBuffer sb = new StringBuffer();
-		sb.append(content).append(";失败原因:").append(errorReason);
-		saveUserLog(request, limitId, Constants.LOG_USER_O, sb.toString());
-	}
-	protected void saveSysLog(final HttpServletRequest request, final String limitId, final String errorCode,
-			final String logType, final String logClass, final String logContent)
-			throws BizException {
 
-		SysLog sysLog = getSysLog(request, limitId, errorCode, logType, logClass, logContent);
-		this.sysLogService.saveSysLog(sysLog);
+	protected ActionForward forward(final HttpServletRequest request) {
+		return new ActionForward((String) request.getAttribute(FORWARD));
 	}
+	protected ActionForward forward(final String url) {
+		return new ActionForward(url);
+	}
+	/**
+	 * 从session中保存的用户权限中获取当前操作的权限编号.
+	 *
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected String getCurPrivilegeCode(final HttpServletRequest request) {
+		Map<String, PrivilegeResource> privileges =
+			(Map<String, PrivilegeResource>) WebUtils.getSessionAttribute(request, Constants.USER_PRIVILEGE_RES);
+
+		if (privileges == null) {
+			return null;
+		}
+
+		String link = WebResource.getLink(request);
+		PrivilegeResource res = privileges.get(link);
+
+		return res == null ? null : res.getLimitId();
+	}
+	protected String getIpAddr(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+	protected String getLog(final HttpServletRequest request) {
+		return (String) request.getAttribute(LOG);
+	}
+	
+	/**
+	 * 取页数.
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected long getPageNumber(final HttpServletRequest request) {
+		String pageNumber = request.getParameter(Paginater.PAGE_NUMBER);
+
+		return NumberUtils.isDigits(pageNumber) ? Long.parseLong(pageNumber) : 1;
+	}
+	/**
+	 * 获取分页参数
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected Pager getPager(final HttpServletRequest request) {
+		return getPager(request, getPageSize(request));
+	}
+	/**
+	 * 获取分页参数
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected Pager getPager(final HttpServletRequest request, final int pageSize) {
+		return new Pager(getPageNumber(request), pageSize);
+	}
+
+	/**
+	 * 获取每页笔数
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected int getPageSize(final HttpServletRequest request) {
+		String pageSize = request.getParameter(Constants.PAGE_SIZE);
+
+		return NumberUtils.isDigits(pageSize) ? Integer.parseInt(pageSize) : Constants.DEFAULT_PAGE_SIZE;
+	}
+
+	protected Map<String, Object> getParaMap() {
+		return new HashMap<String, Object>();
+	}
+
+	public Map<String, String> getReqMap(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put(MsgField.h_bank_no.getFieldCode(), getSessionBranch(request).getValue());
+		return map;
+	}
+
+	protected BranchType getSessionBranch(HttpServletRequest request) {
+		String tag = getSessionBranchTag(request);
+		return BranchType.getByTag(tag);
+	}
+
+	protected String getSessionBranchNo(HttpServletRequest request) {
+		return getSessionUser(request).getBranchNo();
+	}
+
+	protected String getSessionBranchTag(HttpServletRequest request) {
+		String tag = (String)WebUtils.getSessionAttribute(request, Constants.BRANCH_TAG);
+		if(tag == null){
+			tag = "";
+		}
+		return tag;
+	}
+
+	protected CustInfo getSessionCust(HttpServletRequest request) {
+		return (CustInfo)WebUtils.getSessionAttribute(request, Constants.SESSION_CUSTOM);
+	}
+
+	protected String getSessionCustId(HttpServletRequest request) {
+		return (String)WebUtils.getSessionAttribute(request, Constants.SESSION_CUSTOM_ID);
+	}
+	
+	protected String[] getSessionInvestAcctNos(HttpServletRequest request) {
+		return (String[])WebUtils.getSessionAttribute(request, Constants.INVEST_ACCT_NOS);
+	}
+
+	/**
+	 * 获取当前用户.
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected UserInfo getSessionUser(final HttpServletRequest request) {
+		return (UserInfo) WebUtils.getSessionAttribute(request, Constants.SESSION_USER);
+	}
+
+	/**
+	 * 获取当前用户编号.
+	 *
+	 * @param request
+	 * @return
+	 */
+	protected String getSessionUserCode(final HttpServletRequest request) {
+		return getSessionUser(request).getUserId();
+	}
+
 	private SysLog getSysLog(final HttpServletRequest request, final String limitId, final String errorCode,
 			final String logType, final String logClass, final String logContent)
 			throws BizException {
@@ -196,12 +315,7 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 		sysLog.setCreateTime(new Date());
 		return sysLog;
 	}
-	protected void saveUserLog(final HttpServletRequest request, final String limitId, final String logType,
-			final String logContent) throws BizException {
-		UserLog userLog = getUserLog(request, limitId, logType, StringUtils.abbreviate(logContent, 250));
-		this.userLogService.saveUserLog(userLog);
-	}
-	
+ 
 	private UserLog getUserLog(final HttpServletRequest request, String limitId, final String logType,
 			final String logContent) throws BizException {
 
@@ -236,116 +350,6 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 		userLog.setCreateTime(new java.util.Date());
 		return userLog;
 	}
-	protected void logError(final HttpServletRequest request, String operType, final String content) throws BizException {
-		String limitId = getCurPrivilegeCode(request);
-
-		// 无权限点不记录数据库日志.
-		if (StringUtils.isEmpty(limitId)) {
-			//return;
-		}
-
-		// 日志无内容不记录数据库日志.
-		if (StringUtils.isEmpty(content)) {
-			return;
-		}
-
-		saveUserLog(request, limitId, operType, content);
-	}
-	protected ActionForward forward(final HttpServletRequest request) {
-		return new ActionForward((String) request.getAttribute(FORWARD));
-	}
-
-	protected ActionForward forward(final String url) {
-		return new ActionForward(url);
-	}
-
-	/**
-	 * 从session中保存的用户权限中获取当前操作的权限编号.
-	 *
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	protected String getCurPrivilegeCode(final HttpServletRequest request) {
-		Map<String, PrivilegeResource> privileges =
-			(Map<String, PrivilegeResource>) WebUtils.getSessionAttribute(request, Constants.USER_PRIVILEGE_RES);
-
-		if (privileges == null) {
-			return null;
-		}
-
-		String link = WebResource.getLink(request);
-		PrivilegeResource res = privileges.get(link);
-
-		return res == null ? null : res.getLimitId();
-	}
-
-	protected String getLog(final HttpServletRequest request) {
-		return (String) request.getAttribute(LOG);
-	}
-
-	/**
-	 * 取页数.
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected long getPageNumber(final HttpServletRequest request) {
-		String pageNumber = request.getParameter(Paginater.PAGE_NUMBER);
-
-		return NumberUtils.isDigits(pageNumber) ? Long.parseLong(pageNumber) : 1;
-	}
-
-	/**
-	 * 获取分页参数
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected Pager getPager(final HttpServletRequest request) {
-		return getPager(request, getPageSize(request));
-	}
-
-	/**
-	 * 获取分页参数
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected Pager getPager(final HttpServletRequest request, final int pageSize) {
-		return new Pager(getPageNumber(request), pageSize);
-	}
-
-	/**
-	 * 获取每页笔数
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected int getPageSize(final HttpServletRequest request) {
-		String pageSize = request.getParameter(Constants.PAGE_SIZE);
-
-		return NumberUtils.isDigits(pageSize) ? Integer.parseInt(pageSize) : Constants.DEFAULT_PAGE_SIZE;
-	}
-
-	/**
-	 * 获取当前用户.
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected UserInfo getSessionUser(final HttpServletRequest request) {
-		return (UserInfo) WebUtils.getSessionAttribute(request, Constants.SESSION_USER);
-	}
-	
-	/**
-	 * 获取当前用户编号.
-	 *
-	 * @param request
-	 * @return
-	 */
-	protected String getSessionUserCode(final HttpServletRequest request) {
-		return getSessionUser(request).getUserId();
-	}
 
 	/**
 	 * 验证令牌是否合法
@@ -368,6 +372,33 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 		return true;
 	}
 
+	protected void logError(final HttpServletRequest request, String operType, final String content) throws BizException {
+		String limitId = getCurPrivilegeCode(request);
+
+		// 无权限点不记录数据库日志.
+		if (StringUtils.isEmpty(limitId)) {
+			//return;
+		}
+
+		// 日志无内容不记录数据库日志.
+		if (StringUtils.isEmpty(content)) {
+			return;
+		}
+
+		saveUserLog(request, limitId, operType, content);
+	}
+	protected void logErrorWithReason(final HttpServletRequest request, final String limitId, final String content,
+			final String errorReason) throws BizException {
+		StringBuffer sb = new StringBuffer();
+		sb.append(content).append(";失败原因:").append(errorReason);
+		saveUserLog(request, limitId, Constants.LOG_USER_O, sb.toString());
+	}
+	protected void logSuccess(final HttpServletRequest request, String operType, final String content) throws BizException {
+		logUserOperate(request, operType, content);
+	}
+	protected void logUserOperate(HttpServletRequest request, String operType, String logContent) throws BizException {
+		saveUserLog(request, getCurPrivilegeCode(request), operType, logContent);
+	}
 	/**
 	 * response 输出消息.
 	 *
@@ -390,7 +421,13 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 
 		return null;
 	}
+	protected void saveSysLog(final HttpServletRequest request, final String limitId, final String errorCode,
+			final String logType, final String logClass, final String logContent)
+			throws BizException {
 
+		SysLog sysLog = getSysLog(request, limitId, errorCode, logType, logClass, logContent);
+		this.sysLogService.saveSysLog(sysLog);
+	}
 	/**
 	 * 保存令牌到session
 	 *
@@ -401,73 +438,10 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 		String key = request.getParameter(TOKEN_YLINK_KEY);
 		request.getSession().setAttribute(TOKEN_YLINK_KEY, key);
 	}
- 
-	protected void setForward(final HttpServletRequest request, final String forward) {
-		request.setAttribute(FORWARD, forward);
-	}
-
-	protected void setLog(final HttpServletRequest request, final String log) {
-		request.setAttribute(LOG, log);
-	}
-
-	/**
-	 * 保存业务处理的结果，前台可以取得
-	 *
-	 * @param success
-	 * @param message
-	 * @param request
-	 */
-	protected void setResult(final boolean success, final String message, final HttpServletRequest request) {
-		request.setAttribute("result", Boolean.valueOf(success));
-		request.setAttribute("msg", message);
-	}
-	protected void setReturnUrl(String url, HttpServletRequest request){
-		request.setAttribute("url", url);
-	}
-	protected Map<String, Object> getParaMap() {
-		return new HashMap<String, Object>();
-	}
-	protected String getSessionCustId(HttpServletRequest request) {
-		return (String)WebUtils.getSessionAttribute(request, Constants.SESSION_CUSTOM_ID);
-	}
-	protected CustInfo getSessionCust(HttpServletRequest request) {
-		return (CustInfo)WebUtils.getSessionAttribute(request, Constants.SESSION_CUSTOM);
-	}
-	protected BranchType getSessionBranch(HttpServletRequest request) {
-		String tag = getSessionBranchTag(request);
-		return BranchType.getByTag(tag);
-	}
-	protected String getSessionBranchNo(HttpServletRequest request) {
-		return getSessionUser(request).getBranchNo();
-	}
-	protected String[] getSessionInvestAcctNos(HttpServletRequest request) {
-		return (String[])WebUtils.getSessionAttribute(request, Constants.INVEST_ACCT_NOS);
-	}
-	protected String getSessionBranchTag(HttpServletRequest request) {
-		String tag = (String)WebUtils.getSessionAttribute(request, Constants.BRANCH_TAG);
-		if(tag == null){
-			tag = "";
-		}
-		return tag;
-	}
-	protected void logSuccess(final HttpServletRequest request, String operType, final String content) throws BizException {
-		logUserOperate(request, operType, content);
-	}
-	protected void logUserOperate(HttpServletRequest request, String operType, String logContent) throws BizException {
-		saveUserLog(request, getCurPrivilegeCode(request), operType, logContent);
-	}
-	protected String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
+	protected void saveUserLog(final HttpServletRequest request, final String limitId, final String logType,
+			final String logContent) throws BizException {
+		UserLog userLog = getUserLog(request, limitId, logType, StringUtils.abbreviate(logContent, 250));
+		this.userLogService.saveUserLog(userLog);
 	}
 	/*protected ActionForm getSessionForm(HttpServletRequest request, String formName) {
 		Map<String, ActionForm> map = (Map<String, ActionForm>)WebUtils.getSessionAttribute(request, "formMap");
@@ -528,10 +502,36 @@ public abstract class BaseDispatchAction extends RootDispatchAction {
 		System.out.println(json.toString());
 		request.getSession().setAttribute("params", json.toString());
 	}
+	protected void setForward(final HttpServletRequest request, final String forward) {
+		request.setAttribute(FORWARD, forward);
+	}
+	protected void setLog(final HttpServletRequest request, final String log) {
+		request.setAttribute(LOG, log);
+	}
+	/**
+	 * 保存业务处理的结果，前台可以取得
+	 *
+	 * @param success
+	 * @param message
+	 * @param request
+	 */
+	protected void setResult(final boolean success, final String message, final HttpServletRequest request) {
+		request.setAttribute("result", Boolean.valueOf(success));
+		request.setAttribute("msg", message);
+	}
+	/**
+	 * 保存业务处理的结果，前台可以取得
+	 *
+	 * @param success
+	 * @param message
+	 * @param request
+	 */
+	public void setResult(final String result, final String message, final HttpServletRequest request) {
+		request.setAttribute("result", result);
+		request.setAttribute("msg", message);
+	}
 
-	public Map<String, String> getReqMap(HttpServletRequest request) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put(MsgField.h_bank_no.getFieldCode(), getSessionBranch(request).getValue());
-		return map;
+	protected void setReturnUrl(String url, HttpServletRequest request){
+		request.setAttribute("url", url);
 	}
 }

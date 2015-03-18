@@ -9,7 +9,6 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.domain.Privilege;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.UserType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.user.dao.UserInfoDao;
@@ -192,7 +191,7 @@ public class UserInfoDaoHibernateImpl extends BaseDaoHibernateImpl implements Us
 		queryHelper.append("and ui.userType = ? ",userInfo.getUserType());
 		//queryHelper.append("and ui.userType <> ?", UserType.CUSTOM.getValue());
 		queryHelper.append("and ui.loginId = ?", userInfo.getLoginId());
-		/*if (!BranchType.SZGOLD.getValue().equals(userInfo.getBranchNo())) {
+		/*if (!BranchType.HQ_0000.getValue().equals(userInfo.getBranchNo())) {
 			queryHelper.append("and ui.branchNo = ?", userInfo.getBranchNo());
 			queryHelper.append("and ui.userType <> ?",UserType.BRANCH_ADMIN_USER.getValue());
 		}*/

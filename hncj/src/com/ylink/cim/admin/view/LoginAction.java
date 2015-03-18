@@ -99,7 +99,7 @@ public class LoginAction extends BaseDispatchAction {
 			if (StringUtils.isNotEmpty(tag)) {
 				forward = new ActionForward("/"+tag);
 			}*/
-			//if (!branchType.getValue().equals(BranchType.SZGOLD.getValue())) {
+			//if (!branchType.getValue().equals(BranchType.HQ_0000.getValue())) {
 				
 			//}
 			CPSHttpSessionListener.logOff(userId);

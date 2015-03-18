@@ -22,11 +22,17 @@
         <property name="payerName" type="java.lang.String">
             <column name="PAYER_NAME" length="50" not-null="true" />
         </property>
-        <property name="depositDate" type="java.util.Date">
+        <property name="chargeDate" type="java.util.Date">
             <column name="CHARGE_DATE" length="19" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATE_DATE" length="19" />
         </property>
         <property name="chargeUser" type="java.lang.String">
             <column name="CHARGE_USER" length="20"/>
+        </property>
+        <property name="createUser" type="java.lang.String">
+            <column name="CREATE_USER" length="20"/>
         </property>
         <property name="payType" type="java.lang.String">
             <column name="PAY_TYPE" length="2" />

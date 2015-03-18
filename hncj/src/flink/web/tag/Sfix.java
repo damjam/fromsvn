@@ -15,14 +15,6 @@ public class Sfix extends SimpleTagSupport {
 	private String value;
 	private String length;
 	
-	public void setLength(String length) {
-		this.length = length;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public void doTag() throws JspException, IOException {
 		if (value == null) {
 			value = "";
@@ -33,5 +25,13 @@ public class Sfix extends SimpleTagSupport {
 		}
 		
 		this.getJspContext().getOut().write(value);
+	}
+
+	public void setLength(String length) {
+		this.length = length;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

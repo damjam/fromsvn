@@ -31,17 +31,17 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/depositBill.do?action=toAdd');
+					gotoUrl('/generalBill.do?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('/depositBill.do?action=charge&id='+id);
+					gotoUrl('/generalBill.do?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
-				window.open(CONTEXT_PATH+'/reportAction.do?action=depositBill&id='+id);
+				window.open(CONTEXT_PATH+'/reportAction.do?action=generalBill&id='+id);
 			}
 			function delRecord(id){
 				if(!window.confirm("确认删除?")){
@@ -53,7 +53,7 @@
 				if(!window.confirm("确认退款?")){
 					return;
 				}
-				gotoUrl('/depositBill.do?action=refund&id='+id);
+				gotoUrl('/generalBill.do?action=refund&id='+id);
 			}
 		</script> 
 	</head>
@@ -68,19 +68,19 @@
 					<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
 						<caption>${ACT.name}</caption>
 						<tr>
-							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
-							</td>
 							<td class="formlabel">
 								收款日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							
-						</tr>
-						<tr>
+							<td class="formlabel">
+								关键字
+							</td>
+							<td>
+								<html:text property="keyword" styleId="keyword" maxlength="20"/>
+							</td>
 							<td class="formlabel nes">状态</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
@@ -88,6 +88,8 @@
 						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
 						    </td>
+					    </tr>
+						<tr>
 							<td class="formlabel">
 								账单号
 							</td>
@@ -98,7 +100,7 @@
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>	
 						<tr>
@@ -114,13 +116,12 @@
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<!-- 汇总信息 -->
-			<!-- 
+			 
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">已缴未退款金额（元）</td>
 							<td align="center">总笔数</td>
 							<td align="center">总金额（元）</td>
 						</tr>
@@ -130,7 +131,7 @@
 						<td align="center"><bean:write name="sumInfo" property="totalAmt" format="##0.00"/></td>
 					</tr>
 				</table>
-			</div> -->
+			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -141,6 +142,7 @@
 						    <td >单价</td>
 						    <td >数量</td>
 						    <td >总额</td>
+						    <td >实收金额</td>
 						    <td >付款人</td>
 						    <td >付款时间</td>
 						    <td >收款人</td>
@@ -154,15 +156,14 @@
 						<logic:iterate id="element" name="list">
 							<tr align="center">
 								<td>${element.id}</td>
-								<td>${element.tradeType}</td>
+								<td><f:type className="TradeType" value="${element.tradeType}"/> </td>
 								<td><bean:write name="element" property="unitPrice" format="##0.00"/></td>
 								<td>${element.num}</td>
-								<td><bean:write name="element" property="amount" format="##0.00"/></td>
+								<td><bean:write name="element" property="totalAmt" format="##0.00"/></td>
+								<td><bean:write name="element" property="paidAmt" format="##0.00"/></td>
 								<td>${element.payerName}</td>
-								<td width="120"><bean:write name="element" property="refundDate" format="yyyy-MM-dd HH:mm:ss"/></td>
-								<!-- 
-								<td><bean:write name="element" property="refundAmount" format="##0.00"/></td>
-								 --><td>${element.createUser}</td>
+								<td><bean:write name="element" property="chargeDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>${element.chargeUser}</td>
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>

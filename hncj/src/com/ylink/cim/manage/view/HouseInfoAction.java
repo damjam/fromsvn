@@ -22,18 +22,19 @@ import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 
 public class HouseInfoAction extends BaseDispatchAction {
-	private HouseInfoDao houseInfoDao = (HouseInfoDao)getService("houseInfoDao");
-	private HouseInfoService houseInfoService = (HouseInfoService)getService("houseInfoService");
+	private HouseInfoDao houseInfoDao = (HouseInfoDao) getService("houseInfoDao");
+	private HouseInfoService houseInfoService = (HouseInfoService) getService("houseInfoService");
+
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);
 		return forward("/pages/manage/house/houseInfoAdd.jsp");
 	}
-	
+
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			HouseInfoActionForm actionForm = (HouseInfoActionForm)form;
+			HouseInfoActionForm actionForm = (HouseInfoActionForm) form;
 			HouseInfo houseInfo = new HouseInfo();
 			BeanUtils.copyProperties(houseInfo, actionForm);
 			houseInfoService.add(houseInfo, getSessionUser(request));
@@ -51,10 +52,11 @@ public class HouseInfoAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		Map<String, Object> map = getParaMap();
-		HouseInfoActionForm actionForm = (HouseInfoActionForm)form;
+		HouseInfoActionForm actionForm = (HouseInfoActionForm) form;
 		map.put("houseSn", actionForm.getHouseSn());
 		map.put("buildingNo", actionForm.getBuildingNo());
 		map.put("unitNo", actionForm.getUnitNo());
@@ -65,6 +67,7 @@ public class HouseInfoAction extends BaseDispatchAction {
 		initSelect(request);
 		return forward("/pages/manage/house/houseInfoList.jsp");
 	}
+
 	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -74,12 +77,13 @@ public class HouseInfoAction extends BaseDispatchAction {
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
-	    } catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			setResult(false, "²Ù×÷Ê§°Ü", request);
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public void initSelect(HttpServletRequest request) throws Exception {
 		Map<String, String> buildingNos = new LinkedHashMap<String, String>();
 		Map<String, String> unitsNos = new LinkedHashMap<String, String>();
@@ -89,10 +93,10 @@ public class HouseInfoAction extends BaseDispatchAction {
 		}
 		Map<String, String> rent = ParaManager.getSysDict(SysDictType.RentType.getValue());
 		Map<String, String> economical = ParaManager.getSysDict(SysDictType.EconomicalType.getValue());
-		
+
 		buildingNos.putAll(economical);
 		buildingNos.putAll(rent);
-		//buildingNos
+		// buildingNos
 		for (int i = 1; i < 13; i++) {
 			floors.put(String.valueOf(i), String.valueOf(i));
 		}

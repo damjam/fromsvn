@@ -15,6 +15,15 @@ import flink.hibernate.QueryHelper;
 @Component("signContractDao")
 public class SignContractDaoImpl extends BaseDaoHibernateImpl implements SignContractDao{
 
+	public String[] findAcctByCust(Map<String, Object> params){
+		List<SignContract> list = findByParams(params);
+		String[] accts = new String[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			accts[i] = list.get(i).getInvestAcctNo();
+		}
+		return accts;
+	}
+	
 	public List<SignContract> findByParams(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from SignContract where 1=1");
@@ -24,22 +33,13 @@ public class SignContractDaoImpl extends BaseDaoHibernateImpl implements SignCon
 		helper.append("and serviceId = ?", params.get("serviceId"));
 		helper.append("and state = ?", params.get("state"));
 		helper.append("and accreditId = ?", params.get("accreditId"));
-		if (!BranchType.SZGOLD.getValue().equals(params.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
 			helper.append("and exists (select s.id from ServiceRecord s where serviceId = s.id and s.branchNo = ?)", params.get("branchNo"));
 		}
 		return super.getList(helper);
 	}
-	
 	protected Class getModelClass() {
 		return SignContract.class;
-	}
-	public String[] findAcctByCust(Map<String, Object> params){
-		List<SignContract> list = findByParams(params);
-		String[] accts = new String[list.size()];
-		for (int i = 0; i < list.size(); i++) {
-			accts[i] = list.get(i).getInvestAcctNo();
-		}
-		return accts;
 	}
 	
 }

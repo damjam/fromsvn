@@ -8,22 +8,21 @@ public class UserRoleActionForm extends ActionForm {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private String userId;
-	
+
 	private String userName;
-	
+
 	private String loginId;
-	
+
 	private String userType;
-	
+
 	private String roleId;
-	
+
 	private String roleName;
 
 	private String[] roleIds;
-	
-	
+
 	public String[] getRoleIds() {
 		return roleIds;
 	}
@@ -79,7 +78,5 @@ public class UserRoleActionForm extends ActionForm {
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
-	
-	
 
 }

@@ -134,7 +134,7 @@
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/sz">深圳金融电子结算中心</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}">${comInfo.sp}</a>
 				            </div>
 				        </div>
 				        <!--  
@@ -164,13 +164,6 @@
 			</div>
 	    </div>
 	    
-	    <!--登陆口底部-->
-	    <div class="footer">
-	        <div class="footshadow"></div>
-	        <div class="foottext">
-	            <div class="textleft">建议使用IE7.0版本以上浏览器或者FireFox浏览器+1024分辨率获得最佳操作体验</div>
-	            <div class="textright">版权所有&copy;<a href="http://www.szgold.com.cn/" title="访问官方网站" target="_blank"></a> 全国客服热线：400-189-6699</div>
-	        </div>
-	    </div>
+	    <jsp:include flush="true" page="/footer.jsp"></jsp:include>
 	</body>
 </html>

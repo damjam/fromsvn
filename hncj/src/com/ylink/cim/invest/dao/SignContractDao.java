@@ -9,6 +9,6 @@ import flink.hibernate.BaseDao;
 
 public interface SignContractDao extends BaseDao {
 
-	List<SignContract> findByParams(Map<String, Object> params);
 	public String[] findAcctByCust(Map<String, Object> params);
+	List<SignContract> findByParams(Map<String, Object> params);
 }

@@ -11,7 +11,7 @@
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 
-		<title>深圳金融电子结算中心 客户信息管理系统</title>
+		<title>${comInfo.sp}</title>
 		<f:css href="/css/screen.css" />
 		<f:css href="/css/menutree.css" />
 		<f:js src="/js/jquery.js"/>

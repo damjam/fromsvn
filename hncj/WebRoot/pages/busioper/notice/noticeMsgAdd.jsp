@@ -34,7 +34,7 @@
 		 	//变动机构
 		 	function changeBranch(){
 		 		var branchNo = '${BRANCH_TYPE.value}';
-		 		//只有深圳金融电子结算中心才进行机构选择
+		 		//只有总部才进行机构选择
 		 		if(branchNo != '0000'){
 		 			return;
 		 		}

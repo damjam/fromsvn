@@ -37,26 +37,19 @@ public class WaterBill implements java.io.Serializable {
 	private Double paidAmt;
 	private String branchNo;
 	
-	public String getBranchNo() {
-		return branchNo;
+	/** default constructor */
+	public WaterBill() {
 	}
 
 
 
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
+	/** minimal constructor */
+	public WaterBill(String id) {
+		this.id = id;
 	}
-	// Constructors
 	
-	public Double getPaidAmt() {
-		if (paidAmt == null) {
-			paidAmt = 0d;
-		}
-		return paidAmt;
-	}
-
-	public void setPaidAmt(Double paidAmt) {
-		this.paidAmt = paidAmt;
+	public Double getAmount() {
+		return this.amount;
 	}
 
 	public Double getBalance() {
@@ -66,157 +59,164 @@ public class WaterBill implements java.io.Serializable {
 		return balance;
 	}
 
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getRecordMonth() {
-		return recordMonth;
-	}
-
-	public void setRecordMonth(String recordMonth) {
-		this.recordMonth = recordMonth;
-	}
-
-	/** default constructor */
-	public WaterBill() {
-	}
-
-	/** minimal constructor */
-	public WaterBill(String id) {
-		this.id = id;
-	}
-
-
-	// Property accessors
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-
-	public String getHouseSn() {
-		return houseSn;
-	}
-
-	public void setHouseSn(String houseSn) {
-		this.houseSn = houseSn;
-	}
-
-	public Long getPrenum() {
-		return this.prenum;
-	}
-
-	public void setPrenum(Long prenum) {
-		this.prenum = prenum;
-	}
-
-	public Long getCurnum() {
-		return this.curnum;
-	}
-
-	public void setCurnum(Long curnum) {
-		this.curnum = curnum;
-	}
-
-	public Long getNum() {
-		return this.num;
-	}
-
-	public void setNum(Long num) {
-		this.num = num;
-	}
-
-	public Double getAmount() {
-		return this.amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public String getState() {
-		return this.state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getPreRecordDate() {
-		return preRecordDate;
-	}
-
-	public void setPreRecordDate(String preRecordDate) {
-		this.preRecordDate = preRecordDate;
-	}
-
-	public String getCurRecordDate() {
-		return curRecordDate;
-	}
-
-	public void setCurRecordDate(String curRecordDate) {
-		this.curRecordDate = curRecordDate;
-	}
-
-	public String getCreateUser() {
-		return createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getChargeUser() {
-		return chargeUser;
-	}
-
-	public void setChargeUser(String chargeUser) {
-		this.chargeUser = chargeUser;
+	public String getBranchNo() {
+		return branchNo;
 	}
 
 	public Date getChargeDate() {
 		return chargeDate;
 	}
 
+	public String getChargeUser() {
+		return chargeUser;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public Long getCurnum() {
+		return this.curnum;
+	}
+
+	public String getCurRecordDate() {
+		return curRecordDate;
+	}
+
+	public String getHouseSn() {
+		return houseSn;
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public Long getNum() {
+		return this.num;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public Double getPaidAmt() {
+		if (paidAmt == null) {
+			paidAmt = 0d;
+		}
+		return paidAmt;
+	}
+
+
+	// Property accessors
+
+	public Long getPrenum() {
+		return this.prenum;
+	}
+
+	public String getPreRecordDate() {
+		return preRecordDate;
+	}
+	
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public String getRecordMonth() {
+		return recordMonth;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public String getState() {
+		return this.state;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+	// Constructors
+
 	public void setChargeDate(Date chargeDate) {
 		this.chargeDate = chargeDate;
+	}
+
+	public void setChargeUser(String chargeUser) {
+		this.chargeUser = chargeUser;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public void setCurnum(Long curnum) {
+		this.curnum = curnum;
+	}
+
+	public void setCurRecordDate(String curRecordDate) {
+		this.curRecordDate = curRecordDate;
+	}
+
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setNum(Long num) {
+		this.num = num;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public void setPaidAmt(Double paidAmt) {
+		this.paidAmt = paidAmt;
+	}
+
+	public void setPrenum(Long prenum) {
+		this.prenum = prenum;
+	}
+
+	public void setPreRecordDate(String preRecordDate) {
+		this.preRecordDate = preRecordDate;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public void setRecordMonth(String recordMonth) {
+		this.recordMonth = recordMonth;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 

@@ -30,57 +30,57 @@ public class NoticeMsgRecord implements java.io.Serializable {
 
 
 
-	public String getId() {
-		return this.id;
+	public Date getCreateTime() {
+		return this.createTime;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 
 	public String getCustId() {
 		return this.custId;
 	}
 
-	public void setCustId(String custId) {
-		this.custId = custId;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getNoticeMsgId() {
+		return noticeMsgId;
 	}
 
 	public String getRead() {
 		return this.read;
 	}
 
-	public void setRead(String read) {
-		this.read = read;
-	}
-
-	public Date getCreateTime() {
-		return this.createTime;
+	public Date getReadTime() {
+		return this.readTime;
 	}
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Date getReadTime() {
-		return this.readTime;
+	public void setCustId(String custId) {
+		this.custId = custId;
 	}
 
-	public void setReadTime(Date readTime) {
-		this.readTime = readTime;
+	public void setId(String id) {
+		this.id = id;
 	}
-
-
-
-	public String getNoticeMsgId() {
-		return noticeMsgId;
-	}
-
-
 
 	public void setNoticeMsgId(String noticeMsgId) {
 		this.noticeMsgId = noticeMsgId;
+	}
+
+
+
+	public void setRead(String read) {
+		this.read = read;
+	}
+
+
+
+	public void setReadTime(Date readTime) {
+		this.readTime = readTime;
 	}
 
 }

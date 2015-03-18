@@ -28,7 +28,7 @@ public class NoticeMsgDaoImpl extends BaseDaoHibernateImpl implements NoticeMsgD
 		if (map.get("endCreateDate") != null) {
 			helper.append("and t.createTime <= ?", DateUtil.string2Date(MapUtils.getString(map, "endCreateDate"), "yyyyMMdd"));
 		}
-		if (!BranchType.SZGOLD.getValue().equals(map.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(map.get("branchNo"))) {
 			helper.append("and t.branchNo = ?", map.get("branchNo"));
 		}
 		helper.append("and t.subject like ?", (String)map.get("subject"), MatchMode.ANYWHERE);

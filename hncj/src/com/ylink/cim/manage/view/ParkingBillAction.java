@@ -29,18 +29,20 @@ import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 
 public class ParkingBillAction extends BaseDispatchAction {
-	private ParkingBillDao parkingBillDao = (ParkingBillDao)getService("parkingBillDao");
-	private BillService billService = (BillService)getService("billService");
-	private OwnerInfoDao ownerInfoDao = (OwnerInfoDao)getService("ownerInfoDao");
+	private ParkingBillDao parkingBillDao = (ParkingBillDao) getService("parkingBillDao");
+	private BillService billService = (BillService) getService("billService");
+	private OwnerInfoDao ownerInfoDao = (OwnerInfoDao) getService("ownerInfoDao");
+
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		YesNoType.setInReq(request);
 		return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
 	}
+
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			ParkingBillActionForm actionForm = (ParkingBillActionForm)form;
+			ParkingBillActionForm actionForm = (ParkingBillActionForm) form;
 			ParkingBill parkingBill = new ParkingBill();
 			BeanUtils.copyProperties(parkingBill, actionForm);
 			billService.saveParkingBill(parkingBill, getSessionUser(request));
@@ -52,16 +54,17 @@ public class ParkingBillAction extends BaseDispatchAction {
 			setResult(false, e.getMessage(), request);
 			return toAdd(mapping, form, request, response);
 		} catch (Exception e) {
-			setResult(false, "保存失败"+e.getMessage(), request);
+			setResult(false, "保存失败" + e.getMessage(), request);
 			return toAdd(mapping, form, request, response);
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		ParkingBillActionForm actionForm = (ParkingBillActionForm)form;
+		ParkingBillActionForm actionForm = (ParkingBillActionForm) form;
 		map.put("houseSn", actionForm.getHouseSn());
 		map.put("carSn", actionForm.getCarSn());
 		map.put("parkingSn", actionForm.getParkingSn());
@@ -74,6 +77,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 		request.setAttribute("sumInfo", sumInfo);
 		return forward("/pages/manage/charge/parking/parkingBillList.jsp");
 	}
+
 	public ActionForward charge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -87,6 +91,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward deleteBill(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -99,19 +104,19 @@ public class ParkingBillAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
-	
+
 	public ActionForward getOwnerName(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
-			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn), "编号为"+houseSn+"的房屋信息不存在!");
+			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn), "编号为" + houseSn + "的房屋信息不存在!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
 			}
-			//return null;
+			// return null;
 		} catch (Exception e) {
 			setResult(false, "失败", request);
 			e.printStackTrace();
@@ -123,6 +128,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 		respond(response, jsonObject.toString());
 		return null;
 	}
+
 	public ActionForward getAcctInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
@@ -136,7 +142,8 @@ public class ParkingBillAction extends BaseDispatchAction {
 			Date endDate = DateUtil.addMonths(DateUtil.getDateByYYYMMDD(startDate), monthNum);
 			endDate = DateUtil.addDays(endDate, -1);
 			endDateStr = DateUtil.getDateYYYYMMDD(endDate);
-			//amount = Double.parseDouble(priceStr)*Integer.parseInt(monthNumStr);
+			// amount =
+			// Double.parseDouble(priceStr)*Integer.parseInt(monthNumStr);
 		} catch (Exception e) {
 			setResult(false, "失败", request);
 			e.printStackTrace();

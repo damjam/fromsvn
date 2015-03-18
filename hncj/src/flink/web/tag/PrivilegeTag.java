@@ -28,18 +28,6 @@ public class PrivilegeTag extends TagSupport {
 	private String pid;
 	private String style;
 
-	public String getStyle() {
-		return style;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	public void setPid(String pid) {
-		this.pid = pid;
-	}
-
 	public int doEndTag() throws JspException {
 		TagUtils.getInstance().write(pageContext, "</span>");
 		return EVAL_PAGE;
@@ -72,5 +60,17 @@ public class PrivilegeTag extends TagSupport {
 		TagUtils.getInstance().write(pageContext, span);
 		
 		return EVAL_BODY_INCLUDE;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 }

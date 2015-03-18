@@ -27,6 +27,17 @@ public class ConnectionAdapter extends Socket {
 		super(host, port);
 		extra = true;
 	}
+	public void destroy() {
+		release();
+		try {
+			super.close();
+		} catch (Exception e) {
+			
+		}
+	}
+	public boolean isExtra() {
+		return extra;
+	}
 	/**
 	 * 判断此连接是否空闲
 	 * 
@@ -34,15 +45,6 @@ public class ConnectionAdapter extends Socket {
 	 */
 	public boolean isFree() {
 		return status;
-	}
-	public boolean isExtra() {
-		return extra;
-	}
-	/**
-	 * 当使用此连接的时候设置状态为false（忙碌）
-	 */
-	public void setBusy() {
-		this.status = false;
 	}
 
 	/**
@@ -60,13 +62,11 @@ public class ConnectionAdapter extends Socket {
 		}
 	}
 
-	public void destroy() {
-		release();
-		try {
-			super.close();
-		} catch (Exception e) {
-			
-		}
+	/**
+	 * 当使用此连接的时候设置状态为false（忙碌）
+	 */
+	public void setBusy() {
+		this.status = false;
 	}
 	
 

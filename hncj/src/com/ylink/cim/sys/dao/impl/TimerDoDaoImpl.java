@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.sys.dao.TimerDoDao;
-import com.ylink.cim.sys.domain.Timer;
 import com.ylink.cim.sys.domain.TimerDo;
 
 import flink.hibernate.BaseDaoHibernateImpl;

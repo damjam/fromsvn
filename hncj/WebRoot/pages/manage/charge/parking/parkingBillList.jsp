@@ -99,7 +99,7 @@
 								Äê·Ý
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>
 						<tr>

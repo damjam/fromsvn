@@ -41,8 +41,17 @@ public class LimitGroupInfo implements java.io.Serializable {
 	}
 
 
+	public String[] getLimitIds() {
+		return limitIds;
+	}
+
+
 	public String getUserType() {
 		return this.userType;
+	}
+
+	public String getUserTypeName() {
+		return userTypeName;
 	}
 
 
@@ -54,25 +63,16 @@ public class LimitGroupInfo implements java.io.Serializable {
 		this.limitGroupName = limitGroupName;
 	}
 
+	public void setLimitIds(String[] limitIds) {
+		this.limitIds = limitIds;
+	}
 
 	public void setUserType(final String userType) {
 		this.userType = userType;
 	}
 
-	public String getUserTypeName() {
-		return userTypeName;
-	}
-
 	public void setUserTypeName(String userTypeName) {
 		this.userTypeName = userTypeName;
-	}
-
-	public String[] getLimitIds() {
-		return limitIds;
-	}
-
-	public void setLimitIds(String[] limitIds) {
-		this.limitIds = limitIds;
 	}
 
 	

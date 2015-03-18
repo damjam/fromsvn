@@ -15,9 +15,8 @@ public class CustType extends AbstractType {
 	public static final CustType TYPE_NORMAL = new CustType("普通客户", "0");
 	public static final CustType TYPE_MEMBER = new CustType("会员客户", "1");
 
-	protected CustType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("custTypes", CustType.ALL.values());
 	}
 
 	public static CustType valueOf(String value) throws Exception {
@@ -29,7 +28,8 @@ public class CustType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("custTypes", CustType.ALL.values());
+	protected CustType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

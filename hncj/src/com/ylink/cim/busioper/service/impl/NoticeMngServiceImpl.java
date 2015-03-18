@@ -34,6 +34,31 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 	private NoticeMsgRecordDao noticeMsgRecordDao;
 	@Autowired
 	private TimerDoDao timerDoDao;
+	private void addTimerDo(NoticeMsg noticeMsg) {
+		TimerDo timerDo = new TimerDo();
+		timerDo.setBeanName("addNoticeTask");
+		timerDo.setBeanNameCh("添加系统消息");
+		timerDo.setPara1(Long.parseLong(noticeMsg.getId()));
+		timerDo.setTriggerDate(DateUtil.getCurrentDate());
+		timerDo.setTriggerTime(DateUtil.getCurrentTime());
+		timerDo.setState(TimerDo.INIT);
+		timerDoDao.save(timerDo);
+	}
+
+	public void exeTimerDo(Long timerDoId) {
+		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
+		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
+			return;
+		}
+		Long para1 = timerDo.getPara1();
+		String noticeMsgId = String.valueOf(para1);
+		NoticeMsg noticeMsg = noticeMsgDao.findById(noticeMsgId);
+		
+		saveNoticeRecord(noticeMsg);
+		timerDo.setState(TimerDo.BUSINESS_SUCESS);
+		timerDoDao.update(timerDo);
+	}
+
 	public void saveNoticeMsg(NoticeMsg noticeMsg) {
 		noticeMsg.setCreateTime(new Date());
 		noticeMsgDao.save(noticeMsg);
@@ -53,21 +78,6 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 //				noticeMsgDao.flush();
 //			}
 //		}
-	}
-
-	private void addTimerDo(NoticeMsg noticeMsg) {
-		TimerDo timerDo = new TimerDo();
-		timerDo.setBeanName("addNoticeTask");
-		timerDo.setBeanNameCh("添加系统消息");
-		timerDo.setPara1(Long.parseLong(noticeMsg.getId()));
-		timerDo.setTriggerDate(DateUtil.getCurrentDate());
-		timerDo.setTriggerTime(DateUtil.getCurrentTime());
-		timerDo.setState(TimerDo.INIT);
-		timerDoDao.save(timerDo);
-	}
-
-	public void updateMsgRecord(NoticeMsgRecord record) {
-		noticeMsgRecordDao.update(record);
 	}
 	
 	public void saveNoticeRecord(NoticeMsg noticeMsg) {
@@ -102,18 +112,8 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 		}
 	}
 
-	public void exeTimerDo(Long timerDoId) {
-		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
-		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
-			return;
-		}
-		Long para1 = timerDo.getPara1();
-		String noticeMsgId = String.valueOf(para1);
-		NoticeMsg noticeMsg = noticeMsgDao.findById(noticeMsgId);
-		
-		saveNoticeRecord(noticeMsg);
-		timerDo.setState(TimerDo.BUSINESS_SUCESS);
-		timerDoDao.update(timerDo);
+	public void updateMsgRecord(NoticeMsgRecord record) {
+		noticeMsgRecordDao.update(record);
 	}
 
 }

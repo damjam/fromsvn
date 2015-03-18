@@ -15,6 +15,8 @@ public class AdRent implements java.io.Serializable {
 	private String beginDate;
 	private String endDate;
 	private Date createDate;
+	private Date chargeDate;
+	private String createUser;
 	private String chargeUser;
 	private String position;
 	private Integer num;
@@ -24,6 +26,31 @@ public class AdRent implements java.io.Serializable {
 	private String branchNo;
 	private String payerName;
 	
+	
+	public Date getChargeDate() {
+		return chargeDate;
+	}
+
+
+
+	public void setChargeDate(Date chargeDate) {
+		this.chargeDate = chargeDate;
+	}
+
+
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+
+
 	public String getPayerName() {
 		return payerName;
 	}

@@ -11,6 +11,7 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ElecBillDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.AccountDetail;
@@ -32,6 +33,8 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
 		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
 		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
+		helper.append("and chargeDate >= ?", MapUtils.getString(params, "startChargeDate"));
+		helper.append("and chargeDate <= ?", MapUtils.getString(params, "endChargeDate"));
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
@@ -84,7 +87,9 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		helper.append("from ElecBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and state in ?", (String[])params.get("states"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("order by id");
 		return super.getList(helper);
 	}
@@ -101,7 +106,9 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		//helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
 		Map<String, Object> sumInfo = new HashMap<String, Object>();

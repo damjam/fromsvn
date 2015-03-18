@@ -13,105 +13,66 @@ import org.apache.commons.lang.StringUtils;
  * 
  */
 public abstract class DateUtil {
-	/**
-	 * 获取对应Date的日期字符串，格式为yyyy-MM-dd
-	 * 
-	 * @return String
-	 */
-	public static String getDate() {
-		return DateUtil.formatDate("yyyy-MM-dd");
-	}
-
-	/**
-     * 获取当前日期字符串，格式为yyyyMMdd
-     * @return String
-     */
-    public static String getCurrentDate()
-    {
-        return new SimpleDateFormat("yyyyMMdd").format(new Date());
-    }
-    
-    /**
-     * 获取当前日期字符串，格式为yyy-MM-dd
-     * @return String
-     */
-    public static String getCurrentToDate()
-    {
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    }
-    /**
-	 * 获取当前日期字符串，格式为Hmmss
-	 * @return String
-	 */
-	public static String getCurrentTime()
-	{
-		return new SimpleDateFormat("HHmmss").format(new Date());
-	}
-	
-	/**
-	 * 获取当前日期字符串，格式为HH:mm:ss
-	 * @return String
-	 */
-	public static String getCurrentPrettyTime()
-	{
-		return new SimpleDateFormat("HH:mm:ss").format(new Date());
-	}
-
-	/**
-	 * yyyyMMddHHmmss
-	 * @return
-	 */
-	public static String getCurrentDateTime()
-	{
-		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-	}
-	public static String getTimeMicroseconds(){
+	public static Date addDays(Date date, int num) {
+		if (date == null) {
+			throw new IllegalArgumentException("The date must not be null");
+		}
 		
-		return new SimpleDateFormat("HHmmssssssss").format(new Date());
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DAY_OF_MONTH, num);
+		
+		return c.getTime();
 	}
-	/**
-	 * 获取当前日期字符串，格式为yyyy-MM-dd HH:mm:ss
-	 * @return String
-	 */
-	public static String getCurrentPrettyDateTime()
-	{
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+	public static String addDays(String date, int num, String pattern) {
+		return DateUtil.getDate(DateUtil.addDays(DateUtil.string2Date(date, pattern), num), pattern);
 	}
+    
+    public static Date addMins(Date date, int num) {
+		if (date == null) {
+			throw new IllegalArgumentException("The date must not be null");
+		}
+
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MINUTE, num);
+		return c.getTime();
+	}
+    public static Date addMonths(Date date, int num) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.MONTH, num);
+        return c.getTime();
+    }
 	
-	/**
-	 * 获取对应Date的日期字符串，格式为yyyyMMdd
-	 * @param date 婧怐ate
-	 * @return
-	 */
-	public static String getDateYYYYMMDD(Date date)
-	{
-		return new SimpleDateFormat("yyyyMMdd").format(date);
-	}
-	public static String getDateYYYYMM(Date date)
-	{
-		return new SimpleDateFormat("yyyyMM").format(date);
-	}
-	/**
-	 * getDate
-	 * 
-	 * @param pattern
-	 *            String
-	 * @return String
-	 */
-	public static Date string2Date(String date, String pattern) {
-		if (StringUtils.isEmpty(date)) {
+	public static Date addYears(Date date, int num) {
+        if (date == null) {
+            throw new IllegalArgumentException("The date must not be null");
+        }
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.YEAR, num);
+        return c.getTime();
+    }
+
+	private static Date clearTime(Date date) {
+		if (date == null) {
 			return null;
 		}
 		
-		try {
-			return new SimpleDateFormat(pattern).parse(date); 
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		return null;
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.set(Calendar.HOUR_OF_DAY, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		c.set(Calendar.MILLISECOND, 0);
+		
+		return c.getTime();
 	}
-	
 	/**
 	 * getDate
 	 * 
@@ -122,7 +83,6 @@ public abstract class DateUtil {
 	public static String formatDate(String pattern) {
 		return new SimpleDateFormat(pattern).format(new Date());
 	}
-
 	/**
 	 * getDate
 	 * 
@@ -133,6 +93,71 @@ public abstract class DateUtil {
 	public static String formatDate(String pattern, Date date) {
 		return new SimpleDateFormat(pattern).format(date);
 	}
+	
+	public static Date getCurrent() {
+    	return new Date();
+    }
+	/**
+     * 获取当前日期字符串，格式为yyyyMMdd
+     * @return String
+     */
+    public static String getCurrentDate()
+    {
+        return new SimpleDateFormat("yyyyMMdd").format(new Date());
+    }
+	/**
+	 * yyyyMMddHHmmss
+	 * @return
+	 */
+	public static String getCurrentDateTime()
+	{
+		return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	}
+	
+	/**
+	 * 获取当前日期字符串，格式为yyyy-MM-dd HH:mm:ss
+	 * @return String
+	 */
+	public static String getCurrentPrettyDateTime()
+	{
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+
+	/**
+	 * 获取当前日期字符串，格式为HH:mm:ss
+	 * @return String
+	 */
+	public static String getCurrentPrettyTime()
+	{
+		return new SimpleDateFormat("HH:mm:ss").format(new Date());
+	}
+
+	/**
+	 * 获取当前日期字符串，格式为Hmmss
+	 * @return String
+	 */
+	public static String getCurrentTime()
+	{
+		return new SimpleDateFormat("HHmmss").format(new Date());
+	}
+
+	/**
+     * 获取当前日期字符串，格式为yyy-MM-dd
+     * @return String
+     */
+    public static String getCurrentToDate()
+    {
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    }
+
+	/**
+	 * 获取对应Date的日期字符串，格式为yyyy-MM-dd
+	 * 
+	 * @return String
+	 */
+	public static String getDate() {
+		return DateUtil.formatDate("yyyy-MM-dd");
+	}
 
 	/**
 	 * @param date
@@ -141,7 +166,6 @@ public abstract class DateUtil {
 	public static String getDate(Date date) {
 		return DateUtil.getDate(date, "yyyy-MM-dd");
 	}
-
 	/**
 	 * @param date
 	 * @param pattern
@@ -150,8 +174,21 @@ public abstract class DateUtil {
 	public static String getDate(Date date, String pattern) {
 		return new SimpleDateFormat(pattern).format(date);
 	}
-
-	/**
+	public static Date getDateByYYYMMDD(String dateString) {
+		if(dateString.length()<8){
+			return null;
+		}else{
+			try {
+				return new SimpleDateFormat("yyyyMMdd").parse(dateString); 
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+	}
+	
+    /**
 	 * getDateDiffDays
 	 * 
 	 * @param curDate
@@ -176,81 +213,20 @@ public abstract class DateUtil {
 		return (int) Math.abs((startDate.getTime() - endDate.getTime())
 				/ MS_PER_DAY);
 	}
-
-	public static String addDays(String date, int num, String pattern) {
-		return DateUtil.getDate(DateUtil.addDays(DateUtil.string2Date(date, pattern), num), pattern);
-	}
-	public static Date addMins(Date date, int num) {
-		if (date == null) {
-			throw new IllegalArgumentException("The date must not be null");
-		}
-
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.add(Calendar.MINUTE, num);
-		return c.getTime();
-	}
-	public static Date addDays(Date date, int num) {
-		if (date == null) {
-			throw new IllegalArgumentException("The date must not be null");
-		}
-		
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.add(Calendar.DAY_OF_MONTH, num);
-		
-		return c.getTime();
-	}
-	
-    public static Date addMonths(Date date, int num) {
-        if (date == null) {
-            throw new IllegalArgumentException("The date must not be null");
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.MONTH, num);
-        return c.getTime();
-    }
     
-    public static Date addYears(Date date, int num) {
-        if (date == null) {
-            throw new IllegalArgumentException("The date must not be null");
-        }
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.YEAR, num);
-        return c.getTime();
-    }
+    public static String getDateYYYYMM(Date date)
+	{
+		return new SimpleDateFormat("yyyyMM").format(date);
+	}
     
-	public static Date getTomorrow(String date, String pattern){
-		Date today = string2Date(date, pattern);
-		
-		return today == null ? null : addDays(today, 1);
-	}
-	
-	public static Date getStartDate(Date startDate) {
-		return clearTime(startDate);
-	}
-	
-	private static Date clearTime(Date date) {
-		if (date == null) {
-			return null;
-		}
-		
-		Calendar c = Calendar.getInstance();
-		c.setTime(date);
-		c.set(Calendar.HOUR_OF_DAY, 0);
-		c.set(Calendar.MINUTE, 0);
-		c.set(Calendar.SECOND, 0);
-		c.set(Calendar.MILLISECOND, 0);
-		
-		return c.getTime();
-	}
-	
-	public static Date getEndDate(Date endDate){
-		Date date = clearTime(endDate);
-		
-		return date == null ? null : addDays(date, 1);
+	/**
+	 * 获取对应Date的日期字符串，格式为yyyyMMdd
+	 * @param date 婧怐ate
+	 * @return
+	 */
+	public static String getDateYYYYMMDD(Date date)
+	{
+		return new SimpleDateFormat("yyyyMMdd").format(date);
 	}
 	
 	/**
@@ -274,21 +250,57 @@ public abstract class DateUtil {
 		}
 		
 	}
-	public static Date getDateByYYYMMDD(String dateString) {
-		if(dateString.length()<8){
-			return null;
-		}else{
-			try {
-				return new SimpleDateFormat("yyyyMMdd").parse(dateString); 
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
+	
+	public static Date getEndDate(Date endDate){
+		Date date = clearTime(endDate);
 		
+		return date == null ? null : addDays(date, 1);
 	}
 	
-	/**
+	//取某个月份的月底
+    public static String getMaxMonthDate(int offset) {
+    	 Date date = DateUtil.addMonths(DateUtil.getCurrent(), offset);
+    	 Calendar calendar = Calendar.getInstance();  
+         calendar.setTime(date);  
+         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));  
+         return DateUtil.formatDate("yyyyMMdd", calendar.getTime()); 
+	}
+	
+	//取某个月份的月初
+    public static String getMinMonthDate(int offset) {
+    	 Date date = DateUtil.addMonths(DateUtil.getCurrent(), offset);
+    	 Calendar calendar = Calendar.getInstance();  
+         calendar.setTime(date);  
+         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));  
+         return DateUtil.formatDate("yyyyMMdd", calendar.getTime()); 
+	}
+	public static Date getNextDate(String dateString, String pattern) {
+    	Date nextDate = null;
+    	if ("yyyy".equals(pattern)) {
+			nextDate = DateUtil.addYears(DateUtil.string2Date(dateString, pattern), 1);
+		}else if ("yyyyMM".equals(pattern)) {
+			nextDate = DateUtil.addMonths(DateUtil.string2Date(dateString, pattern), 1);
+		}else if("yyyyMMdd".equals(pattern)){
+			nextDate = DateUtil.addDays(DateUtil.string2Date(dateString, pattern), 1);
+		}
+		return nextDate;
+	}
+	
+	public static Date getStartDate(Date startDate) {
+		return clearTime(startDate);
+	}
+	
+	public static String getTimeMicroseconds(){
+		
+		return new SimpleDateFormat("HHmmssssssss").format(new Date());
+	}
+
+    public static Date getTomorrow(String date, String pattern){
+		Date today = string2Date(date, pattern);
+		
+		return today == null ? null : addDays(today, 1);
+	}
+    /**
 	 * 获取指定日期段的周末日期
 	 * @param startDate yyyyMMdd
 	 * @param endDate yyyyMMdd
@@ -365,8 +377,7 @@ public abstract class DateUtil {
 		
 		return list;
 	}
-	
-	/**
+  /**
      * 判断给定日期是否为月末的一天
      * 
      * @param date
@@ -381,40 +392,29 @@ public abstract class DateUtil {
         }
         return false;
     }
-
-    public static Date getCurrent() {
-    	return new Date();
-    }
-    //取某个月份的月底
-    public static String getMaxMonthDate(int offset) {
-    	 Date date = DateUtil.addMonths(DateUtil.getCurrent(), offset);
-    	 Calendar calendar = Calendar.getInstance();  
-         calendar.setTime(date);  
-         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));  
-         return DateUtil.formatDate("yyyyMMdd", calendar.getTime()); 
-	}
-  //取某个月份的月初
-    public static String getMinMonthDate(int offset) {
-    	 Date date = DateUtil.addMonths(DateUtil.getCurrent(), offset);
-    	 Calendar calendar = Calendar.getInstance();  
-         calendar.setTime(date);  
-         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));  
-         return DateUtil.formatDate("yyyyMMdd", calendar.getTime()); 
-	}
     public static void main(String[] args) {
 		
 		System.err.println(getNextDate("20131220", "yyyyMMdd"));
 	}
-    public static Date getNextDate(String dateString, String pattern) {
-    	Date nextDate = null;
-    	if ("yyyy".equals(pattern)) {
-			nextDate = DateUtil.addYears(DateUtil.string2Date(dateString, pattern), 1);
-		}else if ("yyyyMM".equals(pattern)) {
-			nextDate = DateUtil.addMonths(DateUtil.string2Date(dateString, pattern), 1);
-		}else if("yyyyMMdd".equals(pattern)){
-			nextDate = DateUtil.addDays(DateUtil.string2Date(dateString, pattern), 1);
+    /**
+	 * getDate
+	 * 
+	 * @param pattern
+	 *            String
+	 * @return String
+	 */
+	public static Date string2Date(String date, String pattern) {
+		if (StringUtils.isEmpty(date)) {
+			return null;
 		}
-		return nextDate;
+		
+		try {
+			return new SimpleDateFormat(pattern).parse(date); 
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return null;
 	}
 }
 

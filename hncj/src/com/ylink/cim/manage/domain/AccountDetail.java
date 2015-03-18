@@ -27,14 +27,14 @@ public class AccountDetail implements java.io.Serializable {
 	private String remark;
 	private String branchNo;
 	
-	public String getBranchNo() {
-		return branchNo;
+	public String getAcctNo() {
+		return acctNo;
 	}
 
 
 
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
+	public Double getAmount() {
+		return this.amount;
 	}
 	
 	
@@ -44,118 +44,118 @@ public class AccountDetail implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public String getInoutType() {
-		return inoutType;
-	}
-
-	public void setInoutType(String inoutType) {
-		this.inoutType = inoutType;
-	}
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return this.type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-	public String getAcctNo() {
-		return acctNo;
-	}
-
-	public void setAcctNo(String acctNo) {
-		this.acctNo = acctNo;
-	}
-
-	public Double getAmount() {
-		return this.amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getCreateUser() {
-		return this.createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
 	public Double getBalance() {
 		return this.balance;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
-	public Double getFreezeAmt() {
-		return this.freezeAmt;
-	}
-
-	public void setFreezeAmt(Double freezeAmt) {
-		this.freezeAmt = freezeAmt;
-	}
-
-	public Double getCreditAmt() {
-		return this.creditAmt;
-	}
-
-	public void setCreditAmt(Double creditAmt) {
-		this.creditAmt = creditAmt;
 	}
 
 	public String getBillId() {
 		return this.billId;
 	}
 
-	public void setBillId(String billId) {
-		this.billId = billId;
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public String getCreateUser() {
+		return this.createUser;
+	}
+
+	public Double getCreditAmt() {
+		return this.creditAmt;
+	}
+
+	public Double getFreezeAmt() {
+		return this.freezeAmt;
 	}
 
 	public String getHouseSn() {
 		return this.houseSn;
 	}
 
-	public void setHouseSn(String houseSn) {
-		this.houseSn = houseSn;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public String getInoutType() {
+		return inoutType;
 	}
 
 	public String getOwnerName() {
 		return this.ownerName;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setAcctNo(String acctNo) {
+		this.acctNo = acctNo;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public void setBillId(String billId) {
+		this.billId = billId;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public void setCreditAmt(Double creditAmt) {
+		this.creditAmt = creditAmt;
+	}
+
+	public void setFreezeAmt(Double freezeAmt) {
+		this.freezeAmt = freezeAmt;
+	}
+
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setInoutType(String inoutType) {
+		this.inoutType = inoutType;
+	}
+
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 

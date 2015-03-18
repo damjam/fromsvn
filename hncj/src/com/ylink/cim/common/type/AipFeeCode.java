@@ -22,9 +22,8 @@ public class AipFeeCode extends AbstractType {
 	public static final AipFeeCode FEECODE_4 = new AipFeeCode("运保费", "4");
 	public static final AipFeeCode FEECODE_5 = new AipFeeCode("账户管理费", "5");
 
-	protected AipFeeCode(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("aipFeeCodes", AipFeeCode.ALL.values());
 	}
 
 	public static AipFeeCode valueOf(String value) throws Exception {
@@ -36,7 +35,8 @@ public class AipFeeCode extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("aipFeeCodes", AipFeeCode.ALL.values());
+	protected AipFeeCode(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

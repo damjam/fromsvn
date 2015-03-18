@@ -11,13 +11,12 @@ import flink.util.ExceptionUtils;
 public class CustState extends AbstractState {
 
 	public static Map<String, CustState> ALL = new LinkedHashMap<String, CustState>();
-	protected CustState(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
-	}
-	
 	public static final CustState NORMAL = new CustState("Õý³£", "0");
+	
 	public static final CustState CANCEL = new CustState("×¢Ïú", "1");
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("custStates", CustState.ALL.values());
+	}
 	public static CustState valueOf(String value) throws Exception {
 		CustState state = ALL.get(value);
 		if(null == state){
@@ -25,7 +24,8 @@ public class CustState extends AbstractState {
 		}
 		return state;
 	}
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("custStates", CustState.ALL.values());
+	protected CustState(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

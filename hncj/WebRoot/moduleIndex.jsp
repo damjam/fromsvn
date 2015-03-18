@@ -28,9 +28,9 @@
 									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									尊敬的用户，您已经成功登陆深圳金融电子结算中心 客户信息管理系统，请通过左侧导航菜单进行相应功能操作！
-									如果您在使用过程中有疑问，请联系银联网络
-									<span class="redfont">24小时客服热线：<strong>4008-333-222</strong>
+									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
+									如果您在使用过程中有疑问，请联系
+									<span class="redfont">技术支持电话：<strong>18520827190</strong>
 									</span>
 								</p>
 							</td>

@@ -13,12 +13,12 @@ public class RolePrivilegeServiceImpl implements RolePrivilegeService {
 	@Autowired
 	private RolePrivilegeDao rolePrivilegeDao;
 	
-	public void setRolePrivilegeDao(RolePrivilegeDao rolePrivilegeDao) {
-		this.rolePrivilegeDao = rolePrivilegeDao;
-	}
-
 	public List<RolePrivilege> getRolePrivilegeByRoleId(String roleId) {
 		return this.rolePrivilegeDao.getRolePrivilegeByRoleId(roleId);
+	}
+
+	public void setRolePrivilegeDao(RolePrivilegeDao rolePrivilegeDao) {
+		this.rolePrivilegeDao = rolePrivilegeDao;
 	}
 
 }

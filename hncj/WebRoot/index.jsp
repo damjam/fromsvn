@@ -9,8 +9,8 @@
         <meta name="description" content="" />
         <meta name="keywords" content=""
         />
-        <meta name="Copyright" content="漯河市三涛物业管理有限公司" />
-        <meta name="Author" content="漯河市三涛物业管理系统" />
+        <meta name="Copyright" content="${comInfo.name}" />
+        <meta name="Author" content="${comInfo.sp}" />
         <link rel="shortcut icon" href="images/favicon.ico" />
         <title></title>
 </head>

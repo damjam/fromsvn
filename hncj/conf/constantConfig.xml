@@ -3,6 +3,7 @@
 <beans default-lazy-init="false"
 	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
@@ -48,6 +49,33 @@
 			<value>GBK</value>
 		</property>
 	</bean>
-	
-	
+	<bean id="comInfo" class="com.ylink.cim.common.util.ComInfo">
+		<property name="name">
+			<value>漯河市昌建物业管理有限公司</value>
+		</property>
+		<property name="hqName">
+			<value>昌建地产集团</value>
+		</property>
+		<property name="groupWeb">
+			<value>http://www.hncj.com.cn/</value>
+		</property>
+		<property name="tel">
+			<value>0395-3939222</value>
+		</property>
+		<property name="cel">
+			<value></value>
+		</property>
+		<property name="email">
+			<value>cjwy0001@qq.com</value>
+		</property>
+		<property name="add">
+			<value>河南省漯河市郾城区金山路双汇国际花园</value>
+		</property>
+		<property name="sp">
+			<value>漯河市昌建物业信息管理系统</value>
+		</property>
+		<property name="tip">
+			<value>建议使用IE8.0版本以上浏览器+1024分辨率获得最佳操作体验</value>
+		</property>
+	</bean>
 </beans>

@@ -86,46 +86,60 @@ public class SignContractServiceImpl implements SignContractService {
 		return authId;
 	}
 
-	public String updateSignContract(String acctNo, String payChnlNo, HttpServletRequest request,
-			HttpServletResponse response) throws BizException {
-		SignContract signContract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
-		//此时签约记录的状态是更改待确认
-		signContract.setState(SignState.UNCONFIRM_UPDATE.getValue());
-		signContract.setPayChnlNo(payChnlNo);
-		CustInfo custInfo = custInfoDao.findById(signContract.getCustId());
-		String authId = getAuthId(signContract, custInfo.getIdCard());
-		// 签约授权号更改
-		signContract.setAccreditId(authId);
-		signContractDao.update(signContract);
-		if (PayChnlType.BANK_105.getValue().equals(signContract.getPayChnlType())) {
-			Map<String, String> map = new HashMap<String, String>();
-			try {
-				map.put("AUTHID", authId);
-				map.put("PAYMENT", "1000");
-				map.put("LIMIT", "1000");
-				//map.put("UName", custInfo.getName());
-				map.put("UName", custInfo.getName());
-				map.put("IdType", custInfo.getCardType());
-				map.put("IdNumber", custInfo.getIdCard());
-				map.put("EPAYNO", signContract.getPayChnlNo());
-				CcbSignUtil.sign(request, response, map);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new BizException(e.getMessage());
+	public void cancelAcct(HttpServletRequest request, HttpServletResponse response, String acctNo) throws BizException {
+		try {
+			SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
+			//已解约
+			if (SignState.UNSIGN.getValue().equals(contract.getState())) {
+				//直接销户即可
+				cancelAcctToCore(contract.getInvestAcctNo());
+				return;
 			}
+			contract.setState(SignState.CANCELING_ACCT.getValue());
+			signContractDao.update(contract);
+			if (PayChnlType.BANK_105.getValue().equals(contract.getPayChnlType())) {
+				CcbSignUtil.cancelSign(request, response, contract.getAccreditId());
+			}else {
+				//其他行别
+			}
+			
+		} catch (Exception e) {
+			throw new BizException(e.getMessage());
 		}
-		return authId;
 	}
-	//16位授权号
-	private String getAuthId(SignContract contract, String idCard){
-		StringBuilder builder = new StringBuilder();
-		builder.append("C");//代表当前系统
-		builder.append(contract.getBranchNo());//4位机构号
-		builder.append(idCard.substring(idCard.length()-4, idCard.length()));//证件号后4位
-		builder.append(contract.getPayChnlType());//3位行别
-		String payChnlNo = contract.getPayChnlNo();
-		builder.append(payChnlNo.substring(payChnlNo.length()-4, payChnlNo.length()));//银行卡号后4位
-		return builder.toString();
+	private String cancelAcctToCore(String aipNo) throws BizException {
+		// 销户
+		Map<String, String> msgMap = new HashMap<String, String>();
+		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0017");
+
+		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0017.A0017REQ, MsgA0017.A0017RES);
+		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
+		return serialNo;
+	}
+
+	public void cancelSign(HttpServletRequest request, HttpServletResponse response, String acctNo) throws BizException{
+		try {
+			SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
+			//更改银行账户解约中
+			contract.setState(SignState.CANCELING_SIGN.getValue());
+			signContractDao.update(contract);
+			CcbSignUtil.cancelSign(request, response, contract.getAccreditId());
+		} catch (Exception e) {
+			throw new BizException(e.getMessage());
+		}
+	}
+
+	//定投核心解约
+	private String cancelSignToCore(String aipNo, String payChnlType, String payChnlNo) throws BizException {
+		Map<String, String> msgMap = new HashMap<String, String>();
+		
+		msgMap.put(MsgField.aip_no.getFieldCode(), aipNo);
+		msgMap.put(MsgField.account_no.getFieldCode(), payChnlNo);
+		//解约(A0013)
+		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0013");
+		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0013.A0013REQ, MsgA0013.A0013RES);
+		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
+		return serialNo;
 	}
 
 	/**
@@ -172,6 +186,83 @@ public class SignContractServiceImpl implements SignContractService {
 		return null;
 	}
 
+
+	public boolean checkCancel(String aipNo) throws BizException {
+		SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", aipNo);
+		String signState = contract.getState();
+		//已销户
+		if (SignState.CANCELED_ACCT.getValue().equals(signState)) {
+			return true;
+		} 
+		//已解约
+		else if(SignState.UNSIGN.getValue().equals(signState)){
+			return true;
+		} else {
+			//解约失败，恢复状态为已签约
+			contract.setState(SignState.SIGNED.getValue());
+			signContractDao.update(contract);
+			return false;
+		}
+	}
+
+	public boolean checkSign(String accreditId) throws BizException {
+		SignContract contract = signContractDao.getUniqueResult(SignContract.class, "accreditId", accreditId);
+		String signState = contract.getState();
+		if (SignState.SIGNED.getValue().equals(signState)) {
+			return true;
+		}else {
+			if (SignState.UNCONFIRM_ADD.getValue().equals(signState)) {
+				//签约失败，直接删除
+				signContractDao.delete(contract);
+			} else if(SignState.UNCONFIRM_UPDATE.getValue().equals(signState)){
+				contract.setState(SignState.UNSIGN.getValue());
+				contract.setAccreditId(null);
+				contract.setPayChnlNo(null);
+				signContractDao.update(contract);
+			}
+			return false;
+		}
+	}
+
+	
+	//16位授权号
+	private String getAuthId(SignContract contract, String idCard){
+		StringBuilder builder = new StringBuilder();
+		builder.append("C");//代表当前系统
+		builder.append(contract.getBranchNo());//4位机构号
+		builder.append(idCard.substring(idCard.length()-4, idCard.length()));//证件号后4位
+		builder.append(contract.getPayChnlType());//3位行别
+		String payChnlNo = contract.getPayChnlNo();
+		builder.append(payChnlNo.substring(payChnlNo.length()-4, payChnlNo.length()));//银行卡号后4位
+		return builder.toString();
+	}
+	public String modifyInvestAcct(Map<String, String> msgMap) throws BizException {
+		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0014");
+		// String msg = MsgUtil.buildReqMsg(msgMap, MsgA0014.A0014REQ);
+		// String resMsg = SocketUtil.sendRec(msg);
+		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0014.A0014REQ, MsgA0014.A0014RES);
+		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
+		return serialNo;
+	}
+
+	private String openAcctToCore(CustInfo custInfo) throws BizException {
+		// 开户
+		Map<String, String> msgMap = new HashMap<String, String>();
+		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0010");
+		msgMap.put(MsgField.acct_no.getFieldCode(), custInfo.getId());
+		msgMap.put(MsgField.cust_name.getFieldCode(), custInfo.getName());
+		msgMap.put(MsgField.cert_type.getFieldCode(), custInfo.getCardType());
+		msgMap.put(MsgField.cert_num.getFieldCode(), custInfo.getIdCard());
+		msgMap.put(MsgField.area_code.getFieldCode(), custInfo.getAreaCode());
+		msgMap.put(MsgField.mobile_phone.getFieldCode(), custInfo.getMobile());
+		msgMap.put(MsgField.addr.getFieldCode(), custInfo.getAddr());
+		msgMap.put(MsgField.email.getFieldCode(), custInfo.getEmail());
+
+		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0010.A0010REQ, MsgA0010.A0010RES);
+		String aipNo = bodyMap.get(MsgField.aip_no.getFieldCode()).getValue();
+		return aipNo;
+	}
+
 	/**
 	 * 定投账户管理,查询客户定投账号
 	 */
@@ -203,6 +294,15 @@ public class SignContractServiceImpl implements SignContractService {
 			list.add(map);
 		}
 		return list;
+	}
+	
+	/**
+	 * 查定投账号下的库存
+	 */
+	public Map<String, MsgField> queryInvestAcctStock(Map<String, String> msgMap) throws BizException {
+		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A2044");
+		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA2044.A2044REQ, MsgA2044.A2044RES);
+		return bodyMap;
 	}
 
 	// 签约成功后调用
@@ -236,36 +336,6 @@ public class SignContractServiceImpl implements SignContractService {
 			return contract.getInvestAcctNo();
 		}
 	}
-
-
-	private String openAcctToCore(CustInfo custInfo) throws BizException {
-		// 开户
-		Map<String, String> msgMap = new HashMap<String, String>();
-		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0010");
-		msgMap.put(MsgField.acct_no.getFieldCode(), custInfo.getId());
-		msgMap.put(MsgField.cust_name.getFieldCode(), custInfo.getName());
-		msgMap.put(MsgField.cert_type.getFieldCode(), custInfo.getCardType());
-		msgMap.put(MsgField.cert_num.getFieldCode(), custInfo.getIdCard());
-		msgMap.put(MsgField.area_code.getFieldCode(), custInfo.getAreaCode());
-		msgMap.put(MsgField.mobile_phone.getFieldCode(), custInfo.getMobile());
-		msgMap.put(MsgField.addr.getFieldCode(), custInfo.getAddr());
-		msgMap.put(MsgField.email.getFieldCode(), custInfo.getEmail());
-
-		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0010.A0010REQ, MsgA0010.A0010RES);
-		String aipNo = bodyMap.get(MsgField.aip_no.getFieldCode()).getValue();
-		return aipNo;
-	}
-
-	private String cancelAcctToCore(String aipNo) throws BizException {
-		// 销户
-		Map<String, String> msgMap = new HashMap<String, String>();
-		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0017");
-
-		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0017.A0017REQ, MsgA0017.A0017RES);
-		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
-		return serialNo;
-	}
-
 	
 	// 签约
 	private String signToCore(String aipNo, String payChnlType, String payChnlNo) throws BizException {
@@ -285,105 +355,35 @@ public class SignContractServiceImpl implements SignContractService {
 			return bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
 		}
 	}
-	//定投核心解约
-	private String cancelSignToCore(String aipNo, String payChnlType, String payChnlNo) throws BizException {
-		Map<String, String> msgMap = new HashMap<String, String>();
-		
-		msgMap.put(MsgField.aip_no.getFieldCode(), aipNo);
-		msgMap.put(MsgField.account_no.getFieldCode(), payChnlNo);
-		//解约(A0013)
-		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0013");
-		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0013.A0013REQ, MsgA0013.A0013RES);
-		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
-		return serialNo;
-	}
-
-	public String modifyInvestAcct(Map<String, String> msgMap) throws BizException {
-		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A0014");
-		// String msg = MsgUtil.buildReqMsg(msgMap, MsgA0014.A0014REQ);
-		// String resMsg = SocketUtil.sendRec(msg);
-		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA0014.A0014REQ, MsgA0014.A0014RES);
-		String serialNo = bodyMap.get(MsgField.serial_no.getFieldCode()).getValue();
-		return serialNo;
-	}
-
-	/**
-	 * 查定投账号下的库存
-	 */
-	public Map<String, MsgField> queryInvestAcctStock(Map<String, String> msgMap) throws BizException {
-		msgMap.put(MsgField.h_exch_code.getFieldCode(), "A2044");
-		Map<String, MsgField> bodyMap = MsgUtil.getResBody(msgMap, MsgA2044.A2044REQ, MsgA2044.A2044RES);
-		return bodyMap;
-	}
-	
-	public boolean checkSign(String accreditId) throws BizException {
-		SignContract contract = signContractDao.getUniqueResult(SignContract.class, "accreditId", accreditId);
-		String signState = contract.getState();
-		if (SignState.SIGNED.getValue().equals(signState)) {
-			return true;
-		}else {
-			if (SignState.UNCONFIRM_ADD.getValue().equals(signState)) {
-				//签约失败，直接删除
-				signContractDao.delete(contract);
-			} else if(SignState.UNCONFIRM_UPDATE.getValue().equals(signState)){
-				contract.setState(SignState.UNSIGN.getValue());
-				contract.setAccreditId(null);
-				contract.setPayChnlNo(null);
-				signContractDao.update(contract);
+	public String updateSignContract(String acctNo, String payChnlNo, HttpServletRequest request,
+			HttpServletResponse response) throws BizException {
+		SignContract signContract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
+		//此时签约记录的状态是更改待确认
+		signContract.setState(SignState.UNCONFIRM_UPDATE.getValue());
+		signContract.setPayChnlNo(payChnlNo);
+		CustInfo custInfo = custInfoDao.findById(signContract.getCustId());
+		String authId = getAuthId(signContract, custInfo.getIdCard());
+		// 签约授权号更改
+		signContract.setAccreditId(authId);
+		signContractDao.update(signContract);
+		if (PayChnlType.BANK_105.getValue().equals(signContract.getPayChnlType())) {
+			Map<String, String> map = new HashMap<String, String>();
+			try {
+				map.put("AUTHID", authId);
+				map.put("PAYMENT", "1000");
+				map.put("LIMIT", "1000");
+				//map.put("UName", custInfo.getName());
+				map.put("UName", custInfo.getName());
+				map.put("IdType", custInfo.getCardType());
+				map.put("IdNumber", custInfo.getIdCard());
+				map.put("EPAYNO", signContract.getPayChnlNo());
+				CcbSignUtil.sign(request, response, map);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new BizException(e.getMessage());
 			}
-			return false;
 		}
-	}
-
-	public boolean checkCancel(String aipNo) throws BizException {
-		SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", aipNo);
-		String signState = contract.getState();
-		//已销户
-		if (SignState.CANCELED_ACCT.getValue().equals(signState)) {
-			return true;
-		} 
-		//已解约
-		else if(SignState.UNSIGN.getValue().equals(signState)){
-			return true;
-		} else {
-			//解约失败，恢复状态为已签约
-			contract.setState(SignState.SIGNED.getValue());
-			signContractDao.update(contract);
-			return false;
-		}
-	}
-	
-	public void cancelSign(HttpServletRequest request, HttpServletResponse response, String acctNo) throws BizException{
-		try {
-			SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
-			//更改银行账户解约中
-			contract.setState(SignState.CANCELING_SIGN.getValue());
-			signContractDao.update(contract);
-			CcbSignUtil.cancelSign(request, response, contract.getAccreditId());
-		} catch (Exception e) {
-			throw new BizException(e.getMessage());
-		}
-	}
-	public void cancelAcct(HttpServletRequest request, HttpServletResponse response, String acctNo) throws BizException {
-		try {
-			SignContract contract = signContractDao.getUniqueResult(SignContract.class, "investAcctNo", acctNo);
-			//已解约
-			if (SignState.UNSIGN.getValue().equals(contract.getState())) {
-				//直接销户即可
-				cancelAcctToCore(contract.getInvestAcctNo());
-				return;
-			}
-			contract.setState(SignState.CANCELING_ACCT.getValue());
-			signContractDao.update(contract);
-			if (PayChnlType.BANK_105.getValue().equals(contract.getPayChnlType())) {
-				CcbSignUtil.cancelSign(request, response, contract.getAccreditId());
-			}else {
-				//其他行别
-			}
-			
-		} catch (Exception e) {
-			throw new BizException(e.getMessage());
-		}
+		return authId;
 	}
 
 

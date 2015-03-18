@@ -12,7 +12,10 @@ import flink.util.Paginater;
 public interface ElecRecordDao extends BaseDao {
 
 	public Paginater findRecordPager(Map<String, Object> params, Pager pager);
+
 	public ElecRecord findPreRecord(String houseSn);
+
 	public List<ElecRecord> findPreRecords(Map<String, Object> params);
+
 	public List<ElecRecord> findRecords(Map<String, Object> params);
 }

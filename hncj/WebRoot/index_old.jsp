@@ -105,13 +105,7 @@
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
 	            <div class="toptext">
-	            	<!-- 
-	            	 <c:choose>
-		            	<c:when test="${tag eq 'gz'}">广州银行黄金定投交易系统</c:when>
-		            	<c:when test="${tag eq 'dg'}">东莞银行黄金定投交易系统</c:when>
-		            	<c:otherwise> 深圳金融电子结算中心 客户信息管理系统</c:otherwise>
-		            </c:choose> -->
-		            	漯河市三涛物业管理系统
+		            	${comInfo.sp}
 	            </div>
 	            <div style="float:right;"><img src="images/top_right.jpg" width="8" height="39" /></div>
 	        </div>
@@ -123,7 +117,7 @@
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">
-			        <div class="logo" style="padding-top: 30px;"><img title="漯河市三涛物业管理系统" src="images/logo64.jpg" /></div>
+			        <div class="logo" style="padding-top: 30px;"><img title="${comInfo.sp}" src="images/0318.gif" /></div>
 					
 			        <div class="gonggao">
 			        </div>
@@ -183,12 +177,6 @@
 	    </div>
 	    
 	    <!--登陆口底部-->
-	    <div class="footer">
-	        <div class="footshadow"></div>
-	        <div class="foottext">
-	            <div class="textleft">建议使用IE7.0版本以上浏览器或者FireFox浏览器+1024分辨率获得最佳操作体验</div>
-	            <div class="textright">版权所有&copy;<a href="http://www.szgold.com.cn/" title="访问官方网站" target="_blank"></a> 全国客服热线：400-189-6699</div>
-	        </div>
-	    </div>
+	    <jsp:include page="/footer.jsp"></jsp:include>
 	</body>
 </html>

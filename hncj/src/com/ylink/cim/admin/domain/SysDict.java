@@ -3,11 +3,11 @@ package com.ylink.cim.admin.domain;
 public class SysDict {
 
 	private SysDictId id;
-	
+
 	private String dictName;
-	
+
 	private String remark;
-	
+
 	private String display;
 
 	public SysDictId getId() {
@@ -26,7 +26,6 @@ public class SysDict {
 		this.dictName = dictName;
 	}
 
-
 	public String getRemark() {
 		return remark;
 	}
@@ -42,7 +41,5 @@ public class SysDict {
 	public void setDisplay(String display) {
 		this.display = display;
 	}
-	
-	
-	
+
 }

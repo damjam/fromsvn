@@ -11,9 +11,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
-import com.ylink.cim.manage.domain.Account;
 import com.ylink.cim.manage.domain.MerchantInfo;
 import com.ylink.cim.manage.service.MerchantInfoService;
 

@@ -40,30 +40,46 @@ public class WaterRecordAction extends BaseDispatchAction {
 	private HouseInfoDao houseInfoDao = (HouseInfoDao)getService("houseInfoDao");
 	private WaterRecordService waterRecordService = (WaterRecordService)getService("waterRecordService");
 	
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward check(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-		String preRecordDate = "";
-		String curRecordDate = "";
-		String beginDate = "";
-		if(day > 26){
-			preRecordDate = DateUtil.getMaxMonthDate(-1);
-			curRecordDate = DateUtil.getCurrentDate();
-			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -1);
-			beginDate = DateUtil.getDateYYYYMM(d1);
-		}else {
-			preRecordDate = DateUtil.getMaxMonthDate(-2);
-			curRecordDate = DateUtil.getMaxMonthDate(-1);
-			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -2);
-			beginDate = DateUtil.getDateYYYYMM(d1);
+		try {
+			String id = request.getParameter("id");
+			waterRecordService.checkRecord(id, getSessionUser(request));
+			setResult(true, "账单生成成功", request);
+		} catch (Exception e) {
+			setResult(false, "生成账单失败", request);
+			e.printStackTrace();
 		}
-		//DateUtil.addMonths(date, num);
-		String recordMonth = beginDate+"-"+curRecordDate.substring(0, 6);
-		WaterRecordActionForm actioinForm = (WaterRecordActionForm)form;
-		actioinForm.setPreRecordDate(preRecordDate);
-		actioinForm.setCurRecordDate(curRecordDate);
-		actioinForm.setRecordMonth(recordMonth);
-		return forward("/pages/manage/meter/water/waterRecordAdd.jsp");
+		return list(mapping, form, request, response);
+		
+	}
+	public ActionForward checkAll(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			Integer num = waterRecordService.checkAllRecord(getSessionUser(request));
+			if (num > 0) {
+				setResult(true, "已生成"+num+"条账单", request);
+			}else {
+				setResult(true, "没有需要生成账单的记录", request);
+			}
+		} catch (Exception e) {
+			setResult(false, "生成账单失败", request);
+			e.printStackTrace();
+		}
+		return list(mapping, form, request, response);
+		
+	}
+	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			String id = request.getParameter("id");
+			waterRecordService.deleteRecord(id, getSessionUser(request));
+			setResult(true, "操作成功", request);
+		} catch (Exception e) {
+			setResult(false, "删除失败", request);
+			e.printStackTrace();
+		}
+		return list(mapping, form, request, response);
 	}
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -79,23 +95,6 @@ public class WaterRecordAction extends BaseDispatchAction {
 			setResult(false, "保存失败"+e.getMessage(), request);
 		}
 		return forward("/pages/manage/meter/water/waterRecordAdd.jsp");
-	}
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		Map<String, Object> map = getParaMap();
-		WaterRecordActionForm actionForm = (WaterRecordActionForm)form;
-		map.put("startCreateDate", actionForm.getStartCreateDate());
-		map.put("endCreateDate", actionForm.getEndCreateDate());
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = waterRecordDao.findWaterRecordPager(map, getPager(request));
-		saveQueryResult(request, paginater);
-		return forward("/pages/manage/meter/water/waterRecordList.jsp");
-	}
-	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/manage/meter/water/waterRecordImport.jsp");
 	}
 	public ActionForward doImport(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -177,47 +176,6 @@ public class WaterRecordAction extends BaseDispatchAction {
 		}
 		return forward("/pages/manage/meter/water/waterRecordImport.jsp");
 	}
-	public ActionForward check(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			String id = request.getParameter("id");
-			waterRecordService.checkRecord(id, getSessionUser(request));
-			setResult(true, "账单生成成功", request);
-		} catch (Exception e) {
-			setResult(false, "生成账单失败", request);
-			e.printStackTrace();
-		}
-		return list(mapping, form, request, response);
-		
-	}
-	public ActionForward checkAll(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			Integer num = waterRecordService.checkAllRecord(getSessionUser(request));
-			if (num > 0) {
-				setResult(true, "已生成"+num+"条账单", request);
-			}else {
-				setResult(true, "没有需要生成账单的记录", request);
-			}
-		} catch (Exception e) {
-			setResult(false, "生成账单失败", request);
-			e.printStackTrace();
-		}
-		return list(mapping, form, request, response);
-		
-	}
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			String id = request.getParameter("id");
-			waterRecordService.deleteRecord(id, getSessionUser(request));
-			setResult(true, "操作成功", request);
-		} catch (Exception e) {
-			setResult(false, "删除失败", request);
-			e.printStackTrace();
-		}
-		return list(mapping, form, request, response);
-	}
 	public ActionForward getPreRecord(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -239,5 +197,47 @@ public class WaterRecordAction extends BaseDispatchAction {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		Map<String, Object> map = getParaMap();
+		WaterRecordActionForm actionForm = (WaterRecordActionForm)form;
+		map.put("startCreateDate", actionForm.getStartCreateDate());
+		map.put("endCreateDate", actionForm.getEndCreateDate());
+		map.put("houseSn", actionForm.getHouseSn());
+		map.put("branchNo", getSessionBranchNo(request));
+		Paginater paginater = waterRecordDao.findWaterRecordPager(map, getPager(request));
+		saveQueryResult(request, paginater);
+		return forward("/pages/manage/meter/water/waterRecordList.jsp");
+	}
+	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		String preRecordDate = "";
+		String curRecordDate = "";
+		String beginDate = "";
+		if(day > 26){
+			preRecordDate = DateUtil.getMaxMonthDate(-1);
+			curRecordDate = DateUtil.getCurrentDate();
+			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -1);
+			beginDate = DateUtil.getDateYYYYMM(d1);
+		}else {
+			preRecordDate = DateUtil.getMaxMonthDate(-2);
+			curRecordDate = DateUtil.getMaxMonthDate(-1);
+			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -2);
+			beginDate = DateUtil.getDateYYYYMM(d1);
+		}
+		//DateUtil.addMonths(date, num);
+		String recordMonth = beginDate+"-"+curRecordDate.substring(0, 6);
+		WaterRecordActionForm actioinForm = (WaterRecordActionForm)form;
+		actioinForm.setPreRecordDate(preRecordDate);
+		actioinForm.setCurRecordDate(curRecordDate);
+		actioinForm.setRecordMonth(recordMonth);
+		return forward("/pages/manage/meter/water/waterRecordAdd.jsp");
+	}
+	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		return forward("/pages/manage/meter/water/waterRecordImport.jsp");
 	}
 }

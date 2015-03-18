@@ -59,8 +59,8 @@ public class IcDepositAction extends BaseDispatchAction {
 		IcDepositActionForm actionForm = (IcDepositActionForm)form;
 		map.put("houseSn", actionForm.getHouseSn());
 		map.put("state", actionForm.getState());
-		map.put("startDepositDate", actionForm.getStartDepositDate());
-		map.put("endDepositDate", actionForm.getEndDepositDate());
+		map.put("startChargeDate", actionForm.getStartChargeDate());
+		map.put("endChargeDate", actionForm.getEndChargeDate());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
 		map.put("branchNo", getSessionBranchNo(request));

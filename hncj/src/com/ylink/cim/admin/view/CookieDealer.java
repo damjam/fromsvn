@@ -53,6 +53,47 @@ public class CookieDealer {
 	}
 
 	/**
+	 * 获取cookie中的值
+	 * 
+	 * @param keyOfCookie
+	 * @param keyOfAttr
+	 * @param request
+	 */
+	public static String getCookieValue(String keyOfCookie, HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			return "";
+		}
+		for (int i = 0; i < cookies.length; i++) {
+			Cookie cookie = cookies[i];
+			if (keyOfCookie.equals(cookie.getName())) {
+				String value = cookie.getValue();
+				return value;
+			}
+		}
+		return "";
+	}
+
+	/**
+	 * 将所有信息保存到cookie
+	 * 
+	 * @param keyIfCookie
+	 * @param keyForRemenberNames
+	 * @param keyToGetCookie
+	 * @param request
+	 * @param response
+	 */
+	public static void putAllToCookie(String keyIfCookie, List<String> keyForRemenberNames,
+			List<String> keyToGetCookie, HttpServletRequest request, HttpServletResponse response) {
+		if (keyForRemenberNames == null || keyToGetCookie == null) {
+			log.error("传入的键值为空！");
+			return;
+		}
+		CookieDealer.putAllToCookie(keyIfCookie, (String[]) keyForRemenberNames.toArray(),
+				(String[]) keyToGetCookie.toArray(), request, response);
+	}
+
+	/**
 	 * 将所有信息保存到cookie
 	 * 
 	 * @param keyIfCookie  是否保存cookie
@@ -73,22 +114,23 @@ public class CookieDealer {
 	}
 
 	/**
-	 * 将所有信息保存到cookie
+	 * 将客户端cookie保存的内容放入到request的attr中
 	 * 
-	 * @param keyIfCookie
-	 * @param keyForRemenberNames
-	 * @param keyToGetCookie
+	 * @param keyOfCookie
+	 * @param keyOfAttrInReq
 	 * @param request
-	 * @param response
 	 */
-	public static void putAllToCookie(String keyIfCookie, List<String> keyForRemenberNames,
-			List<String> keyToGetCookie, HttpServletRequest request, HttpServletResponse response) {
-		if (keyForRemenberNames == null || keyToGetCookie == null) {
-			log.error("传入的键值为空！");
-			return;
-		}
-		CookieDealer.putAllToCookie(keyIfCookie, (String[]) keyForRemenberNames.toArray(),
-				(String[]) keyToGetCookie.toArray(), request, response);
+	private static void putCookieToReqAttr(String keyOfCookie, String keyOfAttrInReq,
+			HttpServletRequest request) {
+		String value = getCookieValue(keyOfCookie, request);
+		request.setAttribute(keyOfAttrInReq, value);
+	}
+
+	
+	public static void saveBranch(String fromBranch, HttpServletResponse response) {
+		Cookie cookie = new Cookie(FROM_BRANCH, fromBranch);
+		cookie.setMaxAge(-1);
+		response.addCookie(cookie);
 	}
 
 	/**
@@ -115,48 +157,6 @@ public class CookieDealer {
 			deleteNewCookie.setPath("/");
 			response.addCookie(deleteNewCookie);
 		}
-	}
-
-	/**
-	 * 获取cookie中的值
-	 * 
-	 * @param keyOfCookie
-	 * @param keyOfAttr
-	 * @param request
-	 */
-	public static String getCookieValue(String keyOfCookie, HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies == null) {
-			return "";
-		}
-		for (int i = 0; i < cookies.length; i++) {
-			Cookie cookie = cookies[i];
-			if (keyOfCookie.equals(cookie.getName())) {
-				String value = cookie.getValue();
-				return value;
-			}
-		}
-		return "";
-	}
-
-	
-	/**
-	 * 将客户端cookie保存的内容放入到request的attr中
-	 * 
-	 * @param keyOfCookie
-	 * @param keyOfAttrInReq
-	 * @param request
-	 */
-	private static void putCookieToReqAttr(String keyOfCookie, String keyOfAttrInReq,
-			HttpServletRequest request) {
-		String value = getCookieValue(keyOfCookie, request);
-		request.setAttribute(keyOfAttrInReq, value);
-	}
-
-	public static void saveBranch(String fromBranch, HttpServletResponse response) {
-		Cookie cookie = new Cookie(FROM_BRANCH, fromBranch);
-		cookie.setMaxAge(-1);
-		response.addCookie(cookie);
 	}
 	
 }

@@ -12,9 +12,7 @@ import java.util.Collection;
 import flink.etc.Symbol;
 import flink.util.IPrivilege;
 
- 
-public  class Privilege implements IPrivilege, Serializable
-{
+public class Privilege implements IPrivilege, Serializable {
 	/**
 	 * 
 	 */
@@ -24,36 +22,39 @@ public  class Privilege implements IPrivilege, Serializable
 	 * 是否已经用于构造树
 	 */
 	private boolean usedToTree = false;
-    public boolean isUsedToTree() {
+
+	public boolean isUsedToTree() {
 		return usedToTree;
 	}
+
 	public void setUsedToTree(boolean usedToTree) {
 		this.usedToTree = usedToTree;
 	}
 
 	public boolean isMenu() {
-    	return Symbol.YES.equals(getIsMenu());
+		return Symbol.YES.equals(getIsMenu());
 	}
 
-    private int hashValue = 0;
+	private int hashValue = 0;
 
-    private java.lang.String limitId;
+	private java.lang.String limitId;
 
-    private java.lang.String limitName;
+	private java.lang.String limitName;
 
-    private java.lang.String parent;
+	private java.lang.String parent;
 
-    private java.lang.String isMenu;
+	private java.lang.String isMenu;
 
-    private java.lang.Integer menuOrder;
+	private java.lang.Integer menuOrder;
 
-    private java.lang.String ifAudit;
+	private java.lang.String ifAudit;
 
 	// 定义属性.
-    private Collection<Privilege> children;
-    private String entry;
-    
-    private String hasSubPris;
+	private Collection<Privilege> children;
+	private String entry;
+
+	private String hasSubPris;
+
 	public String getHasSubPris() {
 		return hasSubPris;
 	}
@@ -61,22 +62,20 @@ public  class Privilege implements IPrivilege, Serializable
 	public void setHasSubPris(String hasSubPris) {
 		this.hasSubPris = hasSubPris;
 	}
-    public Collection getAllChildren() {
+
+	public Collection getAllChildren() {
 		return children;
 	}
 
-    public Privilege()
-    {
-    }
+	public Privilege() {
+	}
 
+	public Privilege(final java.lang.String limitId) {
+		setLimitId(limitId);
+	}
 
-    public Privilege(final java.lang.String limitId)
-    {
-        setLimitId(limitId);
-    }
-
-
-	public Privilege(final String limitId, final String limitName, final String parent, final String isMenu, final Integer menuOrder, final String ifAudit, final String entry) {
+	public Privilege(final String limitId, final String limitName, final String parent, final String isMenu,
+			final Integer menuOrder, final String ifAudit, final String entry) {
 		super();
 		this.limitId = limitId;
 		this.limitName = limitName;
@@ -87,17 +86,16 @@ public  class Privilege implements IPrivilege, Serializable
 		this.entry = entry;
 	}
 
-	public boolean equals(final Object rhs)
-    {
-        if (rhs == null)
-            return false;
-        if (! (rhs instanceof Privilege))
-            return false;
-        Privilege that = (Privilege) rhs;
-        if (getLimitId() == null || that.getLimitId() == null)
-            return false;
-        return (getLimitId().equals(that.getLimitId()));
-    }
+	public boolean equals(final Object rhs) {
+		if (rhs == null)
+			return false;
+		if (!(rhs instanceof Privilege))
+			return false;
+		Privilege that = (Privilege) rhs;
+		if (getLimitId() == null || that.getLimitId() == null)
+			return false;
+		return (getLimitId().equals(that.getLimitId()));
+	}
 
 	public Collection<Privilege> getChildren() {
 		return this.children;
@@ -111,92 +109,78 @@ public  class Privilege implements IPrivilege, Serializable
 		return this.entry;
 	}
 
-    public java.lang.String getIfAudit()
-    {
-        return this.ifAudit;
-    }
+	public java.lang.String getIfAudit() {
+		return this.ifAudit;
+	}
 
-    public java.lang.String getIsMenu()
-    {
-        return this.isMenu;
-    }
+	public java.lang.String getIsMenu() {
+		return this.isMenu;
+	}
 
-    public java.lang.String getLimitId()
-    {
-        return this.limitId;
-    }
+	public java.lang.String getLimitId() {
+		return this.limitId;
+	}
 
-    public java.lang.String getLimitName()
-    {
-        return this.limitName;
-    }
-
-    public java.lang.Integer getMenuOrder()
-    {
-        return this.menuOrder;
-    }
-
-    public String getName() {
+	public java.lang.String getLimitName() {
 		return this.limitName;
 	}
 
-    public java.lang.String getParent()
-    {
-        return this.parent;
-    }
+	public java.lang.Integer getMenuOrder() {
+		return this.menuOrder;
+	}
 
-	public int hashCode()
-    {
-        if (this.hashValue == 0)
-        {
-            int result = 17;
-            int limitIdValue = getLimitId() == null ? 0 : getLimitId().hashCode();
-            result = result * 37 + limitIdValue;
-            this.hashValue = result;
-        }
-        return this.hashValue;
-    }
+	public String getName() {
+		return this.limitName;
+	}
+
+	public java.lang.String getParent() {
+		return this.parent;
+	}
+
+	public int hashCode() {
+		if (this.hashValue == 0) {
+			int result = 17;
+			int limitIdValue = getLimitId() == null ? 0 : getLimitId().hashCode();
+			result = result * 37 + limitIdValue;
+			this.hashValue = result;
+		}
+		return this.hashValue;
+	}
 
 	public void setChildren(final Collection children) {
 		this.children = children;
 	}
 
-    public void setCode(final String code) {
+	public void setCode(final String code) {
 		this.limitId = code;
 	}
 
-    public void setEntry(final String entry) {
+	public void setEntry(final String entry) {
 		this.entry = entry;
 	}
 
-    public void setIfAudit(final java.lang.String ifAudit)
-    {
-        this.ifAudit = ifAudit;
-    }
+	public void setIfAudit(final java.lang.String ifAudit) {
+		this.ifAudit = ifAudit;
+	}
 
-    public void setIsMenu(final java.lang.String isMenu)
-    {
-        this.isMenu = isMenu;
-    }
+	public void setIsMenu(final java.lang.String isMenu) {
+		this.isMenu = isMenu;
+	}
 
-    public void setLimitId(final java.lang.String limitId)
-    {
-        this.hashValue = 0;
-        this.limitId = limitId;
-    }
+	public void setLimitId(final java.lang.String limitId) {
+		this.hashValue = 0;
+		this.limitId = limitId;
+	}
 
-    public void setLimitName(final java.lang.String limitName)
-    {
-        this.limitName = limitName;
-    }
+	public void setLimitName(final java.lang.String limitName) {
+		this.limitName = limitName;
+	}
 
-    public void setMenuOrder(final java.lang.Integer menuOrder)
-    {
-        this.menuOrder = menuOrder;
-    }
+	public void setMenuOrder(final java.lang.Integer menuOrder) {
+		this.menuOrder = menuOrder;
+	}
 
-    public void setParent(final java.lang.String parent)
-    {
-        this.parent = parent;
-    }
+	public void setParent(final java.lang.String parent) {
+		this.parent = parent;
+	}
 }

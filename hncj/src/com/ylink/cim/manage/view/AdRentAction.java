@@ -30,9 +30,9 @@ public class AdRentAction extends BaseDispatchAction {
 			HttpServletResponse response) throws Exception {
 		try {
 			AdRentActionForm actionForm = (AdRentActionForm)form;
-			AdRent hadRent = new AdRent();
-			BeanUtils.copyProperties(hadRent, actionForm);
-			billService.saveAdRentBill(hadRent, getSessionUser(request));
+			AdRent adRent = new AdRent();
+			BeanUtils.copyProperties(adRent, actionForm);
+			billService.saveAdRentBill(adRent, getSessionUser(request));
 			setResult(true, "Ìí¼Ó³É¹¦", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);

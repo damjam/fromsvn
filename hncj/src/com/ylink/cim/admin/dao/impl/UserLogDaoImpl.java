@@ -30,7 +30,7 @@ public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
 		helper.append("and loginIp = ?", userLog.getLoginIp());
 		helper.append("and limitId = ?", userLog.getLimitId());
 		helper.append("and userId = ?", userLog.getUserId());
-		if (!BranchType.SZGOLD.getValue().equals(userInfo.getBranchNo())) {
+		if (!BranchType.HQ_0000.getValue().equals(userInfo.getBranchNo())) {
 			helper.append("and branchNo = ?", userInfo.getBranchNo());
 		}
 		helper.append("order by id desc");
@@ -42,10 +42,8 @@ public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
 
 	}
 
-	
 	protected Class getModelClass() {
 		return UserLog.class;
 	}
-
 
 }

@@ -8,34 +8,6 @@ public class SysDictId implements Serializable{
 	
 	private String dictType;
 
-	public String getDictValue() {
-		return dictValue;
-	}
-
-	public void setDictValue(String dictValue) {
-		this.dictValue = dictValue;
-	}
-
-	public String getDictType() {
-		return dictType;
-	}
-
-	public void setDictType(String dictType) {
-		this.dictType = dictType;
-	}
-
-	
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((dictType == null) ? 0 : dictType.hashCode());
-		result = prime * result
-				+ ((dictValue == null) ? 0 : dictValue.hashCode());
-		return result;
-	}
-
-	
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -55,6 +27,34 @@ public class SysDictId implements Serializable{
 		} else if (!dictValue.equals(other.dictValue))
 			return false;
 		return true;
+	}
+
+	public String getDictType() {
+		return dictType;
+	}
+
+	public String getDictValue() {
+		return dictValue;
+	}
+
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dictType == null) ? 0 : dictType.hashCode());
+		result = prime * result
+				+ ((dictValue == null) ? 0 : dictValue.hashCode());
+		return result;
+	}
+
+	
+	public void setDictType(String dictType) {
+		this.dictType = dictType;
+	}
+
+	
+	public void setDictValue(String dictValue) {
+		this.dictValue = dictValue;
 	}
 	
 	

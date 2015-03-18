@@ -4,7 +4,6 @@ import java.util.Date;
 
 // default package
 
-
 /**
  * ElecPrestore entity. @author MyEclipse Persistence Tools
  */
@@ -18,108 +17,121 @@ public class IcDeposit implements java.io.Serializable {
 	private String houseSn;
 	private String ownerName;
 	private String payerName;
-	private Date depositDate;
+	private Date chargeDate;
 	private String chargeUser;
+	private String createUser;
+	private String createDate;
 	private String payType;
 	private String state;
 	private String cardType;
-    private String branchNo;
-	
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-	// Constructors
-
-	public String getCardType() {
-		return cardType;
-	}
-
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
-	}
+	private String branchNo;
 
 	/** default constructor */
 	public IcDeposit() {
-	}
-
-	// Property accessors
-
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public Double getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	// Constructors
+
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+	public String getCardType() {
+		return cardType;
+	}
+
+	public Date getChargeDate() {
+		return chargeDate;
+	}
+
+	// Property accessors
+
+	public String getChargeUser() {
+		return this.chargeUser;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public String getCreateUser() {
+		return createUser;
 	}
 
 	public String getHouseSn() {
 		return this.houseSn;
 	}
 
-	public void setHouseSn(String houseSn) {
-		this.houseSn = houseSn;
+	public String getId() {
+		return this.id;
 	}
 
 	public String getOwnerName() {
 		return this.ownerName;
 	}
 
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
 	public String getPayerName() {
 		return this.payerName;
-	}
-
-	public void setPayerName(String payerName) {
-		this.payerName = payerName;
-	}
-
-	
-	public Date getDepositDate() {
-		return depositDate;
-	}
-
-
-	public void setDepositDate(Date depositDate) {
-		this.depositDate = depositDate;
-	}
-
-
-
-	public String getChargeUser() {
-		return this.chargeUser;
-	}
-
-	public void setChargeUser(String chargeUser) {
-		this.chargeUser = chargeUser;
 	}
 
 	public String getPayType() {
 		return this.payType;
 	}
 
-	public void setPayType(String payType) {
-		this.payType = payType;
-	}
-
 	public String getState() {
 		return this.state;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+
+	public void setChargeDate(Date chargeDate) {
+		this.chargeDate = chargeDate;
+	}
+
+	public void setChargeUser(String chargeUser) {
+		this.chargeUser = chargeUser;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public void setPayerName(String payerName) {
+		this.payerName = payerName;
+	}
+
+	public void setPayType(String payType) {
+		this.payType = payType;
 	}
 
 	public void setState(String state) {

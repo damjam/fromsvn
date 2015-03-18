@@ -7,10 +7,8 @@ import org.apache.log4j.Logger;
 
 import com.ylink.cim.common.msg.SocketParams;
 
-import flink.util.SpringContext;
-
 public class ConnectionProvider {
-	//private static Object object_lock = new Object();
+	// private static Object object_lock = new Object();
 	private static Logger logger = Logger.getLogger(ConnectionProvider.class);
 	private String ip;
 	private int port;
@@ -41,10 +39,12 @@ public class ConnectionProvider {
 	 */
 
 	private ConnectionProvider() {
-		//ReadProperties readProperties = new ReadProperties("d:\\project\\cim\\conf\\gess.properties");
-		//ip = readProperties.getValByKey(SERVER_IP);
-		//port = readProperties.getValByKey(SERVER_PORT);
-		//SocketParams socketParams = (SocketParams)SpringContext.getService("socketParams");
+		// ReadProperties readProperties = new
+		// ReadProperties("d:\\project\\cim\\conf\\gess.properties");
+		// ip = readProperties.getValByKey(SERVER_IP);
+		// port = readProperties.getValByKey(SERVER_PORT);
+		// SocketParams socketParams =
+		// (SocketParams)SpringContext.getService("socketParams");
 		SocketParams socketParams = new SocketParams("168.33.120.25", 13000, 5, "GBK");
 		ip = socketParams.getHostName();
 		port = socketParams.getPortNum();
@@ -70,7 +70,7 @@ public class ConnectionProvider {
 	}
 
 	/**
-	 *返回一个连接
+	 * 返回一个连接
 	 * 
 	 * @return a Connection object.
 	 */
@@ -98,7 +98,7 @@ public class ConnectionProvider {
 			try { // 生成普通连接，由客户端自行关闭，释放资源，不再由连接池管理
 				s = new ConnectionAdapter(ip, port, true);
 			} catch (Exception e) { // 此异常永远不会抛出
-				
+
 			}
 		}
 		return s;

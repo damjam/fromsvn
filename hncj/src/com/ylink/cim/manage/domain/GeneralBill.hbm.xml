@@ -11,10 +11,16 @@
             <generator class="assigned" />
         </id>
         <property name="createDate" type="java.util.Date">
-            <column name="CREATE_DATE" length="19" not-null="true" />
+            <column name="CREATE_DATE" length="19" />
+        </property>
+        <property name="chargeDate" type="java.util.Date">
+            <column name="CHARGE_DATE" length="19" />
         </property>
         <property name="chargeUser" type="java.lang.String">
-            <column name="CHARGE_USER" length="50" not-null="true" />
+            <column name="CHARGE_USER" length="50" />
+        </property>
+        <property name="createUser" type="java.lang.String">
+            <column name="CREATE_USER" length="50" />
         </property>
         <property name="tradeType" type="java.lang.String">
             <column name="TRADE_TYPE" length="20" not-null="true" />

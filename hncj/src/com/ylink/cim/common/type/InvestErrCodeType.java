@@ -206,9 +206,8 @@ public class InvestErrCodeType extends AbstractType {
 	public static final InvestErrCodeType DT8012 = new InvestErrCodeType("委托类型不能为空", "DT8012");
 	
 
-	protected InvestErrCodeType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("investErrCodes", InvestErrCodeType.ALL.values());
 	}
 
 	public static InvestErrCodeType valueOf(String value) {
@@ -218,7 +217,8 @@ public class InvestErrCodeType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("investErrCodes", InvestErrCodeType.ALL.values());
+	protected InvestErrCodeType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

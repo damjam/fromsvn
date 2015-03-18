@@ -10,8 +10,8 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.IcDepositDao;
-import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.IcDeposit;
 
 import flink.hibernate.BaseDaoHibernateImpl;
@@ -19,23 +19,30 @@ import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
-@Repository("elecPrestoreDao")
+@Repository("icDepositDao")
 public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositDao{
 	public Paginater findPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
-		helper.append("from ElecPrestore t where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startDepositDate"))) {
-			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startDate")));
+		helper.append("from IcDeposit t where 1=1");
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endDepositDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endDate")));
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
+			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
-		
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
+			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
+			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("order by t.id desc");
 		return super.getPageData(helper, pager);
 	}
@@ -68,7 +75,9 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 		//helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and state = ?", BillState.PAID.getValue());
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("group by state");
 		List<Map<String, Object>> sumList = super.getList(helper);
 		Map<String, Object> sumInfo = new HashMap<String, Object>();

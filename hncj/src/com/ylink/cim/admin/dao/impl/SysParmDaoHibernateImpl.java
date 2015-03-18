@@ -73,6 +73,11 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 
 	
 
+	public boolean isModify(String code) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void saveSysParm(SysParm sysParm) throws Exception {
 
 		this.save(sysParm);
@@ -125,11 +130,6 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 	public void updSysParm(SysParm sysParm) {
 
 		update(sysParm);
-	}
-
-	public boolean isModify(String code) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 

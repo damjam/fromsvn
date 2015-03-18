@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -13,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import com.ylink.cim.admin.dao.LimitGroupInfoDao;
 import com.ylink.cim.admin.dao.UserRoleDao;
 import com.ylink.cim.admin.domain.LimitGroupInfo;
-import com.ylink.cim.admin.domain.RoleInfo;
 import com.ylink.cim.admin.domain.UserRole;
 import com.ylink.cim.admin.domain.UserRoleId;
 import com.ylink.cim.admin.service.UserRoleService;

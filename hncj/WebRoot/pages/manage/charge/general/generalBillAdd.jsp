@@ -28,6 +28,13 @@
 		<script type="text/javascript">
 			
 		 	function save(){
+		 		var tradeType = $('#tradeType').val();
+		 		if(tradeType == '98'){
+		 			var remark = $('#remark').val();
+		 			alert('请在备注中注明收款项目');
+		 			$('#remark').focus();
+		 			return;
+		 		}
 		 		FormUtils.submitFirstTokenForm();
 		 	}
 		 	
@@ -80,16 +87,24 @@
 			}
 			function count(){
 				var unitPrice = $('#unitPrice').val();
-				var num = $('#unitPrice').val();
+				var num = $('#num').val();
 				if(num == '' || unitPrice == ''){
 					return;
 				}
 				if(isNaN(parseFloat(unitPrice))){
 					alert('请输入正确的单价');
+					$('#unitPrice').val('');
+					$('#totalAmt').val('');
+					$('#paidAmt').val('');
+					$('#unitPrice').focus();
 					return;
 				}
 				if(isNaN(parseInt(num, 10))){
 					alert('请输入正确的数量');
+					$('#num').val('');
+					$('#totalAmt').val('');
+					$('#paidAmt').val('');
+					$('#num').focus();
 					return;
 				}
 				unitPrice = parseInt(unitPrice, 10);
@@ -114,29 +129,11 @@
 				<div class="contentb">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
-					   <!-- 
-					   <tr>
-						    <td class="formlabel nes">是否小区业主</td>
-						    <td>
-						    	<html:select property="isInternal" onchange="change()" styleId="isInternal">
-						    		<html:options collection="yesNos" property="value" labelProperty="name" />
-						    	</html:select>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr> -->
-					   <!-- 
-					   <tr class="houseSn">
-						    <td class="formlabel nes">房屋编号</td>
-						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getOwnerName()"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr> -->
 					   <tr>
 						    <td class="formlabel nes">收费项目</td>
 						    <td>
 						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="07">门禁卡办理费</html:option>
+						    		<html:option value="07">智能卡办理费</html:option>
 						    		<html:option value="08">临时出入证办理费</html:option>
 						    		<html:option value="20">广告位租赁费</html:option>
 						    		<html:option value="98">其他</html:option>
@@ -154,7 +151,7 @@
 					   <tr>
 						    <td class="formlabel nes">数量</td>
 						    <td>
-						    <html:text property="num"  styleId="num" styleClass="{required:true,digits:true}" maxlength="8" onblur="count()"/>
+						    <html:text property="num"  styleId="num" styleClass="{required:true,digits:true}" maxlength="8" onblur="count()" value="1"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
@@ -179,7 +176,6 @@
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
-					   
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>

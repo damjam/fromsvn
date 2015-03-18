@@ -44,10 +44,10 @@
             <column name="create_date" length="19" not-null="true" />
         </property>
         <property name="chargeDate" type="java.sql.Timestamp">
-            <column name="CHARGE_DATE" length="19" not-null="true" />
+            <column name="CHARGE_DATE" length="19" />
         </property>
         <property name="chargeUser" type="java.lang.String">
-            <column name="CHARGE_USER" length="50" not-null="true" />
+            <column name="CHARGE_USER" length="50" />
         </property>
         <property name="recordMonth" type="java.lang.String">
             <column name="RECORD_MONTH" length="50" not-null="true" />

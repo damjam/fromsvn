@@ -31,8 +31,7 @@ public class UserLog implements java.io.Serializable {
 	// Constructors
 	private String limitName;
 	private String userName;
-	
-	
+
 	public String getContentAbbr() {
 		return StringUtils.abbreviate(content, 30);
 	}
@@ -134,6 +133,5 @@ public class UserLog implements java.io.Serializable {
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
-	
-	
+
 }

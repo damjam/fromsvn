@@ -105,13 +105,7 @@
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
 	            <div class="toptext">
-	            	            <div class="toptext">
-<%-- 	            ${SESSION_BRANCH.name}黄金定投交易系统 --%>
-	            	 <c:choose>
-		            	<c:when test="${tag eq 'gz'}">广州银行黄金定投交易系统</c:when>
-		            	<c:when test="${tag eq 'dg'}">东莞银行黄金定投交易系统</c:when>
-		            	<c:otherwise> 深圳金融电子结算中心 客户信息管理系统</c:otherwise>
-		            </c:choose>
+		            ${comInfo.sp}
 	            </div>
 	            <div style="float:right;"><img src="images/top_right.jpg" width="8" height="39" /></div>
 	        </div>
@@ -137,19 +131,19 @@
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/sz">深圳金融电子结算中心</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}">${comInfo.name}</a>
 				            </div>
 				        </div>
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/dg">东莞银行</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}">${comInfo.name}</a>
 				            </div>
 				        </div>
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/gz">广州银行</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}">${comInfo.name}</a>
 				            </div>
 				        </div>
 						<!-- 
@@ -166,12 +160,6 @@
 	    </div>
 	    
 	    <!--登陆口底部-->
-	    <div class="footer">
-	        <div class="footshadow"></div>
-	        <div class="foottext">
-	            <div class="textleft">建议使用IE7.0版本以上浏览器或者FireFox浏览器+1024分辨率获得最佳操作体验</div>
-	            <div class="textright">版权所有&copy;<a href="http://www.szgold.com.cn/" title="访问官方网站" target="_blank"></a> 全国客服热线：400-189-6699</div>
-	        </div>
-	    </div>
+	    <jsp:include flush="true" page="/footer.jsp"></jsp:include>
 	</body>
 </html>

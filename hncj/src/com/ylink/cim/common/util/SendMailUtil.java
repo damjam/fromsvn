@@ -38,7 +38,7 @@ public class SendMailUtil {
 //		info.setEncoding(MailConstant.CHARSET_GBK);
 //		info.setTextContent("ÓÊ¼þÄÚÈÝ");
 //		info.setTo(new String[] { "libaozhu_mail@163.com" });
-//		info.setFrom(new String[] { "test@szgold.com.cn" });
+//		info.setFrom(new String[] { "test@HQ_0000.com.cn" });
 //		sendTextMail(info);
 		System.out.println(InetAddress.getLocalHost());
 	}

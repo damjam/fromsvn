@@ -17,15 +17,6 @@ public class Js extends SimpleTagSupport {
 	private String src;
 	private String defer;
 	
-	public void setDefer(String defer) {
-		this.defer = defer;
-	}
-
-	public void setSrc(String src) {
-		this.src = src;
-	}
-
-	
 	public void doTag() throws JspException, IOException {
 		String contextPath = ((HttpServletRequest) ((PageContext) this.getJspContext()).getRequest()).getContextPath();
 		String deferContent = "";
@@ -35,5 +26,14 @@ public class Js extends SimpleTagSupport {
 		}
 		
 		this.getJspContext().getOut().write("<script type=\"text/javascript\" " + deferContent + " src=\"" + contextPath + src + "\"></script>");
+	}
+
+	public void setDefer(String defer) {
+		this.defer = defer;
+	}
+
+	
+	public void setSrc(String src) {
+		this.src = src;
 	}
 }

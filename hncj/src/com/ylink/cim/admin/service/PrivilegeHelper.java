@@ -25,32 +25,6 @@ public abstract class PrivilegeHelper {
 	
 	private static Log log =LogFactory.getLog(PrivilegeHelper.class);
 	/**
-	 * 生成权限目录树（若是叶子节点，将被排除）
-	 * @param root
-	 * @param privileges  当前所有的所有权限
-	 * @param map 权限和权限资源之间的映射
-	 * @return
-	 */
-	public static IPrivilege getPrivilegeTree(IPrivilege root, Collection<IPrivilege> privileges,Map<String,List<PrivilegeResource>> map) {
-		Collection<Privilege> ps = new ArrayList<Privilege>();
-		for(IPrivilege ip: privileges){
-			Privilege subP = (Privilege)ip;
-			subP.setUsedToTree(false);
-			ps.add(subP);
-		}
-		
-		long first = System.currentTimeMillis();
-		List<IPrivilege> children = getChildren(root, ps);
-		long next = System.currentTimeMillis();
-		log.debug("权限树构造时间："+(next-first));
-		
-		Privilege pRoot = (Privilege)root;
-		pRoot.setUsedToTree(true);
-		pRoot.setChildren(children);
-		return pRoot;
-	}
-
-	/**
 	 * 获取权限的子权限.
 	 * 
 	 * @param parent
@@ -77,18 +51,7 @@ public abstract class PrivilegeHelper {
 		
 		return result;
 	}
-	
-	/**
-	 * 前者是否为后者的子权限.
-	 * 
-	 * @param privilege
-	 * @param parent
-	 * @return
-	 */
-	private static boolean isChild(IPrivilege privilege, IPrivilege parent) {
-		return StringUtils.equals(privilege.getParent(), parent.getCode());
-	}
-	
+
 	/**
 	 * 查找父节点.
 	 * @param privilege
@@ -125,5 +88,42 @@ public abstract class PrivilegeHelper {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * 生成权限目录树（若是叶子节点，将被排除）
+	 * @param root
+	 * @param privileges  当前所有的所有权限
+	 * @param map 权限和权限资源之间的映射
+	 * @return
+	 */
+	public static IPrivilege getPrivilegeTree(IPrivilege root, Collection<IPrivilege> privileges,Map<String,List<PrivilegeResource>> map) {
+		Collection<Privilege> ps = new ArrayList<Privilege>();
+		for(IPrivilege ip: privileges){
+			Privilege subP = (Privilege)ip;
+			subP.setUsedToTree(false);
+			ps.add(subP);
+		}
+		
+		long first = System.currentTimeMillis();
+		List<IPrivilege> children = getChildren(root, ps);
+		long next = System.currentTimeMillis();
+		log.debug("权限树构造时间："+(next-first));
+		
+		Privilege pRoot = (Privilege)root;
+		pRoot.setUsedToTree(true);
+		pRoot.setChildren(children);
+		return pRoot;
+	}
+	
+	/**
+	 * 前者是否为后者的子权限.
+	 * 
+	 * @param privilege
+	 * @param parent
+	 * @return
+	 */
+	private static boolean isChild(IPrivilege privilege, IPrivilege parent) {
+		return StringUtils.equals(privilege.getParent(), parent.getCode());
 	}
 }

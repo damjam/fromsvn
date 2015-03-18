@@ -7,7 +7,6 @@ import com.ylink.cim.common.msg.handle.HeadReqUtils;
 import com.ylink.cim.common.msg.handle.MsgA2031;
 import com.ylink.cim.common.msg.handle.MsgField;
 import com.ylink.cim.common.msg.handle.MsgUtil;
-import com.ylink.cim.common.util.SocketUtil;
 
 public class TestMsgA2031 {
 

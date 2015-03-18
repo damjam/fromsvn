@@ -1,6 +1,5 @@
 package com.ylink.cim.invest.view;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +41,8 @@ import flink.web.BaseDispatchAction;
 public class InvestQueryAction extends BaseDispatchAction {
 	Logger logger = Logger.getLogger(InvestQueryAction.class);
 	private InvestQueryService investQueryService = (InvestQueryService) getService("investQueryService");
-	private SignContractDao signContractDao = (SignContractDao)SpringContext.getService("signContractDao");
+	private SignContractDao signContractDao = (SignContractDao) SpringContext.getService("signContractDao");
+
 	/**
 	 * 定投计划查询
 	 * 
@@ -77,16 +77,16 @@ public class InvestQueryAction extends BaseDispatchAction {
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		msgMap.put(MsgField.order_no.getFieldCode(), investInfoActionForm.getPlanNo());
 		msgMap.put(MsgField.plan_stat.getFieldCode(), investInfoActionForm.getPlanState());
-//		msgMap.put(MsgField.aip_type.getFieldCode(), "Au");
+		// msgMap.put(MsgField.aip_type.getFieldCode(), "Au");
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Paginater paginater = investQueryService.queryPlan(msgMap, getPager(request));
 			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("定投计划查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("定投计划查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
-			setResult(false, "查询失败,失败原因:"+e.getMessage(), request);
+		} catch (Exception e) {
+			setResult(false, "查询失败,失败原因:" + e.getMessage(), request);
 			String msg = LogUtils.r("定投计划查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 		}
@@ -106,7 +106,7 @@ public class InvestQueryAction extends BaseDispatchAction {
 	public ActionForward toQueryGoldAcct(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initData(request);
-		
+
 		return forward("/pages/invest/query/acctList.jsp");
 	}
 
@@ -128,17 +128,17 @@ public class InvestQueryAction extends BaseDispatchAction {
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Map<String, MsgField> resMap = investQueryService.queryGoldAcctTatol(msgMap);
-			
-			List<Map<String, MsgField>> list=investQueryService.queryGoldAcct(msgMap);
-			
+
+			List<Map<String, MsgField>> list = investQueryService.queryGoldAcct(msgMap);
+
 			request.setAttribute("resMap", resMap);
 			saveQueryResult(request, list);
-			String msg = LogUtils.r("黄金账户查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("黄金账户查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
-			setResult(false, "查询失败,失败原因:"+e.getMessage(), request);
+		} catch (Exception e) {
+			setResult(false, "查询失败,失败原因:" + e.getMessage(), request);
 			String msg = LogUtils.r("黄金账户查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 		}
@@ -174,17 +174,17 @@ public class InvestQueryAction extends BaseDispatchAction {
 	 */
 	public ActionForward queryCashAcct(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		Map<String,String> map = getReqMap(request);
+		Map<String, String> map = getReqMap(request);
 		InvestInfoActionForm investInfoActionForm = (InvestInfoActionForm) form;
 		map.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		map.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		map.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Paginater paginater = investQueryService.queryCashAcct(map, getPager(request));
 			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("资金账户查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("资金账户查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			setResult(true, e.getMessage(), request);
 			String msg = LogUtils.r("资金账户查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
@@ -211,6 +211,7 @@ public class InvestQueryAction extends BaseDispatchAction {
 
 	/**
 	 * 积存情况查询
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -226,13 +227,13 @@ public class InvestQueryAction extends BaseDispatchAction {
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		msgMap.put(MsgField.bs_flag.getFieldCode(),BSFlag.BUY.getValue());//买卖委托
-		try{
+		msgMap.put(MsgField.bs_flag.getFieldCode(), BSFlag.BUY.getValue());// 买卖委托
+		try {
 			Paginater paginater = investQueryService.queryDepositRecord(msgMap, getPager(request));
 			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("积存情况查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("积存情况查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			setResult(true, e.getMessage(), request);
 			String msg = LogUtils.r("积存情况查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
@@ -275,10 +276,11 @@ public class InvestQueryAction extends BaseDispatchAction {
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Paginater paginater = investQueryService.queryRedeemRecord(msgMap, getPager(request));
 			saveQueryResult(request, paginater);
-			List<Map<String, MsgField>> sumList = investQueryService.querySumGoldAcct(msgMap, getSessionInvestAcctNos(request));
+			List<Map<String, MsgField>> sumList = investQueryService.querySumGoldAcct(msgMap,
+					getSessionInvestAcctNos(request));
 			Double totalWeight = 0d;
 			for (int i = 0; i < sumList.size(); i++) {
 				Map<String, MsgField> map = sumList.get(i);
@@ -286,9 +288,9 @@ public class InvestQueryAction extends BaseDispatchAction {
 				totalWeight += Double.parseDouble(weight);
 			}
 			request.setAttribute("totalWeight", totalWeight);
-			String msg = LogUtils.r("提货记录查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("提货记录查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			request.setAttribute("totalWeight", 0d);
 			setResult(true, e.getMessage(), request);
 			String msg = LogUtils.r("提货记录查询失败,失败原因:{?}", e.getMessage());
@@ -296,29 +298,32 @@ public class InvestQueryAction extends BaseDispatchAction {
 		}
 		return forward("/pages/invest/query/takeoutList.jsp");
 	}
-	//卖出
+
+	// 卖出
 	public ActionForward toQuerySoldRecord(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initData(request);
 		request.setAttribute("totalWeight", 0d);
 		return forward("/pages/invest/query/soldoutList.jsp");
 	}
+
 	public ActionForward querySoldRecord(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initData(request);
-		
+
 		InvestInfoActionForm investInfoActionForm = (InvestInfoActionForm) form;
 		Map<String, String> msgMap = getReqMap(request);
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
-//		msgMap.put(MsgField.aip_type.getFieldCode(), "Au");
-		msgMap.put(MsgField.entr_source.getFieldCode(),EntrSource.TRADINGCOMMISSION.getValue());//买卖委托
-		msgMap.put(MsgField.bs_flag.getFieldCode(),BSFlag.SELL.getValue());//买卖委托
+		// msgMap.put(MsgField.aip_type.getFieldCode(), "Au");
+		msgMap.put(MsgField.entr_source.getFieldCode(), EntrSource.TRADINGCOMMISSION.getValue());// 买卖委托
+		msgMap.put(MsgField.bs_flag.getFieldCode(), BSFlag.SELL.getValue());// 买卖委托
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Paginater paginater = investQueryService.querySoldRecord(msgMap, getPager(request));
 			saveQueryResult(request, paginater);
-			List<Map<String, MsgField>> sumList = investQueryService.querySumGoldAcct(msgMap, getSessionInvestAcctNos(request));
+			List<Map<String, MsgField>> sumList = investQueryService.querySumGoldAcct(msgMap,
+					getSessionInvestAcctNos(request));
 			Double totalWeight = 0d;
 			for (int i = 0; i < sumList.size(); i++) {
 				Map<String, MsgField> map = sumList.get(i);
@@ -326,11 +331,11 @@ public class InvestQueryAction extends BaseDispatchAction {
 				totalWeight += Double.parseDouble(weight);
 			}
 			request.setAttribute("totalWeight", totalWeight);
-			String msg = LogUtils.r("卖出记录查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("卖出记录查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		} catch(Exception e){
-//			e.getMessage();
-//			logger.error(e.getMessage());
+		} catch (Exception e) {
+			// e.getMessage();
+			// logger.error(e.getMessage());
 			setResult(true, e.getMessage(), request);
 			request.setAttribute("totalWeight", 0d);
 			String msg = LogUtils.r("卖出记录查询失败,失败原因:{?}", e.getMessage());
@@ -338,6 +343,7 @@ public class InvestQueryAction extends BaseDispatchAction {
 		}
 		return forward("/pages/invest/query/soldoutList.jsp");
 	}
+
 	/**
 	 * 账户管理费查询
 	 * 
@@ -360,19 +366,19 @@ public class InvestQueryAction extends BaseDispatchAction {
 	 */
 	public ActionForward queryMngFee(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		initData(request);
 		InvestInfoActionForm investInfoActionForm = (InvestInfoActionForm) form;
 		Map<String, String> msgMap = getReqMap(request);
 		msgMap.put(MsgField.aip_no.getFieldCode(), investInfoActionForm.getAcctNo());
 		msgMap.put(MsgField.start_date.getFieldCode(), investInfoActionForm.getStartDate());
 		msgMap.put(MsgField.end_date.getFieldCode(), investInfoActionForm.getEndDate());
-		try{
+		try {
 			Paginater list = investQueryService.queryMngFee(msgMap, getPager(request));
 			saveQueryResult(request, list);
-			String msg = LogUtils.r("账户管理费查询成功,查询账号为：{?}",investInfoActionForm.getAcctNo());
+			String msg = LogUtils.r("账户管理费查询成功,查询账号为：{?}", investInfoActionForm.getAcctNo());
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			setResult(true, e.getMessage(), request);
 			String msg = LogUtils.r("账户管理费查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
@@ -383,22 +389,23 @@ public class InvestQueryAction extends BaseDispatchAction {
 	public ActionForward operList(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		InvestInfoActionForm actionForm = (InvestInfoActionForm) form;
-		try{
+		try {
 			String planNo = actionForm.getPlanNo();
 			Assert.notNull(planNo, "计划号不能为空");
 			Map<String, String> map = getReqMap(request);
 			map.put(MsgField.order_no.getFieldCode(), planNo);
 			List<Map<String, MsgField>> list = investQueryService.queryPlanOperList(map);
 			saveQueryResult(request, list);
-			String msg = LogUtils.r("操作记录查询成功,查询计划号为：{?}",planNo);
+			String msg = LogUtils.r("操作记录查询成功,查询计划号为：{?}", planNo);
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			setResult(true, e.getMessage(), request);
 			String msg = LogUtils.r("操作记录查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 		}
 		return forward("/pages/invest/query/operList.jsp");
 	}
+
 	private void initData(HttpServletRequest request) throws Exception {
 		Map<String, Object> map = getParaMap();
 		map.put("custId", getSessionCustId(request));

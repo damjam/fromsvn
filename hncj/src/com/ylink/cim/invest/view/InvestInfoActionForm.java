@@ -79,49 +79,59 @@ public class InvestInfoActionForm extends ActionForm {
 	
 	private String bankAcctInfo;
 	
-	public String getBankAcctInfo() {
-		return bankAcctInfo;
-	}
-
-	public void setBankAcctInfo(String bankAcctInfo) {
-		this.bankAcctInfo = bankAcctInfo;
-	}
-
 	public String getAccreditId() {
 		return accreditId;
 	}
 
-	public void setAccreditId(String accreditId) {
-		this.accreditId = accreditId;
+	public String getAcctNo() {
+		return acctNo;
+	}
+
+	public String getAipAmount() {
+		return aipAmount;
+	}
+
+	public String getAipMode() {
+		return aipMode;
 	}
 	
-	public String getDebt() {
-		return debt;
+	public String getAipPeriod() {
+		return aipPeriod;
 	}
 
 
-	public void setDebt(String debt) {
-		this.debt = debt;
+	public String getAipType() {
+		return aipType;
 	}
 
 	
-	public String getCityName() {
-		return cityName;
+	public String getAipWeight() {
+		return aipWeight;
 	}
 
 
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
+	public String getAmount() {
+		return amount;
 	}
 
 
-	public String getGoldTypeName() {
-		return goldTypeName;
+	public String getBalance() {
+		return balance;
 	}
 
 
-	public void setGoldTypeName(String goldTypeName) {
-		this.goldTypeName = goldTypeName;
+	public String getBankAcctInfo() {
+		return bankAcctInfo;
+	}
+
+
+	public String getBusiCode() {
+		return busiCode;
+	}
+
+	
+	public Date getCancelTime() {
+		return cancelTime;
 	}
 
 
@@ -129,59 +139,52 @@ public class InvestInfoActionForm extends ActionForm {
 		return cityCode;
 	}
 
-	
-	public String getTakeBankName() {
-		return takeBankName;
+
+	public String getCityName() {
+		return cityName;
 	}
 
-
-	public void setTakeBankName(String takeBankName) {
-		this.takeBankName = takeBankName;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-
-	public void setCityCode(String cityCode) {
-		this.cityCode = cityCode;
+	public String getCustId() {
+		return custId;
 	}
 
-	public String getTakeBank() {
-		return takeBank;
+	public String getDebt() {
+		return debt;
 	}
 
-	public void setTakeBank(String takeBank) {
-		this.takeBank = takeBank;
+	public String getEndDate() {
+		if (StringUtils.isBlank(endDate)) {
+			endDate = DateUtil.getCurrentDate();
+		}
+		return endDate;
 	}
 
-	public String getTakeDate() {
-		return takeDate;
+	public String getExtend() {
+		return extend;
 	}
 
-	public void setTakeDate(String takeDate) {
-		this.takeDate = takeDate;
+	public String getFirstAipDate() {
+		return firstAipDate;
 	}
 
 	public String getGoldType() {
 		return goldType;
 	}
 
-	public void setGoldType(String goldType) {
-		this.goldType = goldType;
+	public String getGoldTypeName() {
+		return goldTypeName;
 	}
 
-	public String getBalance() {
-		return balance;
+	public String[] getInvestDays() {
+		return investDays;
 	}
 
-	public void setBalance(String balance) {
-		this.balance = balance;
-	}
-
-	public String getAmount() {
-		return amount;
-	}
-
-	public void setAmount(String amount) {
-		this.amount = amount;
+	public String getIsDelay() {
+		return isDelay;
 	}
 
 	/*public String getUpdateSymbol() {
@@ -192,172 +195,52 @@ public class InvestInfoActionForm extends ActionForm {
 		this.updateSymbol = updateSymbol;
 	}*/
 
-	public String getPayChnlAlias() {
-		return payChnlAlias;
-	}
-
-	public void setPayChnlAlias(String payChnlAlias) {
-		this.payChnlAlias = payChnlAlias;
-	}
-
-	public String[] getInvestDays() {
-		return investDays;
-	}
-
-	public void setInvestDays(String[] investDays) {
-		this.investDays = investDays;
-	}
-
-	public String getPlanState() {
-		return planState;
-	}
-
-	public void setPlanState(String planState) {
-		this.planState = planState;
-	}
-
-	public String getAipAmount() {
-		return aipAmount;
-	}
-
-	public void setAipAmount(String aipAmount) {
-		this.aipAmount = aipAmount;
-	}
-
-	public String getAipMode() {
-		return aipMode;
-	}
-
-	public void setAipMode(String aipMode) {
-		this.aipMode = aipMode;
-	}
-
-	public String getAipType() {
-		return aipType;
-	}
-
-	public void setAipType(String aipType) {
-		this.aipType = aipType;
-	}
-
-	public String getPlanNo() {
-		return planNo;
-	}
-
-	public void setPlanNo(String planNo) {
-		this.planNo = planNo;
-	}
-
-	public String getPayChnlTypeName() {
-		return payChnlTypeName;
-	}
-
-	public void setPayChnlTypeName(String payChnlTypeName) {
-		this.payChnlTypeName = payChnlTypeName;
-	}
-
-	public String getCustId() {
-		return custId;
-	}
-
-	public void setCustId(String custId) {
-		this.custId = custId;
-	}
-
-	public String getPayChnlType() {
-		return payChnlType;
-	}
-
-	public void setPayChnlType(String payChnlType) {
-		this.payChnlType = payChnlType;
-	}
-
-	public String getPayChnlNo() {
-		return payChnlNo;
-	}
-
-	public void setPayChnlNo(String payChnlNo) {
-		this.payChnlNo = payChnlNo;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getExtend() {
-		return extend;
-	}
-
-	public void setExtend(String extend) {
-		this.extend = extend;
-	}
-
-	public Date getCancelTime() {
-		return cancelTime;
-	}
-
-	public void setCancelTime(Date cancelTime) {
-		this.cancelTime = cancelTime;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getBusiCode() {
-		return busiCode;
-	}
-
-	public void setBusiCode(String busiCode) {
-		this.busiCode = busiCode;
-	}
-
-	public String getAcctNo() {
-		return acctNo;
-	}
-
-	public void setAcctNo(String acctNo) {
-		this.acctNo = acctNo;
-	}
-
-	public String getSignContractId() {
-		return signContractId;
-	}
-
-	public void setSignContractId(String signContractId) {
-		this.signContractId = signContractId;
-	}
-
-	public String getFirstAipDate() {
-		return firstAipDate;
-	}
-
-	public void setFirstAipDate(String firstAipDate) {
-		this.firstAipDate = firstAipDate;
-	}
-
-	public String getMinAmount() {
-		return minAmount;
-	}
-
-	public void setMinAmount(String minAmount) {
-		this.minAmount = minAmount;
+	public String getIsEffect() {
+		return isEffect;
 	}
 
 	public String getMaxAmount() {
 		return maxAmount;
 	}
 
-	public void setMaxAmount(String maxAmount) {
-		this.maxAmount = maxAmount;
+	public String getMinAmount() {
+		return minAmount;
+	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public String getPayChnlAlias() {
+		return payChnlAlias;
+	}
+
+	public String getPayChnlNo() {
+		return payChnlNo;
+	}
+
+	public String getPayChnlType() {
+		return payChnlType;
+	}
+
+	public String getPayChnlTypeName() {
+		return payChnlTypeName;
+	}
+
+	public String getPlanNo() {
+		return planNo;
+	}
+
+	public String getPlanState() {
+		return planState;
+	}
+
+	public String getRedeemType() {
+		return redeemType;
+	}
+
+	public String getSignContractId() {
+		return signContractId;
 	}
 
 	public String getStartDate() {
@@ -367,67 +250,184 @@ public class InvestInfoActionForm extends ActionForm {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public String getState() {
+		return state;
 	}
 
-	public String getEndDate() {
-		if (StringUtils.isBlank(endDate)) {
-			endDate = DateUtil.getCurrentDate();
-		}
-		return endDate;
+	public String getTakeBank() {
+		return takeBank;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public String getTakeBankName() {
+		return takeBankName;
 	}
 
-	public String getRedeemType() {
-		return redeemType;
+	public String getTakeDate() {
+		return takeDate;
 	}
 
-	public void setRedeemType(String redeemType) {
-		this.redeemType = redeemType;
+	public void setAccreditId(String accreditId) {
+		this.accreditId = accreditId;
 	}
 
-	public String getAipWeight() {
-		return aipWeight;
+	public void setAcctNo(String acctNo) {
+		this.acctNo = acctNo;
+	}
+
+	public void setAipAmount(String aipAmount) {
+		this.aipAmount = aipAmount;
+	}
+
+	public void setAipMode(String aipMode) {
+		this.aipMode = aipMode;
+	}
+
+	public void setAipPeriod(String aipPeriod) {
+		this.aipPeriod = aipPeriod;
+	}
+
+	public void setAipType(String aipType) {
+		this.aipType = aipType;
 	}
 
 	public void setAipWeight(String aipWeight) {
 		this.aipWeight = aipWeight;
 	}
 
-	public String getIsDelay() {
-		return isDelay;
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
+	}
+
+	public void setBankAcctInfo(String bankAcctInfo) {
+		this.bankAcctInfo = bankAcctInfo;
+	}
+
+	public void setBusiCode(String busiCode) {
+		this.busiCode = busiCode;
+	}
+
+	public void setCancelTime(Date cancelTime) {
+		this.cancelTime = cancelTime;
+	}
+
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public void setCustId(String custId) {
+		this.custId = custId;
+	}
+
+	public void setDebt(String debt) {
+		this.debt = debt;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setExtend(String extend) {
+		this.extend = extend;
+	}
+
+	public void setFirstAipDate(String firstAipDate) {
+		this.firstAipDate = firstAipDate;
+	}
+
+	public void setGoldType(String goldType) {
+		this.goldType = goldType;
+	}
+
+	public void setGoldTypeName(String goldTypeName) {
+		this.goldTypeName = goldTypeName;
+	}
+
+	public void setInvestDays(String[] investDays) {
+		this.investDays = investDays;
 	}
 
 	public void setIsDelay(String isDelay) {
 		this.isDelay = isDelay;
 	}
 
-	public String getIsEffect() {
-		return isEffect;
-	}
-
 	public void setIsEffect(String isEffect) {
 		this.isEffect = isEffect;
 	}
 
-	public String getOrderNo() {
-		return orderNo;
+	public void setMaxAmount(String maxAmount) {
+		this.maxAmount = maxAmount;
+	}
+
+	public void setMinAmount(String minAmount) {
+		this.minAmount = minAmount;
 	}
 
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
 
-	public String getAipPeriod() {
-		return aipPeriod;
+	public void setPayChnlAlias(String payChnlAlias) {
+		this.payChnlAlias = payChnlAlias;
 	}
 
-	public void setAipPeriod(String aipPeriod) {
-		this.aipPeriod = aipPeriod;
+	public void setPayChnlNo(String payChnlNo) {
+		this.payChnlNo = payChnlNo;
+	}
+
+	public void setPayChnlType(String payChnlType) {
+		this.payChnlType = payChnlType;
+	}
+
+	public void setPayChnlTypeName(String payChnlTypeName) {
+		this.payChnlTypeName = payChnlTypeName;
+	}
+
+	public void setPlanNo(String planNo) {
+		this.planNo = planNo;
+	}
+
+	public void setPlanState(String planState) {
+		this.planState = planState;
+	}
+
+	public void setRedeemType(String redeemType) {
+		this.redeemType = redeemType;
+	}
+
+	public void setSignContractId(String signContractId) {
+		this.signContractId = signContractId;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public void setTakeBank(String takeBank) {
+		this.takeBank = takeBank;
+	}
+
+	public void setTakeBankName(String takeBankName) {
+		this.takeBankName = takeBankName;
+	}
+
+	public void setTakeDate(String takeDate) {
+		this.takeDate = takeDate;
 	}
 
 	

@@ -26,7 +26,6 @@ public class PayChnlType extends AbstractType {
 	public static final PayChnlType BANK_308 = new PayChnlType("招商银行", "308");
 	public static final PayChnlType BANK_309 = new PayChnlType("兴业银行", "309");
 	public static final PayChnlType BANK_001 = new PayChnlType("东莞银行", "001");
-	public static final PayChnlType BANK_002 = new PayChnlType("广州银行", "002");
 	
 	protected PayChnlType(String name, String value) {
 		super(name, value);

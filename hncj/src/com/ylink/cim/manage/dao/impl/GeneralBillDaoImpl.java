@@ -6,8 +6,10 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.GeneralBillDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.GeneralBill;
@@ -22,6 +24,10 @@ import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("generalBillDao")
 public class GeneralBillDaoImpl extends BaseDaoHibernateImpl implements GeneralBillDao{
+	protected static List getOrderedList(List list) {
+		
+		return list;
+	}
 	public Paginater findBillPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from GeneralBill t where 1=1");
@@ -31,7 +37,16 @@ public class GeneralBillDaoImpl extends BaseDaoHibernateImpl implements GeneralB
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
 			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
+			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+		}
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		helper.append("and keyword like ?", MapUtils.getString(params, "keyword"), MatchMode.ANYWHERE);
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
@@ -60,13 +75,8 @@ public class GeneralBillDaoImpl extends BaseDaoHibernateImpl implements GeneralB
 		});
 		return paginater;
 	}
-	protected static List getOrderedList(List list) {
-		
-		return list;
-	}
-	@Override
-	protected Class getModelClass() {
-		return GeneralBill.class;
+	public List<GeneralBill> findBills(Map<String, Object> params) {
+		return null;
 	}
 
 	public WaterRecord findPreRecord(String houseSn) {
@@ -82,11 +92,34 @@ public class GeneralBillDaoImpl extends BaseDaoHibernateImpl implements GeneralB
 		}
 	}
 	
-	public List<GeneralBill> findBills(Map<String, Object> params) {
-		return null;
+	public Map<String, Object> findSumInfo(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("select new map(count(t.id) as totalCnt, sum(t.totalAmt) as totalAmt) from GeneralBill t where 1=1");
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
+			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
+			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
+			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+		}
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		helper.append("and keyword like ?", MapUtils.getString(params, "keyword"), MatchMode.ANYWHERE);
+		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
+		if (sumInfo.get("totalAmt") == null) {
+			sumInfo.put("totalAmt", 0d);
+		}
+		return sumInfo;
 	}
-	public Map<String, Object> findSumInfo(Map<String, Object> map) {
-		return null;
+	@Override
+	protected Class getModelClass() {
+		return GeneralBill.class;
 	}
 
 }

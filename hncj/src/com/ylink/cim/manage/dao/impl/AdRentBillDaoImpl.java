@@ -7,6 +7,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AdRentBillDao;
 import com.ylink.cim.manage.domain.AdRent;
 
@@ -27,7 +28,15 @@ public class AdRentBillDaoImpl extends BaseDaoHibernateImpl implements AdRentBil
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
 			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
+		}
+		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
+			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+		}
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
 		helper.append("order by t.createDate desc");
 		return super.getPageData(helper, pager);
 	}

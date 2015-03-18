@@ -5,7 +5,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.AccountChangeType;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.manage.dao.AccountDao;
@@ -102,6 +102,12 @@ public class AccountAction extends BaseDispatchAction {
 			AccountActionForm actionForm = (AccountActionForm)form;
 			AccountChangeType.setInReq(request);
 			Map<String, Object> params = getParaMap();
+			String acctNo = actionForm.getAcctNo();
+			Account account = accountDao.findById(acctNo);
+			if (!BranchType.HQ_0000.getValue().equals(getSessionBranchNo(request)) && !account.getBranchNo().equals(getSessionBranchNo(request))) {
+				setResult(false, "你无权查看该业主账户", request);
+				list(mapping, actionForm, request, response);
+			}
 			params.put("acctNo", actionForm.getAcctNo());
 			params.put("type", actionForm.getType());
 			params.put("startCreateDate", actionForm.getStartCreateDate());

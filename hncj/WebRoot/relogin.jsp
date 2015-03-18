@@ -6,7 +6,7 @@
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 		
-		<title>深圳金融电子结算中心 客户信息管理系统</title>
+		<title>${comInfo.sp}</title>
 		<link rel="stylesheet" href="css/page.css" type="text/css" />
 		<script type="text/javascript">
 		function rlRelogin() {

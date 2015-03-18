@@ -1,4 +1,3 @@
- 
 package com.ylink.cim.admin.view;
 
 import java.util.ArrayList;
@@ -44,87 +43,85 @@ import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 import flink.web.tag.DTreeObj;
 
-public class RoleInfoAction extends BaseDispatchAction{
-	
-	private RoleInfoService roleInfoService=(RoleInfoService)getService("roleInfoService");
-	private LimitGroupInfoService limitGroupInfoService=(LimitGroupInfoService)getService("limitGroupInfoService");
-	private LimitGroupService limitGroupService=(LimitGroupService)getService("limitGroupService");
-	private RolePrivilegeService rolePrivilegeService=(RolePrivilegeService)getService("rolePrivilegeService");
-	private LimitGroupInfoDao limitGroupInfoDao = (LimitGroupInfoDao)getService("limitGroupInfoDao");
-	private PrivilegeService privilegeService = (PrivilegeService)getService("privilegeService");
-	private RolePrivilegeDao rolePrivilegeDao = (RolePrivilegeDao)getService("rolePrivilegeDao");
-	private RoleInfoDao roleInfoDao = (RoleInfoDao)getService("roleInfoDao");
-	private UserRoleDao userRoleDao = (UserRoleDao)getService("userRoleDao");
-	
-	public ActionForward listRoleInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
-		
-		RoleInfo roleInfo=this.getRoleInfoBy(roleInfoActionForm);
+public class RoleInfoAction extends BaseDispatchAction {
+
+	private RoleInfoService roleInfoService = (RoleInfoService) getService("roleInfoService");
+	private LimitGroupInfoService limitGroupInfoService = (LimitGroupInfoService) getService("limitGroupInfoService");
+	private LimitGroupService limitGroupService = (LimitGroupService) getService("limitGroupService");
+	private RolePrivilegeService rolePrivilegeService = (RolePrivilegeService) getService("rolePrivilegeService");
+	private LimitGroupInfoDao limitGroupInfoDao = (LimitGroupInfoDao) getService("limitGroupInfoDao");
+	private PrivilegeService privilegeService = (PrivilegeService) getService("privilegeService");
+	private RolePrivilegeDao rolePrivilegeDao = (RolePrivilegeDao) getService("rolePrivilegeDao");
+	private RoleInfoDao roleInfoDao = (RoleInfoDao) getService("roleInfoDao");
+	private UserRoleDao userRoleDao = (UserRoleDao) getService("userRoleDao");
+
+	public ActionForward listRoleInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
+
+		RoleInfo roleInfo = this.getRoleInfoBy(roleInfoActionForm);
 		Paginater paginater = this.roleInfoService.getRoleInfoPageList(roleInfo, super.getPager(request));
 
 		saveQueryResult(request, paginater);
 		String msg = LogUtils.r("角色管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		
+
 		return mapping.findForward(ActionConstant.TO_LIST_PAGE);
 	}
 
 	private RoleInfo getRoleInfoBy(RoleInfoActionForm roleInfoActionForm) throws Exception {
-		
-		RoleInfo roleInfo=new RoleInfo();
+
+		RoleInfo roleInfo = new RoleInfo();
 		BeanUtils.copyProperties(roleInfo, roleInfoActionForm);
 		if (StringUtils.isEmpty(roleInfo.getRoleId())) {
 			roleInfo.setRoleId(idFactoryService.generateId(Constants.ROLE_INFO_ID));
 		}
 		return roleInfo;
 	}
-	
-	public ActionForward toAddPage(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
-		
+
+	public ActionForward toAddPage(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
+
 		this.initLimitGroupInfo(request);
-		this.initLimitGroup(request,roleInfoActionForm.getLimitGroupId());
-		initDtreeSelect(roleInfoActionForm.getRoleId(),request);
-		
+		this.initLimitGroup(request, roleInfoActionForm.getLimitGroupId());
+		initDtreeSelect(roleInfoActionForm.getRoleId(), request);
+
 		return mapping.findForward(ActionConstant.TO_ADD_PAGE);
 	}
-	
-	public ActionForward addRoleInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
-		try{
+
+	public ActionForward addRoleInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
+		try {
 			if (!isValidKey(request)) {
 				return this.toAddPage(mapping, form, request, response);
 			}
-			//未选中任何一条
+			// 未选中任何一条
 			Assert.notEmpty(roleInfoActionForm.getLimitIds(), "权限点不能为空");
 			Map<String, Object> params = new HashMap<String, Object>();
-			
+
 			params.put("roleName", roleInfoActionForm.getRoleName());
 			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params, null, null);
 			Assert.isTrue(count == 0, LogUtils.r("已存在角色名称[{?}]", roleInfoActionForm.getRoleName()));
 			RoleInfo roleInfo = this.getRoleInfoBy(roleInfoActionForm);
-			
-			if(this.roleInfoService.isExistRole(roleInfo)){
+
+			if (this.roleInfoService.isExistRole(roleInfo)) {
 				setResult(false, ActionMessageConstant.OPER_FAIL_EXIST, request);
 				return this.toAddPage(mapping, roleInfoActionForm, request, response);
 			}
-			
+
 			this.roleInfoService.saveRoleAndLimits(roleInfo);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("添加角色成功,添加内容为：{?}",FeildUtils.toString(roleInfo));
+			String msg = LogUtils.r("添加角色成功,添加内容为：{?}", FeildUtils.toString(roleInfo));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-		}
-		catch(BizException e){
+		} catch (BizException e) {
 			String msg = LogUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
 			setResult(false, msg, request);
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			String msg = LogUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
@@ -132,20 +129,20 @@ public class RoleInfoAction extends BaseDispatchAction{
 		roleInfoActionForm.setLimitGroupId(null);
 		roleInfoActionForm.setRoleName("");
 		roleInfoActionForm.setLimitGroupName("");
-		//return this.toAddPage(mapping, form, request, response);
+		// return this.toAddPage(mapping, form, request, response);
 		return listRoleInfo(mapping, roleInfoActionForm, request, response);
-	} 
-	
-	public ActionForward toUpdatePage(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
+	}
+
+	public ActionForward toUpdatePage(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
 		RoleInfo roleInfo = this.roleInfoService.getRoleInfoByRoleId(roleInfoActionForm.getRoleId());
 		roleInfoActionForm.setRoleName(roleInfo.getRoleName());
 		roleInfoActionForm.setLimitGroupId(roleInfo.getLimitGroupId());
 		roleInfoActionForm.setRemark(roleInfo.getRemark());
 		this.initLimitGroupInfo(request);
-		this.initLimitGroup(request,roleInfoActionForm.getLimitGroupId());
+		this.initLimitGroup(request, roleInfoActionForm.getLimitGroupId());
 		String limitGroupId = roleInfo.getLimitGroupId();
 		LimitGroupInfo lgi = limitGroupInfoDao.findById(limitGroupId);
 		request.setAttribute("limitGroupName", lgi.getLimitGroupName());
@@ -156,112 +153,109 @@ public class RoleInfoAction extends BaseDispatchAction{
 
 		saveQueryResult(request, list);
 		request.setAttribute("rolePrivilegeList", rolePrivilegeList);
-		
-		initDtreeSelect(roleInfoActionForm.getRoleId(),request);
-		
+
+		initDtreeSelect(roleInfoActionForm.getRoleId(), request);
+
 		return mapping.findForward(ActionConstant.TO_UPDATE_PAGE);
 	}
 
-	public ActionForward updateRoleInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-	
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
-		try{
-			RoleInfo roleInfo = this.getRoleInfoBy(roleInfoActionForm); 
+	public ActionForward updateRoleInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
+		try {
+			RoleInfo roleInfo = this.getRoleInfoBy(roleInfoActionForm);
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("roleName", roleInfoActionForm.getRoleName());
 			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params, "roleId", roleInfoActionForm.getRoleId());
 			Assert.isTrue(count == 0, LogUtils.r("已存在角色名称[{?}]", roleInfoActionForm.getRoleName()));
 			this.roleInfoService.updateRoleAndLimits(roleInfo);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("更新角色成功,更新内容为：{?}",FeildUtils.toString(roleInfo));
+			String msg = LogUtils.r("更新角色成功,更新内容为：{?}", FeildUtils.toString(roleInfo));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage(mapping, roleInfoActionForm, request, response);
-		}
-		catch(BizException e){
+		} catch (BizException e) {
 			setResult(true, LogUtils.r("已存在角色名称[{?}]", roleInfoActionForm.getRoleName()), request);
 			String msg = LogUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage(mapping, roleInfoActionForm, request, response);
-		}
-		catch (Exception e) {
-//			e.printStackTrace();
-			setResult(true, ActionMessageConstant.OPER_FAIL+e.getMessage(), request);
+		} catch (Exception e) {
+			// e.printStackTrace();
+			setResult(true, ActionMessageConstant.OPER_FAIL + e.getMessage(), request);
 			String msg = LogUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage(mapping, roleInfoActionForm, request, response);
 		}
 	}
-	
+
 	private void initDtreeSelect(String roleId, HttpServletRequest request) {
-		if(null==roleId){
-			return ;
-		}
-		
-		List<RolePrivilege> list = this.rolePrivilegeService.getRolePrivilegeByRoleId(roleId);
-		if(null==list || list.size()==0){
+		if (null == roleId) {
 			return;
 		}
-		
-		StringBuffer initCheck=new StringBuffer();
-		for(int i=0;i<list.size();i++){
+
+		List<RolePrivilege> list = this.rolePrivilegeService.getRolePrivilegeByRoleId(roleId);
+		if (null == list || list.size() == 0) {
+			return;
+		}
+
+		StringBuffer initCheck = new StringBuffer();
+		for (int i = 0; i < list.size(); i++) {
 			RolePrivilege rolePrivilege = list.get(i);
-			initCheck.append("$"+rolePrivilege.getId().getLimitId());
+			initCheck.append("$" + rolePrivilege.getId().getLimitId());
 		}
 
 		request.setAttribute("initCheck", initCheck.deleteCharAt(0).toString());
 	}
 
-	private void initLimitGroup(HttpServletRequest request,String limitGroupId) throws Exception {
-		
-		if(null==limitGroupId){ 
+	private void initLimitGroup(HttpServletRequest request, String limitGroupId) throws Exception {
+
+		if (null == limitGroupId) {
 			return;
 		}
-		
-		LimitGroupId id=new LimitGroupId();
+
+		LimitGroupId id = new LimitGroupId();
 		id.setLimitGroupId(limitGroupId);
-		LimitGroup limitGroup=new LimitGroup();
+		LimitGroup limitGroup = new LimitGroup();
 		limitGroup.setId(id);
-		
+
 		List<LimitGroup> list = this.limitGroupService.getLimitGroup(limitGroup);
-		convertToTree(list,request);
+		convertToTree(list, request);
 	}
 
-	
 	private void convertToTree(List<LimitGroup> list, HttpServletRequest request) {
-		
-		if(null==list || list.size()==0){
+
+		if (null == list || list.size() == 0) {
 			return;
 		}
-		
-		List<DTreeObj> dTreeObjs=new ArrayList<DTreeObj>();
-		for(LimitGroup limitGroup:list){
-			DTreeObj dTreeObj=new DTreeObj();
+
+		List<DTreeObj> dTreeObjs = new ArrayList<DTreeObj>();
+		for (LimitGroup limitGroup : list) {
+			DTreeObj dTreeObj = new DTreeObj();
 			dTreeObj.setNodeId(limitGroup.getId().getLimitId());
 			dTreeObj.setNodePid(limitGroup.getPid());
 			dTreeObj.setNodeLabel(limitGroup.getLimitName());
 			dTreeObj.setNodeName("limitIds");
 			dTreeObj.setNodeValue(limitGroup.getId().getLimitId());
-			
+
 			dTreeObjs.add(dTreeObj);
 		}
-		
+
 		request.setAttribute("dTree", dTreeObjs);
 	}
 
-	public void initLimitGroupInfo(HttpServletRequest request) throws Exception{
-		
+	public void initLimitGroupInfo(HttpServletRequest request) throws Exception {
+
 		List<LimitGroupInfo> list = this.limitGroupInfoService.getAll();
 		saveQueryResult(request, list, "limitGroupInfoCollections");
 	}
-	
-	public ActionForward deleteRoleInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
 
-		RoleInfoActionForm roleInfoActionForm=(RoleInfoActionForm)form;
-		try{
-			
-			if(userRoleDao.getUserRoleByRole(roleInfoActionForm.getRoleId()).size() > 0){
+	public ActionForward deleteRoleInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		RoleInfoActionForm roleInfoActionForm = (RoleInfoActionForm) form;
+		try {
+
+			if (userRoleDao.getUserRoleByRole(roleInfoActionForm.getRoleId()).size() > 0) {
 				setResult(false, "角色已被用户绑定，不能删除", request);
 				return this.listRoleInfo(mapping, roleInfoActionForm, request, response);
 			}
@@ -269,40 +263,38 @@ public class RoleInfoAction extends BaseDispatchAction{
 			this.roleInfoService.deleteRoleInfo(roleInfo);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
 			this.clearForm(roleInfoActionForm);
-			String msg = LogUtils.r("删除角色成功,删除内容为：{?}",FeildUtils.toString(roleInfo));
+			String msg = LogUtils.r("删除角色成功,删除内容为：{?}", FeildUtils.toString(roleInfo));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			return this.listRoleInfo(mapping, form, request, response);
-		
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			String msg = LogUtils.r("删除角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logException(RoleInfo.class, e.getMessage());
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			this.clearForm(roleInfoActionForm);
-			
+
 			return this.listRoleInfo(mapping, form, request, response);
 		}
-		
+
 	}
-	
-	public void clearForm(RoleInfoActionForm roleInfoActionForm){
-		
+
+	public void clearForm(RoleInfoActionForm roleInfoActionForm) {
+
 		roleInfoActionForm.setRoleId(null);
 		roleInfoActionForm.setRoleName(null);
 		roleInfoActionForm.setLimitGroupId(null);
 		roleInfoActionForm.setLimitGroupName(null);
 		roleInfoActionForm.setLimitIds(null);
 		roleInfoActionForm.setLimitGroupId(null);
-	
+
 	}
-	
+
 	public ActionForward loadTree(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws BizException {
 
-		
-
 		// 取得页面权限组，如果为空则取登陆用户权限组
-		
+
 		String limitGroupId = (String) request.getParameter("limitGroupId");
 		if (StringUtils.isEmpty(limitGroupId)) {
 			saveQueryResult(request, new ArrayList());
@@ -321,7 +313,3 @@ public class RoleInfoAction extends BaseDispatchAction{
 		return mapping.findForward("loadTree");
 	}
 }
-
-
-
-

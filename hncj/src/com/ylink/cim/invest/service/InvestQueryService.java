@@ -14,8 +14,7 @@ public interface InvestQueryService {
 	/**
 	 * 定投计划查询
 	 */
-	public Paginater queryPlan(Map<String, String> map,
-			Pager pager) throws BizException;
+	public Paginater queryPlan(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 黄金账户查询(汇总部分)
@@ -25,38 +24,32 @@ public interface InvestQueryService {
 	/**
 	 * 黄金账户查询(汇总部分)
 	 */
-	public List<Map<String, MsgField>> queryGoldAcct(Map<String, String> map)
-			throws BizException;
+	public List<Map<String, MsgField>> queryGoldAcct(Map<String, String> map) throws BizException;
 
 	/**
 	 * 资金账户查询
 	 */
-	public Paginater queryCashAcct(Map<String, String> map,
-			Pager pager) throws BizException;
+	public Paginater queryCashAcct(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 积存情况查询
 	 */
-	public Paginater queryDepositRecord(
-			Map<String, String> map, Pager pager) throws BizException;
+	public Paginater queryDepositRecord(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 赎回记录查询
 	 */
-	public Paginater queryRedeemRecord(
-			Map<String, String> map, Pager pager) throws BizException;
+	public Paginater queryRedeemRecord(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 账户管理费查询
 	 */
-	public Paginater queryMngFee(Map<String, String> map,
-			Pager pager) throws BizException;
+	public Paginater queryMngFee(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 现金赎回查询
 	 */
-	public Paginater querySoldRecord(Map<String, String> map,
-			Pager pager) throws BizException;
+	public Paginater querySoldRecord(Map<String, String> map, Pager pager) throws BizException;
 
 	/**
 	 * 黄金账户统计结果查询
@@ -66,9 +59,7 @@ public interface InvestQueryService {
 	 * @return
 	 * @throws BizException
 	 */
-	public List<Map<String, MsgField>> querySumGoldAcct(
-			Map<String, String> map, String[] acctNos) throws BizException;
+	public List<Map<String, MsgField>> querySumGoldAcct(Map<String, String> map, String[] acctNos) throws BizException;
 
-	public List<Map<String, MsgField>> queryPlanOperList(Map<String, String> map)
-			throws BizException;
+	public List<Map<String, MsgField>> queryPlanOperList(Map<String, String> map) throws BizException;
 }

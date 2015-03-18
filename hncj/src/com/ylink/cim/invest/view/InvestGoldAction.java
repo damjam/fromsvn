@@ -27,12 +27,10 @@ import com.ylink.cim.common.type.BusiType;
 import com.ylink.cim.common.type.PayChnlType;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.DoubleUtil;
-import com.ylink.cim.common.util.SendMobilMsgUtil;
 import com.ylink.cim.invest.dao.SignContractDao;
 import com.ylink.cim.invest.domain.SignContract;
 import com.ylink.cim.invest.service.GoldAcctService;
 
-import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.etc.Symbol;

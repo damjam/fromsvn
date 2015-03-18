@@ -18,10 +18,6 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 	@Autowired
 	private IdFactoryDao idFactoryDao;
 	
-	public void setIdFactoryDao(IdFactoryDao idFactoryDao) {
-		this.idFactoryDao = idFactoryDao;
-	}
-
 	public void deleteIdFactory(String seqIdName) throws BizException {
 		this.idFactoryDao.deleteIdFactory(seqIdName);
 	}
@@ -97,6 +93,10 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 	public void saveIdFactory(IdFactory idFactory) throws BizException {
 		this.idFactoryDao.saveIdFactory(idFactory);
 		
+	}
+
+	public void setIdFactoryDao(IdFactoryDao idFactoryDao) {
+		this.idFactoryDao = idFactoryDao;
 	}
 
 }

@@ -35,43 +35,13 @@ public class NoticeMsgAction extends BaseDispatchAction {
 	private NoticeMsgDao noticeMsgDao = (NoticeMsgDao)getService("noticeMsgDao");
 	private NoticeMngService noticeMngService = (NoticeMngService)getService("noticeMngService");
 	private NoticeMsgRecordDao noticeMsgRecordDao = (NoticeMsgRecordDao)getService("noticeMsgRecordDao");
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try{
-			NoticeMsgActionForm actionForm = (NoticeMsgActionForm)form;
-			NoticeMsg noticeMsg = new NoticeMsg();
-			BeanUtils.copyProperties(noticeMsg, actionForm);
-			Map<String, Object> map = getParaMap();
-			map.put("startCreateDate", actionForm.getStartCreateDate());
-			map.put("endCreateDate", actionForm.getEndCreateDate());
-			map.put("subject", actionForm.getSubject());
-			map.put("branchNo", getSessionUser(request).getBranchNo());
-			Paginater paginater = noticeMsgDao.findPaginater(map, getPager(request));
-			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("消息提醒管理查询成功");
-			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
-			String msg = LogUtils.r("消息提醒管理查询失败,失败原因:{?}", e.getMessage());
-			super.logError(request, UserLogType.SEARCH.getValue(), msg);
-			throw new Exception(e);
-		}
-		return forward("/pages/busioper/notice/noticeMsgList.jsp");
-	}
-	
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		initData(request);
-//		ParaManager.setDictInReq(request, SysDictType.BranchType, "branchTypes");
-		return forward("/pages/busioper/notice/noticeMsgAdd.jsp");
-	}
-	
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		NoticeMsgActionForm actionForm = (NoticeMsgActionForm)form;
 		NoticeMsg noticeMsg = new NoticeMsg();
 		BeanUtils.copyProperties(noticeMsg, actionForm);
 		if (StringUtils.isEmpty(actionForm.getBranchNo()) 
-				&& !BranchType.SZGOLD.getValue().equals(getSessionUser(request).getBranchNo())) {
+				&& !BranchType.HQ_0000.getValue().equals(getSessionUser(request).getBranchNo())) {
 			noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());
 		}
 //		noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());
@@ -82,19 +52,7 @@ public class NoticeMsgAction extends BaseDispatchAction {
 		super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 		return success(mapping);
 	}
-	public ActionForward showNotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String custId = getSessionCustId(request);
-		Map<String, Object> map = getParaMap();
-		map.put("custId", custId);
-		map.put("read", Symbol.NO);
-		List<NoticeMsgRecord> list = noticeMsgRecordDao.findByParams(map);
-		saveQueryResult(request, list);
-		request.setAttribute("msgCnt", list.size());
-		String msg = LogUtils.r("消息提醒查看成功");
-		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		return forward("/pageHome.jsp");
-	}
+	
 	public ActionForward hasRead(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -122,5 +80,47 @@ public class NoticeMsgAction extends BaseDispatchAction {
 		ParaManager.setDictInReq(request, SysDictType.valueOf("BusiType"+getSessionBranch(request).getValue().substring(2, 4)), "busiTypes");
 		CustType.setInReq(request);
 		//ParaManager.setDictInReq(request, SysDictType.BranchType, "branchTypes");
+	}
+	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try{
+			NoticeMsgActionForm actionForm = (NoticeMsgActionForm)form;
+			NoticeMsg noticeMsg = new NoticeMsg();
+			BeanUtils.copyProperties(noticeMsg, actionForm);
+			Map<String, Object> map = getParaMap();
+			map.put("startCreateDate", actionForm.getStartCreateDate());
+			map.put("endCreateDate", actionForm.getEndCreateDate());
+			map.put("subject", actionForm.getSubject());
+			map.put("branchNo", getSessionUser(request).getBranchNo());
+			Paginater paginater = noticeMsgDao.findPaginater(map, getPager(request));
+			saveQueryResult(request, paginater);
+			String msg = LogUtils.r("消息提醒管理查询成功");
+			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
+		}catch(Exception e){
+			String msg = LogUtils.r("消息提醒管理查询失败,失败原因:{?}", e.getMessage());
+			super.logError(request, UserLogType.SEARCH.getValue(), msg);
+			throw new Exception(e);
+		}
+		return forward("/pages/busioper/notice/noticeMsgList.jsp");
+	}
+	public ActionForward showNotice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String custId = getSessionCustId(request);
+		Map<String, Object> map = getParaMap();
+		map.put("custId", custId);
+		map.put("read", Symbol.NO);
+		List<NoticeMsgRecord> list = noticeMsgRecordDao.findByParams(map);
+		saveQueryResult(request, list);
+		request.setAttribute("msgCnt", list.size());
+		String msg = LogUtils.r("消息提醒查看成功");
+		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
+		return forward("/pageHome.jsp");
+	}
+	
+	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		initData(request);
+//		ParaManager.setDictInReq(request, SysDictType.BranchType, "branchTypes");
+		return forward("/pages/busioper/notice/noticeMsgAdd.jsp");
 	}
 }
