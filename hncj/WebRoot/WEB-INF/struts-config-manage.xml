@@ -33,8 +33,8 @@
 			type="com.ylink.cim.manage.view.AccountJournalActionForm" />
 		<form-bean name="merchantInfoActionForm"
 			type="com.ylink.cim.manage.view.MerchantInfoActionForm" />
-		<form-bean name="adRentActionForm"
-			type="com.ylink.cim.manage.view.AdRentActionForm" />
+		<form-bean name="adrentBillActionForm"
+			type="com.ylink.cim.manage.view.AdrentBillActionForm" />
 		<form-bean name="generalBillActionForm"
 			type="com.ylink.cim.manage.view.GeneralBillActionForm" />
 		<form-bean name="contactActionForm"
@@ -99,8 +99,8 @@
 			type="com.ylink.cim.manage.view.MerchantInfoAction" parameter="action"
 			scope="request"> 
 		</action>
-		<action path="/adRentBill" name="adRentActionForm"
-			type="com.ylink.cim.manage.view.AdRentAction" parameter="action"
+		<action path="/adrentBill" name="adrentBillActionForm"
+			type="com.ylink.cim.manage.view.AdrentBillAction" parameter="action"
 			scope="request">
 		</action>
 		<action path="/contact" name="contactActionForm"

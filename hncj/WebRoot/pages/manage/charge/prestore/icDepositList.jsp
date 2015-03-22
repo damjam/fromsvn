@@ -41,7 +41,7 @@
 				}
 			}
 			function openReport(id){
-				window.open(CONTEXT_PATH+'/reportAction.do?action=icDeposit&id='+id);
+				window.open(CONTEXT_PATH+'/reportAction.do?action=icDepositBill&id='+id);
 			}
 			function delRecord(id){
 				if(!window.confirm("х╥хои╬ЁЩ?")){
