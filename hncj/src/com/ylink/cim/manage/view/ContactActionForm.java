@@ -1,5 +1,7 @@
 package com.ylink.cim.manage.view;
 
+import java.util.Date;
+
 import org.apache.struts.action.ActionForm;
 
 public class ContactActionForm extends ActionForm {
@@ -9,37 +11,72 @@ public class ContactActionForm extends ActionForm {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private String name;
-	private String add;
-	private String tel;
+	private String position;
+	private String contactName;
 	private String mobile;
-	private String manager;
-	private String seller;
+	private Date createDate;
+	private String merchantNo;
+	private String remark;
+	private String sex;
+	private String idCard;
+	private String branchNo;
 	private String industry;
+	private String keyword;
+	private String merchantName;
 	
+	
+	
+	public String getMerchantName() {
+		return merchantName;
+	}
+
+
+
+	public void setMerchantName(String merchantName) {
+		this.merchantName = merchantName;
+	}
+
+
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+
+
+	public String getIndustry() {
+		return industry;
+	}
+
+
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getPosition() {
+		return position;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPosition(String position) {
+		this.position = position;
 	}
-	public String getAdd() {
-		return add;
+	public String getContactName() {
+		return contactName;
 	}
-	public void setAdd(String add) {
-		this.add = add;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
 	}
 	public String getMobile() {
 		return mobile;
@@ -47,24 +84,41 @@ public class ContactActionForm extends ActionForm {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public String getManager() {
-		return manager;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setManager(String manager) {
-		this.manager = manager;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public String getSeller() {
-		return seller;
+	public String getMerchantNo() {
+		return merchantNo;
 	}
-	public void setSeller(String seller) {
-		this.seller = seller;
+	public void setMerchantNo(String merchantNo) {
+		this.merchantNo = merchantNo;
 	}
-	public String getIndustry() {
-		return industry;
+	public String getRemark() {
+		return remark;
 	}
-	public void setIndustry(String industry) {
-		this.industry = industry;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
-	
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+	public String getBranchNo() {
+		return branchNo;
+	}
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	
 }

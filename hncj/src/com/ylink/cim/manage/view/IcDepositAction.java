@@ -76,6 +76,8 @@ public class IcDepositAction extends BaseDispatchAction {
 			String id = request.getParameter("id");
 			billService.chargeDepositFee(id, getSessionUser(request));
 			setResult(true, "操作成功", request);
+			IcDepositActionForm actionForm = (IcDepositActionForm)form;
+			actionForm.setId("");
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
@@ -91,6 +93,8 @@ public class IcDepositAction extends BaseDispatchAction {
 			String id = request.getParameter("id");
 			billService.deleteBill(IcDeposit.class, id, getSessionUser(request));
 			setResult(true, "操作成功", request);
+			IcDepositActionForm actionForm = (IcDepositActionForm)form;
+			actionForm.setId("");
 		} catch (Exception e) {
 			setResult(false, "删除失败", request);
 			e.printStackTrace();

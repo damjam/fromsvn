@@ -1,6 +1,6 @@
 package com.ylink.cim.manage.service;
 
-import com.ylink.cim.manage.domain.AdRent;
+import com.ylink.cim.manage.domain.AdrentBill;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
@@ -23,7 +23,7 @@ public interface BillService {
 	void chargeWaterFee(String id, UserInfo userInfo) throws BizException;
 	void deleteBill(Class clazz, String id, UserInfo userInfo) throws BizException;
 	void refund(String id, UserInfo sessionUser) throws BizException;
-	void saveAdRentBill(AdRent adRent, UserInfo sessionUser) throws BizException;
+	void saveAdRentBill(AdrentBill adRent, UserInfo sessionUser) throws BizException;
 	void saveDecorateServiceBill(DecorateServiceBill decorateServiceBill, UserInfo userInfo) throws BizException;
 	void saveDepositBill(DepositBill depositBill, UserInfo sessionUser) throws BizException;
 	void saveGeneralBill(GeneralBill generalBill, UserInfo userInfo) throws BizException;

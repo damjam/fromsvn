@@ -11,7 +11,7 @@
 				<value>/routeTemplate.do?action=queryPopUpTradeRouteTemplate</value>
 				<value>/privilege.do?action=queryPrivilege</value>
 				<value>/branchAction.do?action=queryPopUpBranchInfo</value>
-				<value>/merchantAction.do?action=queryPopUpMerchantInfo</value>
+				<value>/merchantInfo.do?action=queryPopUpMerchantInfo</value>
 				<value>/deptInfoAction.do?action=queryPopUpDepartmentInfo</value>
 				<value>/roleInfoAction.do?action=queryPopUpRoleInfo</value>
 				<value>/userInfoAction.do?action=queryPopUpUserInfo</value>

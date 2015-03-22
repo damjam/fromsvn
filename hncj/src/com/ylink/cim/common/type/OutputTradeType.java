@@ -20,7 +20,7 @@ public class OutputTradeType extends AbstractType {
 	public static final OutputTradeType ADD_GAS = new OutputTradeType("加油", "15");
 	public static final OutputTradeType WITHDRAW = new OutputTradeType("退业主预存款", "16");
 	public static final OutputTradeType INNER_WITHDRAW = new OutputTradeType("内部提现", "17");
-	public static final OutputTradeType OUT_OTHER = new OutputTradeType("其他出账", "19");
+	public static final OutputTradeType OUT_OTHER = new OutputTradeType("其他", "19");
 	
 	
 	

@@ -7,6 +7,6 @@ import flink.etc.BizException;
 
 public interface MerchantInfoService {
 
-	void saveMerchant(MerchantInfo merchantInfo, UserInfo userInfo) throws BizException;
-	
+	void saveOrUpdate(MerchantInfo merchantInfo, UserInfo userInfo) throws BizException;
+	void delete(String id) throws BizException;
 }

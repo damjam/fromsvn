@@ -14,7 +14,7 @@ public class Contact implements java.io.Serializable {
 
 	private String id;
 	private String position;
-	private String name;
+	private String contactName;
 	private String mobile;
 	private Date createDate;
 	private String merchantNo;
@@ -22,7 +22,33 @@ public class Contact implements java.io.Serializable {
 	private String sex;
 	private String idCard;
 	private String branchNo;
+	private String industry;
+	private String merchantName;
 	
+	public String getMerchantName() {
+		return merchantName;
+	}
+
+
+
+	public void setMerchantName(String merchantName) {
+		this.merchantName = merchantName;
+	}
+
+
+
+	public String getIndustry() {
+		return industry;
+	}
+
+
+
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}
@@ -55,13 +81,19 @@ public class Contact implements java.io.Serializable {
 		this.position = position;
 	}
 
-	public String getName() {
-		return this.name;
+	
+
+	public String getContactName() {
+		return contactName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
 	}
+
+
 
 	public String getMobile() {
 		return this.mobile;

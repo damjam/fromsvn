@@ -27,6 +27,9 @@ public class ContactServiceImpl implements ContactService {
 		contact.setBranchNo(userInfo.getBranchNo());
 		contactDao.save(contact);
 	}
+	public void delete(String id) throws BizException {
+		contactDao.deleteById(id);
+	}
 
 	
 }

@@ -13,8 +13,8 @@
         <property name="position" type="java.lang.String">
             <column name="POSITION" length="20" not-null="true" />
         </property>
-        <property name="name" type="java.lang.String">
-            <column name="NAME" length="100" not-null="true" />
+        <property name="contactName" type="java.lang.String">
+            <column name="CONTACT_NAME" length="100" not-null="true" />
         </property>
         <property name="mobile" type="java.lang.String">
             <column name="MOBILE" length="100" not-null="true" />
@@ -24,6 +24,9 @@
         </property>
         <property name="merchantNo" type="java.lang.String">
             <column name="MERCHANT_NO" length="100" />
+        </property>
+        <property name="industry" type="java.lang.String">
+            <column name="INDUSTRY" length="25" />
         </property>
         <property name="remark" type="java.lang.String">
             <column name="REMARK" length="100" />

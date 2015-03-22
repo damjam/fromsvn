@@ -14,7 +14,7 @@ import com.ylink.cim.common.type.OutputTradeType;
 import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.manage.dao.AccountDao;
-import com.ylink.cim.manage.dao.AdRentBillDao;
+import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
@@ -24,7 +24,7 @@ import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.dao.ParkingBillDao;
 import com.ylink.cim.manage.dao.WaterBillDao;
 import com.ylink.cim.manage.domain.Account;
-import com.ylink.cim.manage.domain.AdRent;
+import com.ylink.cim.manage.domain.AdrentBill;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
@@ -70,14 +70,14 @@ public class BillServiceImpl implements BillService {
 	@Autowired
 	private IcDepositDao icDepositDao;
 	@Autowired
-	private AdRentBillDao adRentBillDao;
+	private AdrentBillDao adRentBillDao;
 	public void chargeAdRent(String id, UserInfo userInfo) throws BizException {
-		AdRent bill = adRentBillDao.findByIdWithLock(id);
+		AdrentBill bill = adRentBillDao.findByIdWithLock(id);
 		bill.setState(BillState.PAID.getValue());
 		bill.setChargeUser(userInfo.getUserName());
 		bill.setChargeDate(DateUtil.getCurrent());
 		adRentBillDao.update(bill);
-		accountJournalService.add(TradeType.AD_RENT.getValue(), bill.getAmount(), id, "收"+bill.getPayerName()+"广告位租赁费", userInfo);
+		accountJournalService.add(TradeType.AD_RENT.getValue(), bill.getPaidAmt(), id, "收"+bill.getPayerName()+"广告位租赁费", userInfo);
 	}
 	
 	public void chargeCommonFee(String id, UserInfo userInfo) throws BizException {
@@ -203,7 +203,7 @@ public class BillServiceImpl implements BillService {
 		accountJournalService.deduct(OutputTradeType.REFUND.getValue(), depositBill.getAmount(), id, "退"+depositBill.getHouseSn()+"业主"+depositBill.getPayerName()+"押金", userInfo);
 	}
 
-	public void saveAdRentBill(AdRent adRent, UserInfo sessionUser) throws BizException {
+	public void saveAdRentBill(AdrentBill adRent, UserInfo sessionUser) throws BizException {
 		String id = idFactoryService.generateId(Constants.BILL_ID);
 		adRent.setId(id);
 		adRent.setState(BillState.UNPAY.getValue());

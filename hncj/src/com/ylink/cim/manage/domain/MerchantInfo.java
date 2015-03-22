@@ -14,17 +14,45 @@ public class MerchantInfo implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private String name;
-	private String add;
+	private String mrname;
+	private String addr;
 	private String tel;
 	private String mobile;
 	private String manager;
 	private String seller;
 	private String industry;
+	private String busiScope;
 	private Date createDate;
 	private Date updateDate;
 	private String branchNo;
+	private String remark;
 	
+	
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+
+	public String getBusiScope() {
+		return busiScope;
+	}
+
+
+
+	public void setBusiScope(String busiScope) {
+		this.busiScope = busiScope;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}
@@ -50,22 +78,32 @@ public class MerchantInfo implements java.io.Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 
-	public String getName() {
-		return this.name;
+
+	public String getMrname() {
+		return mrname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+
+	public void setMrname(String mrname) {
+		this.mrname = mrname;
 	}
 
-	public String getAdd() {
-		return this.add;
+
+
+	public String getAddr() {
+		return addr;
 	}
 
-	public void setAdd(String add) {
-		this.add = add;
+
+
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
+
+
 
 	public String getTel() {
 		return this.tel;

@@ -10,4 +10,5 @@ import flink.etc.BizException;
 public interface ContactService {
 
 	void save(Contact contact, UserInfo userInfo) throws BizException;
+	void delete(String id) throws BizException;
 }

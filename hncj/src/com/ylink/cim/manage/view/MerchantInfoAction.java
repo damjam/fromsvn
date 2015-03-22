@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -24,17 +25,34 @@ public class MerchantInfoAction extends BaseDispatchAction {
 	private MerchantInfoService merchantInfoService = (MerchantInfoService)getService("merchantInfoService");
 	public ActionForward toEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+		MerchantInfoActionForm actionForm = (MerchantInfoActionForm)form;
+		String id = actionForm.getId();
+		if (!StringUtils.isEmpty(id)) {
+			MerchantInfo merchantInfo = merchantInfoDao.findById(id);
+			BeanUtils.copyProperties(actionForm, merchantInfo);
+		}
 		return forward("/pages/manage/merchant/merchantInfo.jsp");
 	}
 	public ActionForward doEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
 			MerchantInfoActionForm actionForm = (MerchantInfoActionForm)form;
-			MerchantInfo merchantInfo = new MerchantInfo();
+			MerchantInfo merchantInfo = null;
+			Map<String, Object> params = getParaMap();
+			params.put("mrname", actionForm.getMrname());
+			if (StringUtils.isEmpty(actionForm.getId())) {
+				merchantInfo = new MerchantInfo();
+			}else {
+				params.put("id", actionForm.getId());
+				merchantInfo = merchantInfoDao.findById(actionForm.getId());
+			}
+			if (merchantInfoDao.findList(params).size() >= 1) {
+				throw new BizException("商户名已存在，请重新指定");
+			}
 			BeanUtils.copyProperties(merchantInfo, actionForm);
-			merchantInfoService.saveMerchant(merchantInfo, getSessionUser(request));
-			setResult(true, "添加成功", request);
+			merchantInfoService.saveOrUpdate(merchantInfo, getSessionUser(request));
+			actionForm.setMrname("");
+			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
@@ -56,5 +74,26 @@ public class MerchantInfoAction extends BaseDispatchAction {
 		return forward("/pages/manage/merchant/merchantList.jsp");
 	}
 	
-	
+	public ActionForward queryPopUpMerchantInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		Map<String, Object> params = getParaMap();
+		params.put("branchNo", getSessionBranchNo(request));
+		params.put("mrname", request.getParameter("mrname"));
+		Paginater paginater = this.merchantInfoDao.findPager(params, getPager(request));
+		saveQueryResult(request, paginater);
+		return forward("/pages/popUp/popUpMerchantInfo.jsp");
+	}
+	public ActionForward del(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		MerchantInfoActionForm actionForm = (MerchantInfoActionForm) form;
+		String id = actionForm.getId();
+		try {
+			merchantInfoService.delete(id);
+			setResult(true, "操作成功", request);
+		} catch (BizException e) {
+			setResult(false, "操作失败"+e.getMessage(), request);
+		}
+		return list(mapping, form, request, response);
+	}
 }

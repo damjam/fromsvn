@@ -9,17 +9,30 @@ public class MerchantInfoActionForm extends ActionForm {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private String name;
-	private String add;
+	private String mrname;
+	private String addr;
 	private String tel;
 	private String mobile;
 	private String manager;
 	private String seller;
 	private String industry;
+	private String busiScope;
+	private String remark;
 	
-	public String getAdd() {
-		return add;
+	
+	public String getRemark() {
+		return remark;
 	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getBusiScope() {
+		return busiScope;
+	}
+	public void setBusiScope(String busiScope) {
+		this.busiScope = busiScope;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -32,18 +45,14 @@ public class MerchantInfoActionForm extends ActionForm {
 	public String getMobile() {
 		return mobile;
 	}
-	public String getName() {
-		return name;
-	}
+	
 	public String getSeller() {
 		return seller;
 	}
 	public String getTel() {
 		return tel;
 	}
-	public void setAdd(String add) {
-		this.add = add;
-	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -56,8 +65,20 @@ public class MerchantInfoActionForm extends ActionForm {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	public void setName(String name) {
-		this.name = name;
+	
+	
+	public String getMrname() {
+		return mrname;
+	}
+	
+	public void setMrname(String mrname) {
+		this.mrname = mrname;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 	public void setSeller(String seller) {
 		this.seller = seller;

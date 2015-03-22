@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
  * AdRent entity. @author MyEclipse Persistence Tools
  */
 
-public class AdRent implements java.io.Serializable {
+public class AdrentBill implements java.io.Serializable {
 
 	// Fields
 
@@ -20,65 +21,68 @@ public class AdRent implements java.io.Serializable {
 	private String chargeUser;
 	private String position;
 	private Integer num;
-	private Double amount;
+	private Double totalAmt;
+	private Double paidAmt;
 	private String state;
 	private String merchantName;
 	private String branchNo;
 	private String payerName;
+	private String remark;
+	private Double unitPrice;
 	
-	
+	public Double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(Double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public Date getChargeDate() {
 		return chargeDate;
 	}
-
-
 
 	public void setChargeDate(Date chargeDate) {
 		this.chargeDate = chargeDate;
 	}
 
-
-
 	public String getCreateUser() {
 		return createUser;
 	}
-
-
 
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
 
-
-
 	public String getPayerName() {
 		return payerName;
 	}
-
-
 
 	public void setPayerName(String payerName) {
 		this.payerName = payerName;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	/** default constructor */
-	public AdRent() {
+	public AdrentBill() {
 	}
-
-	
 
 	// Property accessors
 
@@ -138,12 +142,20 @@ public class AdRent implements java.io.Serializable {
 		this.num = num;
 	}
 
-	public Double getAmount() {
-		return this.amount;
+	public Double getTotalAmt() {
+		return totalAmt;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setTotalAmt(Double totalAmt) {
+		this.totalAmt = totalAmt;
+	}
+
+	public Double getPaidAmt() {
+		return paidAmt;
+	}
+
+	public void setPaidAmt(Double paidAmt) {
+		this.paidAmt = paidAmt;
 	}
 
 	public String getState() {
