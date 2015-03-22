@@ -8,7 +8,7 @@
 		<div class="textright">
 			版权所有&copy;
 			<a href="${comInfo.groupWeb}" title="访问官方网站" target="_blank">昌建地产集团</a>
-			电话：0395-2652766
+			电话：${comInfo.tel}
 		</div>
 	</div>
 </div>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="parkingBill" pageWidth="623" pageHeight="257" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="591" leftMargin="16" rightMargin="16" topMargin="8" bottomMargin="16">
-	<property name="ireport.zoom" value="1.1000000000000016"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="icDepositBill" pageWidth="623" pageHeight="257" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="567" leftMargin="28" rightMargin="28" topMargin="17" bottomMargin="17">
+	<property name="ireport.zoom" value="1.610510000000002"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="today" class="java.lang.String"/>
 	<parameter name="houseSn" class="java.lang.String"/>
-	<parameter name="ownerName" class="java.lang.String"/>
+	<parameter name="payerName" class="java.lang.String"/>
 	<parameter name="chineseAmount" class="java.lang.String"/>
 	<parameter name="remark" class="java.lang.String"/>
 	<parameter name="chargeUser" class="java.lang.String"/>
@@ -14,12 +14,12 @@
 	<parameter name="curnum" class="java.lang.Long"/>
 	<parameter name="num" class="java.lang.Long"/>
 	<parameter name="amount" class="java.lang.String"/>
-	<parameter name="beginDate" class="java.lang.String"/>
-	<parameter name="endDate" class="java.lang.String"/>
+	<parameter name="preRecordDate" class="java.lang.String"/>
+	<parameter name="curRecordDate" class="java.lang.String"/>
 	<parameter name="billSn" class="java.lang.String"/>
-	<parameter name="carSn" class="java.lang.String"/>
-	<parameter name="parkingSn" class="java.lang.String"/>
+	<parameter name="content" class="java.lang.String"/>
 	<parameter name="comName" class="java.lang.String"/>
+	<parameter name="cardType" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -29,10 +29,8 @@
 	<pageHeader>
 		<band height="213" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="125" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="128" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -43,10 +41,8 @@
 				<text><![CDATA[人民币(大写)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="69" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="72" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -57,24 +53,21 @@
 				<text><![CDATA[款项]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="322" y="41" width="76" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="277" y="44" width="85" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[车位号]]></text>
+				<text><![CDATA[付款人]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="322" y="153" width="76" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="362" y="156" width="91" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
+					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -84,53 +77,21 @@
 				</textElement>
 				<text><![CDATA[收款人(盖章)]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="249" y="69" width="149" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[计费结束日期]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="15" y="97" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[车位维护费]]></text>
-			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="398" y="41" width="179" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="362" y="44" width="193" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{parkingSn}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{payerName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="153" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="156" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -141,9 +102,8 @@
 				<text><![CDATA[收款单位(盖章)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="41" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="44" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -152,30 +112,25 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[车主姓名]]></text>
+				<text><![CDATA[房屋编号]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="99" y="41" width="77" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="113" y="44" width="164" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{ownerName}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{houseSn}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="15" y="13" width="57" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="16" width="63" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
@@ -183,39 +138,19 @@
 				<text><![CDATA[开票日期:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="429" y="17" width="68" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="418" y="16" width="54" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[单号:]]></text>
+				<text><![CDATA[单号：]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="99" y="97" width="150" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="113" y="128" width="442" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{beginDate}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="99" y="125" width="478" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -225,12 +160,9 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{chineseAmount}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="497" y="17" width="80" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="471" y="16" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
 					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
@@ -239,24 +171,8 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{billSn}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="99" y="69" width="150" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="14" y="184" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[计费起始日期]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="15" y="181" width="84" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -267,46 +183,30 @@
 				<text><![CDATA[备注]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="221" y="0" width="114" height="28"/>
+				<reportElement x="220" y="-3" width="114" height="24"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="黑体" size="18" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
 				</textElement>
 				<text><![CDATA[收款收据]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="398" y="69" width="179" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="362" y="72" width="193" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[金额(￥)]]></text>
+				<text><![CDATA[充值金额(￥)]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="249" y="97" width="149" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="362" y="100" width="193" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{endDate}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="398" y="97" width="179" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -316,11 +216,8 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{amount}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="398" y="153" width="179" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
+				<reportElement mode="Transparent" x="453" y="156" width="102" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box rightPadding="0">
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -330,11 +227,8 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{chargeUser}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="99" y="181" width="478" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="113" y="184" width="442" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -344,9 +238,9 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{remark}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="72" y="13" width="90" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="77" y="16" width="95" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
+					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
@@ -357,40 +251,9 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{today}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="176" y="41" width="73" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[车牌号]]></text>
-			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="249" y="41" width="73" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="113" y="156" width="249" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{carSn}]]></textFieldExpression>
-			</textField>
-			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="99" y="153" width="223" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
@@ -399,6 +262,44 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="113" y="72" width="249" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[IC卡类型]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="113" y="100" width="249" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{cardType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="14" y="100" width="99" height="28" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[IC卡充值]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 </jasperReport>

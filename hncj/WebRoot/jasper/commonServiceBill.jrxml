@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="commonServiceBill" pageWidth="623" pageHeight="257" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="592" leftMargin="15" rightMargin="16" topMargin="14" bottomMargin="15">
 	<property name="ireport.zoom" value="1.610510000000003"/>
-	<property name="ireport.x" value="98"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="today" class="java.lang.String"/>
 	<parameter name="houseDesc" class="java.lang.String"/>
@@ -17,6 +17,7 @@
 	<parameter name="lightPrice" class="java.lang.String"/>
 	<parameter name="lightAmount" class="java.lang.String"/>
 	<parameter name="totalAmount" class="java.lang.String"/>
+	<parameter name="comName" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -51,7 +52,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[款项内容]]></text>
+				<text><![CDATA[款项]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="294" y="46" width="74" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -179,7 +180,7 @@
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{chineseAmount}]]></textFieldExpression>
@@ -196,7 +197,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{billSn}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="114" y="70" width="115" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="114" y="70" width="136" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -207,10 +208,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[缴费周期]]></text>
+				<text><![CDATA[计费起止日期]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="229" y="70" width="65" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="250" y="70" width="44" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -221,7 +222,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[缴费月数]]></text>
+				<text><![CDATA[月数]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="294" y="70" width="74" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -235,7 +236,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[计费单价]]></text>
+				<text><![CDATA[单价]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="10" y="189" width="104" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -270,10 +271,10 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[费用金额(￥)]]></text>
+				<text><![CDATA[金额(￥)]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="229" y="94" width="65" height="47" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="250" y="94" width="44" height="47" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -300,20 +301,6 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{serviceAmount}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement mode="Transparent" x="114" y="165" width="180" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
-				<box>
-					<pen lineWidth="1.0"/>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
-					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
-				</textElement>
-				<text><![CDATA[漯河市三涛物业管理有限公司]]></text>
-			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="368" y="165" width="212" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box rightPadding="0">
@@ -382,7 +369,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
-				<text><![CDATA[汇总金额(￥)]]></text>
+				<text><![CDATA[总额(￥)]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement mode="Transparent" x="368" y="117" width="80" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
@@ -413,7 +400,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{totalAmount}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="114" y="94" width="115" height="47" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="114" y="94" width="136" height="47" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -453,6 +440,20 @@
 					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{lightPrice}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="114" y="165" width="180" height="24" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box rightPadding="0">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

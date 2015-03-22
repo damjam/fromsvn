@@ -12,7 +12,6 @@
 
 <html>
 	<head>
-		
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -30,26 +29,32 @@
 				$('#btnClear').click(function(){
 					FormUtils.reset("queryForm");
 				});
+				$('#btnAdd').click(function(){
+					gotoUrl('/adrentBill.do?action=toAdd');
+				});
 				
 			});
+			function charge(id){
+				if(window.confirm("确认收费?")){
+					gotoUrl('/adrentBill.do?action=charge&id='+id);
+				}
+			}
 			function openReport(id){
-				window.open(CONTEXT_PATH+'/reportAction.do?action=depositDetailBill&id='+id);
+				window.open(CONTEXT_PATH+'/reportAction.do?action=adrentBill&id='+id);
 			}
-			function addDeposit(){
-				gotoUrl('/accountJournal.do?action=toDeposit');
+			function delRecord(id){
+				if(!window.confirm("确认删除?")){
+					return;
+				}
+				gotoUrl('/adrentBill.do?action=delete&id='+id);
 			}
-			function addWithdraw(){
-				gotoUrl('/accountJournal.do?action=toWithdraw');
-			}
-			function addReverse(){
-				gotoUrl('/accountJournal.do?action=toReverse');
-			}
+			
 		</script> 
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/accountJournal.do?action=list" styleId="queryForm">
+		<html:form action="/adrentBill.do?action=list" styleId="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -58,98 +63,104 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								日期
+								收款日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							<td class="formlabel">
-								收支类型
-							</td>
-							<td>
-								<html:select property="inoutType" styleId="inoutType">
+							
+							<td class="formlabel nes">状态</td>
+						    <td>
+						    	<html:select property="state" styleId="state">
 						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="inoutTypes" property="value" labelProperty="name" />
+						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
-							</td>
+						    </td>
 							<td class="formlabel">
-								交易类型
+								账单号
 							</td>
 							<td>
-								<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="tradeTypes" property="value" labelProperty="name" />
-						    	</html:select>
+								<html:text property="id" styleId="id" maxlength="20"/>
 							</td>
-						</tr>
+						</tr>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="收入" onclick="addDeposit()"/>&nbsp;
-								<input type="button" value="支出" onclick="addWithdraw()"/>&nbsp;
-								<input type="button" value="冲正" onclick="addReverse()"/>&nbsp;
+								<input type="button" value="新增" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 			<!-- 汇总信息 -->
+			 
+			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">收入笔数</td>
-							<td align="center">收入金额（元）</td>
-							<td align="center">支出笔数</td>
-							<td align="center">支出金额（元）</td>
 							<td align="center">总笔数</td>
-							<td align="center">净收入（元）</td>
+							<td align="center">总金额（元）</td>
 						</tr>
 					</thead>
 					<tr>
-						<td align="center">${sumInfo.inCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="inAmt" format="##0.00"/></td>
-						<td align="center">${sumInfo.outCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="outAmt" format="##0.00"/></td>
 						<td align="center">${sumInfo.totalCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="netAmt" format="##0.00"/></td>
+						<td align="center"><bean:write name="sumInfo" property="totalAmt" format="##0.00"/></td>
 					</tr>
 				</table>
 			</div>
-			
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >流水号</td>
-						 	<td >收支类型</td>
-						 	<td >交易类型</td>
-						 	<td >交易金额</td>
-						    <td >交易时间</td>
-						    <td >关联账单号</td>
-						    <td >当前余额</td>
+						 	<td >账单号</td>
+						    <td >商家名称</td>
+						    <td >租用位置</td>
+						    <td >单价</td>
+						    <td >数量</td>
+						    <td >起止日期</td>
+						    <td >总额</td>
+						    <td >实收金额</td>
+						    <td >付款人</td>
+						    <td >付款时间</td>
+						    <td >收款人</td>
+						    <td >状态</td>
 						    <td >备注</td>
-						    <td >经手人</td>
+						    <td>操作</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<logic:iterate id="element" name="list">
 							<tr align="center">
 								<td>${element.id}</td>
-								<td><f:type className="InoutType" value="${element.inoutType}"/></td>
-								<td><f:type className="TradeType" value="${element.tradeType}"/></td>
-								<td align="right"><bean:write name="element" property="amount" format="##0.00"/></td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
-								<td>${element.billId}</td>
-								<td align="right"><bean:write name="element" property="balance" format="##0.00"/></td>
-						    	<td>${element.remark}</td>
-						    	<td>${element.createUser}</td>
+								<td>${element.merchantName}</td>
+								<td>${element.position}</td>
+								<td><bean:write name="element" property="unitPrice" format="##0.00"/></td>
+								<td>${element.num}</td>
+								<td>${element.beginDate}-${element.endDate}</td>
+								<td><bean:write name="element" property="totalAmt" format="##0.00"/></td>
+								<td><bean:write name="element" property="paidAmt" format="##0.00"/></td>
+								<td>${element.payerName}</td>
+								<td><bean:write name="element" property="chargeDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>${element.chargeUser}</td>
+								<td>
+							    	<f:state className="BillState" value="${element.state}" />
+							    </td>
+								<td>${element.remark}</td>
+								<td class="redlink">
+							    	<logic:equal value="00" name="element" property="state">
+							    		<a href="javascript:charge('${element.id}')">收费</a>
+							    		<a href="javascript:delRecord('${element.id}')">删除</a>
+							    	</logic:equal>
+							    	<logic:equal value="01" name="element" property="state">
+							    		<a href="javascript:openReport('${element.id}')">打印</a>
+							    	</logic:equal>
+							    </td>
 						    </tr>
 						</logic:iterate>
 					</f:showDataGrid>

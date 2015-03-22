@@ -72,7 +72,8 @@
 				var gatherWay = $('#gatherWay').val();
 				var gatherPeriod = $('#gatherPeriod'+gatherWay).val();
 				if(gatherPeriod == ''){
-					alert('不能为空');
+					alert('汇总日期不能为空');
+					$('#gatherPeriod'+gatherWay).focus();
 					return;
 				}
 				$('#frame0').attr('src', CONTEXT_PATH+"/reportAction.do?action=gather&gatherWay="+gatherWay+"&gatherPeriod="+gatherPeriod);

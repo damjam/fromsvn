@@ -63,5 +63,17 @@ popUp={
 			$('#'+goldType).val(resultVal[0]);
 			$('#'+goldTypeName).val(resultVal[1]);
 		}
+	},
+	popUpMerchantInfo:function(merchantNo, merchantName, params){
+		var toUrl="/merchantInfo.do?action=queryPopUpMerchantInfo";
+		if(params&&params!=null){
+			toUrl=toUrl+"&"+params;
+		}
+		retVal = openContextDialog(toUrl);
+		if(retVal){
+			resultVal=retVal.split("$");
+			$('#'+merchantNo).val(resultVal[0]);
+			$('#'+merchantName).val(resultVal[1]);
+		}
 	}
 }
