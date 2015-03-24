@@ -33,7 +33,7 @@ public class CommonServiceBillDaoImpl extends BaseDaoHibernateImpl implements Co
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("order by t.id desc");
+		helper.orderBy(MapUtils.getString(params, "orderType"), "desc");
 		return super.getPageData(helper, pager);
 	}
 

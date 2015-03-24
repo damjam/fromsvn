@@ -94,7 +94,16 @@
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+							</td>
+							<td class="formlabel">
+								排序方式
+							</td>
+							<td>
+								<html:select property="orderType" onchange="this.form.submit()">
+									<html:option value="id">按账单号</html:option>
+									<html:option value="houseSn">按房屋编号</html:option>
+								</html:select>
 							</td>
 						</tr>
 						<tr>

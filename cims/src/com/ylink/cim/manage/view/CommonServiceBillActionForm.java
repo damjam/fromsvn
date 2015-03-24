@@ -32,8 +32,16 @@ public class CommonServiceBillActionForm extends ActionForm{
 	private String checkinState;
 	private String suPayState;
 	private String year;
+	private String orderType;
 	
 	
+	
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
 	public String getYear() {
 		return year;
 	}

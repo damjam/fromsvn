@@ -73,6 +73,7 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 		map.put("state", actionForm.getState());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("orderType", actionForm.getOrderType());
 		Paginater paginater = commonServiceBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = commonServiceBillDao.findSumInfo(map);
