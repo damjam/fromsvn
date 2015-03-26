@@ -75,7 +75,7 @@
 								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							<td class="formlabel nes">״̬</td>
+							<td class="formlabel">״̬</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
 						    		<html:option value="">---ȫ��---</html:option>
