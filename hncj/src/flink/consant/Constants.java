@@ -79,6 +79,7 @@ public abstract class Constants {
 	public static final String ACCOUNT_DETAIL_ID = "ACCOUNT_DETAIL_ID";
 	public static final String CONTACT_ID = "CONTACT_ID";
 	public static final String MERCHANT_INFO_ID = "MERCHANT_INFO_ID";
+	public static final String PARKING_INFO_ID = "PARKING_INFO_ID";
 	public static final String SYSUSER = "system";
 	public static final String[] RENT_BUILDINGS = { "" };
 	public static final String INNER_ACCTID = "00000000";
