@@ -49,7 +49,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="houseInfo.do?action=doAdd" styleId="houseInfoActionForm" method="post" styleClass="validate">
+	<html:form action="carInfo.do?action=doAdd" styleId="carInfoActionForm" method="post" styleClass="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -60,47 +60,58 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					 
-					  <tr>
-						    <td class="formlabel nes">楼号</td>
+					   <tr>
+						    <td class="formlabel nes">车牌号</td>
 						    <td>
-						    	<html:select property="buildingNo" style="width:166px">
-									<html:options collection="buildingNos" property="key" labelProperty="value" />
-								</html:select>
+						    	<html:text property="carSn" styleId="carSn" maxlength="10"></html:text>
+						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">单元</td>
+						    <td class="formlabel nes">品牌</td>
 						    <td>
-						    	<html:select property="unitNo" style="width:166px">
-									<html:options collection="unitNos" property="key" labelProperty="value" />
-								</html:select>
-						    </td>
-					   </tr>
-					   
-					   <tr>
-						    <td class="formlabel nes">房间</td>
-						    <td>
-						    	<html:text property="position" styleId="position" maxlength="4" styleClass="{required:true,digit:true,minlength:3}"></html:text>
-						    	<span class="field_tipinfo">请输入正确的房间号</span>
+						    	<html:text property="brand" styleId="brand" maxlength="10"></html:text>
+						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">面积</td>
+						    <td class="formlabel nes">型号</td>
 						    <td>
-						    	<html:text property="area" styleId="area" maxlength="6" styleClass="{required:true,num:true}"></html:text>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<html:text property="model" styleId="model" maxlength="10"></html:text>
+						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">交房日期</td>
+						    <td class="formlabel nes">车主姓名</td>
 						    <td>
-						    	<html:text property="deliveryDate" styleId="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"></html:text>
+						    	<html:text property="ownerName" styleId="ownerName" maxlength="10" styleClass="{required:true}"></html:text>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">车主联系电话</td>
+						    <td>
+						    	<html:text property="ownerCel" styleId="ownerCel" maxlength="20" styleClass="{required:true}"></html:text>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel">车主房屋编号</td>
+						    <td>
+						    	<html:text property="houseSn" styleId="houseSn" maxlength="15" styleClass="{required:true}"></html:text>
+						    	<span class="field_tipinfo"></span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel">车位编号</td>
+						    <td>
+						    	<html:text property="parkingSn" styleId="parkingSn" maxlength="10"></html:text>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/houseInfo.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/carInfo.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
