@@ -1,6 +1,7 @@
 package com.ylink.cim.admin.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,13 +23,12 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 		this.idFactoryDao.deleteIdFactory(seqIdName);
 	}
 
-	public String generateId(String seqIdName) throws BizException {
+	public synchronized String generateId(String seqIdName) throws BizException {
 		
 		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName); 
 		if(null==idFactory){
 			ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "不存在对的id: "+seqIdName);
 		}
-		
 		if(StringUtils.isEmpty(idFactory.getInitValue())){
 			idFactory.setInitValue("1000");
 			//ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "未设置初始值");
