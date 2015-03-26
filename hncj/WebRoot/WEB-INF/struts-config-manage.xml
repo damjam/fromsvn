@@ -44,7 +44,11 @@
 		<form-bean name="elecRecordActionForm"
 			type="com.ylink.cim.manage.view.ElecRecordActionForm" />
 		<form-bean name="elecBillActionForm"
-			type="com.ylink.cim.manage.view.ElecBillActionForm" />	
+			type="com.ylink.cim.manage.view.ElecBillActionForm" />
+		<form-bean name="carInfoActionForm"
+			type="com.ylink.cim.manage.view.CarInfoActionForm" />
+		<form-bean name="parkingInfoActionForm"
+			type="com.ylink.cim.manage.view.ParkingInfoActionForm" />	
 	</form-beans>
 	<action-mappings>
 		<action path="/waterRecord" name="waterRecordActionForm"
@@ -121,6 +125,14 @@
 		</action>
 		<action path="/elecBill" name="elecBillActionForm"
 			type="com.ylink.cim.manage.view.ElecBillAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/carInfo" name="carInfoActionForm"
+			type="com.ylink.cim.manage.view.CarInfoAction" parameter="action"
+			scope="request"> 
+		</action>
+		<action path="/parkingInfo" name="parkingInfoActionForm"
+			type="com.ylink.cim.manage.view.ParkingInfoAction" parameter="action"
 			scope="request"> 
 		</action>
 	</action-mappings>
