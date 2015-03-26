@@ -82,6 +82,7 @@
 							<td>
 								<html:file property="file" styleId="file" style="width:400px" styleClass="userbox_bt {required:true}" />
 								<span class="field_tipinfo">请选择文件</span>
+								<span><a href="${CONTEXT_PATH}/">下载模板</a> </span>
 							</td>
 						</tr>
 					</table>
