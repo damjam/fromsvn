@@ -57,7 +57,7 @@ public class CommonServiceBillDaoImpl extends BaseDaoHibernateImpl implements Co
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
-		//helper.append("and state = ?", MapUtils.getString(params, "state"));
+		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));

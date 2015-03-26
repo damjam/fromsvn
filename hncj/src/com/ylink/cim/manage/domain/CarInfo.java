@@ -15,13 +15,80 @@ public class CarInfo implements java.io.Serializable {
 	private String brand;
 	private String model;
 	private String ownerId;
+	private String ownerName;
 	private String parkingSn;
 	private Date createDate;
 	private String createUser;
 	private Date updateDate;
 	private String updateUser;
 	private String branchNo;
+	private String remark;
+	private String houseSn;
+	private String ownerCel;
+	private String snCity;
 	
+	
+	
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+
+
+	public String getSnCity() {
+		return snCity;
+	}
+
+
+
+	public void setSnCity(String snCity) {
+		this.snCity = snCity;
+	}
+
+
+
+	public String getOwnerCel() {
+		return ownerCel;
+	}
+
+
+
+	public void setOwnerCel(String ownerCel) {
+		this.ownerCel = ownerCel;
+	}
+
+
+
+	public String getHouseSn() {
+		return houseSn;
+	}
+
+
+
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+
+
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}

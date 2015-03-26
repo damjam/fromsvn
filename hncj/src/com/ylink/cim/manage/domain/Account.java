@@ -10,7 +10,6 @@ import java.util.Date;
 public class Account implements java.io.Serializable {
 
 	// Fields
-
 	private String id;
 	private String ownerName;
 	private String ownerId;

@@ -36,7 +36,7 @@ public class OwnerInfo implements java.io.Serializable {
 	private String hasAcct;
 	private Double area;
 	private String branchNo;
-
+	
 	public String getBranchNo() {
 		return branchNo;
 	}

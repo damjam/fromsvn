@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * HouseInfoId entity. @author MyEclipse Persistence Tools
+ * HouseInfo entity. @author MyEclipse Persistence Tools
  */
 
 public class HouseInfo implements java.io.Serializable {
@@ -23,7 +23,21 @@ public class HouseInfo implements java.io.Serializable {
 	private String houseDesc;
 	private String remark;
 	private String branchNo;
+	private String orderSn;
 	
+	
+	public String getOrderSn() {
+		return orderSn;
+	}
+
+
+
+	public void setOrderSn(String orderSn) {
+		this.orderSn = orderSn;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}

@@ -115,7 +115,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 				org.apache.poi.ss.usermodel.Sheet sheet = book.getSheetAt(i);
 				// 得到第一列第一行的单元格
 				int rownum = sheet.getPhysicalNumberOfRows(); // 得到行数
-				for (int j = 0; j < rownum; j++) { // 循环进行读写
+				for (int j = 1; j < rownum; j++) { // 循环进行读写
 					try {
 						// 从0开始
 						// XSSFRow row = sheet.getRow(i);
@@ -123,7 +123,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 						Assert.notNull(row, "行数据为空");
 						String houseSn = "";
 						houseSn = row.getCell(0).getStringCellValue();
-						houseSn = StringUtils.trimToEmpty(houseSn.replace("盛世浩苑", ""));
+						houseSn = StringUtils.trimToEmpty(houseSn.replace("东外滩", ""));
 						if (StringUtils.isEmpty(houseSn)) {
 							throw new Exception("房屋编号为空");
 						}

@@ -15,6 +15,7 @@ import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.OwnerInfoService;
 import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.util.OrderSnGenerator;
 
 import flink.consant.Constants;
 import flink.etc.Assert;
@@ -85,6 +86,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			ownerInfo.setState(OwnerState.NORMAL.getValue());
 			ownerInfo.setCreateDate(DateUtil.getCurrent());
 			ownerInfo.setCreateUser(userInfo.getUserName());
+			ownerInfo.setBranchNo(userInfo.getBranchNo());
 			ownerInfoDao.save(ownerInfo);
 			
 			HouseInfo houseInfo = new HouseInfo();
@@ -102,6 +104,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			houseInfo.setPosition(position);
 			houseInfo.setCreateDate(DateUtil.getCurrent());
 			houseInfo.setCreateUser(userInfo.getUserName());
+			houseInfo.setBranchNo(userInfo.getBranchNo());
 			StringBuffer houseDesc = new StringBuffer();
 			houseDesc.append(houseInfo.getBuildingNo());
 			houseDesc.append("ºÅÂ¥");
@@ -109,6 +112,8 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			houseDesc.append("µ¥Ôª");
 			houseDesc.append(houseInfo.getPosition());
 			houseInfo.setHouseDesc(houseDesc.toString());
+			String orderSn = OrderSnGenerator.getOrderSn(houseInfo);
+			houseInfo.setOrderSn(orderSn);
 			ownerInfoDao.save(houseInfo);
 		}
 		

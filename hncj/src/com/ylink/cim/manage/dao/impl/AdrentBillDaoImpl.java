@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AdrentBillDao;
-import com.ylink.cim.manage.dao.ContactDao;
 import com.ylink.cim.manage.domain.AdrentBill;
-import com.ylink.cim.manage.domain.Contact;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
@@ -59,10 +57,6 @@ public class AdrentBillDaoImpl extends BaseDaoHibernateImpl implements AdrentBil
 		}
 		helper.append("and remark like ?", MapUtils.getString(params, "remark"));
 		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
-		//sumInfo.put("totalCnt", (Long)sumInfo.get("totalCnt"));
-		//sumInfo.put("totalAmt", (Double)sumInfo.get("totalAmt"));
 		return sumInfo;
 	}
-
-	
 }
