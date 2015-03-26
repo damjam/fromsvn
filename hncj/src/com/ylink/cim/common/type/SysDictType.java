@@ -16,6 +16,8 @@ public class SysDictType extends AbstractType {
 	public static final SysDictType BranchType = new SysDictType("机构类型", "BranchType");
 	public static final SysDictType EconomicalType = new SysDictType("经济适用房楼号", "EconomicalType");
 	public static final SysDictType RentType = new SysDictType("公租房楼号", "RentType");
+	public static final SysDictType HouseType = new SysDictType("住宅区楼号", "HouseType");
+	public static final SysDictType FlatType = new SysDictType("公寓区楼号", "FlatType");
 	protected SysDictType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
