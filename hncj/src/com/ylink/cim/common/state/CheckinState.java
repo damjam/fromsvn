@@ -5,11 +5,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import flink.util.AbstractType;
+import flink.util.AbstractState;
 import flink.util.ExceptionUtils;
 
 
-public class CheckinState extends AbstractType {
+public class CheckinState extends AbstractState {
 	public static Map<String, CheckinState> ALL = new LinkedHashMap<String, CheckinState>();
 
 	public static final CheckinState UNCHECKIN = new CheckinState("Î´Èë×¡", "00");
