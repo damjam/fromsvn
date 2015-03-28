@@ -968,6 +968,9 @@ $.extend($.validator, {
 			var regex = /^\d{16,19}$|^\d{6}[- ]\d{10,13}$|^\d{4}[- ]\d{4}[- ]\d{4}[- ]\d{4,7}$/;
 			return regex.test(str);
 		},
+		carnum : function(value, element){
+			return /^[\u4E00-\u9FA5][\da-zA-Z]{6}$/.test(value);
+		}, 
 		passport : function(value, element) {
 			return /^(P|p\d{7})|(G|g\d{8})$/.test(value);
 		},
