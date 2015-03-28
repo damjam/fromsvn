@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * DepositBillId entity. @author MyEclipse Persistence Tools
+ * DepositBillId domain. @author MyEclipse Persistence Tools
  */
 
 public class DepositBill implements java.io.Serializable {

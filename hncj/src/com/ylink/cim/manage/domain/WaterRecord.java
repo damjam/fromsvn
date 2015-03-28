@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * WaterRecordId entity. @author MyEclipse Persistence Tools
+ * WaterRecordId domain. @author MyEclipse Persistence Tools
  */
 
 public class WaterRecord implements java.io.Serializable {

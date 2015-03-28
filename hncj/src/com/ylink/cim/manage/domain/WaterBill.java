@@ -5,7 +5,7 @@ import java.util.Date;
 // default package
 
 /**
- * WaterBillId entity. @author MyEclipse Persistence Tools
+ * WaterBillId domain. @author MyEclipse Persistence Tools
  */
 
 public class WaterBill implements java.io.Serializable {

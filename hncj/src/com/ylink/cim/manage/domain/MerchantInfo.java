@@ -6,7 +6,7 @@ import java.util.Date;
 
 
 /**
- * MerchantInfo entity. @author MyEclipse Persistence Tools
+ * MerchantInfo domain. @author MyEclipse Persistence Tools
  */
 
 public class MerchantInfo implements java.io.Serializable {

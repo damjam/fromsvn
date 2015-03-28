@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * ParkingBillId entity. @author MyEclipse Persistence Tools
+ * ParkingBillId domain. @author MyEclipse Persistence Tools
  */
 
 public class ParkingBill implements java.io.Serializable {

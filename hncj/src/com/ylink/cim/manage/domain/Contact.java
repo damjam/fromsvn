@@ -5,7 +5,7 @@ import java.util.Date;
 // default package
 
 /**
- * Contact entity. @author MyEclipse Persistence Tools
+ * Contact domain. @author MyEclipse Persistence Tools
  */
 
 public class Contact implements java.io.Serializable {

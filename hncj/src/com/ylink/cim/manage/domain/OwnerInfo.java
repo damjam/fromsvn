@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * OwnerInfoId entity. @author MyEclipse Persistence Tools
+ * OwnerInfoId domain. @author MyEclipse Persistence Tools
  */
 
 public class OwnerInfo implements java.io.Serializable {

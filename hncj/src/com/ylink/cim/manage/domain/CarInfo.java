@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * CarInfoId entity. @author MyEclipse Persistence Tools
+ * CarInfoId domain. @author MyEclipse Persistence Tools
  */
 
 public class CarInfo implements java.io.Serializable {
@@ -26,9 +26,22 @@ public class CarInfo implements java.io.Serializable {
 	private String houseSn;
 	private String ownerCel;
 	private String snCity;
+	private String id;
 	
 	
 	
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
 	public String getOwnerName() {
 		return ownerName;
 	}

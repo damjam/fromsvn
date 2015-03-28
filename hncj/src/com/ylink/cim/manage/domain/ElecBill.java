@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 /**
- * ElecBill entity. @author MyEclipse Persistence Tools
+ * ElecBill domain. @author MyEclipse Persistence Tools
  */
 
 public class ElecBill implements java.io.Serializable {

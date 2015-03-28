@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * CommomServiceBillId entity. @author MyEclipse Persistence Tools
+ * CommomServiceBillId domain. @author MyEclipse Persistence Tools
  */
 
 public class CommonServiceBill implements java.io.Serializable {

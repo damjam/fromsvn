@@ -5,7 +5,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * AdRent entity. @author MyEclipse Persistence Tools
+ * AdRent domain. @author MyEclipse Persistence Tools
  */
 
 public class AdrentBill implements java.io.Serializable {

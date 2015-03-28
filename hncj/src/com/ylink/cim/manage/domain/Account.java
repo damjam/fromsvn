@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * AccountId entity. @author MyEclipse Persistence Tools
+ * AccountId domain. @author MyEclipse Persistence Tools
  */
 
 public class Account implements java.io.Serializable {

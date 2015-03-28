@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 /**
- * ElecRecord entity. @author MyEclipse Persistence Tools
+ * ElecRecord domain. @author MyEclipse Persistence Tools
  */
 
 public class ElecRecord implements java.io.Serializable {

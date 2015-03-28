@@ -6,10 +6,13 @@
 	-->
 <hibernate-mapping>
 	<class name="com.ylink.cim.manage.domain.CarInfo" table="car_info">
-		<id name="carSn" type="java.lang.String">
-			<column name="CAR_SN" length="20" />
+		<id name="id" type="java.lang.String">
+			<column name="ID" length="20" />
 			<generator class="assigned" />
 		</id>
+		<property name="carSn" type="java.lang.String">
+			<column name="CAR_SN" length="20" />
+		</property>
 		<property name="brand" type="java.lang.String">
 			<column name="BRAND" length="20" />
 		</property>

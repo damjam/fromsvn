@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * HouseInfo entity. @author MyEclipse Persistence Tools
+ * HouseInfo domain. @author MyEclipse Persistence Tools
  */
 
 public class HouseInfo implements java.io.Serializable {

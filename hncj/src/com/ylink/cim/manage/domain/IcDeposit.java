@@ -5,7 +5,7 @@ import java.util.Date;
 // default package
 
 /**
- * ElecPrestore entity. @author MyEclipse Persistence Tools
+ * ElecPrestore domain. @author MyEclipse Persistence Tools
  */
 
 public class IcDeposit implements java.io.Serializable {

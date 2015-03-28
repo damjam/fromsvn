@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * AccountJournal entity. @author MyEclipse Persistence Tools
+ * AccountJournal domain. @author MyEclipse Persistence Tools
  */
 
 public class AccountJournal implements java.io.Serializable {

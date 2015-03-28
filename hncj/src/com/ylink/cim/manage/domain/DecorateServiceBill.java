@@ -4,7 +4,7 @@ package com.ylink.cim.manage.domain;
 import java.util.Date;
 
 /**
- * DecorateServiceBillId entity. @author MyEclipse Persistence Tools
+ * DecorateServiceBillId domain. @author MyEclipse Persistence Tools
  */
 
 public class DecorateServiceBill implements java.io.Serializable {
