@@ -130,4 +130,18 @@ public class ParkingInfoAction extends BaseDispatchAction {
 		return list(mapping, form, request, response);
 	}
 
+	public ActionForward queryPopUpParkingInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			Map<String, Object> params = getParaMap();
+			params.put("branchNo", getSessionBranchNo(request));
+			params.put("avai", true);
+			Paginater paginater = this.parkingInfoDao.findPager(params, getPager(request));
+			saveQueryResult(request, paginater);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return forward("/pages/popUp/popUpParkingInfo.jsp");
+	}
 }
