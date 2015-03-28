@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 // default package
 
 /**
- * SysLog entity. @author MyEclipse Persistence Tools
+ * SysLog domain. @author MyEclipse Persistence Tools
  */
 
 public class SysLog implements java.io.Serializable {

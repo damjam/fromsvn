@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 // default package
 
 /**
- * UserLog entity. @author MyEclipse Persistence Tools
+ * UserLog domain. @author MyEclipse Persistence Tools
  */
 
 public class UserLog implements java.io.Serializable {
