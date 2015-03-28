@@ -75,5 +75,16 @@ popUp={
 			$('#'+merchantNo).val(resultVal[0]);
 			$('#'+merchantName).val(resultVal[1]);
 		}
+	},
+	popUpParkingInfo:function(parkingSn, params){
+		var toUrl="/parkingInfo.do?action=queryPopUpParkingInfo";
+		if(params&&params!=null){
+			toUrl=toUrl+"&"+params;
+		}
+		retVal = openContextDialog(toUrl);
+		if(retVal){
+			resultVal=retVal.split("$");
+			$('#'+parkingSn).val(resultVal[0]);
+		}
 	}
 }
