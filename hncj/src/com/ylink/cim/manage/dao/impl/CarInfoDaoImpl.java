@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -38,6 +39,15 @@ public class CarInfoDaoImpl extends BaseDaoHibernateImpl implements CarInfoDao {
 		return super.getPageData(helper, pager);
 	}
 
+
+	public List<CarInfo> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from CarInfo t where 1=1");
+		helper.append("and parkingSn = ?", MapUtils.getString(params, "parkingSn"));
+		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		return super.getList(helper);
+	}
 
 	
 }

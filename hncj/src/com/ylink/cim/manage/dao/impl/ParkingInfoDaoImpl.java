@@ -36,6 +36,9 @@ public class ParkingInfoDaoImpl extends BaseDaoHibernateImpl implements ParkingI
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		}
+		if (MapUtils.getBooleanValue(params, "avai")) {
+			helper.append("and sn not in (select parkingSn from CarInfo)");
+		}
 		helper.append("order by createDate desc");
 		return super.getPageData(helper, pager);
 	}
