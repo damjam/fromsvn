@@ -5,7 +5,7 @@ package com.ylink.cim.invest.domain;
 import java.util.Date;
 
 /**
- * SignContract entity. @author MyEclipse Persistence Tools
+ * SignContract domain. @author MyEclipse Persistence Tools
  */
 
 public class SignContract implements java.io.Serializable {

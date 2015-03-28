@@ -2,7 +2,7 @@ package com.ylink.cim.invest.domain;
 // default package
 
 /**
- * PayChannel entity. @author MyEclipse Persistence Tools
+ * PayChannel domain. @author MyEclipse Persistence Tools
  */
 
 public class PayChannel implements java.io.Serializable {

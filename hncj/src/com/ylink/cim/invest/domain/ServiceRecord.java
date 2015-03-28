@@ -4,7 +4,7 @@ package com.ylink.cim.invest.domain;
 import java.util.Date;
 
 /**
- * ServiceRecord entity. @author MyEclipse Persistence Tools
+ * ServiceRecord domain. @author MyEclipse Persistence Tools
  */
 
 public class ServiceRecord implements java.io.Serializable {

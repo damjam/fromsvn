@@ -5,7 +5,7 @@ import java.util.Date;
 // default package
 
 /**
- * CustInfo entity. @author MyEclipse Persistence Tools
+ * CustInfo domain. @author MyEclipse Persistence Tools
  */
 
 public class CustInfo implements java.io.Serializable {
