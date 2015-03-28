@@ -43,7 +43,35 @@
 // 				}
 		 	  	$("#txtNumLen").html(len);
 		 	}
-			
+			function getOwnerInfo(){
+				var houseSn = $('#houseSn').val();
+				if(houseSn == ''){
+					return;
+				}
+				var params = $('#houseSn').serialize();
+				$.ajax({
+					 type:'POST',
+				     url:CONTEXT_PATH + '/parkingBill.do?action=getOwnerName',
+				     async:true,
+				     dataType: "json",
+				     data:params,
+				     contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					 success:function(data) {
+				    	 if(data.error){
+				    		 alert(data.error);
+				    		 $('#houseSn').val('');
+				    		 return;
+				    	 }
+				    	 var ownerName = data.ownerName;
+				    	 var ownerCel = data.mobile;
+				    	 $('#ownerName').val(ownerName);
+				    	 $('#ownerCel').val(ownerCel);
+					 },
+					 error:function(data){   
+	                     alert("连接服务器失败");
+	                 }   
+				});
+			}
 		</script>
 	</head>
 <body>
@@ -63,22 +91,27 @@
 					   <tr>
 						    <td class="formlabel nes">车牌号</td>
 						    <td>
-						    	<html:text property="carSn" styleId="carSn" maxlength="10"></html:text>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<html:text property="carSn" styleId="carSn" maxlength="10" styleClass="{required:true,carnum:true}"></html:text>
+						    	<span class="field_tipinfo">请输入正确的车牌号</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">品牌</td>
+						    <td class="formlabel">品牌</td>
 						    <td>
 						    	<html:text property="brand" styleId="brand" maxlength="10"></html:text>
-						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">型号</td>
+						    <td class="formlabel">型号</td>
 						    <td>
 						    	<html:text property="model" styleId="model" maxlength="10"></html:text>
-						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel">车主房屋编号</td>
+						    <td>
+						    	<html:text property="houseSn" styleId="houseSn" maxlength="15" onblur="getOwnerInfo()"></html:text>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
@@ -96,16 +129,11 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">车主房屋编号</td>
-						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="15" styleClass="{required:true}"></html:text>
-						    	<span class="field_tipinfo"></span>
-						    </td>
-					   </tr>
-					   <tr>
 						    <td class="formlabel">车位编号</td>
 						    <td>
-						    	<html:text property="parkingSn" styleId="parkingSn" maxlength="10"></html:text>
+						    	<html:text property="parkingSn" styleId="parkingSn" maxlength="10" readonly="true"></html:text>
+						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
+									alt="搜索" onclick="popUp.popUpParkingInfo('parkingSn');" />
 						    </td>
 					   </tr>
 				  </table>

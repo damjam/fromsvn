@@ -43,7 +43,7 @@
 				}
 			}
 			function updateInfo(id){
-				var url="/carInfo.do?action=toEdit&carSn="+id;
+				var url="/carInfo.do?action=toEdit&id="+id;
 				gotoUrl(url);  
 			}
 		</script> 
@@ -130,15 +130,15 @@
 						<logic:iterate id="element" name="list">
 							<tr align="center">
 								<td>${element.carSn}</td>
-								<td>${element.brand}${element.brand}</td>
+								<td>${element.brand}${element.model}</td>
 								<td>${element.ownerName}</td>
 								<td>${element.ownerCel}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.parkingSn}</td>
 								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
-							    	<a href="javascript:updateInfo('${element.carSn}')" >ÐÞ¸Ä</a>
-							    	<a href="javascript:delInfo('${element.carSn}')" >É¾³ý</a>
+							    	<a href="javascript:updateInfo('${element.id}')" >ÐÞ¸Ä</a>
+							    	<a href="javascript:delInfo('${element.id}')" >É¾³ý</a>
 							    </td>
 						    </tr>
 						</logic:iterate>
