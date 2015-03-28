@@ -5,7 +5,7 @@ import java.util.Date;
 // default package
 
 /**
- * PushRecord entity. @author MyEclipse Persistence Tools
+ * PushRecord domain. @author MyEclipse Persistence Tools
  */
 
 public class PushRecord implements java.io.Serializable {

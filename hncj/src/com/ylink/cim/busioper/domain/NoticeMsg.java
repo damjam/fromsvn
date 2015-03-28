@@ -4,7 +4,7 @@ package com.ylink.cim.busioper.domain;
 import java.util.Date;
 
 /**
- * NoticeMsg entity. @author MyEclipse Persistence Tools
+ * NoticeMsg domain. @author MyEclipse Persistence Tools
  */
 
 public class NoticeMsg implements java.io.Serializable {

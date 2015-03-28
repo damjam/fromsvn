@@ -3,7 +3,7 @@ package com.ylink.cim.busioper.domain;
 import java.util.Date;
 
 /**
- * PushInfo entity. @author MyEclipse Persistence Tools
+ * PushInfo domain. @author MyEclipse Persistence Tools
  */
 
 public class PushPlan implements java.io.Serializable {
