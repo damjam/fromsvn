@@ -12,6 +12,7 @@
 				<value>/privilege.do?action=queryPrivilege</value>
 				<value>/branchAction.do?action=queryPopUpBranchInfo</value>
 				<value>/merchantInfo.do?action=queryPopUpMerchantInfo</value>
+				<value>/parkingInfo.do?action=queryPopUpParkingInfo</value>
 				<value>/deptInfoAction.do?action=queryPopUpDepartmentInfo</value>
 				<value>/roleInfoAction.do?action=queryPopUpRoleInfo</value>
 				<value>/userInfoAction.do?action=queryPopUpUserInfo</value>
@@ -48,6 +49,7 @@
 				<value>/pushMngAction.do?action=getBusiType</value>
 				<value>/noticeMsgAction.do?action=list</value>
 				<value>/waterRecord.do?action=getPreRecord</value>
+				<value>/parkingBill.do?action=getOwnerInfo</value>
 			</list>
 		</property>
 	</bean>
