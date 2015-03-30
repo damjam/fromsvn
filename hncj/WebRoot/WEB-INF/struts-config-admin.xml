@@ -20,6 +20,8 @@
 			type="com.ylink.cim.admin.view.SysParmManageActionForm"></form-bean>
 		<form-bean name="userLog" type="com.ylink.cim.admin.view.UserLogActionForm"></form-bean>
 		<form-bean name="sysLog" type="com.ylink.cim.admin.view.SysLogActionForm"></form-bean>
+		<form-bean name="timerActionForm" type="com.ylink.cim.sys.view.TimerActionForm"></form-bean>
+		<form-bean name="timerDoActionForm" type="com.ylink.cim.sys.view.TimerDoActionForm"></form-bean>
 	</form-beans>
 	<action-mappings>
 		<action path="/limitGroupInfoAction" name="limitGroupInfoActionForm"
@@ -62,9 +64,9 @@
 			<forward name="toListPage" path="/pages/admin/sys/sysDictList.jsp"></forward>
 			<forward name="toAddPage" path="/pages/admin/sys/sysDictAdd.jsp"></forward>
 		</action>
-		<action path="/sysParmManage" name="sysParmForm" 
+		<action path="/sysParmManage" name="sysParmForm"
 			type="com.ylink.cim.admin.view.SysParmManageAction" parameter="action"
-			 scope="request">
+			scope="request">
 			<forward name="list" path="/pages/admin/sysRunManager/sysParmManager.jsp"></forward>
 			<forward name="save" path="/pages/admin/sysRunManager/sysParmAdd.jsp"></forward>
 			<forward name="modify" path="/pages/admin/sysRunManager/sysParmModify.jsp"></forward>
@@ -80,6 +82,13 @@
 			name="sysLog" parameter="action" scope="request" validate="true">
 			<forward name="success" path="/pages/admin/log/sysLog.jsp"></forward>
 			<forward name="detail" path="/pages/admin/log/sysLogCurrentDetail.jsp"></forward>
+		</action>
+
+		<action path="/timer" type="com.ylink.cim.sys.view.TimerAction"
+			name="timerActionForm" parameter="action" scope="request" validate="true">
+		</action>
+		<action path="/timerDo" type="com.ylink.cim.sys.view.TimerDoAction"
+			name="timerDoActionForm" parameter="action" scope="request" validate="true">
 		</action>
 	</action-mappings>
 </struts-config>
