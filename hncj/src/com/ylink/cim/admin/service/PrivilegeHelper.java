@@ -81,7 +81,6 @@ public abstract class PrivilegeHelper {
 	public static IPrivilege getPrivilege(String code, Collection privileges) {
 		for (Iterator i = privileges.iterator(); i.hasNext();) {
 			IPrivilege p = (IPrivilege) i.next();
-			
 			if (p.getCode().equals(code)) {
 				return p;
 			}

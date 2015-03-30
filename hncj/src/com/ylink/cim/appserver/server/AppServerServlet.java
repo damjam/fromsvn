@@ -35,7 +35,7 @@ public class AppServerServlet extends HttpServlet {
 				public void run() {
 					IAppServer appServer = (IAppServer)SpringContext.getService("timerAppServer");
 					try {
-						//appServer.doProcess();
+						appServer.doProcess();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

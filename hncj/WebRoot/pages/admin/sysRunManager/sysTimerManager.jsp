@@ -49,23 +49,17 @@
 				//初始化
 				ifrm = document.getElementById('frame0');
 				if(!ifrm.src){
-		    		ifrm.src=CONTEXT_PATH+"/timerCommand.do?action=queryTimerCommand";
+		    		ifrm.src=CONTEXT_PATH+"/timer.do?action=query";
 		    	}
 		    	
-				
 				$('#tabs').bind('tabsselect', function(event, ui) {   
-				    if (ui.index==0) {	
+				    if (ui.index==0){	
 				    	ifrm = document.getElementById('frame0');
-				    	ifrm.src=CONTEXT_PATH+"/timerCommand.do?action=queryTimerCommand";
-						
-	                }  
-				    if (ui.index==1){	
-				    	ifrm = document.getElementById('frame1');
 						ifrm.src=CONTEXT_PATH+"/timer.do?action=query";
 	                }   
-				    if (ui.index==2){	
-				    	ifrm = document.getElementById('frame2');
-						ifrm.src=CONTEXT_PATH+"/timerDo.do?action=queryTimerDo";
+				    if (ui.index==1){	
+				    	ifrm = document.getElementById('frame1');
+						ifrm.src=CONTEXT_PATH+"/timerDo.do?action=list";
 	                }  
 				});  
 		});
@@ -77,13 +71,10 @@
 		<div id="tabs">
 			<ul>
 				<li>
-					<a id="t0" href="#tabs-0">定时命令管理</a>
+					<a id="t0" href="#tabs-0">定时计划管理</a>
 				</li>
 				<li>
-					<a id="t1" href="#tabs-1">定时计划管理</a>
-				</li>
-				<li>
-					<a id="t2" href="#tabs-2">定时执行查询</a>
+					<a id="t1" href="#tabs-1">定时执行查询</a>
 				</li>
 			</ul>
 			<div id="tabs-0" >
@@ -91,9 +82,6 @@
 			</div>
 			<div id="tabs-1">
 				<iframe id="frame1" scrolling="auto" frameborder="0" width="100%"  height="100%" onload="this.height=frame1.document.body.scrollHeight"></iframe>
-			</div>
-			<div id="tabs-2">
-				<iframe id="frame2" scrolling="auto" frameborder="0" width="100%"  height="100%" onload="this.height=frame2.document.body.scrollHeight"></iframe>
 			</div>
 		</div>
 		<!--版权区域-->

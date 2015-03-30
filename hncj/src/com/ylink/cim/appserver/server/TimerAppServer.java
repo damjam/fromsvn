@@ -70,7 +70,7 @@ public class TimerAppServer implements IAppServer {
 			TimerDo timerDo = null;
 			for (int i = 0; i < timerDoList.size(); i++) {
 				timerDo = timerDoList.get(i);
-				logger.info("定时命令开始执行。代码:" + timerDo.getBeanName());
+				logger.info("定时命令开始执行代码:" + timerDo.getBeanName());
 				// 派生线程
 				try {
 					//BaseCmdTask baseCmd = (BaseCmdTask) Class.forName(timerDo.getClassName()).newInstance();
@@ -87,7 +87,6 @@ public class TimerAppServer implements IAppServer {
 					timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_SUCESS, "未知错误");
 				}
 			}
-			
 			Thread.sleep(sleepTime);
 		}
 

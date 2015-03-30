@@ -1,14 +1,11 @@
-package com.ylink.cim.sys.domain;
+package com.ylink.cim.sys.view;
 
 import java.util.Date;
 
-/**
- * Timer entity.
- * 
- * @author MyEclipse Persistence Tools
- */
+import org.apache.struts.action.ActionForm;
 
-public class Timer implements java.io.Serializable {
+public class TimerActionForm extends ActionForm {
+
 	/**
 	 * 
 	 */
@@ -27,8 +24,26 @@ public class Timer implements java.io.Serializable {
 	private Date auditTime;
 	private String auditUser;
 	private String noPass;
+	
+	public String getBeanName() {
+		return beanName;
+	}
 
-	// Property accessors
+	public void setBeanName(String beanName) {
+		this.beanName = beanName;
+	}
+
+	public String getBeanNameCh() {
+		return beanNameCh;
+	}
+
+	public void setBeanNameCh(String beanNameCh) {
+		this.beanNameCh = beanNameCh;
+	}
+
+	public TimerActionForm() {
+		super();
+	}
 
 	public Date getAuditTime() {
 		return this.auditTime;
@@ -36,14 +51,6 @@ public class Timer implements java.io.Serializable {
 
 	public String getAuditUser() {
 		return this.auditUser;
-	}
-
-	public String getBeanName() {
-		return this.beanName;
-	}
-
-	public String getBeanNameCh() {
-		return this.beanNameCh;
 	}
 
 	public Date getCreateTime() {
@@ -58,13 +65,6 @@ public class Timer implements java.io.Serializable {
 		return this.groupno;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getNoPass() {
 		return this.noPass;
@@ -98,14 +98,6 @@ public class Timer implements java.io.Serializable {
 		this.auditUser = auditUser;
 	}
 
-	public void setBeanName(String beanName) {
-		this.beanName = beanName;
-	}
-
-	public void setBeanNameCh(String beanNameCh) {
-		this.beanNameCh = beanNameCh;
-	}
-
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
@@ -116,6 +108,15 @@ public class Timer implements java.io.Serializable {
 
 	public void setGroupno(String groupno) {
 		this.groupno = groupno;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setNoPass(String noPass) {
@@ -138,8 +139,8 @@ public class Timer implements java.io.Serializable {
 		this.state = state;
 	}
 
+
 	public void setTriggertime(String triggertime) {
 		this.triggertime = triggertime;
 	}
-
 }

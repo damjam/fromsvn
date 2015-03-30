@@ -257,7 +257,6 @@ FormUtils = {
 		//清除表单中的数据，可以传form的id,form对象,当前对象,也可什么都不传
 		var form;
 		if(!param){
-			alert('no');
 			 var event = window.event; // 事件     
         	 var target = event.target || event.srcElement; // 获得事件源 
        		 form = target.form;
@@ -325,7 +324,6 @@ FormUtils = {
 	 */
 	submitTokenForm: function(formIndex) {
 		var form = $('form:eq(' + formIndex + ')');
-		
 		if ((form.hasClass('validate') && form.valid()) || !form.hasClass('validate')) {
 			form.find(':button, :submit, :reset').attr('disabled', true);
 			YToken.create(form);
@@ -521,7 +519,7 @@ function arabia_to_chinese(num) {
 			//alert("请输入正确的金额");
 			return "";
 		}// 若数量超过拾亿单位，提示
-		tmpnewchar = ""
+		tmpnewchar = "";
 		perchar = part[0].charAt(i);
 		switch (perchar) {
 			case "0" :

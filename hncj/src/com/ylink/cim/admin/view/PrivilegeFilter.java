@@ -173,13 +173,14 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 			//添加父节点
 			parentCode = curPrivilege.getParent();
 			Privilege parentPrivilege = (Privilege) PrivilegeHelper.getPrivilege(parentCode, allPriv);
-			paths.add(0, parentPrivilege);
-			
+			//不添加顶层节点
+			if (!StringUtils.isEmpty(parentPrivilege.getParent())) {
+				paths.add(0, parentPrivilege);
+			}
 			//进行下次循环
 			curPrivilege = parentPrivilege;
 			limitid = curPrivilege.getCode();
 		}
-
 		return paths;
 	}
 	

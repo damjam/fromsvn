@@ -6,11 +6,10 @@
 -->
 <hibernate-mapping>
     <class name="com.ylink.cim.sys.domain.Timer" table="TIMER" >
-        <id name="id" type="java.lang.Long">
+        <id name="id" type="java.lang.String">
             <column name="ID" precision="12" scale="0" />
-            <generator class="native"/>
+            <generator class="assigned" />
         </id>
-        
         <property name="beanName" type="java.lang.String">
             <column name="BEAN_NAME" length="20" not-null="true" />
         </property>

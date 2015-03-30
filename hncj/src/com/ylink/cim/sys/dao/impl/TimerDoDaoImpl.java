@@ -2,6 +2,7 @@ package com.ylink.cim.sys.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.sys.dao.TimerDoDao;
@@ -9,6 +10,8 @@ import com.ylink.cim.sys.domain.TimerDo;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
+import flink.util.Pager;
+import flink.util.Paginater;
 
 @Component("timerDoDao")
 public class TimerDoDaoImpl extends BaseDaoHibernateImpl implements TimerDoDao {
@@ -32,5 +35,14 @@ public class TimerDoDaoImpl extends BaseDaoHibernateImpl implements TimerDoDao {
 		helper.append(" and ti.triggerTime <=? order by ti.triggerTime", sCurrentTime);
 		return getList(helper);
 	}
-	
+	public Paginater getPagerList(TimerDo timerDo, Pager pager) {
+		QueryHelper queryHelper = new QueryHelper();
+		queryHelper.append("from TimerDo t");
+		queryHelper.append("where 1=1 ");
+		queryHelper.append("and t.beanName like ?", timerDo.getBeanName(), MatchMode.ANYWHERE);
+		queryHelper.append("and t.beanNameCh like ?", timerDo.getBeanNameCh(), MatchMode.ANYWHERE);
+		queryHelper.append("and t.state = ?", timerDo.getState());
+		queryHelper.append("order by t.id desc");
+		return super.getPageData(queryHelper, pager);
+	}
 }
