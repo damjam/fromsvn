@@ -6,9 +6,9 @@
 <hibernate-mapping >
 
     <class name="com.ylink.cim.sys.domain.TimerDo" table="TIMER_DO">
-        <id name="id" type="java.lang.Long">
+        <id name="id" type="java.lang.String">
             <column name="id" precision="12" scale="0" />
-            <generator class="native"/>
+             <generator class="assigned" />
         </id>
         <property name="beanName" column="BEAN_NAME" type="string"  not-null="true" />
         <property name="beanNameCh" column="BEAN_NAME_CH" type="string"  not-null="true" />

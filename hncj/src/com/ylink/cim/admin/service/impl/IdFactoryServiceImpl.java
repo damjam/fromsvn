@@ -30,7 +30,7 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 			ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "不存在对的id: "+seqIdName);
 		}
 		if(StringUtils.isEmpty(idFactory.getInitValue())){
-			idFactory.setInitValue("1000");
+			idFactory.setInitValue("100000");
 			//ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "未设置初始值");
 		}
 		

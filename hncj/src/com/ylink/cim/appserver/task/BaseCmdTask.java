@@ -3,12 +3,12 @@ package com.ylink.cim.appserver.task;
 import org.apache.log4j.Logger;
 
 //定时或者其他命令继承自这个基类
-public class BaseCmdTask extends Thread {
+public abstract class BaseCmdTask extends Thread {
 	private Logger logger = Logger.getLogger(BaseCmdTask.class);
 	private String cmdName;
 
 	// 命令id 具体的线程要根据命令id，修改命令表的状态为成功或者失败
-	private Long cmdId;
+	private String cmdId;
 
 	public BaseCmdTask() {
 
@@ -22,7 +22,7 @@ public class BaseCmdTask extends Thread {
 		logger.debug("开始启动命令[" + cmdName + "]");
 	}
 
-	public Long getCmdId() {
+	public String getCmdId() {
 		return cmdId;
 	}
 
@@ -32,7 +32,7 @@ public class BaseCmdTask extends Thread {
 		doRun();
 	}
 
-	public void setCmdId(Long cmdId) {
+	public void setCmdId(String cmdId) {
 		this.cmdId = cmdId;
 	}
 

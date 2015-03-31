@@ -53,6 +53,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form styleId="timer" action="timer.do?action=query" method="post">
+		<div class="userbox">
 			<b class="b1"></b>
 			<b class="b2"></b>
 			<b class="b3"></b>
@@ -93,7 +94,7 @@
 			<b class="b2"></b>
 			<b class="b1"></b>
 			<!-- 数据列表区 -->
-
+		</div>
 			<div class="tablebox">
 				<table class="data_grid" width="100%" border="0" cellspacing="0"
 					cellpadding="0">

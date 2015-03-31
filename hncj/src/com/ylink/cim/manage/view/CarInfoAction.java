@@ -16,7 +16,6 @@ import org.apache.struts.action.ActionMapping;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarInfoDao;
-import com.ylink.cim.manage.dao.ParkingInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
 import com.ylink.cim.manage.service.CarInfoService;
 
@@ -29,7 +28,6 @@ public class CarInfoAction extends BaseDispatchAction {
 	private CarInfoDao carInfoDao = (CarInfoDao) getService("carInfoDao");
 	private CarInfoService carInfoService = (CarInfoService) getService("carInfoService");
 
-	private ParkingInfoDao parkingInfoDao = (ParkingInfoDao)getService("parkingInfoDao");
 	public ActionForward toEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);

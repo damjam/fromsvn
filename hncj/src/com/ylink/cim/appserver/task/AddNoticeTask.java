@@ -21,7 +21,7 @@ public class AddNoticeTask extends BaseCmdTask {
 	private TimerDoDao timerDoDao;
 	protected void doRun() {
 		super.doRun();
-		Long id = getCmdId();
+		String id = getCmdId();
 		try {
 			noticeMsgService.exeTimerDo(id);
 		} catch (Exception e) {

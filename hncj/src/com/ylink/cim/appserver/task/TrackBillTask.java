@@ -5,38 +5,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.busioper.service.PushMngService;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
-
-/**
- * 执行推送任务
- * 
- * @author libaozhu
- * @date 2013-5-5
- */
+import com.ylink.cim.busioper.service.BillTrackService;
 @Scope("prototype")
-@Component("exePushTask")
-public class ExePushTask extends BaseCmdTask {
+@Component("trackBillTask")
+public class TrackBillTask extends BaseCmdTask {
+
 	@Autowired
-	private PushMngService pushMngService;
-	@Autowired
-	private TimerDoService timerDoService;
+	private BillTrackService trackBillService;
 	@Autowired
 	private TimerDoDao timerDoDao;
+	@Autowired
+	private TimerDoService timerDoService;
 	protected void doRun() {
-		super.doRun();
 		String id = getCmdId();
 		try {
-			
-			pushMngService.exeSendMsgTask(id);
-			
+			trackBillService.exeTimerDo(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			TimerDo timerDo = timerDoDao.findById(id);
 			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE, StringUtils.abbreviate(e.getMessage(), 100));
 		}
-
 	}
 }

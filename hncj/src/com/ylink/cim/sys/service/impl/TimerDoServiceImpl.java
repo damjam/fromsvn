@@ -8,12 +8,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.sys.dao.TimerDao;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.Timer;
 import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
 
+import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.Pager;
 import flink.util.Paginater;
@@ -25,7 +27,8 @@ public class TimerDoServiceImpl implements TimerDoService{
 	private TimerDoDao timerDoDao;
 	@Autowired
 	private TimerDao timerDao;
-	
+	@Autowired
+	private IdFactoryService idFactoryService;
 	public boolean insertInitTask(String sTriggerDate) throws BizException {
 		try {
 			List lstResult = timerDoDao.getAllCommand(sTriggerDate);
@@ -40,7 +43,7 @@ public class TimerDoServiceImpl implements TimerDoService{
 		}
 		return true;
 	}
-	private void initTimerDo(String sTriggerDate) {
+	private void initTimerDo(String sTriggerDate) throws BizException{
 		List<Timer> timerList = timerDao.findAll();
 		if (CollectionUtils.isEmpty(timerList)) {
 			logger.info("定时任务为空，不需要生成(" + sTriggerDate + ")定时任务命令");
@@ -50,6 +53,7 @@ public class TimerDoServiceImpl implements TimerDoService{
 		for (int i = 0; i < timerList.size(); i++) {
 			Timer timer = timerList.get(i);
 			TimerDo timerdo = new TimerDo();
+			timerdo.setId(idFactoryService.generateId(Constants.TIMER_DO_ID));
 			timerdo.setBeanName(timer.getBeanName());
 			timerdo.setBeanNameCh(timer.getBeanNameCh());
 			timerdo.setTriggerDate(sTriggerDate);

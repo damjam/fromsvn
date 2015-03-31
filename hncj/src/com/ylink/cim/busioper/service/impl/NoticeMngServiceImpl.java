@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.busioper.dao.NoticeMsgDao;
 import com.ylink.cim.busioper.dao.NoticeMsgRecordDao;
 import com.ylink.cim.busioper.domain.NoticeMsg;
@@ -19,6 +20,8 @@ import com.ylink.cim.cust.domain.CustInfo;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 
+import flink.consant.Constants;
+import flink.etc.BizException;
 import flink.etc.Symbol;
 import flink.util.DateUtil;
 import flink.util.Pager;
@@ -34,8 +37,11 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 	private NoticeMsgRecordDao noticeMsgRecordDao;
 	@Autowired
 	private TimerDoDao timerDoDao;
-	private void addTimerDo(NoticeMsg noticeMsg) {
+	@Autowired
+	private IdFactoryService idFactoryService;
+	private void addTimerDo(NoticeMsg noticeMsg) throws BizException{
 		TimerDo timerDo = new TimerDo();
+		timerDo.setId(idFactoryService.generateId(Constants.TIMER_DO_ID));
 		timerDo.setBeanName("addNoticeTask");
 		timerDo.setBeanNameCh("添加系统消息");
 		timerDo.setPara1(Long.parseLong(noticeMsg.getId()));
@@ -45,7 +51,7 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 		timerDoDao.save(timerDo);
 	}
 
-	public void exeTimerDo(Long timerDoId) {
+	public void exeTimerDo(String timerDoId) {
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
 			return;
@@ -59,7 +65,7 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 		timerDoDao.update(timerDo);
 	}
 
-	public void saveNoticeMsg(NoticeMsg noticeMsg) {
+	public void saveNoticeMsg(NoticeMsg noticeMsg) throws BizException{
 		noticeMsg.setCreateTime(new Date());
 		noticeMsgDao.save(noticeMsg);
 		//添加到任务

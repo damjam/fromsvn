@@ -6,7 +6,7 @@ import flink.etc.BizException;
 
 public interface PushMngService {
 
-	void exeAddRecordTask(Long timerDoId) throws BizException;
-	void exeSendMsgTask(Long timerDoId) throws BizException; 
-	void addPushPlan(PushPlan pushPlan);
+	void exeAddRecordTask(String timerDoId) throws BizException;
+	void exeSendMsgTask(String timerDoId) throws BizException; 
+	void addPushPlan(PushPlan pushPlan) throws BizException;
 }
