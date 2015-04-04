@@ -17,7 +17,6 @@ import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.AccountDetail;
 import com.ylink.cim.manage.domain.ElecBill;
 import com.ylink.cim.manage.domain.HouseInfo;
-import com.ylink.cim.manage.domain.WaterBill;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
@@ -46,8 +45,8 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
 			public int compare(Object o1, Object o2) {
 				try {
-					WaterBill record1 = (WaterBill) o1;
-					WaterBill record2 = (WaterBill) o2;
+					ElecBill record1 = (ElecBill) o1;
+					ElecBill record2 = (ElecBill) o2;
 					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
 					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
 					if (!h1.getBuildingNo().equals(h2.getBuildingNo())) {

@@ -82,22 +82,20 @@
 								</td>
 							</tr>
 							<tr>
-								<td class="formlabel nes">
+								<td class="formlabel">
 									参数1
 								</td>
 								<td>
-									<html:text property="para1" styleId="para2" maxlength="20"
-										styleClass="{required:true}"></html:text>
+									<html:text property="para1" styleId="para1" maxlength="20"></html:text>
 									<span class="field_tipinfo">不能为空</span>
 								</td>
 							</tr>
 							<tr>
-								<td class="formlabel nes">
+								<td class="formlabel">
 									参数2
 								</td>
 								<td>
-									<html:text property="para2" styleId="para2" maxlength="20"
-										styleClass="{required:true}"></html:text>
+									<html:text property="para2" styleId="para2" maxlength="20"></html:text>
 									<span class="field_tipinfo">不能为空</span>
 								</td>
 							</tr>

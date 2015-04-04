@@ -74,7 +74,6 @@
 					</tr>
 				</table>
 			</div>
-			
 			<b class="b4"></b>
 			<b class="b3"></b>
 			<b class="b2"></b>

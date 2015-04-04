@@ -30,4 +30,5 @@ public interface BillService {
 	void saveIcDeposit(IcDeposit icDeposit, UserInfo userInfo) throws BizException;
 	void saveParkingBill(ParkingBill parkingBill, UserInfo userInfo) throws BizException;
 	void saveServiceBill(CommonServiceBill commomServiceBill, UserInfo userInfo) throws BizException;
+	void chargeElecFee(String id, UserInfo userInfo) throws BizException;
 }

@@ -6,17 +6,20 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.SysDictType;
+import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.ElecBillDao;
 import com.ylink.cim.manage.service.BillService;
 
 import flink.etc.BizException;
+import flink.util.LogUtils;
 import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 
@@ -28,8 +31,10 @@ public class ElecBillAction extends BaseDispatchAction {
 			HttpServletResponse response) throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.chargeWaterFee(id, getSessionUser(request));
+			billService.chargeElecFee(id, getSessionUser(request));
 			setResult(true, "操作成功", request);
+			String log = LogUtils.r("用户{?}收水费，单号{?}", getSessionUser(request).getUserName(), id);
+			logSuccess(request, UserLogType.OTHER.getValue(), StringUtils.abbreviate(log, 100));
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 		} catch (Exception e) {
@@ -66,6 +71,6 @@ public class ElecBillAction extends BaseDispatchAction {
 		buildingNos.putAll(economical);
 		buildingNos.putAll(rent);
 		request.setAttribute("buildingNos", buildingNos);
-		return forward("/pages/manage/charge/water/waterBillList.jsp");
+		return forward("/pages/manage/charge/elec/elecBillList.jsp");
 	}
 }

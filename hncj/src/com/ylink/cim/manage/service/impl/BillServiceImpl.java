@@ -20,6 +20,7 @@ import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
+import com.ylink.cim.manage.dao.ElecBillDao;
 import com.ylink.cim.manage.dao.GeneralBillDao;
 import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
@@ -30,6 +31,7 @@ import com.ylink.cim.manage.domain.AdrentBill;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
+import com.ylink.cim.manage.domain.ElecBill;
 import com.ylink.cim.manage.domain.GeneralBill;
 import com.ylink.cim.manage.domain.IcDeposit;
 import com.ylink.cim.manage.domain.OwnerInfo;
@@ -75,6 +77,8 @@ public class BillServiceImpl implements BillService {
 	private AdrentBillDao adRentBillDao;
 	@Autowired
 	private BillTrackService trackBillService;
+	@Autowired
+	private ElecBillDao elecBillDao;
 	public void chargeAdRent(String id, UserInfo userInfo) throws BizException {
 		AdrentBill bill = adRentBillDao.findByIdWithLock(id);
 		bill.setState(BillState.PAID.getValue());
@@ -308,5 +312,13 @@ public class BillServiceImpl implements BillService {
 		bill.setState(BillState.UNPAY.getValue());
 		bill.setBranchNo(userInfo.getBranchNo());
 		parkingBillDao.save(bill);
+	}
+
+	public void chargeElecFee(String id, UserInfo userInfo) throws BizException {
+		ElecBill bill = elecBillDao.findByIdWithLock(id);
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setChargeDate(DateUtil.getCurrent());
+		elecBillDao.update(bill);
 	}
 }
