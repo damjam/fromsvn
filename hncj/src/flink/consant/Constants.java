@@ -1,6 +1,5 @@
 package flink.consant;
 
-import com.gnete.bc.jce.provider.JDKDSASigner.stdDSA;
 
 public abstract class Constants {
 	// 用户全部权限点.
@@ -86,6 +85,8 @@ public abstract class Constants {
 	public static final String TIMER_ID = "TIMER_ID";
 	public static final String BILL_TRACK_ID = "BILL_TRACK_ID";
 	public static final String TIMER_DO_ID = "TIMER_DO_ID";
+	public static final String CHARGE_PARAM_ID = "CHARGE_PARAM_ID";
+	public static final String CHARGE_ITEM_ID = "CHARGE_ITEM_ID";
 	public static final String SYSUSER = "system";
 	public static final String[] RENT_BUILDINGS = { "" };
 	public static final String INNER_ACCTID = "00000000";
