@@ -39,7 +39,6 @@ public class ParkingInfoAction extends BaseDispatchAction {
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ParkingState.setInReq(request);
-		request.setAttribute("parkingStates", ParkingState.ALL.values());
 		return forward("/pages/manage/parking/parkingInfoAdd.jsp");
 	}
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,

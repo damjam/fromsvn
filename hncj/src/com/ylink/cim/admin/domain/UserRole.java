@@ -19,6 +19,28 @@ public class UserRole implements Serializable {
 	
 	private String userType;
 
+	
+	private String roleId;
+	
+
+	
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
+
+	public String[] getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	private String[] roleIds;
 	public UserRoleId getId() {
 		return id;
 	}

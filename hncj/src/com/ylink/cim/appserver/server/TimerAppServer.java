@@ -89,7 +89,6 @@ public class TimerAppServer implements IAppServer {
 			}
 			Thread.sleep(sleepTime);
 		}
-
 	}
 
 }

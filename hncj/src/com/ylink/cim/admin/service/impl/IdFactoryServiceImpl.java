@@ -23,9 +23,11 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 		this.idFactoryDao.deleteIdFactory(seqIdName);
 	}
 
-	public synchronized String generateId(String seqIdName) throws BizException {
+	public String generateId(String seqIdName) throws BizException {
 		
-		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName); 
+		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName);
+		idFactoryDao.lock(idFactory, LockMode.UPGRADE);
+		idFactoryDao.refresh(idFactory);
 		if(null==idFactory){
 			ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "不存在对的id: "+seqIdName);
 		}

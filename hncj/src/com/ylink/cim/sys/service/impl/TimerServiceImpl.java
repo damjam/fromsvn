@@ -29,7 +29,7 @@ public class TimerServiceImpl implements TimerService {
 	public void save(Timer timer, UserInfo userInfo) throws BizException {
 		timer.setId(idFactoryService.generateId(Constants.TIMER_ID));
 		timer.setCreateTime(DateUtil.getCurrent());
-		timer.setCreateUser(userInfo.getBranchNo());
+		timer.setCreateUser(userInfo.getUserName());
 		timer.setAuditTime(DateUtil.getCurrent());
 		timerDao.save(timer);
 	}

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,16 +42,21 @@ public class BillTrackServiceImpl implements BillTrackService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("state", BillTrackState.VALID.getValue());
 		List<BillTrack> list = billTrackDao.findList(params);
+		Date now = DateUtil.getCurrent();
 		for (int i = 0; i < list.size(); i++) {
 			BillTrack track = list.get(i);
 			billTrackDao.lock(track, LockMode.UPGRADE);
-			Integer leftDays = track.getLeftDays();
-			Integer overDays = track.getOverDays();
-			if (leftDays > 0) {
-				track.setLeftDays(leftDays-1);
+			String expireDate = track.getExpireDate();
+			if (StringUtils.isEmpty(expireDate)) {
+				continue;
 			}
-			if (overDays > 0) {
-				track.setOverDays(overDays+1);
+			int leftDays = DateUtil.getDateDiffDays(now, DateUtil.getDateByYYYMMDD(expireDate));
+			if (leftDays >= 0) {
+				track.setLeftDays(leftDays);
+				track.setOverDays(0);
+			}else {
+				track.setLeftDays(0);
+				track.setOverDays(-leftDays);
 			}
 			billTrackDao.update(track);
 			if (i % 100 == 0) {
