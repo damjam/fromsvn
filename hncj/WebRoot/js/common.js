@@ -357,11 +357,7 @@ function equalArray(array1, array2) {
 }
 
 function gotoUrl(url) {
-	if(url == '/'){
-		window.location.href= CONTEXT_PATH + url+'${cim}';
-	}else{
-		window.location.href= CONTEXT_PATH + url;
-	}
+	window.location.href= CONTEXT_PATH + url;
 }
 
 function isDisplay(domId) {

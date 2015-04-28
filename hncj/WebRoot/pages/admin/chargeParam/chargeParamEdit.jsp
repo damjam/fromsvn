@@ -22,9 +22,7 @@
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
+		
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -43,13 +41,46 @@
 // 				}
 		 	  	$("#txtNumLen").html(len);
 		 	}
-			
+			function getOwnerInfo(){
+				var houseSn = $('#houseSn').val();
+				if(houseSn == ''){
+					return;
+				}
+				var params = $('#houseSn').serialize();
+				$.ajax({
+					 type:'POST',
+				     url:CONTEXT_PATH + '/parkingBill.do?action=getOwnerName',
+				     async:true,
+				     dataType: "json",
+				     data:params,
+				     contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					 success:function(data) {
+				    	 if(data.error){
+				    		 alert(data.error);
+				    		 $('#houseSn').val('');
+				    		 return;
+				    	 }
+				    	 var ownerName = data.ownerName;
+				    	 var ownerCel = data.mobile;
+				    	 $('#ownerName').val(ownerName);
+				    	 $('#ownerCel').val(ownerCel);
+					 },
+					 error:function(data){   
+	                     alert("连接服务器失败");
+	                 }   
+				});
+			}
+			$().ready(function(){
+				var height = document.body.scrollHeight;
+				parent.adjustHeight(height, 1);
+			});
 		</script>
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="houseInfo.do?action=doAdd" styleId="houseInfoActionForm" method="post" styleClass="validate">
+	<html:form action="chargeParam.do?action=doEdit" styleId="chargeParamActionForm" method="post" styleClass="validate">
+		<html:hidden property="id" />
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -59,49 +90,30 @@
 				<div class="contentb">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
-					 
-					  <tr>
-						    <td class="formlabel nes">楼号</td>
-						    <td>
-						    	<html:select property="buildingNo" style="width:166px">
-									<html:options collection="buildingNos" property="key" labelProperty="value" />
-								</html:select>
-						    </td>
-					   </tr>
-					   <!-- 
 					   <tr>
-						    <td class="formlabel nes">单元</td>
+						    <td class="formlabel nes">适用范围</td>
 						    <td>
-						    	<html:select property="unitNo" style="width:166px">
-									<html:options collection="unitNos" property="key" labelProperty="value" />
-								</html:select>
-						    </td>
-					   </tr>
-					    -->
-					   <tr>
-						    <td class="formlabel nes">房间</td>
-						    <td>
-						    	<html:text property="position" styleId="position" maxlength="4" styleClass="{required:true,digit:true,minlength:3}"></html:text>
-						    	<span class="field_tipinfo">请输入正确的房间号</span>
+						    	<html:select property="rangeCode">
+						    		<html:options collection="paramRanges" property="value" labelProperty="name" />
+						    	</html:select>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">面积</td>
+					   	   <td class="formlabel nes">计费对象</td>
 						    <td>
-						    	<html:text property="area" styleId="area" maxlength="6" styleClass="{required:true,num:true}"></html:text>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
-						    </td>
+						    	<html:text property="chargeObj" styleId="chargeObj" maxlength="25"></html:text>
+						    </td>		
 					   </tr>
 					   <tr>
-						    <td class="formlabel">交房日期</td>
+					   		<td class="formlabel">备注</td>
 						    <td>
-						    	<html:text property="deliveryDate" styleId="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"></html:text>
+						    	<html:text property="remark" styleId="remark" maxlength="25"></html:text>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/houseInfo.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/chargeParam.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

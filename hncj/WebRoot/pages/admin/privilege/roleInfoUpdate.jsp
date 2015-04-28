@@ -46,7 +46,7 @@
 					$('#limitTree').show().html(LOAD_IMAGE).load(CONTEXT_PATH + '/roleInfoAction.do?action=loadTree&limitGroupId='+limitGroupId, function() {
 						SysStyle.setDataGridStyle();
 					});
-				})
+				});
 			});
 		 
 		</script>

@@ -46,6 +46,10 @@
 			FormUtils.reset();
 		});
 	});
+	$().ready(function(){
+		var height = document.body.scrollHeight;
+		parent.adjustHeight(height, 0);
+	});
 </script>
 	</head>
 

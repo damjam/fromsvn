@@ -30,7 +30,12 @@
 		<style type="text/css">
 
 </style>
-
+	<script type="">
+		$().ready(function(){
+		    var height = document.body.scrollHeight;
+		    parent.adjustHeight(height, 1);
+	    });
+	</script>
 
 	</head>
 

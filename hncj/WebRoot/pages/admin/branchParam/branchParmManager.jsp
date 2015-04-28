@@ -34,9 +34,9 @@
 				FormUtils.reset("query");
 			}
 		
-		   function addSysParm(){
-			   gotoUrl('/sysParmManage.do?action=toAdd');
-		   		//window.location.href="pages/admin/sysRunManager/sysParmAdd.jsp";
+		   function addbranchParm(){
+			   gotoUrl('/branchParmManage.do?action=toAdd');
+		   		//window.location.href="pages/admin/branchRunManager/branchParmAdd.jsp";
 		   }
 		   
 		   function check(){
@@ -52,8 +52,8 @@
 		   }
 		   
 		   // 重新加载系统参数.
-			function reloadSysParm() {
-				$.post(CONTEXT_PATH + '/sysParmManage.do?action=reload', function(data) {
+			function reloadbranchParm() {
+				$.post(CONTEXT_PATH + '/branchParmManage.do?action=reload', function(data) {
 					if (data.indexOf('重新加载系统参数') > -1) {
 						alert(data);
 					}
@@ -67,7 +67,7 @@
 				   return;
 			   }
 			   $(':button').attr('disabled', true);
-			   $.post(CONTEXT_PATH + '/sysParmManage.do?action=backupData', function(data) {
+			   $.post(CONTEXT_PATH + '/branchParmManage.do?action=backupData', function(data) {
 				   /* 
 				   if(data != null){
 				    	var jsonObj = eval('(' + data + ')');
@@ -90,7 +90,7 @@
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<f:msg/>
 <!-- 查询功能区 -->
-	<form id="query" action="sysParmManage.do?action=query" method="post" >
+	<form id="query" action="branchParmManage.do?action=query" method="post" >
 		<div class="userbox">
 		<div>
 		<b class="b1"></b>
@@ -113,8 +113,8 @@
 		    <td colspan="5">
 		      <input type="submit" value="查询" id="input_btn2"   />&nbsp;&nbsp;
 		      <input onclick="clearData();"   type="button" value="重置"  />&nbsp;&nbsp;
-		   	  <input onclick="addSysParm();"  type="button" value="增加"   />&nbsp;&nbsp;
-			  <input onclick="reloadSysParm();"  type="button" value="重新加载"   />&nbsp;&nbsp;
+		   	  <input onclick="addbranchParm();"  type="button" value="新增"   />&nbsp;&nbsp;
+			  <input onclick="reloadbranchParm();"  type="button" value="重新加载"   />&nbsp;&nbsp;
 			  <!-- 
 			  <input onclick="backup1();"  type="button" value="备份数据库"   /> -->
 		    </td>
@@ -141,18 +141,18 @@
 				  </tr>
 				 </thead>
 				 <tbody>
-				  <logic:notEmpty name="sysParmList">
-				  	<logic:iterate name="sysParmList" id="sysPram">
+				  <logic:notEmpty name="branchParmList">
+				  	<logic:iterate name="branchParmList" id="branchPram">
 					  <tr align="center">
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="code" /></td>
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="parname" /></td>
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="parvalue" /></td>
-						<td nowrap="nowrap"><bean:write name="sysPram" property="remark" /></td>
+					    <td nowrap="nowrap"><bean:write name="branchPram" property="code" /></td>
+					    <td nowrap="nowrap"><bean:write name="branchPram" property="parname" /></td>
+					    <td nowrap="nowrap"><bean:write name="branchPram" property="parvalue" /></td>
+						<td nowrap="nowrap"><bean:write name="branchPram" property="remark" /></td>
 					    <td nowrap="nowrap">
 						    <span class="redlink">
-						   		 <a href="sysParmManage.do?action=update&code=${sysPram.code}">修改</a>
+						   		 <a href="branchParmManage.do?action=update&code=${branchPram.code}">修改</a>
 						   		 <!-- 
-						   		 <a onclick="return confirm('你确认要删除吗?');" href="sysParmManage.do?action=delete&code=${sysPram.code }" >删除</a>
+						   		 <a onclick="return confirm('你确认要删除吗?');" href="branchParmManage.do?action=delete&code=${branchPram.code }" >删除</a>
 						   		 -->
 						    </span>
 					    </td>

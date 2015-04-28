@@ -31,13 +31,6 @@
 		<f:js src="/js/plugin/ui.core.js" />
 		<f:js src="/js/plugin/ui.tabs.js" />
 		
-		<style type="text/css">
-		
-		<style type="text/css">
-		<!--
-			html { overflow-y: auto; }
-		-->
-		</style>
 		<script type="text/javascript">
 			$(function() {
 				$('#tabs').tabs();
@@ -45,23 +38,24 @@
 				//初始化
 				ifrm = document.getElementById('frame0');
 				if(!ifrm.src){
-		    		ifrm.src=CONTEXT_PATH+"/timer.do?action=query";
+		    		ifrm.src=CONTEXT_PATH+"/chargeItem.do?action=list";
 		    	}
 		    	
 				$('#tabs').bind('tabsselect', function(event, ui) {   
 				    if (ui.index==0){	
 				    	ifrm = document.getElementById('frame0');
-						ifrm.src=CONTEXT_PATH+"/timer.do?action=query";
+						ifrm.src=CONTEXT_PATH+"/chargeItem.do?action=list";
 	                }   
 				    if (ui.index==1){	
 				    	ifrm = document.getElementById('frame1');
-						ifrm.src=CONTEXT_PATH+"/timerDo.do?action=list";
+						ifrm.src=CONTEXT_PATH+"/chargeParam.do?action=list";
 	                }  
 				});  
 		});
 			
 			function adjustHeight(height, num){
 				$('#frame'+num).height(height);
+				$('#tabs'+num).height(height+30);
 			}
 		</script>
 	</head>
@@ -72,10 +66,10 @@
 		<div id="tabs" style="width: 98%;">
 			<ul>
 				<li>
-					<a id="t0" href="#tabs-0">定时计划管理</a>
+					<a id="t0" href="#tabs-0">计费项管理</a>
 				</li>
 				<li>
-					<a id="t1" href="#tabs-1">定时执行查询</a>
+					<a id="t1" href="#tabs-1">计费参数管理</a>
 				</li>
 			</ul>
 			<div id="tabs-0" >
