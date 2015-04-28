@@ -18,10 +18,13 @@
 		<form-bean name="sysDictActionForm" type="com.ylink.cim.admin.view.SysDictActionForm"></form-bean>
 		<form-bean name="sysParmForm"
 			type="com.ylink.cim.admin.view.SysParmManageActionForm"></form-bean>
+		<form-bean name="branchParmForm"
+			type="com.ylink.cim.admin.view.BranchParmManageActionForm"></form-bean>
 		<form-bean name="userLog" type="com.ylink.cim.admin.view.UserLogActionForm"></form-bean>
 		<form-bean name="sysLog" type="com.ylink.cim.admin.view.SysLogActionForm"></form-bean>
 		<form-bean name="timerActionForm" type="com.ylink.cim.sys.view.TimerActionForm"></form-bean>
 		<form-bean name="timerDoActionForm" type="com.ylink.cim.sys.view.TimerDoActionForm"></form-bean>
+	
 	</form-beans>
 	<action-mappings>
 		<action path="/limitGroupInfoAction" name="limitGroupInfoActionForm"
@@ -70,6 +73,13 @@
 			<forward name="list" path="/pages/admin/sysRunManager/sysParmManager.jsp"></forward>
 			<forward name="save" path="/pages/admin/sysRunManager/sysParmAdd.jsp"></forward>
 			<forward name="modify" path="/pages/admin/sysRunManager/sysParmModify.jsp"></forward>
+		</action>
+		<action path="/branchParmManage" name="branchParmForm"
+			type="com.ylink.cim.admin.view.BranchParmManageAction" parameter="action"
+			scope="request">
+			<forward name="list" path="/pages/admin/branchParam/branchParmManager.jsp"></forward>
+			<forward name="save" path="/pages/admin/branchParam/branchParmAdd.jsp"></forward>
+			<forward name="modify" path="/pages/admin/branchParam/branchParmModify.jsp"></forward>
 		</action>
 		<action path="/userLog" type="com.ylink.cim.admin.view.UserLogAction"
 			name="userLog" parameter="action" scope="request" validate="true">
