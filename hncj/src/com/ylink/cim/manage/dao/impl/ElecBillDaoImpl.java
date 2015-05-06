@@ -23,9 +23,10 @@ import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
+
 @Repository("elecBillDao")
-public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao{
-	public Paginater findBillPager(Map<String, Object> params, Pager pager){
+public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao {
+	public Paginater findBillPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecBill t where 1=1");
 		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
@@ -42,7 +43,8 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
-			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
+			HouseInfoDao houseInfoDao = (HouseInfoDao) SpringContext.getService("houseInfoDao");
+
 			public int compare(Object o1, Object o2) {
 				try {
 					ElecBill record1 = (ElecBill) o1;
@@ -62,7 +64,7 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 				} catch (Exception e) {
 					return 0;
 				}
-				
+
 			}
 		});
 		return paginater;
@@ -72,7 +74,7 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and createDate <= ?", String.valueOf(yearInt + 1));
 		}
 	}
 
@@ -85,7 +87,7 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
-		helper.append("and state in ?", (String[])params.get("states"));
+		helper.append("and state in ?", (String[]) params.get("states"));
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		}
@@ -102,7 +104,7 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
-		//helper.append("and state = ?", MapUtils.getString(params, "state"));
+		// helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
@@ -121,9 +123,9 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		Double unpayAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
-			String state = (String)map.get("state");
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
+			String state = (String) map.get("state");
+			Long cnt = (Long) map.get("cnt");
+			Double sumAmt = (Double) map.get("sumAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -133,13 +135,13 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 			if (BillState.PAID.getValue().equals(state)) {
 				paidCnt = cnt;
 				paidAmt = sumAmt;
-			}else if (BillState.PART_PAID.getValue().equals(state)) {
+			} else if (BillState.PART_PAID.getValue().equals(state)) {
 				partPaidCnt = cnt;
 				partPaidAmt = sumAmt;
-			}else if (BillState.UNPAY.getValue().equals(state)) {
+			} else if (BillState.UNPAY.getValue().equals(state)) {
 				unpayCnt = cnt;
 				unpayAmt = sumAmt;
-			}else if (BillState.REVERSE.getValue().equals(state)) {
+			} else if (BillState.REVERSE.getValue().equals(state)) {
 				continue;
 			}
 			totalCnt += cnt;
@@ -166,12 +168,7 @@ public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao
 		QueryHelper helper = new QueryHelper();
 		helper.append("from AccountDetail t where t.acctNo=? ", id);
 		helper.append("order by t.id desc");
-		return (AccountDetail)super.getList(helper).get(0);
+		return (AccountDetail) super.getList(helper).get(0);
 	}
 
-	
-
-	
-	
-	
 }

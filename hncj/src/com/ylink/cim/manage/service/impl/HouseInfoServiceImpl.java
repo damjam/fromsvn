@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.RecordState;
@@ -26,7 +27,6 @@ import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.domain.WaterRecord;
 import com.ylink.cim.manage.service.HouseInfoService;
-import com.ylink.cim.user.domain.UserInfo;
 import com.ylink.cim.util.OrderSnGenerator;
 
 import flink.consant.Constants;

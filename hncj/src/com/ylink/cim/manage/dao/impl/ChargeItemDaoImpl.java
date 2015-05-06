@@ -15,19 +15,9 @@ import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Component("chargeItemDao")
 public class ChargeItemDaoImpl extends BaseDaoHibernateImpl implements ChargeItemDao {
-
-	public Paginater findPager(Map<String, Object> params, Pager pager) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("from ChargeItem where 1=1");
-		helper.append("and way = ?", MapUtils.getString(params, "way"));
-		helper.append("and item = ?", MapUtils.getString(params, "item"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
-		return super.getPageData(helper, pager);
-	}
 
 	public List<ChargeItem> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
@@ -42,18 +32,29 @@ public class ChargeItemDaoImpl extends BaseDaoHibernateImpl implements ChargeIte
 		return super.getList(helper);
 	}
 
+	public List<Long> findItemNum(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("select count(id) from ChargeItem where 1=1");
+		helper.append("and id in ?", (String[]) params.get("ids"));
+		helper.append("group by item");
+		return super.getList(helper);
+	}
+
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from ChargeItem where 1=1");
+		helper.append("and way = ?", MapUtils.getString(params, "way"));
+		helper.append("and item = ?", MapUtils.getString(params, "item"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		return super.getPageData(helper, pager);
+	}
+
 	@Override
 	protected Class getModelClass() {
 		// TODO Auto-generated method stub
 		return ChargeItem.class;
-	}
-
-	public List<Long> findItemNum(Map<String, Object> params) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("select count(id) from ChargeItem where 1=1");
-		helper.append("and id in ?", (String[])params.get("ids"));
-		helper.append("group by item");
-		return super.getList(helper);
 	}
 
 }

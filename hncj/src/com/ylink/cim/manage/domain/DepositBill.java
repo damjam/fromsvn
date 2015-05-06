@@ -11,6 +11,10 @@ public class DepositBill implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String houseSn;
 	private Double amount;
@@ -25,7 +29,86 @@ public class DepositBill implements java.io.Serializable {
 	private String payerName;
 	private String remark;
 	private String branchNo;
+	private String startDepositDate;
+	private String endDepositDate;
+	private String startRefundDate;
+	private String endRefundDate;
+	private String isInternal;
+	private String year;
 	
+	
+	public String getStartDepositDate() {
+		return startDepositDate;
+	}
+
+
+
+	public void setStartDepositDate(String startDepositDate) {
+		this.startDepositDate = startDepositDate;
+	}
+
+
+
+	public String getEndDepositDate() {
+		return endDepositDate;
+	}
+
+
+
+	public void setEndDepositDate(String endDepositDate) {
+		this.endDepositDate = endDepositDate;
+	}
+
+
+
+	public String getStartRefundDate() {
+		return startRefundDate;
+	}
+
+
+
+	public void setStartRefundDate(String startRefundDate) {
+		this.startRefundDate = startRefundDate;
+	}
+
+
+
+	public String getEndRefundDate() {
+		return endRefundDate;
+	}
+
+
+
+	public void setEndRefundDate(String endRefundDate) {
+		this.endRefundDate = endRefundDate;
+	}
+
+
+
+	public String getIsInternal() {
+		return isInternal;
+	}
+
+
+
+	public void setIsInternal(String isInternal) {
+		this.isInternal = isInternal;
+	}
+
+
+
+	public String getYear() {
+		return year;
+	}
+
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}

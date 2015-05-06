@@ -17,11 +17,6 @@ import flink.util.Paginater;
 @Repository("contactDao")
 public class ContactDaoImpl extends BaseDaoHibernateImpl implements ContactDao {
 
-	@Override
-	protected Class getModelClass() {
-		return Contact.class;
-	}
-
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Contact t where 1=1");
@@ -34,6 +29,11 @@ public class ContactDaoImpl extends BaseDaoHibernateImpl implements ContactDao {
 		helper.append("and mobile like ?", MapUtils.getString(params, "mobile"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
+	}
+
+	@Override
+	protected Class getModelClass() {
+		return Contact.class;
 	}
 
 	

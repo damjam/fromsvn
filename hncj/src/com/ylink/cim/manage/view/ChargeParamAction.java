@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.type.ChargeType;
 import com.ylink.cim.common.type.ChargeWay;
 import com.ylink.cim.common.type.ParamRange;
@@ -26,90 +26,102 @@ import com.ylink.cim.manage.service.ChargeParamService;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
+
 /**
  * 计费参数管理
+ * 
  * @author libaozhu
  * @date 2015-4-15
  */
-public class ChargeParamAction extends BaseDispatchAction {
-	private ChargeParamDao chargeParamDao = (ChargeParamDao) getService("chargeParamDao");
-	private ChargeParamService chargeParamService = (ChargeParamService) getService("chargeParamService");
-	private ChargeParamItemDao chargeParamItemDao = (ChargeParamItemDao)getService("chargeParamItemDao");
-	private ChargeItemDao chargeItemDao = (ChargeItemDao)getService("chargeItemDao");
-	public ActionForward toChargeParamMng(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/admin/chargeParam/chargeParamManager.jsp");
+@Scope("prototype")
+@Component
+public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeParam> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private ChargeParamDao chargeParamDao;
+	@Autowired
+	private ChargeParamService chargeParamService;
+	@Autowired
+	private ChargeParamItemDao chargeParamItemDao;
+	@Autowired
+	private ChargeItemDao chargeItemDao;
+
+	public String toChargeParamMng() throws Exception {
+
+		// return forward("/pages/admin/chargeParam/chargeParamManager.jsp");
+		return "manager";
 	}
-	
-	public ActionForward toEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ChargeParamActionForm actionForm = (ChargeParamActionForm)form;
-		String id = actionForm.getId();
+
+	public String toEdit() throws Exception {
+
+		String id = model.getId();
 		ChargeParam chargeParam = chargeParamDao.findById(id);
-		BeanUtils.copyProperties(actionForm, chargeParam);
+		BeanUtils.copyProperties(model, chargeParam);
 		initSelect(request);
-		return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
+		// return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
+		return "edit";
 	}
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String toAdd() throws Exception {
 		initSelect(request);
-		return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
+		// return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
+		return "edit";
 	}
-	
+
 	private void initSelect(HttpServletRequest request) {
 		ChargeWay.setInReq(request);
 		ChargeType.setInReq(request);
 		ParamRange.setInReq(request);
 	}
 
-	public ActionForward doEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doEdit() throws Exception {
 		try {
-			ChargeParamActionForm actionForm = (ChargeParamActionForm) form;
-			//Map<String, Object> params = getParaMap();
-			//params.put("branchNo", getSessionBranchNo(request));
-			//Assert.isEmpty(chargeParamDao.findBy(params), "计费参数已存在，请重新指定");
+
+			// Map<String, Object> params = getParaMap();
+			// params.put("branchNo", getSessionBranchNo(request));
+			// Assert.isEmpty(chargeParamDao.findBy(params), "计费参数已存在，请重新指定");
 			ChargeParam chargeParam = null;
 			Map<String, Object> params = getParaMap();
 			params.put("branchNo", getSessionBranchNo(request));
-			params.put("chargeObj", actionForm.getChargeObj());
-			if (StringUtils.isEmpty(actionForm.getId())) {
+			params.put("chargeObj", model.getChargeObj());
+			if (StringUtils.isEmpty(model.getId())) {
 				List<ChargeParam> list = chargeParamDao.findBy(params);
 				Assert.isEmpty(list, "计费对象已存在，请重新指定");
 				chargeParam = new ChargeParam();
-				BeanUtils.copyProperties(chargeParam, actionForm);
+				BeanUtils.copyProperties(chargeParam, model);
 				chargeParamService.saveParam(chargeParam, getSessionUser(request));
-			}else {
-				params.put("exceptId", actionForm.getId());
+			} else {
+				params.put("exceptId", model.getId());
 				List<ChargeParam> list = chargeParamDao.findBy(params);
 				Assert.isEmpty(list, "计费对象已存在，请重新指定");
-				chargeParam = chargeParamDao.findById(actionForm.getId());
+				chargeParam = chargeParamDao.findById(model.getId());
 				String branchNo = chargeParam.getBranchNo();
-				BeanUtils.copyProperties(chargeParam, actionForm);
+				BeanUtils.copyProperties(chargeParam, model);
 				chargeParam.setBranchNo(branchNo);
 				chargeParamService.updateParam(chargeParam, getSessionUser(request));
 			}
 			setResult(true, "操作成功", request);
-			clearForm(actionForm);
-		}catch (BizException e) {
+			// clearForm(model);
+		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
-			return list(mapping, form, request, response);
+			return list();
 		} catch (Exception e) {
 			setResult(false, "操作失败", request);
 			e.printStackTrace();
-			return list(mapping, form, request, response);
+			return list();
 		}
-		
-		return list(mapping, form, request, response);
+
+		return list();
 	}
-	
-	public ActionForward toAddItem(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String toAddItem() throws Exception {
 		Map<String, Object> map = getParaMap();
-		ChargeParamActionForm actionForm = (ChargeParamActionForm) form;
-		String id = actionForm.getId();
+
+		String id = model.getId();
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = chargeItemDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
@@ -120,37 +132,33 @@ public class ChargeParamAction extends BaseDispatchAction {
 			ChargeParamItem cpi = list.get(i);
 			itemIds[i] = cpi.getId().getItemId();
 		}
-		actionForm.setItemIds(itemIds);
-		return forward("/pages/admin/chargeParam/chargeParamItemAdd.jsp");
+		model.setItemIds(itemIds);
+		// return forward("/pages/admin/chargeParam/chargeParamItemAdd.jsp");
+		return "add";
 	}
-	public ActionForward doAddItem(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ChargeParamActionForm actionForm = (ChargeParamActionForm) form;
-		String id = actionForm.getId();
-		String[] itemIds = actionForm.getItemIds();
+
+	public String doAddItem() throws Exception {
+		String id = model.getId();
+		String[] itemIds = model.getItemIds();
 		try {
 			chargeParamService.saveParamItem(id, itemIds, getSessionUser(request));
 			setResult(true, "操作成功", request);
-			return list(mapping, actionForm, request, response);
+			// return list(mapping, model, request, response);
+			return "list";
 		} catch (Exception e) {
 			setResult(false, e.getMessage(), request);
-			return toAddItem(mapping, form, request, response);
+			return toAddItem();
 		}
 	}
-	
-	private void clearForm(ChargeParamActionForm actionForm) {
-		actionForm.setRangeCode("");
-	}
 
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ChargeParamActionForm actionForm = (ChargeParamActionForm)form;
+	public String list() throws Exception {
+
 		Map<String, Object> map = getParaMap();
 		map.put("branchNo", getSessionBranchNo(request));
-		map.put("rangeCode", actionForm.getRangeCode());
+		map.put("rangeCode", model.getRangeCode());
 		Paginater paginater = chargeParamDao.findPager(map, getPager(request));
 		for (int i = 0; i < paginater.getList().size(); i++) {
-			ChargeParam chargeParam = (ChargeParam)paginater.getList().get(i);
+			ChargeParam chargeParam = (ChargeParam) paginater.getList().get(i);
 			map.put("paramId", chargeParam.getId());
 			List<ChargeParamItem> paramItems = chargeParamItemDao.findBy(map);
 			StringBuilder builder = new StringBuilder();
@@ -159,7 +167,7 @@ public class ChargeParamAction extends BaseDispatchAction {
 				String itemId = paramItem.getId().getItemId();
 				ChargeItem item = chargeItemDao.findById(itemId);
 				builder.append(item.getItemName());
-				if (j != paramItems.size()-1) {
+				if (j != paramItems.size() - 1) {
 					builder.append(",");
 				}
 			}
@@ -167,12 +175,11 @@ public class ChargeParamAction extends BaseDispatchAction {
 		}
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		return forward("/pages/admin/chargeParam/chargeParamList.jsp");
+		// return forward("/pages/admin/chargeParam/chargeParamList.jsp");
+		return "list";
 	}
 
-	
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			chargeParamService.deleteParam(id, getSessionUser(request));
@@ -184,8 +191,13 @@ public class ChargeParamAction extends BaseDispatchAction {
 			e.printStackTrace();
 			setResult(false, "操作失败", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
+	public ChargeParam getModel() {
+		return model;
+	}
+
+	private ChargeParam model = new ChargeParam();
 
 }

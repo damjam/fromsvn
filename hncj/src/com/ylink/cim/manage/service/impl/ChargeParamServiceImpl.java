@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.type.ChargeType;
 import com.ylink.cim.common.type.ChargeWay;
@@ -19,7 +20,6 @@ import com.ylink.cim.manage.domain.ChargeParam;
 import com.ylink.cim.manage.domain.ChargeParamItem;
 import com.ylink.cim.manage.domain.ChargeParamItemId;
 import com.ylink.cim.manage.service.ChargeParamService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
@@ -34,18 +34,26 @@ public class ChargeParamServiceImpl implements ChargeParamService {
 	private ChargeParamItemDao chargeParamItemDao;
 	@Autowired
 	private IdFactoryService idFactoryService;
-	public void saveParam(ChargeParam chargeParam, UserInfo userInfo) throws BizException {
-		String id = idFactoryService.generateId(Constants.CHARGE_PARAM_ID);
-		chargeParam.setId(id);
-		chargeParam.setBranchNo(userInfo.getBranchNo());
-		chargeParam.setCreateDate(DateUtil.getCurrent());
-		chargeParam.setCreateUser(userInfo.getUserName());
-		chargeItemDao.save(chargeParam);
+	public void deleteItem(String id, UserInfo sessionUser) throws BizException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("itemId", id);
+		List<ChargeParamItem> list = chargeParamItemDao.findBy(params);
+		if (list.size() > 0) {
+			throw new BizException("计费项正在使用，无法删除");
+		}
+		chargeItemDao.deleteById(id);
 	}
 
-	public void updateParam(ChargeParam chargeParam, UserInfo userInfo) throws BizException {
-		chargeParamDao.update(chargeParam);
+	public void deleteParam(String id, UserInfo sessionUser) throws BizException {
+		chargeParamDao.deleteById(id);
+		chargeParamItemDao.deleteByParamId(id);
 	}
+
+	public void deleteParamItem(String id, UserInfo sessionUser) throws BizException {
+		chargeParamItemDao.deleteById(id);
+		
+	}
+
 
 	public void saveOrUpdateItem(ChargeItem chargeItem, UserInfo userInfo) throws BizException {
 		String id = chargeItem.getId();
@@ -83,6 +91,14 @@ public class ChargeParamServiceImpl implements ChargeParamService {
 		chargeItemDao.saveOrUpdate(chargeItem);
 	}
 
+	public void saveParam(ChargeParam chargeParam, UserInfo userInfo) throws BizException {
+		String id = idFactoryService.generateId(Constants.CHARGE_PARAM_ID);
+		chargeParam.setId(id);
+		chargeParam.setBranchNo(userInfo.getBranchNo());
+		chargeParam.setCreateDate(DateUtil.getCurrent());
+		chargeParam.setCreateUser(userInfo.getUserName());
+		chargeItemDao.save(chargeParam);
+	}
 
 	public void saveParamItem(String id, String[] itemIds, UserInfo userInfo) throws BizException {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -104,24 +120,8 @@ public class ChargeParamServiceImpl implements ChargeParamService {
 		}
 	}
 
-	public void deleteParam(String id, UserInfo sessionUser) throws BizException {
-		chargeParamDao.deleteById(id);
-		chargeParamItemDao.deleteByParamId(id);
-	}
-
-	public void deleteItem(String id, UserInfo sessionUser) throws BizException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("itemId", id);
-		List<ChargeParamItem> list = chargeParamItemDao.findBy(params);
-		if (list.size() > 0) {
-			throw new BizException("计费项正在使用，无法删除");
-		}
-		chargeItemDao.deleteById(id);
-	}
-
-	public void deleteParamItem(String id, UserInfo sessionUser) throws BizException {
-		chargeParamItemDao.deleteById(id);
-		
+	public void updateParam(ChargeParam chargeParam, UserInfo userInfo) throws BizException {
+		chargeParamDao.update(chargeParam);
 	}
 
 }

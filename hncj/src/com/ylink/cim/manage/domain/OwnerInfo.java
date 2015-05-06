@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.domain;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -36,7 +37,26 @@ public class OwnerInfo implements java.io.Serializable {
 	private String hasAcct;
 	private Double area;
 	private String branchNo;
+	private String fileName;
+	private File file;
 	
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public String getBranchNo() {
 		return branchNo;
 	}

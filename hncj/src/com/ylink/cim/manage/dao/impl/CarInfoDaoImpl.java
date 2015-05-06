@@ -15,12 +15,17 @@ import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("carInfoDao")
 public class CarInfoDaoImpl extends BaseDaoHibernateImpl implements CarInfoDao {
 
-	@Override
-	protected Class getModelClass() {
-		return CarInfo.class;
+	public List<CarInfo> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from CarInfo t where 1=1");
+		helper.append("and parkingSn = ?", MapUtils.getString(params, "parkingSn"));
+		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		return super.getList(helper);
 	}
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
@@ -39,15 +44,9 @@ public class CarInfoDaoImpl extends BaseDaoHibernateImpl implements CarInfoDao {
 		return super.getPageData(helper, pager);
 	}
 
-
-	public List<CarInfo> findList(Map<String, Object> params) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("from CarInfo t where 1=1");
-		helper.append("and parkingSn = ?", MapUtils.getString(params, "parkingSn"));
-		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		return super.getList(helper);
+	@Override
+	protected Class getModelClass() {
+		return CarInfo.class;
 	}
 
-	
 }

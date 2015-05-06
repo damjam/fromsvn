@@ -15,9 +15,10 @@ import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("houseInfoDao")
-public class HouseInfoDaoImpl extends BaseDaoHibernateImpl implements HouseInfoDao{
-	public Paginater findPager(Map<String, Object> params, Pager pager){
+public class HouseInfoDaoImpl extends BaseDaoHibernateImpl implements HouseInfoDao {
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from HouseInfo t where 1=1");
 		helper.append("and t.houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
@@ -35,5 +36,5 @@ public class HouseInfoDaoImpl extends BaseDaoHibernateImpl implements HouseInfoD
 	protected Class getModelClass() {
 		return HouseInfo.class;
 	}
-	
+
 }

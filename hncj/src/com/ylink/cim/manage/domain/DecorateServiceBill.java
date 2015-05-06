@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -28,20 +29,45 @@ public class DecorateServiceBill implements java.io.Serializable {
 	private Double supFee;
 	private String csBillId;
 	private String branchNo;
-	
+
+	private String startChargeDate;
+	private String endChargeDate;
+	private String year;
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getStartChargeDate() {
+		return startChargeDate;
+	}
+
+	public void setStartChargeDate(String startChargeDate) {
+		this.startChargeDate = startChargeDate;
+	}
+
+	public String getEndChargeDate() {
+		return endChargeDate;
+	}
+
+	public void setEndChargeDate(String endChargeDate) {
+		this.endChargeDate = endChargeDate;
+	}
+
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
-	
+
 	// Constructors
-	
-	
+
 	public String getCsBillId() {
 		return csBillId;
 	}
@@ -107,7 +133,6 @@ public class DecorateServiceBill implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
 	// Property accessors
 
 	public String getId() {
@@ -181,7 +206,5 @@ public class DecorateServiceBill implements java.io.Serializable {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-
-	
 
 }

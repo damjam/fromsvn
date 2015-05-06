@@ -3,17 +3,15 @@ package com.ylink.cim.manage.view;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
 import com.ylink.cim.common.type.YesNoType;
@@ -30,58 +28,70 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
-public class CommonServiceBillAction extends BaseDispatchAction {
-	private CommonServiceBillDao commonServiceBillDao = (CommonServiceBillDao)getService("commonServiceBillDao");
-	private BillService billService = (BillService)getService("billService");
-	private OwnerInfoDao ownerInfoDao = (OwnerInfoDao)getService("ownerInfoDao");
+@Scope("prototype")
+@Component
+public class CommonServiceBillAction extends BaseAction implements ModelDriven<CommonServiceBill> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private CommonServiceBillDao commonServiceBillDao;
+	@Autowired
+	private BillService billService;
+	@Autowired
+	private OwnerInfoDao ownerInfoDao;
 	Logger log = Logger.getLogger(CommonServiceBillAction.class);
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
 		CheckinState.setInReq(request);
-		return forward("/pages/manage/charge/common/commonServiceBillAdd.jsp");
+		// return
+		// forward("/pages/manage/charge/common/commonServiceBillAdd.jsp");
+		return "add";
 	}
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String doAdd() throws Exception {
 		try {
-			CommonServiceBillActionForm actionForm = (CommonServiceBillActionForm)form;
+
 			CommonServiceBill bill = new CommonServiceBill();
-			BeanUtils.copyProperties(bill, actionForm);
+			BeanUtils.copyProperties(bill, model);
 			billService.saveServiceBill(bill, getSessionUser(request));
 			setResult(true, "数据已保存", request);
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResult(false, "保存失败"+e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			setResult(false, "保存失败" + e.getMessage(), request);
+			return toAdd();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		CommonServiceBillActionForm actionForm = (CommonServiceBillActionForm)form;
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("startChargeDate", actionForm.getStartChargeDate());
-		map.put("endChargeDate", actionForm.getEndChargeDate());
-		map.put("state", actionForm.getState());
-		map.put("id", actionForm.getId());
-		map.put("year", actionForm.getYear());
+		map.put("houseSn", model.getHouseSn());
+		map.put("startChargeDate", model.getStartChargeDate());
+		map.put("endChargeDate", model.getEndChargeDate());
+		map.put("state", model.getState());
+		map.put("id", model.getId());
+		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = commonServiceBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = commonServiceBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		return forward("/pages/manage/charge/common/commonServiceBillList.jsp");
+		// return
+		// forward("/pages/manage/charge/common/commonServiceBillList.jsp");
+		return "list";
 	}
-	public ActionForward charge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String charge() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.chargeCommonFee(id, getSessionUser(request));
@@ -91,10 +101,10 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 		} catch (Exception e) {
 			setResult(false, "操作失败", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
-	public ActionForward deleteBill(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String deleteBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.deleteBill(CommonServiceBill.class, id, getSessionUser(request));
@@ -103,10 +113,10 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 			setResult(false, "删除失败", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
-	public ActionForward getHouseInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String getHouseInfo() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		String areaStr = "";
@@ -121,12 +131,12 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 				checkinState = ownerInfo.getCheckinState();
 			}
 			HouseInfo houseInfo = commonServiceBillDao.findById(HouseInfo.class, houseSn);
-			Assert.notNull(houseInfo, "编号为"+houseSn+"的房屋信息不存在!");
+			Assert.notNull(houseInfo, "编号为" + houseSn + "的房屋信息不存在!");
 			Double area = houseInfo.getArea();
 			areaStr = String.valueOf(area);
 			servicePrice = ParaManager.getServicePrice(Integer.parseInt(houseInfo.getFloor()));
 			lightPrice = ParaManager.getLightPrice(houseInfo.getBuildingNo());
-			//return null;
+			// return null;
 		} catch (Exception e) {
 			jsonObject.put("error", e.getMessage());
 			setResult(false, "失败", request);
@@ -142,8 +152,8 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 		respond(response, jsonObject.toString());
 		return null;
 	}
-	public ActionForward getAcctInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String getAcctInfo() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String endDateStr = "";
 		String serviceAmount = "";
@@ -154,17 +164,18 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 			String monthNumStr = request.getParameter("monthNum");
 			String servicePriceStr = request.getParameter("servicePrice");
 			String lightPrice = request.getParameter("lightPrice");
-			//String houseSn = request.getParameter("houseSn");
+			// String houseSn = request.getParameter("houseSn");
 			String areaStr = request.getParameter("area");
 			Double area = Double.parseDouble(areaStr);
-			//HouseInfo houseInfo = commonServiceBillDao.findById(HouseInfo.class, houseSn);
+			// HouseInfo houseInfo =
+			// commonServiceBillDao.findById(HouseInfo.class, houseSn);
 			Integer monthNum = Integer.parseInt(monthNumStr);
 			Date endDate = DateUtil.addMonths(DateUtil.getDateByYYYMMDD(startDate), monthNum);
 			endDate = DateUtil.addDays(endDate, -1);
 			endDateStr = DateUtil.getDateYYYYMMDD(endDate);
-			
+
 			serviceAmount = MoneyUtil.getFormatStr2(Double.parseDouble(servicePriceStr) * area * monthNum);
-			
+
 			lightAmount = MoneyUtil.getFormatStr2(Double.parseDouble(lightPrice) * monthNum);
 			totalAmount = MoneyUtil.getFormatStr2(Double.parseDouble(serviceAmount) + Double.parseDouble(lightAmount));
 		} catch (Exception e) {
@@ -179,5 +190,10 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 		respond(response, jsonObject.toString());
 		return null;
 	}
-	
+
+	public CommonServiceBill getModel() {
+		return model;
+	}
+
+	private CommonServiceBill model = new CommonServiceBill();
 }

@@ -3,141 +3,94 @@ package com.ylink.cim.sys.view;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.sys.dao.TimerDao;
 import com.ylink.cim.sys.domain.Timer;
 import com.ylink.cim.sys.service.TimerService;
 
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
-/**
- * 
- * 
- */
-public class TimerAction extends BaseDispatchAction {
-
-	TimerService timerService = (TimerService) getService("timerService");
-	TimerDao timerDao = (TimerDao)getService("timerDao");
-	public void clearData(TimerActionForm timerActionForm) {
-		timerActionForm.setId(null);
-		timerActionForm.setBeanName("");
-		timerActionForm.setBeanNameCh("");
-		timerActionForm.setRemark("");
-		timerActionForm.setState("");
-		timerActionForm.setPara1(null);
-		timerActionForm.setPara2(null);
-		timerActionForm.setTriggertime(null);
-		timerActionForm.setGroupno("");
-		timerActionForm.setCreateTime(null);
-		timerActionForm.setCreateUser("");
-		timerActionForm.setAuditTime(null);
-		timerActionForm.setAuditUser("");
-		timerActionForm.setNoPass("");
-
-	}
+@Scope("prototype")
+@Component
+public class TimerAction extends BaseAction implements ModelDriven<Timer> {
 
 	/**
 	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
 	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	TimerService timerService;
+	@Autowired
+	TimerDao timerDao;
+
+	public String delete() throws Exception {
 		try {
-			TimerActionForm actionForm = (TimerActionForm) form;
-			timerService.delete(actionForm.getId());
+			timerService.delete(model.getId());
 			setResult(true, "操作成功", request);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			setResult(false, e.getMessage(), request);
 		}
-		return query(mapping, form, request, response);
+		return query();
 	}
 
-	
-	/**
-	 * 查询
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward query(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		TimerActionForm actionForm = (TimerActionForm)form;
+	public String query() throws Exception {
 		Map<String, Object> params = getParaMap();
-		params.put("beanNameCh", actionForm.getBeanNameCh());
+		params.put("beanNameCh", model.getBeanNameCh());
 		Paginater paginater = timerDao.getTimerList(getPager(request), params);
 		saveQueryResult(request, paginater);
-		return forward("/pages/admin/sysRunManager/timerList.jsp");
+		return "list";
 	}
-	
 
-	/**
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public ActionForward toEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		TimerActionForm actionForm = (TimerActionForm) form;
-		if (!StringUtils.isEmpty(actionForm.getId())) {
-			Timer timer = timerDao.findById(actionForm.getId());
-			BeanUtils.copyProperties(actionForm, timer);
+	public String toEdit() throws Exception {
+		if (!StringUtils.isEmpty(model.getId())) {
+			Timer timer = timerDao.findById(model.getId());
+			BeanUtils.copyProperties(model, timer);
 		}
-		return forward("/pages/admin/sysRunManager/timerEdit.jsp");
+		return "edit";
 	}
-	public ActionForward toTimerMng(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/admin/sysRunManager/sysTimerManager.jsp");
+
+	public String toTimerMng() throws Exception {
+
+		return "timerManager";
 	}
-	
-	public ActionForward doEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+
+	public String doEdit() throws Exception {
 		try {
 			Timer timer = null;
-			TimerActionForm actionForm = (TimerActionForm) form;
-			if (StringUtils.isEmpty(actionForm.getId())) {
+			if (StringUtils.isEmpty(model.getId())) {
 				timer = new Timer();
-				BeanUtils.copyProperties(timer, actionForm);
+				BeanUtils.copyProperties(timer, model);
 				timerService.save(timer, getSessionUser(request));
-			}else {
-				timer = timerDao.findById(actionForm.getId());
+			} else {
+				timer = timerDao.findById(model.getId());
 				String createUser = timer.getCreateUser();
 				Date createTime = timer.getCreateTime();
-				BeanUtils.copyProperties(timer, actionForm);
+				BeanUtils.copyProperties(timer, model);
 				timer.setCreateTime(createTime);
 				timer.setCreateUser(createUser);
 				timerService.update(timer, getSessionUser(request));
 			}
 			setResult(true, "操作成功", request);
-			clearData(actionForm);
-			return query(mapping, actionForm, request, response);
+			model.setBeanName("");
+			model.setBeanNameCh("");
+			return query();
 		} catch (Exception e) {
 			setResult(false, "操作失败", request);
 			e.printStackTrace();
-			return forward("/pages/admin/sysRunManager/timerEdit.jsp");
+			return "edit";
 		}
 	}
-	
+
+	public Timer getModel() {
+		return model;
+	}
+
+	private Timer model = new Timer();
 }

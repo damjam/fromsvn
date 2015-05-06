@@ -25,8 +25,48 @@ public class WaterRecord implements java.io.Serializable {
 	private String checkUser;
 	private String recordMonth;
 	private String remark;
+	
+	//
+	private String startCreateDate;
+	private String endCreateDate;
+	private String fileName;
+	
 	// Constructors
 	
+	public String getFileName() {
+		return fileName;
+	}
+
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+
+
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
+
+
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+
+
+
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
+
 	private String branchNo;
 	
 	public String getBranchNo() {

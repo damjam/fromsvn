@@ -12,7 +12,10 @@ import flink.util.Paginater;
 public interface WaterRecordDao extends BaseDao {
 
 	public WaterRecord findPreRecord(String houseSn);
+
 	public List<WaterRecord> findPreRecords(Map<String, Object> params);
+
 	public List<WaterRecord> findRecords(Map<String, Object> params);
+
 	public Paginater findWaterRecordPager(Map<String, Object> params, Pager pager);
 }

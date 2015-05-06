@@ -1,18 +1,10 @@
 package com.ylink.cim.sys.view;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import flink.web.BaseAction;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+public class UnitTestAction extends BaseAction {
 
-import flink.util.SpringContext;
-
-public class UnitTestAction extends flink.web.BaseDispatchAction {
-
-	public ActionForward testService(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String testService() throws Exception {
 		try {
 //			BatchTradeService batchTradeService = (BatchTradeService)SpringContext.getService("batchTradeService");
 //			batchTradeService.autoAccept(153583L);
@@ -35,7 +27,8 @@ public class UnitTestAction extends flink.web.BaseDispatchAction {
 			setResult(false, "≥ˆœ÷“Ï≥£", request);
 			e.printStackTrace();
 		}
-		return forward("/pages/common/unitTest.jsp");
+		//"/pages/common/unitTest.jsp";
+		return "test";
 	}
 
 }

@@ -21,6 +21,7 @@ import flink.util.AmountUtils;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("accountJournalDao")
 public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements AccountJournalDao {
 
@@ -40,10 +41,10 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 			Date endDate = null;
 			if ("D".equals(gatherWay)) {
 				pattern = "yyyyMMdd";
-			}else if ("M".equals(gatherWay)) {
+			} else if ("M".equals(gatherWay)) {
 				pattern = "yyyyMM";
 
-			}else if ("Y".equals(gatherWay)) {
+			} else if ("Y".equals(gatherWay)) {
 				pattern = "yyyy";
 			}
 			Date beginDate = DateUtil.string2Date(gatherPeriod, pattern);
@@ -55,41 +56,21 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 		List<Map<String, Object>> sumList = super.getList(helper);
 		return sumList;
 		/*
-		Map<String, Object> sumInfo = new HashMap<String, Object>();
-		Long totalCnt = 0L;
-		Double totalAmt = 0d;
-		Long inCnt = 0L;
-		Double inAmt = 0d;
-		Long outCnt = 0L;
-		Double outAmt = 0d;
-		for (int i = 0; i < sumList.size(); i++) {
-			Map<String, Object> map = sumList.get(i);
-			String inoutType = (String)map.get("inoutType");
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
-			if (cnt == null) {
-				cnt = 0L;
-			}
-			if (sumAmt == null) {
-				sumAmt = 0d;
-			}
-			if (InoutType.TYPE_IN.getValue().equals(inoutType)) {
-				inCnt = cnt;
-				inAmt = sumAmt;
-			}else {
-				outCnt = cnt;
-				outAmt = sumAmt;
-			}
-			totalCnt += cnt;
-			totalAmt += sumAmt;
-		}
-		sumInfo.put("inCnt", inCnt);
-		sumInfo.put("inAmt", inAmt);
-		sumInfo.put("outCnt", outCnt);
-		sumInfo.put("outAmt", outAmt);
-		sumInfo.put("totalCnt", totalCnt);
-		sumInfo.put("netAmt", AmountUtils.add(inAmt, -outAmt));
-		return sumInfo;*/
+		 * Map<String, Object> sumInfo = new HashMap<String, Object>(); Long
+		 * totalCnt = 0L; Double totalAmt = 0d; Long inCnt = 0L; Double inAmt =
+		 * 0d; Long outCnt = 0L; Double outAmt = 0d; for (int i = 0; i <
+		 * sumList.size(); i++) { Map<String, Object> map = sumList.get(i);
+		 * String inoutType = (String)map.get("inoutType"); Long cnt =
+		 * (Long)map.get("cnt"); Double sumAmt = (Double)map.get("sumAmt"); if
+		 * (cnt == null) { cnt = 0L; } if (sumAmt == null) { sumAmt = 0d; } if
+		 * (InoutType.TYPE_IN.getValue().equals(inoutType)) { inCnt = cnt; inAmt
+		 * = sumAmt; }else { outCnt = cnt; outAmt = sumAmt; } totalCnt += cnt;
+		 * totalAmt += sumAmt; } sumInfo.put("inCnt", inCnt);
+		 * sumInfo.put("inAmt", inAmt); sumInfo.put("outCnt", outCnt);
+		 * sumInfo.put("outAmt", outAmt); sumInfo.put("totalCnt", totalCnt);
+		 * sumInfo.put("netAmt", AmountUtils.add(inAmt, -outAmt)); return
+		 * sumInfo;
+		 */
 	}
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
@@ -101,13 +82,14 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and createDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
 		String year = MapUtils.getString(params, "year");
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and createDate <= ?", String.valueOf(yearInt + 1));
 		}
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
@@ -126,7 +108,8 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 			helper.append("and t.createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and t.createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and t.createDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
@@ -135,7 +118,7 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and t.createDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and t.createDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and t.createDate <= ?", String.valueOf(yearInt + 1));
 		}
 		helper.append("group by t.inoutType");
 		List<Map<String, Object>> sumList = super.getList(helper);
@@ -148,9 +131,9 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 		Double outAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
-			String inoutType = (String)map.get("inoutType");
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
+			String inoutType = (String) map.get("inoutType");
+			Long cnt = (Long) map.get("cnt");
+			Double sumAmt = (Double) map.get("sumAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -160,7 +143,7 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 			if (InoutType.TYPE_IN.getValue().equals(inoutType)) {
 				inCnt = cnt;
 				inAmt = sumAmt;
-			}else {
+			} else {
 				outCnt = cnt;
 				outAmt = sumAmt;
 			}
@@ -176,13 +159,9 @@ public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements Accou
 		return sumInfo;
 	}
 
-
 	@Override
 	protected Class getModelClass() {
 		return AccountJournal.class;
 	}
 
-
-
-	
 }

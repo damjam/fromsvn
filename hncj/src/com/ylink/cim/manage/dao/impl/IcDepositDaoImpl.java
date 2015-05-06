@@ -20,22 +20,25 @@ import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("icDepositDao")
-public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositDao{
-	public Paginater findPager(Map<String, Object> params, Pager pager){
+public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositDao {
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from IcDeposit t where 1=1");
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
 			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and createDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
@@ -52,7 +55,7 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and chargeDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and chargeDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and chargeDate <= ?", String.valueOf(yearInt + 1));
 		}
 	}
 
@@ -68,12 +71,13 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		
+
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
-		//helper.append("and state = ?", MapUtils.getString(params, "state"));
+		// helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and state = ?", BillState.PAID.getValue());
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
@@ -92,8 +96,8 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 		Double gasAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
+			Long cnt = (Long) map.get("cnt");
+			Double sumAmt = (Double) map.get("sumAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -103,10 +107,10 @@ public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositD
 			if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.ELEC.getValue())) {
 				elecCnt = cnt;
 				elecAmt = sumAmt;
-			}else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
 				waterCnt = cnt;
 				waterAmt = sumAmt;
-			}else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
 				gasCnt = cnt;
 				gasAmt = sumAmt;
 			}

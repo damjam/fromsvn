@@ -31,9 +31,20 @@ public class ParkingBill implements java.io.Serializable {
 	private Date chargeDate;
 	private String chargeUser;
 	private String remark;
+	private String year;
 	
 	// Constructors
 	
+	public String getYear() {
+		return year;
+	}
+
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	private String branchNo;
 	
 	public String getBranchNo() {

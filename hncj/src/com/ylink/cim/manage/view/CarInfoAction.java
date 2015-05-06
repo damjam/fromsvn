@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarInfoDao;
@@ -22,107 +22,30 @@ import com.ylink.cim.manage.service.CarInfoService;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
+@Scope("prototype")
+@Component
+public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private CarInfoDao carInfoDao;
+	@Autowired
+	private CarInfoService carInfoService;
 
-public class CarInfoAction extends BaseDispatchAction {
-	private CarInfoDao carInfoDao = (CarInfoDao) getService("carInfoDao");
-	private CarInfoService carInfoService = (CarInfoService) getService("carInfoService");
-
-	public ActionForward toEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		initSelect(request);
-		CarInfoActionForm actionForm = (CarInfoActionForm)form;
-		String id = actionForm.getId();
-		CarInfo carInfo = carInfoDao.findById(id);
-		BeanUtils.copyProperties(actionForm, carInfo);
-		return forward("/pages/manage/car/carInfoEdit.jsp");
-	}
+	private CarInfo model = new CarInfo();
 	
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/manage/car/carInfoAdd.jsp");
+	private void clearForm() {
+		model.setOwnerName("");
+		model.setCarSn("");
+		model.setOwnerCel("");
+		model.setHouseSn("");
+		model.setBrand("");
+		model.setModel("");
 	}
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			CarInfoActionForm actionForm = (CarInfoActionForm) form;
-			Map<String, Object> params = getParaMap();
-			params.put("carSn", actionForm.getCarSn());
-			params.put("branchNo", actionForm.getBranchNo());
-			List<CarInfo> list = carInfoDao.findList(params);
-			Assert.isEmpty(list, "车牌号已存在，请重新指定");
-			CarInfo carInfo = new CarInfo();
-			BeanUtils.copyProperties(carInfo, actionForm);
-			carInfoService.save(carInfo, getSessionUser(request));
-			setResult(true, "操作成功", request);
-			clearForm(actionForm);
-		}catch (BizException e) {
-			setResult(false, e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
-		} catch (Exception e) {
-			setResult(false, "添加失败", request);
-			e.printStackTrace();
-			return toAdd(mapping, form, request, response);
-		}
-		
-		return list(mapping, form, request, response);
-	}
-	
-	private void clearForm(CarInfoActionForm actionForm) {
-		actionForm.setOwnerName("");
-		actionForm.setCarSn("");
-		actionForm.setOwnerCel("");
-		actionForm.setHouseSn("");
-		actionForm.setBrand("");
-		actionForm.setModel("");
-	}
-
-	public ActionForward doEdit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		try {
-			CarInfoActionForm actionForm = (CarInfoActionForm) form;
-			CarInfo carInfo = carInfoDao.findById(actionForm.getId());
-			String createUser = carInfo.getCreateUser();
-			Date createDate = carInfo.getCreateDate();
-			String ownerId = carInfo.getOwnerId();
-			BeanUtils.copyProperties(carInfo, actionForm);
-			carInfo.setCreateDate(createDate);
-			carInfo.setCreateUser(createUser);
-			carInfo.setOwnerId(ownerId);
-			carInfoService.update(carInfo, getSessionUser(request));
-			clearForm(actionForm);
-			setResult(true, "修改成功", request);
-		} catch (BizException e) {
-			setResult(false, e.getMessage(), request);
-			return toEdit(mapping, form, request, response);
-		} catch (Exception e) {
-			setResult(false, "修改失败", request);
-			e.printStackTrace();
-			return toEdit(mapping, form, request, response);
-		}
-		return list(mapping, form, request, response);
-	}
-
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		Map<String, Object> map = getParaMap();
-		CarInfoActionForm actionForm = (CarInfoActionForm) form;
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("carSn", actionForm.getCarSn());
-		map.put("brand", actionForm.getBrand());
-		map.put("model", actionForm.getModel());
-		map.put("ownerName", actionForm.getOwnerName());
-		map.put("ownerCel", actionForm.getOwnerCel());
-		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = carInfoDao.findPager(map, getPager(request));
-		saveQueryResult(request, paginater);
-		initSelect(request);
-		return forward("/pages/manage/car/carInfoList.jsp");
-	}
-
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			carInfoService.delete(id, getSessionUser(request));
@@ -134,7 +57,61 @@ public class CarInfoAction extends BaseDispatchAction {
 			e.printStackTrace();
 			setResult(false, "操作失败", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
+	}
+	
+	public String doAdd() throws Exception {
+		try {
+			
+			Map<String, Object> params = getParaMap();
+			params.put("carSn", model.getCarSn());
+			params.put("branchNo", model.getBranchNo());
+			List<CarInfo> list = carInfoDao.findList(params);
+			Assert.isEmpty(list, "车牌号已存在，请重新指定");
+			CarInfo carInfo = new CarInfo();
+			BeanUtils.copyProperties(carInfo, model);
+			carInfoService.save(carInfo, getSessionUser(request));
+			setResult(true, "操作成功", request);
+			clearForm();
+		}catch (BizException e) {
+			setResult(false, e.getMessage(), request);
+			return toAdd();
+		} catch (Exception e) {
+			setResult(false, "添加失败", request);
+			e.printStackTrace();
+			return toAdd();
+		}
+		
+		return list();
+	}
+
+	public String doEdit() throws Exception {
+		try {
+			
+			CarInfo carInfo = carInfoDao.findById(model.getId());
+			String createUser = carInfo.getCreateUser();
+			Date createDate = carInfo.getCreateDate();
+			String ownerId = carInfo.getOwnerId();
+			BeanUtils.copyProperties(carInfo, model);
+			carInfo.setCreateDate(createDate);
+			carInfo.setCreateUser(createUser);
+			carInfo.setOwnerId(ownerId);
+			carInfoService.update(carInfo, getSessionUser(request));
+			clearForm();
+			setResult(true, "修改成功", request);
+		} catch (BizException e) {
+			setResult(false, e.getMessage(), request);
+			return toEdit();
+		} catch (Exception e) {
+			setResult(false, "修改失败", request);
+			e.printStackTrace();
+			return toEdit();
+		}
+		return list();
+	}
+
+	public CarInfo getModel() {
+		return model;
 	}
 
 	public void initSelect(HttpServletRequest request) throws Exception {
@@ -156,5 +133,37 @@ public class CarInfoAction extends BaseDispatchAction {
 		request.setAttribute("unitNos", unitsNos);
 		request.setAttribute("buildingNos", buildingNos);
 		request.setAttribute("floors", floors);
+	}
+
+	public String list() throws Exception {
+		Map<String, Object> map = getParaMap();
+		
+		map.put("houseSn", model.getHouseSn());
+		map.put("carSn", model.getCarSn());
+		map.put("brand", model.getBrand());
+		map.put("model", model.getModel());
+		map.put("ownerName", model.getOwnerName());
+		map.put("ownerCel", model.getOwnerCel());
+		map.put("branchNo", getSessionBranchNo(request));
+		Paginater paginater = carInfoDao.findPager(map, getPager(request));
+		saveQueryResult(request, paginater);
+		initSelect(request);
+		//return forward("/pages/manage/car/carInfoList.jsp");
+		return "list";
+	}
+
+	public String toAdd() throws Exception {
+		
+		//return forward("/pages/manage/car/carInfoAdd.jsp");
+		return "add";
+	}
+	public String toEdit() throws Exception {
+		initSelect(request);
+		
+		String id = model.getId();
+		CarInfo carInfo = carInfoDao.findById(id);
+		BeanUtils.copyProperties(model, carInfo);
+		//return forward("/pages/manage/car/carInfoEdit.jsp");
+		return "edit";
 	}
 }

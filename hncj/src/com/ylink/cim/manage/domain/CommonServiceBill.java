@@ -31,7 +31,46 @@ public class CommonServiceBill implements java.io.Serializable {
 	private String chargeUser;
 	private String remark;
 	private String branchNo;
+	private String startChargeDate;
+	private String endChargeDate;
+	private String year;
 	
+	public String getYear() {
+		return year;
+	}
+
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+
+	public String getStartChargeDate() {
+		return startChargeDate;
+	}
+
+
+
+	public void setStartChargeDate(String startChargeDate) {
+		this.startChargeDate = startChargeDate;
+	}
+
+
+
+	public String getEndChargeDate() {
+		return endChargeDate;
+	}
+
+
+
+	public void setEndChargeDate(String endChargeDate) {
+		this.endChargeDate = endChargeDate;
+	}
+
+
+
 	public String getBranchNo() {
 		return branchNo;
 	}

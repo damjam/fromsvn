@@ -1,14 +1,13 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
@@ -18,11 +17,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-import org.apache.struts.upload.FormFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.manage.dao.ElecRecordDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.ElecRecord;
@@ -33,15 +32,22 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
-
-public class ElecRecordAction extends BaseDispatchAction {
-	private ElecRecordDao elecRecordDao = (ElecRecordDao)getService("elecRecordDao");
-	private HouseInfoDao houseInfoDao = (HouseInfoDao)getService("houseInfoDao");
-	private ElecRecordService elecRecordService = (ElecRecordService)getService("elecRecordService");
+import flink.web.BaseAction;
+@Scope("prototype")
+@Component
+public class ElecRecordAction extends BaseAction implements ModelDriven<ElecRecord>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private ElecRecordDao elecRecordDao;
+	@Autowired
+	private HouseInfoDao houseInfoDao;
+	@Autowired
+	private ElecRecordService elecRecordService;
 	
-	public ActionForward check(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String check() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			elecRecordService.checkRecord(id, getSessionUser(request));
@@ -50,11 +56,10 @@ public class ElecRecordAction extends BaseDispatchAction {
 			setResult(false, "生成账单失败", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 		
 	}
-	public ActionForward checkAll(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String checkAll() throws Exception {
 		try {
 			Integer num = elecRecordService.checkAllRecord(getSessionUser(request));
 			if (num > 0) {
@@ -66,11 +71,10 @@ public class ElecRecordAction extends BaseDispatchAction {
 			setResult(false, "生成账单失败", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 		
 	}
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			elecRecordService.deleteRecord(id, getSessionUser(request));
@@ -79,14 +83,12 @@ public class ElecRecordAction extends BaseDispatchAction {
 			setResult(false, "删除失败", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doAdd() throws Exception {
 		try {
-			ElecRecordActionForm actionForm = (ElecRecordActionForm)form;
 			ElecRecord elecRecord = new ElecRecord();
-			BeanUtils.copyProperties(elecRecord, actionForm);
+			BeanUtils.copyProperties(elecRecord, model);
 			elecRecordService.saveElecRecord(elecRecord, getSessionUser(request));
 			setResult(true, "数据已保存", request);
 		} catch (BizException e) {
@@ -94,20 +96,18 @@ public class ElecRecordAction extends BaseDispatchAction {
 		} catch (Exception e) {
 			setResult(false, "保存失败"+e.getMessage(), request);
 		}
-		return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		//return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		return "add";
 	}
-	public ActionForward doImport(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doImport() throws Exception {
 		try {
-			ElecRecordActionForm form = (ElecRecordActionForm) actionform;
-			String recordMonth = form.getRecordMonth();
-			String preRecordDate = form.getPreRecordDate();
-			String curRecordDate = form.getCurRecordDate();
-			FormFile file = form.getFile();
-
-			InputStream is = file.getInputStream();
+			
+			String recordMonth = model.getRecordMonth();
+			String preRecordDate = model.getPreRecordDate();
+			String curRecordDate = model.getCurRecordDate();
+			InputStream is = new FileInputStream(model.getFile());
 			Workbook book = null;
-			String fileName = file.getFileName();
+			String fileName = model.getFileName();
 			if (fileName.toLowerCase().endsWith(".xls")) {
 				book = WorkbookFactory.create(is);
 			} else if (fileName.toLowerCase().endsWith(".xlsx")) {
@@ -174,10 +174,11 @@ public class ElecRecordAction extends BaseDispatchAction {
 			e.printStackTrace();
 			setResult(false, "操作失败:" + e.getMessage(), request);
 		}
-		return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+		//return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+		return "import";
 	}
-	public ActionForward getPreRecord(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String getPreRecord(
+			) throws Exception {
 		try {
 			String houseSn = request.getParameter("houseSn");
 			ElecRecord elecRecord = elecRecordService.getPreRecord(houseSn);
@@ -198,20 +199,18 @@ public class ElecRecordAction extends BaseDispatchAction {
 		}
 		return null;
 	}
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		ElecRecordActionForm actionForm = (ElecRecordActionForm)form;
-		map.put("startCreateDate", actionForm.getStartCreateDate());
-		map.put("endCreateDate", actionForm.getEndCreateDate());
-		map.put("houseSn", actionForm.getHouseSn());
+		map.put("startCreateDate", model.getStartCreateDate());
+		map.put("endCreateDate", model.getEndCreateDate());
+		map.put("houseSn", model.getHouseSn());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = elecRecordDao.findRecordPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		return forward("/pages/manage/meter/elec/elecRecordList.jsp");
+		//return forward("/pages/manage/meter/elec/elecRecordList.jsp");
+		return "list";
 	}
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String toAdd() throws Exception {
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 		String preRecordDate = "";
 		String curRecordDate = "";
@@ -229,15 +228,18 @@ public class ElecRecordAction extends BaseDispatchAction {
 		}
 		//DateUtil.addMonths(date, num);
 		String recordMonth = beginDate+"-"+curRecordDate.substring(0, 6);
-		ElecRecordActionForm actioinForm = (ElecRecordActionForm)form;
-		actioinForm.setPreRecordDate(preRecordDate);
-		actioinForm.setCurRecordDate(curRecordDate);
-		actioinForm.setRecordMonth(recordMonth);
-		return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		model.setPreRecordDate(preRecordDate);
+		model.setCurRecordDate(curRecordDate);
+		model.setRecordMonth(recordMonth);
+		//return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		return "add";
 	}
-	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
-		return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+	public String toImport() throws Exception {
+		//return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+		return "import";
 	}
+	public ElecRecord getModel() {
+		return model;
+	}
+	private ElecRecord model = new ElecRecord();
 }

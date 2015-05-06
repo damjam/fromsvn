@@ -62,10 +62,6 @@ public class Timer implements java.io.Serializable {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getNoPass() {
 		return this.noPass;
 	}
@@ -116,6 +112,10 @@ public class Timer implements java.io.Serializable {
 
 	public void setGroupno(String groupno) {
 		this.groupno = groupno;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setNoPass(String noPass) {

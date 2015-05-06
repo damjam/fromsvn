@@ -15,6 +15,7 @@ import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("parkingInfoDao")
 public class ParkingInfoDaoImpl extends BaseDaoHibernateImpl implements ParkingInfoDao {
 
@@ -43,7 +44,6 @@ public class ParkingInfoDaoImpl extends BaseDaoHibernateImpl implements ParkingI
 		return super.getPageData(helper, pager);
 	}
 
-
 	public List<ParkingInfo> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ParkingInfo t where 1=1");
@@ -52,6 +52,4 @@ public class ParkingInfoDaoImpl extends BaseDaoHibernateImpl implements ParkingI
 		return super.getList(helper);
 	}
 
-
-	
 }

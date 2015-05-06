@@ -3,12 +3,11 @@ package com.ylink.cim.manage.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.manage.dao.ParkingInfoDao;
 import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.ParkingInfoService;
-import com.ylink.cim.manage.service.ParkingInfoService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;

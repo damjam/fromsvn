@@ -19,9 +19,12 @@ import flink.util.Paginater;
 @Repository("parkingBillDao")
 public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingBillDao{
 
-	@Override
-	protected Class getModelClass() {
-		return ParkingBill.class;
+	private void addYearFilter(QueryHelper helper, String year) {
+		if (!StringUtils.isBlank(year)) {
+			helper.append("and createDate >= ?", year);
+			Integer yearInt = Integer.parseInt(year);
+			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+		}
 	}
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
@@ -42,14 +45,6 @@ public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingB
 		return super.getPageData(helper, pager);
 	}
 
-	private void addYearFilter(QueryHelper helper, String year) {
-		if (!StringUtils.isBlank(year)) {
-			helper.append("and createDate >= ?", year);
-			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
-		}
-	}
-
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as amt) from ParkingBill t where 1=1");
@@ -67,6 +62,11 @@ public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingB
 			sumInfo.put("amt", 0d);
 		}
 		return sumInfo;
+	}
+
+	@Override
+	protected Class getModelClass() {
+		return ParkingBill.class;
 	}
 
 }

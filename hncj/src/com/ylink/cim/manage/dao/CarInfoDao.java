@@ -11,7 +11,7 @@ import flink.util.Paginater;
 
 public interface CarInfoDao extends BaseDao {
 
-	public Paginater findPager(Map<String, Object> params, Pager pager);
-
 	public List<CarInfo> findList(Map<String, Object> params);
+
+	public Paginater findPager(Map<String, Object> params, Pager pager);
 }

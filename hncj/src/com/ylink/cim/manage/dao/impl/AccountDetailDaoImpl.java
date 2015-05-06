@@ -14,6 +14,7 @@ import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("accountDetailDao")
 public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements AccountDetailDao {
 
@@ -21,7 +22,7 @@ public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements Accoun
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and createDate <= ?", String.valueOf(yearInt + 1));
 		}
 	}
 
@@ -35,16 +36,17 @@ public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements Accoun
 			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and createDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and createDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}
+
 	@Override
 	protected Class getModelClass() {
 		return AccountDetail.class;
 	}
 
-	
 }

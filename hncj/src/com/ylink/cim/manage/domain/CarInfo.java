@@ -30,92 +30,11 @@ public class CarInfo implements java.io.Serializable {
 	
 	
 	
-	public String getId() {
-		return id;
-	}
-
-
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-
-
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
-
-
-	public String getSnCity() {
-		return snCity;
-	}
-
-
-
-	public void setSnCity(String snCity) {
-		this.snCity = snCity;
-	}
-
-
-
-	public String getOwnerCel() {
-		return ownerCel;
-	}
-
-
-
-	public void setOwnerCel(String ownerCel) {
-		this.ownerCel = ownerCel;
-	}
-
-
-
-	public String getHouseSn() {
-		return houseSn;
-	}
-
-
-
-	public void setHouseSn(String houseSn) {
-		this.houseSn = houseSn;
-	}
-
-
-
-	public String getRemark() {
-		return remark;
-	}
-
-
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-	// Constructors
-
 	/** default constructor */
 	public CarInfo() {
 	}
+
+
 
 	/** minimal constructor */
 	public CarInfo(String carSn) {
@@ -123,79 +42,6 @@ public class CarInfo implements java.io.Serializable {
 	}
 
 
-	// Property accessors
-
-	public String getCarSn() {
-		return this.carSn;
-	}
-
-	public void setCarSn(String carSn) {
-		this.carSn = carSn;
-	}
-
-	public String getBrand() {
-		return this.brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-
-	public String getModel() {
-		return this.model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getOwnerId() {
-		return this.ownerId;
-	}
-
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	public String getParkingSn() {
-		return this.parkingSn;
-	}
-
-	public void setParkingSn(String parkingSn) {
-		this.parkingSn = parkingSn;
-	}
-
-	public Date getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getCreateUser() {
-		return this.createUser;
-	}
-
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
-	}
-
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
-	public String getUpdateUser() {
-		return this.updateUser;
-	}
-
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
-	}
 
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -226,6 +72,95 @@ public class CarInfo implements java.io.Serializable {
 						&& castOther.getUpdateUser() != null && this.getUpdateUser().equals(castOther.getUpdateUser())));
 	}
 
+
+
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+
+
+	public String getBrand() {
+		return this.brand;
+	}
+
+
+
+	public String getCarSn() {
+		return this.carSn;
+	}
+
+
+
+	public Date getCreateDate() {
+		return this.createDate;
+	}
+
+
+
+	public String getCreateUser() {
+		return this.createUser;
+	}
+
+
+
+	public String getHouseSn() {
+		return houseSn;
+	}
+
+
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public String getModel() {
+		return this.model;
+	}
+
+
+
+	public String getOwnerCel() {
+		return ownerCel;
+	}
+
+
+
+	public String getOwnerId() {
+		return this.ownerId;
+	}
+
+
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public String getParkingSn() {
+		return this.parkingSn;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+
+	// Property accessors
+
+	public String getSnCity() {
+		return snCity;
+	}
+
+	public Date getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public String getUpdateUser() {
+		return this.updateUser;
+	}
+
 	public int hashCode() {
 		int result = 17;
 
@@ -239,6 +174,71 @@ public class CarInfo implements java.io.Serializable {
 		result = 37 * result + (getUpdateDate() == null ? 0 : this.getUpdateDate().hashCode());
 		result = 37 * result + (getUpdateUser() == null ? 0 : this.getUpdateUser().hashCode());
 		return result;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+	// Constructors
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public void setCarSn(String carSn) {
+		this.carSn = carSn;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setOwnerCel(String ownerCel) {
+		this.ownerCel = ownerCel;
+	}
+
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
+	public void setParkingSn(String parkingSn) {
+		this.parkingSn = parkingSn;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public void setSnCity(String snCity) {
+		this.snCity = snCity;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 
 }

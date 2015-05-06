@@ -2,6 +2,8 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
+import com.ylink.cim.admin.domain.Privilege;
+
 // default package
 
 /**
@@ -26,7 +28,36 @@ public class IcDeposit implements java.io.Serializable {
 	private String cardType;
 	private String branchNo;
 	private String remark;
+	//
+	private String startChargeDate;
+	private String endChargeDate;
+	private String year;
 	
+	
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getStartChargeDate() {
+		return startChargeDate;
+	}
+
+	public void setStartChargeDate(String startChargeDate) {
+		this.startChargeDate = startChargeDate;
+	}
+
+	public String getEndChargeDate() {
+		return endChargeDate;
+	}
+
+	public void setEndChargeDate(String endChargeDate) {
+		this.endChargeDate = endChargeDate;
+	}
+
 	public String getRemark() {
 		return remark;
 	}

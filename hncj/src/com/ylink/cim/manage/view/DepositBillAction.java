@@ -2,14 +2,11 @@ package com.ylink.cim.manage.view;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.manage.dao.DepositBillDao;
@@ -18,7 +15,7 @@ import com.ylink.cim.manage.service.BillService;
 
 import flink.etc.BizException;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
 /**
  * ÊÕÑº½ð
@@ -26,12 +23,17 @@ import flink.web.BaseDispatchAction;
  * @author libaozhu
  * @date 2015-3-16
  */
-public class DepositBillAction extends BaseDispatchAction {
+@Scope("prototype")
+@Component
+public class DepositBillAction extends BaseAction implements ModelDriven<DepositBill> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DepositBillDao depositBillDao = (DepositBillDao) getService("depositBillDao");
 	private BillService billService = (BillService) getService("billService");
 
-	public ActionForward charge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String charge() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.chargeDepositFee(id, getSessionUser(request));
@@ -43,11 +45,10 @@ public class DepositBillAction extends BaseDispatchAction {
 			e.printStackTrace();
 			setResult(false, "²Ù×÷Ê§°Ü", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward deleteDepositBill(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String deleteDepositBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.deleteBill(DepositBill.class, id, getSessionUser(request));
@@ -56,53 +57,51 @@ public class DepositBillAction extends BaseDispatchAction {
 			setResult(false, "É¾³ýÊ§°Ü", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doAdd() throws Exception {
 		try {
-			DepositBillActionForm actionForm = (DepositBillActionForm) form;
+
 			DepositBill depositBill = new DepositBill();
-			BeanUtils.copyProperties(depositBill, actionForm);
+			BeanUtils.copyProperties(depositBill, model);
 			billService.saveDepositBill(depositBill, getSessionUser(request));
 			setResult(true, "Êý¾ÝÒÑ±£´æ", request);
-			actionForm.setHouseSn("");
+			model.setHouseSn("");
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResult(false, "±£´æÊ§°Ü" + e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		DepositBillActionForm actionForm = (DepositBillActionForm) form;
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("state", actionForm.getState());
-		map.put("startDepositDate", actionForm.getStartDepositDate());
-		map.put("endDepositDate", actionForm.getEndDepositDate());
-		map.put("startRefundDate", actionForm.getStartRefundDate());
-		map.put("endRefundDate", actionForm.getEndRefundDate());
-		map.put("id", actionForm.getId());
-		map.put("year", actionForm.getYear());
+
+		map.put("houseSn", model.getHouseSn());
+		map.put("state", model.getState());
+		map.put("startDepositDate", model.getStartDepositDate());
+		map.put("endDepositDate", model.getEndDepositDate());
+		map.put("startRefundDate", model.getStartRefundDate());
+		map.put("endRefundDate", model.getEndRefundDate());
+		map.put("id", model.getId());
+		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = depositBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = depositBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		return forward("/pages/manage/charge/deposit/depositBillList.jsp");
+		// return forward("/pages/manage/charge/deposit/depositBillList.jsp");
+		return "list";
 	}
 
-	public ActionForward refund(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String refund() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.refund(id, getSessionUser(request));
@@ -114,12 +113,18 @@ public class DepositBillAction extends BaseDispatchAction {
 			setResult(false, "²Ù×÷Ê§°Ü", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
-		return forward("/pages/manage/charge/deposit/depositBillAdd.jsp");
+		// return forward("/pages/manage/charge/deposit/depositBillAdd.jsp");
+		return "add";
 	}
+
+	public DepositBill getModel() {
+		return model;
+	}
+
+	private DepositBill model = new DepositBill();
 }

@@ -20,17 +20,6 @@ import flink.util.Paginater;
 @Component("chargeParamDao")
 public class ChargeParamDaoImpl extends BaseDaoHibernateImpl implements ChargeParamDao {
 
-	public Paginater findPager(Map<String, Object> params, Pager pager) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("from ChargeParam where 1=1");
-		helper.append("and rangeCode = ?", MapUtils.getString(params, "rangeCode"));
-		helper.append("and paramName like ?", MapUtils.getString(params, "paramName"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
-		return super.getPageData(helper, pager);
-	}
-
 	public List<ChargeParam> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeParam where 1=1");
@@ -42,6 +31,17 @@ public class ChargeParamDaoImpl extends BaseDaoHibernateImpl implements ChargePa
 		}
 		helper.append("and id <> ?", MapUtils.getString(params, "exceptId"));
 		return super.getList(helper);
+	}
+
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from ChargeParam where 1=1");
+		helper.append("and rangeCode = ?", MapUtils.getString(params, "rangeCode"));
+		helper.append("and paramName like ?", MapUtils.getString(params, "paramName"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		return super.getPageData(helper, pager);
 	}
 
 	@Override

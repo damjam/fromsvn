@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -22,62 +23,71 @@ public class AccountJournal implements java.io.Serializable {
 	private String remark;
 	private String billId;
 	private String branchNo;
-	
+	private String startCreateDate;
+	private String endCreateDate;
+	private String year;
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
-	
+
 	public String getBillId() {
 		return billId;
 	}
-
-	
 
 	public Double getAmount() {
 		return amount;
 	}
 
-
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
-
-
-	
-
-
 
 	public Double getPrebalance() {
 		return prebalance;
 	}
 
-
-
 	public void setPrebalance(Double prebalance) {
 		this.prebalance = prebalance;
 	}
-
-
 
 	public Double getBalance() {
 		return balance;
 	}
 
-
-
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
-
-
 
 	public void setBillId(String billId) {
 		this.billId = billId;
@@ -109,8 +119,6 @@ public class AccountJournal implements java.io.Serializable {
 	public void setTradeType(String tradeType) {
 		this.tradeType = tradeType;
 	}
-
-	
 
 	public String getInoutType() {
 		return this.inoutType;

@@ -3,16 +3,14 @@ package com.ylink.cim.manage.view;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONObject;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
@@ -26,60 +24,65 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
+@Scope("prototype")
+@Component
+public class ParkingBillAction extends BaseAction implements ModelDriven<ParkingBill>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private ParkingBillDao parkingBillDao;
+	@Autowired
+	private BillService billService;
+	@Autowired
+	private OwnerInfoDao ownerInfoDao;
 
-public class ParkingBillAction extends BaseDispatchAction {
-	private ParkingBillDao parkingBillDao = (ParkingBillDao) getService("parkingBillDao");
-	private BillService billService = (BillService) getService("billService");
-	private OwnerInfoDao ownerInfoDao = (OwnerInfoDao) getService("ownerInfoDao");
-
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
-		return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
+		//return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
+		return "add";
 	}
 
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doAdd() throws Exception {
 		try {
-			ParkingBillActionForm actionForm = (ParkingBillActionForm) form;
+			
 			ParkingBill parkingBill = new ParkingBill();
-			BeanUtils.copyProperties(parkingBill, actionForm);
+			BeanUtils.copyProperties(parkingBill, model);
 			billService.saveParkingBill(parkingBill, getSessionUser(request));
-			actionForm.setHouseSn("");
-			actionForm.setCarSn("");
-			actionForm.setParkingSn("");
+			model.setHouseSn("");
+			model.setCarSn("");
+			model.setParkingSn("");
 			setResult(true, "Êý¾ÝÒÑ±£´æ", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		} catch (Exception e) {
 			setResult(false, "±£´æÊ§°Ü" + e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		ParkingBillActionForm actionForm = (ParkingBillActionForm) form;
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("carSn", actionForm.getCarSn());
-		map.put("parkingSn", actionForm.getParkingSn());
-		map.put("id", actionForm.getId());
-		map.put("year", actionForm.getYear());
+		map.put("houseSn", model.getHouseSn());
+		map.put("carSn", model.getCarSn());
+		map.put("parkingSn", model.getParkingSn());
+		map.put("id", model.getId());
+		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		return forward("/pages/manage/charge/parking/parkingBillList.jsp");
+		//return forward("/pages/manage/charge/parking/parkingBillList.jsp");
+		return "list";
 	}
 
-	public ActionForward charge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String charge() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.chargeParkingFee(id, getSessionUser(request));
@@ -89,11 +92,10 @@ public class ParkingBillAction extends BaseDispatchAction {
 		} catch (Exception e) {
 			setResult(false, "²Ù×÷Ê§°Ü", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward deleteBill(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String deleteBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billService.deleteBill(ParkingBill.class, id, getSessionUser(request));
@@ -102,11 +104,11 @@ public class ParkingBillAction extends BaseDispatchAction {
 			setResult(false, "É¾³ýÊ§°Ü", request);
 			e.printStackTrace();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward getOwnerName(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String getOwnerName(
+			) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		String mobile = "";
@@ -131,8 +133,8 @@ public class ParkingBillAction extends BaseDispatchAction {
 		respond(response, jsonObject.toString());
 		return null;
 	}
-	public ActionForward getOwnerInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String getOwnerInfo(
+			) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		String mobile = "";
@@ -157,8 +159,8 @@ public class ParkingBillAction extends BaseDispatchAction {
 		return null;
 	}
 
-	public ActionForward getAcctInfo(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String getAcctInfo(
+			) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String endDateStr = "";
 		Double amount = 0d;
@@ -182,4 +184,10 @@ public class ParkingBillAction extends BaseDispatchAction {
 		respond(response, jsonObject.toString());
 		return null;
 	}
+
+	public ParkingBill getModel() {
+		return model;
+	}
+	private ParkingBill model = new ParkingBill();
+	
 }

@@ -11,9 +11,9 @@ import flink.util.Paginater;
 
 public interface ChargeItemDao extends BaseDao {
 
-	public Paginater findPager(Map<String, Object> params, Pager pager);
-
 	public List<ChargeItem> findBy(Map<String, Object> params);
-	
+
 	public List<Long> findItemNum(Map<String, Object> params);
+	
+	public Paginater findPager(Map<String, Object> params, Pager pager);
 }

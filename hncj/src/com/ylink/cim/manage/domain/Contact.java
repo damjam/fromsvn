@@ -10,6 +10,10 @@ import java.util.Date;
 
 public class Contact implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -24,45 +28,46 @@ public class Contact implements java.io.Serializable {
 	private String branchNo;
 	private String industry;
 	private String merchantName;
-	
+	private String keyword;
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	public String getMerchantName() {
 		return merchantName;
 	}
-
-
 
 	public void setMerchantName(String merchantName) {
 		this.merchantName = merchantName;
 	}
 
-
-
 	public String getIndustry() {
 		return industry;
 	}
-
-
 
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	/** default constructor */
 	public Contact() {
 	}
+
 	// Property accessors
 
 	public String getId() {
@@ -81,19 +86,13 @@ public class Contact implements java.io.Serializable {
 		this.position = position;
 	}
 
-	
-
 	public String getContactName() {
 		return contactName;
 	}
 
-
-
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
-
-
 
 	public String getMobile() {
 		return this.mobile;

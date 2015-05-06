@@ -23,6 +23,32 @@ import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("elecRecordDao")
 public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecordDao{
+	protected static List getOrderedList(List list) {
+		return list;
+	}
+	public ElecRecord findPreRecord(String houseSn) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from ElecRecord where 1=1");
+		helper.append("and houseSn = ?", houseSn);
+		helper.append("order by recordMonth desc");
+		List list = super.getList(helper);
+		if (list.size() > 0) {
+			return (ElecRecord)list.get(0);
+		}else {
+			return null;
+		}
+	}
+	public List<ElecRecord> findPreRecords(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from ElecRecord where 1=1");
+		helper.append("and houseSn = ?", params.get("houseSn"));
+		helper.append("and recordMonth = ?", params.get("recordMonth"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}
+		return super.getList(helper);
+	}
+
 	public Paginater findRecordPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecRecord t where 1=1");
@@ -66,37 +92,7 @@ public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecor
 		});
 		return paginater;
 	}
-	protected static List getOrderedList(List list) {
-		return list;
-	}
-	@Override
-	protected Class getModelClass() {
-		return ElecRecord.class;
-	}
 
-	public ElecRecord findPreRecord(String houseSn) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("from ElecRecord where 1=1");
-		helper.append("and houseSn = ?", houseSn);
-		helper.append("order by recordMonth desc");
-		List list = super.getList(helper);
-		if (list.size() > 0) {
-			return (ElecRecord)list.get(0);
-		}else {
-			return null;
-		}
-	}
-
-	public List<ElecRecord> findPreRecords(Map<String, Object> params) {
-		QueryHelper helper = new QueryHelper();
-		helper.append("from ElecRecord where 1=1");
-		helper.append("and houseSn = ?", params.get("houseSn"));
-		helper.append("and recordMonth = ?", params.get("recordMonth"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
-		return super.getList(helper);
-	}
 	public List<ElecRecord> findRecords(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecRecord where 1=1");
@@ -105,6 +101,10 @@ public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecor
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		}
 		return super.getList(helper);
+	}
+	@Override
+	protected Class getModelClass() {
+		return ElecRecord.class;
 	}
 	
 	

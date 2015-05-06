@@ -21,9 +21,27 @@ public class Account implements java.io.Serializable {
 	private String state;
 	private String houseSn;
 	private String branchNo;
+	private String startCreateDate;
+	private String endCreateDate;
+	private String acctNo;
+	private String year;
+	private String type;
+	private Double amount;
 	
 	/** default constructor */
 	public Account() {
+	}
+
+
+
+	public String getAcctNo() {
+		return acctNo;
+	}
+
+
+
+	public Double getAmount() {
+		return amount;
 	}
 
 
@@ -38,9 +56,7 @@ public class Account implements java.io.Serializable {
 		return branchNo;
 	}
 
-	
-	
-	// Property accessors
+
 
 	public Date getCreateDate() {
 		return this.createDate;
@@ -51,9 +67,17 @@ public class Account implements java.io.Serializable {
 	public String getCreateUser() {
 		return this.createUser;
 	}
-	
+
+
+
 	public Double getCreditAmt() {
 		return this.creditAmt;
+	}
+
+
+
+	public String getEndCreateDate() {
+		return endCreateDate;
 	}
 
 
@@ -68,20 +92,58 @@ public class Account implements java.io.Serializable {
 		return houseSn;
 	}
 
+
+
 	public String getId() {
 		return id;
 	}
+
+
 
 	public String getOwnerId() {
 		return this.ownerId;
 	}
 
+
+
 	public String getOwnerName() {
 		return this.ownerName;
 	}
 
+
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+	
+	
+	// Property accessors
+
 	public String getState() {
 		return this.state;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+	
+	public String getYear() {
+		return year;
+	}
+
+
+
+	public void setAcctNo(String acctNo) {
+		this.acctNo = acctNo;
+	}
+
+
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
 	public void setBalance(Double balance) {
@@ -104,6 +166,10 @@ public class Account implements java.io.Serializable {
 		this.creditAmt = creditAmt;
 	}
 
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
+
 	public void setFreezeAmt(Double freezeAmt) {
 		this.freezeAmt = freezeAmt;
 	}
@@ -124,8 +190,20 @@ public class Account implements java.io.Serializable {
 		this.ownerName = ownerName;
 	}
 
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 

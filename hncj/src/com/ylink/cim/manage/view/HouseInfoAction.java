@@ -4,13 +4,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseInfoDao;
@@ -19,57 +19,61 @@ import com.ylink.cim.manage.service.HouseInfoService;
 
 import flink.etc.BizException;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
+@Scope("prototype")
+@Component
+public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Autowired
+	private HouseInfoDao houseInfoDao;
+	@Autowired
+	private HouseInfoService houseInfoService;
 
-public class HouseInfoAction extends BaseDispatchAction {
-	private HouseInfoDao houseInfoDao = (HouseInfoDao) getService("houseInfoDao");
-	private HouseInfoService houseInfoService = (HouseInfoService) getService("houseInfoService");
-
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String toAdd() throws Exception {
 		initSelect(request);
-		return forward("/pages/manage/house/houseInfoAdd.jsp");
+		//return forward("/pages/manage/house/houseInfoAdd.jsp");
+		return "";
 	}
 
-	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String doAdd() throws Exception {
 		try {
-			HouseInfoActionForm actionForm = (HouseInfoActionForm) form;
+			
 			HouseInfo houseInfo = new HouseInfo();
-			BeanUtils.copyProperties(houseInfo, actionForm);
+			BeanUtils.copyProperties(houseInfo, model);
 			houseInfoService.add(houseInfo, getSessionUser(request));
 			setResult(true, "添加成功", request);
-			actionForm.setBuildingNo("");
-			actionForm.setUnitNo("");
-			actionForm.setFloor("");
+			model.setBuildingNo("");
+			model.setUnitNo("");
+			model.setFloor("");
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		} catch (Exception e) {
 			setResult(false, "添加失败", request);
 			e.printStackTrace();
-			return toAdd(mapping, form, request, response);
+			return toAdd();
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
-	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		HouseInfoActionForm actionForm = (HouseInfoActionForm) form;
-		map.put("houseSn", actionForm.getHouseSn());
-		map.put("buildingNo", actionForm.getBuildingNo());
-		map.put("unitNo", actionForm.getUnitNo());
-		map.put("floor", actionForm.getFloor());
+		map.put("houseSn", model.getHouseSn());
+		map.put("buildingNo", model.getBuildingNo());
+		map.put("unitNo", model.getUnitNo());
+		map.put("floor", model.getFloor());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = houseInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		return forward("/pages/manage/house/houseInfoList.jsp");
+		//return forward("/pages/manage/house/houseInfoList.jsp");
+		return "list";
 	}
 
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			houseInfoService.delete(id, getSessionUser(request));
@@ -81,7 +85,7 @@ public class HouseInfoAction extends BaseDispatchAction {
 			e.printStackTrace();
 			setResult(false, "操作失败", request);
 		}
-		return list(mapping, form, request, response);
+		return list();
 	}
 
 	public void initSelect(HttpServletRequest request) throws Exception {
@@ -104,4 +108,9 @@ public class HouseInfoAction extends BaseDispatchAction {
 		request.setAttribute("buildingNos", buildingNos);
 		request.setAttribute("floors", floors);
 	}
+
+	public HouseInfo getModel() {
+		return model;
+	}
+	private HouseInfo model = new HouseInfo();
 }

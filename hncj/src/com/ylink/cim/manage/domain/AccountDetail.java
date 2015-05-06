@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -26,21 +27,16 @@ public class AccountDetail implements java.io.Serializable {
 	private String inoutType;
 	private String remark;
 	private String branchNo;
-	
+
 	public String getAcctNo() {
 		return acctNo;
 	}
 
-
-
 	public Double getAmount() {
 		return this.amount;
 	}
-	
-	
+
 	// Constructors
-
-
 
 	// Property accessors
 
@@ -76,7 +72,6 @@ public class AccountDetail implements java.io.Serializable {
 		return this.houseSn;
 	}
 
-
 	public String getId() {
 		return this.id;
 	}
@@ -92,7 +87,6 @@ public class AccountDetail implements java.io.Serializable {
 	public String getRemark() {
 		return remark;
 	}
-
 
 	public String getType() {
 		return this.type;
@@ -157,6 +151,5 @@ public class AccountDetail implements java.io.Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 }

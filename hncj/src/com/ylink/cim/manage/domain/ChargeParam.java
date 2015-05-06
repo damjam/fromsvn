@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -20,8 +21,17 @@ public class ChargeParam implements java.io.Serializable {
 	private Date createDate;
 	private String createUser;
 	private String chargeDesc;
-	
+	private String[] itemIds;
+
 	// Constructors
+
+	public String[] getItemIds() {
+		return itemIds;
+	}
+
+	public void setItemIds(String[] itemIds) {
+		this.itemIds = itemIds;
+	}
 
 	public String getChargeDesc() {
 		return chargeDesc;
@@ -39,7 +49,6 @@ public class ChargeParam implements java.io.Serializable {
 	public ChargeParam(String id) {
 		this.id = id;
 	}
-	
 
 	// Property accessors
 

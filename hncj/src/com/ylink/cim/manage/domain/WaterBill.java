@@ -36,7 +36,59 @@ public class WaterBill implements java.io.Serializable {
 	private Double balance;
 	private Double paidAmt;
 	private String branchNo;
+	private String startCreateDate;
+	private String endCreateDate;
+	private String buildingNo;
+	private String year;
 	
+	public String getBuildingNo() {
+		return buildingNo;
+	}
+
+
+
+	public void setBuildingNo(String buildingNo) {
+		this.buildingNo = buildingNo;
+	}
+
+
+
+	public String getYear() {
+		return year;
+	}
+
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+
+
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
+
+
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+
+
+
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
+
+
+
 	/** default constructor */
 	public WaterBill() {
 	}

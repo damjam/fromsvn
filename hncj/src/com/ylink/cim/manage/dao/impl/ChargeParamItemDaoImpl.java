@@ -17,7 +17,6 @@ import flink.util.Paginater;
 @Component("chargeParamItemDao")
 public class ChargeParamItemDaoImpl extends BaseDaoHibernateImpl implements ChargeParamItemDao {
 
-
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeParamItem where 1=1");
