@@ -20,7 +20,6 @@ public class BranchParmServiceImpl implements BranchParmService {
 	@Autowired
 	private BranchParmDao branchParmDao;
 
-	
 	/**
 	 * 根据主键删除记录
 	 */
@@ -79,12 +78,10 @@ public class BranchParmServiceImpl implements BranchParmService {
 		return this.branchParmDao.findByIdWithLock(code);
 	}
 
-
-
 	public void save(BranchParm branchParm) throws BizException {
 		try {
 			if (branchParmDao.hasParm(branchParm.getCode())) {
-				throw new Exception("该数据已经存在!"+branchParm.getCode());
+				throw new Exception("该数据已经存在!" + branchParm.getCode());
 			}
 
 			this.branchParmDao.saveBranchParm(branchParm);

@@ -1,7 +1,7 @@
 package com.ylink.cim.admin.service;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.etc.BizException;
 import flink.util.Pager;

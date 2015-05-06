@@ -19,29 +19,15 @@ public class SysDictServiceImpl implements SysDictService{
 	@Autowired
 	private SysDictDao sysDictDao;
 	
-	public void setSysDictDao(SysDictDao sysDictDao) {
-		this.sysDictDao = sysDictDao;
-	}
-
-	public Paginater getSysDictPageList(SysDict sysDict,Pager pager) throws BizException {
-		
-		return this.sysDictDao.getSysDictPageList(sysDict, pager);
-	}
-
-	public void saveSysDict(SysDict sysDict) throws BizException {
-		
-		this.sysDictDao.save(sysDict);
-	}
-
 	public void deleteSysDict(SysDict sysDict) throws BizException {
 
 		this.sysDictDao.deleteById(sysDict.getId());
 		
 	}
 
-	public boolean isExist(SysDictId id) throws BizException {
-	
-		return null!=this.sysDictDao.findById(id);
+	public SysDict getSysDict(SysDictId id) throws BizException {
+		
+		return this.sysDictDao.findById(id);
 	}
 
 	public List<SysDict> getSysDictByDictType(String dictType)
@@ -50,9 +36,23 @@ public class SysDictServiceImpl implements SysDictService{
 		return this.sysDictDao.getSysDictByDictType(dictType);
 	}
 
-	public SysDict getSysDict(SysDictId id) throws BizException {
+	public Paginater getSysDictPageList(SysDict sysDict,Pager pager) throws BizException {
 		
-		return this.sysDictDao.findById(id);
+		return this.sysDictDao.getSysDictPageList(sysDict, pager);
+	}
+
+	public boolean isExist(SysDictId id) throws BizException {
+	
+		return null!=this.sysDictDao.findById(id);
+	}
+
+	public void saveSysDict(SysDict sysDict) throws BizException {
+		
+		this.sysDictDao.save(sysDict);
+	}
+
+	public void setSysDictDao(SysDictDao sysDictDao) {
+		this.sysDictDao = sysDictDao;
 	}
 
 }

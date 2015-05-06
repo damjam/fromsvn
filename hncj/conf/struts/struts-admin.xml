@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="admin" extends="struts-default" namespace="/">
+		<action name="userInfoAction" class="userInfoAction">
+			<result name="toListPage">/pages/admin/privilege/userInfoList.jsp</result>
+			<result name="toAddPage">/pages/admin/privilege/userInfoAdd.jsp</result>
+			<result name="toUpdatePage">/pages/admin/privilege/userInfoUpdate.jsp</result>
+			<result name="toChangePassword">/pages/admin/privilege/changePassword.jsp</result>
+			<result name="success">/success.jsp</result>
+		</action>
+		<action name="userRoleAction" class="userRoleAction">
+			<result name="toListPage">/pages/admin/privilege/userRoleList.jsp</result>
+			<result name="toAssignRolePage">/pages/admin/privilege/userRoleAssignList.jsp</result>
+		</action>
+		<action name="limitGroupInfoAction" class="limitGroupInfoAction">
+			<result name="toListPage">/pages/admin/privilege/limitGroupInfoList.jsp</result>
+			<result name="toAddPage">/pages/admin/privilege/limitGroupInfoAdd.jsp</result>
+			<result name="toUpdatePage">/pages/admin/privilege/limitGroupInfoUpdate.jsp</result>
+		</action>
+		<action name="roleInfoAction" class="roleInfoAction">
+			<result name="toListPage">/pages/admin/privilege/roleInfoList.jsp</result>
+			<result name="toAddPage">/pages/admin/privilege/roleInfoAdd.jsp</result>
+			<result name="toUpdatePage">/pages/admin/privilege/roleInfoUpdate.jsp</result>
+			<result name="loadTree">/pages/admin/privilege/roleTree.jsp</result>
+		</action>
+		<action name="privilegeAction" class="privilegeAction">
+			<result name="toListPage">/pages/admin/privilege/privList.jsp</result>
+			<result name="toAddPage">/pages/admin/privilege/privEdit.jsp</result>
+			<result name="popUpPage">/pages/popUp/popUpPrivilege.jsp</result>
+		</action>
+		<action name="privilegeResourceAction" class="privilegeResourceAction">
+			<result name="privResEdit">/pages/admin/privilege/privResEdit.jsp</result>
+			<result name="privResList">/pages/admin/privilege/privResList.jsp</result>
+		</action>
+		<action name="sysDictAction" class="sysDictAction">
+			<result name="toListPage">/pages/admin/sys/sysDictList.jsp</result>
+			<result name="toAddPage">/pages/admin/sys/sysDictAdd.jsp</result>
+		</action>
+		<action name="sysParmManage" class="sysParmManageAction">
+			<result name="list">/pages/admin/sysRunManager/sysParmManager.jsp</result>
+			<result name="add">/pages/admin/sysRunManager/sysParmAdd.jsp</result>
+			<result name="modify">/pages/admin/sysRunManager/sysParmModify.jsp</result>
+			<result name="toMain" type="redirect">sysParmManage.do?action=query&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="userLog" class="userLogAction">
+			<result name="success">/pages/admin/log/userLog.jsp</result>
+			<result name="detail">/pages/admin/log/userLogCurrentDetail.jsp</result>
+		</action>
+		<action name="sysLog" class="sysLogAction">
+			<result name="success">/pages/admin/log/sysLog.jsp</result>
+			<result name="detail">/pages/admin/log/sysLogCurrentDetail.jsp</result>
+		</action>
+		<action name="timer" class="timerAction">
+			<result name="timerManager">/pages/admin/sysRunManager/sysTimerManager.jsp</result>
+			<result name="list">/pages/admin/sysRunManager/timerList.jsp</result>
+			<result name="edit">/pages/admin/sysRunManager/timerEdit.jsp</result>
+		</action>
+		<action name="timerDo" class="timerDoAction">
+			<result name="list">/pages/admin/sysRunManager/timerDoList.jsp</result>
+		</action>
+	</package>
+</struts>

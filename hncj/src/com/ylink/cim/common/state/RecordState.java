@@ -15,9 +15,8 @@ public class RecordState extends AbstractState {
 	public static final RecordState UNCHECK = new RecordState("Œ¥…Û∫À", "00");
 	public static final RecordState CHECKED= new RecordState("“—…Û∫À", "01");
 	
-	protected RecordState(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("billStates", RecordState.ALL.values());
 	}
 
 	public static RecordState valueOf(String value) throws Exception {
@@ -29,7 +28,8 @@ public class RecordState extends AbstractState {
 		return state;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("billStates", RecordState.ALL.values());
+	protected RecordState(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

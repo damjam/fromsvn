@@ -1,7 +1,7 @@
 package com.ylink.cim.admin.dao;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDao;
 import flink.util.Pager;

@@ -1,14 +1,11 @@
 package com.ylink.cim.admin.view;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.domain.SysDict;
-import com.ylink.cim.admin.domain.SysDictId;
 import com.ylink.cim.admin.service.SysDictService;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.type.UserLogType;
@@ -19,94 +16,67 @@ import flink.consant.ActionMessageConstant;
 import flink.util.ExceptionUtils;
 import flink.util.LogUtils;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
-public class SysDictAction extends BaseDispatchAction {
+@Scope("prototype")
+@Component
+public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 
-	//int i=0;
-	private SysDictService sysDictService=(SysDictService)getService("sysDictService");;
-	
-	
-	public ActionForward listSysDict(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		SysDictActionForm sysDictActionForm =(SysDictActionForm)form;
-		SysDict sysDict=this.getSysDictBy(sysDictActionForm);
-		Paginater paginater = this.sysDictService.getSysDictPageList(sysDict, super.getPager(request));
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8604990429021666731L;
+	@Autowired
+	private SysDictService sysDictService;
+
+	public String listSysDict() throws Exception {
+		Paginater paginater = this.sysDictService.getSysDictPageList(model, super.getPager(request));
 		saveQueryResult(request, paginater);
-		
+
 		SysDictType.setInReq(request);
 		String msg = LogUtils.r("字典管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		return mapping.findForward(ActionConstant.TO_LIST_PAGE);
+		return ActionConstant.TO_LIST_PAGE;
 	}
 
-
-	private SysDict getSysDictBy(SysDictActionForm sysDictActionForm) {
-		
-		SysDictId id=new SysDictId();
-		id.setDictType(sysDictActionForm.getDictType());
-		id.setDictValue(sysDictActionForm.getDictValue());
-		
-		SysDict sysDict=new SysDict();
-		sysDict.setDictName(sysDictActionForm.getDictName());
-		sysDict.setRemark(sysDictActionForm.getRemark());
-		
-		sysDict.setId(id);
-		
-		return sysDict;
-	}
-	
-	public ActionForward toAddPage(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response){
+	public String toAddPage() {
 		SysDictType.setInReq(request);
-		return mapping.findForward(ActionConstant.TO_ADD_PAGE);
+		return ActionConstant.TO_ADD_PAGE;
 	}
-	
-	public ActionForward addSysDict(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		try{
-			
-			SysDictActionForm sysDictActionForm=(SysDictActionForm)form;
-			SysDict sysDict = this.getSysDictBy(sysDictActionForm);
-			
-			if(this.sysDictService.isExist(sysDict.getId())){
+
+	public String addSysDict() throws Exception {
+		try {
+			if (this.sysDictService.isExist(model.getId())) {
 				setResult(false, ActionMessageConstant.OPER_FAIL_EXIST, request);
-			}else{
-				this.sysDictService.saveSysDict(sysDict);
+			} else {
+				this.sysDictService.saveSysDict(model);
 				setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
 			}
-			String msg = LogUtils.r("添加字典成功,添加内容为：{?}",FeildUtils.toString(sysDict));
+			String msg = LogUtils.r("添加字典成功,添加内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-			return this.toAddPage(mapping, sysDictActionForm, request, response);
-		}catch (Exception e) {
+			return this.toAddPage();
+		} catch (Exception e) {
 			ExceptionUtils.logBizException(SysDictAction.class, e.getMessage());
-//			setResult(false, ActionMessageConstant.OPER_FAIL, request);
+			// setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			String msg = LogUtils.r("添加字典失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			throw e;
 		}
 	}
-	
-	public ActionForward deleteSysDict(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		try{
-			
-			SysDictActionForm sysDictActionForm=(SysDictActionForm)form;
-			SysDict sysDict = this.getSysDictBy(sysDictActionForm);
-			this.sysDictService.deleteSysDict(sysDict);
-			
+
+	public String deleteSysDict() throws Exception {
+
+		try {
+			this.sysDictService.deleteSysDict(model);
+
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			
-			sysDictActionForm.setDictValue(null);
-			sysDictActionForm.setDictName(null);
-			String msg = LogUtils.r("删除字典成功,删除内容为：{?}",FeildUtils.toString(sysDict));
+			model.getId().setDictValue(null);
+			model.setDictName(null);
+			String msg = LogUtils.r("删除字典成功,删除内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			return this.listSysDict(mapping, sysDictActionForm, request, response);
-		}catch (Exception e) {
+			return this.listSysDict();
+		} catch (Exception e) {
 			String msg = LogUtils.r("删除字典失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logBizException(this.getClass(), e.getMessage());
@@ -115,6 +85,10 @@ public class SysDictAction extends BaseDispatchAction {
 
 		}
 	}
-	
-	
+
+	public SysDict getModel() {
+		return model;
+	}
+
+	private SysDict model = new SysDict();
 }

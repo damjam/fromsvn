@@ -23,9 +23,9 @@ public class FeeType extends AbstractType {
 	public static final FeeType MAINTAIN = new FeeType("维修基金", "08");
 	public static final FeeType PARKING = new FeeType("车位租用费", "09");
 	public static final FeeType OTHER = new FeeType("其他", "99");
-	protected FeeType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("custTypes", FeeType.ALL.values());
 	}
 
 	public static FeeType valueOf(String value) throws Exception {
@@ -37,7 +37,8 @@ public class FeeType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("custTypes", FeeType.ALL.values());
+	protected FeeType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

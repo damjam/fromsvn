@@ -19,6 +19,33 @@ import flink.util.Paginater;
 public class LimitGroupInfoDaoImpl extends BaseDaoHibernateImpl implements LimitGroupInfoDao {
 
 	
+	private List<LimitGroupInfo> convertToGroupInfo(List data) {
+	
+		List<LimitGroupInfo> ls=new ArrayList<LimitGroupInfo>();
+		for(int i=0;i<data.size();i++){
+			Object[] objects =(Object[])data.get(i);
+			LimitGroupInfo limitGroupInfo=(LimitGroupInfo)objects[0];
+			SysDict sysDict=(SysDict)objects[1];
+			
+			limitGroupInfo.setUserTypeName(sysDict.getDictName());
+			
+			ls.add(limitGroupInfo);
+		}
+		return ls;
+	}
+
+	
+	public List<LimitGroupInfo> getAll() {
+		
+		QueryHelper helper=new QueryHelper();
+		helper.append("from LimitGroupInfo lgi");
+		helper.append("where 1=1");
+
+		return super.getList(helper);
+	}
+
+
+	
 	public Paginater getLimitGroupInfoPageList(
 			LimitGroupInfo limitGroupInfo, Pager pager) {
 	
@@ -36,24 +63,7 @@ public class LimitGroupInfoDaoImpl extends BaseDaoHibernateImpl implements Limit
 		return pageData;
 	}
 
-	
-	private List<LimitGroupInfo> convertToGroupInfo(List data) {
-	
-		List<LimitGroupInfo> ls=new ArrayList<LimitGroupInfo>();
-		for(int i=0;i<data.size();i++){
-			Object[] objects =(Object[])data.get(i);
-			LimitGroupInfo limitGroupInfo=(LimitGroupInfo)objects[0];
-			SysDict sysDict=(SysDict)objects[1];
-			
-			limitGroupInfo.setUserTypeName(sysDict.getDictName());
-			
-			ls.add(limitGroupInfo);
-		}
-		return ls;
-	}
 
-
-	
 	protected Class getModelClass() {
 		
 		return LimitGroupInfo.class;
@@ -70,16 +80,6 @@ public class LimitGroupInfoDaoImpl extends BaseDaoHibernateImpl implements Limit
 		helper.append("select distinct lgi.userType from LimitGroupInfo lgi");
 		helper.append(")");
 		
-		return super.getList(helper);
-	}
-
-
-	public List<LimitGroupInfo> getAll() {
-		
-		QueryHelper helper=new QueryHelper();
-		helper.append("from LimitGroupInfo lgi");
-		helper.append("where 1=1");
-
 		return super.getList(helper);
 	}
 

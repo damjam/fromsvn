@@ -18,11 +18,6 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Autowired
 	private UserRoleDao userRoleDao;
 	
-	public void setUserRoleDao(UserRoleDao userRoleDao) {
-		this.userRoleDao = userRoleDao;
-	}
-
-	
 	public void deleteUserRole(UserRoleId id) throws BizException {
 		try{
 			this.userRoleDao.deleteById(id);
@@ -31,11 +26,31 @@ public class UserRoleServiceImpl implements UserRoleService {
 		}
 	}
 
+	
 	public Paginater getUserRolePageList(UserRole userRole, Pager pager)
 			throws BizException {
 		
 		return this.userRoleDao.getUserRolePageList(userRole, pager);
 	}
+
+	public Paginater getWaitAssignRolePageList(String userId, Pager pager)
+			throws BizException {
+		 
+		return this.userRoleDao.getWaitAssignRolePageList(userId, pager);
+	}
+
+	public void saveUserRole(String userId, String[] roleIds) throws BizException {
+		userRoleDao.delRoleByUser(userId);
+		for (int i = 0; i < roleIds.length; i++) {
+			UserRole userRole = new UserRole();
+			UserRoleId id = new UserRoleId();
+			id.setRoleId(roleIds[i]);
+			id.setUserId(userId);
+			userRole.setId(id);
+			userRoleDao.saveOrUpdate(userRole);
+		}
+	}
+
 
 	public void saveUserRole(UserRole userRole) throws BizException {
 		
@@ -48,23 +63,8 @@ public class UserRoleServiceImpl implements UserRoleService {
 	}
 
 
-	public Paginater getWaitAssignRolePageList(String userId, Pager pager)
-			throws BizException {
-		 
-		return this.userRoleDao.getWaitAssignRolePageList(userId, pager);
-	}
-
-
-	public void saveUserRole(String userId, String[] roleIds) throws BizException {
-		userRoleDao.delRoleByUser(userId);
-		for (int i = 0; i < roleIds.length; i++) {
-			UserRole userRole = new UserRole();
-			UserRoleId id = new UserRoleId();
-			id.setRoleId(roleIds[i]);
-			id.setUserId(userId);
-			userRole.setId(id);
-			userRoleDao.saveOrUpdate(userRole);
-		}
+	public void setUserRoleDao(UserRoleDao userRoleDao) {
+		this.userRoleDao = userRoleDao;
 	}
 
 

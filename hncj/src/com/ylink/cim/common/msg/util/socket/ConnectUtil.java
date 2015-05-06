@@ -14,24 +14,6 @@ import flink.etc.BizException;
 public class ConnectUtil {
 	private static Logger logger = Logger.getLogger(ConnectUtil.class);
 
-	public static void sendMsg(Socket socket, String sendMsg, int timeoutSeconds, String charset) throws BizException {
-		try {
-			OutputStream os = socket.getOutputStream();
-			os.write(sendMsg.getBytes(charset));
-			os.flush();
-
-		} catch (Exception e) {
-			if (socket != null) {
-				try {
-					socket.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-			throw new BizException("Socket通讯异常:" + e.getMessage());
-		}
-	}
-
 	public static String recvMsg(ConnectionAdapter socket, int timeoutSeconds, String charset) throws BizException {
 		try {
 			socket.setSoTimeout(3000);
@@ -57,6 +39,24 @@ public class ConnectUtil {
 			throw new BizException("接收报文出错:" + e.getMessage());
 		} finally {
 			// socket.close();
+		}
+	}
+
+	public static void sendMsg(Socket socket, String sendMsg, int timeoutSeconds, String charset) throws BizException {
+		try {
+			OutputStream os = socket.getOutputStream();
+			os.write(sendMsg.getBytes(charset));
+			os.flush();
+
+		} catch (Exception e) {
+			if (socket != null) {
+				try {
+					socket.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			throw new BizException("Socket通讯异常:" + e.getMessage());
 		}
 	}
 

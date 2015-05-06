@@ -24,7 +24,26 @@ public class PushPlan implements java.io.Serializable {
 	private String busiType;
 	private String subsState;
 	private String custType;
-	
+
+	private String startCreateDate;
+	private String endCreateDate;
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
+
 	public String getBranchNo() {
 		return branchNo;
 	}

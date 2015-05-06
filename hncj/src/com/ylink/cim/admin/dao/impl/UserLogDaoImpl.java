@@ -4,9 +4,9 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.UserLogDao;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.common.type.BranchType;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
@@ -15,6 +15,10 @@ import flink.util.Paginater;
 
 @Component("userLogDao")
 public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
+	protected Class getModelClass() {
+		return UserLog.class;
+	}
+
 	/**
 	 * 查询结果转化成hashMap
 	 * 
@@ -40,10 +44,6 @@ public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
 	public void saveUserLog(UserLog userLog) throws Exception {
 		this.save(userLog);
 
-	}
-
-	protected Class getModelClass() {
-		return UserLog.class;
 	}
 
 }

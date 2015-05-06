@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import flink.util.AbstractType;
 import flink.util.ExceptionUtils;
 
-
 public class DepositBillState extends AbstractType {
 	public static Map<String, DepositBillState> ALL = new LinkedHashMap<String, DepositBillState>();
 
 	public static final DepositBillState PAID = new DepositBillState("ря╫иди", "00");
 	public static final DepositBillState RETURN = new DepositBillState("рямк╩╧", "01");
-	
+
 	protected DepositBillState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

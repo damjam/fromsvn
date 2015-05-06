@@ -7,10 +7,9 @@ import flink.etc.BizException;
 public interface IdFactoryService {
 
 	public void saveIdFactory(IdFactory idFactory) throws BizException;
-	
+
 	public void deleteIdFactory(String seqIdName) throws BizException;
-	
+
 	public String generateId(String seqIdName) throws BizException;
-	
-	
+
 }

@@ -18,14 +18,13 @@ import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("sysParmDao")
-public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements SysParmDao {
+public class SysParmDaoImpl extends BaseDaoHibernateImpl implements SysParmDao {
 
 	public void deleteSysParmById(String id) throws Exception {
 
 		this.deleteById(id);
 
 	}
-
 
 	public SysParm findSysParmById(String id) throws Exception {
 
@@ -70,8 +69,6 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 	public boolean hasParm(String code) throws Exception {
 		return this.findById(code) != null;
 	}
-
-	
 
 	public boolean isModify(String code) throws Exception {
 		// TODO Auto-generated method stub
@@ -131,6 +128,5 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 
 		update(sysParm);
 	}
-
 
 }

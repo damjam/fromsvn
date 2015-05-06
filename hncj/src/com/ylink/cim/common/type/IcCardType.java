@@ -13,9 +13,8 @@ public class IcCardType extends AbstractType {
 	public static final IcCardType ELEC = new IcCardType("µç¿¨", "00");
 	public static final IcCardType GAS = new IcCardType("È¼Æø¿¨", "01");
 	public static final IcCardType WATER = new IcCardType("Ë®¿¨", "02");
-	protected IcCardType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("icCardTypes", IcCardType.ALL.values());
 	}
 
 	public static IcCardType valueOf(String value)  {
@@ -23,7 +22,8 @@ public class IcCardType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("icCardTypes", IcCardType.ALL.values());
+	protected IcCardType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

@@ -5,48 +5,38 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONObject;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.domain.BranchParm;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.BranchParmService;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
 /**
  * 系统参数管理action
  */
-public class BranchParmManageAction extends BaseDispatchAction {
+public class BranchParmManageAction extends BaseAction implements ModelDriven<BranchParm> {
 
-	private static final Logger logger = Logger.getLogger(LoginAction.class);
+	private static final long serialVersionUID = 3419813256406264742L;
 
-	BranchParmService branchParmService = (BranchParmService) getService("branchParmService");
+	private static final Logger logger = Logger.getLogger(BranchParmManageAction.class);
 
-	public void clearData(BranchParmManageActionForm branchParmManageActionForm) {
-		branchParmManageActionForm.setCode("");
-		branchParmManageActionForm.setParname("");
-		branchParmManageActionForm.setParvalue("");
-		branchParmManageActionForm.setIfmodify("");
-		branchParmManageActionForm.setUsercode("");
-		branchParmManageActionForm.setUpdatedate("");
-		branchParmManageActionForm.setRemark("");
-	}
+	@Autowired
+	BranchParmService branchParmService;
 
 	/**
 	 * 页面删除
@@ -58,74 +48,28 @@ public class BranchParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 
-		BranchParmManageActionForm branchParmManageActionForm = (BranchParmManageActionForm) form;
 		UserInfo sessionUser = getSessionUser(request);
 		try {
-			branchParmService.delete(branchParmManageActionForm.getCode());
+			branchParmService.delete(model.getCode());
 			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_D, sessionUser.getUserId() + "("
-					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + branchParmManageActionForm.getCode() + "成功");
+					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.DELETE_SUCCESS);
-			this.clearData(branchParmManageActionForm);
 			String msg = LogUtils.r("删除系统参数成功,删除内容为：{?}", request, getCurPrivilegeCode(request), Constants.LOG_USER_D,
-					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code="
-							+ branchParmManageActionForm.getCode() + "成功");
+					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode()
+							+ "成功");
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			return this.query(mapping, branchParmManageActionForm, request, response);
+			model.setCode(null);
+			return this.query();
 		} catch (Exception e) {
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")删除系统参数 addrId=" + branchParmManageActionForm.getCode() + "失败";
+					+ ")删除系统参数 addrId=" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
 			String msg = LogUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(), error);
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
-			return this.query(mapping, branchParmManageActionForm, request, response);
+			return this.query();
 		}
-	}
-
-	/**
-	 * struts actionForm 转化 po
-	 * 
-	 * @param branchParmManageActionForm
-	 */
-	public BranchParm getBranchParmFromActionForm(HttpServletRequest request, BranchParmManageActionForm branchParmManageActionForm) {
-
-		BranchParm branchParm = new BranchParm();
-
-		branchParm.setCode(branchParmManageActionForm.getCode());
-		branchParm.setParname(branchParmManageActionForm.getParname());
-		branchParm.setParvalue(branchParmManageActionForm.getParvalue());
-		branchParm.setRemark(branchParmManageActionForm.getRemark());
-		branchParm.setBranchNo(getSessionBranchNo(request));
-		if (null == branchParm.getCode()) {
-			branchParm.setCode("");
-		}
-
-		if (null == branchParm.getParname()) {
-			branchParm.setParname("");
-		}
-
-		return branchParm;
-
-	}
-
-	/**
-	 * hibernate Po 转化 struts
-	 * 
-	 * @param branchParm
-	 * @return
-	 */
-	public BranchParmManageActionForm getBranchParmManageActionFormFromBranchParm(BranchParm branchParm) {
-
-		BranchParmManageActionForm branchParmManageActionForm = new BranchParmManageActionForm();
-
-		branchParmManageActionForm.setCode(branchParm.getCode());
-		branchParmManageActionForm.setParname(branchParm.getParname());
-		branchParmManageActionForm.setParvalue(branchParm.getParvalue());
-		branchParmManageActionForm.setRemark(branchParm.getRemark());
-
-		return branchParmManageActionForm;
 	}
 
 	/**
@@ -138,23 +82,20 @@ public class BranchParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward query(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String query() throws Exception {
 
-		Paginater paginater = branchParmService.findAll(getPager(request), getBranchParmFromActionForm(request,
-				(BranchParmManageActionForm) form));
-		request.setAttribute("branchParmList", paginater.getList());
-		request.setAttribute(Paginater.PAGINATER, paginater);
+		Paginater paginater = branchParmService.findAll(getPager(request), model);
+		saveQueryResult(request, paginater);
 		String msg = LogUtils.r("系统参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		return forward("/pages/admin/branchParam/branchParmManager.jsp");
+		return "list";
+		// "/pages/admin/sysRunManager/sysParmManager.jsp"
 	}
 
 	/**
 	 * 重新加载系统参数.
 	 */
-	public ActionForward reload(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String reload() throws Exception {
 		try {
 			ParaManager.init();
 			respond(response, "重新加载系统参数完成");
@@ -177,46 +118,46 @@ public class BranchParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		return forward("/pages/admin/branchParam/branchParmAdd.jsp");
+	public String toAdd() throws Exception {
+		return "add";
+		// "/pages/admin/sysRunManager/sysParmAdd.jsp";
 	}
 
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		BranchParmManageActionForm branchParmManageActionForm = (BranchParmManageActionForm) form;
+	public String save() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		if (null == userCode) {
 			userCode = "";
 		}
-
 		UserInfo sessionUser = getSessionUser(request);
 		try {
-			branchParmManageActionForm.setUsercode(userCode);
-			branchParmService.save(this.getBranchParmFromActionForm(request, branchParmManageActionForm));
-			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_A, "用户"
-					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),新增系统参数 code="
-					+ branchParmManageActionForm.getCode() + "成功");
-			this.clearData(branchParmManageActionForm);
+			if (!isValidToken()) {
+				return toAdd();
+			}
+			branchParmService.save(model);
+			this.saveUserLog(
+					request,
+					getCurPrivilegeCode(request),
+					Constants.LOG_USER_A,
+					"用户" + sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),新增系统参数 code="
+							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.SAVE_SUCCESS);
-			setReturnUrl("/branchParmManage.do?action=query", request);
-			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(this.getBranchParmFromActionForm(request,
-					branchParmManageActionForm)));
+			setReturnUrl("/sysParmManage.do?action=query", request);
+			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-			return success(mapping);
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (BizException e) {
 			// e.printStackTrace();
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
 
-			+ ")新增系统参数 code" + branchParmManageActionForm.getCode() + "失败";
+			+ ")新增系统参数 code" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
 			this.logErrorWithReason(request, getCurPrivilegeCode(request), error, e.getMessage());
 			setResult(false, e.getMessage(), request);
 			String msg = LogUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-			return mapping.findForward("save");
+			setResult(false, e.getMessage(), request);
+			return toAdd();
 		}
 
 	}
@@ -239,38 +180,35 @@ public class BranchParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward saveUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		BranchParmManageActionForm actionForm = (BranchParmManageActionForm) form;
+	public String saveUpdate() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		UserInfo sessionUser = getSessionUser(request);
 		if (null == userCode) {
 			userCode = "";
 		}
-
 		try {
-			actionForm.setUsercode(userCode);
-			branchParmService.update(this.getBranchParmFromActionForm(request, actionForm));
-			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_U, "用户"
-					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),修改系统参数 code="
-					+ actionForm.getCode() + "成功");
-			this.clearData(actionForm);
+			branchParmService.update(model);
+			this.saveUserLog(
+					request,
+					getCurPrivilegeCode(request),
+					Constants.LOG_USER_U,
+					"用户" + sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),修改系统参数 code="
+							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_SUCCESS);
-			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(this.getBranchParmFromActionForm(request,
-					actionForm)));
+			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
-			return query(mapping, actionForm, request, response);
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (Exception e) {
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")修改系统参数 code=" + actionForm.getCode() + "失败";
+					+ ")修改系统参数 code=" + model.getCode() + "失败";
 			logger.debug(error + ",原因：" + e.getMessage());
 			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
 					error + e.getMessage());
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_FAIL);
 			String msg = LogUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
-			return mapping.findForward("modify");
+			return update();
 		}
 
 	}
@@ -285,27 +223,21 @@ public class BranchParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward update(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		BranchParm branchParm = branchParmService.findById(((BranchParmManageActionForm) form).getCode());
-		request.setAttribute("branchParm", branchParm);
-		// BranchParmManageActionForm branchParmManageActionForm =
-		// getBranchParmManageActionFormFromBranchParm(branchParm);
-		// BeanUtils.copyProperties(form, branchParmManageActionForm);
-
-		return mapping.findForward("modify");
+	public String update() throws Exception {
+		BranchParm parm = branchParmService.findById(model.getCode());
+		BeanUtils.copyProperties(model, parm);
+		// setModel(parm);
+		return "modify";
 	}
 
-	public ActionForward backupData(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String backupData() throws Exception {
 		try {
 			JSONObject jsonObject = new JSONObject();
 			String today = DateUtil.getCurrentDate();
 			Runtime rt = Runtime.getRuntime();
 			String dir = "D:\\data_back";
 			File file = new File(dir);
-			//file.make
+			// file.make
 			if (!file.exists()) {
 				file.mkdir();
 			}
@@ -322,7 +254,7 @@ public class BranchParmManageAction extends BaseDispatchAction {
 			System.out.println("备份成功!");
 			// 删除以往文件
 			String yesterday = DateUtil.getDateYYYYMMDD(DateUtil.addDays(DateUtil.getCurrent(), -1));
-			File oldFile = new File(dir+"\\cims" + yesterday + ".sql");
+			File oldFile = new File(dir + "\\cims" + yesterday + ".sql");
 			oldFile.deleteOnExit();
 			jsonObject.put("tip", "备份成功");
 			respond(response, jsonObject.toString());
@@ -334,4 +266,15 @@ public class BranchParmManageAction extends BaseDispatchAction {
 
 		return null;
 	}
+
+	public BranchParm getModel() {
+		return model;
+	}
+
+	private BranchParm model = new BranchParm();
+
+	public void setModel(BranchParm model) {
+		this.model = model;
+	}
+
 }

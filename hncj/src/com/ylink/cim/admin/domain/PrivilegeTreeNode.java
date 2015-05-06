@@ -12,7 +12,7 @@ public class PrivilegeTreeNode implements Serializable {
 	private String tip = "";
 	private String isMenu;
 	private String uri = "javascript:;";
-	
+
 	public String getUri() {
 		return uri;
 	}
@@ -24,31 +24,31 @@ public class PrivilegeTreeNode implements Serializable {
 	public String getCode() {
 		return code;
 	}
-	
+
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	public String getParentCode() {
 		return parentCode;
 	}
-	
+
 	public void setParentCode(String parentCode) {
 		this.parentCode = parentCode;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getTip() {
 		return tip;
 	}
-	
+
 	public void setTip(String tip) {
 		this.tip = tip;
 	}

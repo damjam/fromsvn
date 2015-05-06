@@ -14,12 +14,13 @@ public class RemainDays extends AbstractType {
 	public static final RemainDays LEFT_30 = new RemainDays("30天以内", "30");
 	public static final RemainDays LEFT_15 = new RemainDays("15天以内", "15");
 	public static final RemainDays LEFT_7 = new RemainDays("7天以内", "7");
+
 	protected RemainDays(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
 	}
 
-	public static RemainDays valueOf(String value)  {
+	public static RemainDays valueOf(String value) {
 		RemainDays type = ALL.get(value);
 		return type;
 	}

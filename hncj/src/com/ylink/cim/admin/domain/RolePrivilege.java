@@ -8,7 +8,7 @@ public class RolePrivilege implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private RolePrivilegeId id;
 
 	public RolePrivilege() {
@@ -26,7 +26,6 @@ public class RolePrivilege implements Serializable {
 		this.id = id;
 	}
 
-	
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -34,7 +33,6 @@ public class RolePrivilege implements Serializable {
 		return result;
 	}
 
-	
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -51,5 +49,4 @@ public class RolePrivilege implements Serializable {
 		return true;
 	}
 
-	
 }

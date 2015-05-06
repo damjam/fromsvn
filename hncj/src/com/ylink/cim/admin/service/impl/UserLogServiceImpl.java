@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.UserLogDao;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.Assert;

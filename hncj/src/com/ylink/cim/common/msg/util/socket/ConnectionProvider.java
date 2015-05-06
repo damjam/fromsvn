@@ -8,8 +8,25 @@ import org.apache.log4j.Logger;
 import com.ylink.cim.common.msg.SocketParams;
 
 public class ConnectionProvider {
+	/**
+	 * 静态方法，生成此连接池实现的对象
+	 * 
+	 * @param pro
+	 *            Properties 此连接池所需要的所有参数的封装
+	 * @throws UnknownHostException
+	 *             主机无法找到
+	 * @throws IOException
+	 *             与服务器无法建立连接
+	 * @return ConnectionProvider 返回父类ConnectionProvider
+	 */
+	private static class ResourceHolder {
+		public static ConnectionProvider resource = new ConnectionProvider();
+	}
 	// private static Object object_lock = new Object();
 	private static Logger logger = Logger.getLogger(ConnectionProvider.class);
+	public static ConnectionProvider getInstance() {
+		return ResourceHolder.resource;
+	}
 	private String ip;
 	private int port;
 	public static final String SERVER_IP = "SERVER_HOST_IP";
@@ -21,10 +38,12 @@ public class ConnectionProvider {
 	 * 默认的最大连接数
 	 */
 	private int max_size = 20;
+
 	/**
 	 * 默认的最小连接数
 	 */
 	private int min_size = 10;
+
 	/**
 	 * Socket connection池数组
 	 */
@@ -58,15 +77,15 @@ public class ConnectionProvider {
 	}
 
 	/**
-	 * 判断是否已经池化
-	 * 
-	 * @return boolean 如果池化返回ture,反之返回false
+	 * 注销此连接池
 	 */
-	public boolean isPooled() {
-		if (socketpool != null) {
-			return true;
-		} else
-			return false;
+	public void destroy() {
+		for (int i = 0; i < socketpool.length; i++) {
+			if (socketpool[i] != null) {
+				ConnectionAdapter adapter = (ConnectionAdapter) socketpool[i];
+				adapter.destroy();
+			}
+		}
 	}
 
 	/**
@@ -120,6 +139,18 @@ public class ConnectionProvider {
 	}
 
 	/**
+	 * 判断是否已经池化
+	 * 
+	 * @return boolean 如果池化返回ture,反之返回false
+	 */
+	public boolean isPooled() {
+		if (socketpool != null) {
+			return true;
+		} else
+			return false;
+	}
+
+	/**
 	 * 重新启动连接池
 	 * 
 	 * @throws UnknownHostException
@@ -128,37 +159,6 @@ public class ConnectionProvider {
 	public void restart() throws UnknownHostException, IOException {
 		destroy();
 		init();
-	}
-
-	/**
-	 * 注销此连接池
-	 */
-	public void destroy() {
-		for (int i = 0; i < socketpool.length; i++) {
-			if (socketpool[i] != null) {
-				ConnectionAdapter adapter = (ConnectionAdapter) socketpool[i];
-				adapter.destroy();
-			}
-		}
-	}
-
-	/**
-	 * 静态方法，生成此连接池实现的对象
-	 * 
-	 * @param pro
-	 *            Properties 此连接池所需要的所有参数的封装
-	 * @throws UnknownHostException
-	 *             主机无法找到
-	 * @throws IOException
-	 *             与服务器无法建立连接
-	 * @return ConnectionProvider 返回父类ConnectionProvider
-	 */
-	private static class ResourceHolder {
-		public static ConnectionProvider resource = new ConnectionProvider();
-	}
-
-	public static ConnectionProvider getInstance() {
-		return ResourceHolder.resource;
 	}
 
 }

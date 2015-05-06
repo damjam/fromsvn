@@ -20,9 +20,8 @@ public class AipMode extends AbstractType {
 	public static final AipMode MODE_1 = new AipMode("½ð¶î", "1");
 	public static final AipMode MODE_2 = new AipMode("ÖØÁ¿", "2");
 
-	protected AipMode(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("aipModes", AipMode.ALL.values());
 	}
 
 	public static AipMode valueOf(String value) throws Exception {
@@ -34,7 +33,8 @@ public class AipMode extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("aipModes", AipMode.ALL.values());
+	protected AipMode(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

@@ -15,11 +15,6 @@ public class InvestTime extends AbstractType {
 	public static final InvestTime TYPE_3 = new InvestTime("累计扣款金额", "3");
 	public static final InvestTime TYPE_4 = new InvestTime("累计定投重量", "4");
 
-	protected InvestTime(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
-	}
-
 	public static InvestTime valueOf(String value) throws Exception {
 
 		InvestTime type = ALL.get(value);
@@ -27,5 +22,10 @@ public class InvestTime extends AbstractType {
 			ExceptionUtils.logException(InvestTime.class, "类型错误");
 		}
 		return type;
+	}
+
+	protected InvestTime(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

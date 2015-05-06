@@ -18,11 +18,13 @@ public class IdCardType extends AbstractType {
 		super(name, value);
 		ALL.put(value, this);
 	}
+
 	protected IdCardType(String name, String value, String ccbCardType) {
 		super(name, value);
 		this.ccbCardType = ccbCardType;
 		ALL.put(value, this);
 	}
+
 	public static IdCardType valueOf(String value) {
 
 		IdCardType type = ALL.get(value);
@@ -31,9 +33,11 @@ public class IdCardType extends AbstractType {
 		}
 		return type;
 	}
-	public String getCcbCardType(){
+
+	public String getCcbCardType() {
 		return this.ccbCardType;
 	}
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("idCardTypes", IdCardType.ALL.values());
 	}

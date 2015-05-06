@@ -19,9 +19,8 @@ public class AccountChangeType extends AbstractType {
 	public static final AccountChangeType WITHDRAW = new AccountChangeType("Ã·œ÷", "02");
 	
 	
-	protected AccountChangeType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("changeTypes", AccountChangeType.ALL.values());
 	}
 
 	public static AccountChangeType valueOf(String value) throws Exception {
@@ -33,7 +32,8 @@ public class AccountChangeType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("changeTypes", AccountChangeType.ALL.values());
+	protected AccountChangeType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

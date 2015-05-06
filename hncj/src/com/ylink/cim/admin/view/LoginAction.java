@@ -10,62 +10,55 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.domain.Privilege;
 import com.ylink.cim.admin.domain.PrivilegeResource;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.PrivilegeHelper;
-import com.ylink.cim.busioper.dao.NoticeMsgRecordDao;
-import com.ylink.cim.busioper.domain.NoticeMsgRecord;
-import com.ylink.cim.common.state.SignState;
-import com.ylink.cim.common.type.BranchType;
+import com.ylink.cim.admin.service.UserService;
 import com.ylink.cim.common.type.UserLogType;
-import com.ylink.cim.common.type.UserType;
-import com.ylink.cim.cust.domain.CustInfo;
-import com.ylink.cim.cust.service.CustInfoService;
-import com.ylink.cim.invest.dao.SignContractDao;
-import com.ylink.cim.user.domain.UserInfo;
-import com.ylink.cim.user.service.UserService;
 
 import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
 import flink.consant.Constants;
 import flink.etc.BizException;
-import flink.etc.Symbol;
 import flink.util.DateUtil;
 import flink.util.IPrivilege;
 import flink.util.LogUtils;
 import flink.util.LoggerCacheUtils;
 import flink.util.WebResource;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
+@Scope("prototype")
+@Component
+public class LoginAction extends BaseAction implements ModelDriven<UserInfo>{
 
-public class LoginAction extends BaseDispatchAction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	private final UserService userService = (UserService) getService("userService");
-	private final CustInfoService custInfoService = (CustInfoService) getService("custInfoService");
-	private NoticeMsgRecordDao noticeMsgRecordDao = (NoticeMsgRecordDao)getService("noticeMsgRecordDao");
-	private SignContractDao signContractDao = (SignContractDao)getService("signContractDao");
+	@Autowired
+	private UserService userService;
 	/**
 	 * 加载登录用户权限菜单中, 加载第三级菜单.
 	 */
-	public ActionForward loadUserPrivilegeTopButton(final ActionMapping mapping,
-		  ActionForm form, final HttpServletRequest request,
-		 HttpServletResponse response) throws Exception {
+	public String loadUserPrivilegeTopButton() throws Exception {
 		String parentCode = request.getParameter("parentCode");// 第一级菜单权限编号(为根节点的子节点).
 		String privilegeCode = request.getParameter("privilegeCode");// 第二级菜单权限编号.
 		Privilege menuTree = (Privilege) WebUtils.getSessionAttribute(request, Constants.USER_MENU);//目录树
 
 		// 查询第三级菜单.
 		request.setAttribute("menus", getPrivilegeTopButton(menuTree, parentCode, privilegeCode));
-		return forward("/pages/layout/topbutton.jsp");
+		return "topbutton";
 	}
 	
 	/**
@@ -75,11 +68,10 @@ public class LoginAction extends BaseDispatchAction {
 	 * @param form
 	 * @param request
 	 * @param response
-	 * @return
+	 * @returnlo
 	 * @throws Exception
 	 */
-	public ActionForward logOff(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String logOff() throws Exception {
 		String userId="";
 		try {
 			UserInfo userInfo = (UserInfo)request.getSession().getAttribute(Constants.SESSION_USER);
@@ -94,37 +86,34 @@ public class LoginAction extends BaseDispatchAction {
 				tag = BranchType.valueOf(branchNo).getTag();
 			}*/
 			setResult(true, "用户强制离线成功", request);
-			ActionForward forward = new ActionForward("/");
 			/*
 			if (StringUtils.isNotEmpty(tag)) {
 				forward = new ActionForward("/"+tag);
 			}*/
-			//if (!branchType.getValue().equals(BranchType.HQ_0000.getValue())) {
+			//if (!branchType.getValue().equals(BranchType.SZGOLD.getValue())) {
 				
 			//}
 			CPSHttpSessionListener.logOff(userId);
 			WebUtils.setSessionAttribute(request, "tag", null);
 			request.getSession().invalidate();
-			forward.setRedirect(true);
 			String msg = LogUtils.r("用户："+userId+" 登出成功");
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
-			return forward;
-			//return mapping.findForward("index");// 跳到登陆页面
+			return "index";
+			//return mapping.findForward("index");// 跳到登录页面
 		} catch (Exception e) {
 			String msg = LogUtils.r("用户："+userId+" 登出失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.OTHER.getValue(), msg);
-			return mapping.findForward("index");// 跳到登陆页面
+			return "index";// 跳到登录页面
 		}
 	}
 	
 
-	public ActionForward login(final ActionMapping mapping, final ActionForm form,
-			final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+	public String login() throws Exception {
 		String verifyCode = request.getParameter("verifyCode");
 		String randomCode = (String) request.getSession().getAttribute("randomCode");
 		if (!StringUtils.equalsIgnoreCase(verifyCode, randomCode)) {
 			 setResult(false, "验证码不正确", request);
-			 return forward("/index_old.jsp");
+			 return ActionConstant.TO_LOGIN_PAGE;
 		}
 		String loginId = request.getParameter("code");
 		String password = request.getParameter("password");
@@ -150,7 +139,7 @@ public class LoginAction extends BaseDispatchAction {
 			
 			if(null == userInfo){
 				setResult(false, ActionMessageConstant.OPER_FAIL_NO_USER, request);
-				return mapping.findForward(ActionConstant.TO_LOGIN_PAGE);
+				return ActionConstant.TO_LOGIN_PAGE;
 			}
 			if(!password.equals(userInfo.getLoginPwd())){
 				//Integer errorTimes = userService.updateErrorInfo(userInfo.getUserId());
@@ -159,7 +148,7 @@ public class LoginAction extends BaseDispatchAction {
 				//} else {
 				//	setResult(false, ActionMessageConstant.OPER_FAIL_USER_LOCKED, request);
 				//}
-				return mapping.findForward(ActionConstant.TO_LOGIN_PAGE);
+				return ActionConstant.TO_LOGIN_PAGE;
 			}
 			//账号信息正确,检查是否已被锁定
 			/*
@@ -169,37 +158,16 @@ public class LoginAction extends BaseDispatchAction {
 			}*/
 			WebUtils.setSessionAttribute(request, Constants.SESSION_USER, userInfo);//将用户保存到session中
 			String tag = request.getParameter("tag");
-			WebUtils.setSessionAttribute(request, Constants.BRANCH_TYPE, BranchType.getByTag(tag));
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TAG, tag);
-			if(StringUtils.equals(userInfo.getUserType(), UserType.CUSTOM.getValue())) {
-				//客户用户
-				CustInfo custInfo = custInfoService.getCustInfoByUserId(userInfo.getUserId());//用户不存在没有判断
-				if(null != custInfo) {
-					WebUtils.setSessionAttribute(request, Constants.SESSION_CUSTOM_ID, custInfo.getId());//将客户Id保存到session中
-					WebUtils.setSessionAttribute(request, Constants.SESSION_CUSTOM, custInfo);//将客户信息保存到session中
-					Map<String, Object> map = getParaMap();
-					map.put("custId", custInfo.getId());
-					map.put("branchNo", getSessionBranch(request).getValue());
-					map.put("state", SignState.SIGNED.getValue());
-					String[] investAcctNo = signContractDao.findAcctByCust(map);
-					WebUtils.setSessionAttribute(request, Constants.INVEST_ACCT_NOS, investAcctNo);
-				}
-				Map<String, Object> map = getParaMap();
-				map.put("custId", custInfo.getId());
-				map.put("read", Symbol.NO);
-				List<NoticeMsgRecord> list = noticeMsgRecordDao.findByParams(map);
-				request.setAttribute("msgCnt", list.size());
-				//request.setAttribute("msgCnt", list.size());
-				WebUtils.setSessionAttribute(request, CookieDealer.FROM_BRANCH, custInfo.getBranchNo());
-			}
+				
 			CookieDealer.saveBranch(userInfo.getBranchNo(), response);
 			CPSHttpSessionListener.putSession(userInfo.getUserId(), request.getSession());
 			initDefaultParam(request);
 			// 加载用户权限和菜单.
 			loadPrivilege(userInfo, request);
-			String msg = LogUtils.r("用户："+loginId+" 登陆成功");
+			String msg = LogUtils.r("用户："+loginId+" 登录成功");
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
-			return mapping.findForward(ActionConstant.TO_MAIN_PAGE);
+			return ActionConstant.TO_MAIN_PAGE;
 		} catch (Throwable e) {
 			e.printStackTrace();
 			String err = "登录异常：" + e.getMessage();
@@ -208,11 +176,12 @@ public class LoginAction extends BaseDispatchAction {
 			String tag = getSessionBranchTag(request);
 			String msg = LogUtils.r("用户："+loginId+" 登出失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.OTHER.getValue(), msg);
-			return forward("/"+tag);
+			return ActionConstant.TO_LOGIN_PAGE;
 		}
 	}
 	
 	private void initDefaultParam(HttpServletRequest request) {
+		//
 		WebUtils.setSessionAttribute(request, "defStartDate", DateUtil.getDateYYYYMMDD(DateUtil.addMonths(DateUtil.getCurrent(), -3)));
 		WebUtils.setSessionAttribute(request, "defEndDate", DateUtil.getCurrentDate());
 	}
@@ -401,7 +370,7 @@ public class LoginAction extends BaseDispatchAction {
 		List<WebResource> resources = this.userService.getPrivilegeResources(allPriv);
 		WebUtils.setSessionAttribute(request, Constants.USER_PRIVILEGE_RES, WebResource.map(resources));
 		
-		//将登陆的权限资源加入
+		//将登录的权限资源加入
 		dealWithLogPri(request);
 		
 		//设置所有权限的路径
@@ -420,11 +389,11 @@ public class LoginAction extends BaseDispatchAction {
 		root.setCode(Constants.ROOT_PRIVILEGE_CODE);
 		IPrivilege priviligeTree = PrivilegeHelper.getPrivilegeTree(root, allPriv,map);
 		WebUtils.setSessionAttribute(request, Constants.USER_MENU, priviligeTree);//保存权限树
-		
+		this.setUserMenu(priviligeTree);
 	}
 	
 	/**
-	 * 将登陆的权限加入到session中
+	 * 将登录的权限加入到session中
 	 * @param privileges
 	 */
 	private void dealWithLogPri(HttpServletRequest request) {
@@ -439,8 +408,8 @@ public class LoginAction extends BaseDispatchAction {
 		
 		privileges.put(link, pr);
 	}
-	public ActionForward index(final ActionMapping mapping, final ActionForm form,
-			final HttpServletRequest request, final HttpServletResponse response) {
+	
+	public String index() throws Exception{
 		UserInfo userInfo = getSessionUser(request);
 		String forwardUrl = "/";
 		if (userInfo != null) {
@@ -450,9 +419,24 @@ public class LoginAction extends BaseDispatchAction {
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TAG, null);
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TYPE, null);
 		}
-		ActionForward forward = new ActionForward(forwardUrl);
-		forward.setRedirect(true);
-		return forward; 
+		//response.sendRedirect(forwardUrl);
+		return forwardUrl; 
 	}
+
+	public UserInfo getModel() {
+		// TODO Auto-generated method stub
+		return model;
+	}
+	private UserInfo model = new UserInfo();
+	
+	private IPrivilege userMenu;
+	public IPrivilege getUserMenu() {
+		return userMenu;
+	}
+
+	public void setUserMenu(IPrivilege userMenu) {
+		this.userMenu = userMenu;
+	}
+	
 	
 }

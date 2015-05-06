@@ -14,21 +14,17 @@ import flink.hibernate.QueryHelper;
 public class RolePrivilegeDaoImpl extends BaseDaoHibernateImpl implements RolePrivilegeDao {
 
 	public List<RolePrivilege> getRolePrivilegeByRoleId(String roleId) {
-		
-		QueryHelper helper=new QueryHelper();
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("from RolePrivilege p");
 		helper.append("where 1=1");
-		helper.append("and p.id.roleId=?",roleId);
-		
+		helper.append("and p.id.roleId=?", roleId);
+
 		return super.getList(helper);
 	}
 
-	
 	protected Class getModelClass() {
 		return RolePrivilege.class;
 	}
-
-
-	 
 
 }

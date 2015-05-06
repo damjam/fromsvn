@@ -16,8 +16,28 @@ import flink.hibernate.QueryHelper;
 @Component("limitGroupDao")
 public class LimitGroupDaoImpl extends BaseDaoHibernateImpl implements LimitGroupDao {
 
-	protected Class<LimitGroup> getModelClass() {
-		return LimitGroup.class;
+	private List<LimitGroup> convert(List list) {
+
+		List<LimitGroup> limitGroups = new ArrayList<LimitGroup>();
+		if (null == list) {
+			return limitGroups;
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			Object[] objects = (Object[]) list.get(i);
+
+			LimitGroup limitGroup = (LimitGroup) objects[0];
+			LimitGroupInfo limitGroupInfo = (LimitGroupInfo) objects[1];
+			Privilege p = (Privilege) objects[2];
+
+			limitGroup.setLimitGroupName(limitGroupInfo.getLimitGroupName());
+			limitGroup.setLimitName(p.getLimitName());
+			limitGroup.setPid(p.getParent());
+
+			limitGroups.add(limitGroup);
+		}
+
+		return limitGroups;
 	}
 
 	public void deleteByLimitGroupId(String limitGroupId) {
@@ -55,28 +75,8 @@ public class LimitGroupDaoImpl extends BaseDaoHibernateImpl implements LimitGrou
 		return limitGroups;
 	}
 
-	private List<LimitGroup> convert(List list) {
-
-		List<LimitGroup> limitGroups = new ArrayList<LimitGroup>();
-		if (null == list) {
-			return limitGroups;
-		}
-
-		for (int i = 0; i < list.size(); i++) {
-			Object[] objects = (Object[]) list.get(i);
-
-			LimitGroup limitGroup = (LimitGroup) objects[0];
-			LimitGroupInfo limitGroupInfo = (LimitGroupInfo) objects[1];
-			Privilege p = (Privilege) objects[2];
-
-			limitGroup.setLimitGroupName(limitGroupInfo.getLimitGroupName());
-			limitGroup.setLimitName(p.getLimitName());
-			limitGroup.setPid(p.getParent());
-
-			limitGroups.add(limitGroup);
-		}
-
-		return limitGroups;
+	protected Class<LimitGroup> getModelClass() {
+		return LimitGroup.class;
 	}
 
 }

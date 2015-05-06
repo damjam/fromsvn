@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-
 public class MsgField {
 
 	private String fieldName;
@@ -16,41 +15,48 @@ public class MsgField {
 	private boolean notNull;
 	private int deciLength;
 	private Double numVal;
-	
+
 	public Double getNumVal() {
 		return numVal;
 	}
+
 	public void setNumVal(Double numVal) {
 		this.numVal = numVal;
 	}
+
 	public int getDeciLength() {
 		return this.deciLength;
 	}
+
 	public void setDeciLength(int length) {
 		this.deciLength = length;
 	}
+
 	public static Map<String, MsgField> ALL = new LinkedHashMap<String, MsgField>();
-	public MsgField(String fieldName, String fieldCode, String fieldType, int length){
+
+	public MsgField(String fieldName, String fieldCode, String fieldType, int length) {
 		this.fieldCode = fieldCode;
 		this.fieldType = fieldType;
 		this.length = length;
 		ALL.put(fieldCode, this);
 	}
-	public MsgField(String fieldName, String fieldCode, String fieldType, int length, int deciLength){
+
+	public MsgField(String fieldName, String fieldCode, String fieldType, int length, int deciLength) {
 		this.fieldCode = fieldCode;
 		this.fieldType = fieldType;
 		this.length = length;
 		this.deciLength = deciLength;
 		ALL.put(fieldCode, this);
 	}
-	public MsgField(){
+
+	public MsgField() {
 	}
-	
-	//请求报文头
+
+	// 请求报文头
 	public static MsgField h_gateway_header = new MsgField("网关报文头", "h_gateway_header", MsgUtil.FIELD_CHAR, 76);
 	public static MsgField h_exch_code = new MsgField("交易码", "h_exch_code", MsgUtil.FIELD_CHAR, 5);
 	public static MsgField h_cashier_id = new MsgField("出纳员号", "h_cashier_id", MsgUtil.FIELD_CHAR, 4);
-	
+
 	public static MsgField h_bk_tx_date = new MsgField("交易发生日期", "h_bk_tx_date", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField h_bk_tx_time = new MsgField("交易发生时间", "h_bk_tx_time", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField h_bk_serial_no = new MsgField("交易流水号", "h_bk_serial_no", MsgUtil.FIELD_CHAR, 22);
@@ -72,12 +78,12 @@ public class MsgField {
 	public static MsgField back2 = new MsgField("备用2", "back2", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField back3 = new MsgField("备用3", "back3", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField back4 = new MsgField("备用4", "back4", MsgUtil.FIELD_CHAR, 20);
-	//返回报文头
+	// 返回报文头
 	public static MsgField h_rsp_code = new MsgField("返回码", "h_rsp_code", MsgUtil.FIELD_CHAR, 7);
 	public static MsgField h_rsp_msg = new MsgField("返回信息", "h_rsp_msg", MsgUtil.FIELD_CHAR, 100);
 	public static MsgField h_sum_num = new MsgField("总页数", "h_sum_num", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField h_rsp_num = new MsgField("返回记录数", "h_rsp_num", MsgUtil.FIELD_CHAR, 8);
-	
+
 	public static MsgField account_no = new MsgField("银行帐号", "account_no", MsgUtil.FIELD_CHAR, 32);
 	public static MsgField is_sign = new MsgField("是否签约", "is_sign", MsgUtil.FIELD_CHAR, 2);
 	public static MsgField access_way = new MsgField("划转方向", "access_way", MsgUtil.FIELD_CHAR, 2);
@@ -105,10 +111,10 @@ public class MsgField {
 	public static MsgField memo = new MsgField("备注", "memo", MsgUtil.FIELD_CHAR, 30);
 	public static MsgField old_account_no = new MsgField("原银行账号", "old_account_no", MsgUtil.FIELD_CHAR, 32);
 	public static MsgField new_account_no = new MsgField("新银行账号", "new_account_no", MsgUtil.FIELD_CHAR, 32);
-	
+
 	public static MsgField branch_id = new MsgField("代理机构", "branch_id", MsgUtil.FIELD_CHAR, 32);
 	public static MsgField take_month = new MsgField("提货月份", "take_month", MsgUtil.FIELD_CHAR, 6);
-	public static MsgField take_date = new MsgField("提货日", "take_date", MsgUtil.FIELD_CHAR,8);
+	public static MsgField take_date = new MsgField("提货日", "take_date", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField branch_name = new MsgField("网点名称", "branch_name", MsgUtil.FIELD_CHAR, 50);
 	public static MsgField broker_name = new MsgField("客户经理名称", "broker_name", MsgUtil.FIELD_CHAR, 30);
 	public static MsgField aip_mode = new MsgField("定投模式", "aip_mode", MsgUtil.FIELD_CHAR, 2);
@@ -139,7 +145,7 @@ public class MsgField {
 	public static MsgField c_teller_id = new MsgField("撤销操作员", "c_teller_id", MsgUtil.FIELD_CHAR, 10);
 	public static MsgField c_exch_time = new MsgField("撤销时间", "c_exch_time", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField aip_amount = new MsgField("定投金额/重量", "aip_amount", MsgUtil.FIELD_DOUBLE, 18, 4);
-	public static MsgField aip_periods = new MsgField("定投周期", "aip_periods", MsgUtil.FIELD_CHAR,10);
+	public static MsgField aip_periods = new MsgField("定投周期", "aip_periods", MsgUtil.FIELD_CHAR, 10);
 	public static MsgField aip_period = new MsgField("定投周期", "aip_period", MsgUtil.FIELD_CHAR, 2);
 	public static MsgField chn_aip_date = new MsgField("指定日期", "chn_aip_date", MsgUtil.FIELD_CHAR, 100);
 	public static MsgField is_delay = new MsgField("是否无限延期", "is_delay", MsgUtil.FIELD_CHAR, 2);
@@ -155,27 +161,27 @@ public class MsgField {
 	public static MsgField b_addr = new MsgField("网点地址", "b_addr", MsgUtil.FIELD_CHAR, 200);
 	public static MsgField is_stop = new MsgField("是否暂停", "is_stop", MsgUtil.FIELD_CHAR, 2);
 	public static MsgField affect_time = new MsgField("扣款日期", "affect_time", MsgUtil.FIELD_CHAR, 20);
-	public static MsgField multiple  = new MsgField("倍数", "multiple", MsgUtil.FIELD_CHAR, 10);
-	public static MsgField rate  = new MsgField("扣资金比率", "rate", MsgUtil.FIELD_CHAR, 20);
-	public static MsgField liqu_time  = new MsgField("清算日期", "liqu_time", MsgUtil.FIELD_CHAR, 8);
-	public static MsgField entr_amount  = new MsgField("委托数量", "entr_amount", MsgUtil.FIELD_CHAR, 18);
-	public static MsgField bs_flag  = new MsgField("买卖标志", "bs_flag", MsgUtil.FIELD_CHAR, 2);
+	public static MsgField multiple = new MsgField("倍数", "multiple", MsgUtil.FIELD_CHAR, 10);
+	public static MsgField rate = new MsgField("扣资金比率", "rate", MsgUtil.FIELD_CHAR, 20);
+	public static MsgField liqu_time = new MsgField("清算日期", "liqu_time", MsgUtil.FIELD_CHAR, 8);
+	public static MsgField entr_amount = new MsgField("委托数量", "entr_amount", MsgUtil.FIELD_CHAR, 18);
+	public static MsgField bs_flag = new MsgField("买卖标志", "bs_flag", MsgUtil.FIELD_CHAR, 2);
 	public static MsgField app_date = new MsgField("申请日期", "app_date", MsgUtil.FIELD_CHAR, 4);
 	public static MsgField acct_no = new MsgField("客户号", "acct_no", MsgUtil.FIELD_CHAR, 15);
 	public static MsgField o_date = new MsgField("开户日期", "o_date", MsgUtil.FIELD_CHAR, 8);
 	public static MsgField m_date = new MsgField("修改日期", "m_date", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField m_term_type = new MsgField("修改来源", "m_term_type", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField m_teller_id = new MsgField("修改操作员号", "m_teller_id", MsgUtil.FIELD_CHAR, 10);
-	public static MsgField plan_exch_date  = new MsgField("计划提货日", "plan_exch_date", MsgUtil.FIELD_CHAR, 8);
-	public static MsgField variety_id  = new MsgField("品种代码", "variety_id", MsgUtil.FIELD_CHAR, 5);
-	public static MsgField take_weight  = new MsgField("提货重量", "take_weight", MsgUtil.FIELD_INTEGER, 15);
-	public static MsgField city_code  = new MsgField("提货城市", "city_code", MsgUtil.FIELD_CHAR, 50);
-	public static MsgField city_name  = new MsgField("城市名称", "city_name", MsgUtil.FIELD_CHAR, 50);
-	public static MsgField stor_id  = new MsgField("提货仓库", "stor_id", MsgUtil.FIELD_CHAR, 60);
-	public static MsgField contacter  = new MsgField("提货联系人", "contacter", MsgUtil.FIELD_CHAR,20);
-	public static MsgField local_serial_no  = new MsgField("提货流水号", "local_serial_no", MsgUtil.FIELD_CHAR, 16);
-	public static MsgField take_address  = new MsgField("提货地址", "take_address", MsgUtil.FIELD_CHAR, 200);
-	public static MsgField b_contactor  = new MsgField("提货联系人", "b_contactor", MsgUtil.FIELD_CHAR, 20);
+	public static MsgField plan_exch_date = new MsgField("计划提货日", "plan_exch_date", MsgUtil.FIELD_CHAR, 8);
+	public static MsgField variety_id = new MsgField("品种代码", "variety_id", MsgUtil.FIELD_CHAR, 5);
+	public static MsgField take_weight = new MsgField("提货重量", "take_weight", MsgUtil.FIELD_INTEGER, 15);
+	public static MsgField city_code = new MsgField("提货城市", "city_code", MsgUtil.FIELD_CHAR, 50);
+	public static MsgField city_name = new MsgField("城市名称", "city_name", MsgUtil.FIELD_CHAR, 50);
+	public static MsgField stor_id = new MsgField("提货仓库", "stor_id", MsgUtil.FIELD_CHAR, 60);
+	public static MsgField contacter = new MsgField("提货联系人", "contacter", MsgUtil.FIELD_CHAR, 20);
+	public static MsgField local_serial_no = new MsgField("提货流水号", "local_serial_no", MsgUtil.FIELD_CHAR, 16);
+	public static MsgField take_address = new MsgField("提货地址", "take_address", MsgUtil.FIELD_CHAR, 200);
+	public static MsgField b_contactor = new MsgField("提货联系人", "b_contactor", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField serial_no = new MsgField("本地流水号", "serial_no", MsgUtil.FIELD_CHAR, 16);
 	public static MsgField sheet_no = new MsgField("提货单号", "sheet_no", MsgUtil.FIELD_CHAR, 14);
 	public static MsgField variety_name = new MsgField("品种名称", "variety_name", MsgUtil.FIELD_CHAR, 40);
@@ -185,7 +191,7 @@ public class MsgField {
 	public static MsgField stat = new MsgField("提货状态", "stat", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField trade_type = new MsgField("交易方式", "trade_type", MsgUtil.FIELD_CHAR, 20);
 	public static MsgField entr_flow_serial_no = new MsgField("委托交易流水号", "entr_flow_serial_no", MsgUtil.FIELD_CHAR, 20);
-	public static MsgField out_account_no = new MsgField("出金银行账号", "out_account_no", MsgUtil.FIELD_CHAR,32);
+	public static MsgField out_account_no = new MsgField("出金银行账号", "out_account_no", MsgUtil.FIELD_CHAR, 32);
 	public static MsgField in_account_no = new MsgField("入金银行账号", "in_account_no", MsgUtil.FIELD_CHAR, 32);
 	public static MsgField send_stat = new MsgField("发送状态", "send_stat", MsgUtil.FIELD_CHAR, 10);
 	public static MsgField in_account_flag = new MsgField("是否已入账", "in_account_flag", MsgUtil.FIELD_CHAR, 20);
@@ -233,12 +239,14 @@ public class MsgField {
 	public static MsgField spot_app_froz = new MsgField("提货冻结数量", "spot_app_froz", MsgUtil.FIELD_DOUBLE, 18, 4);
 	public static MsgField total_amt = new MsgField("总库存", "total_amt", MsgUtil.FIELD_DOUBLE, 18, 4);
 	public static MsgField account_surplus = new MsgField("账户盈亏", "account_surplus", MsgUtil.FIELD_DOUBLE, 18, 2);
-	public static MsgField cur_year_acct_surplus = new MsgField("本年账户盈亏", "cur_year_acct_surplus", MsgUtil.FIELD_DOUBLE, 18, 2);
+	public static MsgField cur_year_acct_surplus = new MsgField("本年账户盈亏", "cur_year_acct_surplus",
+			MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField settle_price = new MsgField("当日定投结算价", "settle_price", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField gold_virtual_bal = new MsgField("黄金账户账面价值", "gold_virtual_bal", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField gold_real_bal = new MsgField("实际定投金额", "gold_real_bal", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField au100_take_fare = new MsgField("Au100g提取费", "au100_take_fare", MsgUtil.FIELD_DOUBLE, 18, 2);
-	public static MsgField au9999_take_fare = new MsgField("Au99.99提取费", "au9999_take_fare", MsgUtil.FIELD_DOUBLE, 18, 2);
+	public static MsgField au9999_take_fare = new MsgField("Au99.99提取费", "au9999_take_fare", MsgUtil.FIELD_DOUBLE, 18,
+			2);
 	public static MsgField take_margin = new MsgField("提货准备金", "take_margin", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField take_fare = new MsgField("实际提货手续费", "take_fare", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField re_margin = new MsgField("返还客户准备金", "re_margin", MsgUtil.FIELD_DOUBLE, 18, 2);
@@ -258,8 +266,9 @@ public class MsgField {
 	public static MsgField last_settle_price = new MsgField("上日定投结算价", "last_settle_price", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField diff_bal = new MsgField("溢短费", "diff_bal", MsgUtil.FIELD_DOUBLE, 18, 2);
 	public static MsgField process_cost = new MsgField("品牌金条加工费", "process_cost", MsgUtil.FIELD_DOUBLE, 18, 2);
-	public static MsgField deal_time = new MsgField("处理次数", "deal_time", MsgUtil.FIELD_INTEGER,6);
-	public static int getStartIndex(MsgField[] fields, MsgField field){
+	public static MsgField deal_time = new MsgField("处理次数", "deal_time", MsgUtil.FIELD_INTEGER, 6);
+
+	public static int getStartIndex(MsgField[] fields, MsgField field) {
 		int index = 0;
 		for (int i = 0; i < fields.length; i++) {
 			if (!StringUtils.equals(field.getFieldCode(), fields[i].getFieldCode())) {
@@ -268,6 +277,7 @@ public class MsgField {
 		}
 		return index;
 	}
+
 	public String getFieldName() {
 		return fieldName;
 	}
@@ -315,5 +325,5 @@ public class MsgField {
 	public void setNotNull(boolean notNull) {
 		this.notNull = notNull;
 	}
-	
+
 }

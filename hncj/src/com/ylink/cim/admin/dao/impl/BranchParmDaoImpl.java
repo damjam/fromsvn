@@ -26,7 +26,6 @@ public class BranchParmDaoImpl extends BaseDaoHibernateImpl implements BranchPar
 
 	}
 
-
 	public BranchParm findBranchParmById(String id) throws Exception {
 
 		return (BranchParm) this.findById(id);
@@ -70,8 +69,6 @@ public class BranchParmDaoImpl extends BaseDaoHibernateImpl implements BranchPar
 	public boolean hasParm(String code) throws Exception {
 		return this.findById(code) != null;
 	}
-
-	
 
 	public boolean isModify(String code) throws Exception {
 		// TODO Auto-generated method stub
@@ -131,6 +128,5 @@ public class BranchParmDaoImpl extends BaseDaoHibernateImpl implements BranchPar
 
 		update(sysParm);
 	}
-
 
 }

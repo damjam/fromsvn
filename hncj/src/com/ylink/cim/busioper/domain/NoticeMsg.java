@@ -22,8 +22,26 @@ public class NoticeMsg implements java.io.Serializable {
 	private String branchNo;
 	private String busiType;
 	private String custType;
+	private String startCreateDate;
+	private String endCreateDate;
 	
 	// Constructors
+
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
+	}
 
 	/** default constructor */
 	public NoticeMsg() {
@@ -88,7 +106,6 @@ public class NoticeMsg implements java.io.Serializable {
 	public void setCustType(String custType) {
 		this.custType = custType;
 	}
-
 	
 	
 }

@@ -11,7 +11,7 @@ import flink.util.ExceptionUtils;
 /**
  * 
  * À≥—”‘≠“Ú
- *
+ * 
  */
 public class DeferReason extends AbstractType {
 	public static Map<String, DeferReason> ALL = new LinkedHashMap<String, DeferReason>();

@@ -18,12 +18,11 @@ public class PushRecord implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String pushAdd;
-	//N:未推送Y:已推送
+	// N:未推送Y:已推送
 	private String state;
 	private Date pushTime;
 	private String planId;
-	
-	
+
 	public String getPlanId() {
 		return planId;
 	}

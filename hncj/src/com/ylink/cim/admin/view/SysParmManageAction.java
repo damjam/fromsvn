@@ -5,48 +5,46 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.sf.json.JSONObject;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.domain.SysParm;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.SysParmService;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 
 /**
  * 系统参数管理action
  */
-public class SysParmManageAction extends BaseDispatchAction {
+@Scope("prototype")
+@Component()
+public class SysParmManageAction extends BaseAction implements ModelDriven<SysParm>{
 
-	private static final Logger logger = Logger.getLogger(LoginAction.class);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3419813256406264742L;
 
-	SysParmService sysParmService = (SysParmService) getService("sysParmService");
+	private static final Logger logger = Logger.getLogger(SysParmManageAction.class);
 
-	public void clearData(SysParmManageActionForm sysParmManageActionForm) {
-		sysParmManageActionForm.setCode("");
-		sysParmManageActionForm.setParname("");
-		sysParmManageActionForm.setParvalue("");
-		sysParmManageActionForm.setIfmodify("");
-		sysParmManageActionForm.setUsercode("");
-		sysParmManageActionForm.setUpdatedate("");
-		sysParmManageActionForm.setRemark("");
-	}
+	@Autowired
+	SysParmService sysParmService;
+
 
 	/**
 	 * 页面删除
@@ -58,75 +56,30 @@ public class SysParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String delete() throws Exception {
 
-		SysParmManageActionForm sysParmManageActionForm = (SysParmManageActionForm) form;
 		UserInfo sessionUser = getSessionUser(request);
 		try {
-			sysParmService.delete(sysParmManageActionForm.getCode());
+			sysParmService.delete(model.getCode());
 			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_D, sessionUser.getUserId() + "("
-					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + sysParmManageActionForm.getCode() + "成功");
+					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.DELETE_SUCCESS);
-			this.clearData(sysParmManageActionForm);
 			String msg = LogUtils.r("删除系统参数成功,删除内容为：{?}", request, getCurPrivilegeCode(request), Constants.LOG_USER_D,
 					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code="
-							+ sysParmManageActionForm.getCode() + "成功");
+							+ model.getCode() + "成功");
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			return this.query(mapping, sysParmManageActionForm, request, response);
+			model.setCode(null);
+			return this.query();
 		} catch (Exception e) {
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")删除系统参数 addrId=" + sysParmManageActionForm.getCode() + "失败";
+					+ ")删除系统参数 addrId=" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
 			String msg = LogUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(), error);
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
-			return this.query(mapping, sysParmManageActionForm, request, response);
+			return this.query();
 		}
 	}
 
-	/**
-	 * struts actionForm 转化 po
-	 * 
-	 * @param sysParmManageActionForm
-	 */
-	public SysParm getSysParmFromActionForm(HttpServletRequest request, SysParmManageActionForm sysParmManageActionForm) {
-
-		SysParm sysParm = new SysParm();
-
-		sysParm.setCode(sysParmManageActionForm.getCode());
-		sysParm.setParname(sysParmManageActionForm.getParname());
-		sysParm.setParvalue(sysParmManageActionForm.getParvalue());
-		sysParm.setRemark(sysParmManageActionForm.getRemark());
-
-		if (null == sysParm.getCode()) {
-			sysParm.setCode("");
-		}
-
-		if (null == sysParm.getParname()) {
-			sysParm.setParname("");
-		}
-
-		return sysParm;
-
-	}
-
-	/**
-	 * hibernate Po 转化 struts
-	 * 
-	 * @param sysParm
-	 * @return
-	 */
-	public SysParmManageActionForm getSysParmManageActionFormFromSysParm(SysParm sysParm) {
-
-		SysParmManageActionForm sysParmManageActionForm = new SysParmManageActionForm();
-
-		sysParmManageActionForm.setCode(sysParm.getCode());
-		sysParmManageActionForm.setParname(sysParm.getParname());
-		sysParmManageActionForm.setParvalue(sysParm.getParvalue());
-		sysParmManageActionForm.setRemark(sysParm.getRemark());
-
-		return sysParmManageActionForm;
-	}
 
 	/**
 	 * 页面查询
@@ -138,23 +91,20 @@ public class SysParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward query(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String query() throws Exception {
 
-		Paginater paginater = sysParmService.findAll(getPager(request), getSysParmFromActionForm(request,
-				(SysParmManageActionForm) form));
-		request.setAttribute("sysParmList", paginater.getList());
-		request.setAttribute(Paginater.PAGINATER, paginater);
+		Paginater paginater = sysParmService.findAll(getPager(request), model);
+		saveQueryResult(request, paginater);
 		String msg = LogUtils.r("系统参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		return forward("/pages/admin/sysRunManager/sysParmManager.jsp");
+		return "list";
+		//"/pages/admin/sysRunManager/sysParmManager.jsp"
 	}
 
 	/**
 	 * 重新加载系统参数.
 	 */
-	public ActionForward reload(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String reload() throws Exception {
 		try {
 			ParaManager.init();
 			respond(response, "重新加载系统参数完成");
@@ -177,46 +127,43 @@ public class SysParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		return forward("/pages/admin/sysRunManager/sysParmAdd.jsp");
+	public String toAdd() throws Exception {
+		return "add";
+		//"/pages/admin/sysRunManager/sysParmAdd.jsp";
 	}
 
-	public ActionForward save(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		SysParmManageActionForm sysParmManageActionForm = (SysParmManageActionForm) form;
+	public String save() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		if (null == userCode) {
 			userCode = "";
 		}
-
 		UserInfo sessionUser = getSessionUser(request);
 		try {
-			sysParmManageActionForm.setUsercode(userCode);
-			sysParmService.save(this.getSysParmFromActionForm(request, sysParmManageActionForm));
+			if (!isValidToken()) {
+				return toAdd();
+			}
+			sysParmService.save(model);
 			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_A, "用户"
 					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),新增系统参数 code="
-					+ sysParmManageActionForm.getCode() + "成功");
-			this.clearData(sysParmManageActionForm);
+					+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.SAVE_SUCCESS);
 			setReturnUrl("/sysParmManage.do?action=query", request);
-			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(this.getSysParmFromActionForm(request,
-					sysParmManageActionForm)));
+			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-			return success(mapping);
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (BizException e) {
 			// e.printStackTrace();
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
 
-			+ ")新增系统参数 code" + sysParmManageActionForm.getCode() + "失败";
+			+ ")新增系统参数 code" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
 			this.logErrorWithReason(request, getCurPrivilegeCode(request), error, e.getMessage());
 			setResult(false, e.getMessage(), request);
 			String msg = LogUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-			return mapping.findForward("save");
+			setResult(false, e.getMessage(), request);
+			return toAdd();
 		}
 
 	}
@@ -239,38 +186,32 @@ public class SysParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward saveUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		SysParmManageActionForm actionForm = (SysParmManageActionForm) form;
+	public String saveUpdate() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		UserInfo sessionUser = getSessionUser(request);
 		if (null == userCode) {
 			userCode = "";
 		}
-
 		try {
-			actionForm.setUsercode(userCode);
-			sysParmService.update(this.getSysParmFromActionForm(request, actionForm));
+			sysParmService.update(model);
 			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_U, "用户"
 					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),修改系统参数 code="
-					+ actionForm.getCode() + "成功");
-			this.clearData(actionForm);
+					+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_SUCCESS);
-			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(this.getSysParmFromActionForm(request,
-					actionForm)));
+			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
-			return query(mapping, actionForm, request, response);
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (Exception e) {
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")修改系统参数 code=" + actionForm.getCode() + "失败";
+					+ ")修改系统参数 code=" + model.getCode() + "失败";
 			logger.debug(error + ",原因：" + e.getMessage());
 			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
 					error + e.getMessage());
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_FAIL);
 			String msg = LogUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
-			return mapping.findForward("modify");
+			return update();
 		}
 
 	}
@@ -285,20 +226,14 @@ public class SysParmManageAction extends BaseDispatchAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public ActionForward update(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		SysParm sysParm = sysParmService.findById(((SysParmManageActionForm) form).getCode());
-		request.setAttribute("sysParm", sysParm);
-		// SysParmManageActionForm sysParmManageActionForm =
-		// getSysParmManageActionFormFromSysParm(sysParm);
-		// BeanUtils.copyProperties(form, sysParmManageActionForm);
-
-		return mapping.findForward("modify");
+	public String update() throws Exception {
+		SysParm parm = sysParmService.findById(model.getCode());
+		BeanUtils.copyProperties(model, parm);
+		//setModel(parm);
+		return "modify";
 	}
 
-	public ActionForward backupData(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public String backupData() throws Exception {
 		try {
 			JSONObject jsonObject = new JSONObject();
 			String today = DateUtil.getCurrentDate();
@@ -334,4 +269,16 @@ public class SysParmManageAction extends BaseDispatchAction {
 
 		return null;
 	}
+
+	public SysParm getModel() {
+		return model;
+	}
+	private SysParm model = new SysParm();
+
+
+	public void setModel(SysParm model) {
+		this.model = model;
+	}
+
+	
 }

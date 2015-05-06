@@ -8,28 +8,29 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.UserRoleDao;
 import com.ylink.cim.admin.domain.RoleInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserRole;
 import com.ylink.cim.admin.domain.UserRoleId;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.HqlHelper;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Component("userRoleDao")
 public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao {
-	
+
 	private void assignRoleInfoValue(RoleInfo roleInfo, Object[] objects) {
-		
-		String[] columns=new String[]{"roleId","roleName","limitGroupId","limitGroupName"};
-		for(int i=0;i<columns.length;i++){
-			Object object=objects[i];
-			String value="";
-			if(null!=object){
-				value=object.toString();
+
+		String[] columns = new String[] { "roleId", "roleName", "limitGroupId", "limitGroupName" };
+		for (int i = 0; i < columns.length; i++) {
+			Object object = objects[i];
+			String value = "";
+			if (null != object) {
+				value = object.toString();
 			}
-			
+
 			switch (i) {
 			case 0:
 				roleInfo.setRoleId(value);
@@ -51,83 +52,84 @@ public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao
 	}
 
 	private void assingUserRoleValue(UserRole userRole, Object[] objects) {
-		
-		String[] columns=new String[]{"userId","userName","loginId","userType"
-				,"roleId","roleName"};
-		
-		for(int i=0;i<columns.length;i++){
-			
+
+		String[] columns = new String[] { "userId", "userName", "loginId", "userType", "roleId", "roleName" };
+
+		for (int i = 0; i < columns.length; i++) {
+
 			Object object = objects[i];
 
-			String value="";
-			if(null!=object);{
-				value=object.toString();
+			String value = "";
+			if (null != object)
+				;
+			{
+				value = object.toString();
 			}
-			
+
 			switch (i) {
-				case 0:
-					userRole.getId().setUserId(value);
-					break;
-				case 1:
-					userRole.setUserName(value);
-					break;
-				case 2:
-					userRole.setLoginId(value);
-					break;
-				case 3:
-					userRole.setUserType(value);
-					break;
-				case 4:
-					userRole.getId().setRoleId(value);	
-					break;
-				case 5:
-					userRole.setRoleName(value);
-					break;
-				default:
-					break;
+			case 0:
+				userRole.getId().setUserId(value);
+				break;
+			case 1:
+				userRole.setUserName(value);
+				break;
+			case 2:
+				userRole.setLoginId(value);
+				break;
+			case 3:
+				userRole.setUserType(value);
+				break;
+			case 4:
+				userRole.getId().setRoleId(value);
+				break;
+			case 5:
+				userRole.setRoleName(value);
+				break;
+			default:
+				break;
 			}
 		}
 	}
+
 	private List<RoleInfo> convertToRoleInfo(List data) {
-		
-		List<RoleInfo> ls=new ArrayList<RoleInfo>();
-		if(null==data){
+
+		List<RoleInfo> ls = new ArrayList<RoleInfo>();
+		if (null == data) {
 			return ls;
 		}
-		
-		for(int i=0;i<data.size();i++){
+
+		for (int i = 0; i < data.size(); i++) {
 			RoleInfo roleInfo = new RoleInfo();
-			Object[] objects = (Object[])data.get(i);
-			
-			assignRoleInfoValue(roleInfo,objects);
-			
+			Object[] objects = (Object[]) data.get(i);
+
+			assignRoleInfoValue(roleInfo, objects);
+
 			ls.add(roleInfo);
 		}
 		return ls;
 	}
 
-	
 	private List<UserRole> convertToUserRole(List data) {
-		
-		List<UserRole> ls=new ArrayList<UserRole>();
-		if(null==data){
+
+		List<UserRole> ls = new ArrayList<UserRole>();
+		if (null == data) {
 			return ls;
 		}
-		
-		for(int i=0;i<data.size();i++){
-			
-			UserRoleId id=new UserRoleId();
-			UserRole userRole=new UserRole();
+
+		for (int i = 0; i < data.size(); i++) {
+
+			UserRoleId id = new UserRoleId();
+			UserRole userRole = new UserRole();
 			userRole.setId(id);
-			
-			Object[] objects =(Object[])data.get(i);
-			assingUserRoleValue(userRole,objects);
-			
+
+			Object[] objects = (Object[]) data.get(i);
+			assingUserRoleValue(userRole, objects);
+
 			ls.add(userRole);
 		}
-		
+
 		return ls;
-		
+
 	}
 
 	public void delRoleByUser(String userId) {
@@ -139,20 +141,21 @@ public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao
 	public Paginater getAvailableRoles(String userId, Pager pager) {
 		UserInfo userInfo = super.findById(UserInfo.class, userId);
 		QueryHelper helper = new QueryHelper();
-		helper.append("from RoleInfo t where t.limitGroupId in (select g.limitGroupId from LimitGroupInfo g where g.userType = ?)", userInfo.getUserType());
+		helper.append(
+				"from RoleInfo t where t.limitGroupId in (select g.limitGroupId from LimitGroupInfo g where g.userType = ?)",
+				userInfo.getUserType());
 		return super.getPageData(helper, pager);
 	}
 
-	
 	protected Class getModelClass() {
-		
+
 		return UserRole.class;
 	}
 
-	
 	public List<RoleInfo> getRoleByUser(String userId) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("from RoleInfo t where t.roleId in (select u.id.roleId from UserRole u where u.id.userId = ?)", userId);
+		helper.append("from RoleInfo t where t.roleId in (select u.id.roleId from UserRole u where u.id.userId = ?)",
+				userId);
 		return super.getList(helper);
 	}
 
@@ -168,8 +171,8 @@ public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao
 	}
 
 	public Paginater getUserRolePageList(UserRole userRole, Pager pager) {
-		
-		QueryHelper helper=new QueryHelper();
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("select");
 		helper.append("ui.userId as userId,ui.userName as userName,ui.loginId as loginId,ui.userType as userType,");
 		helper.append("ur.id.roleId as roleId,");
@@ -178,20 +181,20 @@ public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao
 		helper.append("where 1=1");
 		helper.append("and ui.userId=ur.id.userId");
 		helper.append("and ur.id.roleId=ri.roleId");
-		helper.append("and ui.userId=?",userRole.getId().getUserId());
-		helper.append("and ri.roleName like ?",userRole.getRoleName(),MatchMode.ANYWHERE);
-		
+		helper.append("and ui.userId=?", userRole.getId().getUserId());
+		helper.append("and ri.roleName like ?", userRole.getRoleName(), MatchMode.ANYWHERE);
+
 		Paginater pageData = super.getPageData(helper, pager);
-		List<UserRole> lsRoleInfo=convertToUserRole((List)pageData.getData());
-		
+		List<UserRole> lsRoleInfo = convertToUserRole((List) pageData.getData());
+
 		pageData.setData(lsRoleInfo);
-		
+
 		return pageData;
 	}
 
-	public Paginater getWaitAssignRolePageList(String userId,Pager pager) {
-		
-		QueryHelper helper=new QueryHelper();
+	public Paginater getWaitAssignRolePageList(String userId, Pager pager) {
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("select ");
 		helper.append(" ri.role_id as roleId,");
 		helper.append(" ri.role_name as roleName,");
@@ -201,16 +204,15 @@ public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao
 		helper.append("inner join limit_group_info lgi on lgi.limit_group_id=ri.limit_group_id");
 		helper.append("inner join user_info ui on ui.user_type=lgi.user_type");
 		helper.append("where  1=1");
-		helper.append("and ui.user_id=?",userId);
-		helper.append("and ri.role_id not in (select ur.role_id from user_role ur where ui.user_id= ? )",userId);
-		
+		helper.append("and ui.user_id=?", userId);
+		helper.append("and ri.role_id not in (select ur.role_id from user_role ur where ui.user_id= ? )", userId);
+
 		Paginater paginater = super.getPageDataBySql(helper, pager);
 
-		List<RoleInfo> lsRoleInfo=convertToRoleInfo((List)paginater.getData());
+		List<RoleInfo> lsRoleInfo = convertToRoleInfo((List) paginater.getData());
 		paginater.setData(lsRoleInfo);
-		
+
 		return paginater;
 	}
-
 
 }

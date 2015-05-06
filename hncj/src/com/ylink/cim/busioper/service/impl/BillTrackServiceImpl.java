@@ -10,6 +10,7 @@ import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.busioper.dao.BillTrackDao;
 import com.ylink.cim.busioper.service.BillTrackService;
@@ -17,7 +18,6 @@ import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.manage.domain.BillTrack;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
@@ -54,7 +54,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 			if (leftDays >= 0) {
 				track.setLeftDays(leftDays);
 				track.setOverDays(0);
-			}else {
+			} else {
 				track.setLeftDays(0);
 				track.setOverDays(-leftDays);
 			}
@@ -67,8 +67,8 @@ public class BillTrackServiceImpl implements BillTrackService {
 		timerDoDao.update(timerDo);
 	}
 
-
-	public void addBillTrack(String houseSn, String billType, String billId, String expireDate, String ownerName, String ownerCel, String branchNo) throws BizException {
+	public void addBillTrack(String houseSn, String billType, String billId, String expireDate, String ownerName,
+			String ownerCel, String branchNo) throws BizException {
 		Date endDate = DateUtil.getDayEndByYYYMMDD(expireDate);
 		Date today = DateUtil.getCurrent();
 		int leftDays = DateUtil.getDateDiffDays(endDate, today);
@@ -102,29 +102,26 @@ public class BillTrackServiceImpl implements BillTrackService {
 		billTrackDao.deleteById(id);
 	}
 
-
 	public void add(BillTrack billTrack, UserInfo userInfo) throws BizException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-
-	public void sendNotice(String id) throws BizException{
-		//发送短信
+	public void sendNotice(String id) throws BizException {
+		// 发送短信
 		BillTrack track = billTrackDao.findById(id);
 		billTrackDao.lock(track, LockMode.UPGRADE);
 		String cel = track.getOwnerCel();
 		String content = LogUtils.r(Constants.SERVICE_BILL_DUE_MSG, track.getExpireDate());
-		track.setNoticeTimes(track.getNoticeTimes()+1);
+		track.setNoticeTimes(track.getNoticeTimes() + 1);
 		billTrackDao.update(track);
-		//SendMobilMsgUtil.sendMsgFw(cel, content);
+		// SendMobilMsgUtil.sendMsgFw(cel, content);
 	}
-
 
 	public void discard(String id, UserInfo userInfo) throws BizException {
 		BillTrack track = billTrackDao.findById(id);
 		track.setState(BillTrackState.EXPIRED.getValue());
 		billTrackDao.update(track);
 	}
-	
+
 }

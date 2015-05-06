@@ -17,9 +17,8 @@ public class EmailType extends AbstractType {
 	public static final EmailType TYPE_SINA_COM = new EmailType("@sina.com",
 			"@sina.com");
 
-	protected EmailType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("emailTypes", EmailType.ALL.values());
 	}
 
 	public static EmailType valueOf(String value) throws Exception {
@@ -32,7 +31,8 @@ public class EmailType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("emailTypes", EmailType.ALL.values());
+	protected EmailType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

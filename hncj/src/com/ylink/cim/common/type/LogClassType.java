@@ -18,9 +18,8 @@ public class LogClassType extends AbstractType {
 	public static final LogClassType ADD = new LogClassType("¾¯¸æ", "W");
 	public static final LogClassType UPDATE = new LogClassType("´íÎó", "E");
 
-	protected LogClassType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("logClassTypes", LogClassType.ALL.values());
 	}
 
 	public static LogClassType valueOf(String value) {
@@ -31,8 +30,9 @@ public class LogClassType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("logClassTypes", LogClassType.ALL.values());
+	protected LogClassType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 
 }

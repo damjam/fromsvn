@@ -15,10 +15,6 @@ import flink.hibernate.QueryHelper;
 public class NoticeMsgRecordDaoImpl extends BaseDaoHibernateImpl implements NoticeMsgRecordDao {
 
 	
-	protected Class getModelClass() {
-		return NoticeMsgRecord.class;
-	}
-
 	public List<NoticeMsgRecord> findByParams(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from NoticeMsgRecord t where 1=1");
@@ -26,6 +22,10 @@ public class NoticeMsgRecordDaoImpl extends BaseDaoHibernateImpl implements Noti
 		helper.append("and t.read = ?", map.get("read"));
 		helper.append("order by t.createTime desc");
 		return super.getList(helper);
+	}
+
+	protected Class getModelClass() {
+		return NoticeMsgRecord.class;
 	}
 
 	

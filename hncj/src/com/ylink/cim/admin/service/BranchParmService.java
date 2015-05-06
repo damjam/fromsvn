@@ -32,5 +32,4 @@ public interface BranchParmService {
 
 	public void update(BranchParm sysParm) throws BizException;
 
-	
 }

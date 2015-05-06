@@ -11,9 +11,10 @@ import flink.util.Paginater;
 public interface RoleInfoDao extends BaseDao {
 
 	public void deleteRoleLimits(RoleInfo roleInfo);
-	
+
 	public RoleInfo getRoleInfo(RoleInfo roleInfo);
-	
-	public Paginater getRoleInfoPageList(RoleInfo roleInfo,Pager pager);
+
+	public Paginater getRoleInfoPageList(RoleInfo roleInfo, Pager pager);
+
 	public List<RoleInfo> queryRoleInfoByLimitGroupId(String limitGroupId);
 }

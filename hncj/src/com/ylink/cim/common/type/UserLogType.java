@@ -21,9 +21,8 @@ public class UserLogType extends AbstractType {
 	public static final UserLogType CHECK = new UserLogType("…Û∫À", "C");
 	public static final UserLogType OTHER = new UserLogType("∆‰À˚", "O");
 
-	protected UserLogType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("userLogTypes", UserLogType.ALL.values());
 	}
 
 	public static UserLogType valueOf(String value) {
@@ -36,8 +35,9 @@ public class UserLogType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("userLogTypes", UserLogType.ALL.values());
+	protected UserLogType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 
 }

@@ -10,6 +10,7 @@ import com.ylink.cim.busioper.domain.PushRecord;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
+
 @Component("pushRecordDao")
 public class PushRecordDaoImpl extends BaseDaoHibernateImpl implements PushRecordDao {
 
@@ -22,10 +23,8 @@ public class PushRecordDaoImpl extends BaseDaoHibernateImpl implements PushRecor
 		return super.getList(helper);
 	}
 
-	
 	protected Class getModelClass() {
 		return PushRecord.class;
 	}
 
-	
 }

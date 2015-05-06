@@ -15,9 +15,8 @@ public class SexType extends AbstractType {
 	public static final SexType SEX_M = new SexType("ÄÐ", "M");
 	public static final SexType SEX_F = new SexType("Å®", "F");
 
-	protected SexType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("sexTypes", SexType.ALL.values());
 	}
 
 	public static SexType valueOf(String value) throws Exception {
@@ -29,7 +28,8 @@ public class SexType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("sexTypes", SexType.ALL.values());
+	protected SexType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

@@ -8,14 +8,15 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.dao.LimitGroupDao;
 import com.ylink.cim.admin.dao.LimitGroupInfoDao;
+import com.ylink.cim.admin.dao.PrivilegeDao;
 import com.ylink.cim.admin.domain.LimitGroup;
 import com.ylink.cim.admin.domain.LimitGroupInfo;
 import com.ylink.cim.admin.domain.Privilege;
@@ -39,258 +40,244 @@ import flink.consant.Constants;
 import flink.util.ExceptionUtils;
 import flink.util.LogUtils;
 import flink.util.Paginater;
-import flink.web.BaseDispatchAction;
+import flink.web.BaseAction;
 import flink.web.tag.DTreeObj;
+
 /**
  * 权限分组管理
- *
+ * 
  */
-public class LimitGroupInfoAction extends BaseDispatchAction{
+@Scope("prototype")
+@Component
+public class LimitGroupInfoAction extends BaseAction implements ModelDriven<LimitGroupInfo> {
+
+	/**
+	 * 
+	 */
 	
-	private LimitGroupInfoService limitGroupInfoService=(LimitGroupInfoService)getService("limitGroupInfoService");
-	private LimitGroupService limitGroupService=(LimitGroupService)getService("limitGroupService");
-	private PrivilegeService privilegeService=(PrivilegeService)getService("privilegeService");
-	private SysDictService  sysDictService=(SysDictService)getService("sysDictService");
-	private LimitGroupDao limitGroupDao = (LimitGroupDao)getService("limitGroupDao");
-	private LimitGroupInfoDao limitGroupInfoDao = (LimitGroupInfoDao)getService("limitGroupInfoDao");
-	private RoleInfoService roleInfoService=(RoleInfoService)getService("roleInfoService");
-	private IdFactoryService idFactoryService = (IdFactoryService)getService("idFactoryService");
-	public ActionForward listLimitGroupInfo(ActionMapping mapping, ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		try{
-			LimitGroupInfoActionForm limitGroupInfoActionForm=(LimitGroupInfoActionForm)form;
-			
-			LimitGroupInfo limitGroupInfo = this.getLimitGroupInfoBy(limitGroupInfoActionForm);
-			Paginater paginater = this.limitGroupInfoService.getLimitGroupInfoPageList(limitGroupInfo
-					, super.getPager(request));
-			
+	private static final long serialVersionUID = -3917589214310429849L;
+	@Autowired
+	private LimitGroupInfoService limitGroupInfoService;
+	@Autowired
+	private LimitGroupService limitGroupService;
+	@Autowired
+	private PrivilegeDao privilegeDao;
+	@Autowired
+	private SysDictService sysDictService;
+	@Autowired
+	private LimitGroupDao limitGroupDao;
+	@Autowired
+	private LimitGroupInfoDao limitGroupInfoDao;
+	@Autowired
+	private RoleInfoService roleInfoService;
+	@Autowired
+	private IdFactoryService idFactoryService;
+
+	public String listLimitGroupInfo() throws Exception {
+		try {
+
+			Paginater paginater = this.limitGroupInfoService.getLimitGroupInfoPageList(info, super.getPager(request));
 			saveQueryResult(request, paginater);
 			String msg = LogUtils.r("权限分组管理查询成功");
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		}catch(Exception e){
+		} catch (Exception e) {
 			String msg = LogUtils.r("权限分组管理查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 			throw new Exception(e);
 		}
-		
-		return mapping.findForward(ActionConstant.TO_LIST_PAGE);
+
+		return ActionConstant.TO_LIST_PAGE;
 	}
-	
-	
-	public LimitGroupInfo getLimitGroupInfoBy(LimitGroupInfoActionForm limitGroupInfoActionForm)
-			throws Exception{
-		
-		LimitGroupInfo limitGroupInfo=new LimitGroupInfo();
-		BeanUtils.copyProperties(limitGroupInfo, limitGroupInfoActionForm);
-		
-		return limitGroupInfo;
-	
-	};
-	
-	public ActionForward deleteLimitGroupInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		try{
-			LimitGroupInfoActionForm limitGroupInfoActionForm=(LimitGroupInfoActionForm)form;
-			List<RoleInfo> list=roleInfoService.queryRoleInfoByLimitGroupId(limitGroupInfoActionForm.getLimitGroupId());
-			if(list!=null && list.size()>0){
+
+	public String deleteLimitGroupInfo() throws Exception {
+		try {
+			List<RoleInfo> list = roleInfoService.queryRoleInfoByLimitGroupId(info.getLimitGroupId());
+			if (list != null && list.size() > 0) {
 				setResult(false, "删除失败,失败原因:该权限组已被某一角色使用，不能删除！", request);
-				limitGroupInfoActionForm.setLimitGroupId(null);
 				String msg = LogUtils.r("删除权限失败,失败原因:{?}", "该权限组已被某一角色使用，不能删除！");
 				super.logError(request, UserLogType.DELETE.getValue(), msg);
-				return this.listLimitGroupInfo(mapping, form, request, response);
-			}else{
-			this.limitGroupInfoService.deleteLimitGroupInfo(limitGroupInfoActionForm.getLimitGroupId());
-				limitGroupInfoActionForm.setLimitGroupId(null);
-				String msg = LogUtils.r("删除权限组成功，删除的权限组id为:{?}"+limitGroupInfoActionForm.getLimitGroupId());
+				return this.listLimitGroupInfo();
+			} else {
+				this.limitGroupInfoService.deleteLimitGroupInfo(info.getLimitGroupId());
+				info.setLimitGroupId(null);
+				String msg = LogUtils.r("删除权限组成功，删除的权限组id为:{?}" + info.getLimitGroupId());
 				super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			}
-		}catch(Exception e){
-			setResult(false, "删除失败,失败原因:"+e.getMessage(), request);
+		} catch (Exception e) {
+			setResult(false, "删除失败,失败原因:" + e.getMessage(), request);
 			String msg = LogUtils.r("删除权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 		}
-		return this.listLimitGroupInfo(mapping, form, request, response);
+		return this.listLimitGroupInfo();
 	}
-	
-	public ActionForward toAddPage(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		try{
+
+	public String toAddPage() throws Exception {
+
+		try {
 			this.initUserTypeCollections(request);
 			this.initPrivilegeTree(request);
 
-			return mapping.findForward(ActionConstant.TO_ADD_PAGE);
-		}catch (Exception e) {
+			return ActionConstant.TO_ADD_PAGE;
+		} catch (Exception e) {
 			setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT_GROUP, request);
-			
-			return this.listLimitGroupInfo(mapping, form, request, response);
+
+			return this.listLimitGroupInfo();
 		}
-	}
-	
-	public void initUserTypeCollections(HttpServletRequest request) throws Exception{
-		
-		List<SysDict> list = this.limitGroupInfoService.getSysDictNoLimitGroup();
-		 
-		if(null==list || list.size()==0){
-			throw new Exception("没用需要创建的权限组");
-		}
-		
-		saveQueryResult(request, list, "userTypeCollections");
-		  
-	}
-	
-	public void initPrivilegeTree(HttpServletRequest request) throws Exception{
-		
-		//初始化权限树
-		  List<Privilege> privilegeList = this.privilegeService.getPrivilegeList(new Privilege());
-		  List<PrivilegeTreeNode> list = privilegeService.getRoleTree();
-		  saveQueryResult(request, list);
-		  List<DTreeObj> dtreeLs=new ArrayList<DTreeObj>();
-		  convertToDtree(dtreeLs,privilegeList);
-		  
-		  saveQueryResult(request, dtreeLs,"dTree");
-		  
 	}
 
-	public void initPrivilegeSelect(HttpServletRequest request,String limitGroupId) throws Exception{
-		
+	public void initUserTypeCollections(HttpServletRequest request) throws Exception {
+
+		List<SysDict> list = this.limitGroupInfoService.getSysDictNoLimitGroup();
+
+		if (null == list || list.size() == 0) {
+			throw new Exception("没用需要创建的权限组");
+		}
+
+		saveQueryResult(request, list, "userTypeCollections");
+
+	}
+
+	public void initPrivilegeTree(HttpServletRequest request) throws Exception {
+
+		// 初始化权限树
+		List<Privilege> privilegeList = this.privilegeDao.getPrivilegeList(new Privilege());
+		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree();
+		saveQueryResult(request, list);
+		List<DTreeObj> dtreeLs = new ArrayList<DTreeObj>();
+		convertToDtree(dtreeLs, privilegeList);
+
+		saveQueryResult(request, dtreeLs, "dTree");
+
+	}
+
+	public void initPrivilegeSelect(HttpServletRequest request, String limitGroupId) throws Exception {
+
 		List<LimitGroup> list = this.limitGroupService.getByLimitGroupId(limitGroupId);
-		if(null==list || list.size()==0){
+		if (null == list || list.size() == 0) {
 			return;
 		}
-		
-		StringBuffer sb=new StringBuffer();
-		for(LimitGroup limitGroup:list){
+
+		StringBuffer sb = new StringBuffer();
+		for (LimitGroup limitGroup : list) {
 			sb.append("$").append(limitGroup.getId().getLimitId());
 		}
-		
+
 		StringBuffer inititSelect = sb.deleteCharAt(0);
-		
+
 		request.setAttribute("initCheck", inititSelect.toString());
 	}
 
-	private void convertToDtree(List<DTreeObj> dtreeLs,
-			List<Privilege> privilegeList) {
-		
-		if(null==privilegeList){
+	private void convertToDtree(List<DTreeObj> dtreeLs, List<Privilege> privilegeList) {
+
+		if (null == privilegeList) {
 			return;
 		}
-		
-		for(Privilege p :privilegeList){
-			
-			DTreeObj dTreeObj=new DTreeObj();
-			dTreeObj.setNodeId(p.getLimitId());;
+
+		for (Privilege p : privilegeList) {
+
+			DTreeObj dTreeObj = new DTreeObj();
+			dTreeObj.setNodeId(p.getLimitId());
+			;
 			dTreeObj.setNodePid(p.getParent());
 			dTreeObj.setNodeLabel(p.getLimitName());
 			dTreeObj.setNodeName("limitIds");
 			dTreeObj.setNodeValue(p.getLimitId());
 			dtreeLs.add(dTreeObj);
 		}
-		
+
 	}
 
+	public String addLimitGroupInfo() throws Exception {
 
-	public ActionForward addLimitGroupInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		try{
-		
-			LimitGroupInfoActionForm limitGroupInfoActionForm=(LimitGroupInfoActionForm)form;
-			
-			if(ArrayUtils.isEmpty(limitGroupInfoActionForm.getLimitIds())){
+		try {
+
+			if (ArrayUtils.isEmpty(info.getLimitIds())) {
 				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT, request);
-				return mapping.findForward(ActionConstant.TO_ADD_PAGE);
+				return ActionConstant.TO_ADD_PAGE;
 			}
-			
-			LimitGroupInfo limitGroupInfo = this.getLimitGroupInfoBy(limitGroupInfoActionForm);
+
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("limitGroupName", limitGroupInfoActionForm.getLimitGroupName());
+			params.put("limitGroupName", info.getLimitGroupName());
 			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class, params, null, null);
 			if (count > 0) {
-				setResult(false, LogUtils.r("权限组名称[{?}]已存在", limitGroupInfoActionForm.getLimitGroupName()), request);
-				return this.toAddPage(mapping, limitGroupInfoActionForm, request, response);
+				setResult(false, LogUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()), request);
+				return this.toAddPage();
 			}
-			limitGroupInfo.setLimitGroupId(idFactoryService.generateId(Constants.LIMIT_GROUP_INFO_ID));
-			this.limitGroupInfoService.saveLimitGroup(limitGroupInfo);
-			
+			info.setLimitGroupId(idFactoryService.generateId(Constants.LIMIT_GROUP_INFO_ID));
+			this.limitGroupInfoService.saveLimitGroup(info);
+
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			this.clearForm(limitGroupInfoActionForm);
-			String msg = LogUtils.r("添加权限组成功,添加内容为：{?}",FeildUtils.toString(limitGroupInfo));
+			String msg = LogUtils.r("添加权限组成功,添加内容为：{?}", FeildUtils.toString(info));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-			return this.listLimitGroupInfo(mapping, limitGroupInfoActionForm, request, response);
-		}catch (Exception e) {
+			return this.listLimitGroupInfo();
+		} catch (Exception e) {
 			String msg = LogUtils.r("添加权限组失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			ExceptionUtils.logException(LimitGroupInfoAction.class, e.getMessage());
 			throw e;
 		}
-		
+
 	}
 
-	public void clearForm(LimitGroupInfoActionForm limitGroupInfoActionForm){
-			limitGroupInfoActionForm.setLimitGroupId(null);
-			limitGroupInfoActionForm.setLimitGroupName(null);
+	public void clearForm(LimitGroupInfo info) {
+		info.setLimitGroupId(null);
+		info.setLimitGroupName(null);
 	}
-	
-	public ActionForward toUpdatePage(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-			LimitGroupInfoActionForm limitGroupInfoActionForm=(LimitGroupInfoActionForm)form;
-			String limitGroupId = limitGroupInfoActionForm.getLimitGroupId();
-			LimitGroupInfo limitGroupInfo = this.limitGroupInfoService.getLimitGroupInfoById(limitGroupInfoActionForm.getLimitGroupId());
-			limitGroupInfoActionForm.setLimitGroupId(limitGroupInfo.getLimitGroupId());
-			limitGroupInfoActionForm.setLimitGroupName(limitGroupInfo.getLimitGroupName());
-			limitGroupInfoActionForm.setUserType(limitGroupInfo.getUserType());
-			
-			SysDictId id=new SysDictId();
-			id.setDictType(SysDictType.UserType.getValue());
-			id.setDictValue(limitGroupInfo.getUserType());
-			SysDict sysDict = this.sysDictService.getSysDict(id);
-			
-			limitGroupInfoActionForm.setUserTypeName(sysDict.getDictName());
-			
-			List<SysDict> userTypeCollections=new ArrayList<SysDict>();
-			userTypeCollections.add(sysDict);
-			saveQueryResult(request, userTypeCollections , "userTypeCollections");
-			
-			this.initPrivilegeTree(request);
-			this.initPrivilegeSelect(request, limitGroupInfoActionForm.getLimitGroupId());
-			LimitGroupInfo gr = (LimitGroupInfo) limitGroupInfoDao.findById(limitGroupId);
-			
-			List<LimitGroup> lgList = limitGroupDao.getByLimitGroupId(limitGroupId);
-			request.setAttribute("groupPrivilegeList", lgList);
-			request.setAttribute("element", gr);
-			return mapping.findForward(ActionConstant.TO_UPDATE_PAGE);
+
+	public String toUpdatePage() throws Exception {
+		String limitGroupId = info.getLimitGroupId();
+		LimitGroupInfo limitGroupInfo = this.limitGroupInfoService.getLimitGroupInfoById(info.getLimitGroupId());
+		info.setLimitGroupId(limitGroupInfo.getLimitGroupId());
+		info.setLimitGroupName(limitGroupInfo.getLimitGroupName());
+		info.setUserType(limitGroupInfo.getUserType());
+
+		SysDictId id = new SysDictId();
+		id.setDictType(SysDictType.UserType.getValue());
+		id.setDictValue(limitGroupInfo.getUserType());
+		SysDict sysDict = this.sysDictService.getSysDict(id);
+
+		info.setUserTypeName(sysDict.getDictName());
+
+		List<SysDict> userTypeCollections = new ArrayList<SysDict>();
+		userTypeCollections.add(sysDict);
+		saveQueryResult(request, userTypeCollections, "userTypeCollections");
+
+		this.initPrivilegeTree(request);
+		this.initPrivilegeSelect(request, info.getLimitGroupId());
+		LimitGroupInfo gr = (LimitGroupInfo) limitGroupInfoDao.findById(limitGroupId);
+
+		List<LimitGroup> lgList = limitGroupDao.getByLimitGroupId(limitGroupId);
+		request.setAttribute("groupPrivilegeList", lgList);
+		request.setAttribute("element", gr);
+		return ActionConstant.TO_UPDATE_PAGE;
 	}
-	
-	public ActionForward updateLimitGroupInfo(ActionMapping mapping,ActionForm form,
-			HttpServletRequest request,HttpServletResponse response) throws Exception{
-		
-		try{
+
+	public String updateLimitGroupInfo() throws Exception {
+
+		try {
 			if (!isValidKey(request)) {
-				return this.toUpdatePage(mapping, form, request, response);
+				return this.toUpdatePage();
 			}
-			LimitGroupInfoActionForm limitGroupInfoActionForm=(LimitGroupInfoActionForm)form;
-			LimitGroupInfo limitGroupInfo = this.getLimitGroupInfoBy(limitGroupInfoActionForm);
-			
-			if(null==limitGroupInfoActionForm.getLimitIds() || limitGroupInfoActionForm.getLimitIds().length==0){
+
+			if (null == info.getLimitIds() || info.getLimitIds().length == 0) {
 				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT, request);
-				return this.toUpdatePage(mapping, limitGroupInfoActionForm, request, response);
+				return this.toUpdatePage();
 			}
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("limitGroupName", limitGroupInfoActionForm.getLimitGroupName());
-			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class, params, "limitGroupId", limitGroupInfoActionForm.getLimitGroupId());
+			params.put("limitGroupName", info.getLimitGroupName());
+			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class, params, "limitGroupId",
+					info.getLimitGroupId());
 			if (count > 0) {
-				setResult(false, LogUtils.r("权限组名称[{?}]已存在", limitGroupInfoActionForm.getLimitGroupName()), request);
-				return this.toUpdatePage(mapping, limitGroupInfoActionForm, request, response);
+				setResult(false, LogUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()), request);
+				return this.toUpdatePage();
 			}
-			this.limitGroupInfoService.updateLimitGroupInfo(limitGroupInfo);
+			this.limitGroupInfoService.updateLimitGroupInfo(info);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("修改权限组成功，修改的权限组内容为:{?}",FeildUtils.toString(limitGroupInfo));
+			String msg = LogUtils.r("修改权限组成功，修改的权限组内容为:{?}", FeildUtils.toString(info));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
-			return  this.toUpdatePage(mapping, limitGroupInfoActionForm, request, response);
-		}catch (Exception e) {
-			setResult(false, "修改失败,失败原因:"+e.getMessage(), request);
+			return this.toUpdatePage();
+		} catch (Exception e) {
+			setResult(false, "修改失败,失败原因:" + e.getMessage(), request);
 			String msg = LogUtils.r("修改权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			ExceptionUtils.logException(LimitGroupInfoAction.class, e.getMessage());
@@ -298,4 +285,11 @@ public class LimitGroupInfoAction extends BaseDispatchAction{
 			throw e;
 		}
 	}
+
+	public LimitGroupInfo getModel() {
+		return info;
+	}
+
+	private LimitGroupInfo info = new LimitGroupInfo();
+
 }

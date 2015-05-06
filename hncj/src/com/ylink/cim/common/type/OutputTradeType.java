@@ -24,9 +24,8 @@ public class OutputTradeType extends AbstractType {
 	
 	
 	
-	protected OutputTradeType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("tradeTypes", OutputTradeType.ALL.values());
 	}
 	
 	public static OutputTradeType valueOf(String value) {
@@ -34,7 +33,8 @@ public class OutputTradeType extends AbstractType {
 		return type;
 	}
 	
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("tradeTypes", OutputTradeType.ALL.values());
+	protected OutputTradeType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

@@ -19,6 +19,7 @@ public class ParamRange extends AbstractType {
 	public static final ParamRange UNIT = new ParamRange("µ¥Ôª", "02");
 	public static final ParamRange FLOOR = new ParamRange("²ã", "03");
 	public static final ParamRange HOUSE = new ParamRange("»§", "04");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("paramRanges", ParamRange.ALL.values());
 	}

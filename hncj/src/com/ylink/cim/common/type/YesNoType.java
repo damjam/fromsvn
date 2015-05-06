@@ -14,9 +14,8 @@ public class YesNoType extends AbstractType {
 	public static final YesNoType YES = new YesNoType("ÊÇ", "1");
 	public static final YesNoType NO = new YesNoType("·ñ", "0");
 
-	protected YesNoType(String name, String value) {
-		super(name, value);
-		ALL.put(value, this);
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("yesNos", YesNoType.ALL.values());
 	}
 
 	public static YesNoType valueOf(String value) throws Exception {
@@ -28,7 +27,8 @@ public class YesNoType extends AbstractType {
 		return type;
 	}
 
-	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("yesNos", YesNoType.ALL.values());
+	protected YesNoType(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
 	}
 }

@@ -18,6 +18,7 @@ public class ChargeWay extends AbstractType {
 	public static final ChargeWay UNIT = new ChargeWay("固定单价", "00");
 	public static final ChargeWay SEG = new ChargeWay("分段计价", "01");
 	public static final ChargeWay STEP = new ChargeWay("逐层递增", "02");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("chargeWays", ChargeWay.ALL.values());
 	}

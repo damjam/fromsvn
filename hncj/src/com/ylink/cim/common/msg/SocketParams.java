@@ -18,36 +18,36 @@ public class SocketParams {
 		this.charset = charset;
 	}
 
-	public String getHostName() {
-		return hostName;
+	public String getCharset() {
+		return charset;
 	}
 
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
+	public String getHostName() {
+		return hostName;
 	}
 
 	public int getPortNum() {
 		return portNum;
 	}
 
-	public void setPortNum(int portNum) {
-		this.portNum = portNum;
-	}
-
 	public int getTimeout() {
 		return timeout;
 	}
 
-	public void setTimeout(int timeout) {
-		this.timeout = timeout;
-	}
-
-	public String getCharset() {
-		return charset;
-	}
-
 	public void setCharset(String charset) {
 		this.charset = charset;
+	}
+
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+
+	public void setPortNum(int portNum) {
+		this.portNum = portNum;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
 	}
 
 }

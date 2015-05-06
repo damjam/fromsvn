@@ -8,7 +8,9 @@ import flink.util.Paginater;
 
 public interface PrivilegeResourceDao extends BaseDao{
 	
-	public Paginater getPrivilegeResourceList(PrivilegeResource privilegeResource,Pager pager); 
+	public boolean existPriRes(String limitId, Long id); 
 	
+	public Paginater findPrivRes(PrivilegeResource privilegeResource, Pager pager);
 	
+	public Paginater getPrivilegeResourceList(PrivilegeResource privilegeResource,Pager pager);
 }

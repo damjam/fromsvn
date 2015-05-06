@@ -15,6 +15,7 @@ public class OwnerGrade extends AbstractType {
 	public static final OwnerGrade NORMAL = new OwnerGrade("一般", "0");
 	public static final OwnerGrade VIP = new OwnerGrade("重要", "1");
 	public static final OwnerGrade VVIP = new OwnerGrade("非常重要", "2");
+
 	protected OwnerGrade(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

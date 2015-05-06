@@ -18,10 +18,10 @@ import org.apache.log4j.Logger;
 import org.springframework.web.util.WebUtils;
 
 import com.ylink.cim.admin.domain.PrivilegeResource;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.UserLogService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.util.SpringContext;
@@ -39,6 +39,10 @@ public class UserLogFilter extends HttpServlet implements Filter {
 	private IdFactoryService idFactoryService = (IdFactoryService)SpringContext.getService("idFactoryService");
 	private FilterConfig filterConfig;
 	
+	public void destroy() {
+		this.filterConfig = null;
+	}
+
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain) throws IOException, ServletException {
 		try {
@@ -54,7 +58,7 @@ public class UserLogFilter extends HttpServlet implements Filter {
 				}// 将模块编号：空的话修改为“ ”
 	
 				UserInfo sessionUser =(UserInfo)WebUtils.getSessionAttribute(request, Constants.SESSION_USER);
-				if (sessionUser == null) {// 没有登陆成功的情景
+				if (sessionUser == null) {// 没有登录成功的情景
 					userLog.setUserId("anony");
 				} else {
 					userLog.setUserId(sessionUser.getUserId());
@@ -73,7 +77,59 @@ public class UserLogFilter extends HttpServlet implements Filter {
 			filterConfig.getServletContext().log(e.getMessage());
 		}
 	}
+	
+	private String getCurPrivilegeCode(final HttpServletRequest request) {
+		Map<String, PrivilegeResource> privileges =
+			(Map<String, PrivilegeResource>) WebUtils.getSessionAttribute(request, Constants.USER_PRIVILEGE_RES);
+		if (privileges == null) {
+			return null;
+		}
+		String link = WebResource.getLink(request);
+		PrivilegeResource res = privileges.get(link);
+		return res == null ? null : res.getLimitId();
+	}
+	
+	private  String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
+    }
 
+	private String getLogContent(HttpServletRequest request,String uri) {
+		Enumeration en = request.getParameterNames();
+        StringBuffer url = new StringBuffer();
+        String paramName = "";
+        String paramValue = "";
+        url.append(uri);
+        url.append("?");
+        String action = request.getParameter("action");
+        if(StringUtils.isNotEmpty(action)){
+	        url.append("action").append("=").append(action);
+	        url.append("&");
+        }
+        while(en.hasMoreElements()){        //遍历所有属性，对有值的进行组装
+        	 	
+                paramName = en.nextElement().toString();
+                paramValue = request.getParameter(paramName);
+                if(!paramName.equalsIgnoreCase("action")){
+	                url.append(paramName).append("=").append(paramValue);
+	                url.append("&");
+                }
+               
+        }
+        int len=url.toString().length();
+        String logContent=url.toString().substring(0, len-1);
+		return logContent;
+	}
+	
 	private String getLogType(HttpServletRequest request,String uri){
 		String logType=Constants.LOG_USER_O;//其他
 		if (uri.endsWith(".do")) {
@@ -130,63 +186,7 @@ public class UserLogFilter extends HttpServlet implements Filter {
 		return logType;	
 	}
 	
-	private String getLogContent(HttpServletRequest request,String uri) {
-		Enumeration en = request.getParameterNames();
-        StringBuffer url = new StringBuffer();
-        String paramName = "";
-        String paramValue = "";
-        url.append(uri);
-        url.append("?");
-        String action = request.getParameter("action");
-        if(StringUtils.isNotEmpty(action)){
-	        url.append("action").append("=").append(action);
-	        url.append("&");
-        }
-        while(en.hasMoreElements()){        //遍历所有属性，对有值的进行组装
-        	 	
-                paramName = en.nextElement().toString();
-                paramValue = request.getParameter(paramName);
-                if(!paramName.equalsIgnoreCase("action")){
-	                url.append(paramName).append("=").append(paramValue);
-	                url.append("&");
-                }
-               
-        }
-        int len=url.toString().length();
-        String logContent=url.toString().substring(0, len-1);
-		return logContent;
-	}
-	
-	private String getCurPrivilegeCode(final HttpServletRequest request) {
-		Map<String, PrivilegeResource> privileges =
-			(Map<String, PrivilegeResource>) WebUtils.getSessionAttribute(request, Constants.USER_PRIVILEGE_RES);
-		if (privileges == null) {
-			return null;
-		}
-		String link = WebResource.getLink(request);
-		PrivilegeResource res = privileges.get(link);
-		return res == null ? null : res.getLimitId();
-	}
-
-	private  String getIpAddr(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        return ip;
-    }
-	
 	public void init(FilterConfig filterConfig) throws ServletException {
 			this.filterConfig = filterConfig;
-	}
-	
-	public void destroy() {
-		this.filterConfig = null;
 	}
 }

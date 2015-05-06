@@ -2,15 +2,15 @@ package com.ylink.cim.common.util;
 
 import java.util.Random;
 
-
 public class RandomUtils {
 
 	/**
 	 * 获取随机数
+	 * 
 	 * @param bit
 	 * @return
 	 */
-	public static String getRandomNumber(int bit){
+	public static String getRandomNumber(int bit) {
 		if (bit <= 0) {
 			return "";
 		}
@@ -33,6 +33,7 @@ public class RandomUtils {
 		}
 		return builder.toString();
 	}
+
 	public static void main(String[] args) {
 		//
 		System.out.println(getRandomNumber(6));

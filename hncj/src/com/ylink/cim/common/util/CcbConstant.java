@@ -2,9 +2,9 @@ package com.ylink.cim.common.util;
 
 public class CcbConstant {
 
-	public static String MERCHANTID = "105584060120048";//银行提供
-	public static String POSID = "856679647";//默认值
-	public static String BRANCHID = "442000000";//银行提供
+	public static String MERCHANTID = "105584060120048";// 银行提供
+	public static String POSID = "856679647";// 默认值
+	public static String BRANCHID = "442000000";// 银行提供
 	public static String CURCODE = "01";
 	public static String TXCODE_SIGN = "520105";
 	public static String TXCODE_CANCEL = "520110";

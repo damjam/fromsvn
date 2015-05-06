@@ -26,7 +26,7 @@ public class PayChnlType extends AbstractType {
 	public static final PayChnlType BANK_308 = new PayChnlType("招商银行", "308");
 	public static final PayChnlType BANK_309 = new PayChnlType("兴业银行", "309");
 	public static final PayChnlType BANK_001 = new PayChnlType("东莞银行", "001");
-	
+
 	protected PayChnlType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
@@ -41,6 +41,7 @@ public class PayChnlType extends AbstractType {
 
 		return type;
 	}
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("payChnlTypes", PayChnlType.ALL.values());
 	}

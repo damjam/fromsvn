@@ -26,7 +26,6 @@ public abstract class BaseCmdTask extends Thread {
 		return cmdId;
 	}
 
-	
 	public void run() {
 		logger.debug("BaseCmdTask.run...");
 		doRun();

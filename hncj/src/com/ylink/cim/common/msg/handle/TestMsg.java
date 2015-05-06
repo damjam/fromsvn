@@ -16,6 +16,12 @@ public class TestMsg {
 		// testA0011();
 	}
 
+	private static void printMap(Map<String, MsgField> map) {
+		for (Map.Entry<String, MsgField> entry : map.entrySet()) {
+			System.out.println(entry.getKey() + "=" + entry.getValue().getValue());
+		}
+	}
+
 	private static void testA0010() throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put(MsgField.account_no.getFieldCode(), "71221234123413241");
@@ -104,12 +110,6 @@ public class TestMsg {
 		List<Map<String, MsgField>> bodyList = MsgUtil.parseResBodyList(msg, MsgA2040.A2040RES);
 		for (int i = 0; i < bodyList.size(); i++) {
 			printMap(bodyList.get(i));
-		}
-	}
-
-	private static void printMap(Map<String, MsgField> map) {
-		for (Map.Entry<String, MsgField> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + "=" + entry.getValue().getValue());
 		}
 	}
 }

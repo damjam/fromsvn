@@ -23,13 +23,15 @@ import flink.util.SpringContext;
  */
 @Component("timerAppServer")
 public class TimerAppServer implements IAppServer {
-	private static long sleepTime = 60000L;//一分钟
+	private static long sleepTime = 60000L;// 一分钟
 	private Logger logger = Logger.getLogger(TimerAppServer.class);
 
 	@Autowired
-	private TimerDoDao timerDoDao;// = (TimerDoDao) SpringContext.getService("timerDoDao");
+	private TimerDoDao timerDoDao;// = (TimerDoDao)
+									// SpringContext.getService("timerDoDao");
 	@Autowired
-	private TimerDoService timerDoService;// = (TimerDoService) SpringContext.getService("timerDoService");
+	private TimerDoService timerDoService;// = (TimerDoService)
+											// SpringContext.getService("timerDoService");
 
 	private SimpleDateFormat dayFormat = new SimpleDateFormat("yyyyMMdd");// 日期格式化
 
@@ -40,7 +42,7 @@ public class TimerAppServer implements IAppServer {
 		String sTriggerDate;// 触发日期
 		String sCurrentTime;// 触发时间
 		Map<String, String> mapOfInit = new HashMap<String, String>();
-		
+
 		while (true) {
 			Date now = new Date();
 			sTriggerDate = dayFormat.format(now);
@@ -50,7 +52,7 @@ public class TimerAppServer implements IAppServer {
 			if (init == null) {
 				try {
 					timerDoService.insertInitTask(sTriggerDate);
-					
+
 					mapOfInit.clear();
 					mapOfInit.put(sTriggerDate, "init");
 				} catch (Exception e) {
@@ -73,7 +75,8 @@ public class TimerAppServer implements IAppServer {
 				logger.info("定时命令开始执行代码:" + timerDo.getBeanName());
 				// 派生线程
 				try {
-					//BaseCmdTask baseCmd = (BaseCmdTask) Class.forName(timerDo.getClassName()).newInstance();
+					// BaseCmdTask baseCmd = (BaseCmdTask)
+					// Class.forName(timerDo.getClassName()).newInstance();
 					BaseCmdTask baseCmd = (BaseCmdTask) SpringContext.getService(timerDo.getBeanName());
 					baseCmd.setCmdName(timerDo.getBeanNameCh());
 					baseCmd.setCmdId(timerDo.getId());

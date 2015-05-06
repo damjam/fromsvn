@@ -16,8 +16,6 @@ import flink.util.Paginater;
 public interface BranchParmDao extends BaseDao {
 	public void deleteBranchParmById(String id) throws Exception;
 
-	
-
 	public BranchParm findBranchParmById(String id) throws Exception;
 
 	/**
@@ -34,7 +32,6 @@ public interface BranchParmDao extends BaseDao {
 	 */
 	public Date getDbTime();
 
-
 	public Paginater getPageList(Pager pager, BranchParm sysParm) throws Exception;
 
 	/**
@@ -50,7 +47,6 @@ public interface BranchParmDao extends BaseDao {
 	 * @return
 	 */
 	public boolean hasParm(String code) throws Exception;
-
 
 	public void saveBranchParm(BranchParm sysParm) throws Exception;
 

@@ -2,18 +2,17 @@ package com.ylink.cim.common.msg.handle;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-
 public class MsgA2038 {
 	/**
 	 * 当前报文域长度与MsgField类中定义不一致时，可在此处重新定义
 	 */
-	
+
 	public static MsgField variety_id = new MsgField();
 	public static MsgField variety_name = new MsgField();
 	public static MsgField branch_id = new MsgField();
 	public static MsgField addr = new MsgField();
 	public static MsgField tel = new MsgField();
-	static{
+	static {
 		try {
 			BeanUtils.copyProperties(variety_id, MsgField.variety_id);
 			variety_id.setLength(3);
@@ -27,45 +26,26 @@ public class MsgA2038 {
 			tel.setLength(30);
 		} catch (Exception e) {
 		}
-		
+
 	}
 
-	public static MsgField[] A2038REQ = {
-		MsgField.aip_no,
-		MsgField.local_serial_no,
-		MsgField.start_app_date,
-		MsgField.end_app_date
-		};
-	
-	public static MsgField[] A2038RES = {
-		MsgField.aip_no,
-		MsgField.account_no,
-		MsgField.cust_name,
-		MsgField.stat,
-		MsgField.local_serial_no,
-		variety_id,
-		variety_name,
-		MsgField.take_weight,
-		MsgField.take_end_date,
-//		MsgField.city_code,
-//		MsgField.rsp_msg,
-//		MsgField.sheet_no,
-		MsgField.city_code,
-		branch_id,
-		MsgField.stor_id,
-		MsgField.contacter,
-		addr,
-		MsgField.exch_date,
-		MsgField.b_contacter,
-		MsgField.b_addr,
-		tel,
-		MsgField.take_margin,
-		MsgField.take_fare,
-		MsgField.re_margin,
-		MsgField.diff_bal,
-		MsgField.process_cost
-		
-		};
-	
+	public static MsgField[] A2038REQ = { MsgField.aip_no, MsgField.local_serial_no, MsgField.start_app_date,
+			MsgField.end_app_date };
+
+	public static MsgField[] A2038RES = { MsgField.aip_no, MsgField.account_no, MsgField.cust_name,
+			MsgField.stat,
+			MsgField.local_serial_no,
+			variety_id,
+			variety_name,
+			MsgField.take_weight,
+			MsgField.take_end_date,
+			// MsgField.city_code,
+			// MsgField.rsp_msg,
+			// MsgField.sheet_no,
+			MsgField.city_code, branch_id, MsgField.stor_id, MsgField.contacter, addr, MsgField.exch_date,
+			MsgField.b_contacter, MsgField.b_addr, tel, MsgField.take_margin, MsgField.take_fare, MsgField.re_margin,
+			MsgField.diff_bal, MsgField.process_cost
+
+	};
 
 }

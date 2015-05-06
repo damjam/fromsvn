@@ -18,6 +18,7 @@ public class SysDictType extends AbstractType {
 	public static final SysDictType RentType = new SysDictType("公租房楼号", "RentType");
 	public static final SysDictType HouseType = new SysDictType("住宅区楼号", "HouseType");
 	public static final SysDictType FlatType = new SysDictType("公寓区楼号", "FlatType");
+
 	protected SysDictType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
@@ -31,8 +32,9 @@ public class SysDictType extends AbstractType {
 		}
 		return sysDictType;
 	}
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("dictTypes", ALL.values());
 	}
-	
+
 }

@@ -17,6 +17,7 @@ public class ChargeType extends AbstractType {
 	public static final ChargeType JUNK_CLEAN = new ChargeType("垃圾清运费", "02");
 	public static final ChargeType PUBLIC_ENERGE = new ChargeType("公共能源费", "03");
 	public static final ChargeType LIFT_USE = new ChargeType("电梯使用费", "04");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("chargeTypes", ChargeType.ALL.values());
 	}

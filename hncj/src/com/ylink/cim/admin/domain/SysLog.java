@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 // default package
 
 /**
- * SysLog domain. @author MyEclipse Persistence Tools
+ * SysLog entity. @author MyEclipse Persistence Tools
  */
 
 public class SysLog implements java.io.Serializable {
@@ -18,7 +18,7 @@ public class SysLog implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id;
+	private Long id;
 	private String userId;
 	private String limitId;
 	private String errorCode;
@@ -52,16 +52,17 @@ public class SysLog implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getId() {
-		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getUserId() {
 		return this.userId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setUserId(String userId) {

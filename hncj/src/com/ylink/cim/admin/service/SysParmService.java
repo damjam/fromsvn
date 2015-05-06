@@ -33,5 +33,4 @@ public interface SysParmService {
 
 	public void update(SysParm sysParm) throws BizException;
 
-	
 }

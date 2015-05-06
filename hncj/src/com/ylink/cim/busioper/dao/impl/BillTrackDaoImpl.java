@@ -25,10 +25,12 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		QueryHelper helper = new QueryHelper();
 		helper.append("from BillTrack t where 1=1");
 		if (map.get("startCreateDate") != null) {
-			helper.append("and t.createTime >= ?", DateUtil.string2Date(MapUtils.getString(map, "startCreateDate"), "yyyyMMdd"));
+			helper.append("and t.createTime >= ?",
+					DateUtil.string2Date(MapUtils.getString(map, "startCreateDate"), "yyyyMMdd"));
 		}
 		if (map.get("endCreateDate") != null) {
-			helper.append("and t.createTime <= ?", DateUtil.string2Date(MapUtils.getString(map, "endCreateDate"), "yyyyMMdd"));
+			helper.append("and t.createTime <= ?",
+					DateUtil.string2Date(MapUtils.getString(map, "endCreateDate"), "yyyyMMdd"));
 		}
 		if (!BranchType.HQ_0000.getValue().equals(map.get("branchNo"))) {
 			helper.append("and t.branchNo = ?", map.get("branchNo"));
@@ -44,10 +46,11 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		helper.append("order by t.id desc");
 		return getPageData(helper, pager);
 	}
+
 	protected Class getModelClass() {
 		return BillTrack.class;
 	}
-	
+
 	public List<BillTrack> findList(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from BillTrack t where 1=1");
@@ -69,5 +72,5 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		helper.append("and branchNo = ?", branchNo);
 		return super.execute(helper);
 	}
-	
+
 }
