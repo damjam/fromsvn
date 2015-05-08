@@ -75,7 +75,7 @@
 								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							<td class="formlabel nes">状态</td>
+							<td class="formlabel">状态</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
 						    		<html:option value="">---全部---</html:option>
@@ -100,9 +100,9 @@
 								排序方式
 							</td>
 							<td>
-								<html:select property="orderType" onchange="this.form.submit()">
-									<html:option value="id">按账单号</html:option>
-									<html:option value="houseSn">按房屋编号</html:option>
+								<html:select property="orderType">
+									<html:option value="id">账单号</html:option>
+									<html:option value="houseSn">房屋编号</html:option>
 								</html:select>
 							</td>
 						</tr>
