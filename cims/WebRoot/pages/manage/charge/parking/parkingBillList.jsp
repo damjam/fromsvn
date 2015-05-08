@@ -103,6 +103,17 @@
 							</td>
 						</tr>
 						<tr>
+						<td class="formlabel">
+								排序方式
+							</td>
+							<td>
+								<html:select property="orderType">
+									<html:option value="id">账单号</html:option>
+									<html:option value="houseSn">房屋编号</html:option>
+								</html:select>
+							</td>
+						</tr>
+						<tr>
 						    <td></td>
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
