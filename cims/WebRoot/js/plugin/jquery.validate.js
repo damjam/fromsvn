@@ -1262,5 +1262,5 @@ $.format = $.validator.format;
 		triggerEvent: function(type, target) {
 			return this.triggerHandler(type, [$.event.fix({ type: type, target: target })]);
 		}
-	})
+	});
 })(jQuery);
