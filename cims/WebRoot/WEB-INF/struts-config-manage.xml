@@ -26,7 +26,9 @@
 		<form-bean name="accountActionForm"
 			type="com.ylink.cim.manage.view.AccountActionForm" />	
 		<form-bean name="accountJournalActionForm"
-			type="com.ylink.cim.manage.view.AccountJournalActionForm" />						
+			type="com.ylink.cim.manage.view.AccountJournalActionForm" />
+		<form-bean name="billTrackActionForm"
+			type="com.ylink.cim.manage.view.BillTrackActionForm" />
 	</form-beans>
 	<action-mappings>
 		<action path="/waterRecord" name="waterRecordActionForm"
@@ -75,6 +77,10 @@
 		</action>
 		<action path="/accountJournal" name="accountJournalActionForm"
 			type="com.ylink.cim.manage.view.AccountJournalAction" parameter="action"
+			scope="request">
+		</action>
+		<action path="/billTrack" name="billTrackActionForm"
+			type="com.ylink.cim.manage.view.BillTrackAction" parameter="action"
 			scope="request">
 		</action>
 	</action-mappings>

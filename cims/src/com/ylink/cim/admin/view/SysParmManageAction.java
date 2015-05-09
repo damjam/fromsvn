@@ -18,11 +18,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.admin.domain.SysParm;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.SysParmService;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;

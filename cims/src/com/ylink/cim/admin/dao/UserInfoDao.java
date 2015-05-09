@@ -1,8 +1,8 @@
-package com.ylink.cim.user.dao;
+package com.ylink.cim.admin.dao;
 
 import java.util.List;
 
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 
 import flink.hibernate.BaseDao;
 import flink.util.IPrivilege;

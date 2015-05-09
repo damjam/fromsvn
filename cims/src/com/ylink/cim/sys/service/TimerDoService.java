@@ -11,7 +11,7 @@ public interface TimerDoService {
 	public abstract boolean insertInitTask(String sTriggerDate) throws BizException;
 
 	public abstract void updateTimerDo(TimerDo timerDo, String state, String string);
-	
+
 	public abstract void addTimerDo(Class<?> clazz, Date date);
 
 }

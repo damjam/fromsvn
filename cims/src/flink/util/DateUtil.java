@@ -102,7 +102,6 @@ public abstract class DateUtil {
 		if (StringUtils.isEmpty(date)) {
 			return null;
 		}
-		
 		try {
 			return new SimpleDateFormat(pattern).parse(date); 
 		} catch (Exception ex) {
@@ -160,21 +159,13 @@ public abstract class DateUtil {
 	 * @since 2006-12-28
 	 */
 	public static int getDateDiffDays(Date curDate, Date oriDate) {
-		final int MS_PER_DAY = 1000 * 60 * 60 * 24;
-		Date startDate = new Date();
-		Date endDate = new Date();
-
-		try {
-			startDate = new java.text.SimpleDateFormat("yyyy-MM-dd")
-					.parse(getDate(curDate));
-			endDate = new java.text.SimpleDateFormat("yyyy-MM-dd")
-					.parse(getDate(oriDate));
-		} catch (ParseException ex) {
-			ex.printStackTrace();
-		}
-
-		return (int) Math.abs((startDate.getTime() - endDate.getTime())
-				/ MS_PER_DAY);
+		Calendar cal = Calendar.getInstance();    
+        cal.setTime(curDate);    
+        long time1 = cal.getTimeInMillis();                 
+        cal.setTime(oriDate);    
+        long time2 = cal.getTimeInMillis();         
+        long interval = (time1-time2)/(1000*3600*24);  
+        return (int)interval;
 	}
 
 	public static String addDays(String date, int num, String pattern) {
@@ -401,9 +392,11 @@ public abstract class DateUtil {
          calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));  
          return DateUtil.formatDate("yyyyMMdd", calendar.getTime()); 
 	}
-    public static void main(String[] args) {
-		
-		System.err.println(getNextDate("20131220", "yyyyMMdd"));
+    public static void main(String[] args) throws Exception{
+    	String expireDate = "20141130";
+    	Date endDate = DateUtil.string2Date(expireDate, "yyyyMMdd");
+		Date today = DateUtil.getCurrent();
+		System.err.println(getDateDiffDays(today, endDate));
 	}
     public static Date getNextDate(String dateString, String pattern) {
     	Date nextDate = null;

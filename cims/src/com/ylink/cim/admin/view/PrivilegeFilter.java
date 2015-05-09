@@ -24,8 +24,8 @@ import org.springframework.util.PatternMatchUtils;
 
 import com.ylink.cim.admin.domain.Privilege;
 import com.ylink.cim.admin.domain.PrivilegeResource;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.PrivilegeHelper;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.util.WebResource;

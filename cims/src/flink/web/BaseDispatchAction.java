@@ -27,6 +27,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.ylink.cim.admin.domain.PrivilegeResource;
 import com.ylink.cim.admin.domain.SysLog;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.SysLogService;
@@ -34,7 +35,6 @@ import com.ylink.cim.admin.service.UserLogService;
 import com.ylink.cim.common.msg.handle.MsgField;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.cust.domain.CustInfo;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.Assert;

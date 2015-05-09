@@ -26,8 +26,26 @@ public class ParkingBillActionForm extends ActionForm{
 	private Integer monthNum;
 	private String state;
 	private String year;
+	private String orderType;
+	private String mobile;
+	
+	// Constructors
 	
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
 	public String getYear() {
 		return year;
 	}

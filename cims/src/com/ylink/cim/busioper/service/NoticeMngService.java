@@ -9,5 +9,5 @@ public interface NoticeMngService {
 	
 	void updateMsgRecord(NoticeMsgRecord record);
 	
-	void exeTimerDo(Long timerDoId); 
+	void exeTimerDo(String timerDoId); 
 }

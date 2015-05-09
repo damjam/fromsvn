@@ -21,4 +21,6 @@ public interface WaterBillDao extends BaseDao {
 	public List findErr();
 	
 	public AccountDetail getstDeta(String id);
+	
+	public List<WaterBill> getAllUnpayBill(Map<String, Object> map);
 }

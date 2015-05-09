@@ -3,7 +3,7 @@ package com.ylink.cim.admin.service;
 
 import java.util.List;
 
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 
 /**
  * 数据过滤服务

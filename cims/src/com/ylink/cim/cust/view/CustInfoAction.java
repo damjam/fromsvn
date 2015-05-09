@@ -19,6 +19,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.ylink.cim.admin.dao.SysDictDao;
 import com.ylink.cim.admin.domain.SysDict;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.view.CookieDealer;
 import com.ylink.cim.common.type.AreaCodeType;
 import com.ylink.cim.common.type.BranchType;
@@ -38,7 +39,6 @@ import com.ylink.cim.cust.dao.CustInfoDao;
 import com.ylink.cim.cust.domain.CustInfo;
 import com.ylink.cim.cust.service.CustInfoService;
 import com.ylink.cim.invest.service.SignContractService;
-import com.ylink.cim.user.domain.UserInfo;
 import com.ylink.cim.util.DataValidator;
 
 import flink.MD5Util;
@@ -151,7 +151,7 @@ public class CustInfoAction extends BaseDispatchAction {
 			}
 			return branchNo;
 		} catch (Exception e) {
-			return BranchType.SZGOLD.getValue();
+			return BranchType.HQ_0000.getValue();
 		}
 
 	}

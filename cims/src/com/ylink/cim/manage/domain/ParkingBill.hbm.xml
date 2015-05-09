@@ -52,5 +52,8 @@
 		<property name="remark" type="java.lang.String">
 			<column name="REMARK" length="50" />
 		</property>
+		<property name="mobile" type="java.lang.String">
+            <column name="MOBILE" length="20" />
+        </property>
 	</class>
 </hibernate-mapping>

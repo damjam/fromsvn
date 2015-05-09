@@ -156,7 +156,7 @@ public class CommonServiceBillAction extends BaseDispatchAction {
 			String lightPrice = request.getParameter("lightPrice");
 			//String houseSn = request.getParameter("houseSn");
 			String areaStr = request.getParameter("area");
-			String checkinState = request.getParameter("checkinState");
+			//String checkinState = request.getParameter("checkinState");
 			Double area = Double.parseDouble(areaStr);
 			//HouseInfo houseInfo = commonServiceBillDao.findById(HouseInfo.class, houseSn);
 			Integer monthNum = Integer.parseInt(monthNumStr);

@@ -160,9 +160,10 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		return (AccountDetail)super.getList(helper).get(0);
 	}
 
-	
-
-	
-	
-	
+	public List<WaterBill> getAllUnpayBill(Map<String, Object> map) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from WaterBill where state in('00', '03') and id in (select max(id) from WaterBill group by houseSn)");
+		helper.append("and id not in(select billId from BillTrack)");
+		return super.getList(helper);
+	}
 }

@@ -13,9 +13,7 @@ public class BranchType extends AbstractType {
 	public static Map<String,BranchType> ALL=new LinkedHashMap<String,BranchType>();
 	public static Map<String,BranchType> ALL_=new LinkedHashMap<String,BranchType>();
 	private String tag;
-	public static final BranchType SZGOLD = new BranchType("深圳金融电子结算中心", "0000", "sz");
-	public static final BranchType BODG = new BranchType("东莞银行", "2001", "dg");
-	public static final BranchType BOGZ = new BranchType("广州银行 ", "2002", "gz");
+	public static final BranchType HQ_0000 = new BranchType("总部", "0000", "hq");
 	protected BranchType(String name, String value, String tag) {
 		super(name, value);
 		this.tag = tag;
@@ -30,7 +28,7 @@ public class BranchType extends AbstractType {
 		
 		BranchType type = ALL.get(value);
 		if(null==type){
-			type = SZGOLD;
+			type = HQ_0000;
 		}
 			
 		return type; 
@@ -38,7 +36,7 @@ public class BranchType extends AbstractType {
 	public static BranchType getByTag(String value) {
 		BranchType type = ALL_.get(value);
 		if (type == null) {
-			type = SZGOLD;
+			type = HQ_0000;
 		}
 		return type; 
 	}

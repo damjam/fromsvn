@@ -58,6 +58,10 @@
 					gotoUrl(url);  
 				}
 			}
+			function generate(){
+				gotoUrl("/billTrack.do?action=generateAll");
+				$('#queryForm').find(':button, :submit, :reset').attr('disabled', true);
+			}
 		</script> 
 	</head>
 	<body>
@@ -115,6 +119,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
+								<c:if test="${sessionScope.SESSION_USER.userType eq 'superUser'}">
+									<input type="button" value="生成账单提醒" id="" onclick="generate()"/>&nbsp;
+								</c:if>
 								<!-- 
 								<input type="button" value="新增" id="btnAdd"/> -->
 							</td>

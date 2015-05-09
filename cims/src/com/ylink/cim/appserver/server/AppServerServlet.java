@@ -27,7 +27,7 @@ public class AppServerServlet extends HttpServlet {
 	public void init() throws ServletException {
 		//主控只在管理端运行
 		if (ParaManager.isCustServer()) {
-			return;
+			//return;
 		}
 		try {
 			Thread t = new Thread() {
@@ -35,7 +35,7 @@ public class AppServerServlet extends HttpServlet {
 				public void run() {
 					IAppServer appServer = (IAppServer)SpringContext.getService("timerAppServer");
 					try {
-						//appServer.doProcess();
+						appServer.doProcess();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

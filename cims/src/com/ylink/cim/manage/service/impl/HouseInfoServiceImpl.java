@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.RecordState;
@@ -26,7 +27,7 @@ import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.domain.WaterRecord;
 import com.ylink.cim.manage.service.HouseInfoService;
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.util.OrderSnGenerator;
 
 import flink.consant.Constants;
 import flink.etc.Assert;
@@ -74,7 +75,8 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		houseDesc.append("µ¥Ôª");
 		houseDesc.append(houseInfo.getPosition());
 		houseInfo.setHouseDesc(houseDesc.toString());
-		
+		String orderSn = OrderSnGenerator.getOrderSn(houseInfo);
+		houseInfo.setOrderSn(orderSn);
 		houseInfoDao.save(houseInfo);
 	}
 	public void test() throws BizException {
@@ -88,9 +90,19 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		//updat();
 		//setRem();
 		//update();
+		addOrderSn();
 	}
 	
 	
+	private void addOrderSn() {
+		HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
+		List<HouseInfo> list = houseInfoDao.findAll();
+		for (int i = 0; i < list.size(); i++) {
+			HouseInfo info = list.get(i);
+			info.setOrderSn(OrderSnGenerator.getOrderSn(info));
+			houseInfoDao.update(info);
+		}
+	}
 	private void update() {
 		WaterBillDao waterBillDao = (WaterBillDao)SpringContext.getService("waterBillDao");
 		OwnerInfoDao ownerInfoDao = (OwnerInfoDao)SpringContext.getService("ownerInfoDao");
@@ -145,7 +157,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		}
 		
 	}
-	private void addBi() throws BizException{
+	private void addBi(UserInfo userInfo) throws BizException{
 		WaterRecordDao waterRecordDao = (WaterRecordDao)SpringContext.getService("waterRecordDao");
 		IdFactoryService idFactoryService = (IdFactoryService)SpringContext.getService("idFactoryService");
 		List list = waterRecordDao.findAll();
@@ -153,7 +165,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			WaterRecord waterRecord = (WaterRecord)list.get(i);
 			waterRecord.setState(RecordState.CHECKED.getValue());
 			waterRecord.setCheckDate(DateUtil.getCurrent());
-			waterRecord.setCheckUser("Ö£¾´ÌÎ");
+			waterRecord.setCheckUser(userInfo.getUserName());
 			waterRecordDao.save(waterRecord);
 			//ÌîÕËµ¥
 			WaterBill waterBill = new WaterBill();
@@ -170,7 +182,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			waterBill.setNum(waterRecord.getNum());
 			waterBill.setState(BillState.UNPAY.getValue());
 			waterBill.setCreateDate(DateUtil.getCurrent());
-			waterBill.setCreateUser("Ö£¾´ÌÎ");
+			waterBill.setCreateUser(userInfo.getUserName());
 			waterBill.setAmount(amount);
 			waterBill.setRecordMonth(waterRecord.getRecordMonth());
 			waterBill.setPrice(Double.parseDouble(ParaManager.getWaterPrice()));
@@ -180,7 +192,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		}
 		
 	}
-	private void addWR() {
+	private void addWR(UserInfo userInfo) {
 		WaterRecordDao waterRecordDao = (WaterRecordDao)SpringContext.getService("waterRecordDao");
 		List list = waterRecordDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
@@ -188,7 +200,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			r.setNum(r.getCurnum()-r.getPrenum());
 			r.setPreRecordDate("20140628");
 			r.setCurRecordDate("20140827");
-			r.setCreateUser("Ö£¾´ÌÎ");
+			r.setCreateUser(userInfo.getUserName());
 			r.setCreateDate(DateUtil.getCurrent());
 			r.setState(RecordState.UNCHECK.getValue());
 		}
@@ -205,7 +217,7 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			ownerInfoDao.update(inf);
 		}
 	}
-	private void addhouseInfo() {
+	private void addhouseInfo(UserInfo userInfo) {
 		List list = houseInfoDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
 			HouseInfo house = (HouseInfo)list.get(i);
@@ -232,7 +244,9 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			houseDesc.append(house.getPosition());
 			house.setHouseDesc(houseDesc.toString());
 			house.setCreateDate(DateUtil.getCurrent());
-			house.setCreateUser("Ö£¾´ÌÎ");
+			house.setCreateUser(userInfo.getUserName());
+			String orderSn = OrderSnGenerator.getOrderSn(house);
+			house.setOrderSn(orderSn);
 			houseInfoDao.update(house);
 		}
 	}

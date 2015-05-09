@@ -67,6 +67,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 		map.put("parkingSn", actionForm.getParkingSn());
 		map.put("id", actionForm.getId());
 		map.put("year", actionForm.getYear());
+		map.put("orderType", actionForm.getOrderType());
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);
@@ -103,12 +104,14 @@ public class ParkingBillAction extends BaseDispatchAction {
 			HttpServletResponse response) throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
+		String mobile = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
 			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn), "编号为"+houseSn+"的房屋信息不存在!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
+				mobile = ownerInfo.getMobile();
 			}
 			//return null;
 		} catch (Exception e) {
@@ -119,6 +122,7 @@ public class ParkingBillAction extends BaseDispatchAction {
 			return null;
 		}
 		jsonObject.put("ownerName", ownerName);
+		jsonObject.put("mobile", mobile);
 		respond(response, jsonObject.toString());
 		return null;
 	}

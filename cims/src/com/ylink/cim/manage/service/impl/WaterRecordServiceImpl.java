@@ -7,10 +7,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.RecordState;
+import com.ylink.cim.common.type.BillType;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.AccountDao;
@@ -22,8 +24,8 @@ import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.domain.WaterRecord;
 import com.ylink.cim.manage.service.AccountService;
+import com.ylink.cim.manage.service.BillTrackService;
 import com.ylink.cim.manage.service.WaterRecordService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.Assert;
@@ -42,6 +44,8 @@ public class WaterRecordServiceImpl implements WaterRecordService{
 	private AccountService accountService;
 	@Autowired
 	private AccountDao accountDao;
+	@Autowired
+	private BillTrackService billTrackService;
 	public void saveWaterRecord(WaterRecord waterRecord, UserInfo userInfo) throws BizException{
 		String houseSn = waterRecord.getHouseSn();
 		Assert.notNull(waterRecordDao.findById(HouseInfo.class, houseSn), "房屋信息不存在");
@@ -118,8 +122,15 @@ public class WaterRecordServiceImpl implements WaterRecordService{
 				}
 			}
 		}
-		
 		waterRecordDao.save(waterBill);
+		Double oweAmt = waterBill.getAmount()-waterBill.getPaidAmt();
+		
+		if (BillState.UNPAY.getValue().equals(waterBill.getState()) || BillState.PART_PAID.getValue().equals(waterBill.getState())) {
+			billTrackService.expirePreTracks(waterBill.getHouseSn(), BillType.WATER.getValue(), null);
+			//默认15天内缴水费
+			String expireDate = DateUtil.formatDate("yyyyMMdd", DateUtil.addDays(waterBill.getCreateDate(), 15));
+			billTrackService.addBillTrack(waterBill.getHouseSn(), BillType.WATER.getValue(), waterBill.getId(), expireDate, waterBill.getOwnerName(), ownerInfo.getMobile(), BranchType.HQ_0000.getValue(), oweAmt);
+		}
 		return true;
 	}
 	public void deleteRecord(String id, UserInfo userInfo) throws BizException {

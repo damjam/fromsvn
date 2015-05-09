@@ -21,7 +21,9 @@ import org.springframework.web.util.WebUtils;
 
 import com.ylink.cim.admin.domain.Privilege;
 import com.ylink.cim.admin.domain.PrivilegeResource;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.PrivilegeHelper;
+import com.ylink.cim.admin.service.UserService;
 import com.ylink.cim.busioper.dao.NoticeMsgRecordDao;
 import com.ylink.cim.busioper.domain.NoticeMsgRecord;
 import com.ylink.cim.common.state.SignState;
@@ -31,8 +33,6 @@ import com.ylink.cim.common.type.UserType;
 import com.ylink.cim.cust.domain.CustInfo;
 import com.ylink.cim.cust.service.CustInfoService;
 import com.ylink.cim.invest.dao.SignContractDao;
-import com.ylink.cim.user.domain.UserInfo;
-import com.ylink.cim.user.service.UserService;
 
 import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
@@ -99,7 +99,7 @@ public class LoginAction extends BaseDispatchAction {
 			if (StringUtils.isNotEmpty(tag)) {
 				forward = new ActionForward("/"+tag);
 			}*/
-			//if (!branchType.getValue().equals(BranchType.SZGOLD.getValue())) {
+			//if (!branchType.getValue().equals(BranchType.HQ_0000.getValue())) {
 				
 			//}
 			CPSHttpSessionListener.logOff(userId);

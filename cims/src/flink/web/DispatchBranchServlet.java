@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.type.BranchType;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 

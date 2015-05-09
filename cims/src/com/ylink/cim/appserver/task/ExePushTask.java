@@ -33,7 +33,7 @@ public class ExePushTask extends BaseCmdTask {
 	private TimerDoDao timerDoDao;
 	protected void doRun() {
 		super.doRun();
-		Long id = getCmdId();
+		String id = getCmdId();
 		try {
 			
 			pushMngService.exeSendMsgTask(id);

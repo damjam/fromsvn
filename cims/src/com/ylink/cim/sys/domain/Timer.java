@@ -13,7 +13,7 @@ public class Timer implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	private String id;
 	private String beanName;
 	private String beanNameCh;
 	private String remark;
@@ -58,9 +58,6 @@ public class Timer implements java.io.Serializable {
 		return this.groupno;
 	}
 
-	public Long getId() {
-		return this.id;
-	}
 
 	public String getNoPass() {
 		return this.noPass;
@@ -114,7 +111,11 @@ public class Timer implements java.io.Serializable {
 		this.groupno = groupno;
 	}
 
-	public void setId(Long id) {
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
 		this.id = id;
 	}
 

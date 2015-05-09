@@ -75,7 +75,9 @@
 				    		 return;
 				    	 }
 				    	 var ownerName = data.ownerName;
+				    	 var mobile = data.mobile;
 				    	 $('#ownerName').val(ownerName);
+				    	 $('#mobile').val(mobile);
 					 },
 					 error:function(data){   
 	                     alert("连接服务器失败");
@@ -169,6 +171,13 @@
 						    <td class="formlabel nes">车主姓名</td>
 						    <td>
 						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" />
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">电话</td>
+						    <td>
+						    	<html:text property="mobile" styleId="mobile" maxlength="20" styleClass="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

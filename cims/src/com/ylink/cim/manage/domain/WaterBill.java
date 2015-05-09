@@ -35,9 +35,18 @@ public class WaterBill implements java.io.Serializable {
 	private String remark;
 	private Double balance;
 	private Double paidAmt;
+	private String mobile;
 	
 	// Constructors
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public Double getPaidAmt() {
 		if (paidAmt == null) {
 			paidAmt = 0d;

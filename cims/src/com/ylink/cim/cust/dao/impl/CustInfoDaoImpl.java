@@ -7,12 +7,12 @@ import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.CustState;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.PushType;
 import com.ylink.cim.cust.dao.CustInfoDao;
 import com.ylink.cim.cust.domain.CustInfo;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.etc.Symbol;
 import flink.hibernate.BaseDaoHibernateImpl;
@@ -42,7 +42,7 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		helper.append("and t.custType = ?", params.get("custType"));
 		helper.append("and t.name like ?", params.get("name"));
 		helper.append("and t.idCard = ?", params.get("idCard"));
-		if (!BranchType.SZGOLD.getValue().equals(params.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
 			helper.append("and exists (select distinct(s.custId) from AipAcct s where s.custId = t.id and s.branchNo = ?)", params.get("branchNo"));
 		}
 		helper.append("and exists (select s.id from ServiceRecord s where s.custId = t.id and s.busiType = ?)", params.get("busiType"));
@@ -63,7 +63,7 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		helper.append("and t.custType = ?", params.get("custType"));
 		helper.append("and t.name like ?", params.get("name"));
 		helper.append("and t.idCard = ?", params.get("idCard"));
-		if (!BranchType.SZGOLD.getValue().equals(params.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
 			helper.append("and exists (select distinct(s.custId) from AipAcct s where s.custId = t.id and s.branchNo = ?)", params.get("branchNo"));
 		}
 		helper.append("and exists (select s.id from ServiceRecord s where s.custId = t.id and s.busiType = ?)", params.get("busiType"));
@@ -78,7 +78,7 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		helper.append("and t.email like ? ", custInfo.getEmail(), MatchMode.ANYWHERE);
 		helper.append("and t.custType = ?", custInfo.getCustType());
 		//操作员仅能查看在自己机构下开通业务的客户信息 
-		if (!BranchType.SZGOLD.getValue().equals(userInfo.getBranchNo())) {
+		if (!BranchType.HQ_0000.getValue().equals(userInfo.getBranchNo())) {
 			helper.append("and exists (select distinct(s.custId) from AipAcct s where s.custId = t.id and s.branchNo = ?)", userInfo.getBranchNo());
 		}
 		//helper.append(hql);
@@ -89,7 +89,7 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		helper.append("from CustInfo t where 1=1");
 		helper.append("and state = ?", CustState.NORMAL.getValue());
 		helper.append("and custType = ?", params.get("custType"));
-		if (!BranchType.SZGOLD.getValue().equals(params.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
 			helper.append("and exists (select distinct(s.custId) from AipAcct s where s.custId = t.id and s.branchNo = ?)", params.get("branchNo"));
 		}
 //		helper.append("and exists (select distinct(s.custId) from AipAcct s where s.custId = t.id and s.branchNo = ?)", params.get("branchNo"));

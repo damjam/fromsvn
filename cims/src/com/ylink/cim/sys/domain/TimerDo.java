@@ -13,7 +13,7 @@ public class TimerDo implements java.io.Serializable {
 	public static final String BUSINESS_FAILURE = "2";// 业务执行失败
 	public static final String CANCEL = "3";// 废弃，下次不用再次执行
 	public static final String[] NEED_EXC_STRINGS = {INIT, BUSINESS_FAILURE};
-	private Long id;
+	private String id;
 
 	private String beanName;
 
@@ -52,9 +52,6 @@ public class TimerDo implements java.io.Serializable {
 		return this.groupNo;
 	}
 
-	public Long getId() {
-		return id;
-	}
 
 	public Long getPara1() {
 		return para1;
@@ -95,8 +92,12 @@ public class TimerDo implements java.io.Serializable {
 	public void setGroupNo(String groupNo) {
 		this.groupNo = groupNo;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

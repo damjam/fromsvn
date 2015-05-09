@@ -45,7 +45,7 @@ public class PushMngServiceImpl implements PushMngService {
 	private TimerDoDao timerDoDao;
 	@Autowired
 	private CustInfoDao custInfoDao;
-	public void exeAddRecordTask(Long timerDoId) throws BizException{
+	public void exeAddRecordTask(String timerDoId) throws BizException{
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
 			logger.debug("任务已执行");
@@ -135,7 +135,7 @@ public class PushMngServiceImpl implements PushMngService {
 		logger.debug(LogUtils.r("本次添加推送信息共执行{?}条记录", cnt));
 	}
 
-	public void exeSendMsgTask(Long timerDoId) throws BizException {
+	public void exeSendMsgTask(String timerDoId) throws BizException {
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		Long para1 = timerDo.getPara1();
 		String planId = String.valueOf(para1);

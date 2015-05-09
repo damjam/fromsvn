@@ -77,7 +77,7 @@ public class PushMngAction extends BaseDispatchAction{
 			PushPlan plan = new PushPlan();
 			BeanUtils.copyProperties(plan, actionForm);
 			if (StringUtils.isEmpty(actionForm.getBranchNo()) 
-					&& !BranchType.SZGOLD.getValue().equals(getSessionUser(request).getBranchNo())) {
+					&& !BranchType.HQ_0000.getValue().equals(getSessionUser(request).getBranchNo())) {
 				plan.setBranchNo(getSessionUser(request).getBranchNo());
 			}
 			pushMngService.addPushPlan(plan);
@@ -98,7 +98,7 @@ public class PushMngAction extends BaseDispatchAction{
 		String branchNo = request.getParameter("branchNo");
 		JSONObject object = new JSONObject();
 		if (StringUtils.isEmpty(branchNo)) {
-			branchNo = BranchType.SZGOLD.getValue();
+			branchNo = BranchType.HQ_0000.getValue();
 		}
 		Map<String, String> map = ParaManager.getSysDict("BusiType"+branchNo.substring(2, 4));
 		object.putAll(map);

@@ -43,7 +43,7 @@ public class ServiceRecordDaoImpl extends BaseDaoHibernateImpl implements Servic
 		}
 		service = new ServiceRecord();
 		if (StringUtils.isEmpty(branchNo)) {
-			branchNo = BranchType.SZGOLD.getValue();
+			branchNo = BranchType.HQ_0000.getValue();
 		}
 		service.setBranchNo(branchNo);
 		service.setBusiType(busiType);

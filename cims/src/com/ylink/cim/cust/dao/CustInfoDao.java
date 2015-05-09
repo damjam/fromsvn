@@ -3,8 +3,8 @@ package com.ylink.cim.cust.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.cust.domain.CustInfo;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDao;
 import flink.util.Pager;

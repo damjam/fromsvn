@@ -12,11 +12,11 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.admin.dao.PrivilegeDao;
 import com.ylink.cim.admin.domain.Privilege;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.UserLogService;
 import com.ylink.cim.common.type.UserLogType;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.BizException;

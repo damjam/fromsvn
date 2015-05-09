@@ -317,7 +317,7 @@ public class SignContractServiceImpl implements SignContractService {
 	}
 	
 	public boolean checkSign(String accreditId) throws BizException {
-		SignContract contract = signContractDao.getUniqueResult(SignContract.class, "accreditId", accreditId);
+		SignContract contract = (SignContract)signContractDao.getUniqueResult(SignContract.class, "accreditId", accreditId);
 		String signState = contract.getState();
 		if (SignState.SIGNED.getValue().equals(signState)) {
 			return true;

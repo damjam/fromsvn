@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.UserRoleDao;
 import com.ylink.cim.admin.domain.RoleInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserRole;
 import com.ylink.cim.admin.domain.UserRoleId;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.HqlHelper;

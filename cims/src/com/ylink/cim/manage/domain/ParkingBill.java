@@ -31,10 +31,19 @@ public class ParkingBill implements java.io.Serializable {
 	private Date chargeDate;
 	private String chargeUser;
 	private String remark;
+	private String mobile;
 	
 	// Constructors
 	
 	
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public String getRemark() {
 		return remark;
 	}

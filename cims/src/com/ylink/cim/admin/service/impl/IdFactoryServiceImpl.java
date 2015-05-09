@@ -30,7 +30,12 @@ public class IdFactoryServiceImpl implements IdFactoryService{
 		
 		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName); 
 		if(null==idFactory){
-			ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "不存在对的id: "+seqIdName);
+			//ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class, "不存在对的id: "+seqIdName);
+			idFactory = new IdFactory();
+			idFactory.setSeqIdName(seqIdName);
+			idFactory.setInitValue("1000");
+			idFactory.setDateLength("8");
+			idFactoryDao.save(idFactory);
 		}
 		
 		if(StringUtils.isEmpty(idFactory.getInitValue())){

@@ -9,19 +9,26 @@ import com.ylink.cim.sys.dao.TimerDao;
 import com.ylink.cim.sys.domain.Timer;
 
 import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.QueryHelper;
+import flink.util.Pager;
+import flink.util.Paginater;
 
 @Component("timerDao")
 public class TimerDaoImpl extends BaseDaoHibernateImpl implements TimerDao {
+
+	public List<Timer> findAllValidTimer() {
+		return null;
+	}
 
 	protected Class getModelClass() {
 		return Timer.class;
 	}
 
-	public List<Timer> findAllValidTimer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Paginater getTimerList(Pager pager, Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from Timer where 1=1");
 
-	
+		return super.getPageData(helper, pager);
+	}
 
 }

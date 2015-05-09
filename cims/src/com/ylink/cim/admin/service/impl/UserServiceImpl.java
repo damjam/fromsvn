@@ -1,4 +1,4 @@
-package com.ylink.cim.user.service.impl;
+package com.ylink.cim.admin.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.user.dao.UserInfoDao;
-import com.ylink.cim.user.dao.impl.UserInfoDaoHibernateImpl;
-import com.ylink.cim.user.domain.UserInfo;
-import com.ylink.cim.user.service.UserService;
+import com.ylink.cim.admin.dao.UserInfoDao;
+import com.ylink.cim.admin.dao.impl.UserInfoDaoImpl;
+import com.ylink.cim.admin.domain.UserInfo;
+import com.ylink.cim.admin.service.UserService;
 
 import flink.MD5Util;
 import flink.etc.BizException;
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
 			userInfo.setLoginPwd(MD5Util.MD5("111111"));
 			this.userInfoDao.save(userInfo);
 		}catch (Exception e) {
-			ExceptionUtils.logBizException(UserInfoDaoHibernateImpl.class, e.getMessage());
+			ExceptionUtils.logBizException(UserInfoDaoImpl.class, e.getMessage());
 		}
 	}
 

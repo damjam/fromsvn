@@ -24,7 +24,7 @@ public class SignContractDaoImpl extends BaseDaoHibernateImpl implements SignCon
 		helper.append("and serviceId = ?", params.get("serviceId"));
 		helper.append("and state = ?", params.get("state"));
 		helper.append("and accreditId = ?", params.get("accreditId"));
-		if (!BranchType.SZGOLD.getValue().equals(params.get("branchNo"))) {
+		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
 			helper.append("and exists (select s.id from ServiceRecord s where serviceId = s.id and s.branchNo = ?)", params.get("branchNo"));
 		}
 		return super.getList(helper);

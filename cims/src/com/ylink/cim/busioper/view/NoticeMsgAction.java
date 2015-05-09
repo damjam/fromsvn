@@ -71,7 +71,7 @@ public class NoticeMsgAction extends BaseDispatchAction {
 		NoticeMsg noticeMsg = new NoticeMsg();
 		BeanUtils.copyProperties(noticeMsg, actionForm);
 		if (StringUtils.isEmpty(actionForm.getBranchNo()) 
-				&& !BranchType.SZGOLD.getValue().equals(getSessionUser(request).getBranchNo())) {
+				&& !BranchType.HQ_0000.getValue().equals(getSessionUser(request).getBranchNo())) {
 			noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());
 		}
 //		noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());

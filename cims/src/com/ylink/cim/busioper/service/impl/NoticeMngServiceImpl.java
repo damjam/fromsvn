@@ -102,7 +102,7 @@ public class NoticeMngServiceImpl implements NoticeMngService {
 		}
 	}
 
-	public void exeTimerDo(Long timerDoId) {
+	public void exeTimerDo(String timerDoId) {
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
 			return;

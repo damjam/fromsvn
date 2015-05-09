@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.OwnerState;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
@@ -14,7 +15,7 @@ import com.ylink.cim.manage.domain.Account;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.OwnerInfoService;
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.util.OrderSnGenerator;
 
 import flink.consant.Constants;
 import flink.etc.Assert;
@@ -109,6 +110,8 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			houseDesc.append("ตฅิช");
 			houseDesc.append(houseInfo.getPosition());
 			houseInfo.setHouseDesc(houseDesc.toString());
+			String orderSn = OrderSnGenerator.getOrderSn(houseInfo);
+			houseInfo.setOrderSn(orderSn);
 			ownerInfoDao.save(houseInfo);
 		}
 		

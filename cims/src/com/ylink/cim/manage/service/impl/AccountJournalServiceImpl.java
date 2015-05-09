@@ -4,6 +4,7 @@ import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.InoutType;
@@ -18,7 +19,6 @@ import com.ylink.cim.manage.domain.InnerAcct;
 import com.ylink.cim.manage.domain.ParkingBill;
 import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.service.AccountJournalService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.etc.Assert;

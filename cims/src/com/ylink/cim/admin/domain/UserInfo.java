@@ -1,4 +1,4 @@
-package com.ylink.cim.user.domain;
+package com.ylink.cim.admin.domain;
 
 import java.io.Serializable;
 import java.util.Date;

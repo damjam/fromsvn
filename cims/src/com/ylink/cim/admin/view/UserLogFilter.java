@@ -18,10 +18,10 @@ import org.apache.log4j.Logger;
 import org.springframework.web.util.WebUtils;
 
 import com.ylink.cim.admin.domain.PrivilegeResource;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.UserLogService;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.consant.Constants;
 import flink.util.SpringContext;

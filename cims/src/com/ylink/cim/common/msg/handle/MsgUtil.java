@@ -108,7 +108,7 @@ public class MsgUtil {
 			map.put(MsgField.h_bank_no.getFieldCode(), map.get("h_bank_no"));
 		}
 		
-		if(!map.get("h_bank_no").equals(BranchType.SZGOLD.getValue())){
+		if(!map.get("h_bank_no").equals(BranchType.HQ_0000.getValue())){
 			map.put(MsgField.h_proxy.getFieldCode(), "1");//代理行
 		}else{
 			map.put(MsgField.h_proxy.getFieldCode(), "0");//深圳金融电子结算中心

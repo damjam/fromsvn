@@ -8,7 +8,7 @@ public class BaseCmdTask extends Thread {
 	private String cmdName;
 
 	// 命令id 具体的线程要根据命令id，修改命令表的状态为成功或者失败
-	private Long cmdId;
+	private String cmdId;
 
 	public BaseCmdTask() {
 
@@ -22,18 +22,22 @@ public class BaseCmdTask extends Thread {
 		logger.debug("开始启动命令[" + cmdName + "]");
 	}
 
-	public Long getCmdId() {
-		return cmdId;
-	}
-
 	
 	public void run() {
 		logger.debug("BaseCmdTask.run...");
 		doRun();
 	}
 
-	public void setCmdId(Long cmdId) {
+	public String getCmdId() {
+		return cmdId;
+	}
+
+	public void setCmdId(String cmdId) {
 		this.cmdId = cmdId;
+	}
+
+	public String getCmdName() {
+		return cmdName;
 	}
 
 	public void setCmdName(String strCmdName) {

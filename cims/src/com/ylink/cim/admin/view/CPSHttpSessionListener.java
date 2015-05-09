@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.log4j.Logger;
 
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 
 import flink.consant.Constants;
 

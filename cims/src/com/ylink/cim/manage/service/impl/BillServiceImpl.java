@@ -5,9 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
+import com.ylink.cim.common.type.BillType;
 import com.ylink.cim.common.type.InputTradeType;
 import com.ylink.cim.common.type.OutputTradeType;
 import com.ylink.cim.common.util.MoneyUtil;
@@ -22,20 +24,18 @@ import com.ylink.cim.manage.domain.Account;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
-import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.ParkingBill;
 import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.service.AccountJournalService;
 import com.ylink.cim.manage.service.AccountService;
 import com.ylink.cim.manage.service.BillService;
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.manage.service.BillTrackService;
 
 import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.etc.Symbol;
-import flink.util.AmountUtils;
 import flink.util.DateUtil;
 @Component("billService")
 public class BillServiceImpl implements BillService {
@@ -59,6 +59,8 @@ public class BillServiceImpl implements BillService {
 	private AccountDao accountDao;
 	@Autowired
 	private AccountJournalService accountJournalService;
+	@Autowired
+	private BillTrackService billTrackService;
 	public void chargeWaterFee(String id, UserInfo userInfo) throws BizException {
 		WaterBill bill = waterBillDao.findByIdWithLock(id);
 		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn());
@@ -88,6 +90,8 @@ public class BillServiceImpl implements BillService {
 			accountService.payBill(ownerInfo.getId(), acctPayAmt, bill.getId(), "扣除水费"+MoneyUtil.getFormatStr2(acctPayAmt)+"元", userInfo);
 		}
 		accountJournalService.add(InputTradeType.WATER.getValue(), bill.getAmount(), id, "收"+bill.getHouseSn()+"业主"+ownerInfo.getOwnerName()+"水费", userInfo);
+		// 废弃以前的提醒,不创建新提醒
+		billTrackService.expirePreTracks(bill.getHouseSn(), BillType.WATER.getValue(), null);
 	}
 	
 	public void saveParkingBill(ParkingBill parkingBill, UserInfo userInfo) throws BizException {
@@ -105,24 +109,31 @@ public class BillServiceImpl implements BillService {
 		commonServiceBill.setCreateUser(userInfo.getUserName());
 		commonServiceBill.setState(BillState.UNPAY.getValue());
 		commonServiceBillDao.save(commonServiceBill);
-		//
 	}
 	public void chargeCommonFee(String id, UserInfo userInfo) throws BizException {
-		CommonServiceBill commonServiceBill = commonServiceBillDao.findByIdWithLock(id);
-		Assert.equals(BillState.UNPAY.getValue(), commonServiceBill.getState(), "账单不是待缴费状态");
-		commonServiceBill.setState(BillState.PAID.getValue());
-		commonServiceBill.setChargeDate(DateUtil.getCurrent());
-		commonServiceBill.setChargeUser(userInfo.getUserName());
-		commonServiceBillDao.save(commonServiceBill);
-		accountJournalService.add(InputTradeType.SERVICE.getValue(), commonServiceBill.getTotalAmount(), id, "收"+commonServiceBill.getHouseSn()+"业主"+commonServiceBill.getOwnerName()+"物业费(含公共照明费)", userInfo);
-		if (commonServiceBill.getTotalAmount() == commonServiceBill.getServiceAmount()+commonServiceBill.getLightAmount()) {
+		CommonServiceBill bill = commonServiceBillDao.findByIdWithLock(id);
+		Assert.equals(BillState.UNPAY.getValue(), bill.getState(), "账单不是待缴费状态");
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeDate(DateUtil.getCurrent());
+		bill.setChargeUser(userInfo.getUserName());
+		commonServiceBillDao.save(bill);
+		accountJournalService.add(InputTradeType.SERVICE.getValue(), bill.getTotalAmount(), id, "收"+bill.getHouseSn()+"业主"+bill.getOwnerName()+"物业费(含公共能源费)", userInfo);
+		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn());
+		if (bill.getTotalAmount() == bill.getServiceAmount()+bill.getLightAmount()) {
 			// houseInfo = commonServiceBillDao.findById(commonServiceBill.getHouseSn());
-			OwnerInfo ownerInfo	= ownerInfoDao.getNormalOwner(commonServiceBill.getHouseSn());
 			if (ownerInfo != null && CheckinState.CHECKEDIN.getValue().equals(ownerInfo.getCheckinState())) {
 				ownerInfo.setCheckinState(CheckinState.CHECKEDIN.getValue());
 				ownerInfoDao.update(ownerInfo);
 			}
 		}
+		String mobile = "";
+		if (ownerInfo != null) {
+			mobile = ownerInfo.getMobile();
+		}
+		// 废弃以前的提醒
+		billTrackService.expirePreTracks(bill.getHouseSn(), BillType.SERVICE.getValue(), null);
+		//添加提醒
+		billTrackService.addBillTrack(bill.getHouseSn(), BillType.SERVICE.getValue(), bill.getId(), bill.getEndDate(), bill.getOwnerName(), mobile, "", bill.getTotalAmount());
 	}
 	public void chargeDecorateFee(String id, UserInfo userInfo) throws BizException {
 		DecorateServiceBill decorateServiceBill = decorateServiceBillDao.findByIdWithLock(id);
@@ -152,6 +163,11 @@ public class BillServiceImpl implements BillService {
 			houseSn = "";
 		}
 		accountJournalService.add(InputTradeType.PARKING.getValue(), bill.getAmount(), id, "收"+houseSn+""+bill.getOwnerName()+"停车费", userInfo);
+		//废弃以前的提醒
+		billTrackService.expirePreTracks(houseSn, BillType.PARKING.getValue(), null);
+		//添加提醒
+		billTrackService.expirePreTracks(houseSn, BillType.PARKING.getValue(), null);
+		billTrackService.addBillTrack(bill.getHouseSn(), BillType.PARKING.getValue(), bill.getId(), bill.getEndDate(), bill.getOwnerName(), bill.getMobile(), "", bill.getAmount());
 	}
 
 	public void deleteBill(Class clazz, String id, UserInfo userInfo) throws BizException {
