@@ -50,10 +50,10 @@ public class TimerAppServer implements IAppServer {
 			if (init == null) {
 				try {
 					timerDoService.insertInitTask(sTriggerDate);
-					
 					mapOfInit.clear();
 					mapOfInit.put(sTriggerDate, "init");
 				} catch (Exception e) {
+					e.printStackTrace();
 					logger.error("初始化定时服务initTask异常,稍后重新初始化" + e, e);
 					Thread.sleep(sleepTime);
 					continue;
