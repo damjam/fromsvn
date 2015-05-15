@@ -14,7 +14,7 @@ public interface CommonServiceBillDao extends BaseDao {
 	public Paginater findPager(Map<String, Object> params, Pager pager);
 
 	public Map<String, Object> findSumInfo(Map<String, Object> map);
-	
+
 	public List<CommonServiceBill> getAllLastBill(Map<String, Object> map);
-	
+
 }

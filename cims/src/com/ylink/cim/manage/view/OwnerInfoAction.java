@@ -33,30 +33,33 @@ import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 
 public class OwnerInfoAction extends BaseDispatchAction {
-	private OwnerInfoDao OwnerInfoDao = (OwnerInfoDao)getService("ownerInfoDao");
-	private OwnerInfoService ownerInfoService = (OwnerInfoService)getService("ownerInfoService");
-	private AccountService accountService = (AccountService)getService("accountService");
-	private HouseInfoDao houseInfoDao = (HouseInfoDao)getService("houseInfoDao");
+	private OwnerInfoDao OwnerInfoDao = (OwnerInfoDao) getService("ownerInfoDao");
+	private OwnerInfoService ownerInfoService = (OwnerInfoService) getService("ownerInfoService");
+	private AccountService accountService = (AccountService) getService("accountService");
+	private HouseInfoDao houseInfoDao = (HouseInfoDao) getService("houseInfoDao");
+
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);
 		return forward("/pages/manage/owner/ownerInfoAdd.jsp");
 	}
+
 	public ActionForward toUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);
 		String id = request.getParameter("id");
 		OwnerInfo ownerInfo = OwnerInfoDao.findById(id);
-		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+		OwnerInfoActionForm actionForm = (OwnerInfoActionForm) form;
 		BeanUtils.copyProperties(actionForm, ownerInfo);
 		return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
 	}
+
 	public ActionForward doUpdate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+			OwnerInfoActionForm actionForm = (OwnerInfoActionForm) form;
 			OwnerInfo ownerInfo = OwnerInfoDao.findById(actionForm.getId());
-			OwnerInfo owner = (OwnerInfo)BeanUtils.cloneBean(ownerInfo);
+			OwnerInfo owner = (OwnerInfo) BeanUtils.cloneBean(ownerInfo);
 			BeanUtils.copyProperties(ownerInfo, actionForm);
 			ownerInfo.setCreateDate(owner.getCreateDate());
 			ownerInfo.setCreateUser(owner.getCreateUser());
@@ -67,10 +70,11 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		}
 		return toUpdate(mapping, form, request, response);
 	}
+
 	public ActionForward doAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
-			OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+			OwnerInfoActionForm actionForm = (OwnerInfoActionForm) form;
 			OwnerInfo ownerInfo = new OwnerInfo();
 			BeanUtils.copyProperties(ownerInfo, actionForm);
 			ownerInfoService.add(ownerInfo, getSessionUser(request));
@@ -87,20 +91,23 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	private void clearForm(OwnerInfoActionForm actionForm) {
 		actionForm.setOwnerName(null);
 		actionForm.setHouseSn(null);
 	}
+
 	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		Map<String, Object> map = getParaMap();
-		OwnerInfoActionForm actionForm = (OwnerInfoActionForm)form;
+		OwnerInfoActionForm actionForm = (OwnerInfoActionForm) form;
 		map.put("ownerName", actionForm.getOwnerName());
 		map.put("houseSn", actionForm.getHouseSn());
 		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		return forward("/pages/manage/owner/ownerInfoList.jsp");
 	}
+
 	public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -113,6 +120,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -127,6 +135,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward openAcct(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -139,20 +148,23 @@ public class OwnerInfoAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public void initSelect(HttpServletRequest request) throws Exception {
 		SexType.setInReq(request);
 		OwnerGrade.setInReq(request);
 	}
+
 	public ActionForward toImport(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		return forward("/pages/manage/owner/ownerInfoImport.jsp");
 	}
+
 	public ActionForward doImport(ActionMapping mapping, ActionForm actionform, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
 			OwnerInfoActionForm form = (OwnerInfoActionForm) actionform;
-			
+
 			FormFile file = form.getFile();
 
 			InputStream is = file.getInputStream();
@@ -188,11 +200,11 @@ public class OwnerInfoAction extends BaseDispatchAction {
 						if (StringUtils.isEmpty(houseSn)) {
 							throw new Exception("房屋编号为空");
 						}
-						if(houseInfoDao.findById(houseSn) != null){
-							throw new Exception("房屋编号为"+houseSn+"的房屋信息已存在");
+						if (houseInfoDao.findById(houseSn) != null) {
+							throw new Exception("房屋编号为" + houseSn + "的房屋信息已存在");
 						}
 						Double area = row.getCell(1).getNumericCellValue();
-						if (area == null || area<= 0) {
+						if (area == null || area <= 0) {
 							throw new Exception("面积有误");
 						}
 						String ownerName = row.getCell(2).getStringCellValue();
@@ -203,7 +215,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 						String sexTypeName = row.getCell(3).getStringCellValue();
 						if (SexType.SEX_M.getName().equals(sexTypeName)) {
 							sexType = "M";
-						}else if (SexType.SEX_F.getName().equals(sexTypeName)) {
+						} else if (SexType.SEX_F.getName().equals(sexTypeName)) {
 							sexType = "F";
 						}
 						String mobile = row.getCell(4).getStringCellValue();
@@ -211,7 +223,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 							throw new Exception("联系电话为空");
 						}
 						String idCard = row.getCell(5).getStringCellValue();
-						
+
 						OwnerInfo ownerInfo = new OwnerInfo();
 						ownerInfo.setHouseSn(houseSn);
 						ownerInfo.setGender(sexType);
@@ -222,7 +234,7 @@ public class OwnerInfoAction extends BaseDispatchAction {
 						ownerInfo.setGrade(OwnerGrade.NORMAL.getValue());
 						list.add(ownerInfo);
 					} catch (Exception e) {
-						throw new Exception("第" + (i+1) +"个工作表中第"+ (j+1) +"行:" + e.getMessage());
+						throw new Exception("第" + (i + 1) + "个工作表中第" + (j + 1) + "行:" + e.getMessage());
 					}
 				}
 			}

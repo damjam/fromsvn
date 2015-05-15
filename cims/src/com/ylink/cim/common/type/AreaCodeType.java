@@ -12,7 +12,6 @@ public class AreaCodeType extends AbstractType {
 
 	public static Map<String, AreaCodeType> ALL = new LinkedHashMap<String, AreaCodeType>();
 
-	
 	public static final AreaCodeType BEIJING = new AreaCodeType("北京市", "110000");
 	public static final AreaCodeType TIANJING = new AreaCodeType("天津市", "120000");
 	public static final AreaCodeType HEIBEI = new AreaCodeType("河北省", "130000");
@@ -48,8 +47,6 @@ public class AreaCodeType extends AbstractType {
 	public static final AreaCodeType TAIWAN = new AreaCodeType("台湾省", "710000");
 	public static final AreaCodeType HONGKONG = new AreaCodeType("香港特别行政区", "810000");
 
-	
-	
 	protected AreaCodeType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

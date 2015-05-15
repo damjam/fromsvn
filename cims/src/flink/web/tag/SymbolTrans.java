@@ -11,24 +11,22 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class SymbolTrans extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String symbol;
-	
+
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 
 	public void doTag() throws JspException, IOException {
 		String s = null;
-		
+
 		if ("Y".equalsIgnoreCase(symbol) || "YES".equalsIgnoreCase(symbol) || "TRUE".equalsIgnoreCase(symbol)) {
 			s = "ÊÇ";
-		}
-		else if ("N".equalsIgnoreCase(symbol) || "NO".equalsIgnoreCase(symbol) || "FALSE".equalsIgnoreCase(symbol)) {
+		} else if ("N".equalsIgnoreCase(symbol) || "NO".equalsIgnoreCase(symbol) || "FALSE".equalsIgnoreCase(symbol)) {
 			s = "·ñ";
-		}
-		else {
+		} else {
 			s = symbol;
 		}
-		
+
 		this.getJspContext().getOut().write(s);
 	}
 }

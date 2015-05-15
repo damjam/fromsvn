@@ -6,14 +6,14 @@ import java.util.List;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.dao.RoleInfoDao;
+import com.ylink.cim.admin.domain.LimitGroupInfo;
+import com.ylink.cim.admin.domain.RoleInfo;
+
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
-
-import com.ylink.cim.admin.dao.RoleInfoDao;
-import com.ylink.cim.admin.domain.LimitGroupInfo;
-import com.ylink.cim.admin.domain.RoleInfo;
 @Component("roleInfoDao")
 public class RoleInfoDaoImpl extends BaseDaoHibernateImpl implements RoleInfoDao {
 

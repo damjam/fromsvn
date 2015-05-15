@@ -14,14 +14,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-
 import flink.consant.ActionConstant;
 import flink.util.Paginater;
 
 /**
  * Title: RootDispatchAction
  * 
- * @description: 
+ * @description:
  * 
  * @copyright: (c) 2008 ylink inc
  * 
@@ -30,25 +29,29 @@ import flink.util.Paginater;
  */
 public abstract class RootDispatchAction extends DispatchAction {
 	private static Log log = LogFactory.getLog(RootDispatchAction.class);
-	
-	
-	/* (non-Javadoc)
-	 * @see org.apache.struts.actions.DispatchAction#dispatchMethod(org.apache.struts.action.ActionMapping, org.apache.struts.action.ActionForm, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.apache.struts.actions.DispatchAction#dispatchMethod(org.apache.struts
+	 * .action.ActionMapping, org.apache.struts.action.ActionForm,
+	 * javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse, java.lang.String)
 	 */
-	protected ActionForward dispatchMethod(ActionMapping mapping, ActionForm form, 
-			HttpServletRequest request, HttpServletResponse response, String name) throws Exception {
+	protected ActionForward dispatchMethod(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response, String name) throws Exception {
 		ActionForward forward = null;
-		
+
 		try {
 			forward = super.dispatchMethod(mapping, form, request, response, name);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			return dealException(mapping, form, request, response, e, name);
 		}
-		
+
 		return forward;
 	}
-	
+
 	/**
 	 * 处理异常, for override.
 	 * 
@@ -57,7 +60,7 @@ public abstract class RootDispatchAction extends DispatchAction {
 	 * @param e
 	 * @return
 	 */
-	protected ActionForward dealException(ActionMapping mapping, ActionForm form, HttpServletRequest request, 
+	protected ActionForward dealException(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response, Exception e, String methodName) {
 		if (log.isErrorEnabled()) {
 			log.error(e.getMessage(), e);
@@ -69,36 +72,40 @@ public abstract class RootDispatchAction extends DispatchAction {
 	 * 保存查询结果.
 	 * 
 	 * @param request
-	 * @param paginater 分页器.
+	 * @param paginater
+	 *            分页器.
 	 * @param list
 	 */
 	protected void saveQueryResult(HttpServletRequest request, Paginater paginater) {
 		this.saveQueryResult(request, paginater, "list", Paginater.PAGINATER);
 	}
-	
+
 	/**
 	 * 保存查询结果.
 	 * 
 	 * @param request
-	 * @param paginater 分页器.
+	 * @param paginater
+	 *            分页器.
 	 * @param list
 	 */
 	protected void saveQueryResult(HttpServletRequest request, Paginater paginater, String listName) {
 		this.saveQueryResult(request, paginater, listName, Paginater.PAGINATER);
 	}
-	
+
 	/**
 	 * 保存查询结果.
 	 * 
 	 * @param request
-	 * @param paginater 分页器.
+	 * @param paginater
+	 *            分页器.
 	 * @param list
 	 */
-	protected void saveQueryResult(HttpServletRequest request, Paginater paginater, String listName, String paginaterName) {
+	protected void saveQueryResult(HttpServletRequest request, Paginater paginater, String listName,
+			String paginaterName) {
 		if (paginater == null) {
 			return;
 		}
-		
+
 		if (StringUtils.isNotEmpty(paginaterName)) {
 			request.setAttribute(paginaterName, paginater);
 		}
@@ -107,29 +114,31 @@ public abstract class RootDispatchAction extends DispatchAction {
 			request.setAttribute(listName, paginater.getList());
 		}
 	}
-	
+
 	/**
 	 * 保存查询结果.
 	 * 
 	 * @param request
-	 * @param paginater 分页器.
+	 * @param paginater
+	 *            分页器.
 	 * @param list
 	 */
 	protected void saveQueryResult(HttpServletRequest request, List list) {
 		this.saveQueryResult(request, list, "list");
 	}
-	
+
 	/**
 	 * 保存查询结果.
 	 * 
 	 * @param request
-	 * @param paginater 分页器.
+	 * @param paginater
+	 *            分页器.
 	 * @param list
 	 */
 	protected void saveQueryResult(HttpServletRequest request, List list, String listName) {
-			request.setAttribute(listName, list);
+		request.setAttribute(listName, list);
 	}
-	
+
 	/**
 	 * @param mapping
 	 * @return
@@ -137,7 +146,7 @@ public abstract class RootDispatchAction extends DispatchAction {
 	protected ActionForward success(ActionMapping mapping) {
 		return mapping.findForward(ActionConstant.SUCCESS);
 	}
-	
+
 	/**
 	 * @param mapping
 	 * @return

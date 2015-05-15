@@ -1,4 +1,5 @@
 package com.ylink.cim.invest.domain;
+
 // default package
 
 /**
@@ -9,6 +10,10 @@ public class PayChannel implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String channelType;
 	private String acctType;

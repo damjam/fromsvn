@@ -132,53 +132,31 @@ public class RspMsg {
 
 	}
 
-	
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 
-		sb.append(MsgUtil.addSpaceForString(this.h_exch_code,
-				RspMsg.H_EXCH_CODE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_rsp_code,
-				RspMsg.H_RSP_CODE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_rsp_msg,
-				RspMsg.H_RSP_MSG_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_bk_tx_date,
-				RspMsg.H_BK_TX_DATE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_bk_tx_time,
-				RspMsg.H_BK_TX_TIME));
-		sb.append(MsgUtil.addSpaceForString(this.h_bk_serial_no,
-				RspMsg.H_BK_SERIAL_NO_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_exch_date,
-				RspMsg.H_EXCH_DATE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_exch_code, RspMsg.H_EXCH_CODE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_rsp_code, RspMsg.H_RSP_CODE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_rsp_msg, RspMsg.H_RSP_MSG_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_bk_tx_date, RspMsg.H_BK_TX_DATE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_bk_tx_time, RspMsg.H_BK_TX_TIME));
+		sb.append(MsgUtil.addSpaceForString(this.h_bk_serial_no, RspMsg.H_BK_SERIAL_NO_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_exch_date, RspMsg.H_EXCH_DATE_LEN));
 		sb.append(MsgUtil.addSpaceForString(this.h_proxy, RspMsg.H_PROXY_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_bank_no,
-				RspMsg.H_BANK_NO_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_branch_id,
-				RspMsg.H_BRANCH_ID_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_teller_id,
-				RspMsg.H_TELLER_ID_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_teller_id1,
-				RspMsg.H_TELLER_ID1_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_teller_id2,
-				RspMsg.H_TELLER_ID2_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_channel,
-				RspMsg.H_CHANNEL_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_term_id,
-				RspMsg.H_TERM_ID_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_rsp_type,
-				RspMsg.H_RSP_TYPE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_req_type,
-				RspMsg.H_REQ_TYPE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_auth_lvl,
-				RspMsg.H_AUTH_LVL_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_start_num,
-				RspMsg.H_START_NUM_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_query_num,
-				RspMsg.H_QUERY_NUM_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_sum_num,
-				RspMsg.H_SUM_NUM_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_rsp_num,
-				RspMsg.H_RSP_NUM_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_bank_no, RspMsg.H_BANK_NO_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_branch_id, RspMsg.H_BRANCH_ID_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_teller_id, RspMsg.H_TELLER_ID_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_teller_id1, RspMsg.H_TELLER_ID1_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_teller_id2, RspMsg.H_TELLER_ID2_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_channel, RspMsg.H_CHANNEL_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_term_id, RspMsg.H_TERM_ID_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_rsp_type, RspMsg.H_RSP_TYPE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_req_type, RspMsg.H_REQ_TYPE_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_auth_lvl, RspMsg.H_AUTH_LVL_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_start_num, RspMsg.H_START_NUM_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_query_num, RspMsg.H_QUERY_NUM_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_sum_num, RspMsg.H_SUM_NUM_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_rsp_num, RspMsg.H_RSP_NUM_LEN));
 
 		sb.append(this.sbMsgBody.toString());
 		return sb.toString();

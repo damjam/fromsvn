@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -11,6 +12,10 @@ public class Account implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String ownerName;
 	private String ownerId;
@@ -21,37 +26,30 @@ public class Account implements java.io.Serializable {
 	private Date createDate;
 	private String state;
 	private String houseSn;
+
 	// Constructors
 
 	/** default constructor */
 	public Account() {
 	}
 
-	
-	
 	// Property accessors
 
 	public String getHouseSn() {
 		return houseSn;
 	}
 
-
-
 	public void setHouseSn(String houseSn) {
 		this.houseSn = houseSn;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
 
-
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
 
 	public String getOwnerName() {
 		return this.ownerName;
@@ -116,6 +114,5 @@ public class Account implements java.io.Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-
 
 }

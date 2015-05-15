@@ -20,7 +20,6 @@ public class SysParmServiceImpl implements SysParmService {
 	@Autowired
 	private SysParmDao sysParmDao;
 
-	
 	/**
 	 * 根据主键删除记录
 	 */
@@ -66,7 +65,7 @@ public class SysParmServiceImpl implements SysParmService {
 
 		SysParm sysParm;
 		try {
-			sysParm = (SysParm) this.sysParmDao.findSysParmById(id);
+			sysParm = this.sysParmDao.findSysParmById(id);
 			return sysParm;
 		} catch (Exception e) {
 			throw new BizException(e.getMessage());
@@ -79,12 +78,10 @@ public class SysParmServiceImpl implements SysParmService {
 		return this.sysParmDao.findByIdWithLock(code);
 	}
 
-
-
 	public void save(SysParm sysParm) throws BizException {
 		try {
 			if (sysParmDao.hasParm(sysParm.getCode())) {
-				throw new Exception("该数据已经存在!"+sysParm.getCode());
+				throw new Exception("该数据已经存在!" + sysParm.getCode());
 			}
 
 			this.sysParmDao.saveSysParm(sysParm);

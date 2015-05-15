@@ -12,10 +12,8 @@ public class EmailType extends AbstractType {
 	public static Map<String, EmailType> ALL = new LinkedHashMap<String, EmailType>();
 
 	public static final EmailType TYPE_163 = new EmailType("@163", "@163");
-	public static final EmailType TYPE_SINA_CN = new EmailType("@sina.cn",
-			"@sina.cn");
-	public static final EmailType TYPE_SINA_COM = new EmailType("@sina.com",
-			"@sina.com");
+	public static final EmailType TYPE_SINA_CN = new EmailType("@sina.cn", "@sina.cn");
+	public static final EmailType TYPE_SINA_COM = new EmailType("@sina.com", "@sina.com");
 
 	protected EmailType(String name, String value) {
 		super(name, value);

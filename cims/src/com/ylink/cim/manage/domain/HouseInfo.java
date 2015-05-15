@@ -10,6 +10,10 @@ public class HouseInfo implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String houseSn;
 	private Double area;
 	private String buildingNo;
@@ -23,23 +27,20 @@ public class HouseInfo implements java.io.Serializable {
 	private String houseDesc;
 	private String remark;
 	private String orderSn;
-	
+
 	// Constructors
 
 	public String getOrderSn() {
 		return orderSn;
 	}
 
-
 	public void setOrderSn(String orderSn) {
 		this.orderSn = orderSn;
 	}
 
-
 	/** default constructor */
 	public HouseInfo() {
 	}
-
 
 	// Property accessors
 
@@ -47,12 +48,9 @@ public class HouseInfo implements java.io.Serializable {
 		return remark;
 	}
 
-
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-
 
 	public String getHouseSn() {
 		return this.houseSn;
@@ -61,7 +59,6 @@ public class HouseInfo implements java.io.Serializable {
 	public void setHouseSn(String houseSn) {
 		this.houseSn = houseSn;
 	}
-
 
 	public String getBuildingNo() {
 		return this.buildingNo;
@@ -86,7 +83,7 @@ public class HouseInfo implements java.io.Serializable {
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
-	
+
 	public String getPosition() {
 		return position;
 	}
@@ -142,6 +139,5 @@ public class HouseInfo implements java.io.Serializable {
 	public void setHouseDesc(String houseDesc) {
 		this.houseDesc = houseDesc;
 	}
-	
 
 }

@@ -14,6 +14,6 @@ public interface ParkingBillDao extends BaseDao {
 	public Paginater findPager(Map<String, Object> params, Pager pager);
 
 	public Map<String, Object> findSumInfo(Map<String, Object> params);
-	
+
 	public List<ParkingBill> getAllLastBill(Map<String, Object> map);
 }

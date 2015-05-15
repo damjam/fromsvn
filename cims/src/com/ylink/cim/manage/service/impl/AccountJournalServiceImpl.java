@@ -42,13 +42,14 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		innerAcct.setUpdateDate(DateUtil.getCurrent());
 		innerAcct.setBalance(AmountUtils.add(innerAcct.getBalance(), amount));
 		innerAcct.setInTimes(innerAcct.getInTimes() + 1);
-		innerAcct.setTimes(innerAcct.getInTimes()+innerAcct.getOutTimes());
+		innerAcct.setTimes(innerAcct.getInTimes() + innerAcct.getOutTimes());
 		accountJournalDao.update(innerAcct);
-		addAcctJur(InoutType.TYPE_IN.getValue(), tradeType, prebalance, innerAcct.getBalance(), amount, billId, remark, userInfo);
+		addAcctJur(InoutType.TYPE_IN.getValue(), tradeType, prebalance, innerAcct.getBalance(), amount, billId, remark,
+				userInfo);
 	}
 
-	public void deduct(String tradeType, Double amount, String billId, String remark,
-			UserInfo userInfo) throws BizException {
+	public void deduct(String tradeType, Double amount, String billId, String remark, UserInfo userInfo)
+			throws BizException {
 		InnerAcct innerAcct = accountJournalDao.findById(InnerAcct.class, Constants.INNER_ACCTID);
 		accountJournalDao.lock(innerAcct, LockMode.UPGRADE);
 		Double prebalance = innerAcct.getBalance();
@@ -58,13 +59,14 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		innerAcct.setUpdateDate(DateUtil.getCurrent());
 		innerAcct.setBalance(AmountUtils.add(innerAcct.getBalance(), -amount));
 		innerAcct.setOutTimes(innerAcct.getOutTimes() + 1);
-		innerAcct.setTimes(innerAcct.getInTimes()+innerAcct.getOutTimes());
+		innerAcct.setTimes(innerAcct.getInTimes() + innerAcct.getOutTimes());
 		accountJournalDao.update(innerAcct);
-		addAcctJur(InoutType.TYPE_OUT.getValue(), tradeType, prebalance, innerAcct.getBalance(), amount, billId, remark, userInfo);
+		addAcctJur(InoutType.TYPE_OUT.getValue(), tradeType, prebalance, innerAcct.getBalance(), amount, billId,
+				remark, userInfo);
 	}
 
-	private void addAcctJur(String inoutType, String tradeType, Double prebalance, Double balance, Double amount, String billId,
-			String remark, UserInfo userInfo) throws BizException {
+	private void addAcctJur(String inoutType, String tradeType, Double prebalance, Double balance, Double amount,
+			String billId, String remark, UserInfo userInfo) throws BizException {
 		AccountJournal accountJournal = new AccountJournal();
 		accountJournal.setId(idFactoryService.generateId(Constants.ACCOUNT_JOURNAL_ID));
 		accountJournal.setPrebalance(prebalance);
@@ -79,7 +81,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		accountJournalDao.save(accountJournal);
 	}
 
-	public void reverse(String tradeType, String billId, String remark, UserInfo userInfo) throws BizException{
+	public void reverse(String tradeType, String billId, String remark, UserInfo userInfo) throws BizException {
 		Double amount = 0d;
 		if (InputTradeType.DECORATE.getValue().equals(tradeType)) {
 			DecorateServiceBill bill = accountJournalDao.findById(DecorateServiceBill.class, billId);
@@ -89,7 +91,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			amount = bill.getAmount();
 			bill.setState(BillState.REVERSE.getValue());
 			accountJournalDao.update(bill);
-		}else if (InputTradeType.SERVICE.getValue().equals(tradeType)) {
+		} else if (InputTradeType.SERVICE.getValue().equals(tradeType)) {
 			CommonServiceBill bill = accountJournalDao.findById(CommonServiceBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
 			accountJournalDao.lock(bill, LockMode.UPGRADE);
@@ -97,7 +99,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			amount = bill.getTotalAmount();
 			bill.setState(BillState.REVERSE.getValue());
 			accountJournalDao.update(bill);
-		}else if (InputTradeType.PARKING.getValue().equals(tradeType)) {
+		} else if (InputTradeType.PARKING.getValue().equals(tradeType)) {
 			ParkingBill bill = accountJournalDao.findById(ParkingBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
 			accountJournalDao.lock(bill, LockMode.UPGRADE);
@@ -105,7 +107,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			amount = bill.getAmount();
 			bill.setState(BillState.REVERSE.getValue());
 			accountJournalDao.update(bill);
-		}else if (InputTradeType.SECURITY.getValue().equals(tradeType)) {
+		} else if (InputTradeType.SECURITY.getValue().equals(tradeType)) {
 			DepositBill bill = accountJournalDao.findById(DepositBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
 			accountJournalDao.lock(bill, LockMode.UPGRADE);
@@ -113,7 +115,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			amount = bill.getAmount();
 			bill.setState(BillState.REVERSE.getValue());
 			accountJournalDao.update(bill);
-		}else if (InputTradeType.WATER.getValue().equals(tradeType)) {
+		} else if (InputTradeType.WATER.getValue().equals(tradeType)) {
 			WaterBill bill = accountJournalDao.findById(WaterBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
 			accountJournalDao.lock(bill, LockMode.UPGRADE);
@@ -121,7 +123,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			amount = bill.getAmount();
 			bill.setState(BillState.REVERSE.getValue());
 			accountJournalDao.update(bill);
-		}else{
+		} else {
 			throw new BizException("无法对当前交易进行冲正!");
 		}
 		deduct(TradeType.IN_REVERSE.getValue(), amount, billId, remark, userInfo);

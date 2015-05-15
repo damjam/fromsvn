@@ -19,7 +19,6 @@ public class FormatDate extends SimpleTagSupport {
 	private String targetPattern;
 	private String value;
 
-
 	public String getSourcePattern() {
 		return sourcePattern;
 	}
@@ -44,18 +43,17 @@ public class FormatDate extends SimpleTagSupport {
 		this.value = value;
 	}
 
-	
 	public void doTag() throws JspException, IOException {
 		if (StringUtils.isEmpty(sourcePattern) || StringUtils.isEmpty(value)) {
 			return;
 		}
 		try {
-			if(StringUtils.isEmpty(targetPattern)){
-				targetPattern="yyyy-MM-dd hh:mm:ss";
+			if (StringUtils.isEmpty(targetPattern)) {
+				targetPattern = "yyyy-MM-dd hh:mm:ss";
 			}
-			DateFormat df=new SimpleDateFormat(sourcePattern);
-			Date d=df.parse(value);
-			String html=new SimpleDateFormat(targetPattern).format(d);
+			DateFormat df = new SimpleDateFormat(sourcePattern);
+			Date d = df.parse(value);
+			String html = new SimpleDateFormat(targetPattern).format(d);
 			this.getJspContext().getOut().write(html);
 		} catch (Exception e) {
 			// do nothing.

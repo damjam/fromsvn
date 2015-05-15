@@ -1,14 +1,9 @@
 package com.ylink.cim.common.msg.test;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.ylink.cim.common.msg.handle.HeadReqUtils;
 import com.ylink.cim.common.msg.handle.MsgA0014;
-import com.ylink.cim.common.msg.handle.MsgA0011;
-import com.ylink.cim.common.msg.handle.MsgA0014;
-import com.ylink.cim.common.msg.handle.MsgA2040;
 import com.ylink.cim.common.msg.handle.MsgField;
 import com.ylink.cim.common.msg.handle.MsgUtil;
 import com.ylink.cim.common.util.SocketUtil;

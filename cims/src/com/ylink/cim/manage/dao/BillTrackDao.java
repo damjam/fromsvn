@@ -12,6 +12,8 @@ import flink.util.Paginater;
 public interface BillTrackDao extends BaseDao {
 
 	Paginater findPaginater(Map<String, Object> map, Pager pager);
+
 	List<BillTrack> findList(Map<String, Object> params);
+
 	public int expireBillTrack(String houseSn, String billType, String branchNo);
 }

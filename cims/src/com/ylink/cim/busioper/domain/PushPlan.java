@@ -24,7 +24,7 @@ public class PushPlan implements java.io.Serializable {
 	private String busiType;
 	private String subsState;
 	private String custType;
-	
+
 	public String getBusiType() {
 		return busiType;
 	}

@@ -58,7 +58,6 @@ public class Timer implements java.io.Serializable {
 		return this.groupno;
 	}
 
-
 	public String getNoPass() {
 		return this.noPass;
 	}

@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -11,6 +12,10 @@ public class CarInfo implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String carSn;
 	private String brand;
 	private String model;
@@ -31,7 +36,6 @@ public class CarInfo implements java.io.Serializable {
 	public CarInfo(String carSn) {
 		this.carSn = carSn;
 	}
-
 
 	// Property accessors
 
@@ -108,12 +112,15 @@ public class CarInfo implements java.io.Serializable {
 	}
 
 	public boolean equals(Object other) {
-		if ((this == other))
+		if ((this == other)) {
 			return true;
-		if ((other == null))
+		}
+		if ((other == null)) {
 			return false;
-		if (!(other instanceof CarInfo))
+		}
+		if (!(other instanceof CarInfo)) {
 			return false;
+		}
 		CarInfo castOther = (CarInfo) other;
 
 		return ((this.getCarSn() == castOther.getCarSn()) || (this.getCarSn() != null && castOther.getCarSn() != null && this

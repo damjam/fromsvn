@@ -14,6 +14,7 @@ import com.ylink.cim.admin.service.PrivilegeService;
 import flink.etc.BizException;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Component("privilegeService")
 public class PrivilegeServiceImpl implements PrivilegeService {
 
@@ -24,58 +25,55 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		this.privilegeDao = privilegeDao;
 	}
 
-	public Paginater getPrivilegePageList(Privilege privilege, Pager pager)throws  BizException{
+	public Paginater getPrivilegePageList(Privilege privilege, Pager pager) throws BizException {
 		return this.privilegeDao.getPrivilegePageList(privilege, pager);
 	}
-	
 
 	public List<PrivilegeTreeNode> getRoleTreeByRole(String roleId) throws BizException {
 		return this.privilegeDao.getRoleTreeByRole(roleId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see gnete.dsf.biz.PrivilegeService#getRoleTree()
 	 */
 	public List getRoleTree(String limitGroupId) throws BizException {
-		
+
 		List<PrivilegeTreeNode> list = new ArrayList<PrivilegeTreeNode>();
 		/*
-		//初始化第一个节点
-		PrivilegeTreeNode node = new PrivilegeTreeNode();
-		node.setCode(PrivilegeTreeNode.ROOT);
-		node.setName("权限菜单");
-		node.setParentCode(PrivilegeTreeNode.ROOT_PARENT);
-		list.add(node);
-		*/
-		return privilegeDao.getRoleTree(list,limitGroupId);
+		 * //初始化第一个节点 PrivilegeTreeNode node = new PrivilegeTreeNode();
+		 * node.setCode(PrivilegeTreeNode.ROOT); node.setName("权限菜单");
+		 * node.setParentCode(PrivilegeTreeNode.ROOT_PARENT); list.add(node);
+		 */
+		return privilegeDao.getRoleTree(list, limitGroupId);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see gnete.dsf.biz.PrivilegeService#getRoleTree()
 	 */
 	public List<PrivilegeTreeNode> getRoleTree() throws BizException {
-		
+
 		List<PrivilegeTreeNode> list = new ArrayList<PrivilegeTreeNode>();
-		
+
 		/*
-		//初始化第一个节点
-		PrivilegeTreeNode node = new PrivilegeTreeNode();
-		node.setCode(PrivilegeTreeNode.ROOT);
-		node.setName("权限菜单");
-		node.setParentCode(PrivilegeTreeNode.ROOT_PARENT);
-		list.add(node);
-		*/
+		 * //初始化第一个节点 PrivilegeTreeNode node = new PrivilegeTreeNode();
+		 * node.setCode(PrivilegeTreeNode.ROOT); node.setName("权限菜单");
+		 * node.setParentCode(PrivilegeTreeNode.ROOT_PARENT); list.add(node);
+		 */
 		return privilegeDao.getRoleTree(list);
 	}
 
 	public void savePrivilege(Privilege privilege) throws BizException {
-		
-		if(null!=this.privilegeDao.findById(privilege.getLimitId())){
-			throw new BizException("权限点  "+privilege.getLimitId()+",已经存在");
+
+		if (null != this.privilegeDao.findById(privilege.getLimitId())) {
+			throw new BizException("权限点  " + privilege.getLimitId() + ",已经存在");
 		}
-		
+
 		this.privilegeDao.save(privilege);
-		
+
 	}
 
 	public void deletePrivilege(Privilege privilege) throws BizException {
@@ -83,7 +81,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 	}
 
 	public Privilege getPrivilege(String limitId) throws BizException {
-		 
+
 		return this.privilegeDao.findById(limitId);
 	}
 
@@ -92,6 +90,4 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 		return this.privilegeDao.getPrivilegeList(privilege);
 	}
 
-	
-	
 }

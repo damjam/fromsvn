@@ -10,9 +10,14 @@ import flink.etc.BizException;
 public interface WaterRecordService {
 
 	void saveWaterRecord(WaterRecord waterRecord, UserInfo userInfo) throws BizException;
+
 	Integer checkAllRecord(UserInfo userInfo) throws BizException;
+
 	boolean checkRecord(String id, UserInfo userInfo) throws BizException;
+
 	void deleteRecord(String id, UserInfo userInfo) throws BizException;
+
 	WaterRecord getPreRecord(String houseSn) throws BizException;
+
 	void importDeposit(List<WaterRecord> list, UserInfo sessionUser) throws BizException;
 }

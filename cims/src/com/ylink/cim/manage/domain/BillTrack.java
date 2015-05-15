@@ -12,6 +12,10 @@ public class BillTrack implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String billType;
 	private String expireDate;
@@ -28,9 +32,7 @@ public class BillTrack implements java.io.Serializable {
 	private String billId;
 	private String branchNo;
 	private Double billAmount;
-	
-	
-	
+
 	// Constructors
 
 	public Double getBillAmount() {
@@ -150,7 +152,7 @@ public class BillTrack implements java.io.Serializable {
 	}
 
 	public Integer getNoticeTimes() {
-		return this.noticeTimes == null? 0:noticeTimes;
+		return this.noticeTimes == null ? 0 : noticeTimes;
 	}
 
 	public void setNoticeTimes(Integer noticeTimes) {

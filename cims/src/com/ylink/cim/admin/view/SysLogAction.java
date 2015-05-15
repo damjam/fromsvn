@@ -20,6 +20,7 @@ import com.ylink.cim.common.type.UserLogType;
 
 import flink.util.BoUtils;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
@@ -28,7 +29,8 @@ public class SysLogAction extends BaseDispatchAction {
 
 	private static Logger logger = Logger.getLogger(SysLogAction.class);
 	SysLogService sysLogService = (SysLogService) getService("sysLogService");
-	private PrivilegeDao privilegeDao = (PrivilegeDao)getService("privilegeDao");
+	private PrivilegeDao privilegeDao = (PrivilegeDao) getService("privilegeDao");
+
 	public SysLog getSysLog(SysLogActionForm sysLogActionForm) throws Exception {
 		SysLog sysLog = new SysLog();
 		BeanUtils.copyProperties(sysLog, sysLogActionForm);
@@ -43,7 +45,7 @@ public class SysLogAction extends BaseDispatchAction {
 		BoUtils.addProperty(paginater.getList(), "limitId", "limitName", list, "limitId", "limitName");
 		saveQueryResult(request, paginater);
 		LogClassType.setInReq(request);
-		String msg = LogUtils.r("系统日志查询成功");
+		String msg = MsgUtils.r("系统日志查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return mapping.findForward("success");
 	}
@@ -63,7 +65,7 @@ public class SysLogAction extends BaseDispatchAction {
 		Pager pager = new Pager(getPageNumber(request), getPageSize(request));
 		Paginater paginater = this.sysLogService.getSysLogPageList(this.getSysLog(sysLogActionForm), pager);
 		request.setAttribute(Paginater.PAGINATER, paginater);
-		String msg = LogUtils.r("系统日志明细查看成功");
+		String msg = MsgUtils.r("系统日志明细查看成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return mapping.findForward("detail");
 	}

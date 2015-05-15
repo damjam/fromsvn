@@ -4,9 +4,8 @@ import com.ylink.gess.product.msg.RspBase;
 
 /**
  * 
- * 客户定投计划查询
- * 返回报文
- *
+ * 客户定投计划查询 返回报文
+ * 
  */
 public class RspA2002 extends RspBase {
 	/**
@@ -66,7 +65,7 @@ public class RspA2002 extends RspBase {
 	 */
 	public String e_term_type = "";
 	/**
-	 *  委托代理机构
+	 * 委托代理机构
 	 */
 	public String e_branch_id = "";
 	/**

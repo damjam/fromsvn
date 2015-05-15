@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `bill_track` (
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk COMMENT='账单跟踪信息表';
 
 
-timer_do id类型改为字符串
+timer_do id类型改为字符串,para2改为字符串
 
 INSERT INTO `privilege` (`LIMIT_ID`, `LIMIT_NAME`, `PARENT`, `IS_MENU`, `MENU_ORDER`, `IF_AUDIT`) VALUES ('timer_task', '定时任务管理', 'system_mng', 'Y', '8', 'N');
 

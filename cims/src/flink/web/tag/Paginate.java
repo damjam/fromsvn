@@ -34,18 +34,17 @@ public class Paginate extends SimpleTagSupport {
 		this.formIndex = formIndex;
 	}
 
-	
 	public void doTag() throws JspException, IOException {
 		if (!isExistPaginater()) {
 			return;
 		}
-		
+
 		StringBuffer html = new StringBuffer();
-		
+
 		appendPageHeader(html);
 		appendPageNavigationHtml(html);
 		appendPageTail(html);
-		
+
 		this.getJspContext().getOut().write(html.toString());
 	}
 
@@ -54,7 +53,7 @@ public class Paginate extends SimpleTagSupport {
 	 */
 	private boolean isExistPaginater() {
 		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
-		
+
 		String key = StringUtils.isEmpty(name) ? Paginater.PAGINATER : name;
 		return (Paginater) request.getAttribute(key) != null;
 	}
@@ -87,30 +86,29 @@ public class Paginate extends SimpleTagSupport {
 		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
 		String key = StringUtils.isEmpty(name) ? Paginater.PAGINATER : name;
 		Paginater p = (Paginater) request.getAttribute(key);
-		
+
 		if (p == null) {
 			return;
 		}
-		
+
 		// 是否显示总结信息.
 		String showSingleSummary = null;
 		showSingleSummary = request.getSession().getServletContext().getInitParameter("showSingleSummary");
-		
+
 		if (StringUtils.isNotEmpty(showSingleSummary)) {
 			if (Boolean.parseBoolean(showSingleSummary) && showSummary) {
 				appendPageSummaryHtml(html, p);
 			}
-		}
-		else {
+		} else {
 			if (showSummary) {
 				appendPageSummaryHtml(html, p);
 			}
 		}
-		
+
 		if (StringUtils.isEmpty(navigateStyle)) {
 			navigateStyle = request.getSession().getServletContext().getInitParameter("htmlNavigator");
 		}
-		
+
 		HtmlNavigator navigator = HtmlNavigatorFactory.getInstance(navigateStyle);
 		html.append(navigator.getHtmlNavigation(request.getContextPath(), p, formIndex, tidy));
 	}
@@ -123,12 +121,11 @@ public class Paginate extends SimpleTagSupport {
 	 */
 	private void appendPageSummaryHtml(StringBuffer html, Paginater p) {
 		html.append("<div class=\"pageSummary\">");
-		
+
 		if (tidy) {
 			html.append("第" + p.getCurrentPage() + "/" + p.getMaxPage() + "页&nbsp;");
 			html.append("共" + p.getMaxRowCount() + "笔&nbsp;");
-		}
-		else {
+		} else {
 			html.append("第" + p.getCurrentPage() + "页&nbsp;");
 			html.append("共" + p.getMaxPage() + "页&nbsp;");
 			html.append("共" + p.getMaxRowCount() + "笔");

@@ -11,24 +11,24 @@ import com.ylink.cim.common.util.SocketUtil;
 
 public class TestMsgA2042 {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		testA2042();
 	}
-	private static void testA2042() throws Exception{
-		Map map=HeadReqUtils.encapsulationHeadReqParam();
-		
+
+	private static void testA2042() throws Exception {
+		Map map = HeadReqUtils.encapsulationHeadReqParam();
+
 		map.put(MsgField.h_exch_code.getFieldCode(), "A2042");
-//		map.put(MsgField.aip_type.getFieldCode(), "P089958072");
+		// map.put(MsgField.aip_type.getFieldCode(), "P089958072");
 		String msg = MsgUtil.buildReqMsg(map, MsgA2042.A2042REQ);
 		String ip = "168.33.120.25";
 		int port = 13000;
 		String resMsg = SocketUtil.sendRecInPool(ip);
-		//String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
+		// String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
 		Map<String, MsgField> headMap = MsgUtil.parseResHead(resMsg);
-//		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg, MsgA2042.A2042RES);
+		// Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg,
+		// MsgA2042.A2042RES);
 		List<Map<String, MsgField>> bodyMapList = MsgUtil.parseResBodyList(resMsg, MsgA2042.A2042RES);
 	}
-	
-	
-	
+
 }

@@ -16,16 +16,18 @@ import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("decorateServiceBillDao")
-public class DecorateServiceBillDaoImpl extends BaseDaoHibernateImpl implements DecorateServiceBillDao{
-	public Paginater findPager(Map<String, Object> params, Pager pager){
+public class DecorateServiceBillDaoImpl extends BaseDaoHibernateImpl implements DecorateServiceBillDao {
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from DecorateServiceBill t where 1=1");
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
@@ -47,13 +49,14 @@ public class DecorateServiceBillDaoImpl extends BaseDaoHibernateImpl implements 
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?",
+					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", BillState.PAID.getValue());
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
+		Map<String, Object> sumInfo = (Map<String, Object>) super.getUniqueResult(helper);
 		if (sumInfo.get("sumAmt") == null) {
 			sumInfo.put("sumAmt", 0d);
 		}
@@ -70,7 +73,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoHibernateImpl implements 
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and chargeDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and chargeDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and chargeDate <= ?", String.valueOf(yearInt + 1));
 		}
 	}
 }

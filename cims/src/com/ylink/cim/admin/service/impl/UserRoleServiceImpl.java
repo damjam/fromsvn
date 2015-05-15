@@ -12,48 +12,44 @@ import flink.etc.BizException;
 import flink.util.ExceptionUtils;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Component("userRoleService")
 public class UserRoleServiceImpl implements UserRoleService {
 
 	@Autowired
 	private UserRoleDao userRoleDao;
-	
+
 	public void setUserRoleDao(UserRoleDao userRoleDao) {
 		this.userRoleDao = userRoleDao;
 	}
 
-	
 	public void deleteUserRole(UserRoleId id) throws BizException {
-		try{
+		try {
 			this.userRoleDao.deleteById(id);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExceptionUtils.logBizException(UserRoleServiceImpl.class, e.getMessage());
 		}
 	}
 
-	public Paginater getUserRolePageList(UserRole userRole, Pager pager)
-			throws BizException {
-		
+	public Paginater getUserRolePageList(UserRole userRole, Pager pager) throws BizException {
+
 		return this.userRoleDao.getUserRolePageList(userRole, pager);
 	}
 
 	public void saveUserRole(UserRole userRole) throws BizException {
-		
-		try{
+
+		try {
 			this.userRoleDao.save(userRole);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ExceptionUtils.logBizException(UserRoleServiceImpl.class, e.getMessage());
 		}
 
 	}
 
+	public Paginater getWaitAssignRolePageList(String userId, Pager pager) throws BizException {
 
-	public Paginater getWaitAssignRolePageList(String userId, Pager pager)
-			throws BizException {
-		 
 		return this.userRoleDao.getWaitAssignRolePageList(userId, pager);
 	}
-
 
 	public void saveUserRole(String userId, String[] roleIds) throws BizException {
 		userRoleDao.delRoleByUser(userId);
@@ -66,6 +62,5 @@ public class UserRoleServiceImpl implements UserRoleService {
 			userRoleDao.saveOrUpdate(userRole);
 		}
 	}
-
 
 }

@@ -10,6 +10,10 @@ public class OwnerInfo implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String mobile;
 	private String ownerName;
@@ -35,66 +39,44 @@ public class OwnerInfo implements java.io.Serializable {
 	private String cancelUser;
 	private String hasAcct;
 	private Double area;
-	
-	
-	
-	// Constructors
-	
 
-	
+	// Constructors
+
 	public Double getArea() {
 		return area;
 	}
-
-
 
 	public void setArea(Double area) {
 		this.area = area;
 	}
 
-
-
 	public String getHasAcct() {
 		return hasAcct;
 	}
-
-
 
 	public void setHasAcct(String hasAcct) {
 		this.hasAcct = hasAcct;
 	}
 
-
-
 	public String getState() {
 		return state;
 	}
-
-	
 
 	public Date getCancelDate() {
 		return cancelDate;
 	}
 
-
-
 	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
-
-
 
 	public String getCancelUser() {
 		return cancelUser;
 	}
 
-
-
 	public void setCancelUser(String cancelUser) {
 		this.cancelUser = cancelUser;
 	}
-
-
 
 	public void setState(String state) {
 		this.state = state;
@@ -141,7 +123,6 @@ public class OwnerInfo implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
 	// Property accessors
 
 	public String getId() {
@@ -159,7 +140,6 @@ public class OwnerInfo implements java.io.Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-
 
 	public String getEmail() {
 		return this.email;
@@ -275,6 +255,5 @@ public class OwnerInfo implements java.io.Serializable {
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
 	}
-	
 
 }

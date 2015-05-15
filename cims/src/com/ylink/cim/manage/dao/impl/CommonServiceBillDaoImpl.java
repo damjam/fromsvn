@@ -11,7 +11,6 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.type.BillType;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.CommonServiceBill;

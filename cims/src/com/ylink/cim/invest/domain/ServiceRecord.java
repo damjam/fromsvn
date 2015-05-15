@@ -1,4 +1,5 @@
 package com.ylink.cim.invest.domain;
+
 // default package
 
 import java.util.Date;
@@ -11,6 +12,10 @@ public class ServiceRecord implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String custId;
 	private String busiType;

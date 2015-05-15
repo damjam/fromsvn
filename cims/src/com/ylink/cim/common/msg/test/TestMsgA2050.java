@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ylink.cim.common.msg.handle.HeadReqUtils;
-import com.ylink.cim.common.msg.handle.MsgA2042;
 import com.ylink.cim.common.msg.handle.MsgA2050;
 import com.ylink.cim.common.msg.handle.MsgField;
 import com.ylink.cim.common.msg.handle.MsgUtil;

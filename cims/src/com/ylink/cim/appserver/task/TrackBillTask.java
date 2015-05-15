@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.manage.service.BillTrackService;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
-import com.ylink.cim.manage.service.BillTrackService;
 @Scope("prototype")
 @Component("trackBillTask")
 public class TrackBillTask extends BaseCmdTask {

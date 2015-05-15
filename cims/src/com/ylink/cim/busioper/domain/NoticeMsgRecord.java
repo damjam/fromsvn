@@ -1,4 +1,5 @@
 package com.ylink.cim.busioper.domain;
+
 // default package
 
 import java.util.Date;
@@ -28,8 +29,6 @@ public class NoticeMsgRecord implements java.io.Serializable {
 	public NoticeMsgRecord() {
 	}
 
-
-
 	public String getId() {
 		return this.id;
 	}
@@ -37,7 +36,6 @@ public class NoticeMsgRecord implements java.io.Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-
 
 	public String getCustId() {
 		return this.custId;
@@ -71,13 +69,9 @@ public class NoticeMsgRecord implements java.io.Serializable {
 		this.readTime = readTime;
 	}
 
-
-
 	public String getNoticeMsgId() {
 		return noticeMsgId;
 	}
-
-
 
 	public void setNoticeMsgId(String noticeMsgId) {
 		this.noticeMsgId = noticeMsgId;

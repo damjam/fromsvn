@@ -5,14 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.IdFactoryDao;
-import com.ylink.cim.admin.dao.impl.IdFactoryHibernateDaoImpl;
 import com.ylink.cim.admin.domain.IdFactory;
 import com.ylink.cim.admin.service.IdFactoryService;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
-import flink.util.ExceptionUtils;
 @Component("idFactoryService")
 public class IdFactoryServiceImpl implements IdFactoryService{
 	@Autowired

@@ -7,8 +7,6 @@ import org.apache.log4j.Logger;
 
 import com.ylink.cim.common.msg.SocketParams;
 
-import flink.util.SpringContext;
-
 public class ConnectionProvider {
 	//private static Object object_lock = new Object();
 	private static Logger logger = Logger.getLogger(ConnectionProvider.class);

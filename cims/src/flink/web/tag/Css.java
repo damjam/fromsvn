@@ -13,14 +13,14 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class Css extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String href;
-	
+
 	public void setHref(String href) {
 		this.href = href;
 	}
 
-	
 	public void doTag() throws JspException, IOException {
 		String contextPath = ((HttpServletRequest) ((PageContext) this.getJspContext()).getRequest()).getContextPath();
-		this.getJspContext().getOut().write("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + href + "\" />");
+		this.getJspContext().getOut()
+				.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + href + "\" />");
 	}
 }

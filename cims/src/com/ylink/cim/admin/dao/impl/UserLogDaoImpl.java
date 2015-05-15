@@ -42,10 +42,8 @@ public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
 
 	}
 
-	
 	protected Class getModelClass() {
 		return UserLog.class;
 	}
-
 
 }

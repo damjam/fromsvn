@@ -32,6 +32,7 @@ import flink.etc.BizException;
 import flink.etc.Symbol;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Pager;
 
 @Component("pushMngService")
@@ -45,7 +46,8 @@ public class PushMngServiceImpl implements PushMngService {
 	private TimerDoDao timerDoDao;
 	@Autowired
 	private CustInfoDao custInfoDao;
-	public void exeAddRecordTask(String timerDoId) throws BizException{
+
+	public void exeAddRecordTask(String timerDoId) throws BizException {
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
 			logger.debug("任务已执行");
@@ -69,44 +71,45 @@ public class PushMngServiceImpl implements PushMngService {
 		while (list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
 				CustInfo custInfo = list.get(i);
-				
+
 				PushRecord pushRecord = new PushRecord();
-				//邮件
+				// 邮件
 				String pushAdd = "";
 				if (PushType.MAIL.getValue().endsWith(pushType)) {
-					if(StringUtils.isNotEmpty(pushPlan.getSubsState())){//只给订阅的发
-						if(pushPlan.getSubsState().equals(custInfo.getSubsEmail())){
+					if (StringUtils.isNotEmpty(pushPlan.getSubsState())) {// 只给订阅的发
+						if (pushPlan.getSubsState().equals(custInfo.getSubsEmail())) {
 							pushAdd = custInfo.getEmail();
 						}
-					}else{//都发
-							pushAdd = custInfo.getEmail();
+					} else {// 都发
+						pushAdd = custInfo.getEmail();
 					}
-				} else if(PushType.MOBILE.getValue().equals(pushType)){
-					String time=ParaManager.getSubPhone();
-					if(StringUtils.isNotEmpty(time)){
-						if(Symbol.YES.equals(time)){//为Y立即执行
-//							pushAdd = custInfo.getMobile();
-							if(StringUtils.isNotEmpty(pushPlan.getSubsState())){//只给订阅的发
-								if(pushPlan.getSubsState().equals(custInfo.getSubsPhone())){
+				} else if (PushType.MOBILE.getValue().equals(pushType)) {
+					String time = ParaManager.getSubPhone();
+					if (StringUtils.isNotEmpty(time)) {
+						if (Symbol.YES.equals(time)) {// 为Y立即执行
+						// pushAdd = custInfo.getMobile();
+							if (StringUtils.isNotEmpty(pushPlan.getSubsState())) {// 只给订阅的发
+								if (pushPlan.getSubsState().equals(custInfo.getSubsPhone())) {
 									pushAdd = custInfo.getMobile();
 								}
-							}else{//都发
-									pushAdd = custInfo.getMobile();
+							} else {// 都发
+								pushAdd = custInfo.getMobile();
 							}
-//							SendMobilMsgUtil.sendMsgFw(adds, plan.getSubject()+":"+plan.getContent());
-						}else if(Symbol.NO.equals(time)){
-							//为N，不执行
-						}else{
-							SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
-							String nowTime=sdf.format(new Date());
-							if(nowTime.equals(time)){
-//								pushAdd = custInfo.getMobile();
-								if(StringUtils.isNotEmpty(pushPlan.getSubsState())){//只给订阅的发
-									if(pushPlan.getSubsState().equals(custInfo.getSubsPhone())){
+							// SendMobilMsgUtil.sendMsgFw(adds,
+							// plan.getSubject()+":"+plan.getContent());
+						} else if (Symbol.NO.equals(time)) {
+							// 为N，不执行
+						} else {
+							SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+							String nowTime = sdf.format(new Date());
+							if (nowTime.equals(time)) {
+								// pushAdd = custInfo.getMobile();
+								if (StringUtils.isNotEmpty(pushPlan.getSubsState())) {// 只给订阅的发
+									if (pushPlan.getSubsState().equals(custInfo.getSubsPhone())) {
 										pushAdd = custInfo.getMobile();
 									}
-								}else{//都发
-										pushAdd = custInfo.getMobile();
+								} else {// 都发
+									pushAdd = custInfo.getMobile();
 								}
 							}
 						}
@@ -123,7 +126,7 @@ public class PushMngServiceImpl implements PushMngService {
 				cnt++;
 			}
 			pushRecordDao.flush();
-			//本次查出的不足100条，不再查询
+			// 本次查出的不足100条，不再查询
 			if (list.size() < pageSize) {
 				break;
 			}
@@ -132,7 +135,7 @@ public class PushMngServiceImpl implements PushMngService {
 			list = custInfoDao.findForPushPlan(map, pager);
 		}
 		timerDo.setState(TimerDo.BUSINESS_SUCESS);
-		logger.debug(LogUtils.r("本次添加推送信息共执行{?}条记录", cnt));
+		logger.debug(MsgUtils.r("本次添加推送信息共执行{?}条记录", cnt));
 	}
 
 	public void exeSendMsgTask(String timerDoId) throws BizException {
@@ -145,7 +148,7 @@ public class PushMngServiceImpl implements PushMngService {
 		map.put("planId", planId);
 		List<PushRecord> list = pushRecordDao.findByParams(map);
 		if (list.size() == 0) {
-			//未生成推送记录
+			// 未生成推送记录
 			return;
 		}
 		int cnt = 0;
@@ -155,33 +158,33 @@ public class PushMngServiceImpl implements PushMngService {
 			pushPlanDao.lock(record, LockMode.UPGRADE);
 			pushPlanDao.refresh(record);
 			if (Symbol.YES.endsWith(record.getState())) {
-				logger.debug(LogUtils.r("推送记录{?}已推送,无须再次推送", record.getId()));
+				logger.debug(MsgUtils.r("推送记录{?}已推送,无须再次推送", record.getId()));
 			}
-			
+
 			record.setPushTime(DateUtil.getCurrent());
 			record.setState(Symbol.YES);
 			pushPlanDao.update(record);
-			if (i > 100 && i%100 == 0){
+			if (i > 100 && i % 100 == 0) {
 				pushRecordDao.flush();
 			}
 			addList.add(record.getPushAdd());
-			if((i > 100 && i%100 == 0) || i == list.size()-1){
+			if ((i > 100 && i % 100 == 0) || i == list.size() - 1) {
 				String[] adds = addList.toArray(new String[addList.size()]);
 				if (PushType.MAIL.getValue().equals(plan.getPushType())) {
 					SendMailUtil.sendTextMail(adds, plan.getSubject(), plan.getContent());
 				} else if (PushType.MOBILE.getValue().equals(plan.getPushType())) {
-									SendMobilMsgUtil.sendMsgFw(adds, plan.getSubject()+":"+plan.getContent());
-							}
+					SendMobilMsgUtil.sendMsgFw(adds, plan.getSubject() + ":" + plan.getContent());
 				}
+			}
 			cnt++;
 		}
 		timerDo.setState(TimerDo.BUSINESS_SUCESS);
 		timerDoDao.update(timerDo);
 		plan.setState(Symbol.YES);
 		pushPlanDao.update(plan);
-		logger.debug(LogUtils.r("本次向客户添加推送信息共执行{?}条记录", cnt));
+		logger.debug(MsgUtils.r("本次向客户添加推送信息共执行{?}条记录", cnt));
 	}
-	
+
 	public void addPushPlan(PushPlan pushPlan) {
 		pushPlan.setCreateTime(DateUtil.getCurrent());
 		pushPlan.setExpPushTime(DateUtil.getCurrent());
@@ -189,9 +192,10 @@ public class PushMngServiceImpl implements PushMngService {
 		pushPlanDao.save(pushPlan);
 		addPushTask(pushPlan);
 		exePushTask(pushPlan);
-		//添加计划
-		
+		// 添加计划
+
 	}
+
 	private void addPushTask(PushPlan pushPlan) {
 		TimerDo timerDo = new TimerDo();
 		timerDo.setBeanName("addPushTask");
@@ -203,6 +207,7 @@ public class PushMngServiceImpl implements PushMngService {
 		timerDo.setState(TimerDo.INIT);
 		timerDoDao.save(timerDo);
 	}
+
 	private void exePushTask(PushPlan pushPlan) {
 		TimerDo timerDo = new TimerDo();
 		timerDo.setBeanName("exePushTask");
@@ -210,7 +215,7 @@ public class PushMngServiceImpl implements PushMngService {
 		timerDo.setPara1(Long.parseLong(pushPlan.getId()));
 		timerDo.setPara2(pushPlan.getBranchNo());
 		timerDo.setTriggerDate(DateUtil.getCurrentDate());
-		//10分钟后执行
+		// 10分钟后执行
 		timerDo.setTriggerTime(DateUtil.formatDate("HHmmss", DateUtil.addMins(DateUtil.getCurrent(), 1)));
 		timerDo.setState(TimerDo.INIT);
 		timerDoDao.save(timerDo);

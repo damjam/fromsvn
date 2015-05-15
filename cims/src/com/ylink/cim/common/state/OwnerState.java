@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import flink.util.AbstractState;
 import flink.util.ExceptionUtils;
 
-
 public class OwnerState extends AbstractState {
 	public static Map<String, OwnerState> ALL = new LinkedHashMap<String, OwnerState>();
 	public static final OwnerState NORMAL = new OwnerState("正常", "00");
 	public static final OwnerState CANCEL = new OwnerState("已销户", "01");
-	
+
 	protected OwnerState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

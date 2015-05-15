@@ -22,13 +22,14 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.etc.Symbol;
 import flink.util.DateUtil;
+
 @Component("ownerInfoService")
-public class OwnerInfoServiceImpl implements OwnerInfoService{
+public class OwnerInfoServiceImpl implements OwnerInfoService {
 	@Autowired
 	private OwnerInfoDao ownerInfoDao;
 	@Autowired
 	private IdFactoryService idFactoryService;
-	
+
 	public void delete(String id, UserInfo userInfo) throws BizException {
 		ownerInfoDao.deleteById(id);
 		Account account = ownerInfoDao.findById(Account.class, id);
@@ -36,13 +37,14 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			ownerInfoDao.delete(account);
 		}
 	}
-	public void add(OwnerInfo ownerInfo, UserInfo userInfo) throws BizException{
+
+	public void add(OwnerInfo ownerInfo, UserInfo userInfo) throws BizException {
 		String houseSn = ownerInfo.getHouseSn();
 		HouseInfo houseInfo = ownerInfoDao.findById(HouseInfo.class, houseSn);
-		Assert.notNull(houseInfo, "不存在房屋编号"+houseSn);
+		Assert.notNull(houseInfo, "不存在房屋编号" + houseSn);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("houseSn", houseInfo.getHouseSn());
-		Assert.isNull(ownerInfoDao.getNormalOwner(houseSn), "房屋"+houseSn+"已关联业主信息");
+		Assert.isNull(ownerInfoDao.getNormalOwner(houseSn), "房屋" + houseSn + "已关联业主信息");
 		ownerInfo.setCreateDate(DateUtil.getCurrent());
 		ownerInfo.setCreateUser(userInfo.getUserName());
 		ownerInfo.setOweDays(0);
@@ -51,13 +53,15 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 		ownerInfo.setState(OwnerState.NORMAL.getValue());
 		ownerInfoDao.save(ownerInfo);
 	}
-	public void update(OwnerInfo ownerInfo, UserInfo userInfo) throws BizException{
+
+	public void update(OwnerInfo ownerInfo, UserInfo userInfo) throws BizException {
 		ownerInfo.setUpdateDate(DateUtil.getCurrent());
 		ownerInfo.setUpdateUser(userInfo.getUserName());
 		ownerInfoDao.update(ownerInfo);
 	}
+
 	public void cancel(String id, UserInfo sessionUser) throws BizException {
-		
+
 		OwnerInfo ownerInfo = ownerInfoDao.findByIdWithLock(id);
 		Account account = null;
 		if (Symbol.YES.equals(ownerInfo.getHasAcct())) {
@@ -77,7 +81,8 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			ownerInfoDao.update(account);
 		}
 	}
-	public void importOwnerInfo(List<OwnerInfo> list, UserInfo userInfo) throws BizException{
+
+	public void importOwnerInfo(List<OwnerInfo> list, UserInfo userInfo) throws BizException {
 		for (int i = 0; i < list.size(); i++) {
 			OwnerInfo ownerInfo = list.get(i);
 			ownerInfo.setId(idFactoryService.generateId(Constants.OWNER_INFO_ID));
@@ -87,7 +92,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			ownerInfo.setCreateDate(DateUtil.getCurrent());
 			ownerInfo.setCreateUser(userInfo.getUserName());
 			ownerInfoDao.save(ownerInfo);
-			
+
 			HouseInfo houseInfo = new HouseInfo();
 			String houseSn = ownerInfo.getHouseSn();
 			String[] strs = houseSn.split("-");
@@ -96,7 +101,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			String buildingNo = strs[0];
 			String unitNo = strs[1];
 			String position = strs[2];
-			String floor = position.substring(0, position.length()-2);
+			String floor = position.substring(0, position.length() - 2);
 			houseInfo.setBuildingNo(buildingNo);
 			houseInfo.setUnitNo(unitNo);
 			houseInfo.setFloor(floor);
@@ -114,7 +119,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService{
 			houseInfo.setOrderSn(orderSn);
 			ownerInfoDao.save(houseInfo);
 		}
-		
+
 	}
 
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.dao.ParkingBillDao;
-import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.ParkingBill;
 import com.ylink.cim.manage.domain.WaterRecord;

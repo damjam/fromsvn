@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class VerifyCodeServlet extends HttpServlet {
-	static{
-        System.setProperty("java.awt.headless", "true");
-    }
+	static {
+		System.setProperty("java.awt.headless", "true");
+	}
 	private static final long serialVersionUID = 1L;
 	private static String strs = "234567890abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ";
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
@@ -50,7 +51,7 @@ public class VerifyCodeServlet extends HttpServlet {
 			StringBuilder sRand = new StringBuilder();
 			for (int i = 0; i < 4; i++) {
 				String rand = String.valueOf(strs.charAt(random.nextInt(58)));
-				//String rand = String.valueOf(random.nextInt(10));
+				// String rand = String.valueOf(random.nextInt(10));
 				sRand.append(rand);
 				g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
 				g.drawString(rand, 13 * i + 6, 16);
@@ -70,10 +71,12 @@ public class VerifyCodeServlet extends HttpServlet {
 
 	Color getRandColor(int fc, int bc) {
 		Random random = new Random();
-		if (fc > 255)
+		if (fc > 255) {
 			fc = 255;
-		if (bc > 255)
+		}
+		if (bc > 255) {
 			bc = 255;
+		}
 		int r = fc + random.nextInt(bc - fc);
 		int g = fc + random.nextInt(bc - fc);
 		int b = fc + random.nextInt(bc - fc);

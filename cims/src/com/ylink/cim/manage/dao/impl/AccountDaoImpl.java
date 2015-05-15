@@ -16,6 +16,7 @@ import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("accountDao")
 public class AccountDaoImpl extends BaseDaoHibernateImpl implements AccountDao {
 
@@ -45,6 +46,4 @@ public class AccountDaoImpl extends BaseDaoHibernateImpl implements AccountDao {
 		return getList(hql);
 	}
 
-
-	
 }

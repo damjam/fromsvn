@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import flink.util.AbstractState;
-import flink.util.AbstractType;
 import flink.util.ExceptionUtils;
 
 /**

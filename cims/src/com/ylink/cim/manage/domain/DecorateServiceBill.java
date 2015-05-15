@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -11,6 +12,10 @@ public class DecorateServiceBill implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String houseSn;
 	private Double area;
@@ -27,11 +32,9 @@ public class DecorateServiceBill implements java.io.Serializable {
 	private String ownerName;
 	private Double supFee;
 	private String csBillId;
-	
-	
+
 	// Constructors
-	
-	
+
 	public String getCsBillId() {
 		return csBillId;
 	}
@@ -97,7 +100,6 @@ public class DecorateServiceBill implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
 	// Property accessors
 
 	public String getId() {
@@ -171,7 +173,5 @@ public class DecorateServiceBill implements java.io.Serializable {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-
-	
 
 }

@@ -5,15 +5,15 @@ import org.apache.struts.action.ActionForm;
 public class SysDictActionForm extends ActionForm {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String dictValue;
-	
+
 	private String dictType;
-	
+
 	private String dictName;
-	
+
 	private String remark;
-	
+
 	private String display;
 
 	public String getDictValue() {
@@ -55,7 +55,5 @@ public class SysDictActionForm extends ActionForm {
 	public void setDisplay(String display) {
 		this.display = display;
 	}
-	
-	
 
 }

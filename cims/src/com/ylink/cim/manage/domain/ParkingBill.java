@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -32,10 +33,9 @@ public class ParkingBill implements java.io.Serializable {
 	private String chargeUser;
 	private String remark;
 	private String mobile;
-	
+
 	// Constructors
-	
-	
+
 	public String getMobile() {
 		return mobile;
 	}
@@ -184,12 +184,15 @@ public class ParkingBill implements java.io.Serializable {
 	}
 
 	public boolean equals(Object other) {
-		if ((this == other))
+		if ((this == other)) {
 			return true;
-		if ((other == null))
+		}
+		if ((other == null)) {
 			return false;
-		if (!(other instanceof ParkingBill))
+		}
+		if (!(other instanceof ParkingBill)) {
 			return false;
+		}
 		ParkingBill castOther = (ParkingBill) other;
 
 		return ((this.getId() == castOther.getId()) || (this.getId() != null && castOther.getId() != null && this

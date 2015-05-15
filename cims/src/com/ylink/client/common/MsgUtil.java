@@ -2,33 +2,34 @@ package com.ylink.client.common;
 
 public class MsgUtil {
 	public static String addSpaceForString(String str, int len) {
-		if(str.length() <= len) {
+		if (str.length() <= len) {
 			return FILL(str, ' ', len, 'R');
 		} else {
 			throw new IllegalArgumentException("参数长度过长");
 		}
 	}
-	
+
 	public static String addZeroForNum(int num, int len) {
 		return FormatNum(num, len);
 	}
-	
+
 	public static String FormatNum(int num, int len) {
 		String s = String.valueOf(num);
-	    if (s.length() < len) {
-	      s = FILL("0", '0', len - s.length(), 'L') + s;
-	    } else if(s.length() == len) {
-	    	return s;
-	    } else {
-	    	throw new IllegalArgumentException("参数长度过长");
-	    }
-	    return s;
+		if (s.length() < len) {
+			s = FILL("0", '0', len - s.length(), 'L') + s;
+		} else if (s.length() == len) {
+			return s;
+		} else {
+			throw new IllegalArgumentException("参数长度过长");
+		}
+		return s;
 	}
 
 	public static String blank(int n) {
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < n; ++i)
+		for (int i = 0; i < n; ++i) {
 			sb.append(' ');
+		}
 		return sb.toString();
 	}
 

@@ -5,15 +5,15 @@ import org.apache.struts.action.ActionForm;
 public class LimitGroupInfoActionForm extends ActionForm {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private String limitGroupId;
 
 	private String limitGroupName;
 
 	private String userType;
-	
+
 	private String userTypeName;
-	
+
 	private String limitIds[];
 
 	public String getLimitGroupId() {
@@ -60,5 +60,4 @@ public class LimitGroupInfoActionForm extends ActionForm {
 		this.limitIds = limitIds;
 	}
 
-	
 }

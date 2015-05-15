@@ -19,7 +19,7 @@ public class Log4jServlet extends HttpServlet {
 		if (StringUtils.isEmpty(file)) {
 			return;
 		}
-		
+
 		try {
 			Properties ps = new Properties();
 			ps.load(getServletContext().getResourceAsStream(file));

@@ -1,7 +1,5 @@
 package com.ylink.cim.admin.view;
 
-import java.util.Collection;
-
 import org.apache.struts.action.ActionForm;
 
 public class PrivilegeActionForm extends ActionForm {
@@ -25,6 +23,7 @@ public class PrivilegeActionForm extends ActionForm {
 	private String entry;
 	private Long id;
 	private String isEntry;
+
 	public String getIsEntry() {
 		return isEntry;
 	}
@@ -134,6 +133,5 @@ public class PrivilegeActionForm extends ActionForm {
 	public void setParent(java.lang.String parent) {
 		this.parent = parent;
 	}
-	
-	
+
 }

@@ -21,9 +21,9 @@ import flink.util.Paginater;
 import flink.web.BaseDispatchAction;
 
 public class WaterBillAction extends BaseDispatchAction {
-	private WaterBillDao waterBillDao = (WaterBillDao)getService("waterBillDao");
-	private BillService billService = (BillService)getService("billService");
-	
+	private WaterBillDao waterBillDao = (WaterBillDao) getService("waterBillDao");
+	private BillService billService = (BillService) getService("billService");
+
 	public ActionForward charge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		try {
@@ -38,11 +38,12 @@ public class WaterBillAction extends BaseDispatchAction {
 		}
 		return list(mapping, form, request, response);
 	}
+
 	public ActionForward list(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		WaterBillActionForm actionForm = (WaterBillActionForm)form;
+		WaterBillActionForm actionForm = (WaterBillActionForm) form;
 		map.put("startCreateDate", actionForm.getStartCreateDate());
 		map.put("endCreateDate", actionForm.getEndCreateDate());
 		map.put("houseSn", actionForm.getHouseSn());
@@ -51,9 +52,11 @@ public class WaterBillAction extends BaseDispatchAction {
 		map.put("buildingNo", actionForm.getBuildingNo());
 		map.put("year", actionForm.getYear());
 		Paginater paginater = waterBillDao.findWaterBillPager(map, getPager(request));
-		//List<String> houseSns = BoUtils.getProperties(paginater.getList(), "houseSn");
-		//List<String> accounts = accountDao.findAcctByHouseSn(houseSns);
-		//BoUtils.addProperty(paginater.getList(), "houseSn", "balance", accounts, "houseSn", "balance");
+		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),
+		// "houseSn");
+		// List<String> accounts = accountDao.findAcctByHouseSn(houseSns);
+		// BoUtils.addProperty(paginater.getList(), "houseSn", "balance",
+		// accounts, "houseSn", "balance");
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = waterBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);

@@ -1,7 +1,6 @@
 package com.ylink.cim.common.util;
 
 import com.flink.mail.MailConfig;
-import com.flink.mail.MailHelper;
 import com.flink.mail.info.SimpleTextMailInfo;
 
 public class MailUtils {

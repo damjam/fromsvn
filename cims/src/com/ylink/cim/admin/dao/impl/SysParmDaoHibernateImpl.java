@@ -26,7 +26,6 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 
 	}
 
-
 	public SysParm findSysParmById(String id) throws Exception {
 
 		return (SysParm) this.findById(id);
@@ -70,8 +69,6 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 	public boolean hasParm(String code) throws Exception {
 		return this.findById(code) != null;
 	}
-
-	
 
 	public void saveSysParm(SysParm sysParm) throws Exception {
 
@@ -131,6 +128,5 @@ public class SysParmDaoHibernateImpl extends BaseDaoHibernateImpl implements Sys
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 
 }

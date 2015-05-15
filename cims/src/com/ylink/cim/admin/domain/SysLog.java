@@ -31,13 +31,13 @@ public class SysLog implements java.io.Serializable {
 	private Date createTime;
 
 	private String limitName;
-	
+
 	// Constructors
 
 	public String getContentAbbr() {
 		return StringUtils.abbreviate(content, 30);
 	}
-	
+
 	public String getLimitName() {
 		return limitName;
 	}

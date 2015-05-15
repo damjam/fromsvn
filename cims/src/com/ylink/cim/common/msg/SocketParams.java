@@ -1,6 +1,5 @@
 package com.ylink.cim.common.msg;
 
-
 public class SocketParams {
 
 	private String hostName;
@@ -9,9 +8,9 @@ public class SocketParams {
 	private String charset;
 
 	public SocketParams() {
-		
+
 	}
-	
+
 	public SocketParams(String hostName, int portNum, int timeout, String charset) {
 		this.hostName = hostName;
 		this.portNum = portNum;
@@ -50,6 +49,5 @@ public class SocketParams {
 	public void setCharset(String charset) {
 		this.charset = charset;
 	}
-	
 
 }

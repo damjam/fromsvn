@@ -71,7 +71,6 @@ public class SysParm implements java.io.Serializable {
 		return this.remark;
 	}
 
-	
 	public int hashCode() {
 		int result = 17;
 		int code = this.getCode() == null ? 0 : this.getCode().hashCode();

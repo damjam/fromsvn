@@ -16,16 +16,19 @@ public class ExecuteState extends AbstractState {
 	public static final ExecuteState CALL_FAIL = new ExecuteState("µ˜”√ ß∞‹", "2");
 	public static final ExecuteState EXE_SUC = new ExecuteState("√¸¡Ó÷¥––≥…π¶", "3");
 	public static final ExecuteState EXE_FAIL = new ExecuteState("√¸¡Ó÷¥–– ß∞‹", "4");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("executeStates", ExecuteState.ALL.values());
 	}
+
 	public static ExecuteState valueOf(String value) throws Exception {
 		ExecuteState state = ALL.get(value);
-		if(null == state){
+		if (null == state) {
 			ExceptionUtils.logException(ExecuteState.class, "◊¥Ã¨¥ÌŒÛ");
 		}
 		return state;
 	}
+
 	protected ExecuteState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
