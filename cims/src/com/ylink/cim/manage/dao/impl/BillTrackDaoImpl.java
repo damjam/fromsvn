@@ -41,6 +41,9 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		if (MapUtils.getInteger(map, "leftDays") != null && MapUtils.getInteger(map, "leftDays") > 0) {
 			helper.append("and leftDays <= ?", MapUtils.getInteger(map, "leftDays"));
 		}
+		if (MapUtils.getInteger(map, "overDays") != null && MapUtils.getInteger(map, "overDays") > 0) {
+			helper.append("and overDays > ?", MapUtils.getInteger(map, "overDays"));
+		}
 		helper.append("and billType = ?", MapUtils.getString(map, "billType"));
 		helper.append("order by t.overDays desc, t.leftDays");
 		return getPageData(helper, pager);

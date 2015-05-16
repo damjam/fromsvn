@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.common.type.BillType;
+import com.ylink.cim.common.type.ExceedDays;
 import com.ylink.cim.common.type.RemainDays;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.type.UserLogType;
@@ -67,6 +68,7 @@ public class BillTrackAction extends BaseDispatchAction {
 		map.put("ownerCel", actionForm.getOwnerCel());
 		map.put("billType", actionForm.getBillType());
 		map.put("leftDays", actionForm.getLeftDays());
+		map.put("overDays", actionForm.getOverDays());
 		map.put("billType", actionForm.getBillType());
 		map.put("state", BillTrackState.VALID.getValue());
 		Paginater paginater = billTrackDao.findPaginater(map, getPager(request));
@@ -158,5 +160,7 @@ public class BillTrackAction extends BaseDispatchAction {
 		request.setAttribute("floors", floors);
 		BillType.setInReq(request);
 		RemainDays.setInReq(request);
+		ExceedDays.setInReq(request);
+		
 	}
 }
