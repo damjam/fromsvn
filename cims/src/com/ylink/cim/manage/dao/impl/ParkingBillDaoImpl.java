@@ -46,8 +46,8 @@ public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingB
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
 			public int compare(Object o1, Object o2) {
 				try {
-					WaterRecord record1 = (WaterRecord) o1;
-					WaterRecord record2 = (WaterRecord) o2;
+					ParkingBill record1 = (ParkingBill) o1;
+					ParkingBill record2 = (ParkingBill) o2;
 					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
 					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
 					if (!h1.getOrderSn().equals(h2.getOrderSn())) {

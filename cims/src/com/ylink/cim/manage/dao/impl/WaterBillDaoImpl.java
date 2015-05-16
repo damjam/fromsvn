@@ -36,7 +36,11 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
-		helper.append("order by t.createDate desc");
+		if("houseSn".equals(MapUtils.getString(params, "orderSn"))){
+			helper.append("order by houseSn desc");
+		}else {
+			helper.append("order by t.createDate desc");
+		}
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");

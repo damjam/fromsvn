@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.common.state.BillTrackState;
@@ -34,18 +35,22 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		if (!BranchType.HQ_0000.getValue().equals(map.get("branchNo"))) {
 			helper.append("and t.branchNo = ?", map.get("branchNo"));
 		}*/
-		helper.append("and houseSn = ?", MapUtils.getString(map, "houseSn"));
-		helper.append("and ownerCel = ?", MapUtils.getString(map, "ownerCel"));
-		helper.append("and ownerName = ?", MapUtils.getString(map, "ownerName"));
-		helper.append("and state = ?", MapUtils.getString(map, "state"));
+		helper.append("and t.houseSn like ?", MapUtils.getString(map, "houseSn"), MatchMode.START);
+		helper.append("and t.ownerCel = ?", MapUtils.getString(map, "ownerCel"));
+		helper.append("and t.ownerName = ?", MapUtils.getString(map, "ownerName"));
+		helper.append("and t.state = ?", MapUtils.getString(map, "state"));
 		if (MapUtils.getInteger(map, "leftDays") != null && MapUtils.getInteger(map, "leftDays") > 0) {
-			helper.append("and leftDays <= ?", MapUtils.getInteger(map, "leftDays"));
+			helper.append("and t.leftDays <= ?", MapUtils.getInteger(map, "leftDays"));
 		}
 		if (MapUtils.getInteger(map, "overDays") != null && MapUtils.getInteger(map, "overDays") > 0) {
-			helper.append("and overDays > ?", MapUtils.getInteger(map, "overDays"));
+			helper.append("and t.overDays > ?", MapUtils.getInteger(map, "overDays"));
 		}
-		helper.append("and billType = ?", MapUtils.getString(map, "billType"));
-		helper.append("order by t.overDays desc, t.leftDays");
+		helper.append("and t.billType = ?", MapUtils.getString(map, "billType"));
+		if ("houseSn".equals(MapUtils.getString(map, "orderType"))) {
+			helper.append("order by t.houseSn desc, t.id desc");
+		}else {
+			helper.append("order by t.overDays desc, t.leftDays");
+		}
 		return getPageData(helper, pager);
 	}
 

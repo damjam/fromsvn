@@ -15,7 +15,6 @@ import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.HouseInfo;
-import com.ylink.cim.manage.domain.WaterRecord;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;
@@ -48,8 +47,8 @@ public class CommonServiceBillDaoImpl extends BaseDaoHibernateImpl implements Co
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
 			public int compare(Object o1, Object o2) {
 				try {
-					WaterRecord record1 = (WaterRecord) o1;
-					WaterRecord record2 = (WaterRecord) o2;
+					CommonServiceBill record1 = (CommonServiceBill) o1;
+					CommonServiceBill record2 = (CommonServiceBill) o2;
 					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
 					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
 					if (!h1.getOrderSn().equals(h2.getOrderSn())) {

@@ -123,7 +123,7 @@ public class UserInfoDaoImpl extends BaseDaoHibernateImpl implements UserInfoDao
 	private String getSqlStrForUserPriv(String userId) {
 		String condtion = "";
 		UserInfo userInfo = (UserInfo) findById(userId);
-		if (!userInfo.getUserType().equals(UserType.SUPER_ADMIN.getValue())) {// 不是测试
+		if (!UserType.SUPER_ADMIN.getValue().equals(userInfo.getUserType())) {// 不是测试
 			condtion = "select rp.LIMIT_ID from ROLE_PRIVILEGE rp left join USER_ROLE ur on rp.ROLE_ID = ur.ROLE_ID "
 					+ "where ur.USER_ID='" + userId + "'";
 
