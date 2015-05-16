@@ -53,10 +53,10 @@
 					//alert('没有可发送的手机号码');
 					//return;
 				}
-				if(window.confirm("将发送短信至"+cel+"，确认操作?")){
+				//if(window.confirm("将发送短信至"+cel+"，确认操作?")){
 					var url="/billTrack.do?action=sendNotice&id="+id;
 					gotoUrl(url);  
-				}
+				//}
 			}
 			function generate(){
 				gotoUrl("/billTrack.do?action=generateAll");
@@ -161,7 +161,8 @@
 								<td>${element.noticeTimes}</td> 
 							    <td class="redlink">
 							    	<a href="javascript:discard('${element.id}')" >不再提醒</a>
-							    	<a href="javascript:sendNotice('${element.id}','${element.ownerCel}')" >发送通知</a>
+							    	 
+							    	<a href="javascript:sendNotice('${element.id}','${element.ownerCel}')" >标记通知</a>
 							    </td>
 						    </tr>
 						</logic:iterate>
