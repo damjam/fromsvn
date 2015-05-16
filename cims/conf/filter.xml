@@ -48,6 +48,7 @@
 				<value>/pushMngAction.do?action=getBusiType</value>
 				<value>/noticeMsgAction.do?action=list</value>
 				<value>/waterRecord.do?action=getPreRecord</value>
+				<value>/houseInfo.do?action=generateHouseSn</value>
 			</list>
 		</property>
 	</bean>
