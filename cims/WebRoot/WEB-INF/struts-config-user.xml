@@ -3,7 +3,7 @@
 
 <struts-config>
 	<form-beans>
-		<form-bean name="userInfoActionForm" type="com.ylink.cim.user.view.UserInfoActionForm"></form-bean>
+		<form-bean name="userInfoActionForm" type="com.ylink.cim.admin.view.UserInfoActionForm"></form-bean>
 		<form-bean name="userRoleActionForm" type="com.ylink.cim.admin.view.UserRoleActionForm"></form-bean>
 	</form-beans>
 	
@@ -11,7 +11,7 @@
 		<action path="/userInfoAction"
 			name="userInfoActionForm"
 			attribute="userInfoActionForm"
-			type="com.ylink.cim.user.view.UserInfoAction"
+			type="com.ylink.cim.admin.view.UserInfoAction"
 			parameter="action"
 			scope="request">
 			<forward name="toListPage" path="/pages/admin/privilege/userInfoList.jsp"/>
