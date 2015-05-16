@@ -26,6 +26,14 @@ public class BillTrackActionForm extends ActionForm {
 	private String billId;
 	private String branchNo;
 	private Double billAmount;
+	private String orderType;
+	
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
 	public String getId() {
 		return id;
 	}

@@ -29,8 +29,15 @@ public class WaterBillActionForm extends ActionForm{
 	private String remark;
 	private String buildingNo;
 	private String year;
+	private String orderSn;
 	
 	
+	public String getOrderSn() {
+		return orderSn;
+	}
+	public void setOrderSn(String orderSn) {
+		this.orderSn = orderSn;
+	}
 	public String getYear() {
 		return year;
 	}

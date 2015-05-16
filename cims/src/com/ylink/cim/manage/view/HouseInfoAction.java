@@ -27,7 +27,7 @@ public class HouseInfoAction extends BaseDispatchAction {
 	public ActionForward toAdd(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		initSelect(request);
-		houseInfoService.test();
+		//houseInfoService.test();
 		return forward("/pages/manage/house/houseInfoAdd.jsp");
 	}
 	
@@ -99,5 +99,15 @@ public class HouseInfoAction extends BaseDispatchAction {
 		request.setAttribute("unitNos", unitsNos);
 		request.setAttribute("buildingNos", buildingNos);
 		request.setAttribute("floors", floors);
+	}
+	public ActionForward generateOrderSn(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			houseInfoService.test();
+			setResult(true, "操作成功", request);
+		} catch (Exception e) {
+			setResult(true, "操作失败", request);
+		}
+		return list(mapping, form, request, response);
 	}
 }

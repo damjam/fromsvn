@@ -51,6 +51,7 @@ public class WaterBillAction extends BaseDispatchAction {
 		map.put("id", actionForm.getId());
 		map.put("buildingNo", actionForm.getBuildingNo());
 		map.put("year", actionForm.getYear());
+		map.put("orderSn", actionForm.getOrderSn());
 		Paginater paginater = waterBillDao.findWaterBillPager(map, getPager(request));
 		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),
 		// "houseSn");

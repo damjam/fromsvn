@@ -71,6 +71,7 @@ public class BillTrackAction extends BaseDispatchAction {
 		map.put("overDays", actionForm.getOverDays());
 		map.put("billType", actionForm.getBillType());
 		map.put("state", BillTrackState.VALID.getValue());
+		map.put("orderType", actionForm.getOrderType());
 		Paginater paginater = billTrackDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
