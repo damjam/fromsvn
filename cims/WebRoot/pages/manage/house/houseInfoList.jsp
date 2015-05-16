@@ -42,7 +42,9 @@
 					gotoUrl('/houseInfo.do?action=delete&id='+id);
 				}
 			}
-			
+			function generate(){
+				gotoUrl('/houseInfo.do?action=generateHouseSn');
+			}
 		</script> 
 	</head>
 	<body>
@@ -98,6 +100,9 @@
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>
+								<c:if test="${sessionScope.SESSION_USER.userType eq 'superUser'}">
+									<input type="button" value="生成排序编号" id="" onclick="generate()"/>&nbsp;
+								</c:if>
 							</td>
 						</tr>
 					</table>

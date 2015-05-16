@@ -96,6 +96,15 @@
 						</tr>
 						<tr>
 							<td class="formlabel">
+								账单类型
+							</td>
+							<td>
+								<html:select property="billType" style="width:166px">
+									<html:option value="">---全部---</html:option>
+									<html:options collection="billTypes" property="value" labelProperty="name" />
+								</html:select>
+							</td>
+							<td class="formlabel">
 								到期天数
 							</td>
 							<td>
@@ -105,14 +114,25 @@
 								</html:select>
 							</td>
 							<td class="formlabel">
-								账单类型
+								超期天数
 							</td>
 							<td>
-								<html:select property="billType" style="width:166px">
+								<html:select property="overDays" style="width:166px">
 									<html:option value="">---全部---</html:option>
-									<html:options collection="billTypes" property="value" labelProperty="name" />
+									<html:options collection="exceedDays" property="value" labelProperty="name" />
 								</html:select>
-							</td>	
+							</td>
+						</tr>
+						<tr>
+							<td class="formlabel">
+								排序方式
+							</td>
+							<td>
+								<html:select property="orderType">
+									<html:option value="id">默认排序</html:option>
+									<html:option value="houseSn">房屋编号</html:option>
+								</html:select>
+							</td>
 						</tr>	
 						<tr>
 						    <td></td>

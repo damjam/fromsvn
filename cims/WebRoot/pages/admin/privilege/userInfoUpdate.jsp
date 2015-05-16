@@ -64,6 +64,15 @@
 						    	<span class="field_tipinfo">中文字、英文字母、数字和下划线</span>
 						    </td>
 					   </tr>
+					   <tr>
+					    	<td class="formlabel nes">用户类型</td>
+						     <td>
+								<html:select property="userType" styleClass="{required:true}" >
+									<html:options collection="userTypes" labelProperty="value" property="key"  />
+								</html:select>
+								<span class="field_tipinfo">不能为空</span>
+							</td>
+					   </tr>
 					   </table>
 					     <div class="btnbox">
 								 <input type="submit" id="btnSumit" value="提交"/>
