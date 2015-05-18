@@ -14,6 +14,9 @@ public class OrderSnGenerator {
 		if (position.length() == 3) {
 			position = "0"+position;
 		}
+		if (unitNo.length() == 1) {
+			position = "0"+position;
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(buildNo);
 		sb.append(unitNo);
