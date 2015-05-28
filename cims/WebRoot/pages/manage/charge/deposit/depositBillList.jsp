@@ -47,7 +47,7 @@
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/depositBill.do?action=deleteBill&id='+id);
+				gotoUrl('/depositBill.do?action=deleteDepositBill&id='+id);
 			}
 			function refund(id){
 				if(!window.confirm("确认退款?")){
