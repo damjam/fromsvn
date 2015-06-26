@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.manage.dao.ChargeParamItemDao;
 import com.ylink.cim.manage.domain.ChargeParamItem;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("chargeParamItemDao")
-public class ChargeParamItemDaoImpl extends BaseDaoHibernateImpl implements ChargeParamItemDao {
+public class ChargeParamItemDaoImpl extends BaseDaoImpl implements ChargeParamItemDao {
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();

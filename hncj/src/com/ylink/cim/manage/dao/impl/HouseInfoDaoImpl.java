@@ -11,13 +11,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.HouseInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("houseInfoDao")
-public class HouseInfoDaoImpl extends BaseDaoHibernateImpl implements HouseInfoDao {
+public class HouseInfoDaoImpl extends BaseDaoImpl implements HouseInfoDao {
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from HouseInfo t where 1=1");

@@ -10,13 +10,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.domain.AdrentBill;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("adrentBillDao")
-public class AdrentBillDaoImpl extends BaseDaoHibernateImpl implements AdrentBillDao {
+public class AdrentBillDaoImpl extends BaseDaoImpl implements AdrentBillDao {
 
 	@Override
 	protected Class getModelClass() {

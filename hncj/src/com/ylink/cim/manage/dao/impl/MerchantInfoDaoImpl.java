@@ -11,12 +11,12 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.domain.MerchantInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("merchantInfoDao")
-public class MerchantInfoDaoImpl extends BaseDaoHibernateImpl implements MerchantInfoDao {
+public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao {
 
 	@Override
 	protected Class getModelClass() {

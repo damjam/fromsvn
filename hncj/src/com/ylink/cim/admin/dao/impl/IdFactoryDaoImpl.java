@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.IdFactoryDao;
 import com.ylink.cim.admin.domain.IdFactory;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 
 @Component("idFactoryDao")
-public class IdFactoryDaoImpl extends BaseDaoHibernateImpl implements IdFactoryDao {
+public class IdFactoryDaoImpl extends BaseDaoImpl implements IdFactoryDao {
 
 	public void deleteIdFactory(String seqIdName) {
 		super.deleteById(seqIdName);

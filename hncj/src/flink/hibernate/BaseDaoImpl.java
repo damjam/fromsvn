@@ -26,7 +26,7 @@ import flink.util.Paginater;
  *
  */
 @SuppressWarnings("unchecked")
-public abstract class BaseDaoHibernateImpl extends RootDao implements BaseDao {
+public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	/**
 	 * for override.
 	 * 

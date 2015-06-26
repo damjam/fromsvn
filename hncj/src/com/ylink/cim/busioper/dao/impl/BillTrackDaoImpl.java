@@ -12,14 +12,14 @@ import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.domain.BillTrack;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("billTrackDao")
-public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackDao {
+public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();

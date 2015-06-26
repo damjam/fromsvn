@@ -10,11 +10,11 @@ import com.ylink.cim.admin.domain.LimitGroup;
 import com.ylink.cim.admin.domain.LimitGroupInfo;
 import com.ylink.cim.admin.domain.Privilege;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("limitGroupDao")
-public class LimitGroupDaoImpl extends BaseDaoHibernateImpl implements LimitGroupDao {
+public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 
 	private List<LimitGroup> convert(List list) {
 

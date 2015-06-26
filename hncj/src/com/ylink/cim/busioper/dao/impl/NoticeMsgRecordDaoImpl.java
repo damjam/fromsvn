@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.busioper.dao.NoticeMsgRecordDao;
 import com.ylink.cim.busioper.domain.NoticeMsgRecord;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("noticeMsgRecordDao")
-public class NoticeMsgRecordDaoImpl extends BaseDaoHibernateImpl implements NoticeMsgRecordDao {
+public class NoticeMsgRecordDaoImpl extends BaseDaoImpl implements NoticeMsgRecordDao {
 
 	
 	public List<NoticeMsgRecord> findByParams(Map<String, Object> map) {

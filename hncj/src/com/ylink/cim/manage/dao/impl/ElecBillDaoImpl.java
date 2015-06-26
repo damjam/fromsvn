@@ -18,14 +18,14 @@ import com.ylink.cim.manage.domain.AccountDetail;
 import com.ylink.cim.manage.domain.ElecBill;
 import com.ylink.cim.manage.domain.HouseInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 
 @Repository("elecBillDao")
-public class ElecBillDaoImpl extends BaseDaoHibernateImpl implements ElecBillDao {
+public class ElecBillDaoImpl extends BaseDaoImpl implements ElecBillDao {
 	public Paginater findBillPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecBill t where 1=1");

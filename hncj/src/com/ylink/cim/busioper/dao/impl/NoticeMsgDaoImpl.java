@@ -10,14 +10,14 @@ import com.ylink.cim.busioper.dao.NoticeMsgDao;
 import com.ylink.cim.busioper.domain.NoticeMsg;
 import com.ylink.cim.common.type.BranchType;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("noticeMsgDao")
-public class NoticeMsgDaoImpl extends BaseDaoHibernateImpl implements NoticeMsgDao {
+public class NoticeMsgDaoImpl extends BaseDaoImpl implements NoticeMsgDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();

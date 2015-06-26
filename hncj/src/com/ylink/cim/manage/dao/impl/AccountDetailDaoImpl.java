@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 import com.ylink.cim.manage.dao.AccountDetailDao;
 import com.ylink.cim.manage.domain.AccountDetail;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("accountDetailDao")
-public class AccountDetailDaoImpl extends BaseDaoHibernateImpl implements AccountDetailDao {
+public class AccountDetailDaoImpl extends BaseDaoImpl implements AccountDetailDao {
 
 	private void addYearFilter(QueryHelper helper, String year) {
 		if (!StringUtils.isBlank(year)) {

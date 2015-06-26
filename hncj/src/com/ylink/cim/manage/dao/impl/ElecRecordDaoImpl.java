@@ -15,14 +15,14 @@ import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.ElecRecord;
 import com.ylink.cim.manage.domain.HouseInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("elecRecordDao")
-public class ElecRecordDaoImpl extends BaseDaoHibernateImpl implements ElecRecordDao{
+public class ElecRecordDaoImpl extends BaseDaoImpl implements ElecRecordDao{
 	protected static List getOrderedList(List list) {
 		return list;
 	}

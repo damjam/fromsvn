@@ -13,11 +13,11 @@ import com.ylink.cim.invest.dao.ServiceRecordDao;
 import com.ylink.cim.invest.domain.ServiceRecord;
 import com.ylink.cim.invest.domain.SignContract;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 @Component("serviceRecordDao")
-public class ServiceRecordDaoImpl extends BaseDaoHibernateImpl implements ServiceRecordDao {
+public class ServiceRecordDaoImpl extends BaseDaoImpl implements ServiceRecordDao {
 
 	
 	protected Class getModelClass() {

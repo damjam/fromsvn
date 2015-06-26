@@ -9,11 +9,11 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.invest.dao.SignContractDao;
 import com.ylink.cim.invest.domain.SignContract;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("signContractDao")
-public class SignContractDaoImpl extends BaseDaoHibernateImpl implements SignContractDao{
+public class SignContractDaoImpl extends BaseDaoImpl implements SignContractDao{
 
 	public String[] findAcctByCust(Map<String, Object> params){
 		List<SignContract> list = findByParams(params);

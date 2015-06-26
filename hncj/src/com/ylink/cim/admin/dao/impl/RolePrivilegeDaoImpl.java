@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.RolePrivilegeDao;
 import com.ylink.cim.admin.domain.RolePrivilege;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("rolePrivilegeDao")
-public class RolePrivilegeDaoImpl extends BaseDaoHibernateImpl implements RolePrivilegeDao {
+public class RolePrivilegeDaoImpl extends BaseDaoImpl implements RolePrivilegeDao {
 
 	public List<RolePrivilege> getRolePrivilegeByRoleId(String roleId) {
 

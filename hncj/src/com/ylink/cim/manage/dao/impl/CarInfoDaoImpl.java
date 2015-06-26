@@ -11,13 +11,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("carInfoDao")
-public class CarInfoDaoImpl extends BaseDaoHibernateImpl implements CarInfoDao {
+public class CarInfoDaoImpl extends BaseDaoImpl implements CarInfoDao {
 
 	public List<CarInfo> findList(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();

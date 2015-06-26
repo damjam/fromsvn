@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("timerDoDao")
-public class TimerDoDaoImpl extends BaseDaoHibernateImpl implements TimerDoDao {
+public class TimerDoDaoImpl extends BaseDaoImpl implements TimerDoDao {
 
 	public List<TimerDo> getAllCanExcuteCommand(String sTriggerDate, String sCurrentTime) {
 		QueryHelper helper = new QueryHelper();

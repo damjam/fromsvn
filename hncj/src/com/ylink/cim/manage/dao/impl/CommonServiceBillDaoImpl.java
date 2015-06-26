@@ -14,13 +14,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
 import com.ylink.cim.manage.domain.CommonServiceBill;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("commonServiceBillDao")
-public class CommonServiceBillDaoImpl extends BaseDaoHibernateImpl implements CommonServiceBillDao{
+public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServiceBillDao{
 	public Paginater findPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from CommonServiceBill t where 1=1");

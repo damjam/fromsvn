@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.busioper.dao.PushRecordDao;
 import com.ylink.cim.busioper.domain.PushRecord;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("pushRecordDao")
-public class PushRecordDaoImpl extends BaseDaoHibernateImpl implements PushRecordDao {
+public class PushRecordDaoImpl extends BaseDaoImpl implements PushRecordDao {
 
 	public List<PushRecord> findByParams(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();

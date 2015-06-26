@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.SysLogDao;
 import com.ylink.cim.admin.domain.SysLog;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
@@ -17,7 +17,7 @@ import flink.util.Paginater;
  * 
  */
 @Component("sysLogDao")
-public class SysLogDaoImpl extends BaseDaoHibernateImpl implements SysLogDao {
+public class SysLogDaoImpl extends BaseDaoImpl implements SysLogDao {
 
 	
 	protected Class getModelClass() {

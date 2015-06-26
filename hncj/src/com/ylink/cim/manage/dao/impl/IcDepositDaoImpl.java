@@ -15,14 +15,14 @@ import com.ylink.cim.common.type.IcCardType;
 import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.domain.IcDeposit;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("icDepositDao")
-public class IcDepositDaoImpl extends BaseDaoHibernateImpl implements IcDepositDao {
+public class IcDepositDaoImpl extends BaseDaoImpl implements IcDepositDao {
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from IcDeposit t where 1=1");

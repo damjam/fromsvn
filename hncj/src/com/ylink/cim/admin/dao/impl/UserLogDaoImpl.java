@@ -8,13 +8,13 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.common.type.BranchType;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("userLogDao")
-public class UserLogDaoImpl extends BaseDaoHibernateImpl implements UserLogDao {
+public class UserLogDaoImpl extends BaseDaoImpl implements UserLogDao {
 	protected Class getModelClass() {
 		return UserLog.class;
 	}

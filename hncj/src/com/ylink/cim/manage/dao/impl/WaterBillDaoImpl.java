@@ -18,13 +18,13 @@ import com.ylink.cim.manage.domain.AccountDetail;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.WaterBill;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("waterBillDao")
-public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillDao{
+public class WaterBillDaoImpl extends BaseDaoImpl implements WaterBillDao{
 	private void addYearFilter(QueryHelper helper, String year) {
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);

@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.BranchParmDao;
 import com.ylink.cim.admin.domain.BranchParm;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("branchParmDao")
-public class BranchParmDaoImpl extends BaseDaoHibernateImpl implements BranchParmDao {
+public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 
 	public void deleteBranchParmById(String id) throws Exception {
 

@@ -12,13 +12,13 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.SysParmDao;
 import com.ylink.cim.admin.domain.SysParm;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("sysParmDao")
-public class SysParmDaoImpl extends BaseDaoHibernateImpl implements SysParmDao {
+public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 
 	public void deleteSysParmById(String id) throws Exception {
 

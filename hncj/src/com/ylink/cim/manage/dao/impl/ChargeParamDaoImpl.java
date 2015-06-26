@@ -12,13 +12,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ChargeParamDao;
 import com.ylink.cim.manage.domain.ChargeParam;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("chargeParamDao")
-public class ChargeParamDaoImpl extends BaseDaoHibernateImpl implements ChargeParamDao {
+public class ChargeParamDaoImpl extends BaseDaoImpl implements ChargeParamDao {
 
 	public List<ChargeParam> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();

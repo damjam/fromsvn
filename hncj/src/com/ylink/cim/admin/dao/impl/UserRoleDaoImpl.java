@@ -12,14 +12,14 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserRole;
 import com.ylink.cim.admin.domain.UserRoleId;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.HqlHelper;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("userRoleDao")
-public class UserRoleDaoImpl extends BaseDaoHibernateImpl implements UserRoleDao {
+public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 
 	private void assignRoleInfoValue(RoleInfo roleInfo, Object[] objects) {
 

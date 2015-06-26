@@ -12,12 +12,12 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ParkingBillDao;
 import com.ylink.cim.manage.domain.ParkingBill;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("parkingBillDao")
-public class ParkingBillDaoImpl extends BaseDaoHibernateImpl implements ParkingBillDao{
+public class ParkingBillDaoImpl extends BaseDaoImpl implements ParkingBillDao{
 
 	private void addYearFilter(QueryHelper helper, String year) {
 		if (!StringUtils.isBlank(year)) {

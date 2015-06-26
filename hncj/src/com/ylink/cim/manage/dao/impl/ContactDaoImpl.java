@@ -10,12 +10,12 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ContactDao;
 import com.ylink.cim.manage.domain.Contact;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("contactDao")
-public class ContactDaoImpl extends BaseDaoHibernateImpl implements ContactDao {
+public class ContactDaoImpl extends BaseDaoImpl implements ContactDao {
 
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();

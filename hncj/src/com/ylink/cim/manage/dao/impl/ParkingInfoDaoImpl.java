@@ -11,13 +11,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ParkingInfoDao;
 import com.ylink.cim.manage.domain.ParkingInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("parkingInfoDao")
-public class ParkingInfoDaoImpl extends BaseDaoHibernateImpl implements ParkingInfoDao {
+public class ParkingInfoDaoImpl extends BaseDaoImpl implements ParkingInfoDao {
 
 	@Override
 	protected Class getModelClass() {

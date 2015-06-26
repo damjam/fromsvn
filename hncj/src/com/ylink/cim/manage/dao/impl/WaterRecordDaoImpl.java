@@ -15,14 +15,14 @@ import com.ylink.cim.manage.dao.WaterRecordDao;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.WaterRecord;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("waterRecordDao")
-public class WaterRecordDaoImpl extends BaseDaoHibernateImpl implements WaterRecordDao{
+public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 	protected static List getOrderedList(List list) {
 		
 		return list;

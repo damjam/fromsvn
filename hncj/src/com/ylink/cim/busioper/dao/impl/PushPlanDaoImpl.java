@@ -10,13 +10,13 @@ import com.ylink.cim.busioper.dao.PushPlanDao;
 import com.ylink.cim.busioper.domain.PushPlan;
 import com.ylink.cim.common.type.BranchType;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Component("pushPlanDao")
-public class PushPlanDaoImpl extends BaseDaoHibernateImpl implements PushPlanDao {
+public class PushPlanDaoImpl extends BaseDaoImpl implements PushPlanDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();

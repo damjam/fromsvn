@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.dao.SysDictDao;
 import com.ylink.cim.admin.domain.SysDict;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("sysDictDao")
-public class SysDictDaoImpl extends BaseDaoHibernateImpl implements SysDictDao {
+public class SysDictDaoImpl extends BaseDaoImpl implements SysDictDao {
 
 	protected Class getModelClass() {
 

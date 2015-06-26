@@ -15,7 +15,7 @@ import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.manage.dao.AccountJournalDao;
 import com.ylink.cim.manage.domain.AccountJournal;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.AmountUtils;
 import flink.util.DateUtil;
@@ -23,7 +23,7 @@ import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("accountJournalDao")
-public class AccountJournalDaoImpl extends BaseDaoHibernateImpl implements AccountJournalDao {
+public class AccountJournalDaoImpl extends BaseDaoImpl implements AccountJournalDao {
 
 	public List<Map<String, Object>> findGatherInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();

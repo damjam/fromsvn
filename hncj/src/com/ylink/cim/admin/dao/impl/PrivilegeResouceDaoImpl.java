@@ -7,12 +7,12 @@ import com.ylink.cim.admin.dao.PrivilegeResourceDao;
 import com.ylink.cim.admin.domain.PrivilegeResource;
 
 import flink.etc.Symbol;
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Component("privilegeResourceDao")
-public class PrivilegeResouceDaoImpl extends BaseDaoHibernateImpl 
+public class PrivilegeResouceDaoImpl extends BaseDaoImpl 
 	implements PrivilegeResourceDao {
 
 	

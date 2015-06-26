@@ -14,13 +14,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.domain.Account;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("accountDao")
-public class AccountDaoImpl extends BaseDaoHibernateImpl implements AccountDao {
+public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
 	@Override
 	protected Class getModelClass() {

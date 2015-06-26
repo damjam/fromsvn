@@ -12,13 +12,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("decorateServiceBillDao")
-public class DecorateServiceBillDaoImpl extends BaseDaoHibernateImpl implements DecorateServiceBillDao{
+public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateServiceBillDao{
 	public Paginater findPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from DecorateServiceBill t where 1=1");

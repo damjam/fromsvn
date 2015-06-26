@@ -14,7 +14,7 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.type.UserType;
 import com.ylink.cim.common.util.ParaManager;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.IPrivilege;
 import flink.util.Pager;
@@ -38,7 +38,7 @@ import flink.util.WebResource;
  * @version 1.0
  */
 @Component("userInfoDao")
-public class UserInfoDaoImpl extends BaseDaoHibernateImpl implements UserInfoDao {
+public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	
 	
 	public UserInfo getUserInfoByLoginId(String loginId) {

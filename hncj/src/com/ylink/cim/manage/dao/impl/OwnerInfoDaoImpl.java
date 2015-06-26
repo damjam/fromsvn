@@ -14,12 +14,12 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.domain.OwnerInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("ownerInfoDao")
-public class OwnerInfoDaoImpl extends BaseDaoHibernateImpl implements OwnerInfoDao{
+public class OwnerInfoDaoImpl extends BaseDaoImpl implements OwnerInfoDao{
 	public Paginater findPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from OwnerInfo t where 1=1");

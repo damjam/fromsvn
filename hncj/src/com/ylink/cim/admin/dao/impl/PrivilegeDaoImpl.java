@@ -14,16 +14,16 @@ import com.ylink.cim.admin.domain.PrivilegeResource;
 import com.ylink.cim.admin.domain.PrivilegeTreeNode;
 
 import flink.etc.BizException;
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("privilegeDao")
-public class PrivilegeDaoImpl extends BaseDaoHibernateImpl implements PrivilegeDao {
+public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 
 	/**
-	 * @see flink.hibernate.BaseDaoHibernateImpl#getModelClass()
+	 * @see flink.hibernate.BaseDaoImpl#getModelClass()
 	 */
 
 	protected Class<Privilege> getModelClass() {

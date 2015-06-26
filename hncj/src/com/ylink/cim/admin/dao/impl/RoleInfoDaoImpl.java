@@ -10,13 +10,13 @@ import com.ylink.cim.admin.dao.RoleInfoDao;
 import com.ylink.cim.admin.domain.LimitGroupInfo;
 import com.ylink.cim.admin.domain.RoleInfo;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("roleInfoDao")
-public class RoleInfoDaoImpl extends BaseDaoHibernateImpl implements RoleInfoDao {
+public class RoleInfoDaoImpl extends BaseDaoImpl implements RoleInfoDao {
 
 	private List<RoleInfo> convert(List data) {
 

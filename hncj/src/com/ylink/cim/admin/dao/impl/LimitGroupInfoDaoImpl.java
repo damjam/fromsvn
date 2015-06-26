@@ -11,12 +11,12 @@ import com.ylink.cim.admin.domain.LimitGroupInfo;
 import com.ylink.cim.admin.domain.SysDict;
 import com.ylink.cim.common.type.SysDictType;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Component("limitGroupInfoDao")
-public class LimitGroupInfoDaoImpl extends BaseDaoHibernateImpl implements LimitGroupInfoDao {
+public class LimitGroupInfoDaoImpl extends BaseDaoImpl implements LimitGroupInfoDao {
 
 	
 	private List<LimitGroupInfo> convertToGroupInfo(List data) {

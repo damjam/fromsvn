@@ -11,13 +11,13 @@ import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.ChargeItemDao;
 import com.ylink.cim.manage.domain.ChargeItem;
 
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("chargeItemDao")
-public class ChargeItemDaoImpl extends BaseDaoHibernateImpl implements ChargeItemDao {
+public class ChargeItemDaoImpl extends BaseDaoImpl implements ChargeItemDao {
 
 	public List<ChargeItem> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();

@@ -15,12 +15,12 @@ import com.ylink.cim.cust.dao.CustInfoDao;
 import com.ylink.cim.cust.domain.CustInfo;
 
 import flink.etc.Symbol;
-import flink.hibernate.BaseDaoHibernateImpl;
+import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("custInfoDao")
-public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao{
+public class CustInfoDaoImpl extends BaseDaoImpl implements CustInfoDao{
 	/* (non-Javadoc)
 	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#findByParams(java.util.Map)
 	 */
