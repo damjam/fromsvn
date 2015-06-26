@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -48,7 +48,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("��ѡ����Ҫ��·��ģ��");
+						alert("请选择需要的路由模板");
 						return false;
 					}
 					
@@ -85,7 +85,7 @@
 						<table width="100%">
 							<tr>
 								<td align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">·��ģ��ѡ��</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">路由模板选择</span>
 								</td>
 							</tr>
 						</table>
@@ -94,13 +94,13 @@
 							cellpadding="0">
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									ģ����
+									模板编号
 								</td>
 								<td  height="30">
 									<html:text   styleClass="width: 260px;" property="tempId"   />
 								</td>
 								<td height="30" align="right">
-									ģ������
+									模板名称
 								</td>
 								<td height="30">
 									<html:text  style="width: 260px;" property="tempName"/>
@@ -113,8 +113,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="��ѯ" />
-									<input onclick="FormUtils.reset('query');" style="margin-left: 30px;" type="button" value="���" />
+									<input type="submit" value="查询" />
+									<input onclick="FormUtils.reset('query');" style="margin-left: 30px;" type="button" value="清除" />
 								</td>
 							</tr>
 						</table>
@@ -126,19 +126,19 @@
 				</div>
 			</div>
 			</html:form>
-			<!-- �����б��� -->
+			<!-- 数据列表区 -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								��ѡ��
+								请选择
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ģ����
+								模板编号
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ģ������
+								模板名称
 							</th>
 						</tr>
 					</thead>
@@ -148,7 +148,7 @@
 						<c:if test="${empty tradeRouteTemplateList}">
 							<tr>
 								<td colspan="10">
-									û������
+									没有数据
 								</td>
 							</tr>
 						</c:if>
@@ -180,9 +180,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="ȷ��" id="selTradeRouteTemplate"/>
-					<input style="margin-left: 30px;" type="submit" value="���" id="clearTradeRouteTemplate"/>
-					<input style="margin-left: 30px;" type="button" value="�ر�" id="winClose"/>
+					<input type="submit" value="确定" id="selTradeRouteTemplate"/>
+					<input style="margin-left: 30px;" type="submit" value="清除" id="clearTradeRouteTemplate"/>
+					<input style="margin-left: 30px;" type="button" value="关闭" id="winClose"/>
 				</td>
 			</tr>
 		</table>

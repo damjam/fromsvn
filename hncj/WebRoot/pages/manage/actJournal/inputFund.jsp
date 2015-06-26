@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -48,7 +44,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(curnum < prenum){
-						alert('±¾ÆÚ¶ÁÊı²»ÄÜĞ¡ÓÚÉÏÆÚ¶ÁÊı');
+						alert('æœ¬æœŸè¯»æ•°ä¸èƒ½å°äºä¸ŠæœŸè¯»æ•°');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -71,23 +67,23 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">½»Ò×ÀàĞÍ</td>
+						    <td class="formlabel nes">äº¤æ˜“ç±»å‹</td>
 						    <td>
 						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="06">ÄÚ²¿³äÖµ</html:option>
-						    		<html:option value="09">ÆäËû</html:option>
+						    		<html:option value="06">å†…éƒ¨å……å€¼</html:option>
+						    		<html:option value="09">å…¶ä»–</html:option>
 						    	</html:select>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÊÕÈë½ğ¶î</td>
+						    <td class="formlabel nes">æ”¶å…¥é‡‘é¢</td>
 						    <td>
 						    	<html:text property="amount" styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">ÇëÌîĞ´ÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·å¡«å†™æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					  <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    	<html:text property="remark" styleId="remark" maxlength="50"/>
 						    	<span class="field_tipinfo"></span>
@@ -95,8 +91,8 @@
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/accountJournal.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/accountJournal.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -106,7 +102,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

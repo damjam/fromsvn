@@ -1,22 +1,18 @@
-<!-- 
-  @ temp page.
-  @ author aps-mhc
-  @ since 2006-12-25
-//-->
-<%@ page contentType="text/html; charset=GBK" language="java" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
-<% response.setHeader("Cache-Control", "no-cache"); %>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<title>操作失败</title>
+		<title>鎿嶄綔澶辫触</title>
+		<%@ include file="/pages/common/sys.jsp"%>
 	</head>
 	
 	<body>
 		<div style="text-align: center; margin: 20px">
-			<html:img page="/images/error.gif" />
+			<img alt="" src="${CONTEXT_PATH }/images/error.gif">
 		</div>
 		
-		<div style="text-align: center">没有该项权限</div>
+		<div style="text-align: center">娌℃湁璇ラ」鏉冮檺</div>
 	</body>
 </html>

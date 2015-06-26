@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -50,7 +50,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄÇþµÀÕË»§");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„æ¸ é“è´¦æˆ·");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -82,7 +82,7 @@
 					  } 
 			}  
 	 	</script>
-	 	<title>ÇþµÀÕË»§Ñ¡Ôñ</title>
+	 	<title>æ¸ é“è´¦æˆ·é€‰æ‹©</title>
 	 	
 	</head>
 
@@ -100,7 +100,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÇþµÀÕË»§Ñ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">æ¸ é“è´¦æˆ·é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -109,13 +109,13 @@
 							cellpadding="0">
 							<tr>
 								<td  height="30" align="right">
-									ÒøÐÐÐÐºÅ
+									é“¶è¡Œè¡Œå·
 								</td>
 								<td width="270" height="30">
 									<input type="text" class="userbox_bt"  name="bankNo" id="bankNo"  value="${channelAccount.bankNo }"/>
 								</td>
 								<td  height="30" align="right">
-									ÕËºÅ
+									è´¦å·
 								</td>
 								<td height="30">
 									<input class="userbox_bt"  name="accountNo" type="text" id="accountNo"  value="${channelAccount.accountNo }" />
@@ -123,7 +123,7 @@
 							</tr>
 							<tr>
 								<td  height="30" align="right">
-									ÕËºÅÃû³Æ
+									è´¦å·åç§°
 								</td>
 								<td width="270" height="30">
 									<input type="text" class="userbox_bt"  name="accountName" id="accountName"  value="${channelAccount.accountName }"/>
@@ -136,8 +136,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input style="margin-left: 30px;" type="reset" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input style="margin-left: 30px;" type="reset" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -151,7 +151,7 @@
 		</form>
 		
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr></tr>
@@ -160,16 +160,16 @@
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÒøÐÐÐÐºÅ
+							é“¶è¡Œè¡Œå·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							½áËãÕËºÅ
+							ç»“ç®—è´¦å·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							½áËãÕË»§Ãû³Æ
+							ç»“ç®—è´¦æˆ·åç§°
 						</th>
 					</tr>
 				</thead>
@@ -179,7 +179,7 @@
 					<c:if test="${empty channelAccountList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -210,9 +210,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="submit" value="È·¶¨" id="selChannelAccountId"/>
-						<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearChannelAccountId"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input type="submit" value="ç¡®å®š" id="selChannelAccountId"/>
+						<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearChannelAccountId"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>

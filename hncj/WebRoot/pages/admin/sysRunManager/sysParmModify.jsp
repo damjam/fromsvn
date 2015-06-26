@@ -1,19 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">  
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<html lang="zh-cn">  
+<%@ include file="/pages/common/taglibs.jsp" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 
 
 <%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
 
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ut-8" />
         <%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 
@@ -24,11 +19,6 @@
 		<f:js src="/js/plugin/jquery.metadata.js"/>
 		<f:js src="/js/common.js"/>
 		<f:css href="/css/page.css" />
-		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 		
 			$(function(){
@@ -36,7 +26,6 @@
 				
 				$('#btnReturn').click(function(){
 					window.location.href=CONTEXT_PATH+"/sysParmManage.do?action=query";
-						 
 				});
 					
 			});
@@ -45,8 +34,8 @@
 <body>
 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-	<form id="query" action="${CONTEXT_PATH}/sysParmManage.do?action=saveUpdate" method="post" class="validate">
-		<!-- ÓÃ»§×ÊÁÏĞŞ¸ÄÇø -->
+	<form id="query" action="sysParmManage.do?action=saveUpdate" method="post" class="validate">
+		<!-- ç”¨æˆ·èµ„æ–™ä¿®æ”¹åŒº -->
 			<div class="userbox">
 				<div>
 					<b class="b1"></b>
@@ -55,40 +44,39 @@
 					<b class="b4"></b>
 						<div class="contentb">
 							<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
-							  <caption>${ACT.name}ĞŞ¸Ä</caption>	
+							  <caption>${ACT.name}ä¿®æ”¹</caption>	
 							  <tr>
-							    <td class="formlabel nes">²ÎÊı±àÂë</td>
+							    <td class="formlabel nes">å‚æ•°ç¼–ç </td>
 							    <td>
-							    	<input class="{required:true,maxlength:6} readonly" disabled="disabled"  name="code" type="text" value="${sysParm.code}"  />
-							    	<span class="field_tipinfo">1-6Î»×Ö·û£¬°üÀ¨×ÖÄ¸ºÍÊı×Ö</span>
-							    	<html:hidden property="code"   value="${sysParm.code}"/>
+							    	<s:textfield class="{required:true,maxlength:6} readonly" name="code"/>
+							    	<span class="field_tipinfo">1-6ä½å­—ç¬¦ï¼ŒåŒ…æ‹¬å­—æ¯å’Œæ•°å­—</span>
 							    </td>
 							    </tr>
 							   <tr>
-							    <td class="formlabel nes">²ÎÊıÃû³Æ</td>
+							    <td class="formlabel nes">å‚æ•°åç§°</td>
 							    <td>
-							    	<input class="{required:true}" name="parname"  type="text" value="${sysParm.parname}" maxlength="100"/>
-							    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+							    	<s:textfield class="{required:true}" name="parname" maxlength="100"/>
+							    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							    </td>
 							  </tr>
 							  <tr>
-							    <td class="formlabel nes">²ÎÊıÖµ</td>
+							    <td class="formlabel nes">å‚æ•°å€¼</td>
 							    <td>
-							   		 <input class="{required:true}"  name="parvalue" type="text" value="${sysParm.parvalue}" maxlength="100"/>
-						    		 <span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+							   		 <s:textfield class="{required:true}"  name="parvalue" maxlength="100" />
+						    		 <span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							    </td>
 							  </tr>
 							  <tr>
-							    <td class="formlabel">±¸×¢</td>
+							    <td class="formlabel">å¤‡æ³¨</td>
 							    <td>
-							   		 <input name="remark" type="text"  value="${sysParm.remark}" maxlength="50"/>
+							   		 <s:textfield name="remark" maxlength="50"/>
 							    </td>
 							    </tr>
 							  <tr>
 							  	<td></td>
 							    <td colspan="3">
-								    <input type="submit"  id="input_btn2"   value="È·¶¨"  />
-								    <input style="margin-left:30px;" type="button"  value="·µ»Ø" id="btnReturn" />
+								    <input type="submit"  id="input_btn2"   value="ç¡®å®š"  />
+								    <input style="margin-left:30px;" type="button"  value="è¿”å›" id="btnReturn" />
 							    </td>
 							  </tr>
 						  </table>
@@ -101,7 +89,7 @@
 		</div>
 	</form>
 	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

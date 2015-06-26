@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
-		<title>ˮ���˵�</title>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
+		<title>水费账单</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -35,11 +28,11 @@
 					var endCreateDate = $('#endCreateDate').val();
 					var buildingNo = $('#buildingNo').val();
 					if(startCreateDate.trim() == '' || endCreateDate.trim() == ''){
-						alert('��ѡ�񴴽�����');
+						alert('请选择创建日期');
 						return;
 					}
 					if(buildingNo.trim() == ''){
-						alert('��ѡ��¥��');
+						alert('请选择楼号');
 						return;
 					}
 					window.open(CONTEXT_PATH+'/reportAction.do?action=waterBillDetail&buildingNo='+buildingNo+"&startCreateDate="+startCreateDate+"&endCreateDate="+endCreateDate);
@@ -51,13 +44,13 @@
 				amount = parseFloat(amount);
 				
 				var flag= false;
-				var tip = "ȷ���շ�?";
+				var tip = "确认收费?";
 				if(balance > 0){
 					if(balance >= amount){
-						tip = "ҵ��Ԥ���˻��������"+balance+"Ԫ,ˮ�ѽ����п۳���ȷ�ϲ���?";
+						tip = "业主预存账户现有余额"+balance+"元,水费将从中扣除，确认操作?";
 					}else{
 						var lackAmt = amount-balance;
-						tip = "����ҵ��Ԥ���˻��п۳�"+balance+"Ԫ,���貹��"+lackAmt+"Ԫ��ȷ�ϲ���?";
+						tip = "将从业主预存账户中扣除"+balance+"元,另需补交"+lackAmt+"元，确认操作?";
 					}
 				}
 				
@@ -78,7 +71,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/waterBill.do?action=list" styleId="queryForm">
-			<!-- ��ѯ������ -->
+			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -86,44 +79,44 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								��������
+								创建日期
 							</td>
 							<td>
 								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
-								���ݱ��
+								房屋编号
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
 							</td>
-							<td class="formlabel">״̬</td>
+							<td class="formlabel">状态</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---ȫ��---</html:option>
+						    		<html:option value="">---全部---</html:option>
 						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
 						    </td>
 						</tr>
 						<tr>
 							<td class="formlabel">
-								�˵���
+								账单号
 							</td>
 							<td>
 								<html:text property="id" styleId="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
-								¥��
+								楼号
 							</td>
 							<td>
 								<html:select property="buildingNo" style="width:166px" styleId="buildingNo">
-									<html:option value="">---ȫ��---</html:option>
+									<html:option value="">---全部---</html:option>
 									<html:options collection="buildingNos" property="key" labelProperty="value" />
 								</html:select>
 							</td>
 							<td class="formlabel">
-								���
+								年份
 							</td>
 							<td>
 								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
@@ -132,9 +125,9 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="��ѯ" id="btnQry"/>&nbsp;
-								<input type="button" value="����" id="btnClear" />&nbsp;
-								<input type="button" value="��ӡǷ���˵�" id="btnPrint"/>
+								<input type="button" value="查询" id="btnQry"/>&nbsp;
+								<input type="button" value="重置" id="btnClear" />&nbsp;
+								<input type="button" value="打印欠费账单" id="btnPrint"/>
 							</td>
 						</tr>
 					</table>
@@ -142,19 +135,19 @@
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
-			<!-- ������Ϣ -->
+			<!-- 汇总信息 -->
 				<table class="data_grid" style="margin:0 0 10px 0;width: 100%;border: 0;">
-					<caption>������Ϣ</caption>
+					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">Ӧ�ɱ���</td>
-							<td align="center">Ӧ�ɽ�Ԫ��</td>
-							<td align="center">�ѽɱ���</td>
-							<td align="center">�ѽɽ�Ԫ��</td>
-							<td align="center">�����ѽɱ���</td>
-							<td align="center">�����ѽɽ�Ԫ��</td>
-							<td align="center">δ�ɱ���</td>
-							<td align="center">δ�ɽ�Ԫ��</td>
+							<td align="center">应缴笔数</td>
+							<td align="center">应缴金额（元）</td>
+							<td align="center">已缴笔数</td>
+							<td align="center">已缴金额（元）</td>
+							<td align="center">部分已缴笔数</td>
+							<td align="center">部分已缴金额（元）</td>
+							<td align="center">未缴笔数</td>
+							<td align="center">未缴金额（元）</td>
 						</tr>
 					</thead>
 					<tr>
@@ -169,25 +162,25 @@
 					</tr>
 				</table>
 			</div>
-			<!-- �����б��� -->
+			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >�˵���</td>
-						 	<td >���ݱ��</td>
-						 	<td >ҵ������</td>
-						 	<td >��ˮ�·�</td>
-						    <td >���ڶ���</td>
-						    <td >���ڶ���</td>
-						    <td >ʵ������</td>
-						    <td >����</td>
-						    <td >Ӧ�ɽ��</td>
-						    <td >�ѽɽ��</td>
-						    <td >�ɷ�ʱ��</td>
-						    <td >�˵�״̬</td>
-						    <td >��ע</td>
-						    <td >����</td>
+						 	<td >账单号</td>
+						 	<td >房屋编号</td>
+						 	<td >业主姓名</td>
+						 	<td >用水月份</td>
+						    <td >上期读数</td>
+						    <td >本期读数</td>
+						    <td >实际用量</td>
+						    <td >单价</td>
+						    <td >应缴金额</td>
+						    <td >已缴金额</td>
+						    <td >缴费时间</td>
+						    <td >账单状态</td>
+						    <td >备注</td>
+						    <td >操作</td>
 						 </tr>
 					</thead>
 					
@@ -211,10 +204,10 @@
 							    <td style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" >${element.remark}</td>
 							    <td class="redlink">
 							    	<logic:equal value="00" name="element" property="state">
-							    		<a href="javascript:charge('${element.id}', '${element.amount}', '${element.balance}')">�շ�</a>
+							    		<a href="javascript:charge('${element.id}', '${element.amount}', '${element.balance}')">收费</a>
 							    	</logic:equal>
 							    	<logic:equal value="01" name="element" property="state">
-							    		<a href="javascript:openReport(${element.id})">��ӡ</a>
+							    		<a href="javascript:openReport(${element.id})">打印</a>
 							    	</logic:equal>
 							    </td>
 						    </tr>

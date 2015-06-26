@@ -1,19 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 <head>
 	
 		<%@ include file="/pages/common/meta.jsp" %>
@@ -41,7 +30,7 @@
 
 <body>
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-	<!-- ²éÑ¯¹¦ÄÜÇø -->
+	<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 	<html:form styleId="query" action="userLog.do?action=queryUserLog" method="post" >
 		<div class="userbox">
 		<div>
@@ -51,16 +40,16 @@
 		<b class="b4"></b>
 		<div class="contentb">
 		<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
-		  <caption>ÓÃ»§ÈÕÖ¾²éÑ¯</caption>
+		  <caption>ç”¨æˆ·æ—¥å¿—æŸ¥è¯¢</caption>
 		  <tr>
-		    <td class="formlabel">ÓÃ»§±àºÅ</td>
+		    <td class="formlabel">ç”¨æˆ·ç¼–å·</td>
 		    <td><input type="text"  name="userId" id="userId" value ="${param.userId}"/></td>
-		    <td class="formlabel">Ä£¿é±àºÅ</td>
+		    <td class="formlabel">æ¨¡å—ç¼–å·</td>
 		    <td><input name="limitId" type="text" id="limitId" value ="${param.limitId}" /></td>
-		    <td class="formlabel">ÈÕÖ¾ÀàÐÍ</td>
+		    <td class="formlabel">æ—¥å¿—ç±»åž‹</td>
 		    <td>
 				<html:select property="logType">
-					<html:option value="">---ÇëÑ¡Ôñ---</html:option>
+					<html:option value="">---è¯·é€‰æ‹©---</html:option>
 					<html:options collection="userLogTypes" labelProperty="name" property="value"/>
 				</html:select>
 			</td>
@@ -68,8 +57,8 @@
 		   <tr>
 		    <td></td>
 		    <td colspan="5">
-	   			 <input type="submit" value="²éÑ¯"/>&nbsp;&nbsp;
-	   			 <input type="button" value="ÖØÖÃ" onclick="FormUtils.reset('query')"/>
+	   			 <input type="submit" value="æŸ¥è¯¢"/>&nbsp;&nbsp;
+	   			 <input type="button" value="é‡ç½®" onclick="FormUtils.reset('query')"/>
 		    </td>
 		  </tr>
 		  </table>
@@ -81,19 +70,19 @@
 		</div>
 		</div>
 	</html:form>
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 				  <tr align="center">
-				    <th class="titlebg" width="10%">ÓÃ»§±àºÅ</th>
-				    <th class="titlebg" width="10%">ÓÃ»§ÐÕÃû</th>
-				    <th class="titlebg" width="10%">Ä£¿é±àºÅ</th>
-				    <th class="titlebg" width="10%">Ä£¿éÃû³Æ</th>
-				    <th class="titlebg" width="10%">ÈÕÖ¾ÀàÐÍ</th>
-				    <th class="titlebg" width="15%">´´½¨Ê±¼ä</th>
-				    <th class="titlebg" width="30%">ÄÚÈÝ</th>
-				    <th class="titlebg" width="10%">²Ù×÷</th> 
+				    <th class="titlebg" width="10%">ç”¨æˆ·ç¼–å·</th>
+				    <th class="titlebg" width="10%">ç”¨æˆ·å§“å</th>
+				    <th class="titlebg" width="10%">æ¨¡å—ç¼–å·</th>
+				    <th class="titlebg" width="10%">æ¨¡å—åç§°</th>
+				    <th class="titlebg" width="10%">æ—¥å¿—ç±»åž‹</th>
+				    <th class="titlebg" width="15%">åˆ›å»ºæ—¶é—´</th>
+				    <th class="titlebg" width="30%">å†…å®¹</th>
+				    <th class="titlebg" width="10%">æ“ä½œ</th> 
 				  </tr>
 				 </thead>
 				 <tbody>
@@ -113,7 +102,7 @@
 					 </td>
 					 <td>
 						 <span class="redlink">
-						 	<a href="#" onclick='detailUserLog(${userLog.id})'>Ã÷Ï¸</a>
+						 	<a href="#" onclick='detailUserLog(${userLog.id})'>æ˜Žç»†</a>
 						 </span>
 					 </td>
 				  </tr>
@@ -124,7 +113,7 @@
 			<f:paginate />	
 		</div>
 
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
  	<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 </body>
 </html>

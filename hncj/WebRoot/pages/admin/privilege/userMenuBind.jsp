@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞŞ¸Ä½ÇÉ«ĞÅÏ¢</title>
+		<title>ä¿®æ”¹è§’è‰²ä¿¡æ¯</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
@@ -19,14 +15,11 @@
 		<f:js src="/js/plugin/jquery.validate.js"/>		
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="/userInfoAction.do?action=menuBind" styleId="userInfoForm" styleClass="validate">
+<f:msg />
+	<form action="/userInfoAction.do?action=menuBind" id="userInfoForm" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -35,37 +28,35 @@
 				<b class="b4"></b>
 				<div class="contentb">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
-					  <caption>ÓÃ»§¿ì½İ²Ëµ¥</caption>
+					  <caption>ç”¨æˆ·å¿«æ·èœå•</caption>
 					  <tr>
-						    <td class="formlabel">µÇÂ½Ãû</td>
+						    <td class="formlabel">ç™»å½•å</td>
 						    <td>${SESSION_USER.loginId}</td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÓÃ»§Ãû³Æ</td>
+						    <td class="formlabel nes">ç”¨æˆ·åç§°</td>
 						    <td>${SESSION_USER.userName}</td>
 					   </tr>
 					   
 					    <tr>
-							<td class="formlabel nes">¿ì½İ²Ëµ¥</td>
+							<td class="formlabel nes">å¿«æ·èœå•</td>
 							<td>
-								<logic:present name="avaibleList">
 								<div id="systree" style="margin-top: 10px;"></div>
 								<script type="text/javascript">		
 									var d = new dTree('d','dtree/images/system/menu/');
 									d.config.folderLinks = false;
 									d.config.useCookies = false;
 									d.config.check = true;
-									<logic:iterate id="element" name="avaibleList">
+									<c:forEach var="element" items="avaibleList">
 										d.add('${element.code}','${element.parentCode}','${element.name}', null, null, null, 'privilege', '${element.code}');
-									</logic:iterate>
+									</c:forEach>
 									document.getElementById('systree').innerHTML = d;
 									
-									//ÉèÖÃÒÑ¾­Ñ¡ÖĞµÄÖµ
-									<logic:present name="selectList">
+									//è®¾ç½®å·²ç»é€‰ä¸­çš„å€¼
 										var selectStr = '';
-										<logic:iterate id="element" name="selectList">
+										<c:forEach var="element" items="selectList">
 											selectStr = selectStr + ",{menudm:'${element.code}'}";
-										</logic:iterate>
+										</c:forEach>
 										if(selectStr.length>0){
 											selectStr = selectStr.substring(1);
 										}
@@ -77,18 +68,16 @@
 											if(node){
 											   node.checked = true;
 											}else{
-												//alert(funcs.funcs[n].menudm+'¶ÔÓ¦µÄÈ¨ÏŞµãÔÚÈ¨ÏŞÊ÷ÖĞ²»´æÔÚ£¡');
+												//alert(funcs.funcs[n].menudm+'å¯¹åº”çš„æƒé™ç‚¹åœ¨æƒé™æ ‘ä¸­ä¸å­˜åœ¨ï¼');
 											}
 										}
-									</logic:present>
 								</script>
-								</logic:present>
 							</td>
 						</tr>					   
 					   <tr>
 							<td width="100" height="30" align="right">&nbsp;</td>
 							<td height="30" colspan="3">
-								<input type=submit alt=" Ìá ½» " value=" Ìá ½» "/>
+								<input type=submit alt=" æ äº¤ " value=" æ äº¤ "/>
 								<%@ include file="/pages/layout/goback.jsp" %>
 							</td>
 						</tr>
@@ -100,8 +89,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

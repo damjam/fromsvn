@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
 <logic:notEmpty name="menus">
 	<logic:iterate id="menu" name="menus">

@@ -1,16 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ÐÂÔöÓÃ»§ÐÅÏ¢</title>
+		<title>æ–°å¢žç”¨æˆ·ä¿¡æ¯</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
@@ -21,9 +20,6 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/popUp.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -43,8 +39,9 @@
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="userInfoAction.do?action=addUserInfo" styleId="userInfoForm" method="post" styleClass="validate">
+<f:msg />
+	<form action="userInfoAction.do?action=addUserInfo" id="userInfoForm" method="post" class="validate">
+		<s:token/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -55,44 +52,32 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel nes">µÇÂ½Ãû</td>
+						    <td class="formlabel nes">ç™»å½•å</td>
 						    <td>
-						    	<html:text property="loginId"  styleId="loginId" styleClass="{required:true,stringNum:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">×ÖÄ¸»òÊý×Ö</span>
+						    	<s:textfield name="loginId" id="loginId" class="{required:true,stringNum:true}" maxlength="20"></s:textfield>
+						    	<span class="field_tipinfo">å­—æ¯æˆ–æ•°å­—</span>
 						    </td>
 					   </tr>
 					   
 					   <tr>
-						    <td class="formlabel nes">ÓÃ»§Ãû</td>
+						    <td class="formlabel nes">ç”¨æˆ·å</td>
 						    <td nowrap="nowrap">
-						    	<html:text property="userName"  styleClass="{required:true,stringCheck:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">ÖÐÎÄ×Ö¡¢Ó¢ÎÄ×ÖÄ¸¡¢Êý×ÖºÍÏÂ»®Ïß</span>
+						    	<s:textfield name="userName" class="{required:true,stringCheck:true}" maxlength="20"></s:textfield>
+						    	<span class="field_tipinfo">ä¸­æ–‡å­—ã€è‹±æ–‡å­—æ¯ã€æ•°å­—å’Œä¸‹åˆ’çº¿</span>
 						    </td>
 					   </tr>
 					   <tr>
-					    	<td class="formlabel nes">ÓÃ»§ÀàÐÍ</td>
+					    	<td class="formlabel nes">ç”¨æˆ·ç±»åž‹</td>
 						     <td>
-								<html:select property="userType" styleClass="{required:true}" >
-									<html:options collection="userTypes" labelProperty="value" property="key"  />
-								</html:select>
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
-							</td>
-					   </tr>
-					   <tr>
-					    	<td class="formlabel nes">ËùÊô»ú¹¹</td>
-						     <td>
-								<html:select property="branchNo" styleClass="{required:true}" >
-									<html:option value="">---ÇëÑ¡Ôñ---</html:option>
-									<html:options collection="branchTypes" labelProperty="value" property="key"  />
-								</html:select>
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+								<s:select id="userType" name="userType" list="#request.userTypes" listKey="key" listValue="value" cssClass="{required:true}"></s:select>
+								<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							</td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="Ìá½»" onclick="save()"/>
-					 <input type="button" id="btnClear" value="Çå³ý"/>
-					 <input type="button" id="btnReturn" value="·µ»Ø"/>
+					 <input type="button" id="btnSumit" value="æäº¤" onclick="save()"/>
+					 <input type="button" id="btnClear" value="æ¸…é™¤"/>
+					 <input type="button" id="btnReturn" value="è¿”å›ž"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -101,8 +86,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

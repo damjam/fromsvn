@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -40,14 +40,14 @@
 			{      
 				var busiType ;
 				busiType = $("#gs").val();
-				busiType += "¡¾ÒµÎñÀàÐÍ¡¿";
+				busiType += "ã€ä¸šåŠ¡ç±»åž‹ã€‘";
 				$('#gs').val(busiType);
 			}
 			function merchantAbbAdd()    
 			{      
 				var merchantAbb ;
 				merchantAbb = $("#gs").val();
-				merchantAbb += "¡¾ÉÌ»§¼ò³Æ¡¿";
+				merchantAbb += "ã€å•†æˆ·ç®€ç§°ã€‘";
 				$('#gs').val(merchantAbb);
 			} 
 			function ss()    
@@ -62,7 +62,7 @@
 				document.getElementById("gs").value="";
 			}
 	 	</script>
-		<title>ÇþµÀÕªÒª¹«Ê½</title>
+		<title>æ¸ é“æ‘˜è¦å…¬å¼</title>
 
 	</head>
 
@@ -78,7 +78,7 @@
 						<tr>
 							<td align="center">
 								<span
-									style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÇþµÀÕªÒª¹«Ê½</span>
+									style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">æ¸ é“æ‘˜è¦å…¬å¼</span>
 							</td>
 						</tr>
 						<tr></tr>
@@ -94,9 +94,9 @@
 						<tr>
 							<td height="30" align="center" >
 								<input type="button" name="merchantAbb" id="merchantAbb"
-									value="ÉÌ»§¼ò³Æ" onclick="merchantAbbAdd();" />
+									value="å•†æˆ·ç®€ç§°" onclick="merchantAbbAdd();" />
 								<input type="button" name="busiType" id="busiType"
-									value="ÒµÎñÀàÐÍ" onclick="busiTypeAdd();" />
+									value="ä¸šåŠ¡ç±»åž‹" onclick="busiTypeAdd();" />
 							</td>
 						</tr>
 						
@@ -108,22 +108,22 @@
 						<tr></tr>
 						<tr></tr>
 						<tr>
-						<td align="center">Àý×Ó1£º¡¾ÒµÎñÀàÐÍ¡¿±£ÏÕ¡¾ÉÌ»§¼ò³Æ¡¿QIFA</td>
+						<td align="center">ä¾‹å­1ï¼šã€ä¸šåŠ¡ç±»åž‹ã€‘ä¿é™©ã€å•†æˆ·ç®€ç§°ã€‘QIFA</td>
 						</tr>
 						<tr>
-						<td align="center">Àý×Ó2£º¡¾ÉÌ»§¼ò³Æ¡¿QIFA¡¾ÒµÎñÀàÐÍ¡¿±£ÏÕ</td>
+						<td align="center">ä¾‹å­2ï¼šã€å•†æˆ·ç®€ç§°ã€‘QIFAã€ä¸šåŠ¡ç±»åž‹ã€‘ä¿é™©</td>
 						</tr>
 						<tr>
-						<td align="center">Àý×Ó3£º¡¾ÒµÎñÀàÐÍ¡¿±£ÏÕ</td>
+						<td align="center">ä¾‹å­3ï¼šã€ä¸šåŠ¡ç±»åž‹ã€‘ä¿é™©</td>
 						</tr>
 						<tr></tr>
 						<tr></tr>
 						<tr></tr>
 						<tr>
 							<td height="30" colspan="3" align="center">
-								<input type="submit" value="È·¶¨" onclick="ss();" id="selectBtn"/>
+								<input type="submit" value="ç¡®å®š" onclick="ss();" id="selectBtn"/>
 									<input onclick="clearData();" style="margin-left: 30px;"
-										type="button" value="Çå³ý" />
+										type="button" value="æ¸…é™¤" />
 							</td>
 						</tr>
 					</table>

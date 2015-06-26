@@ -1,18 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 <%@ include file="/pages/common/meta.jsp"%>
 <%@ include file="/pages/common/sys.jsp"%>
 
 <html>
 	<head>
 		
-		<title>ÓÃ»§½ÇÉ«·ÖÅä</title>
+		<title>ç”¨æˆ·è§’è‰²åˆ†é…</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -40,41 +35,54 @@
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg" />
-		<html:form action="/userRoleAction.do?action=assignRole" styleId="userRoleForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<f:msg  />
+		<form action="userRoleAction.do?action=assignRole" id="userRoleForm" method="post">
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">	
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td><input type="checkbox" onclick="FormUtils.selectAll(this, 'roleIds')" />È«Ñ¡</td>
-						    <td>½ÇÉ«±àºÅ</td>
-						    <td>½ÇÉ«Ãû³Æ</td>
-						    <td>È¨ÏŞ×é±àºÅ</td>
-						    <td>È¨ÏŞ×éÃû³Æ</td>
+						 	<td><input type="checkbox" onclick="FormUtils.selectAll(this, 'roleIds')" />å…¨é€‰</th></td>
+						    <td>è§’è‰²ç¼–å·1</td>
+						    <td>è§’è‰²åç§°</td>
+						    <td>æƒé™ç»„ç¼–å·</td>
+						    <td>æƒé™ç»„åç§°</td>
 						 </tr>
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forTokens items="" delims=""></c:forTokens>
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								<td><html:multibox property="roleIds" value="${element.roleId}"/></td>
+								<td>
+									<c:if test="${empty roleIds}">
+										<input type="checkbox" name="roleIds" value="${element.roleId}">
+									</c:if>
+									<c:forEach items="${roleIds}" var="roleId">
+										<c:if test="${roleId eq element.roleId}">
+											<input type="checkbox" name="roleIds" value="${element.roleId}" checked="checked">
+										</c:if>
+										<c:if test="${roleId ne element.roleId}">
+											<input type="checkbox" name="roleIds" value="${element.roleId}">
+										</c:if>
+									</c:forEach>
+								</td>
 								<td>${element.roleId}</td>
 							    <td>${element.roleName}</td>
 							    <td>${element.limitGroupId}</td>
 							    <td>${element.limitGroupName}</td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-			<html:hidden property="userId" styleId="userId"/>
-		</html:form>
-		<dir class="btn_box"><input type="button" value="Ìá½»" onclick="assignRole()"/>&nbsp;
-			<input type="button" value="·µ»Ø" id="btnReturn"/> 
+			<s:hidden name="userId" id="userId"/>
+		</form>
+		<dir class="btn_box"><input type="button" value="æäº¤" onclick="assignRole()"/>&nbsp;
+			<input type="button" value="è¿”å›" id="btnReturn"/> 
 		</dir>
 	</body>
 </html>

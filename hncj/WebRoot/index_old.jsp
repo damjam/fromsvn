@@ -24,7 +24,7 @@
 				});
 			});
 			
-			//登陆
+			//登录
 			function log(){
 				if(isEmpty() || $('#password').val() == ''){
 					$('#errorMsg').html('用户名或密码不能为空');
@@ -100,7 +100,7 @@
 	</head>
 
 	<body class="fullwidth">
-	    <!--登陆口头部-->
+	    <!--登录口头部-->
 	    <div class="top">
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
@@ -113,7 +113,7 @@
 		</div>
 		
 		
-	    <!--登陆表单区域-->
+	    <!--登录表单区域-->
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">
@@ -127,8 +127,8 @@
 		        	<form action="login.do?action=login" method="post" id="logForm">
 		        		<input type="hidden" name="tag" value="${tag}"/>
 				        <div class="formbox">
-				            <div class="formleft"><img title="用户登陆" src="images/user.gif" /></div>
-				            <div class="formright"><span style="font-size:14px;font-weight:bold; padding-left:5px;">用户登陆</span>
+				            <div class="formleft"><img title="用户登录" src="images/user.gif" /></div>
+				            <div class="formright"><span style="font-size:14px;font-weight:bold; padding-left:5px;">用户登录</span>
 				            <span class="redfont" id="errorMsg">${msg}</span></div>
 				        </div>
 				        <div class="formbox">
@@ -176,7 +176,7 @@
 			</div>
 	    </div>
 	    
-	    <!--登陆口底部-->
+	    <!--登录口底部-->
 	    <jsp:include page="/footer.jsp"></jsp:include>
 	</body>
 </html>

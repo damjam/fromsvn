@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -48,17 +41,17 @@
 				$('#gatherPeriod').val('');
 				var gatherWay = $('#gatherWay').val();
 				if(gatherWay == 'D'){
-					$('#td1').html('»ã×ÜÈÕÆÚ');
+					$('#td1').html('æ±‡æ€»æ—¥æœŸ');
 					$('#gatherPeriodD').show();
 					$('#gatherPeriodM').hide();
 					$('#gatherPeriodY').hide();
 				}else if(gatherWay == 'M'){
-					$('#td1').html('»ã×ÜÔÂ·İ');
+					$('#td1').html('æ±‡æ€»æœˆä»½');
 					$('#gatherPeriodD').hide();
 					$('#gatherPeriodM').show();
 					$('#gatherPeriodY').hide();
 				}else if(gatherWay == 'Y'){
-					$('#td1').html('»ã×ÜÄê·İ');
+					$('#td1').html('æ±‡æ€»å¹´ä»½');
 					$('#gatherPeriodD').hide();
 					$('#gatherPeriodM').hide();
 					$('#gatherPeriodY').show();
@@ -72,7 +65,7 @@
 				var gatherWay = $('#gatherWay').val();
 				var gatherPeriod = $('#gatherPeriod'+gatherWay).val();
 				if(gatherPeriod == ''){
-					alert('»ã×ÜÈÕÆÚ²»ÄÜÎª¿Õ');
+					alert('æ±‡æ€»æ—¥æœŸä¸èƒ½ä¸ºç©º');
 					$('#gatherPeriod'+gatherWay).focus();
 					return;
 				}
@@ -83,7 +76,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -91,17 +84,17 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								»ã×ÜÖÜÆÚ
+								æ±‡æ€»å‘¨æœŸ
 							</td>
 							<td>
 								<select name="gatherWay" id="gatherWay" onchange="change()">
-									<option value="D">°´Ìì</option>
-									<option value="M">°´ÔÂ</option>
-									<option value="Y">°´Äê</option>
+									<option value="D">æŒ‰å¤©</option>
+									<option value="M">æŒ‰æœˆ</option>
+									<option value="Y">æŒ‰å¹´</option>
 								</select>
 							</td>
 							<td class="formlabel nes" id="td1">
-								»ã×ÜÈÕÆÚ
+								æ±‡æ€»æ—¥æœŸ
 							</td>
 							<td id="td2">
 								<input type="text" name="gatherPeriod" id="gatherPeriodD" onclick="WdatePicker({dateFmt:'yyyyMMdd'})" value="${today}"/>
@@ -112,14 +105,14 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry" onclick="query();"/>&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry" onclick="query();"/>&nbsp;
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox" style="height:100%">			
 				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" ></iframe>
 			</div> 

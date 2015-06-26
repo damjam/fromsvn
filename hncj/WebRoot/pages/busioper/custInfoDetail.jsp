@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>²é¿´¿Í»§×ÊÁÏ</title>
-		
+		<title>æŸ¥çœ‹å®¢æˆ·èµ„æ–™</title>
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -58,28 +53,28 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel">ÊÖ»úºÅ</td>
+						    <td class="formlabel">æ‰‹æœºå·</td>
 						    <td>
 						    	${cust.mobile}
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">ÓÊÏä</td>
+						    <td class="formlabel">é‚®ç®±</td>
 						    <td>
 						    	${cust.email}
 						    </td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel">¶©ÔÄ×ÊÑ¶</td>
+					   		<td class="formlabel">è®¢é˜…èµ„è®¯</td>
 						     <td>
-						     	<input type="checkbox" name="subsPhone" value="Y" onclick="javascript:return false;" id="subsPhone"/>ÊÖ»ú¶©ÔÄ
-						     	<input type="checkbox" name="subsEmail" value="Y" onclick="javascript:return false;" id="subsEmail"/>ÓÊÏä¶©ÔÄ
+						     	<input type="checkbox" name="subsPhone" value="Y" onclick="javascript:return false;" id="subsPhone"/>æ‰‹æœºè®¢é˜…
+						     	<input type="checkbox" name="subsEmail" value="Y" onclick="javascript:return false;" id="subsEmail"/>é‚®ç®±è®¢é˜…
 							</td>
 					   </tr>
 							<c:if test="${cust.custType eq '1'}">
 								<tr>
 									<td class="formlabel">
-										ÕæÊµÐÕÃû
+										çœŸå®žå§“å
 									</td>
 									<td>
 										${cust.name}
@@ -87,7 +82,7 @@
 								</tr>
 								<tr>
 									<td class="formlabel">
-										Ö¤¼þÀàÐÍ
+										è¯ä»¶ç±»åž‹
 									</td>
 									<td>
 										<f:type className="IdCardType" value="${cust.cardType}"/>
@@ -95,7 +90,7 @@
 								</tr>
 								<tr>
 									<td class="formlabel">
-										Ö¤¼þºÅÂë
+										è¯ä»¶å·ç 
 									</td>
 									<td>
 										${cust.idCard}
@@ -103,7 +98,7 @@
 								</tr>
 								<tr>
 									<td class="formlabel">
-										³öÉúÈÕÆÚ
+										å‡ºç”Ÿæ—¥æœŸ
 									</td>
 									<td>
 										${cust.birthday}
@@ -111,7 +106,7 @@
 								</tr>
 								<tr>
 									<td class="formlabel">
-										ÐÔ±ð
+										æ€§åˆ«
 									</td>
 									<td>
 										<f:type className="SexType" value="${cust.sex}"/>
@@ -119,7 +114,7 @@
 								</tr>
 								<tr>
 									<td class="formlabel">
-										Í¨Ñ¶µØÖ·
+										é€šè®¯åœ°å€
 									</td>
 									<td>
 										${cust.addr}
@@ -128,7 +123,7 @@
 							</c:if>
 						</table>
 				  <div class="btnbox">
-					 <input type="button" value="·µ»Ø" onclick="back();" />
+					 <input type="button" value="è¿”å›ž" onclick="back();" />
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -138,7 +133,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

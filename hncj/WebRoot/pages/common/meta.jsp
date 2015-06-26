@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-
-<meta http-equiv="x-ua-compatible" content="ie=7" />
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<% response.setHeader("Cache-Control", "no-cache");%>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Language" content="zh-cn" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />

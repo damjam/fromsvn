@@ -1,19 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%response.setHeader("Cache-Control", "no-cache");%>
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 <head>
 	
 		<%@ include file="/pages/common/meta.jsp" %>
@@ -44,26 +32,26 @@
 				var parname=document.getElementById("parname").value;
 				
 				if(code.length==0 && parname.length==0){
-					alert("ÇëÊäÈëÖÁÉÙÒ»¸ö²éÑ¯Ìõ¼ş");
+					alert("è¯·è¾“å…¥è‡³å°‘ä¸€ä¸ªæŸ¥è¯¢æ¡ä»¶");
 					return false;
 				}
 				
 				return true;
 		   }
 		   
-		   // ÖØĞÂ¼ÓÔØÏµÍ³²ÎÊı.
+		   // é‡æ–°åŠ è½½ç³»ç»Ÿå‚æ•°.
 			function reloadbranchParm() {
 				$.post(CONTEXT_PATH + '/branchParmManage.do?action=reload', function(data) {
-					if (data.indexOf('ÖØĞÂ¼ÓÔØÏµÍ³²ÎÊı') > -1) {
+					if (data.indexOf('é‡æ–°åŠ è½½ç³»ç»Ÿå‚æ•°') > -1) {
 						alert(data);
 					}
 					else {
-						alert('¼ÓÔØÊ§°Ü');
+						alert('åŠ è½½å¤±è´¥');
 					}
 				});
 			}
 		   function backup1(){
-			   if(!window.confirm('È·ÈÏ±¸·İ?')){
+			   if(!window.confirm('ç¡®è®¤å¤‡ä»½?')){
 				   return;
 			   }
 			   $(':button').attr('disabled', true);
@@ -72,12 +60,12 @@
 				   if(data != null){
 				    	var jsonObj = eval('(' + data + ')');
 					    if (jsonObj.indexOf('') > -1) {
-							alert('±¸·İ³É¹¦');
+							alert('å¤‡ä»½æˆåŠŸ');
 						}else {
-							alert('±¸·İÊ§°Ü');
+							alert('å¤‡ä»½å¤±è´¥');
 						}
 				    } else {
-						alert('±¸·İÊ§°Ü');
+						alert('å¤‡ä»½å¤±è´¥');
 					}*/
 				});
 			   $(':button').attr('disabled', false);
@@ -89,7 +77,7 @@
 	 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<f:msg/>
-<!-- ²éÑ¯¹¦ÄÜÇø -->
+<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 	<form id="query" action="branchParmManage.do?action=query" method="post" >
 		<div class="userbox">
 		<div>
@@ -101,9 +89,9 @@
 		<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 		  <caption>${ACT.name}</caption>	
 		  <tr>
-		    <td class="formlabel">²ÎÊı´úÂë</td>
+		    <td class="formlabel">å‚æ•°ä»£ç </td>
 		    <td><input type="text" name="code" id="code"  /></td>
-		    <td class="formlabel">²ÎÊıÃû³Æ</td>
+		    <td class="formlabel">å‚æ•°åç§°</td>
 		    <td><input name="parname" type="text" id="parname" /></td>
 		    <td class="formlabel" align="left">&nbsp;</td>
 		    <td></td>
@@ -111,12 +99,12 @@
 		  <tr>
 		    <td>&nbsp;</td>
 		    <td colspan="5">
-		      <input type="submit" value="²éÑ¯" id="input_btn2"   />&nbsp;&nbsp;
-		      <input onclick="clearData();"   type="button" value="ÖØÖÃ"  />&nbsp;&nbsp;
-		   	  <input onclick="addbranchParm();"  type="button" value="ĞÂÔö"   />&nbsp;&nbsp;
-			  <input onclick="reloadbranchParm();"  type="button" value="ÖØĞÂ¼ÓÔØ"   />&nbsp;&nbsp;
+		      <input type="submit" value="æŸ¥è¯¢" id="input_btn2"   />&nbsp;&nbsp;
+		      <input onclick="clearData();"   type="button" value="é‡ç½®"  />&nbsp;&nbsp;
+		   	  <input onclick="addbranchParm();"  type="button" value="æ–°å¢"   />&nbsp;&nbsp;
+			  <input onclick="reloadbranchParm();"  type="button" value="é‡æ–°åŠ è½½"   />&nbsp;&nbsp;
 			  <!-- 
-			  <input onclick="backup1();"  type="button" value="±¸·İÊı¾İ¿â"   /> -->
+			  <input onclick="backup1();"  type="button" value="å¤‡ä»½æ•°æ®åº“"   /> -->
 		    </td>
 		  </tr>
 		  </table>
@@ -128,16 +116,16 @@
 		</div>
 		</div>
 	
-		<!-- Êı¾İÁĞ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 				  <tr>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊı´úÂë</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊıÃû³Æ</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊıÖµ</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">±¸×¢</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²Ù×÷</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°ä»£ç </th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°åç§°</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°å€¼</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å¤‡æ³¨</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">æ“ä½œ</th>
 				  </tr>
 				 </thead>
 				 <tbody>
@@ -150,9 +138,9 @@
 						<td nowrap="nowrap"><bean:write name="branchPram" property="remark" /></td>
 					    <td nowrap="nowrap">
 						    <span class="redlink">
-						   		 <a href="branchParmManage.do?action=update&code=${branchPram.code}">ĞŞ¸Ä</a>
+						   		 <a href="branchParmManage.do?action=update&code=${branchPram.code}">ä¿®æ”¹</a>
 						   		 <!-- 
-						   		 <a onclick="return confirm('ÄãÈ·ÈÏÒªÉ¾³ıÂğ?');" href="branchParmManage.do?action=delete&code=${branchPram.code }" >É¾³ı</a>
+						   		 <a onclick="return confirm('ä½ ç¡®è®¤è¦åˆ é™¤å—?');" href="branchParmManage.do?action=delete&code=${branchPram.code }" >åˆ é™¤</a>
 						   		 -->
 						    </span>
 					    </td>
@@ -167,7 +155,7 @@
 		</div>
 	</form>
 	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
  	<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 </body>
 </html>

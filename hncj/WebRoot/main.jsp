@@ -1,12 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f" %>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -17,7 +13,7 @@
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/biz/main.js"/>
 
-		<!--ÏÔÊ¾Òş²Ø×ó²à²Ëµ¥´úÂë-->
+		<!--æ˜¾ç¤ºéšè—å·¦ä¾§èœå•ä»£ç -->
 		<script>
 			var fg = true;
 			function menu_xsyc(){
@@ -31,54 +27,54 @@
 			   fg = !fg;
 			}
 			
-			//ÍË³öÏµÍ³
+			//é€€å‡ºç³»ç»Ÿ
 			function logOut(){
 				
 			}
 			
 			
 			
-//µ¥»÷Ä¿Â¼²Ëµ¥´¥·¢º¯Êı£ºobj£ºµ±Ç°µ¥»÷µÄ²Ëµ¥£»noid£º²Ëµ¥¶ÔÓ¦µÄ×Ó²Ëµ¥ËùÔÚµÄ±êÇ©id;level£ºµ±Ç°µã»÷²Ëµ¥µÄµÈ¼¶
-//Ö»ÓĞ¶ş¼¶ºÍÒ»¼¶²Ëµ¥µã»÷Ê±ºò²Å»á´¥·¢´Ëº¯Êı
+//å•å‡»ç›®å½•èœå•è§¦å‘å‡½æ•°ï¼šobjï¼šå½“å‰å•å‡»çš„èœå•ï¼›noidï¼šèœå•å¯¹åº”çš„å­èœå•æ‰€åœ¨çš„æ ‡ç­¾id;levelï¼šå½“å‰ç‚¹å‡»èœå•çš„ç­‰çº§
+//åªæœ‰äºŒçº§å’Œä¸€çº§èœå•ç‚¹å‡»æ—¶å€™æ‰ä¼šè§¦å‘æ­¤å‡½æ•°
 function ShowMenu(obj,noid,level){
 	changeColor(obj);
-	var block = document.getElementById(noid);//²Ëµ¥¶ÔÓ¦µÄÕ¹Ê¾¿é
-	var beforeOpen = false;//¼ÇÂ¼Ñ¡ÖĞ²Ëµ¥µÄÏÔÊ¾¿éÔ­À´ÊÇ·ñÊÇ´ò¿ªµÄ
-	if(block.className == "no"){//´ò¿ª	
+	var block = document.getElementById(noid);//èœå•å¯¹åº”çš„å±•ç¤ºå—
+	var beforeOpen = false;//è®°å½•é€‰ä¸­èœå•çš„æ˜¾ç¤ºå—åŸæ¥æ˜¯å¦æ˜¯æ‰“å¼€çš„
+	if(block.className == "no"){//æ‰“å¼€	
 	}else{
 		beforeOpen = true;
 	}
 	
-	if(level==2){//µã»÷µÄÊÇ¶ş¼¶²Ëµ¥		
-		var h2 = $(block).parent()[0].getElementsByTagName("h2");//¶ş¼¶×Ó²Ëµ¥ÁĞ±í
+	if(level==2){//ç‚¹å‡»çš„æ˜¯äºŒçº§èœå•		
+		var h2 = $(block).parent()[0].getElementsByTagName("h2");//äºŒçº§å­èœå•åˆ—è¡¨
 		for(var i=0; i<h2.length;i++){
-			h2[i].innerHTML = h2[i].innerHTML.replace("-","+");//ĞŞ¸Ä¶ş¼¶×Ó²Ëµ¥µÄÇ°ÃæµÄÕ¹¿ª·ûºÅ
+			h2[i].innerHTML = h2[i].innerHTML.replace("-","+");//ä¿®æ”¹äºŒçº§å­èœå•çš„å‰é¢çš„å±•å¼€ç¬¦å·
 			//h2[i].style.color = "";
 		}
-		//obj.style.color = "#FF0000";//¶ş¼¶²Ëµ¥Ñ¡ÖĞÊ±ºòµÄÑÕÉ«
+		//obj.style.color = "#FF0000";//äºŒçº§èœå•é€‰ä¸­æ—¶å€™çš„é¢œè‰²
 		
-		var ul = $(block).parent()[0].getElementsByTagName("ul");//ËùÔÚÒ»¼¶²Ëµ¥ÏÂµÄËùÓĞ¶ş¼¶×Ó²Ëµ¥¶ÔÓ¦µÄÕ¹ÏÖÌå
+		var ul = $(block).parent()[0].getElementsByTagName("ul");//æ‰€åœ¨ä¸€çº§èœå•ä¸‹çš„æ‰€æœ‰äºŒçº§å­èœå•å¯¹åº”çš„å±•ç°ä½“
 		for(var i=0; i<ul.length; i++){ul[i].className = "no";}
 	}	
-	else{//µã»÷µÄÊÇÒ»¼¶²Ëµ¥
-		//½«µ±Ç°Ñ¡ÖĞµÄÒ»¼¶²Ëµ¥ĞŞ¸ÄÎªºìÉ«£¬ÆäÓàµÄ¶¼ĞŞ¸ÄÎªÎ´Ñ¡ÖĞ×´Ì¬
-		var h1 = document.getElementById("menu").getElementsByTagName("h1");//ËùÓĞµÄÒ»¼¶²Ëµ¥		
+	else{//ç‚¹å‡»çš„æ˜¯ä¸€çº§èœå•
+		//å°†å½“å‰é€‰ä¸­çš„ä¸€çº§èœå•ä¿®æ”¹ä¸ºçº¢è‰²ï¼Œå…¶ä½™çš„éƒ½ä¿®æ”¹ä¸ºæœªé€‰ä¸­çŠ¶æ€
+		var h1 = document.getElementById("menu").getElementsByTagName("h1");//æ‰€æœ‰çš„ä¸€çº§èœå•		
 		for(var i=0; i<h1.length;i++){
 			h1[i].innerHTML = h1[i].innerHTML.replace("-","+");
 			//h1[i].style.color = "";
 		}
-		//obj.style.color = "#ffffff";//Ò»¼¶²Ëµ¥Ñ¡ÖĞÊ±ºòµÄÑÕÉ«
+		//obj.style.color = "#ffffff";//ä¸€çº§èœå•é€‰ä¸­æ—¶å€™çš„é¢œè‰²
 		
-		var span = document.getElementById("menu").getElementsByTagName("span");//ËùÓĞÒ»¼¶²Ëµ¥¶ÔÓ¦µÄÕ¹ÏÖÌå
+		var span = document.getElementById("menu").getElementsByTagName("span");//æ‰€æœ‰ä¸€çº§èœå•å¯¹åº”çš„å±•ç°ä½“
 		for(var i=0; i<span.length; i++){span[i].className = "no";}
 	}
 	
-	//ĞŞ¸Äµ±Ç°µã»÷²Ëµ¥µÄÑùÊ½£º¿ª¹Ø²Ù×÷
-	//´¦Àíµ±Ç°Ñ¡ÖĞ²Ëµ¥µÄÏÔÊ¾¿é
-	if(beforeOpen){//¹Ø±Õ Ô­À´ÊÇ´ò¿ªµÄÏÔÊ¾¿é
+	//ä¿®æ”¹å½“å‰ç‚¹å‡»èœå•çš„æ ·å¼ï¼šå¼€å…³æ“ä½œ
+	//å¤„ç†å½“å‰é€‰ä¸­èœå•çš„æ˜¾ç¤ºå—
+	if(beforeOpen){//å…³é—­ åŸæ¥æ˜¯æ‰“å¼€çš„æ˜¾ç¤ºå—
 		block.className = "no";
 		//obj.style.color = "";	
-	}else{//´ò¿ª  Ô­À´ÊÇ¹Ø±ÕµÄÏÔÊ¾¿é
+	}else{//æ‰“å¼€  åŸæ¥æ˜¯å…³é—­çš„æ˜¾ç¤ºå—
 		block.className = "";
 		obj.innerHTML = obj.innerHTML.replace("+","-");	
 	}
@@ -99,7 +95,7 @@ function setMsgTip(readOne){
 		var s = tip.replace(/[^\d]*/ig,"");
 		var cnt = parseInt(s)-1;
 		if(cnt > 0){
-			$('#msgTip').text(cnt+'ÌõÎ´¶ÁÏûÏ¢');
+			$('#msgTip').text(cnt+'æ¡æœªè¯»æ¶ˆæ¯');
 		}else{
 			$('#msgTip').text('');
 		}
@@ -117,7 +113,7 @@ $().ready(function(){
 	</head>
 	
 	<body class="top_frame">
-		<!--Ö÷¿ò¼ÜÍ·²¿-->
+		<!--ä¸»æ¡†æ¶å¤´éƒ¨-->
 		<div class="top">
 			<div class="top_box">
 				 <!-- 
@@ -125,13 +121,13 @@ $().ready(function(){
 				  -->
 				<div class="top_right">
 					<div class="toptext">
-						<a href="${CONTEXT_PATH}/pageHome.jsp" target="main_area">Ê×Ò³</a><a href="login.do?action=logOff">ÖØĞÂµÇÂ½</a><a
-							href="login.do?action=logOff">ÍË³öÏµÍ³</a>
+						<a href="${CONTEXT_PATH}/pageHome.jsp" target="main_area">é¦–é¡µ</a><a href="login.do?action=logOff">é‡æ–°ç™»å½•</a><a
+							href="login.do?action=logOff">é€€å‡ºç³»ç»Ÿ</a>
 					</div>
 				</div>
 			</div>
 
-			<!--Í·²¿ºáÏò²Ëµ¥-->
+			<!--å¤´éƒ¨æ¨ªå‘èœå•-->
 			<div class="top_menu">
 				<div class="top_menutime" id="showtime">
 					<script>setInterval("document.getElementById('showtime').innerHTML=new Date().toLocaleString()",300);</script>
@@ -141,7 +137,7 @@ $().ready(function(){
 						<img src="images/separated.gif" width="3" height="39" />
 					</div>
 					
-					<!-- ¼ÓÔØ¿ì½İ²Ëµ¥ -->
+					<!-- åŠ è½½å¿«æ·èœå• -->
 					<div class="top_button" id="topbutton">
 						<logic:notEmpty name="quickMenus">
 							<logic:iterate id="quick" name="quickMenus">
@@ -153,30 +149,30 @@ $().ready(function(){
 				
 				<div class="top_menuuser">
 					<img src="images/icon0.gif" width="12" height="16" />
-					ÄúºÃ£¡${SESSION_USER.loginId}
+					æ‚¨å¥½ï¼${SESSION_USER.loginId}
 					<c:if test="${msgCnt > 0}">
-						<a href="${CONTEXT_PATH}/noticeMsgAction.do?action=showNotice" target="main_area" style="color: red" id="msgTip">${msgCnt}ÌõÎ´¶ÁÏûÏ¢</a>
+						<a href="${CONTEXT_PATH}/noticeMsgAction.do?action=showNotice" target="main_area" style="color: red" id="msgTip">${msgCnt}æ¡æœªè¯»æ¶ˆæ¯</a>
 					</c:if>
 				</div>
 			</div>
 		</div>
 
-		<!--×ó²à²Ëµ¥Çø-->
+		<!--å·¦ä¾§èœå•åŒº-->
 		<div class="side" id="menu" style="overflow-x:hidden; padding-top:4px;padding-bottom:20px;">
-				<logic:iterate id="menu1" name="USER_MENU" property="children"><!-- Ò»¼¶×Ó²Ëµ¥ -->
+				<logic:iterate id="menu1" name="USER_MENU" property="children"><!-- ä¸€çº§å­èœå• -->
 						<h1 onclick="javascript:ShowMenu(this,'${menu1.code}',1)"> + ${menu1.name}</h1>
 						<span id="${menu1.code}" class="no">
-							<logic:iterate id="menu2" name="menu1" property="children">	<!-- ¶ş¼¶×Ó²Ëµ¥ -->
-								<!-- ´ø×Ó²Ëµ¥ -->	
+							<logic:iterate id="menu2" name="menu1" property="children">	<!-- äºŒçº§å­èœå• -->
+								<!-- å¸¦å­èœå• -->	
 								<logic:empty name="menu2" property="entry">
 									<h2 onclick="javascript:ShowMenu(this,'${menu2.code}',2)"> + ${menu2.name}</h2>
 									<ul id="${menu2.code}" class="no">
-										<logic:iterate id="menu3" name="menu2" property="children">	<!-- Èı¼¶×Ó²Ëµ¥ -->
+										<logic:iterate id="menu3" name="menu2" property="children">	<!-- ä¸‰çº§å­èœå• -->
 											<html:link page="${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)"><li>${menu3.name}</li></html:link>
 										</logic:iterate>
 									</ul>
 								</logic:empty>
-								<!-- ²»´ø×Ó²Ëµ¥:Èı¼¶²Ëµ¥ÌîĞ´Îª×Ô¼º -->
+								<!-- ä¸å¸¦å­èœå•:ä¸‰çº§èœå•å¡«å†™ä¸ºè‡ªå·± -->
 								<logic:notEmpty name="menu2" property="entry">
 									<h2>&nbsp;&nbsp;&nbsp;<html:link page="${menu2.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu2.name}</html:link>
 									</h2>
@@ -187,13 +183,13 @@ $().ready(function(){
 				<div style="overflow-x:hidden; padding-top:1px;"></div>
 		</div>
 
-		<!--ÏÔÊ¾Òş²Ø°´Å¥-->
+		<!--æ˜¾ç¤ºéšè—æŒ‰é’®-->
 		<div class="main_bt">
-			<input type="image" id="yc" onclick="menu_xsyc()" src="images/yc_icon.gif" onfocus="this.blur()" title="µã»÷ÏÔÊ¾/Òş²Ø×ó²à²Ëµ¥"
+			<input type="image" id="yc" onclick="menu_xsyc()" src="images/yc_icon.gif" onfocus="this.blur()" title="ç‚¹å‡»æ˜¾ç¤º/éšè—å·¦ä¾§èœå•"
 				width="7" height="80" border="0"/>
 		</div>
 
-		<!--ÔØÈëÄÚÈİÇø-->
+		<!--è½½å…¥å†…å®¹åŒº-->
 		<div class="main">
 			<iframe name="main_area" frameborder="0" src="pageHome.jsp"></iframe>
 		</div>

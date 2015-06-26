@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -43,7 +39,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -55,7 +51,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(curnum < prenum){
-						alert('±¾ÆÚ¶ÁÊı²»ÄÜĞ¡ÓÚÉÏÆÚ¶ÁÊı');
+						alert('æœ¬æœŸè¯»æ•°ä¸èƒ½å°äºä¸ŠæœŸè¯»æ•°');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -84,7 +80,7 @@
 				    	 $('#payerName').val(ownerName);
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·şÎñÆ÷Ê§°Ü");
+	                     alert("è¿æ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 			}
@@ -106,44 +102,44 @@
 					  <caption>${ACT.name}</caption>
 					   <!-- 
 					   <tr>
-						    <td class="formlabel nes">ÊÇ·ñĞ¡ÇøÒµÖ÷</td>
+						    <td class="formlabel nes">æ˜¯å¦å°åŒºä¸šä¸»</td>
 						    <td>
 						    	<html:select property="isInternal" onchange="change()" styleId="isInternal">
 						    		<html:options collection="yesNos" property="value" labelProperty="name" />
 						    	</html:select>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr> -->
 					   <tr class="houseSn">
-						    <td class="formlabel nes">·¿Îİ±àºÅ</td>
+						    <td class="formlabel nes">æˆ¿å±‹ç¼–å·</td>
 						    <td>
 						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getOwnerName()"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">¸¶¿îÈË</td>
+						    <td class="formlabel nes">ä»˜æ¬¾äºº</td>
 						    <td>
 						    	<html:text property="payerName" styleId="payerName" styleClass="{required:true}" maxlength="10" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">½ğ¶î</td>
+						    <td class="formlabel nes">é‡‘é¢</td>
 						    <td>
 						    <html:text property="amount"  styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÓÃÍ¾</td>
+						    <td class="formlabel nes">ç”¨é€”</td>
 						    <td>
 						    <html:text property="purpose"  styleId="purpose" maxlength="25"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÓÃÍ¾</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥ç”¨é€”</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    <html:text property="remark"  styleId="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
@@ -151,8 +147,8 @@
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/depositBill.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/depositBill.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -162,7 +158,7 @@
 			</div>
 		</div>	
 	</html:form>
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

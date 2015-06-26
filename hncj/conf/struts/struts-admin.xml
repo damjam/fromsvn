@@ -3,7 +3,7 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<package name="admin" extends="struts-default" namespace="/">
+	<package name="admin" extends="default" namespace="/">
 		<action name="userInfoAction" class="userInfoAction">
 			<result name="toListPage">/pages/admin/privilege/userInfoList.jsp</result>
 			<result name="toAddPage">/pages/admin/privilege/userInfoAdd.jsp</result>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 
 <jsp:directive.page import="flink.util.Paginater;" />
 
@@ -48,7 +48,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄ½ÇÉ«£¬ÓÐÇÒ½öÓÐÒ»Ìõ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„è§’è‰²ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 						return false;
 					}
 					
@@ -76,10 +76,10 @@
 				$('#tempType').val($('#hidTempType').val());
 			});
 	    </script> 
-	  <title>Ñ¡ÔñÎÄ¼þÄ£°å</title>
+	  <title>é€‰æ‹©æ–‡ä»¶æ¨¡æ¿</title>
 	</head>
 	<body>
-	<!-- ²éÑ¯¹¦ÄÜÇø -->
+	<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 	<form id="query" action="templateConfig.do?action=queryPopUpTemplateConfig"
 		method="post">
 		<div class="userbox">
@@ -94,18 +94,18 @@
 						cellpadding="0">
 						<tr>
 							<td colspan="4" align="left"  nowrap="nowrap">
-								<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÎÄ¼þÄ£°åÅäÖÃ²éÑ¯</span>
+								<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">æ–‡ä»¶æ¨¡æ¿é…ç½®æŸ¥è¯¢</span>
 							</td>
 						</tr>
 						<tr>
 							<td height="30" align="right"  nowrap="nowrap">
-								Ä£°å±àºÅ
+								æ¨¡æ¿ç¼–å·
 							</td>
 							<td height="30"  nowrap="nowrap">
 								<input type="text" class="userbox_bt" style="width: 100px;" name="tempId" id="tempId"  maxlength="6" value ="${templateConfig.tempId}"/>
 							</td>
 							<td height="30" align="right"  nowrap="nowrap">
-								Ä£°åÃû³Æ
+								æ¨¡æ¿åç§°
 							</td>
 							<td height="30"  nowrap="nowrap">
 								<input type="text"  name="tempName" id="tempName"  maxlength="6" value ="${templateConfig.tempName}"/>
@@ -113,13 +113,13 @@
 						</tr>
 						<tr>
 							<td height="30" align="right"  nowrap="nowrap">
-								»ú¹¹Ãû³Æ
+								æœºæž„åç§°
 							</td>
 							<td height="30"  nowrap="nowrap">
 								<input type="text" style="width: 100px;" name="branchName" id="branchName"  maxlength="6" value ="${templateConfig.branchName}"/>
 							</td>
 							<td height="30" align="right"  nowrap="nowrap">
-								ÉÌ»§Ãû³Æ
+								å•†æˆ·åç§°
 							</td>
 							<td height="30"  nowrap="nowrap">
 								<input type="text"  name="merchantName" id="merchantName"  maxlength="6" value ="${templateConfig.merchantName}"/>
@@ -127,25 +127,25 @@
 						</tr>
 						<tr>
 							<td height="30" align="right">
-								ÒµÎñÀàÐÍ
+								ä¸šåŠ¡ç±»åž‹
 							</td>
 							<td height="30"  nowrap="nowrap">
 								<select  id="busiType" name="busiType" >
-									<option value='' >---ÇëÑ¡Ôñ---</option>
-									<option value='0' >´ú¸¶</option>
-									<option value='1' >´úÊÕ</option>
+									<option value='' >---è¯·é€‰æ‹©---</option>
+									<option value='0' >ä»£ä»˜</option>
+									<option value='1' >ä»£æ”¶</option>
 								</select>
 								<input id="hidBusiType" value="${templateConfig.busiType}" type="hidden"/>
 							</td>
 							<td height="30" align="right"  nowrap="nowrap">
-								Ä£°åÀàÐÍ
+								æ¨¡æ¿ç±»åž‹
 							</td>
 							<td height="30"  nowrap="nowrap">
 							<select   id="tempType" name="tempType" >
-								<option value='' >---ÇëÑ¡Ôñ---</option>
-								<option value='0' >½»Ò×ÎÄ¼þ</option>
-								<option value='1' >ÇåËãÎÄ¼þ</option>
-								<option value='2' >»ØÅÌÎÄ¼þ</option>
+								<option value='' >---è¯·é€‰æ‹©---</option>
+								<option value='0' >äº¤æ˜“æ–‡ä»¶</option>
+								<option value='1' >æ¸…ç®—æ–‡ä»¶</option>
+								<option value='2' >å›žç›˜æ–‡ä»¶</option>
 							</select>
 							<input id="hidTempType" value="${templateConfig.tempType}" type="hidden" />
 						  </td>
@@ -156,8 +156,8 @@
 								&nbsp;
 							</td>
 							<td height="30" colspan="3">
-								<input type="submit" value="²éÑ¯" />
-								<input id="btnClear" style="margin-left: 30px;" type="button" value="Çå³ý" />
+								<input type="submit" value="æŸ¥è¯¢" />
+								<input id="btnClear" style="margin-left: 30px;" type="button" value="æ¸…é™¤" />
 							</td>
 						</tr>
 					</table>
@@ -169,43 +169,43 @@
 			</div>
 		</div>
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							Ä£°å±àºÅ
+							æ¨¡æ¿ç¼–å·
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							Ä£°åÃû³Æ
+							æ¨¡æ¿åç§°
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ËùÊô»ú¹¹
+							æ‰€å±žæœºæž„
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							»ú¹¹Ãû³Æ
+							æœºæž„åç§°
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ËùÊôÉÌ»§
+							æ‰€å±žå•†æˆ·
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ÉÌ»§Ãû³Æ
+							å•†æˆ·åç§°
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ÒµÎñÀàÐÍ
+							ä¸šåŠ¡ç±»åž‹
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							Ä£°åÀàÐÍ
+							æ¨¡æ¿ç±»åž‹
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ÊÇ·ñÄ¬ÈÏ
+							æ˜¯å¦é»˜è®¤
 						</th>
 						<th align="left" nowrap="nowrap" class="titlebg">
-							ÎÄ¼þÀàÐÍ
+							æ–‡ä»¶ç±»åž‹
 						</th>
 					</tr>
 				</thead>
@@ -215,7 +215,7 @@
 					<c:if test="${empty templateConfigList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -247,33 +247,33 @@
 								<td align="left" nowrap="nowrap">
 									<c:choose>
 										<c:when test="${templateConfig.busiType eq '0'}">
-											´ú¸¶
+											ä»£ä»˜
 										</c:when>
 										<c:when test="${templateConfig.busiType eq '1'}">
-											´úÊÕ
+											ä»£æ”¶
 										</c:when>
 									</c:choose>
 								</td>
 								<td align="left" nowrap="nowrap">
 									<c:choose>
 										<c:when test="${templateConfig.tempType eq '0'}">
-											½»Ò×ÎÄ¼þ
+											äº¤æ˜“æ–‡ä»¶
 										</c:when>
 										<c:when test="${templateConfig.tempType eq '1'}">
-											ÇåËãÎÄ¼þ
+											æ¸…ç®—æ–‡ä»¶
 										</c:when>
 										<c:when test="${templateConfig.tempType eq '2'}">
-											»ØÅÌÎÄ¼þ
+											å›žç›˜æ–‡ä»¶
 										</c:when>
 									</c:choose>
 								</td>
 								<td align="left" nowrap="nowrap">
 									<c:choose>
 										<c:when test="${templateConfig.ifDefault eq 'Y'}">
-											ÊÇ
+											æ˜¯
 										</c:when>
 										<c:when test="${templateConfig.ifDefault eq 'N'}">
-											·ñ
+											å¦
 										</c:when>
 									</c:choose>
 								</td>
@@ -304,9 +304,9 @@
 		<tr></tr>
 		<tr>
 			<td height="30" colspan="4" align="center">
-				<input type="submit" value="È·¶¨" id="selTemplateConfig"/>
-				<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearTemplateConfig"/>
-				<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+				<input type="submit" value="ç¡®å®š" id="selTemplateConfig"/>
+				<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearTemplateConfig"/>
+				<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 			</td>
 		</tr>
 	</table>

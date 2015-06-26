@@ -1,19 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html>
 <head>
 	
 		<%@ include file="/pages/common/meta.jsp" %>
@@ -24,20 +13,14 @@
 		<f:js src="/js/paginater.js"/>
 		<f:js src="/js/common.js"/>
 		<f:css href="/css/page.css"/>
-
-
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 		</script>
 </head>
 
 <body>
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-	<!-- ²éÑ¯¹¦ÄÜÇø -->
-	<html:form action="sysLog.do?action=querySysLog" method="post" >
+	<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
+	<form action="sysLog.do?action=querySysLog" method="post">
 		<div class="userbox">
 		<b class="b1"></b>
 		<b class="b2"></b>
@@ -45,23 +28,20 @@
 		<b class="b4"></b>
 		<div class="contentb">
 		<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
-		  <caption>ÏµÍ³ÈÕÖ¾²éÑ¯</caption>
+		  <caption>ç³»ç»Ÿæ—¥å¿—æŸ¥è¯¢</caption>
 		  <tr>
-		    <td class="formlabel">Ä£¿é±àºÅ</td>
-		    <td><input name="limitId" type="text" id="limitId" value ="${param.limitId}" /></td>
-		    <td class="formlabel">ÈÕÖ¾¼¶±ğ</td>
+		    <td class="formlabel">æ¨¡å—ç¼–å·</td>
+		    <td><s:textfield name="limitId" id="limitId"/></td>
+		    <td class="formlabel">æ—¥å¿—çº§åˆ«</td>
 		    <td>
-				<html:select property="logClass">
-					<html:option value="">---ÇëÑ¡Ôñ---</html:option>
-					<html:options collection="logClassTypes" labelProperty="name" property="value"/>
-				</html:select>
+		    	<s:select list="#request.logClassTypes" name="logClass" headerKey="" headerValue="---è¯·é€‰æ‹©---" listKey="name" listValue="value"></s:select>
 			</td>
 		  </tr>
 		   <tr>
 		    <td></td>
 		    <td colspan="5">
-	   			 <input type="submit" value="²éÑ¯"/>&nbsp;&nbsp;
-	   			 <input type="button" value="ÖØÖÃ" onclick="FormUtils.reset('query')"/>
+	   			 <input type="submit" value="æŸ¥è¯¢"/>&nbsp;&nbsp;
+	   			 <input type="button" value="é‡ç½®" onclick="FormUtils.reset('query')"/>
 		    </td>
 		  </tr>
 		  </table>
@@ -71,41 +51,41 @@
 		<b class="b2"></b>
 		<b class="b1"></b>	
 		</div>
-	</html:form>
-		<!-- Êı¾İÁĞ±íÇø -->
+	</form>
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
-			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table class='data_grid' style="width: 100%">
 				<thead>
 				  <tr align="center">
-				    <th class="titlebg">Ä£¿é±àºÅ</th>
-				    <th class="titlebg">Ä£¿éÃû³Æ</th>
-				    <th class="titlebg">ÈÕÖ¾¼¶±ğ</th>
-				    <th class="titlebg">´´½¨Ê±¼ä</th>
-				    <th class="titlebg">ÄÚÈİ</tr></th>
+				    <th class="titlebg">æ¨¡å—ç¼–å·</th>
+				    <th class="titlebg">æ¨¡å—åç§°</th>
+				    <th class="titlebg">æ—¥å¿—çº§åˆ«</th>
+				    <th class="titlebg">åˆ›å»ºæ—¶é—´</th>
+				    <th class="titlebg">å†…å®¹</th>
 				    <!-- 
-				    <th class="titlebg">²Ù×÷</th> -->
+				    <th class="titlebg">æ“ä½œ</th> -->
 				  </tr>
 				 </thead>
 				 <tbody>
 			  	<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-				<logic:iterate id="sysLog" name="list">
+				<c:forEach var="element" items="${list}">
 				  <tr align="center">
-				    <td>${sysLog.limitId}</td>
-				    <td>${sysLog.limitName}</td>
-				    <td><f:type className="LogClassType" value="${sysLog.logClass}"/></td>
+				    <td>${element.limitId}</td>
+				    <td>${element.limitName}</td>
+				    <td><f:type className="LogClassType" value="${element.logClass}"/></td>
 				    <td>
-						<fmt:formatDate value="${sysLog.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>   
+						<fmt:formatDate value="${element.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
 					</td>
-					 <td title="${sysLog.content}">${sysLog.contentAbbr}</td>
+					 <td title="${element.content}">${element.contentAbbr}</td>
 				  </tr>
-				 </logic:iterate>
+				 </c:forEach>
 				 </f:showDataGrid>
 				</tbody>
 			</table>
 			<f:paginate />	
 		</div>
 
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
  	<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 </body>
 </html>

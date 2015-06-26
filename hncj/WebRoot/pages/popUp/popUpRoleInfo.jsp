@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -18,7 +18,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>½ÇÉ«Ñ¡Ôñ</title>
+		<title>è§’è‰²é€‰æ‹©</title>
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -47,7 +47,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄ½ÇÉ«£¬ÓÐÇÒ½öÓÐÒ»Ìõ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„è§’è‰²ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 						return false;
 					}
 					
@@ -90,19 +90,19 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">½ÇÉ«Ñ¡Ôñ</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">è§’è‰²é€‰æ‹©</span>
 								</td>
 							</tr>
 							<tr>
 								
 								<td height="30" align="right">
-									½ÇÉ«Ãû³Æ
+									è§’è‰²åç§°
 								</td>
 								<td height="30">
 									<input  style="width: 260px;" name="roleName" type="text"  value="${param.roleName }"/>
 								</td>
 								<td height="30" align="right" nowrap="nowrap">
-									È¨ÏÞ×é
+									æƒé™ç»„
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="limitGroupName"  value="${param.limitGroupName }"/>
@@ -115,8 +115,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" /> 
-									<input id="btnClear" style="margin-left: 30px;" type="button" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" /> 
+									<input id="btnClear" style="margin-left: 30px;" type="button" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -128,34 +128,34 @@
 				</div>
 			</div>
 		</form>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							½ÇÉ«±àºÅ
+							è§’è‰²ç¼–å·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							½ÇÉ«Ãû³Æ
+							è§’è‰²åç§°
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							È¨ÏÞ×é
+							æƒé™ç»„
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÓÃ»§ÀàÐÍ
+							ç”¨æˆ·ç±»åž‹
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							»ú¹¹
+							æœºæž„
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÉÌ»§
+							å•†æˆ·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							²¿ÃÅ
+							éƒ¨é—¨
 						</th>
 					</tr>
 				</thead>
@@ -165,7 +165,7 @@
 					<c:if test="${empty roleInfoList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -186,13 +186,13 @@
 									&nbsp;${roleInfo.limitGroupName}
 								</td>
 								<td align="center" nowrap="nowrap">
-									<c:if test="${roleInfo.userType eq '0'}">ÒøÁªÍøÂç±¾²¿</c:if>
-									<c:if test="${roleInfo.userType eq '1'}">ÒøÁªÌåÏµ»ú¹¹</c:if>
-									<c:if test="${roleInfo.userType eq '2'}">ÇþµÀ»ú¹¹</c:if>
-									<c:if test="${roleInfo.userType eq '3'}">µÚÈý·½´úÀí»ú¹¹</c:if>
-									<c:if test="${roleInfo.userType eq '4'}">ÊÕµ¥»ú¹¹</c:if>
-									<c:if test="${roleInfo.userType eq '5'}">ÒøÁª·ÖÖ§»ú¹¹</c:if>
-									<c:if test="${roleInfo.userType eq '30'}">ÉÌ»§</c:if>
+									<c:if test="${roleInfo.userType eq '0'}">é“¶è”ç½‘ç»œæœ¬éƒ¨</c:if>
+									<c:if test="${roleInfo.userType eq '1'}">é“¶è”ä½“ç³»æœºæž„</c:if>
+									<c:if test="${roleInfo.userType eq '2'}">æ¸ é“æœºæž„</c:if>
+									<c:if test="${roleInfo.userType eq '3'}">ç¬¬ä¸‰æ–¹ä»£ç†æœºæž„</c:if>
+									<c:if test="${roleInfo.userType eq '4'}">æ”¶å•æœºæž„</c:if>
+									<c:if test="${roleInfo.userType eq '5'}">é“¶è”åˆ†æ”¯æœºæž„</c:if>
+									<c:if test="${roleInfo.userType eq '30'}">å•†æˆ·</c:if>
 								</td>
 								<td align="center" nowrap="nowrap">
 									&nbsp;${roleInfo.branchName}
@@ -217,9 +217,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="È·¶¨" id="selRoleInfo"/>
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearRoleInfo"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selRoleInfo"/>
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearRoleInfo"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

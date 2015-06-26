@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -42,7 +35,7 @@
 		<f:msg styleClass="msg" />
 		<html:form action="/account.do?action=detail" styleId="queryForm">
 			<html:hidden property="acctNo"/>
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -50,18 +43,18 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ÈÕÆÚ
+								æ—¥æœŸ
 							</td>
 							<td>
 								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
-								±ä¶¯ÀàÐÍ
+								å˜åŠ¨ç±»åž‹
 							</td>
 							<td>
 								<html:select property="type" styleId="type">
-						    		<html:option value="">---È«²¿---</html:option>
+						    		<html:option value="">---å…¨éƒ¨---</html:option>
 						    		<html:options collection="changeTypes" property="value" labelProperty="name" />
 						    	</html:select>
 							</td>
@@ -69,28 +62,28 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >Á÷Ë®ºÅ</td>
-						 	<td >³öÈëÕËÀàÐÍ</td>
-						 	<td >½»Ò×ÀàÐÍ</td>
-						 	<td >½»Ò×½ð¶î</td>
-						 	<td >½»Ò×Ê±¼ä</td>
-						    <td >¹ØÁªÕËµ¥ºÅ</td>
-						    <td >µ±Ç°Óà¶î</td>
-						    <td >±¸×¢</td>
-						    <td >²Ù×÷</td>
+						 	<td >æµæ°´å·</td>
+						 	<td >å‡ºå…¥è´¦ç±»åž‹</td>
+						 	<td >äº¤æ˜“ç±»åž‹</td>
+						 	<td >äº¤æ˜“é‡‘é¢</td>
+						 	<td >äº¤æ˜“æ—¶é—´</td>
+						    <td >å…³è”è´¦å•å·</td>
+						    <td >å½“å‰ä½™é¢</td>
+						    <td >å¤‡æ³¨</td>
+						    <td >æ“ä½œ</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
@@ -106,7 +99,7 @@
 						    	<td>${element.remark}</td>
 						    	<td class="redlink">
 						    		<c:if test="${element.type eq '01'}">
-						    			<a href="javascript:openReport(${element.id})">´òÓ¡</a>
+						    			<a href="javascript:openReport(${element.id})">æ‰“å°</a>
 						    		</c:if>
 						    	</td>
 						    </tr>

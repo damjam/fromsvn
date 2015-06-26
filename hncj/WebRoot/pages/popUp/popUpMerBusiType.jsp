@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -18,7 +18,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Ñ¡ÔñÉÌ»§ÒµÎñÀàÐÍ</title>
+		<title>é€‰æ‹©å•†æˆ·ä¸šåŠ¡ç±»åž‹</title>
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -55,15 +55,15 @@
 					
 					var merchantNo=$('#merchantNo').val();
 					if(merchantNo="" ||merchantNo.length==0){
-						alert("ÇëÑ¡ÔñÉÌ»§!");
+						alert("è¯·é€‰æ‹©å•†æˆ·!");
 						return false;
 					}
 					
 	
-					//ÅÐ¶ÏÊÇ·ñÑ¡Ôñ½»Ò×ÀàÐÍ
+					//åˆ¤æ–­æ˜¯å¦é€‰æ‹©äº¤æ˜“ç±»åž‹
 					var tranNo=$('#selTranNo').val();
 					if(tranNo="" ||tranNo.length==0){
-						alert("ÇëÑ¡Ôñ½»Ò×ÀàÐÍ!");
+						alert("è¯·é€‰æ‹©äº¤æ˜“ç±»åž‹!");
 						return false;
 					}
 					
@@ -76,7 +76,7 @@
 					});
 					
 					if(i==0){
-						alert("ÇëÑ¡ÔñÒµÎñÀàÐÍ!")
+						alert("è¯·é€‰æ‹©ä¸šåŠ¡ç±»åž‹!")
 						return false;
 					}
 				
@@ -87,7 +87,7 @@
 			
 			$(function(){
 			
-				//ÐÞ¸ÄµÄÊ±ºòÓÃ
+				//ä¿®æ”¹çš„æ—¶å€™ç”¨
 				var ssMerchantNo=$('#merchantNo').val();
 				if(null!=ssMerchantNo && ssMerchantNo.length>0){
 					$('#merchantName').val(ssMerchantNo);
@@ -110,35 +110,35 @@
 			<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 				<tr>
 					<td colspan="4" align="left">
-						<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÉÌ»§ÒµÎñÀàÐÍÑ¡Ôñ</span>
+						<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">å•†æˆ·ä¸šåŠ¡ç±»åž‹é€‰æ‹©</span>
 						<br/>
 					</td>
 				</tr>
 				<tr><td colspan="4" align="center"><f:msg /></td></tr>
 				<tr >
 					<td height="30" align="right" nowrap="nowrap" class="formlabel nes">
-						ÉÌ»§±àºÅ
+						å•†æˆ·ç¼–å·
 					</td>
 					<td  height="30" class="form" >
 						<input type="text" value="${param.merchantName}" id="merchantName" name="merchantName" class="{required:true}"/>
-						<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>" alt="ËÑË÷" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName')"/>
+						<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>" alt="æœç´¢" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName')"/>
 						<span class="field_tipinfo"></span>
-						<span class="error_tipinfo">ÇëÑ¡ÔñÉÌ»§</span>							
+						<span class="error_tipinfo">è¯·é€‰æ‹©å•†æˆ·</span>							
 						<input type="hidden" value="${popUpMerBusiTypeOperForm.merchantNo}" id="merchantNo" name="merchantNo"/>	
 						<input type="hidden" id="ssMerchantNo" name="ssMerchantNo" value="{param.merchantNo}"/>	
 					</td>
 					<td height="30" align="right" nowrap="nowrap" class="formlabel nes">
-						½»Ò×ÀàÐÍ
+						äº¤æ˜“ç±»åž‹
 					</td>
 					<td  height="30" colspan="3">
 						<select name="tranNo" id="selTranNo"  class="{required:true}">
-							<option value="">---ÇëÑ¡Ôñ---</option>
+							<option value="">---è¯·é€‰æ‹©---</option>
 							<c:forEach items="${tranList}" var="tran">
 								<option value="${tran.tranNo}">${tran.tranName}</option>
 							</c:forEach>
 						</select>
 							<span class="field_tipinfo"></span>
-						<span class="error_tipinfo">ÇëÑ¡Ôñ½»Ò×ÀàÐÍ</span>	
+						<span class="error_tipinfo">è¯·é€‰æ‹©äº¤æ˜“ç±»åž‹</span>	
 						<input type="hidden" value="${popUpMerBusiTypeOperForm.tranNo}" id="hidTranNo"/>	
 					</td>
 				</tr>
@@ -149,8 +149,8 @@
 						&nbsp;
 					</td>
 					<td height="30" colspan="3">
-						<input style="margin-left: 30px;" type="button"" value="±£´æ" id="saveMerBusiType"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input style="margin-left: 30px;" type="button"" value="ä¿å­˜" id="saveMerBusiType"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>
@@ -162,19 +162,19 @@
 			</div>
 		</div>
 	
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÒµÎñ±àºÅ
+							ä¸šåŠ¡ç¼–å·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÒµÎñÀàÐÍ
+							ä¸šåŠ¡ç±»åž‹
 						</th>
 					</tr>
 				</thead>
@@ -182,7 +182,7 @@
 					<c:if test="${empty merchantBusiTypeOperList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>

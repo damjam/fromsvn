@@ -1,19 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
-		<title>ÏûÏ¢ÁÐ±í</title>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
+		<title>æ¶ˆæ¯åˆ—è¡¨</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -42,7 +35,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/noticeMsgAction.do?action=list" styleId="noticeMsgForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -50,14 +43,14 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								´´½¨ÈÕÆÚ
+								åˆ›å»ºæ—¥æœŸ
 							</td>
 							<td>
 								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker()"/>&nbsp;-
 								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker()"/>
 							</td>
 							<td class="formlabel">
-								Ö÷Ìâ
+								ä¸»é¢˜
 							</td>
 							<td>
 								<html:text property="subject" styleId="subject"  maxlength="25"/>
@@ -66,27 +59,27 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ÐÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ–°å¢ž" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >±àºÅ</td>
-						    <td >Ö÷Ìâ</td>
-						    <td width="120px;">ÄÚÈÝ</td>
-						    <td >¿Í»§ÀàÐÍ</td>
-						    <td >ÒµÎñÀàÐÍ</td>
-						    <td >ËùÊô»ú¹¹</td>
-						    <td >Ê±¼ä</td>
+						 	<td >ç¼–å·</td>
+						    <td >ä¸»é¢˜</td>
+						    <td width="120px;">å†…å®¹</td>
+						    <td >å®¢æˆ·ç±»åž‹</td>
+						    <td >ä¸šåŠ¡ç±»åž‹</td>
+						    <td >æ‰€å±žæœºæž„</td>
+						    <td >æ—¶é—´</td>
 						 </tr>
 					</thead>
 					

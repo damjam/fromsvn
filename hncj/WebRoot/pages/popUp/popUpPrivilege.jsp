@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -48,7 +48,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("��ѡ����Ҫ��Ȩ�ޣ����ҽ���һ��");
+						alert("请选择需要的权限，有且仅有一条");
 						return false;
 					}
 					
@@ -90,18 +90,18 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">Ȩ��ѡ��</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">权限选择</span>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									Ȩ�ޱ��
+									权限编号
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="limitId" id="limitId" value="${privilege.limitId }"/>
 								</td>
 								<td height="30" align="right">
-									Ȩ������
+									权限名称
 								</td>
 								<td height="30">
 									<input  style="width: 260px;" name="limitName" type="text" id="limitName" value="${privilege.limitName }"/>
@@ -114,8 +114,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="��ѯ" /> 
-									<input id="btnClear" style="margin-left: 30px;" type="button" value="���" />
+									<input type="submit" value="查询" /> 
+									<input id="btnClear" style="margin-left: 30px;" type="button" value="清除" />
 								</td>
 							</tr>
 						</table>
@@ -127,19 +127,19 @@
 				</div>
 			</div>
 
-			<!-- �����б��� -->
+			<!-- 数据列表区 -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								��ѡ��
+								请选择
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								Ȩ�ޱ��
+								权限编号
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								Ȩ������
+								权限名称
 							</th>
 						</tr>
 					</thead>
@@ -149,7 +149,7 @@
 						<c:if test="${empty privilegeList}">
 							<tr>
 								<td colspan="10">
-									û������
+									没有数据
 								</td>
 							</tr>
 						</c:if>
@@ -182,9 +182,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="ȷ��" id="selPrivilege"/>
-					<input style="margin-left: 30px;" type="submit" value="���" id="clearPrivilege"/>
-					<input style="margin-left: 30px;" type="button" value="�ر�" id="winClose"/>
+					<input type="submit" value="确定" id="selPrivilege"/>
+					<input style="margin-left: 30px;" type="submit" value="清除" id="clearPrivilege"/>
+					<input style="margin-left: 30px;" type="button" value="关闭" id="winClose"/>
 				</td>
 			</tr>
 		</table>

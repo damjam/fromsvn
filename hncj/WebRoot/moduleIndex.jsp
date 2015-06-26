@@ -13,7 +13,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		
-		<!-- 登陆成功提示区 -->
+		<!-- 登录成功提示区 -->
 		<div class="okbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
@@ -28,9 +28,9 @@
 									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
+									尊敬的用户，您已经成功登录${comInfo.sp}，请通过导航菜单进行相应功能操作！
 									如果您在使用过程中有疑问，请联系
-									<span class="redfont">技术支持电话：<strong>18520827190</strong>
+									<span class="redfont">技术支持电话：<strong>${comInfo.tel}</strong>
 									</span>
 								</p>
 							</td>

@@ -1,12 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -33,7 +29,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -65,7 +61,7 @@
 				    	 $('#ownerCel').val(ownerCel);
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·þÎñÆ÷Ê§°Ü");
+	                     alert("è¿žæŽ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 			}
@@ -108,83 +104,83 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">¼Æ·ÑÏîÃû³Æ</td>
+						    <td class="formlabel nes">è®¡è´¹é¡¹åç§°</td>
 						    <td>
 						    	<html:text property="itemName" styleId="itemName" maxlength="10" styleClass="{required:true}"></html:text>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">¼Æ·ÑÏîÄ¿</td>
+						    <td class="formlabel nes">è®¡è´¹é¡¹ç›®</td>
 						    	<td>
 						    	<html:select property="item">
 						    		<html:options collection="chargeTypes" property="value" labelProperty="name" />
 						    	</html:select>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">¼Æ·Ñ·½Ê½</td>
+						    <td class="formlabel nes">è®¡è´¹æ–¹å¼</td>
 						    <td>
 						    	<html:select property="way" onchange="changeWay(this.value);" styleId="way">
 						    		<html:options collection="chargeWays" property="value" labelProperty="name" />
 						    	</html:select>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr class="unit">
-						    <td class="formlabel nes">¼Æ·Ñµ¥¼Û</td>
+						    <td class="formlabel nes">è®¡è´¹å•ä»·</td>
 						    <td>
 						    	<html:text property="unitPrice" styleId="unitPrice" maxlength="10" styleClass="{num:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕýÈ·µÄÊý×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
-						    <td class="formlabel nes">Æð²½¼Û</td>
+						    <td class="formlabel nes">èµ·æ­¥ä»·</td>
 						    <td>
 						    	<html:text property="basePrice" styleId="basePrice" maxlength="10" styleClass="{num:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕýÈ·µÄÊý×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
-						    <td class="formlabel nes">Æð²½Â¥²ã</td>
+						    <td class="formlabel nes">èµ·æ­¥æ¥¼å±‚</td>
 						    <td>
 						    	<html:text property="baseFloor" styleId="baseFloor" maxlength="10" styleClass="{digit:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕýÈ·µÄÊý×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
-						    <td class="formlabel nes">µÝÔö¼Û</td>
+						    <td class="formlabel nes">é€’å¢žä»·</td>
 						    <td>
 						    	<html:text property="stepPrice" styleId="stepPrice" maxlength="10" styleClass="{num:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕýÈ·µÄÊý×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
-						    <td class="formlabel nes">·â¶¥¼Û</td>
+						    <td class="formlabel nes">å°é¡¶ä»·</td>
 						    <td>
 						    	<html:text property="capPrice" styleId="capPrice" maxlength="10" styleClass="{num:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕýÈ·µÄÊý×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr class="seg">
-						    <td class="formlabel nes">·Ö¶Î¼Û¸ñ</td>
+						    <td class="formlabel nes">åˆ†æ®µä»·æ ¼</td>
 						    <td>
 						    	<html:text property="segRule" styleId="segRule" maxlength="30"></html:text>
-						    	<span class="field_tipinfo">¸ñÊ½Èç:1-18:10;19-32:20</span>
-						    	<span class="error_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">æ ¼å¼å¦‚:1-18:10;19-32:20</span>
+						    	<span class="error_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel">±¸×¢</td>
+					   		<td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    	<html:text property="remark" styleId="remark" maxlength="25"></html:text>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/chargeItem.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/chargeItem.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -194,7 +190,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

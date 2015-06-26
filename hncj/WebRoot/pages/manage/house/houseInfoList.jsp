@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -38,7 +31,7 @@
 			});
 			
 			function delInfo(id){
-				if(window.confirm("È·ÈÏÉ¾³ý?")){
+				if(window.confirm("ç¡®è®¤åˆ é™¤?")){
 					gotoUrl('/houseInfo.do?action=delete&id='+id);
 				}
 			}
@@ -49,7 +42,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/houseInfo.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -57,36 +50,36 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								Â¥ºÅ
+								æ¥¼å·
 							</td>
 							<td>
 								<html:select property="buildingNo" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 									<html:options collection="buildingNos" property="key" labelProperty="value" />
 								</html:select>
 							</td>
 							<td class="formlabel">
-								µ¥Ôª
+								å•å…ƒ
 							</td>
 							<td>
 								<html:select property="unitNo" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 									<html:options collection="unitNos" property="key" labelProperty="value" />
 								</html:select>
 							</td>
 							<td class="formlabel">
-								Â¥²ã
+								æ¥¼å±‚
 							</td>
 							<td>
 								<html:select property="floor" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 									<html:options collection="floors" property="key" labelProperty="value" />
 								</html:select>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel">
-								·¿ÎÝ±àºÅ
+								æˆ¿å±‹ç¼–å·
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
@@ -95,29 +88,29 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ÐÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ–°å¢ž" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >·¿ÎÝ±àºÅ</td>
-						    <td >Â¥ºÅ</td>
-						    <td >µ¥Ôª</td>
-						    <td >Â¥²ã</td>
-						    <td >ÃèÊö</td>
-						    <td >Ãæ»ý(Æ½Ã×)</td>
-						    <td >½»·¿ÈÕÆÚ</td>
-						    <td >´´½¨Ê±¼ä</td>
-						    <td >²Ù×÷</td>
+						 	<td >æˆ¿å±‹ç¼–å·</td>
+						    <td >æ¥¼å·</td>
+						    <td >å•å…ƒ</td>
+						    <td >æ¥¼å±‚</td>
+						    <td >æè¿°</td>
+						    <td >é¢ç§¯(å¹³ç±³)</td>
+						    <td >äº¤æˆ¿æ—¥æœŸ</td>
+						    <td >åˆ›å»ºæ—¶é—´</td>
+						    <td >æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -133,7 +126,7 @@
 								<td>${element.deliveryDate}</td>
 								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
-							    	<a href="javascript:delInfo('${element.houseSn}')" >É¾³ý</a>
+							    	<a href="javascript:delInfo('${element.houseSn}')" >åˆ é™¤</a>
 							    </td>
 						    </tr>
 						</logic:iterate>

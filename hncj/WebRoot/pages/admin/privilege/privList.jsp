@@ -1,11 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -16,9 +12,6 @@
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/paginater.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			var parent = '${param.parent}';
 			function goBack(){
@@ -29,8 +22,8 @@
     
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg"/>
-		<html:form action="/privilegeAction.do?action=listPrivs" styleId="searchForm">
+		<f:msg />
+		<form action="privilegeAction.do?action=listPrivs" id="searchForm" method="post">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -40,29 +33,29 @@
 				<div class="contentb">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0" style="line-height:30px">
 						<tr>
-							<td class="formlabel" align="left">х╗очID</td>
-							<td><html:text property="limitId" maxlength="50"/></td>
+							<td class="formlabel" align="left">Ф²┐И≥░ID</td>
+							<td><s:textfield name="limitId" maxlength="50"/></td>
 							<td class="formlabel" align="left">
-								х╗очцШЁф
+								Ф²┐И≥░Е░█Г╖╟
 							</td>
 							<td>
-								<html:text property="limitName" styleId="limitName" styleClass="userbox_bt"/>
+								<s:textfield name="limitName" id="limitName" class="userbox_bt"/>
 							</td>
 							<td class="formlabel" align="left">
-								╦╦╪╤х╗очID
+								Г┬╤Г╨╖Ф²┐И≥░ID
 							</td>
 							<td>
-								<html:text property="parent" styleId="parent" styleClass="userbox_bt"/>
+								<s:textfield name="parent" id="parent" class="userbox_bt"/>
 							</td>
 						</tr>	
 						<tr>
 						    <td></td>
 							<td colspan="5" align="left">							
-							<input type="submit" value="╡Ия╞" id="query" name="ok" />
-							<input style="margin-left:20px;" type="button" value="жьжц"  onclick="FormUtils.reset('searchForm')" />&nbsp;&nbsp;
+							<input type="submit" value="Ф÷╔Х╞╒" id="query" name="ok" />
+							<input style="margin-left:20px;" type="button" value="И┤█Г╫╝"  onclick="FormUtils.reset('searchForm')" />&nbsp;&nbsp;
 							${privilege.parent}
 							<c:if test="${!empty privilege.parent}">
-								<input type="button" onclick="javascript:history.go(-1)" value="╥╣╩ь"/>
+								<input type="button" onclick="javascript:history.go(-1)" value="Х©■Е⌡·"/>
 							</c:if>
 							</td>
 						</tr>
@@ -74,52 +67,53 @@
 				<b class="b1"></b>
 			</div>
 		</div>
-		<!-- йЩ╬щап╠МгЬ -->
+		<!-- Ф∙╟Ф█╝Е┬≈Х║╗Е▄╨ -->
 		<div class="tablebox">
-			<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table class="data_grid">
 				<thead>
 					 <tr align="center" class="titlebg">
-					    <td>х╗очID</td>
-					    <td>х╗очцШЁф</td>
-					    <td>╦╦╪╤х╗очID</td>
-					    <td>йг╥Я╡к╣╔</td>
-					    <td>╡ывВ</td>
+					    <td>Ф²┐И≥░ID</td>
+					    <td>Ф²┐И≥░Е░█Г╖╟</td>
+					    <td>Г┬╤Г╨╖Ф²┐И≥░ID</td>
+					    <td>Ф≤╞Е░╕Х▐°Е█∙</td>
+					    <td>Ф⌠█Д╫°</td>
 					 </tr>
 				</thead>
 				
 				<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-					<logic:iterate id="element" name="list">
+					<c:forEach items="${list}" var="element">
 						<tr align="center">
 							<td>${element.limitId}</td>
 							<td>${element.limitName}</td>
 							<td>${element.parent}</td>
 							<td>
-								<c:if test="${element.isMenu eq 'Y'}">йг</c:if>
-								<c:if test="${element.isMenu eq 'N'}">╥Я</c:if>
+								<c:if test="${element.isMenu eq 'Y'}">Ф≤╞</c:if>
+								<c:if test="${element.isMenu eq 'N'}">Е░╕</c:if>
 							</td>
 							<td class="redlink">
 								<c:if test="${element.hasSubPris eq 'Y'}">
-									<html:link action="/privilegeAction.do?action=listPrivs&parent=${element.limitId}">всх╗оч</html:link>
+									<a href="privilegeAction.do?action=listPrivs&parent=${element.limitId}">Е╜░Ф²┐И≥░</a>
 								</c:if>
 								
-								<html:link action="/privilegeAction.do?action=toEditPrivilege&parent=${element.limitId}">лМ╪свсх╗оч</html:link>
+								<a href="privilegeAction.do?action=toEditPrivilege&parent=${element.limitId}">Ф╥╩Е┼═Е╜░Ф²┐И≥░</a>
 								<c:if test="${!(element.hasSubPris eq 'Y')}">
-									<html:link action="/privilegeAction.do?action=listPrivRes&limitId=${element.limitId}">х╗очвйт╢</html:link>
-									<html:link action="/privilegeAction.do?action=toEditPriRes&limitId=${element.limitId}">лМ╪сх╗очвйт╢</html:link>
+									<a href="privilegeResourceAction.do?action=listPriRes&limitId=${element.limitId}">Ф²┐И≥░Х╣└Ф╨░</a>
+									<a href="privilegeResourceAction.do?action=toEdit&limitId=${element.limitId}">Ф╥╩Е┼═Ф²┐И≥░Х╣└Ф╨░</a>
 								</c:if>
-								<!-- 
-								<html:link action="/privilegeAction.do?action=toEditPrivilege&limitId=${element.limitId}">пч╦д</html:link>
+								 <!-- 
+								<a href="privilegeAction.do?action=toEditPrivilege&limitId=${element.limitId}">Д©╝Ф■╧</a>
 								<c:if test="${element.hasSubPris ne 'Y'}">
-									<html:link action="/privilegeAction.do?action=delPri&limitId=${element.limitId}">и╬ЁЩ</html:link>
-								</c:if> -->
+									<a href="privilegeAction.do?action=delPri&limitId=${element.limitId}">Е┬═И≥╓</a>
+								</c:if>
+								 -->
 							</td>
 						</tr>
-					</logic:iterate>
+					</c:forEach>
 				</f:showDataGrid>
 			</table>
 			<f:paginate/>
 		</div>
-		</html:form>
+		</form>
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

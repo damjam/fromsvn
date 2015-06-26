@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -48,7 +41,7 @@
 			function query(){
 				var tradeDate = $('#tradeDate').val();
 				if(tradeDate == ''){
-					alert('½»Ò×ÈÕÆÚ²»ÄÜÎª¿Õ');
+					alert('äº¤æ˜“æ—¥æœŸä¸èƒ½ä¸ºç©º');
 					$('#tradeDate').focus();
 					return;
 				}
@@ -59,7 +52,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -68,7 +61,7 @@
 						<tr>
 							
 							<td class="formlabel nes" id="td1">
-								½»Ò×ÈÕÆÚ
+								äº¤æ˜“æ—¥æœŸ
 							</td>
 							<td id="td2">
 								<input type="text" name="tradeDate" id="tradeDate" value="${today}" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
@@ -77,14 +70,14 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry" onclick="query();"/>&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry" onclick="query();"/>&nbsp;
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox" style="height:100%">			
 				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" ></iframe>
 			</div> 

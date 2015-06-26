@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 
 
@@ -42,7 +42,7 @@
 			$(function() {
 				$('#tabs').tabs();
 				
-				//³õÊ¼»¯
+				//åˆå§‹åŒ–
 				ifrm = document.getElementById('frame0');
 				if(!ifrm.src){
 		    		ifrm.src=CONTEXT_PATH+"/timer.do?action=query";
@@ -72,10 +72,10 @@
 		<div id="tabs" style="width: 98%;">
 			<ul>
 				<li>
-					<a id="t0" href="#tabs-0">¶¨Ê±¼Æ»®¹ÜÀí</a>
+					<a id="t0" href="#tabs-0">å®šæ—¶è®¡åˆ’ç®¡ç†</a>
 				</li>
 				<li>
-					<a id="t1" href="#tabs-1">¶¨Ê±Ö´ĞĞ²éÑ¯</a>
+					<a id="t1" href="#tabs-1">å®šæ—¶æ‰§è¡ŒæŸ¥è¯¢</a>
 				</li>
 			</ul>
 			<div id="tabs-0" >
@@ -85,7 +85,7 @@
 				<iframe id="frame1" scrolling="auto" frameborder="0" width="100%"  height="100%" onload="this.height=frame1.document.body.scrollHeight"></iframe>
 			</div>
 		</div>
-		<!--°æÈ¨ÇøÓò-->
+		<!--ç‰ˆæƒåŒºåŸŸ-->
 		<div class="bottom">
 			<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 		</div>

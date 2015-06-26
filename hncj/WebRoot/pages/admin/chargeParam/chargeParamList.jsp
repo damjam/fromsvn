@@ -1,16 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<title></title>
 		<f:css href="/css/page.css" />
@@ -37,7 +29,7 @@
 			});
 			
 			function delInfo(id){
-				if(window.confirm("È·ÈÏÉ¾³ý?")){
+				if(window.confirm("ç¡®è®¤åˆ é™¤?")){
 					gotoUrl('/chargeParam.do?action=delete&id='+id);
 				}
 			}
@@ -59,7 +51,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/chargeParam.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -67,11 +59,11 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								·¿ÎÝÀàÐÍ
+								æˆ¿å±‹ç±»åž‹
 							</td>
 							<td>
 								<html:select property="rangeCode">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 						    		<html:options collection="paramRanges" property="value" labelProperty="name" />
 						    	</html:select>
 							</td>
@@ -79,26 +71,26 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ÐÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ–°å¢ž" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td >¼Æ·ÑÊÊÓÃÀàÐÍ</td>
-						    <td >¼Æ·Ñ¶ÔÏó</td>
-						    <td >¼Æ·ÑÏî</td>
-						    <td >±¸×¢</td>
-						    <td >´´½¨Ê±¼ä</td>
-						    <td >²Ù×÷</td>
+						    <td >è®¡è´¹é€‚ç”¨ç±»åž‹</td>
+						    <td >è®¡è´¹å¯¹è±¡</td>
+						    <td >è®¡è´¹é¡¹</td>
+						    <td >å¤‡æ³¨</td>
+						    <td >åˆ›å»ºæ—¶é—´</td>
+						    <td >æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -111,9 +103,9 @@
 								<td>${element.remark}</td>
 								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
-							    	<a href="javascript:updateInfo('${element.id}')" >ÐÞ¸Ä</a>
-							    	<a href="javascript:delInfo('${element.id}')" >É¾³ý</a>
-							    	<a href="javascript:showItems('${element.id}')" >¼Æ·ÑÏî</a>
+							    	<a href="javascript:updateInfo('${element.id}')" >ä¿®æ”¹</a>
+							    	<a href="javascript:delInfo('${element.id}')" >åˆ é™¤</a>
+							    	<a href="javascript:showItems('${element.id}')" >è®¡è´¹é¡¹</a>
 							    </td>
 						    </tr>
 						</logic:iterate>

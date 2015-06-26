@@ -1,10 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
 <html>
 	<head>
@@ -21,32 +18,32 @@
 		<f:js src="/js/md5.js"/>
 		
 		<script type="text/javascript">
-			//ÐÞ¸ÄÃÜÂë
+			//ä¿®æ”¹å¯†ç 
 			function changePassword(){
 				var oldLoginPwd = $('#oldLoginPwd').val();
 				var flag = true;
 				if(oldLoginPwd.length<6){
-					$('.error_tipinfo:eq(0)').html('ÊäÈë¾ÉÃÜÂë').show();
+					$('.error_tipinfo:eq(0)').html('è¾“å…¥æ—§å¯†ç ').show();
 					$('.field_tipinfo:eq(0)').hide();
 					flag = false;
 				}
 				var loginPwd = $('#loginPwd').val();
 				if(loginPwd.length<6){
-					$('.error_tipinfo:eq(1)').html('ÖÁÉÙ6Î»£¬ÇÒ²»ÄÜÓë¾ÉÃÜÂëÏàÍ¬').show();
+					$('.error_tipinfo:eq(1)').html('è‡³å°‘6ä½ï¼Œä¸”ä¸èƒ½ä¸Žæ—§å¯†ç ç›¸åŒ').show();
 					$('.field_tipinfo:eq(1)').hide();
 					flag = false;
 				}else if(loginPwd != '' && oldLoginPwd != '' && loginPwd == oldLoginPwd){
-					$('.error_tipinfo:eq(1)').html('ÐÂÃÜÂë²»ÄÜÓëÔ­ÃÜÂëÏàÍ¬').css("color","#333").show();
+					$('.error_tipinfo:eq(1)').html('æ–°å¯†ç ä¸èƒ½ä¸ŽåŽŸå¯†ç ç›¸åŒ').css("color","#333").show();
 					$('.field_tipinfo:eq(1)').hide();
 					flag = false;
 				}
 				var confirmPwd = $('#confirmPwd').val();
 				if(confirmPwd.length<6){
-					$('.error_tipinfo:eq(2)').html('ÖÁÉÙ6Î»').show();
+					$('.error_tipinfo:eq(2)').html('è‡³å°‘6ä½').show();
 					$('.field_tipinfo:eq(2)').hide();
 					flag = false;
 				}else if(loginPwd != confirmPwd){
-					$('.error_tipinfo:eq(2)').html('ÇëÓëÐÂÃÜÂëÒ»ÖÂ').show();
+					$('.error_tipinfo:eq(2)').html('è¯·ä¸Žæ–°å¯†ç ä¸€è‡´').show();
 					$('.field_tipinfo:eq(2)').hide();
 					flag = false;
 				}
@@ -65,11 +62,11 @@
 				var confirmPwd = $('#confirmPwd').val();
 				if(oldLoginPwd.length >= 6 && loginPwd.length >= 6 && confirmPwd.length >= 6){
 					if(oldLoginPwd == loginPwd){
-						alert('ÐÂÃÜÂë²»ÄÜÓë¾ÉÃÜÂëÏàÍ¬');
+						alert('æ–°å¯†ç ä¸èƒ½ä¸Žæ—§å¯†ç ç›¸åŒ');
 						return;
 					}
 					if(loginPwd != confirmPwd){
-						alert('ÐÂÃÜÂëÓëÈ·ÈÏÃÜÂë²»Ò»ÖÂ');
+						alert('æ–°å¯†ç ä¸Žç¡®è®¤å¯†ç ä¸ä¸€è‡´');
 						return;
 					}
 				}
@@ -87,44 +84,44 @@
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg"/>
-		<html:form action="/userInfoAction.do?action=changePassword" styleId="userInfoForm" styleClass="validate">
+		<f:msg />
+		<form action="userInfoAction.do?action=changePassword" id="userInfoForm" class="validate" method="post">
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
 			<table class="form_grid">
 				<tr>
-					<td class="formlabel nes">¾ÉÃÜÂë</td>
-					<td><html:password property="oldLoginPwd" styleClass="userbox_bt {required:true,minlength:6}" styleId="oldLoginPwd"/>
-						<span class="field_tipinfo">ÊäÈë¾ÉÃÜÂë</span>
-						<span class="error_tipinfo">ÊäÈë¾ÉÃÜÂë</span>
+					<td class="formlabel nes">æ—§å¯†ç </td>
+					<td><s:password name="oldLoginPwd" class="userbox_bt {required:true,minlength:6}" id="oldLoginPwd"/>
+						<span class="field_tipinfo">è¾“å…¥æ—§å¯†ç </span>
+						<span class="error_tipinfo">è¾“å…¥æ—§å¯†ç </span>
 					</td>
 				</tr>
 				<tr>
-					<td class="formlabel nes">ÐÂÃÜÂë</td>
-					<td><html:password property="loginPwd" styleId="loginPwd" styleClass="userbox_bt {required:true,minlength:6}"/>
-					<span class="field_tipinfo">ÖÁÉÙ6Î»£¬ÇÒ²»ÄÜÓë¾ÉÃÜÂëÏàÍ¬</span>
-					<span class="error_tipinfo">ÖÁÉÙ6Î»£¬ÇÒ²»ÄÜÓë¾ÉÃÜÂëÏàÍ¬</span>
+					<td class="formlabel nes">æ–°å¯†ç </td>
+					<td><s:password name="loginPwd" id="loginPwd" class="userbox_bt {required:true,minlength:6}"/>
+					<span class="field_tipinfo">è‡³å°‘6ä½ï¼Œä¸”ä¸èƒ½ä¸Žæ—§å¯†ç ç›¸åŒ</span>
+					<span class="error_tipinfo">è‡³å°‘6ä½ï¼Œä¸”ä¸èƒ½ä¸Žæ—§å¯†ç ç›¸åŒ</span>
 					</td>
 				</tr>
 				<tr>
-					<td class="formlabel nes">È·ÈÏÐÂÃÜÂë</td>
-					<td><html:password styleClass="{required:true,minlength:6,equalTo:'#loginPwd'}" property="confirmPwd" styleId="confirmPwd"/>
-					<span class="field_tipinfo">ÇëÓëÐÂÃÜÂëÒ»ÖÂ</span>
-					<span class="error_tipinfo">ÇëÓëÐÂÃÜÂëÒ»ÖÂ</span>
+					<td class="formlabel nes">ç¡®è®¤æ–°å¯†ç </td>
+					<td><s:password class="{required:true,minlength:6,equalTo:'#loginPwd'}" name="confirmPwd" id="confirmPwd"/>
+					<span class="field_tipinfo">è¯·ä¸Žæ–°å¯†ç ä¸€è‡´</span>
+					<span class="error_tipinfo">è¯·ä¸Žæ–°å¯†ç ä¸€è‡´</span>
 					</td>
 				</tr>
 				<tr align="center">
 				    <td></td>
 					<td align="left">
-					<input type="button" onclick="changePassword()" value="Ìá½»"/>&emsp;
-					<input type="button" onclick="toHomePage();" value="È¡Ïû"/>&emsp;
+					<input type="button" onclick="changePassword()" value="æäº¤"/>&emsp;
+					<input type="button" onclick="toHomePage();" value="å–æ¶ˆ"/>&emsp;
 					</td>
 				</tr>
 			</table>
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
-		</html:form>
+		</form>
 	</body>
 </html>

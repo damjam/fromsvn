@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -50,7 +50,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ว๋ักิ๑ะ่าชตฤา๘ะะตุว๘ฑเบล");
+						alert("่ฏท้€ๆฉ้€่ฆ็้“ถ่กๅฐๅบ็ผ–ๅท");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -71,7 +71,7 @@
 				
 			});
 	 	</script>
-	 	<title>า๘ะะตุว๘ย๋ักิ๑</title>
+	 	<title>้“ถ่กๅฐๅบ็ ้€ๆฉ</title>
 	 	
 	</head>
 
@@ -89,7 +89,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">า๘ะะตุว๘ย๋ักิ๑</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">้“ถ่กๅฐๅบ็ ้€ๆฉ</span>
 								</td>
 							</tr>
 						</table>
@@ -98,13 +98,13 @@
 							cellpadding="0">
 							<tr class="shortcut">
 								<td  height="30" align="right">
-									า๘ะะตุว๘ย๋
+									้“ถ่กๅฐๅบ็ 
 								</td>
 								<td width="270" height="30">
 									<input type="text" class="userbox_bt"  name="addrNo" id="addrNo"  value="${bankAddress.addrNo }"/>
 								</td>
 								<td  height="30" align="right">
-									า๘ะะตุว๘ร๛ณฦ
+									้“ถ่กๅฐๅบๅ็งฐ
 								</td>
 								<td height="30">
 									<input class="userbox_bt"  name="addrName" type="text" id="addrName"  value="${bankAddress.addrName }" />
@@ -117,8 +117,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="ฒ้ัฏ" />
-									<input style="margin-left: 30px;" type="reset" value="วๅณý" />
+									<input type="submit" value="ๆฅ่ฏข" />
+									<input style="margin-left: 30px;" type="reset" value="ๆธ…้ค" />
 								</td>
 							</tr>
 						</table>
@@ -132,7 +132,7 @@
 		</form>
 		
 
-		<!-- สýพÝมะฑํว๘ -->
+		<!-- ๆ•ฐๆฎๅ—่กจๅบ -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr></tr>
@@ -141,13 +141,13 @@
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ว๋ักิ๑
+							่ฏท้€ๆฉ
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ตุว๘ฑเบล
+							ๅฐๅบ็ผ–ๅท
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ตุว๘ร๛ณฦ
+							ๅฐๅบๅ็งฐ
 						</th>
 					</tr>
 				</thead>
@@ -157,7 +157,7 @@
 					<c:if test="${empty bankAddressList}">
 						<tr>
 							<td colspan="10">
-								รปำะสýพÝ
+								ๆฒกๆๆ•ฐๆฎ
 							</td>
 						</tr>
 					</c:if>
@@ -186,9 +186,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="submit" value="ศทถจ" id="selBankAddress"/>
-						<input style="margin-left: 30px;" type="submit" value="วๅณý" id="clearBankAddress"/>
-						<input style="margin-left: 30px;" type="button" value="นุฑี" id="winClose"/>
+						<input type="submit" value="็กฎๅฎ" id="selBankAddress"/>
+						<input style="margin-left: 30px;" type="submit" value="ๆธ…้ค" id="clearBankAddress"/>
+						<input style="margin-left: 30px;" type="button" value="ๅ…ณ้—ญ" id="winClose"/>
 					</td>
 				</tr>
 			</table>

@@ -1,17 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">  
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
         <%@ include file="/pages/common/meta.jsp" %>
@@ -52,7 +43,7 @@
 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<form id="query" action="${CONTEXT_PATH}/timerCommand.do?action=save" method="post" class="validate">
-		<!-- ÓÃ»§×ÊÁÏÐÞ¸ÄÇø -->
+		<!-- ç”¨æˆ·èµ„æ–™ä¿®æ”¹åŒº -->
 			<div class="userbox">
 				<div>
 					<b class="b1"></b>
@@ -63,31 +54,31 @@
 							<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 							  <tr>
 							    <td width="100" height="30" align="right">
-							    	<span style="font-size:14px; font-weight:bold; padding-bottom:10px;">ÐÂÔö¶¨Ê±ÃüÁî</span>
+							    	<span style="font-size:14px; font-weight:bold; padding-bottom:10px;">æ–°å¢žå®šæ—¶å‘½ä»¤</span>
 							    </td>
 							    <td height="30" colspan="3"><br /><span style="color:#CCC"></span><br /></td>
 							  </tr>
 							  <tr><td colspan="4" align="center"><f:msg /></td></tr>
 							  <tr>
-							    <td height="30" align="right" class="formlabel nes">ÀàÃû</td>
+							    <td height="30" align="right" class="formlabel nes">ç±»å</td>
 							    <td height="30">
 							    	<input class="{required:true}"  name="timerClassName" type="text" value="${timerCommand.timerClassName}"  />
-							    	<span class="field_tipinfo">1-200Î»×Ö·û£¬×ÖÄ¸</span>
-							    	<span class="error_tipinfo">¸ñÊ½´íÎó</span>
+							    	<span class="field_tipinfo">1-200ä½å­—ç¬¦ï¼Œå­—æ¯</span>
+							    	<span class="error_tipinfo">æ ¼å¼é”™è¯¯</span>
 							    </td>
-							    <td align="right" class="formlabel nes">ÀàÖÐÎÄ</td>
+							    <td align="right" class="formlabel nes">ç±»ä¸­æ–‡</td>
 							    <td>
 							    	<input class="{required:true}" name="classNameCh"  type="text" value="${timerCommand.classNameCh}" maxlength="60"/>
 							    	<span class="field_tipinfo"></span>
-							    	<span class="error_tipinfo">ÇëÊäÈë</span>
+							    	<span class="error_tipinfo">è¯·è¾“å…¥</span>
 							    </td>
 							  </tr>
 							  <tr>
 							    <td height="30" align="right">&nbsp;</td>
 							    <td height="30" colspan="3">
-								    <input type="submit"  id="input_btn2"   value="È·¶¨"  />
-								    <input style="margin-left:30px;" type="button" value="Çå³ý" id="btnClear"/>
-								    <input style="margin-left:30px;" type="button"  value="·µ»Ø" id="btnReturn" />
+								    <input type="submit"  id="input_btn2"   value="ç¡®å®š"  />
+								    <input style="margin-left:30px;" type="button" value="æ¸…é™¤" id="btnClear"/>
+								    <input style="margin-left:30px;" type="button"  value="è¿”å›ž" id="btnReturn" />
 							    </td>
 							  </tr>
 						  </table>
@@ -100,7 +91,7 @@
 		</div>
 	</form>
 	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

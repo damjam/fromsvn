@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞÂÔöÍÆËÍÏûÏ¢</title>
+		<title>æ–°å¢æ¨é€æ¶ˆæ¯</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
@@ -49,10 +45,10 @@
 		 		changePushType();
 		 		changeBranch();
 		 	});
-		 	//±ä¶¯»ú¹¹
+		 	//å˜åŠ¨æœºæ„
 		 	function changeBranch(){
 		 		var branchNo = '${BRANCH_TYPE.value}';
-		 		//Ö»ÓĞ×Ü²¿²Å½øĞĞ»ú¹¹Ñ¡Ôñ
+		 		//åªæœ‰æ€»éƒ¨æ‰è¿›è¡Œæœºæ„é€‰æ‹©
 		 		if(branchNo != '0000'){
 		 			return;
 		 		}
@@ -66,13 +62,13 @@
 					 success:function(data) {
 				    	var jsonObj = data;
 				    	$('#busiType').empty();
-				    	$("#busiType").append("<option value=''>²»ÏŞ</option>");
+				    	$("#busiType").append("<option value=''>ä¸é™</option>");
 				    	for(var i in jsonObj){
 							$("#busiType").append("<option value='"+i+"'>"+jsonObj[i]+"</option>");
 						}
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·şÎñÆ÷Ê§°Ü");
+	                     alert("è¿æ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 		 	}
@@ -82,7 +78,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -106,44 +102,44 @@
 					  <caption>${ACT.name}</caption>
 					  <c:if test="${BRANCH_TYPE.value eq '0000'}">
 					    <tr>
-						    <td class="formlabel nes">¿Í»§ÀàĞÍ</td>
+						    <td class="formlabel nes">å®¢æˆ·ç±»å‹</td>
 						    <td>
 						    	<html:select property="custType"  styleId="custType">
-									<html:option value="">²»ÏŞ</html:option>
+									<html:option value="">ä¸é™</html:option>
 									<html:options collection="custTypes" labelProperty="name" property="value"/>
 								</html:select>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">»ú¹¹ÀàĞÍ</td>
+						    <td class="formlabel nes">æœºæ„ç±»å‹</td>
 						    <td>
 						    	<html:select property="branchNo"  styleId="branchNo" onchange="changeBranch();">
-									<html:option value="">²»ÏŞ</html:option>
+									<html:option value="">ä¸é™</html:option>
 									<html:options collection="branchTypes" labelProperty="value" property="key"/>
 								</html:select>
 						    </td>
 					   </tr>
 					  </c:if> 
 					   <tr>
-						    <td class="formlabel nes">ÒµÎñÀàĞÍ</td>
+						    <td class="formlabel nes">ä¸šåŠ¡ç±»å‹</td>
 						    <td>
 						    	<html:select property="busiType"  styleId="busiType">
-									<html:option value="">²»ÏŞ</html:option>
+									<html:option value="">ä¸é™</html:option>
 									<html:options collection="busiTypes" labelProperty="value" property="key"/>
 								</html:select>
 						    </td>
 					   </tr>
 					    <tr>
-						    <td class="formlabel nes">¶©ÔÄ×´Ì¬</td>
+						    <td class="formlabel nes">è®¢é˜…çŠ¶æ€</td>
 						    <td>
 						    	<html:select property="subsState"  styleId="subsState">
-									<html:option value="">²»ÏŞ</html:option>
+									<html:option value="">ä¸é™</html:option>
 									<html:options collection="subsStates" labelProperty="value" property="key"/>
 								</html:select>
 						    </td>
 					   </tr>
 					  <tr>
-						    <td class="formlabel nes">ÍÆËÍ·½Ê½</td>
+						    <td class="formlabel nes">æ¨é€æ–¹å¼</td>
 						    <td>
 						    	<html:select property="pushType"  styleId="pushType" onchange="changePushType()">
 									<html:options collection="pushTypes" labelProperty="name" property="value"/>
@@ -151,24 +147,24 @@
 						    </td>
 					   </tr>
 					  <tr id="subTr">
-						    <td class="formlabel nes">Ö÷Ìâ</td>
+						    <td class="formlabel nes">ä¸»é¢˜</td>
 						    <td>
 						    	<html:text property="subject"  styleId="subject" styleClass="{required:true}" maxlength="25"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÄÚÈİ</td>
+						    <td class="formlabel nes">å†…å®¹</td>
 						    <td>
-						    	<div id="txtNum">µ±Ç°ÊäÈëµÄ×ÖÊıÎª£º<span id="txtNumLen" style="color: red;">0</span></div>
+						    	<div id="txtNum">å½“å‰è¾“å…¥çš„å­—æ•°ä¸ºï¼š<span id="txtNumLen" style="color: red;">0</span></div>
 						    	<html:textarea property="content"  styleId="content" styleClass="{required:true,maxlength:1000}" onkeyup="inputTextNum();" onblur="inputTextNum();" rows="20" cols="50"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ,1000×ÖÒÔÄÚ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º,1000å­—ä»¥å†…</span>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="Ìá½»" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/pushMngAction.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="æäº¤" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/pushMngAction.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -178,7 +174,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

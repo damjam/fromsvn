@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=GBK" language="java" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" %>
 <p align="center">
-	<input type="button" value="¹Ø±Õ" class="inp_L3" onclick="window.close()" />
+	<input type="button" value="å…³é—­" class="inp_L3" onclick="window.close()" />
 </p>

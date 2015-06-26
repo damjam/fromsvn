@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞÂÔö½ÇÉ«</title>
+		<title>æ–°å¢è§’è‰²</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
@@ -20,9 +16,7 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/dtree/wtree.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
+		
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -35,7 +29,7 @@
 				});
 				$('#btnSubmit').click(function(){
 					if(!FormUtils.hasSelected('limitIds')){
-						alert('ÇëÑ¡ÔñÈ¨ÏŞµã');
+						alert('è¯·é€‰æ‹©æƒé™ç‚¹');
 						return;
 					}
 					/*
@@ -52,7 +46,7 @@
 						SysStyle.setDataGridStyle();
 					});
 					
-					//$('#limitTree').html($('#limitTree').html()+'<span class="filed_tipinfo">±ØÑ¡</span>');
+					//$('#limitTree').html($('#limitTree').html()+'<span class="filed_tipinfo">å¿…é€‰</span>');
 				});
 			});
 		 	function change(){
@@ -64,14 +58,14 @@
 					}
 				}
 				return this.optional(element) || (length >= param);
-				}, $.validator.format("³¤¶È²»ÄÜĞ¡ÓÚ{0}!"));
+				}, $.validator.format("é•¿åº¦ä¸èƒ½å°äº{0}!"));
 			 }
 		</script>
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="roleInfoAction.do?action=addRoleInfo" styleId="roleInfoForm" method="post" styleClass="validate">
+<f:msg />
+	<form action="roleInfoAction.do?action=addRoleInfo" id="roleInfoForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -82,39 +76,36 @@
 					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">½ÇÉ«Ãû³Æ</td>
+						    <td class="formlabel nes">è§’è‰²åç§°</td>
 						    <td>
-						    	<html:text property="roleName"  styleClass="{required:true}" maxlength="40" style="roleName"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<s:textfield name="roleName"  class="{required:true}" maxlength="40" style="roleName"/>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					    <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
-						    	<html:text property="remark"  maxlength="100"/>
+						    	<s:textfield name="remark"  maxlength="100"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes">È¨ÏŞ×é</td>
+						     <td class="formlabel nes">æƒé™ç»„</td>
 						     <td>
-						     	<html:select property="limitGroupId" styleId="limitGroupId" styleClass="{required:true}">
-						     		<html:option value="">---ÇëÑ¡Ôñ---</html:option>
-						     		<html:options collection="limitGroupInfoCollections" property="limitGroupId" labelProperty="limitGroupName"/>
-						     	</html:select>
-						     	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						     	<s:select name="limitGroupId" id="limitGroupId" class="{required:true}" list="limitGroupInfoCollections" listKey="limitGroupId" listValue="limitGroupName"/>
+						     	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							</td>
 					   </tr>
 					    <tr>
-					    	<td class="formlabel nes">È¨ÏŞ½Úµã</td>
+					    	<td class="formlabel nes">æƒé™èŠ‚ç‚¹</td>
 					 		<td id="limitTree">
 					 		
 					 		</td>
 					   </tr>
 					   <tr>
 						     <td colspan="2" align="center">
-								 <input type="button" id="btnSubmit" value="Ìá½»"/>&nbsp;
-								 <input type="button" id="btnReturn" value="·µ»Ø"/>
+								 <input type="button" id="btnSubmit" value="æäº¤"/>&nbsp;
+								 <input type="button" id="btnReturn" value="è¿”å›"/>
 							</td>
 					   </tr>
 				  </table>
@@ -125,8 +116,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

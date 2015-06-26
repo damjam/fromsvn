@@ -1,15 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞÂÔöÈ¨ÏŞ×é</title>
-		
+		<title>æ–°å¢æƒé™ç»„</title>
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -18,9 +14,7 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/dtree/wtree.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
+		
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -33,7 +27,7 @@
 				});
 				$('#btnSubmit').click(function(){
 					if(!FormUtils.hasSelected('limitIds')){
-						alert('ÇëÑ¡ÔñÈ¨ÏŞµã');
+						alert('è¯·é€‰æ‹©æƒé™ç‚¹');
 						return;
 					}
 					FormUtils.submitFirstTokenForm();
@@ -44,8 +38,8 @@
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="limitGroupInfoAction.do?action=addLimitGroupInfo" styleId="limitGroupInfoForm" method="post" styleClass="validate">
+<f:msg />
+	<form action="limitGroupInfoAction.do?action=addLimitGroupInfo" id="limitGroupInfoForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -56,44 +50,40 @@
 					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">È¨ÏŞ×éÃû³Æ</td>
+						    <td class="formlabel nes">æƒé™ç»„åç§°</td>
 						    <td>
-						    	<html:text property="limitGroupName"  styleClass="{required:true}" maxlength="200"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<s:textfield name="limitGroupName" class="{required:true}" maxlength="200"></s:textfield>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes" align="right">ÓÃ»§ÀàĞÍ</td>
+						     <td class="formlabel nes" align="right">ç”¨æˆ·ç±»å‹</td>
 						     <td>
-						     	<html:select property="userType">
-						     		<html:options collection="userTypeCollections" property="id.dictValue" labelProperty="dictName"/>
-						     	</html:select>
+						     	<s:select name="userType" list="#request.userTypeCollections" listKey="id.dictValue" listValue="dictName"/>
 							</td>
 					   </tr>
 					    <tr>
-					    	<td align="right">È¨ÏŞ½Úµã</td>
+					    	<td align="right">æƒé™èŠ‚ç‚¹</td>
 					 		  <td>
-					 		  	 <logic:present name="list">
-									<div id="systree" style="margin-top:10px;"></div>
-									<script type="text/javascript">
-										var d = new dTree('d','dtree/images/system/menu/');
-										d.config.folderLinks = false;
-										d.config.useCookies = false;
-										d.config.check = true;										
-										<logic:iterate id="element" name="list">
-											d.add('${element.code}','${element.parentCode}','${element.name}', null, null, null, 'limitIds', '${element.code}');
-										</logic:iterate>
-										document.getElementById('systree').innerHTML = d;
-									</script>
-								</logic:present>
+								<div id="systree" style="margin-top:10px;"></div>
+								<script type="text/javascript">
+									var d = new dTree('d','dtree/images/system/menu/');
+									d.config.folderLinks = false;
+									d.config.useCookies = false;
+									d.config.check = true;										
+									<c:forEach items="${list}" var="element">
+										d.add('${element.code}','${element.parentCode}','${element.name}', null, null, null, 'limitIds', '${element.code}');
+									</c:forEach>
+									document.getElementById('systree').innerHTML = d;
+								</script>
 						 	</td>
 					   </tr>
 					     <tr>
 						     
 						     <td colspan="2" align="center">
-								 <input type="button" id="btnSubmit" value="Ìá½»"/>
-								 <input type="button" id="btnClear" value="Çå³ı"/>
-								 <input type="button" id="btnReturn" value="·µ»Ø"/>
+								 <input type="button" id="btnSubmit" value="æäº¤"/>
+								 <input type="button" id="btnClear" value="æ¸…é™¤"/>
+								 <input type="button" id="btnReturn" value="è¿”å›"/>
 							</td>
 					   </tr>
 				  </table>
@@ -104,8 +94,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

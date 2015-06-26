@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -31,7 +27,7 @@
 		 		var tradeType = $('#tradeType').val();
 		 		if(tradeType == '98'){
 		 			var remark = $('#remark').val();
-		 			alert('ÇëÔÚ±¸×¢ÖĞ×¢Ã÷ÊÕ¿îÏîÄ¿');
+		 			alert('è¯·åœ¨å¤‡æ³¨ä¸­æ³¨æ˜æ”¶æ¬¾é¡¹ç›®');
 		 			$('#remark').focus();
 		 			return;
 		 		}
@@ -50,7 +46,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -81,7 +77,7 @@
 				    	 $('#payerName').val(ownerName);
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·şÎñÆ÷Ê§°Ü");
+	                     alert("è¿æ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 			}
@@ -92,7 +88,7 @@
 					return;
 				}
 				if(isNaN(parseFloat(unitPrice))){
-					alert('ÇëÊäÈëÕıÈ·µÄµ¥¼Û');
+					alert('è¯·è¾“å…¥æ­£ç¡®çš„å•ä»·');
 					$('#unitPrice').val('');
 					$('#totalAmt').val('');
 					$('#paidAmt').val('');
@@ -100,7 +96,7 @@
 					return;
 				}
 				if(isNaN(parseInt(num, 10))){
-					alert('ÇëÊäÈëÕıÈ·µÄÊıÁ¿');
+					alert('è¯·è¾“å…¥æ­£ç¡®çš„æ•°é‡');
 					$('#num').val('');
 					$('#totalAmt').val('');
 					$('#paidAmt').val('');
@@ -130,54 +126,54 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">ÊÕ·ÑÏîÄ¿</td>
+						    <td class="formlabel nes">æ”¶è´¹é¡¹ç›®</td>
 						    <td>
 						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="07">ÖÇÄÜ¿¨°ìÀí·Ñ</html:option>
-						    		<html:option value="08">ÁÙÊ±³öÈëÖ¤°ìÀí·Ñ</html:option>
-						    		<html:option value="20">¹ã¸æÎ»×âÁŞ·Ñ</html:option>
-						    		<html:option value="98">ÆäËû</html:option>
+						    		<html:option value="07">æ™ºèƒ½å¡åŠç†è´¹</html:option>
+						    		<html:option value="08">ä¸´æ—¶å‡ºå…¥è¯åŠç†è´¹</html:option>
+						    		<html:option value="20">å¹¿å‘Šä½ç§Ÿèµè´¹</html:option>
+						    		<html:option value="98">å…¶ä»–</html:option>
 						    	</html:select>
-						    	<span class="field_tipinfo">ÈçÊÕ·ÑÏîÄ¿ÎªÆäËû£¬ÇëÔÚ±¸×¢ÖĞËµÃ÷</span>
+						    	<span class="field_tipinfo">å¦‚æ”¶è´¹é¡¹ç›®ä¸ºå…¶ä»–ï¼Œè¯·åœ¨å¤‡æ³¨ä¸­è¯´æ˜</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">µ¥¼Û</td>
+						    <td class="formlabel nes">å•ä»·</td>
 						    <td>
 						    <html:text property="unitPrice"  styleId="unitPrice" styleClass="{required:true,num:true}" maxlength="8" onblur="count()"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÊıÁ¿</td>
+						    <td class="formlabel nes">æ•°é‡</td>
 						    <td>
 						    <html:text property="num"  styleId="num" styleClass="{required:true,digits:true}" maxlength="8" onblur="count()" value="1"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">½ğ¶î</td>
+						    <td class="formlabel nes">é‡‘é¢</td>
 						    <td>
 						    <html:text property="totalAmt"  styleId="totalAmt" styleClass="{required:true,num:true}" maxlength="12"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÊµÊÕ</td>
+						    <td class="formlabel nes">å®æ”¶</td>
 						    <td>
 						    <html:text property="paidAmt"  styleId="paidAmt" styleClass="{required:true,num:true}" maxlength="12"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">¸¶¿îÈË</td>
+						    <td class="formlabel nes">ä»˜æ¬¾äºº</td>
 						    <td>
 						    	<html:text property="payerName" styleId="payerName" styleClass="{required:true}" maxlength="10" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    <html:text property="remark"  styleId="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
@@ -185,8 +181,8 @@
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/generalBill.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/generalBill.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -196,7 +192,7 @@
 			</div>
 		</div>	
 	</html:form>
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

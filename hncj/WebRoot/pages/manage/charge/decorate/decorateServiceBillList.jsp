@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -35,7 +28,7 @@
 				
 			});
 			function charge(id){
-				if(window.confirm("ȷ���շ�?")){
+				if(window.confirm("确认收费?")){
 					gotoUrl('/decorateServiceBill.do?action=charge&id='+id);
 				}
 			}
@@ -43,7 +36,7 @@
 				window.open(CONTEXT_PATH+'/reportAction.do?action=decorateServiceBill&id='+id);
 			}
 			function delRecord(id){
-				if(!window.confirm("ȷ��ɾ��?")){
+				if(!window.confirm("确认删除?")){
 					return;
 				}
 				gotoUrl('/decorateServiceBill.do?action=deleteBill&id='+id);
@@ -54,7 +47,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/decorateServiceBill.do?action=list" styleId="queryForm">
-			<!-- ��ѯ������ -->
+			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -62,35 +55,35 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								���ݱ��
+								房屋编号
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								�տ�����
+								收款日期
 							</td>
 							<td>
 								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							<td class="formlabel nes">״̬</td>
+							<td class="formlabel nes">状态</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---ȫ��---</html:option>
+						    		<html:option value="">---全部---</html:option>
 						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
 						    </td>
 						</tr>
 						<tr>
 							<td class="formlabel">
-								�˵���
+								账单号
 							</td>
 							<td>
 								<html:text property="id" styleId="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
-								���
+								年份
 							</td>
 							<td>
 								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
@@ -99,9 +92,9 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="��ѯ" id="btnQry"/>&nbsp;
-								<input type="button" value="����" id="btnClear" />&nbsp;
-								<input type="button" value="����" id="btnAdd"/>
+								<input type="button" value="查询" id="btnQry"/>&nbsp;
+								<input type="button" value="重置" id="btnClear" />&nbsp;
+								<input type="button" value="新增" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
@@ -109,15 +102,15 @@
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
-			<!-- ������Ϣ -->
+			<!-- 汇总信息 -->
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
-					<caption>������Ϣ</caption>
+					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">�ܱ���</td>
-							<td align="center">�������Ϸѣ�Ԫ��</td>
-							<td align="center">װ���������˷ѣ�Ԫ��</td>
-							<td align="center">�ܽ�Ԫ��</td>
+							<td align="center">总笔数</td>
+							<td align="center">电梯上料费（元）</td>
+							<td align="center">装修垃圾清运费（元）</td>
+							<td align="center">总金额（元）</td>
 						</tr>
 					</thead>
 					<tr>
@@ -128,24 +121,24 @@
 					</tr>
 				</table>
 			</div>
-			<!-- �����б��� -->
+			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >�˵���</td>
-						 	<td>���ݱ��</td>
-						 	<td>ҵ������</td>
-						 	<td>�������</td>
-						    <td>�������Ϸ�</td>
-						    <td>�������˷ѵ���</td>
-						    <td>�������˷�</td>
-						    <td>�ϼƽ��</td>
-						    <td>�ɷ�ʱ��</td>
-						    <td>�տ���</td>
-						    <td>״̬</td>
-						    <td>��ע</td>
-						    <td>����</td>
+						 	<td >账单号</td>
+						 	<td>房屋编号</td>
+						 	<td>业主姓名</td>
+						 	<td>房屋面积</td>
+						    <td>电梯上料费</td>
+						    <td>垃圾清运费单价</td>
+						    <td>垃圾清运费</td>
+						    <td>合计金额</td>
+						    <td>缴费时间</td>
+						    <td>收款人</td>
+						    <td>状态</td>
+						    <td>备注</td>
+						    <td>操作</td>
 						 </tr>
 					</thead>
 					
@@ -168,11 +161,11 @@
 								<td>${element.remark}</td>
 								<td class="redlink">
 							    	<logic:equal value="00" name="element" property="state">
-							    		<a href="javascript:charge('${element.id}')">�շ�</a>
-							    		<a href="javascript:delRecord('${element.id}')">ɾ��</a>
+							    		<a href="javascript:charge('${element.id}')">收费</a>
+							    		<a href="javascript:delRecord('${element.id}')">删除</a>
 							    	</logic:equal>
 							    	<logic:equal value="01" name="element" property="state">
-							    		<a href="javascript:openReport('${element.id}')">��ӡ</a>
+							    		<a href="javascript:openReport('${element.id}')">打印</a>
 							    	</logic:equal>
 							    </td>
 						    </tr>

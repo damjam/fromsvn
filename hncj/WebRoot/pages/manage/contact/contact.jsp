@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -31,7 +27,7 @@
 		 		var tradeType = $('#tradeType').val();
 		 		if(tradeType == '98'){
 		 			var remark = $('#remark').val();
-		 			alert('ÇëÔÚ±¸×¢ÖĞ×¢Ã÷ÊÕ¿îÏîÄ¿');
+		 			alert('è¯·åœ¨å¤‡æ³¨ä¸­æ³¨æ˜æ”¶æ¬¾é¡¹ç›®');
 		 			$('#remark').focus();
 		 			return;
 		 		}
@@ -50,7 +46,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -81,7 +77,7 @@
 				    	 $('#payerName').val(ownerName);
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·şÎñÆ÷Ê§°Ü");
+	                     alert("è¿æ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 			}
@@ -92,7 +88,7 @@
 					return;
 				}
 				if(isNaN(parseFloat(unitPrice))){
-					alert('ÇëÊäÈëÕıÈ·µÄµ¥¼Û');
+					alert('è¯·è¾“å…¥æ­£ç¡®çš„å•ä»·');
 					$('#unitPrice').val('');
 					$('#totalAmt').val('');
 					$('#paidAmt').val('');
@@ -100,7 +96,7 @@
 					return;
 				}
 				if(isNaN(parseInt(num, 10))){
-					alert('ÇëÊäÈëÕıÈ·µÄÊıÁ¿');
+					alert('è¯·è¾“å…¥æ­£ç¡®çš„æ•°é‡');
 					$('#num').val('');
 					$('#totalAmt').val('');
 					$('#paidAmt').val('');
@@ -131,14 +127,14 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">ĞÕÃû</td>
+						    <td class="formlabel nes">å§“å</td>
 						    <td>
 						    	<html:text property="contactName"  styleId="contactName" styleClass="{required:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ĞÔ±ğ</td>
+						    <td class="formlabel nes">æ€§åˆ«</td>
 						    <td>
 						    	<html:select property="sex">
 						    		<html:options collection="sexTypes" property="value" labelProperty="name"/>
@@ -146,37 +142,37 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÉÌ»§</td>
+						    <td class="formlabel nes">å•†æˆ·</td>
 						    <td>
 						    	<html:text property="merchantName"  styleId="merchantName" styleClass="{required:true}" maxlength="20" readonly="readonly"></html:text>
 						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="ËÑË÷" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+									alt="æœç´¢" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ËùÊôĞĞÒµ</td>
+						    <td class="formlabel nes">æ‰€å±è¡Œä¸š</td>
 						    <td>
 						    <html:text property="industry"  styleId="industry" styleClass="{required:true}" maxlength="10"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">Ö°Î»</td>
+						    <td class="formlabel nes">èŒä½</td>
 						    <td>
 						    <html:text property="position"  styleId="position" styleClass="{required:true}" maxlength="10"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">µç»°</td>
+						    <td class="formlabel nes">ç”µè¯</td>
 						    <td>
 						    	<html:text property="mobile" styleId="mobile" maxlength="15" styleClass="{required:true}"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    <html:text property="remark"  styleId="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
@@ -184,8 +180,8 @@
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/contact.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/contact.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -195,7 +191,7 @@
 			</div>
 		</div>	
 	</html:form>
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -49,7 +49,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄÒøÐÐÐÐºÅ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„é“¶è¡Œè¡Œå·");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -67,30 +67,30 @@
 			});
 			
 	 	</script>
-	 	<title>»Æ½ðÆ·ÖÖÑ¡Ôñ</title>
+	 	<title>é»„é‡‘å“ç§é€‰æ‹©</title>
 	</head>
 
 	<body>
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<thead>
 					<tr align="center" class="titlebg">
 						<td>
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</td>
 						<td>
-							Æ·ÖÖ´úÂë
+							å“ç§ä»£ç 
 						</td>
 						<td>
-							Æ·ÖÖÃû³Æ
+							å“ç§åç§°
 						</td>
 						<td>
-							×îÐ¡Ìá»õÊýÁ¿  
+							æœ€å°æè´§æ•°é‡  
 						</td>
 						<td>
-							Ìá»õ²½³¤ 
+							æè´§æ­¥é•¿ 
 						</td>
 					</tr>
 				</thead>
@@ -117,9 +117,9 @@
 				</tbody>
 			</table>
 			<div style="text-align: center; margin-top: 20px;">
-				<input type="submit" value="È·¶¨" id="selBtn"/>
-				<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBtn"/>
-				<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+				<input type="submit" value="ç¡®å®š" id="selBtn"/>
+				<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBtn"/>
+				<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 			</div>		
 		</div>
 	</body>

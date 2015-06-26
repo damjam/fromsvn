@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -38,29 +31,25 @@
 			});
 			
 			function delInfo(id){
-				if(window.confirm("È·ÈÏÉ¾³ı?")){
+				if(window.confirm("ç¡®è®¤åˆ é™¤?")){
 					gotoUrl('/billTrack.do?action=delete&id='+id);
 				}
 			}
 			function discard(id){
-				if(window.confirm("È·ÈÏ²»ÔÙÏÔÊ¾¸Ã¼ÇÂ¼?")){
+				if(window.confirm("ç¡®è®¤ä¸å†æ˜¾ç¤ºè¯¥è®°å½•?")){
 					var url="/billTrack.do?action=discard&id="+id;
 					gotoUrl(url);
 				}
 			}
 			function sendNotice(id,cel){
 				if(cel == ''){
-					//alert('Ã»ÓĞ¿É·¢ËÍµÄÊÖ»úºÅÂë');
+					//alert('æ²¡æœ‰å¯å‘é€çš„æ‰‹æœºå·ç ');
 					//return;
 				}
-				//if(window.confirm("½«·¢ËÍ¶ÌĞÅÖÁ"+cel+"£¬È·ÈÏ²Ù×÷?")){
+				if(window.confirm("å°†å‘é€çŸ­ä¿¡è‡³"+cel+"ï¼Œç¡®è®¤æ“ä½œ?")){
 					var url="/billTrack.do?action=sendNotice&id="+id;
 					gotoUrl(url);  
-				//}
-			}
-			function generate(){
-				gotoUrl("/billTrack.do?action=generateAll");
-				$('#queryForm').find(':button, :submit, :reset').attr('disabled', true);
+				}
 			}
 		</script> 
 	</head>
@@ -68,7 +57,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/billTrack.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -76,19 +65,19 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								·¿Îİ±àºÅ
+								æˆ¿å±‹ç¼–å·
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								ÒµÖ÷ĞÕÃû
+								ä¸šä¸»å§“å
 							</td>
 							<td>
 								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								ÁªÏµµç»°
+								è”ç³»ç”µè¯
 							</td>
 							<td>
 								<html:text property="ownerCel" styleId="ownerCel" maxlength="10"/>
@@ -96,75 +85,52 @@
 						</tr>
 						<tr>
 							<td class="formlabel">
-								ÕËµ¥ÀàĞÍ
-							</td>
-							<td>
-								<html:select property="billType" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
-									<html:options collection="billTypes" property="value" labelProperty="name" />
-								</html:select>
-							</td>
-							<td class="formlabel">
-								µ½ÆÚÌìÊı
+								åˆ°æœŸå¤©æ•°
 							</td>
 							<td>
 								<html:select property="leftDays" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 									<html:options collection="remainDays" property="value" labelProperty="name" />
 								</html:select>
 							</td>
 							<td class="formlabel">
-								³¬ÆÚÌìÊı
+								è´¦å•ç±»å‹
 							</td>
 							<td>
-								<html:select property="overDays" style="width:166px">
-									<html:option value="">---È«²¿---</html:option>
-									<html:options collection="exceedDays" property="value" labelProperty="name" />
+								<html:select property="billType" style="width:166px">
+									<html:option value="">---å…¨éƒ¨---</html:option>
+									<html:options collection="billTypes" property="value" labelProperty="name" />
 								</html:select>
-							</td>
-						</tr>
-						<tr>
-							<td class="formlabel">
-								ÅÅĞò·½Ê½
-							</td>
-							<td>
-								<html:select property="orderType">
-									<html:option value="id">Ä¬ÈÏÅÅĞò</html:option>
-									<html:option value="houseSn">·¿Îİ±àºÅ</html:option>
-								</html:select>
-							</td>
+							</td>	
 						</tr>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<c:if test="${sessionScope.SESSION_USER.userType eq 'superUser'}">
-									<input type="button" value="Éú³ÉÕËµ¥ÌáĞÑ" id="" onclick="generate()"/>&nbsp;
-								</c:if>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
 								<!-- 
-								<input type="button" value="ĞÂÔö" id="btnAdd"/> -->
+								<input type="button" value="æ–°å¢" id="btnAdd"/> -->
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td>·¿Îİ±àºÅ</td>
-						 	<td>ÒµÖ÷ĞÕÃû</td>
-						    <td>ÕËµ¥ÀàĞÍ</td>
-						    <td>ÕËµ¥ºÅ</td>
-						    <td>µ½ÆÚÊ±¼ä</td>
-						    <td>Ê£ÓàÌìÊı</td>
-						    <td>Ç··ÑÌìÊı</td>
-						    <td>ÁªÏµµç»°</td>
-						    <td>ÒÑÍ¨Öª´ÎÊı</td>
-						    <td>²Ù×÷</td>
+						 	<td>æˆ¿å±‹ç¼–å·</td>
+						 	<td>ä¸šä¸»å§“å</td>
+						    <td>è´¦å•ç±»å‹</td>
+						    <td>è´¦å•å·</td>
+						    <td>åˆ°æœŸæ—¶é—´</td>
+						    <td>å‰©ä½™å¤©æ•°</td>
+						    <td>æ¬ è´¹å¤©æ•°</td>
+						    <td>è”ç³»ç”µè¯</td>
+						    <td>å·²é€šçŸ¥æ¬¡æ•°</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
@@ -180,9 +146,8 @@
 								<td>${element.ownerCel}</td>
 								<td>${element.noticeTimes}</td> 
 							    <td class="redlink">
-							    	<a href="javascript:discard('${element.id}')" >²»ÔÙÌáĞÑ</a>
-							    	 
-							    	<a href="javascript:sendNotice('${element.id}','${element.ownerCel}')" >±ê¼ÇÍ¨Öª</a>
+							    	<a href="javascript:discard('${element.id}')" >ä¸å†æé†’</a>
+							    	<a href="javascript:sendNotice('${element.id}','${element.ownerCel}')" >å‘é€é€šçŸ¥</a>
 							    </td>
 						    </tr>
 						</logic:iterate>

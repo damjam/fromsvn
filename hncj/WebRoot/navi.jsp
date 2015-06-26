@@ -25,7 +25,7 @@
 				});
 			});
 			
-			//登陆
+			//登录
 			function log(){
 				if(isEmpty() || $('#password').val() == ''){
 					$('#errorMsg').html('用户名或密码不能为空');
@@ -100,7 +100,7 @@
 	</head>
 
 	<body class="fullwidth">
-	    <!--登陆口头部-->
+	    <!--登录口头部-->
 	    <div class="top">
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
@@ -111,7 +111,7 @@
 		</div>
 		
 		
-	    <!--登陆表单区域-->
+	    <!--登录表单区域-->
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">

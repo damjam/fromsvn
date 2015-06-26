@@ -1,11 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
 <%@ include file="/pages/common/meta.jsp"%>
 <%@ include file="/pages/common/sys.jsp"%>
@@ -13,7 +9,7 @@
 <html>
 	<head>
 		
-		<title>½ÇÉ«ĞÅÏ¢ÁĞ±í</title>
+		<title>è§’è‰²ä¿¡æ¯åˆ—è¡¨</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -23,7 +19,6 @@
 		 
 		<script type="text/javascript">
 			$(function(){
-				
 				$('#btnQry').click(function(){
 					$('#roleInfoForm').submit();
 				});
@@ -40,7 +35,7 @@
 			});
 			
 			function deleteRoleInfo(roleId){
-				if(confirm("È·ÈÏÒªÉ¾³ıÂğ?")){
+				if(confirm("ç¡®è®¤è¦åˆ é™¤å—?")){
 					var url="/roleInfoAction.do?action=deleteRoleInfo&roleId="+roleId;
 					gotoUrl(url);
 				}else{
@@ -57,9 +52,9 @@
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg" />
-		<html:form action="/roleInfoAction.do?action=listRoleInfo" styleId="roleInfoForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<f:msg  />
+		<form action="roleInfoAction.do?action=listRoleInfo" id="roleInfoForm" method="post">
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -67,44 +62,44 @@
 						<caption>${ACT.name}</caption> 
 						<tr>
 							<td class="formlabel">
-								½ÇÉ«Ãû³Æ
+								è§’è‰²åç§°
 							</td>
 							<td>
-								<html:text property="roleName" styleId="roleName" />
+								<s:textfield name="roleName" id="roleName" />
 							</td>
 							<td class="formlabel">
-								È¨ÏŞ×éÃû³Æ
+								æƒé™ç»„åç§°
 							</td>
 							<td>
-								<html:text property="limitGroupName" styleId="limitGroupName" />
+								<s:textfield name="limitGroupName" id="limitGroupName" />
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="Çå³ı" id="btnClear"/>&nbsp;
-								<input type="button" value="ĞÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="æ¸…é™¤" id="btnClear"/>&nbsp;
+								<input type="button" value="æ–°å¢" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td>½ÇÉ«±àºÅ</td>
-						    <td>½ÇÉ«Ãû³Æ</td>
-						    <td>È¨ÏŞ×é±àºÅ</td>
-						    <td>È¨ÏŞ×éÃû³Æ</td>
-						    <td>²Ù×÷</td>
+						    <td>è§’è‰²ç¼–å·</td>
+						    <td>è§’è‰²åç§°</td>
+						    <td>æƒé™ç»„ç¼–å·</td>
+						    <td>æƒé™ç»„åç§°</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.roleId}</td>
 							    <td>${element.roleName}</td>
@@ -112,16 +107,16 @@
 							    <td>${element.limitGroupName}</td>
 							    <td align="center">
 							       <span class="redlink">
-							       		<a href="javascript:void(0)" onclick="return updateRoleInfo('${element.roleId}');">ĞŞ¸Ä</a>
-							       		<a href="javascript:void(0)" onclick="return deleteRoleInfo('${element.roleId}');">É¾³ı</a>
+							       		<a href="javascript:void(0)" onclick="return updateRoleInfo('${element.roleId}');">ä¿®æ”¹</a>
+							       		<a href="javascript:void(0)" onclick="return deleteRoleInfo('${element.roleId}');">åˆ é™¤</a>
 							 	   </span>
 							  </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</form>
 	</body>
 </html>

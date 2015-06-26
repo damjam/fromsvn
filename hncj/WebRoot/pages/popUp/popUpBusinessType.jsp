@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -52,7 +52,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("ÇëÑ¡ÔñÐèÒªµÄÒµÎñÀàÐÍ");
+					alert("è¯·é€‰æ‹©éœ€è¦çš„ä¸šåŠ¡ç±»åž‹");
 					return false;
 				}
 				
@@ -90,7 +90,7 @@
 						$('#selBusinessType').click();
 					});
 					$tr.mouseover(function(){
-						$(this).attr("title", "Ë«»÷¿É¿ìËÙÑ¡¶¨");
+						$(this).attr("title", "åŒå‡»å¯å¿«é€Ÿé€‰å®š");
 					});
 				});
 			});
@@ -105,16 +105,16 @@
 		
 	    </script>
 	    
-	    <title>ÒµÎñÀàÐÍÑ¡Ôñ</title>
+	    <title>ä¸šåŠ¡ç±»åž‹é€‰æ‹©</title>
 	</head>
 
 	<body>
 
 		<div class="location">
-			Äúµ±Ç°ËùÔÚÎ»ÖÃ£º
-			<span class="redlink"><a href="javascript: return;">Ê×Ò³</a> </span> > ¹¦ÄÜ²Ù×÷ >ÒµÎñÀàÐÍ¹ÜÀí
+			æ‚¨å½“å‰æ‰€åœ¨ä½ç½®ï¼š
+			<span class="redlink"><a href="javascript: return;">é¦–é¡µ</a> </span> > åŠŸèƒ½æ“ä½œ >ä¸šåŠ¡ç±»åž‹ç®¡ç†
 		</div>
-		<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 		<form id="query" action="businessType.do?action=queryPopUpBusinessType"
 			method="post">
 			<div class="userbox">
@@ -127,7 +127,7 @@
 						<table width="100%">
 							<tr>
 								<td align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÒµÎñÀàÐÍÑ¡Ôñ</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ä¸šåŠ¡ç±»åž‹é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -136,13 +136,13 @@
 							cellpadding="0">
 							<tr>
 								<td width="100" height="30" align="right">
-									ÀàÐÍ±àºÅ
+									ç±»åž‹ç¼–å·
 								</td>
 								<td width="270" height="30">
 									<input type="text"  style="width: 260px;" name="busiNo"  value="${businessType.busiNo }"/>
 								</td>
 								<td width="100" height="30" align="right">
-									ÀàÐÍÃû³Æ
+									ç±»åž‹åç§°
 								</td>
 								<td height="30">
 									<input  style="width: 260px;" name="busiName" type="text"  value="${businessType.busiName }"/>
@@ -155,8 +155,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input id="btnClear" type="button"  style="margin-left: 30px;"  value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input id="btnClear" type="button"  style="margin-left: 30px;"  value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -167,14 +167,14 @@
 					<b class="b1"></b>
 				</div>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-							<th align="center" nowrap="nowrap" class="titlebg">ÇëÑ¡Ôñ</th>
-							<th align="center" nowrap="nowrap" class="titlebg">ÀàÐÍ±àºÅ</th>
-							<th align="center" nowrap="nowrap" class="titlebg">ÀàÐÍÃû³Æ</th>
+							<th align="center" nowrap="nowrap" class="titlebg">è¯·é€‰æ‹©</th>
+							<th align="center" nowrap="nowrap" class="titlebg">ç±»åž‹ç¼–å·</th>
+							<th align="center" nowrap="nowrap" class="titlebg">ç±»åž‹åç§°</th>
 						</tr>
 					</thead>
 					
@@ -183,7 +183,7 @@
 						<c:if test="${empty businessTypeList}">
 							<tr>
 								<td colspan="10">
-									Ã»ÓÐÊý¾Ý
+									æ²¡æœ‰æ•°æ®
 								</td>
 							</tr>
 						</c:if>
@@ -215,9 +215,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="3" align="center">
-					<input type="submit" value="È·¶¨" id="selBusinessType"/>
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBusinessType"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selBusinessType"/>
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBusinessType"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

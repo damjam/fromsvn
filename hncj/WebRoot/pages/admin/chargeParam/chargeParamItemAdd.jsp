@@ -1,16 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<title></title>
 		<f:css href="/css/page.css" />
@@ -50,18 +42,18 @@
 		<f:msg styleClass="msg" />
 		<html:form action="/chargeParam.do?action=doAddItem" styleId="queryForm">
 			<html:hidden property="id" />
-			<!--  ˝æ›¡–±Ì«¯ -->
+			<!-- Êï∞ÊçÆÂàóË°®Âå∫ -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td> </td>
-						 	<td >º∆∑—œÓ</td>
-						 	<td >º∆∑—¿‡–Õ</td>
-						    <td >º∆∑—∑Ω Ω</td>
-						    <td >º∆∑—πÊ‘Ú</td>
-						    <td >¥¥Ω® ±º‰</td>
-						    <td >±∏◊¢</td>
+						 	<td >ËÆ°Ë¥πÈ°π</td>
+						 	<td >ËÆ°Ë¥πÁ±ªÂûã</td>
+						    <td >ËÆ°Ë¥πÊñπÂºè</td>
+						    <td >ËÆ°Ë¥πËßÑÂàô</td>
+						    <td >ÂàõÂª∫Êó∂Èó¥</td>
+						    <td >Â§áÊ≥®</td>
 						 </tr>
 					</thead>
 					
@@ -81,8 +73,8 @@
 				</table>
 				<f:paginate/>
 				<div class="btnbox clear">
-					<input type="button" id="" onclick="save()" value="±£¥Ê"></button>
-					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="∑µªÿ"></button>
+					<input type="button" id="" onclick="save()" value="‰øùÂ≠ò"></button>
+					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="ËøîÂõû"></button>
 				</div>		
 			</div> 
 		</html:form>

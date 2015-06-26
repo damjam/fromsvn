@@ -3,12 +3,12 @@
 	@ 2006-12-23.
 //-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/pages/common/sys.jsp"%>
 <%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
 <html>
 	<head>
-		<title>²Ù×÷³¬Ê±</title>
+		<title>æ“ä½œè¶…æ—¶</title>
 		<link rel="stylesheet" href="${CONTEXT_PATH}/css/page.css"
 			type="text/css" media="screen, projection" />
 		<f:js src="/js/jquery.js"/>
@@ -39,8 +39,8 @@
 				<div style="width: 68%;text-align: left;vertical-align: center">
 					<p align="left"
 						style="font-size: 16px; font-weight: bold; margin-top:55px;">
-						Äú»¹Ã»ÓÐµÇÂ¼»ò²Ù×÷³¬Ê±£¬µã<a href="" target="_top"
-							style="text-decoration: underline;color: red" id="link">ÕâÀï</sapn></a>ÖØÐÂµÇÂ¼.
+						æ‚¨è¿˜æ²¡æœ‰ç™»å½•æˆ–æ“ä½œè¶…æ—¶ï¼Œç‚¹<a href="" target="_top"
+							style="text-decoration: underline;color: red" id="link">è¿™é‡Œ</sapn></a>é‡æ–°ç™»å½•.
 					</p>
 				</div>
 			</div>

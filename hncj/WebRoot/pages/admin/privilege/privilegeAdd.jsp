@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞÂÔöÈ¨ÏŞ</title>
+		<title>æ–°å¢æƒé™</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
@@ -20,9 +16,7 @@
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
+		
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -30,7 +24,7 @@
 				});
 				
 				$('#btnReturn').click(function(){
-					gotoUrl("/privilegeAction.do?action=listPrivilege");
+					gotoUrl("/privilegeAction.do?action=listPrivs");
 				});
 				
 				$("#imgSelectParent").click(function(){
@@ -44,8 +38,8 @@
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="/privilegeAction.do?action=addPrivilege" styleId="privilegeForm" method="post" styleClass="validate">
+<f:msg />
+	<form action="/privilegeAction.do?action=addPrivilege" id="privilegeForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -56,52 +50,49 @@
 					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel nes">È¨ÏŞID</td>
+						    <td class="formlabel nes">æƒé™ID</td>
 						    <td>
-						    	<html:text property="limitId"  styleId="limitId" styleClass="{required:true,letter:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">×ÖÄ¸</span>
+						    	<s:textfield name="limitId"  id="limitId" class="{required:true,letter:true}" maxlength="20"/>
+						    	<span class="field_tipinfo">å­—æ¯</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">È¨ÏŞÃû³Æ</td>
+						    <td class="formlabel nes">æƒé™åç§°</td>
 						    <td>
-						    	<html:text property="limitName" styleId="limitNameId"  styleClass="{required:true}" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<s:textfield name="limitName" id="limitNameId"  class="{required:true}" />
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes">¸¸Ç×½Úµã</td>
+						     <td class="formlabel nes">çˆ¶äº²èŠ‚ç‚¹</td>
 						     <td>
-								<html:text property="parentName" readonly="true" styleId="parentName"></html:text>
-								<img src="${CONTEXT_PATH}/images/search.gif" alt="ÇëÑ¡Ôñ" id="imgSelectParent"/>
-								<html:hidden property="parent" styleId="parentId"  styleClass="{required:true}" />
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+								<s:textfield name="parentName" readonly="true" id="parentName"></s:textfield>
+								<img src="${CONTEXT_PATH}/images/search.gif" alt="è¯·é€‰æ‹©" id="imgSelectParent"/>
+								<s:hidden name="parent" id="parentId"  class="{required:true}" />
+								<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 								
 							</td>
 					   </tr>
 					    <tr>
-						     <td class="formlabel nes">²Ëµ¥(?)</td>
+						     <td class="formlabel nes">èœå•(?)</td>
 						     <td>
-								<html:select property="isMenu" styleClass="{required:true}">
-									<html:option value="N">·ñ</html:option>
-									<html:option value="Y">ÊÇ</html:option>
-								</html:select>
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+								<s:select list="#{'Y':'æ˜¯','N':å¦ }" name="isMenu" listKey="key" listValue="value"></s:select>
+								<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							</td>
 					   </tr>
 					    <tr>
-						     <td class="formlabel nes">ĞòºÅ</td>
+						     <td class="formlabel nes">åºå·</td>
 						     <td>
-								<html:text property="menuOrder" styleId="menuOrderId"  styleClass="{required:true,num:true}" />
-								<span class="field_tipinfo">Êı×Ö</span>
+								<s:textfield name="menuOrder" id="menuOrderId"  class="{required:true,num:true}" />
+								<span class="field_tipinfo">æ•°å­—</span>
 							</td>
 					   </tr>
 					     <tr>
 						     
 						     <td colspan="2" align="center">
-								 <input type="submit" id="btnSumit" value="Ìá½»"/>
-								 <input type="button" id="btnClear" value="Çå³ı"/>
-								 <input type="button" id="btnReturn" value="·µ»Ø"/>
+								 <input type="submit" id="btnSumit" value="æäº¤"/>
+								 <input type="button" id="btnClear" value="æ¸…é™¤"/>
+								 <input type="button" id="btnReturn" value="è¿”å›"/>
 							</td>
 					   </tr>
 				  </table>
@@ -112,8 +103,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

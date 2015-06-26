@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<!--°æÈ¨ÇøÓò-->
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<!--ç‰ˆæƒåŒºåŸŸ-->
 <div class="bottom">
 	<div style="float:left; padding-left:5px; color:#767676;">
 		${comInfo.tip}
 	</div>
 	<div style="float:right; padding-right:5px;color:#767676;">
 	<!-- 
-		°æÈ¨ËùÓÐ&copy;<a href="${comInfo.groupWeb}" title="·ÃÎÊ${comInfo.hqName}¹Ù·½ÍøÕ¾" target="_blank" style="color:#767676;">²ý½¨µØ²ú¼¯ÍÅ</a>µç»°£º0395-2652766 
+		ç‰ˆæƒæ‰€æœ‰&copy;<a href="${comInfo.groupWeb}" title="è®¿é—®${comInfo.hqName}å®˜æ–¹ç½‘ç«™" target="_blank" style="color:#767676;">æ˜Œå»ºåœ°äº§é›†å›¢</a>ç”µè¯ï¼š0395-2652766 
 	 -->
 	</div>
 </div>

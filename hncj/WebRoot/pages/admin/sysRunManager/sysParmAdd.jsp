@@ -1,12 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">  
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html lang="zh-cn">  
+<%@ include file="/pages/common/taglibs.jsp" %>
 
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 
 
@@ -25,11 +21,6 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:css href="/css/page.css" />
-		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript"><!--//--><![CDATA[//><!--
 		
 		$(function(){
@@ -56,8 +47,9 @@
 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<f:msg/>
-	<form id="query" action="${CONTEXT_PATH}/sysParmManage.do?action=save" method="post" class="validate">
-		<!-- ÓÃ»§×ÊÁÏÐÞ¸ÄÇø -->
+	<form id="query" action="sysParmManage.do?action=save" method="post" class="validate">
+		<s:token/>
+		<!-- ç”¨æˆ·èµ„æ–™ä¿®æ”¹åŒº -->
 			<div class="userbox">
 				<div>
 					<b class="b1"></b>
@@ -66,39 +58,39 @@
 					<b class="b4"></b>
 						<div class="contentb">
 							<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
-							  <caption>${ACT.name}ÐÂÔö</caption>	
+							  <caption>${ACT.name}</caption>	
 							  <tr>
-							    <td class="formlabel nes">²ÎÊý±àÂë</td>
+							    <td class="formlabel nes">å‚æ•°ç¼–ç </td>
 							    <td>
-							    	<input class="{required:true,maxlength:6,stringNum:true}"  name="code" type="text" value="${sysParm.code}"  maxlength="6"/>
-							    	<span class="field_tipinfo">1-6Î»×Ö·û£¬°üÀ¨×ÖÄ¸ºÍÊý×Ö</span>
+							    	<s:textfield class="{required:true,maxlength:6,stringNum:true}"  name="code"  maxlength="6"/>
+							    	<span class="field_tipinfo">1-6ä½å­—ç¬¦ï¼ŒåŒ…æ‹¬å­—æ¯å’Œæ•°å­—</span>
 							    </td>
 							    </tr>
 							   <tr>
-							    <td class="formlabel nes">²ÎÊýÃû³Æ</td>
+							    <td class="formlabel nes">å‚æ•°åç§°</td>
 							    <td>
-							    	<input class="{required:true}" name="parname"  type="text" value="${sysParm.parname}" maxlength="50"/>
-							    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+							    	<s:textfield class="{required:true}" name="parname"  maxlength="50"/>
+							    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							    </td>
 							  </tr>
 							  <tr>
-							    <td class="formlabel nes">²ÎÊýÖµ</td>
+							    <td class="formlabel nes">å‚æ•°å€¼</td>
 							    <td>
-							   		 <input class="{required:true}"  name="parvalue" type="text" value="${sysParm.parvalue}" maxlength="25"/>
-						    		 <span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+							   		 <s:textfield class="{required:true}"  name="parvalue" maxlength="25"/>
+						    		 <span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							    </td>
 							  </tr>
 							  <tr>
-							    <td class="formlabel">±¸×¢</td>
+							    <td class="formlabel">å¤‡æ³¨</td>
 							    <td>
-							   		 <input name="remark" type="text"  value="${sysParm.remark}" maxlength="50"/>
+							   		 <s:textfield name="remark" maxlength="50"/>
 							    </td>
 							    </tr>
 							  <tr>
 							  	<td></td>
 							    <td colspan="3">
-								    <input type="submit"  id="input_btn2"   value="È·¶¨"  />
-								    <input style="margin-left:30px;" type="button"  value="·µ»Ø" id="btnReturn" />
+								    <input type="submit"  id="input_btn2"   value="ç¡®å®š"  />
+								    <input style="margin-left:30px;" type="button"  value="è¿”å›ž" id="btnReturn" />
 							    </td>
 							  </tr>
 						  </table>
@@ -111,7 +103,7 @@
 		</div>
 	</form>
 	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

@@ -1,26 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>È¨ÏŞ×ÊÔ´¹ÜÀí</title>
+		<title>æƒé™èµ„æºç®¡ç†</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/paginater.js"/>
-
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 			 $(function(){
 				$("#btnQry").click(function(){
@@ -32,12 +24,12 @@
 				});
 				
 				$("#btnAdd").click(function(){
-					var url="/privilegeResourceAction.do?action=toAddPage&limitId="+$("#limitId").val()
+					var url="/privilegeResourceAction.do?action=toAddPage&limitId="+$("#limitId").val();
 					gotoUrl(url);
 				});
 				
 				$("#btnReturn").click(function(){
-					var url="/privilegeAction.do?action=listPrivilege";
+					var url="/privilegeAction.do?action=listPrivs";
 					gotoUrl(url);
 				}); 
 			 });
@@ -51,8 +43,8 @@
     
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg"/>
-		<html:form action="/privilegeResourceAction.do?action=listPrivilegeResource" styleId="privilegeResourceFrm" >
+		<f:msg />
+		<form action="privilegeResourceAction.do?action=listPrivilegeResource" id="privilegeResourceFrm" method="post">
 			<div class="userbox">
 				<b class="b1"></b>
 				<b class="b2"></b>
@@ -62,18 +54,18 @@
 					<table class="form_grid" >
 						 <caption>${ACT.name}</caption>
 						<tr>
-							<td class="formlabel">È¨ÏŞÃû³Æ</td>
+							<td class="formlabel">æƒé™åç§°</td>
 							<td>
-								<html:text property="limitName" styleId="limitName"></html:text>
-								<html:hidden property="limitId" styleId="limitId"/>
+								<s:textfield name="limitName" id="limitName"></s:textfield>
+								<s:hidden name="limitId" id="limitId"/>
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯"  id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear"/>&nbsp;
-								<input type="button" value="ĞÂÔö"  id="btnAdd"/>&nbsp;
+								<input type="button" value="æŸ¥è¯¢"  id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear"/>&nbsp;
+								<input type="button" value="æ–°å¢"  id="btnAdd"/>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -84,22 +76,22 @@
 				<b class="b1"></b>
 			</div>
 			
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td>×ÊÔ´ID</td>
-						    <td>È¨ÏŞID</td>
+						    <td>èµ„æºID</td>
+						    <td>æƒé™ID</td>
 						    <td>URL</td>
 						    <td>Method</td>
-						    <td>²Ëµ¥</td>
-						    <td>²Ù×÷</td>
+						    <td>èœå•</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr>
 								<td>${element.id}</td>
 							    <td>${element.limitId}</td>
@@ -108,16 +100,16 @@
 							    <td>${element.isEntry}</td>
 							    <td align="center">
 							       <span class="redlink">
-							       		<html:link href="javascript:deletePrivilegeResource('${element.id}')" styleId="hrefDelete">É¾³ı</html:link>
+							       		<a href="javascript:deletePrivilegeResource('${element.id}')" id="hrefDelete">åˆ é™¤</a>
 							 	   </span>
 							  </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div>
-		</html:form>
+		</form>
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
+		<title>æ·»åŠ æ–°å®¢æˆ·</title>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>Ìí¼ÓĞÂ¿Í»§</title>
-		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
@@ -25,20 +20,20 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#bankno').keyup(function() {
-					// ÒøĞĞ¿¨ºÅ×Ô¶¯²¹¿Õ¸ñ
+					// é“¶è¡Œå¡å·è‡ªåŠ¨è¡¥ç©ºæ ¼
 					var t_bankno = $('#bankno').val().replace(/\s/g,'').replace(/(\d{4})(?=\d)/g,"$1 ");
 					$('#bankno').val(t_bankno);
 				});
 			});
 			function checkChange() {
-				// ¿¨ÀàĞÍÑ¡ÔñÊÂ¼ş
+				// å¡ç±»å‹é€‰æ‹©äº‹ä»¶
 				var type = $('#cardType').val();
 				if(type == "0") {
 					$('#idCard').rules("remove");
-					$('#idCard').rules("add", { required: true,idcard: true, messages: { required: "ÇëÕıÈ·ÊäÈëÄúµÄÉí·İÖ¤ºÅÂë"} });
+					$('#idCard').rules("add", { required: true,idcard: true, messages: { required: "è¯·æ­£ç¡®è¾“å…¥æ‚¨çš„èº«ä»½è¯å·ç "} });
 				} else if(type == "1") {
 					$('#idCard').rules("remove");
-					$('#idCard').rules("add", { required: true,passport: true, messages: { required: "ÇëÕıÈ·ÊäÈëÄúµÄ»¤ÕÕ"} });
+					$('#idCard').rules("add", { required: true,passport: true, messages: { required: "è¯·æ­£ç¡®è¾“å…¥æ‚¨çš„æŠ¤ç…§"} });
 				}
 			}
 			
@@ -90,23 +85,23 @@
 				<b class="b4"></b>
 				<div class="contentb">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
-					  <caption>Ìí¼ÓĞÂ¿Í»§</caption>
+					  <caption>æ·»åŠ æ–°å®¢æˆ·</caption>
 					  <tr>
-						    <td class="formlabel nes">ÊÖ»úºÅ</td>
+						    <td class="formlabel nes">æ‰‹æœºå·</td>
 						    <td>
 						    	<html:text property="mobile" styleClass="{required:true,digit:true,mobile:true,minlength:11,maxlength:11}" maxlength="11"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÓĞĞ§µÄÊÖ»úºÅ</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æœ‰æ•ˆçš„æ‰‹æœºå·</span>
 						    </td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel nes">ÕæÊµĞÕÃû</td>
+					   		<td class="formlabel nes">çœŸå®å§“å</td>
 					   		<td>
 					   			<html:text property="name" styleClass="required:true" maxlength="30" />
-					   			<span class="field_tipinfo">ÇëÊäÈëÕæÊµĞÕÃû</span>
+					   			<span class="field_tipinfo">è¯·è¾“å…¥çœŸå®å§“å</span>
 					   		</td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel nes">Ö¤¼şÀàĞÍ</td>
+					   		<td class="formlabel nes">è¯ä»¶ç±»å‹</td>
 					   		<td>
 						    	<html:select property="cardType" styleId="cardType" onchange="checkChange()">
 									<html:options collection="idCardTypes" labelProperty="name" property="value"  />
@@ -114,45 +109,45 @@
 						    </td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel nes">Ö¤¼şºÅ</td>
+					   		<td class="formlabel nes">è¯ä»¶å·</td>
 					   		<td>
 					   			<html:text property="idCard" styleClass="{required:true,idcard:true}" maxlength="30" styleId="idCard" />
-					   			<span class="field_tipinfo">ÇëÊäÈëÄúÓĞĞ§µÄÖ¤¼şºÅ</span>
+					   			<span class="field_tipinfo">è¯·è¾“å…¥æ‚¨æœ‰æ•ˆçš„è¯ä»¶å·</span>
 					   		</td>
 					   </tr>
 <%--					   <tr>--%>
-<%--					   		<td class="formlabel nes">²âÊÔÊäÈëÒøĞĞ¿¨ºÅ</td>--%>
+<%--					   		<td class="formlabel nes">æµ‹è¯•è¾“å…¥é“¶è¡Œå¡å·</td>--%>
 <%--					   		<td>--%>
 <%--					   			<html:text property="bankno" styleClass="{required:true,bankno:true}" maxlength="30" styleId="bankno" />--%>
-<%--					   			<span class="field_tipinfo">ÇëÊäÈëÄúµÄÒøĞĞ¿¨ºÅ</span>--%>
+<%--					   			<span class="field_tipinfo">è¯·è¾“å…¥æ‚¨çš„é“¶è¡Œå¡å·</span>--%>
 <%--					   		</td>--%>
 <%--					   </tr>--%>
 					   <tr>
-							<td class="formlabel">Í¨Ñ¶µØÖ·</td>
+							<td class="formlabel">é€šè®¯åœ°å€</td>
 							<td>
 					   			<html:text property="addr" maxlength="100" />
-					   			<span class="field_tipinfo">Í¨Ñ¶µØÖ·</span>
+					   			<span class="field_tipinfo">é€šè®¯åœ°å€</span>
 					   		</td>
 						</tr>
 					    <tr>
-					    	<td class="formlabel">ÓÊÏä</td>
+					    	<td class="formlabel">é‚®ç®±</td>
 						     <td>
 								<html:text property="email" styleId="email" styleClass="{email:true}" maxlength="30" onblur="checkEmail()"/>
-								<span class="field_tipinfo">ÓĞĞ§µÄÓÊÏä</span>
+								<span class="field_tipinfo">æœ‰æ•ˆçš„é‚®ç®±</span>
 							</td>
 					   </tr>
 					   <tr>
-					   		<td class="formlabel">¶©ÔÄ×ÊÑ¶</td>
+					   		<td class="formlabel">è®¢é˜…èµ„è®¯</td>
 						     <td>
-						     	<input type="checkbox" name="subsPhone" value="Y" checked="checked" id="subsPhone"/>ÊÖ»ú¶©ÔÄ
-						     	<input type="checkbox" name="subsEmail" value="Y" id="subsEmail" onclick="checkSubEmail()"/>ÓÊÏä¶©ÔÄ
+						     	<input type="checkbox" name="subsPhone" value="Y" checked="checked" id="subsPhone"/>æ‰‹æœºè®¢é˜…
+						     	<input type="checkbox" name="subsEmail" value="Y" id="subsEmail" onclick="checkSubEmail()"/>é‚®ç®±è®¢é˜…
 							</td>
 					   </tr>
 					   <tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="Ìá½»" onclick="custInfoAdd(this.form)"/>&nbsp;
-								<input type="button" value="È¡Ïû" onclick="history.go(-1)"/>&nbsp;
+								<input type="button" value="æäº¤" onclick="custInfoAdd(this.form)"/>&nbsp;
+								<input type="button" value="å–æ¶ˆ" onclick="history.go(-1)"/>&nbsp;
 							</td>
 						</tr>
 				  </table>
@@ -164,7 +159,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

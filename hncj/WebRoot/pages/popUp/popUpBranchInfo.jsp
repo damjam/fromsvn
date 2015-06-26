@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -50,7 +50,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñĞèÒªµÄ»ú¹¹");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„æœºæ„");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -86,7 +86,7 @@
 						$('#selBranchInfo').click();
 					});
 					$tr.mouseover(function(){
-						$(this).attr("title", "Ë«»÷¿É¿ìËÙÑ¡¶¨");
+						$(this).attr("title", "åŒå‡»å¯å¿«é€Ÿé€‰å®š");
 					});
 				});
 			});
@@ -100,7 +100,7 @@
 			});
 			
 	 	</script>
-	 	<title>Ñ¡Ôñ»ú¹¹</title>
+	 	<title>é€‰æ‹©æœºæ„</title>
 	 	
 	</head>
 
@@ -119,7 +119,7 @@
 							<tr>
 								<td align="left">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px; padding-left: 20px;">»ú¹¹Ñ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px; padding-left: 20px;">æœºæ„é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -128,13 +128,13 @@
 							cellpadding="0">
 							<tr class="shortcut">
 								<td  height="30" align="right">
-									»ú¹¹±àºÅ
+									æœºæ„ç¼–å·
 								</td>
 								<td width="270" height="30">
 									<input name="branchNo"  type="text" id="branchNo"  value="${branchInfoOperForm.branchNo}"/>
 								</td>
 								<td  height="30" align="right">
-									»ú¹¹Ãû³Æ
+									æœºæ„åç§°
 								</td>
 								<td height="30">
 									<input  name="branchName" type="text" id="branchName"  value="${branchInfoOperForm.branchName}" />
@@ -147,8 +147,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input id='btnClear' style="margin-left: 30px;" type="button" value="Çå³ı" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input id='btnClear' style="margin-left: 30px;" type="button" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -160,19 +160,19 @@
 				</div>
 			</div>
 
-		<!-- Êı¾İÁĞ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							»ú¹¹±àºÅ
+							æœºæ„ç¼–å·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							»ú¹¹Ãû³Æ
+							æœºæ„åç§°
 						</th>
 					</tr>
 				</thead>
@@ -182,7 +182,7 @@
 					<c:if test="${empty branchInfoList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓĞÊı¾İ
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -213,9 +213,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="button" value="È·¶¨" id="selBranchInfo"/>
-						<input style="margin-left: 30px;" type="submit" value="Çå³ı" id="clearBranchInfo"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input type="button" value="ç¡®å®š" id="selBranchInfo"/>
+						<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBranchInfo"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>

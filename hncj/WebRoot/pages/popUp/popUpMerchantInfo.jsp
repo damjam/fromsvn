@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -15,7 +15,7 @@
 <%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Ñ¡ÔñÉÌ»§</title>
+		<title>é€‰æ‹©å•†æˆ·</title>
 		<base target="_self" />
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -44,7 +44,7 @@ body {
 			});
 
 			if (i == 0 || i > 1) {
-				alert("ÇëÑ¡ÔñĞèÒªµÄ²¿ÃÅ£¬ÓĞÇÒ½öÓĞÒ»Ìõ");
+				alert("è¯·é€‰æ‹©éœ€è¦çš„éƒ¨é—¨ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 				return false;
 			}
 
@@ -81,7 +81,7 @@ body {
 					$('#selMerchantInfo').click();
 				});
 				$tr.mouseover(function() {
-					$(this).attr("title", "Ë«»÷¿É¿ìËÙÑ¡¶¨");
+					$(this).attr("title", "åŒå‡»å¯å¿«é€Ÿé€‰å®š");
 				});
 			});
 		});
@@ -113,12 +113,12 @@ body {
 							<tr>
 								<td colspan="4" align="left">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px; padding-left: 10px;">ÉÌ»§Ñ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px; padding-left: 10px;">å•†æˆ·é€‰æ‹©</span>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									ÉÌ»§Ãû³Æ
+									å•†æˆ·åç§°
 								</td>
 								<td height="30">
 									<input type="text" name="mrname" id="mrname" style="width: 260px;" value="${merchantInfoActionForm.mrname}"/>
@@ -131,9 +131,9 @@ body {
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
+									<input type="submit" value="æŸ¥è¯¢" />
 									<input id="btnClear" style="margin-left: 30px;" type="button"
-										value="ÖØÖÃ" />
+										value="é‡ç½®" />
 								</td>
 							</tr>
 						</table>
@@ -145,23 +145,23 @@ body {
 				</div>
 			</div>
 
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0"
 					cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇëÑ¡Ôñ
+								è¯·é€‰æ‹©
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÉÌ»§Ãû³Æ
+								å•†æˆ·åç§°
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ĞĞÒµÀà±ğ
+								è¡Œä¸šç±»åˆ«
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								¾­Óª·¶Î§
+								ç»è¥èŒƒå›´
 							</th>
 						</tr>
 					</thead>
@@ -197,10 +197,10 @@ body {
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="button" value="È·¶¨" id="selMerchantInfo" />
-					<input style="margin-left: 30px;" type="submit" value="Çå³ı"
+					<input type="button" value="ç¡®å®š" id="selMerchantInfo" />
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤"
 						id="clearMerchantInfo" />
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ"
+					<input style="margin-left: 30px;" type="button" value="å…³é—­"
 						id="winClose" />
 				</td>
 			</tr>

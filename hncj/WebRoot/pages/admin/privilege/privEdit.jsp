@@ -1,14 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 <%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -50,58 +48,48 @@ html {
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<html:form action="/privilegeAction.do?action=editPrivilege"
-					styleId="inputForm" styleClass="validate">
-					<html:hidden property="parent" styleId="parent"/>
-					<table class="form_grid" width="100%" border="0" cellspacing="3"
-						cellpadding="0">
+				<form action="privilegeAction.do?action=editPrivilege"
+					id="inputForm" class="validate" method="post">
+					<s:hidden name="parent" id="parent"/>
+					<table class="form_grid">
 						<caption>
 							${ACT.name}
 						</caption>
 						<tr>
 							<td class="formlabel nes">
-								È¨ÏÞID
+								æƒé™ID
 							</td>
 							<td>
-								<logic:empty name="privilegeActionForm" property="limitId">
-									<html:text property="limitId"
-									styleClass="userbox_bt {required:true}" maxlength="100" />
-								</logic:empty>
-								<logic:notEmpty name="privilegeActionForm" property="limitId">
-									<html:text property="limitId"
-									styleClass="userbox_bt {required:true}" maxlength="100" readonly="true"/>
-								</logic:notEmpty>
-								<span class="field_tipinfo"></span><span class="error_tipinfo">±ØÌî</span>
+								<s:textfield name="limitId" class="userbox_bt {required:true}"></s:textfield>
+								
+								<span class="field_tipinfo"></span><span class="error_tipinfo">å¿…å¡«</span>
 							</td>
 						</tr>
 
 						<tr>
 							<td class="formlabel nes">
-								È¨ÏÞÃû³Æ
+								æƒé™åç§°
 							</td>
 							<td>
-								<html:text property="limitName" maxlength="20"></html:text>
-								<span class="field_tipinfo"></span><span class="error_tipinfo">±ØÌî</span>
+								<s:textfield id="limitName" maxlength="20" name="limitName"/>
+								<span class="field_tipinfo"></span><span class="error_tipinfo">å¿…å¡«</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel">
-								ÊÇ·ñ²Ëµ¥
+								æ˜¯å¦èœå•
 							</td>
 							<td>
-								<html:select property="isMenu">
-									<html:option value="Y">ÊÇ</html:option>
-									<html:option value="N">·ñ</html:option>
-								</html:select>
+								<s:select list="#{'Y':'æ˜¯','N':å¦ }" name="isMenu" listKey="key" listValue="value"></s:select>
 							</td>
 						</tr>
 					</table>
 					<div class="btnbox" align="center">
-						<input type='submit' value='Ìá½»' />
+						<input type='submit' value='æäº¤' />
 						<input type='button' onclick="goBack();"
-							value='·µ»Ø' />
+							value='è¿”å›ž' />
 					</div>
-				</html:form>
+				</form>
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>

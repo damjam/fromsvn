@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -50,7 +50,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄÒøÐÐÐÐºÅ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„é“¶è¡Œè¡Œå·");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -80,7 +80,7 @@
 					  } 
 			}  
 	 	</script>
-	 	<title>ÒøÐÐÐÐºÅÑ¡Ôñ</title>
+	 	<title>é“¶è¡Œè¡Œå·é€‰æ‹©</title>
 	 	
 	</head>
 
@@ -98,7 +98,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÒøÐÐÐÐºÅÑ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">é“¶è¡Œè¡Œå·é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -107,13 +107,13 @@
 							cellpadding="0">
 							<tr>
 								<td  height="30" align="right">
-									ÒøÐÐÐÐºÅ
+									é“¶è¡Œè¡Œå·
 								</td>
 								<td width="270" height="30">
 									<input type="text" class="userbox_bt"  name="bankNo" id="bankNo"  value="${bankInfo.bankNo }"/>
 								</td>
 								<td  height="30" align="right">
-									ÒøÐÐÃû³Æ
+									é“¶è¡Œåç§°
 								</td>
 								<td height="30">
 									<input class="userbox_bt"  name="bankName" type="text" id="bankName"  value="${bankInfo.bankName }" />
@@ -126,8 +126,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input style="margin-left: 30px;" type="reset" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input style="margin-left: 30px;" type="reset" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -141,7 +141,7 @@
 		</form>
 		
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr></tr>
@@ -150,13 +150,13 @@
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÒøÐÐÐÐºÅ
+							é“¶è¡Œè¡Œå·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÒøÐÐÃû³Æ
+							é“¶è¡Œåç§°
 						</th>
 					</tr>
 				</thead>
@@ -166,7 +166,7 @@
 					<c:if test="${empty bankInfoList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -195,9 +195,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="submit" value="È·¶¨" id="selBankNo"/>
-						<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBankNo"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input type="submit" value="ç¡®å®š" id="selBankNo"/>
+						<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBankNo"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>

@@ -1,10 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -26,7 +24,7 @@
 			function hasRead(link, msgId){
 				gotoUrl('/noticeMsgAction.do?action=hasRead&msgId='+msgId);
 				/*
-				link.innerHtml('�Ѷ�');
+				link.innerHtml('已读');
 				$.ajax({
 				 type:'POST',
 			     url:CONTEXT_PATH + '/noticeMsgAction.do?action=hasRead',
@@ -41,7 +39,7 @@
 			    	 }
 				 },
 				 error:function(data){   
-                     alert("����ʧ��"+data.msg);
+                     alert("发送失败"+data.msg);
                  }       
 			 });*/
 			}
@@ -53,10 +51,10 @@
 
 	<body>
 		<div class="location">
-			����ǰ����λ�ã�<span class="redlink"><a href="javascript: void(0);">��ҳ</a>
+			您当前所在位置：<span class="redlink"><a href="javascript: void(0);">首页</a>
 		</div>
 		
-		<!-- ��½�ɹ���ʾ�� -->
+		<!-- 登录成功提示区 -->
 		<div class="okbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
@@ -68,12 +66,12 @@
 							</td>
 							<td>
 								<p style="font-size:14px; font-weight:bold;">
-									ϵͳ��¼��ʾ
+									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									�𾴵��û������Ѿ��ɹ���¼${comInfo.sp}����ͨ����ർ���˵�������Ӧ���ܲ�����
-									�������ʹ�ù����������ʣ��벦��
-									<span class="redfont">����֧�ֵ绰��18520827190<strong></strong>
+									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
+									如果您在使用过程中有疑问，请拨打
+									<span class="redfont">技术支持电话：18520827190<strong></strong>
 									</span>
 								</p>
 							</td>
@@ -95,7 +93,7 @@
 							</td>
 							<td>
 								<p style="font-size: 14px; font-weight: bold;">
-									ϵͳ��Ϣ
+									系统消息
 								</p>
 								<p style="text-indent: 2em; line-height: 20px;" align="center">
 									
@@ -116,7 +114,7 @@
 										${element.content}
 									</td>
 									<td align="right" nowrap="nowrap" class="bluelinku">
-										<a href="javascript:void(0)" onclick="hasRead(this, ${element.id})">���Ϊ�Ѷ�</a>
+										<a href="javascript:void(0)" onclick="hasRead(this, ${element.id})">标记为已读</a>
 									</td>
 								</tr>
 							</logic:iterate>
@@ -127,13 +125,13 @@
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
 		</c:if>
-		<!-- ��ɫ���̰����� -->
+		<!-- 角色流程帮助区 -->
 		<div class="processtitle">
 			<div class="processtitleimg">
 				<img src="images/icon15.gif" width="37" height="41" />
 			</div>
 			<div class="processtitletx">
-				���ò������̣�
+				常用操作流程：
 				<span style="color:#0459a7"></span>
 			</div>
 		</div>
@@ -147,37 +145,37 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td valign="middle">
-								<strong>����һ</strong>��
+								<strong>步骤一</strong>：
 								<br />
 								<br />
-								�������๦�ܲ����еġ�xxxx���˵���
+								鼠标点击左侧功能操作中的“xxxx”菜单。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
 							</td>
 							<td valign="middle">
-								<strong>�����</strong>��
+								<strong>步骤二</strong>：
 								<br />
 								<br />
-								�ڴ򿪵Ĵ����������ѯ�������������ѯ����ť���в�ѯ��
+								在打开的窗口中输入查询条件，点击“查询”按钮进行查询。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
 							</td>
 							<td valign="middle">
-								<strong>������</strong>��
+								<strong>步骤三</strong>：
 								<br />
 								<br />
-								�ڱ༭ҳ������Ҫ����/�޸ĵ����ݣ���������桱��ť��
+								在编辑页面输入要新增/修改的内容，点击“保存”按钮。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
 							</td>
 							<td valign="middle">
-								<strong>������</strong>��
+								<strong>步骤四</strong>：
 								<br />
 								<br />
-								�ڵ�������ʾ�����е�������ء���ť��ɲ�����
+								在弹出的提示窗口中点击“返回”按钮完成操作！
 							</td>
 						</tr>
 					</table>
@@ -188,12 +186,12 @@
 
 <!-- 
 		<div class="processbz">
-			ע������ۿ����Ӿ���Ĳ������̣���
-			<span class="redlink"><a href="javascript: return;">����˴�</a>
-			</span>����Flash���������̳̣�
+			注：如需观看更加具体的操作过程，请
+			<span class="redlink"><a href="javascript: return;">点击此处</a>
+			</span>下载Flash动画帮助教程！
 		</div>
  -->
-		<!--��Ȩ����-->
+		<!--版权区域-->
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

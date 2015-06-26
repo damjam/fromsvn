@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -49,7 +49,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄ¼ÇÂ¼");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„è®°å½•");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -67,43 +67,43 @@
 			});
 			
 	 	</script>
-	 	<title>Ìá»õÍøµãÑ¡Ôñ</title>
+	 	<title>æè´§ç½‘ç‚¹é€‰æ‹©</title>
 	 	
 	</head>
 
 	<body>
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<thead>
 					<tr align="center" class="titlebg">
 						<td>
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</td>
 						<td>
-							ÍøµãºÅ
+							ç½‘ç‚¹å·
 						</td>
 						<td>
-							ÍøµãÃû³Æ
+							ç½‘ç‚¹åç§°
 						</td>
 						<td>
-							Ìá»õ²Ö¿â
+							æè´§ä»“åº“
 						</td>
 						<td>
-							Ìá»õÁªÏµÈË
+							æè´§è”ç³»äºº
 						</td>
 						<td>
-							²Ö¿âµØÖ·
+							ä»“åº“åœ°å€
 						</td>
 						<td>
-							ÍøµãÁªÏµÈË
+							ç½‘ç‚¹è”ç³»äºº
 						</td>
 						<td>
-							ÍøµãµØÖ·
+							ç½‘ç‚¹åœ°å€
 						</td>
 						<td>
-							ÁªÏµµç»°
+							è”ç³»ç”µè¯
 						</td>
 					</tr>
 				</thead>
@@ -142,9 +142,9 @@
 				</tbody>
 			</table>
 			<div style="text-align: center; margin-top: 20px;">
-				<input type="submit" value="È·¶¨" id="selButton"/>
-				<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearButton"/>
-				<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+				<input type="submit" value="ç¡®å®š" id="selButton"/>
+				<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearButton"/>
+				<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 			</div>		
 		</div>
 	</body>

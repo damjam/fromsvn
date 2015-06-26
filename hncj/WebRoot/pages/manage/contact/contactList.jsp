@@ -1,17 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		
 		<title></title>
 		<f:css href="/css/page.css" />
@@ -40,13 +34,13 @@
 			}
 			
 			function delRecord(id){
-				if(!window.confirm("È·ÈÏÉ¾³ı?")){
+				if(!window.confirm("ç¡®è®¤åˆ é™¤?")){
 					return;
 				}
 				gotoUrl('/contact.do?action=del&id='+id);
 			}
 			function refund(id){
-				if(!window.confirm("È·ÈÏÍË¿î?")){
+				if(!window.confirm("ç¡®è®¤é€€æ¬¾?")){
 					return;
 				}
 				gotoUrl('/contact.do?action=refund&id='+id);
@@ -57,7 +51,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/contact.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -65,19 +59,19 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ĞÕÃû
+								å§“å
 							</td>
 							<td>
 								<html:text property="contactName" styleId="contactName" maxlength="20"/>
 							</td>
 							<td class="formlabel">
-								µç»°
+								ç”µè¯
 							</td>
 							<td>
 								<html:text property="mobile" styleId="mobile" maxlength="20"/>
 							</td>
 							<td class="formlabel">
-								±¸×¢¹Ø¼ü×Ö
+								å¤‡æ³¨å…³é”®å­—
 							</td>
 							<td>
 								<html:text property="remark" styleId="remark" maxlength="20"/>
@@ -87,29 +81,29 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ĞÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ–°å¢" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >ĞÕÃû</td>
-						 	<td >ĞÔ±ğ</td>
-						 	<td >ĞĞÒµ</td>
-						    <td >Ö°Î»</td>
-						    <td >µç»°</td>
-						    <td >¹¤×÷µ¥Î»</td>
-						    <td>´´½¨Ê±¼ä</td>
-						    <td >±¸×¢</td>
-						    <td>²Ù×÷</td>
+						 	<td >å§“å</td>
+						 	<td >æ€§åˆ«</td>
+						 	<td >è¡Œä¸š</td>
+						    <td >èŒä½</td>
+						    <td >ç”µè¯</td>
+						    <td >å·¥ä½œå•ä½</td>
+						    <td>åˆ›å»ºæ—¶é—´</td>
+						    <td >å¤‡æ³¨</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -125,8 +119,8 @@
 								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.remark}</td>
 								<td class="redlink">
-						    		<a href="javascript:update('${element.id}')">ĞŞ¸Ä</a>
-						    		<a href="javascript:delRecord('${element.id}')">É¾³ı</a>
+						    		<a href="javascript:update('${element.id}')">ä¿®æ”¹</a>
+						    		<a href="javascript:delRecord('${element.id}')">åˆ é™¤</a>
 							    </td>
 						    </tr>
 						</logic:iterate>

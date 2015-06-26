@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -31,30 +27,30 @@
 			function submitUpload() {
 				var recordMonth = $('#recordMonth').val();
 				if(recordMonth == ''){
-					alert("ÓÃË®ÔÂ·İ²»ÄÜÎª¿Õ");
+					alert("ç”¨æ°´æœˆä»½ä¸èƒ½ä¸ºç©º");
 					return;
 				}
 				var preRecordDate = $('#preRecordDate').val();
 				if(preRecordDate == ''){
-					alert("ÉÏÆÚ³­±íÈÕÆÚ²»ÄÜÎª¿Õ");
+					alert("ä¸ŠæœŸæŠ„è¡¨æ—¥æœŸä¸èƒ½ä¸ºç©º");
 					return;
 				}
 				var curRecordDate = $('#curRecordDate').val();
 				if(curRecordDate == ''){
-					alert("±¾ÆÚ³­±íÈÕÆÚ²»ÄÜÎª¿Õ");
+					alert("æœ¬æœŸæŠ„è¡¨æ—¥æœŸä¸èƒ½ä¸ºç©º");
 					return;
 				}
 		 		var oraFile = $('#file').val();
 		 		if(oraFile.length == 0){
-					alert("ÇëÏÈÑ¡ÔñÒªµ¼ÈëµÄÎÄ¼ş¡£");
+					alert("è¯·å…ˆé€‰æ‹©è¦å¯¼å…¥çš„æ–‡ä»¶ã€‚");
 					return;
 				}
 		 		oraFile = oraFile.toLowerCase();
 				if(!(endWith(oraFile, '.xlsx')) && !(endWith(oraFile, '.xls'))){
-					alert('ÎÄ¼ş¸ñÊ½À©Õ¹Ãû±ØĞëÊÇxlsx»òxls¡£');
+					alert('æ–‡ä»¶æ ¼å¼æ‰©å±•åå¿…é¡»æ˜¯xlsxæˆ–xlsã€‚');
 					return;
 				}
-				if (!confirm('È·¶¨Ìá½»ÎÄ¼ş?')) {
+				if (!confirm('ç¡®å®šæäº¤æ–‡ä»¶?')) {
 					return;
 				}
 				FormUtils.submitFirstTokenForm();
@@ -91,37 +87,37 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 						<caption>${ACT.name}</caption>
 						<tr>
-							<td class="formlabel nes">ÓÃË®ÔÂ·İ</td>
+							<td class="formlabel nes">ç”¨æ°´æœˆä»½</td>
 							<td>
 								<html:text property="recordMonth" styleId="recordMonth" styleClass="{required:true}" maxlength="13"/>
-								<span class="field_tipinfo">ÇëÊäÈëÓÃË®ÔÂ·İ,ÀıÈç201409-201410</span>
+								<span class="field_tipinfo">è¯·è¾“å…¥ç”¨æ°´æœˆä»½,ä¾‹å¦‚201409-201410</span>
 							</td>
 						</tr>
 						<tr>
-							<td class="formlabel nes">ÉÏÆÚ³­±íÈÕÆÚ</td>
+							<td class="formlabel nes">ä¸ŠæœŸæŠ„è¡¨æ—¥æœŸ</td>
 							<td>
 								<html:text property="preRecordDate" styleId="preRecordDate" styleClass="{required:true}" onfocus="WdatePicker();" readonly="true"/>
-								<span class="field_tipinfo">ÇëÊäÈëÉÏÆÚ³­±íÈÕÆÚ</span>
+								<span class="field_tipinfo">è¯·è¾“å…¥ä¸ŠæœŸæŠ„è¡¨æ—¥æœŸ</span>
 							</td>
 						</tr>
 						<tr>
-							<td class="formlabel nes">±¾ÆÚ³­±íÈÕÆÚ</td>
+							<td class="formlabel nes">æœ¬æœŸæŠ„è¡¨æ—¥æœŸ</td>
 							<td>
 								<html:text property="curRecordDate" styleId="curRecordDate" styleClass="{required:true}" onfocus="WdatePicker();" readonly="true"/>
-								<span class="field_tipinfo">ÇëÊäÈë±¾ÆÚ³­±íÈÕÆÚ</span>
+								<span class="field_tipinfo">è¯·è¾“å…¥æœ¬æœŸæŠ„è¡¨æ—¥æœŸ</span>
 							</td>
 						</tr>
 						<tr>
-							<td class="formlabel nes">ÇëÑ¡Ôñµ¼ÈëµÄÎÄ¼ş</td>
+							<td class="formlabel nes">è¯·é€‰æ‹©å¯¼å…¥çš„æ–‡ä»¶</td>
 							<td>
 								<html:file property="file" styleId="file" style="width:400px" styleClass="userbox_bt {required:true}" />
-								<span class="field_tipinfo">ÇëÑ¡ÔñÎÄ¼ş</span>
+								<span class="field_tipinfo">è¯·é€‰æ‹©æ–‡ä»¶</span>
 							</td>
 						</tr>
 					</table>
 				</html:form>
 				<div class="btnbox">
-					<input type="button" value="Ìá½»" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
+					<input type="button" value="æäº¤" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 				 </div>
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
@@ -131,7 +127,7 @@
 				<img src="${CONTEXT_PATH}/images/ajax_loader.gif" align="middle" />
 			</div>
 			<div style="width: 55%;height:30px;text-align: left;line-height:30px; vertical-align: middle;padding-left: 10px;" id="processMsg">
-				ÕıÔÚ´¦Àí£¬ÇëÉÔºò...
+				æ­£åœ¨å¤„ç†ï¼Œè¯·ç¨å€™...
 			</div>
 		</div>
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

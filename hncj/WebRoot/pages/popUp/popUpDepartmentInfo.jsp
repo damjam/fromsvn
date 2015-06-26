@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -17,7 +17,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>Ñ¡Ôñ²¿ÃÅ</title>
+		<title>é€‰æ‹©éƒ¨é—¨</title>
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -46,7 +46,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("ÇëÑ¡ÔñÐèÒªµÄ²¿ÃÅ");
+					alert("è¯·é€‰æ‹©éœ€è¦çš„éƒ¨é—¨");
 					return false;
 				}
 				
@@ -89,19 +89,19 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">²¿ÃÅÑ¡Ôñ</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">éƒ¨é—¨é€‰æ‹©</span>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									²¿ÃÅ±àºÅ
+									éƒ¨é—¨ç¼–å·
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="deptId" 
 										 	value="${deptForm.deptId }"/>
 								</td>
 								<td height="30" align="right">
-									²¿ÃÅÃû³Æ
+									éƒ¨é—¨åç§°
 								</td>
 								<td height="30">
 									<input  style="width: 260px;" name="departmentName" type="text"
@@ -115,8 +115,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" /> 
-									<input id="btnClear" style="margin-left: 30px;" type="button" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" /> 
+									<input id="btnClear" style="margin-left: 30px;" type="button" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -128,19 +128,19 @@
 				</div>
 			</div>
 
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇëÑ¡Ôñ
+								è¯·é€‰æ‹©
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²¿ÃÅ±àºÅ
+								éƒ¨é—¨ç¼–å·
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²¿ÃÅÃû³Æ
+								éƒ¨é—¨åç§°
 							</th>
 						</tr>
 					</thead>
@@ -150,7 +150,7 @@
 						<c:if test="${empty departmentInfoList}">
 							<tr>
 								<td colspan="10">
-									Ã»ÓÐÊý¾Ý
+									æ²¡æœ‰æ•°æ®
 								</td>
 							</tr>
 						</c:if>
@@ -183,9 +183,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="È·¶¨" id="selMerchantInfo"/>
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearMerchant"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selMerchantInfo"/>
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearMerchant"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

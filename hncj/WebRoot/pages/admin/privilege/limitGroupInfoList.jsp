@@ -1,18 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 <%@ include file="/pages/common/meta.jsp"%>
 <%@ include file="/pages/common/sys.jsp"%>
 
 <html>
 	<head>
-		
-		<title>È¨ÏŞ×éĞÅÏ¢ÁĞ±í</title>
+		<title>æƒé™ç»„ä¿¡æ¯åˆ—è¡¨</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -40,7 +34,7 @@
 			
 			
 			function deleteLimitGroupInfo(limitGroupId){
-				if(confirm("È·ÈÏÒªÉ¾³ıÂğ?")){
+				if(confirm("ç¡®è®¤è¦åˆ é™¤å—?")){
 					var url="/limitGroupInfoAction.do?action=deleteLimitGroupInfo&limitGroupId="+limitGroupId;
 					gotoUrl(url);
 				}else{
@@ -57,9 +51,9 @@
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg" />
-		<html:form action="/limitGroupInfoAction.do?action=listLimitGroupInfo" styleId="limitGroupInfoForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<f:msg  />
+		<form action="limitGroupInfoAction.do?action=listLimitGroupInfo" id="limitGroupInfoForm" method="post">
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -67,54 +61,54 @@
 						<caption>${ACT.name}</caption> 
 						<tr>
 							<td class="formlabel">
-								È¨ÏŞ×éÃû³Æ
+								æƒé™ç»„åç§°
 							</td>
 							<td>
-								<html:text property="limitGroupName" styleId="limitGroupName" />
+								<s:textfield name="limitGroupName" id="limitGroupName"/>
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="Çå³ı" id="btnClear"/>&nbsp;
-								<input type="button" value="ĞÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear"/>&nbsp;
+								<input type="button" value="æ–°å¢" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid" style="width: 100%">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td>È¨ÏŞ×é±àºÅ</td>
-						    <td>È¨ÏŞ×éÃû³Æ</td>
-						    <td>ÓÃ»§ÀàĞÍ</td>
-						    <td>²Ù×÷</td>
+						    <td>æƒé™ç»„ç¼–å·</td>
+						    <td>æƒé™ç»„åç§°</td>
+						    <td>ç”¨æˆ·ç±»å‹</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.limitGroupId}</td>
 							    <td>${element.limitGroupName}</td>
 							    <td>${element.userTypeName}</td>
 							    <td align="center">
 							       <span class="redlink">
-							       		<a href="javascript:void(0)" onclick="return updateLimitGroupInfo('${element.limitGroupId}');">ĞŞ¸Ä</a>
-							       		<a href="javascript:void(0)" onclick="return deleteLimitGroupInfo('${element.limitGroupId}');">É¾³ı</a>
+							       		<a href="javascript:void(0)" onclick="return updateLimitGroupInfo('${element.limitGroupId}');">ä¿®æ”¹</a>
+							       		<a href="javascript:void(0)" onclick="return deleteLimitGroupInfo('${element.limitGroupId}');">åˆ é™¤</a>
 							 	   </span>
 							  </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</form>
 	</body>
 </html>

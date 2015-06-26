@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//汉字len要加1
+// 		 	  for ( var i = 0; i < content.length; i++) {//姹夊瓧len瑕佸姞1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -48,7 +44,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(curnum < prenum){
-						alert('本期读数不能小于上期读数');
+						alert('鏈湡璇绘暟涓嶈兘灏忎簬涓婃湡璇绘暟');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -72,23 +68,23 @@
 					  <caption>${ACT.name}</caption>
 					 
 					  <tr>
-						    <td class="formlabel nes">账户余额</td>
+						    <td class="formlabel nes">璐︽埛浣欓</td>
 						    <td>
 						    	<html:text property="balance" styleId="balance" readonly="true"/>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">提现金额</td>
+						    <td class="formlabel nes">鎻愮幇閲戦</td>
 						    <td>
 						    	<html:text property="amount" styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">请填写正确的数字</span>
+						    	<span class="field_tipinfo">璇峰～鍐欐纭殑鏁板瓧</span>
 						    </td>
 					   </tr>
 					  
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/account.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="淇濆瓨" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="鍙栨秷" onclick="gotoUrl('/account.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -98,7 +94,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--版权区域-->
+	<!--鐗堟潈鍖哄煙-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

@@ -58,5 +58,5 @@
 	</package>
 	
 	<include file="struts/struts-admin.xml" />
-
+	<include file="struts/struts-manage.xml" />
 </struts>

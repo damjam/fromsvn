@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -61,7 +57,7 @@
 					  <caption>${ACT.name}</caption>
 					 
 					  <tr>
-						    <td class="formlabel nes">Â¥ºÅ</td>
+						    <td class="formlabel nes">æ¥¼å·</td>
 						    <td>
 						    	<html:select property="buildingNo" style="width:166px">
 									<html:options collection="buildingNos" property="key" labelProperty="value" />
@@ -70,7 +66,7 @@
 					   </tr>
 					   <!-- 
 					   <tr>
-						    <td class="formlabel nes">µ¥Ôª</td>
+						    <td class="formlabel nes">å•å…ƒ</td>
 						    <td>
 						    	<html:select property="unitNo" style="width:166px">
 									<html:options collection="unitNos" property="key" labelProperty="value" />
@@ -79,29 +75,29 @@
 					   </tr>
 					    -->
 					   <tr>
-						    <td class="formlabel nes">·¿¼ä</td>
+						    <td class="formlabel nes">æˆ¿é—´</td>
 						    <td>
 						    	<html:text property="position" styleId="position" maxlength="4" styleClass="{required:true,digit:true,minlength:3}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄ·¿¼äºÅ</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æˆ¿é—´å·</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">Ãæ»ı</td>
+						    <td class="formlabel nes">é¢ç§¯</td>
 						    <td>
 						    	<html:text property="area" styleId="area" maxlength="6" styleClass="{required:true,num:true}"></html:text>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊı×Ö</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">½»·¿ÈÕÆÚ</td>
+						    <td class="formlabel">äº¤æˆ¿æ—¥æœŸ</td>
 						    <td>
 						    	<html:text property="deliveryDate" styleId="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"></html:text>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/houseInfo.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/houseInfo.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -111,7 +107,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

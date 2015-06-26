@@ -1,22 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%
-	response.setHeader("Cache-Control", "no-cache");
-%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
 
+<%@ include file="/pages/common/taglibs.jsp" %>
 
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 	<head>
 
 		<%@ include file="/pages/common/meta.jsp"%>
@@ -34,14 +22,14 @@
 
 		<script type="text/javascript">
 	$(function() {
-		//¶¨Ê±¼Æ»®Ôö¼Ó
+		//å®šæ—¶è®¡åˆ’å¢åŠ 
 		$('#btnTimerAdd').click(
 			function() {
 				var url="/timer.do?action=toEdit";
 				gotoUrl(url);
 			});
 
-		//¶¨Ê±¼Æ»®Çå³ı
+		//å®šæ—¶è®¡åˆ’æ¸…é™¤
 		$('#btnTimerClear').click(function() {
 			FormUtils.reset();
 		});
@@ -55,8 +43,8 @@
 
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg" />
-		<html:form styleId="timer" action="timer.do?action=query" method="post">
+		<f:msg/>
+		<form id="timer" action="timer.do?action=query" method="post">
 		<div class="userbox">
 			<b class="b1"></b>
 			<b class="b2"></b>
@@ -73,22 +61,22 @@
 							beanName
 						</td>
 						<td>
-							<html:text property="beanName" maxlength="20"></html:text>
+							<s:textfield name="beanName" maxlength="20"></s:textfield>
 						</td>
 						<td class="formlabel">
-							beanNameÖĞÎÄÃû
+							beanNameä¸­æ–‡å
 						</td>
 						<td>
-							<html:text property="beanNameCh" maxlength="20"></html:text>
+							<s:textfield name="beanNameCh" maxlength="20"></s:textfield>
 						</td>
 					</tr>
 					<tr>
 						<td></td>
 						<td colspan="5" nowrap="nowrap">
-							<input type="submit" value="²éÑ¯" id="input_btn2" />&nbsp;
-							<input type="button" value="ÖØÖÃ" id="btnClear"
+							<input type="submit" value="æŸ¥è¯¢" id="input_btn2" />&nbsp;
+							<input type="button" value="é‡ç½®" id="btnClear"
 								onclick="FormUtils.reset('timer');" />&nbsp;
-							<input id="btnTimerAdd" type="button" value="ĞÂÔö" />
+							<input id="btnTimerAdd" type="button" value="æ–°å¢" />
 						</td>
 					</tr>
 				</table>
@@ -97,7 +85,7 @@
 			<b class="b3"></b>
 			<b class="b2"></b>
 			<b class="b1"></b>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		</div>
 			<div class="tablebox">
 				<table class="data_grid" width="100%" border="0" cellspacing="0"
@@ -108,27 +96,27 @@
 								bean
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								beanÖĞÎÄÃû
+								beanä¸­æ–‡å
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²ÎÊı1
+								å‚æ•°1
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²ÎÊı2
+								å‚æ•°2
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								´¥·¢Ê±¼ä
+								è§¦å‘æ—¶é—´
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								±¸×¢
+								å¤‡æ³¨
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²Ù×÷
+								æ“ä½œ
 							</th>
 						</tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>
 									${element.beanName }
@@ -150,16 +138,16 @@
 								</td>
 								<td>
 									<span class="redlink"> <a
-										href="timer.do?action=toEdit&id=${element.id}">ĞŞ¸Ä</a> <a
-										onclick="return confirm('È·ÈÏÉ¾³ı?');"
-										href="timer.do?action=delete&id=${element.id }">É¾³ı</a> </span>
+										href="timer.do?action=toEdit&id=${element.id}">ä¿®æ”¹</a> <a
+										onclick="return confirm('ç¡®è®¤åˆ é™¤?');"
+										href="timer.do?action=delete&id=${element.id }">åˆ é™¤</a> </span>
 								</td>
 							</tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate />
 			</div>
-			</html:form>
+		</form>
 	</body>
 </html>

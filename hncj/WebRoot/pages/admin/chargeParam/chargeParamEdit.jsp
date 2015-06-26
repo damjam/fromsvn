@@ -1,12 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -34,7 +30,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//∫∫◊÷len“™º”1
+// 		 	  for ( var i = 0; i < content.length; i++) {//Ê±âÂ≠ólenË¶ÅÂä†1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -66,7 +62,7 @@
 				    	 $('#ownerCel').val(ownerCel);
 					 },
 					 error:function(data){   
-	                     alert("¡¨Ω”∑˛ŒÒ∆˜ ß∞‹");
+	                     alert("ËøûÊé•ÊúçÂä°Âô®Â§±Ë¥•");
 	                 }   
 				});
 			}
@@ -91,7 +87,7 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">  ”√∑∂Œß</td>
+						    <td class="formlabel nes">ÈÄÇÁî®ËåÉÂõ¥</td>
 						    <td>
 						    	<html:select property="rangeCode">
 						    		<html:options collection="paramRanges" property="value" labelProperty="name" />
@@ -99,21 +95,21 @@
 						    </td>
 					   </tr>
 					   <tr>
-					   	   <td class="formlabel nes">º∆∑—∂‘œÛ</td>
+					   	   <td class="formlabel nes">ËÆ°Ë¥πÂØπË±°</td>
 						    <td>
 						    	<html:text property="chargeObj" styleId="chargeObj" maxlength="25"></html:text>
 						    </td>		
 					   </tr>
 					   <tr>
-					   		<td class="formlabel">±∏◊¢</td>
+					   		<td class="formlabel">Â§áÊ≥®</td>
 						    <td>
 						    	<html:text property="remark" styleId="remark" maxlength="25"></html:text>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£¥Ê" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="»°œ˚" onclick="gotoUrl('/chargeParam.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="‰øùÂ≠ò" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="ÂèñÊ∂à" onclick="gotoUrl('/chargeParam.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -123,7 +119,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--∞Ê»®«¯”Ú-->
+	<!--ÁâàÊùÉÂå∫Âüü-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

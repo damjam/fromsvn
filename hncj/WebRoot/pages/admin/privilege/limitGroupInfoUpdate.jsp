@@ -1,17 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ĞŞ¸ÄÈ¨ÏŞ×é</title>
-		
+		<title>ä¿®æ”¹æƒé™ç»„</title>
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -20,9 +15,7 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/dtree/wtree.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
+		
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -35,7 +28,7 @@
 				});
 				$('#btnSubmit').click(function(){
 					if(!FormUtils.hasSelected('limitIds')){
-						alert('ÇëÑ¡ÔñÈ¨ÏŞµã');
+						alert('è¯·é€‰æ‹©æƒé™ç‚¹');
 						return false;
 					}
 					FormUtils.submitFirstTokenForm();
@@ -46,9 +39,9 @@
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="limitGroupInfoAction.do?action=updateLimitGroupInfo" styleId="limitGroupInfoForm" method="post" styleClass="validate">
-		<html:hidden property="limitGroupId"/>
+<f:msg />
+	<form action="limitGroupInfoAction.do?action=updateLimitGroupInfo" id="limitGroupInfoForm" method="post" class="validate">
+		<s:hidden name="limitGroupId"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -59,63 +52,59 @@
 					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes" align="right">È¨ÏŞ×éÃû³Æ</td>
+						    <td class="formlabel nes" align="right">æƒé™ç»„åç§°</td>
 						    <td>
-						    	<html:text property="limitGroupName"  styleClass="{required:true}" maxlength="200"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<s:textfield name="limitGroupName" class="{required:true}" maxlength="200"></s:textfield>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes" align="right">ÓÃ»§ÀàĞÍ</td>
+						     <td class="formlabel nes" align="right">ç”¨æˆ·ç±»å‹</td>
 						     <td>
-						     	<html:select property="userType">
-						     		<html:options collection="userTypeCollections" property="id.dictValue" labelProperty="dictName"/>
-						     	</html:select>
+						     	<s:select name="userType" list="#request.userTypeCollections" listKey="id.dictValue" listValue="dictName"/>
 							</td>
 					   </tr>
 					    <tr>
-					    	<td class="formlabel nes">È¨ÏŞ½Úµã</td>
+					    	<td class="formlabel nes">æƒé™èŠ‚ç‚¹</td>
 					 		<td>
-					 			<logic:present name="list">
 								<div id="systree" style="margin-top: 10px;"></div>
 								<script type="text/javascript">		
 									var d = new dTree('d','dtree/images/system/menu/');
 									d.config.folderLinks = false;
 									d.config.useCookies = false;
 									d.config.check = true;
-									<logic:iterate id="element" name="list">
-										d.add('${element.code}','${element.parentCode}','${element.name}', null, null, null, 'limitIds', '${element.code}');
-									</logic:iterate>
-									document.getElementById('systree').innerHTML = d;
 									
-									<logic:present name="groupPrivilegeList">
-										var selectStr = '';
-										<logic:iterate id="element" name="groupPrivilegeList">
-											selectStr = selectStr + ",{menudm:'${element.id.limitId}'}";
-										</logic:iterate>
-										if(selectStr.length>0){
-											selectStr = selectStr.substring(1);
-										}
-										//alert(selectStr);
-										var funcs = eval("("+"{funcs:["+selectStr+"]}"+")");
-										var node = '';
-										for(var n=0; n<funcs.funcs.length;n++){
-											node = d.co(funcs.funcs[n].menudm);
-											if(node){
-											   node.checked = true;
-											}else{
-												//alert(funcs.funcs[n].menudm+'¶ÔÓ¦µÄÈ¨ÏŞµãÔÚÈ¨ÏŞÊ÷ÖĞ²»´æÔÚ£¡');
+									<c:forEach items="${list}" var="element">
+										d.add('${element.code}','${element.parentCode}','${element.name}', null, null, null, 'limitIds', '${element.code}');
+									</c:forEach>
+									document.getElementById('systree').innerHTML = d;
+									<c:if test="${not empty groupPrivilegeList}">
+											var selectStr = '';
+											<c:forEach items="${groupPrivilegeList}" var="element">
+												selectStr = selectStr + ",{menudm:'${element.id.limitId}'}";
+											</c:forEach>
+											if(selectStr.length>0){
+												selectStr = selectStr.substring(1);
 											}
-										}
-									</logic:present>
+											//alert(selectStr);
+											var funcs = eval("("+"{funcs:["+selectStr+"]}"+")");
+											var node = '';
+											for(var n=0; n<funcs.funcs.length;n++){
+												node = d.co(funcs.funcs[n].menudm);
+												if(node){
+												   node.checked = true;
+												}else{
+													//alert(funcs.funcs[n].menudm+'å¯¹åº”çš„æƒé™ç‚¹åœ¨æƒé™æ ‘ä¸­ä¸å­˜åœ¨ï¼');
+												}
+											}
+									</c:if>	
 								</script>
-								</logic:present>
 					 		</td>
 					   </tr>
 					     <tr>
 						     <td colspan="2" align="center">
-								 <input type="button" id="btnSubmit" value="Ìá½»"/>&nbsp;
-								 <input type="button" id="btnReturn" value="·µ»Ø"/>
+								 <input type="button" id="btnSubmit" value="æäº¤"/>&nbsp;
+								 <input type="button" id="btnReturn" value="è¿”å›"/>
 							</td>
 					   </tr>
 				  </table>
@@ -126,8 +115,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

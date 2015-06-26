@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -48,7 +44,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(curnum < prenum){
-						alert('±¾ÆÚ¶ÁÊı²»ÄÜĞ¡ÓÚÉÏÆÚ¶ÁÊı');
+						alert('æœ¬æœŸè¯»æ•°ä¸èƒ½å°äºä¸ŠæœŸè¯»æ•°');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -71,21 +67,21 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel nes">·¿Îİ±àºÅ</td>
+						    <td class="formlabel nes">æˆ¿å±‹ç¼–å·</td>
 						    <td>
 						    	<html:text property="houseSn"  styleId="houseSn" styleClass="{required:true}" maxlength="10" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					  <tr>
-						    <td class="formlabel nes">ÒµÖ÷ĞÕÃû</td>
+						    <td class="formlabel nes">ä¸šä¸»å§“å</td>
 						    <td>
 						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ĞÔ±ğ</td>
+						    <td class="formlabel nes">æ€§åˆ«</td>
 						    <td>
 						    	<html:select property="gender" style="width:166px">
 									<html:options collection="sexTypes" property="value" labelProperty="name" />
@@ -93,28 +89,28 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">Ö¤¼şºÅÂë</td>
+						    <td class="formlabel">è¯ä»¶å·ç </td>
 						    <td>
 						    <html:text property="idCard"  styleId="idCard"  maxlength="20"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÊÖ»úºÅ</td>
+						    <td class="formlabel nes">æ‰‹æœºå·</td>
 						    <td>
 						    <html:text property="mobile"  styleId="mobile" styleClass="{required:true,digit:true}" maxlength="11"/>
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·µÄÊÖ»úºÅ</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®çš„æ‰‹æœºå·</span>
 						    </td>
 					   </tr>
 					   	<tr>
-						    <td class="formlabel">ÓÊÏä</td>
+						    <td class="formlabel">é‚®ç®±</td>
 						    <td>
 						    <html:text property="email"  styleId="email" styleClass="{email:true}" />
-						    	<span class="field_tipinfo">ÇëÊäÈëÕıÈ·¸ñÊ½µÄÓÊÏä</span>
+						    	<span class="field_tipinfo">è¯·è¾“å…¥æ­£ç¡®æ ¼å¼çš„é‚®ç®±</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÖØÒª¼¶±ğ</td>
+						    <td class="formlabel nes">é‡è¦çº§åˆ«</td>
 						    <td>
 						    	<html:select property="grade" style="width:166px">
 									<html:options collection="ownerGrades" property="value" labelProperty="name" />
@@ -122,14 +118,14 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">Èë×¡ÈÕÆÚ</td>
+						    <td class="formlabel">å…¥ä½æ—¥æœŸ</td>
 						    <td>
 						    	<html:text property="checkinDate" styleId="checkinDate" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">³µÁ¾Êı</td>
+						    <td class="formlabel nes">è½¦è¾†æ•°</td>
 						    <td>
 						    	<html:select property="carNum" style="width:166px">
 						    		<html:option value="0">0</html:option>
@@ -141,15 +137,15 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    	<html:text property="remark" styleId="remark" maxlength="25"/>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/ownerInfo.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/ownerInfo.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -159,7 +155,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

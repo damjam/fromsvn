@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -39,7 +32,7 @@
 				gotoUrl('/account.do?action=toWithdraw&id='+id);
 			}
 			function cancelAcct(id){
-				if(window.confirm("È·ÈÏÏú»§?")){
+				if(window.confirm("ç¡®è®¤é”€æˆ·?")){
 					gotoUrl('/account.do?action=cancel&id='+id);
 				}
 				
@@ -53,7 +46,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/account.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -61,13 +54,13 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ÒµÖ÷ÐÕÃû
+								ä¸šä¸»å§“å
 							</td>
 							<td>
 								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								·¿ÎÝ±àºÅ
+								æˆ¿å±‹ç¼–å·
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
@@ -76,28 +69,28 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >·¿ÎÝ±àºÅ</td>
-						 	<td >ÒµÖ÷ÐÕÃû</td>
-						 	<td >ÕË»§Óà¶î</td>
+						 	<td >æˆ¿å±‹ç¼–å·</td>
+						 	<td >ä¸šä¸»å§“å</td>
+						 	<td >è´¦æˆ·ä½™é¢</td>
 						    <!-- 
-						    <td >Ç··Ñ´ÎÊý</td>
-						    <td >ÀÛ¼ÆÇ··ÑÌìÊý</td> -->
-						    <td >´´½¨Ê±¼ä</td>
-						    <td >×´Ì¬</td>
-						    <td >²Ù×÷</td>
+						    <td >æ¬ è´¹æ¬¡æ•°</td>
+						    <td >ç´¯è®¡æ¬ è´¹å¤©æ•°</td> -->
+						    <td >åˆ›å»ºæ—¶é—´</td>
+						    <td >çŠ¶æ€</td>
+						    <td >æ“ä½œ</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
@@ -110,12 +103,12 @@
 								<td><f:state className="OwnerState" value="${element.state}"/> </td>
 							    <td class="redlink">
 							    	<logic:equal value="00" name="element" property="state">
-							    		<a href="javascript:deposit('${element.id}')" >³äÖµ</a>
-							    		<a href="javascript:withdraw('${element.id}')" >ÌáÏÖ</a>
+							    		<a href="javascript:deposit('${element.id}')" >å……å€¼</a>
+							    		<a href="javascript:withdraw('${element.id}')" >æçŽ°</a>
 							    		<!-- 
-							    		<a href="javascript:cancelAcct('${element.id}')" >Ïú»§</a> -->
+							    		<a href="javascript:cancelAcct('${element.id}')" >é”€æˆ·</a> -->
 							    	</logic:equal>
-							    	<a href="javascript:detail('${element.id}')" >²é¿´½»Ò×¼ÇÂ¼</a>
+							    	<a href="javascript:detail('${element.id}')" >æŸ¥çœ‹äº¤æ˜“è®°å½•</a>
 							    </td>
 						    </tr>
 						</logic:iterate>

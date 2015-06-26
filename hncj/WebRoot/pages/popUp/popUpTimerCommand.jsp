@@ -1,22 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%
-	response.setHeader("Cache-Control", "no-cache");
-%>
-<jsp:directive.page import="flink.util.Paginater;" />
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -50,7 +36,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄ¶¨Ê±ÃüÁî£¬ÓÐÇÒ½öÓÐÒ»Ìõ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„å®šæ—¶å‘½ä»¤ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -69,19 +55,19 @@
 					window.close();
 				});
 				
-				//¶¨Ê±ÃüÁîÇå³ý
+				//å®šæ—¶å‘½ä»¤æ¸…é™¤
 				$('#btnTimerCommandClear').click(function(){
 					$('#timerCommand :text').val('');
 				});
 			});
 	 	</script>
-	 	<title>¶¨Ê±ÃüÁîÑ¡Ôñ</title>
+	 	<title>å®šæ—¶å‘½ä»¤é€‰æ‹©</title>
 	 	
 	</head>
 
 	<body>
 
-		<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 	<form id="timerCommand" action="${CONTEXT_PATH}/timerCommand.do?action=queryPopUpTimerCommand" method="post" >
 		<b class="b1"></b>
 		<b class="b2"></b>
@@ -91,14 +77,14 @@
 		
 		<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 		  <tr>
-		    <td colspan="4"  align="left"><span style="font-size:14px; font-weight:bold; padding-bottom:10px;"> ¶¨Ê±ÃüÁî²éÑ¯</span></td>
+		    <td colspan="4"  align="left"><span style="font-size:14px; font-weight:bold; padding-bottom:10px;"> å®šæ—¶å‘½ä»¤æŸ¥è¯¢</span></td>
 		  </tr>
 		  <tr>
-		    <td width="100" height="30" align="right">ÀàÃû</td>
+		    <td width="100" height="30" align="right">ç±»å</td>
 		    <td width="270" height="30">
 		   		 <input type="text" class="userbox_bt"  name="timerClassName" value="${timerCommand.timerClassName}"  />
 		    </td>
-		    <td width="100" height="30" align="right">ÀàÖÐÎÄ</td>
+		    <td width="100" height="30" align="right">ç±»ä¸­æ–‡</td>
 		    <td height="30">
 		    	<input type="text" class="userbox_bt"  name="classNameCh"  value="${timerCommand.classNameCh}" />
 		    </td>
@@ -108,8 +94,8 @@
 		  <tr>
 		    <td width="100" height="30" align="right">&nbsp;</td>
 		    <td height="30" colspan="3">
-		      <input type="submit" value="²éÑ¯" id="input_btn2"   />
-		      <input  id="btnTimerCommandClear" style="margin-left:30px;"  type="button" value="Çå³ý"  />
+		      <input type="submit" value="æŸ¥è¯¢" id="input_btn2"   />
+		      <input  id="btnTimerCommandClear" style="margin-left:30px;"  type="button" value="æ¸…é™¤"  />
 		    </td>
 		    </tr>
 		  </table>
@@ -118,20 +104,20 @@
 		<b class="b3"></b>
 		<b class="b2"></b>
 		<b class="b1"></b>	
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 	</form>
 	<div class="tablebox">
 		<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 			<thead>
 			  <tr>
-			    <th align="center" nowrap="nowrap" class="titlebg">ÇëÑ¡Ôñ</th>
-			    <th align="center" nowrap="nowrap" class="titlebg">ÀàÃû</th>
-			    <th align="center" nowrap="nowrap" class="titlebg">ÀàÖÐÎÄ</th>
+			    <th align="center" nowrap="nowrap" class="titlebg">è¯·é€‰æ‹©</th>
+			    <th align="center" nowrap="nowrap" class="titlebg">ç±»å</th>
+			    <th align="center" nowrap="nowrap" class="titlebg">ç±»ä¸­æ–‡</th>
 			  </tr>
 			 </thead>
 			 <tbody>
 			  <c:if test="${empty timerCommandList}">
-				  <tr><td nowrap="nowrap" colspan="2" >Ã»ÓÐÊý¾Ý</td></tr>
+				  <tr><td nowrap="nowrap" colspan="2" >æ²¡æœ‰æ•°æ®</td></tr>
 			  </c:if>
 			  <c:if test="${not empty timerCommandList}">	  	  
 				  <c:forEach items="${timerCommandList}" var="timerCommand">
@@ -147,7 +133,7 @@
 			</tbody>
 		</table>
 		
-			<!-- ·ÖÒ³ -->
+			<!-- åˆ†é¡µ -->
 			<div class="table_navi">
 				<f:paginate />	
 			</div>
@@ -157,9 +143,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="submit" value="È·¶¨" id="selTimerCommand"/>
-						<input style="margin-left: 30px;" type="button" value="Çå³ý" id="clearTimerCommand"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input type="submit" value="ç¡®å®š" id="selTimerCommand"/>
+						<input style="margin-left: 30px;" type="button" value="æ¸…é™¤" id="clearTimerCommand"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>

@@ -1,17 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<!DOCTYPE html>
+<html lang="zh-cn">
 
-	<%@ page language="java" contentType="text/html; charset=GBK"%>
+
+	<%@ page language="java" contentType="text/html; charset=utf-8"%>
 	<%response.setHeader("Cache-Control", "no-cache");%>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
-
+		<%@ include file="/pages/common/taglibs.jsp" %>
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/paginater.js" />
@@ -38,24 +35,23 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="data_table" width="80%" border="0" cellspacing="3"
-						cellpadding="0">
+					<table class="data_table" style="width: 100%">
 						<c:forEach items="${sysLogList}" var="sysLog" >
 							<tr>
 								<td height="30" align="center" colspan="4">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">²é¿´ÈÕÖ¾Ã÷Ï¸</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">æŸ¥çœ‹æ—¥å¿—æ˜ç»†</span>
 								</td>
 							</tr>
 							<tr>
 								<td align="right"  nowrap="nowrap">
-									ÓÃ»§±àºÅ:&nbsp;
+									ç”¨æˆ·ç¼–å·:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.userId}
 								</td>
 								<td height="30" align="right" nowrap="nowrap">
-									ÓÃ»§ĞÕÃû:&nbsp;
+									ç”¨æˆ·å§“å:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.userName}
@@ -63,14 +59,14 @@
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									ËùÊô»ú¹¹ºÅ:&nbsp;
+									æ‰€å±æœºæ„å·:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.branchNo}
 								</td>
 									
 								<td height="30" align="right">
-									»ú¹¹Ãû³Æ:&nbsp;
+									æœºæ„åç§°:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.branchName}
@@ -78,13 +74,13 @@
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									ÉÌ»§±àºÅ:&nbsp;
+									å•†æˆ·ç¼–å·:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.merchantNo}
 								</td>
 								<td height="30" align="right">
-									ÉÌ»§Ãû³Æ:&nbsp;
+									å•†æˆ·åç§°:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.merchantName}
@@ -92,13 +88,13 @@
 							</tr>
 							<tr>
 								<td align="right">
-									Ä£¿é±àºÅ:&nbsp;
+									æ¨¡å—ç¼–å·:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.limitId}
 								</td>
 								<td height="30" align="right">
-									Ä£¿éÃû³Æ:&nbsp;
+									æ¨¡å—åç§°:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.limitName}
@@ -106,13 +102,13 @@
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									ÈÕÖ¾ÀàĞÍ:&nbsp;
+									æ—¥å¿—ç±»å‹:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.logType}
 								</td>
 								<td height="30" align="right">
-									ÈÕÖ¾ÖÖÀà:&nbsp;
+									æ—¥å¿—ç§ç±»:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.logClass}
@@ -120,35 +116,35 @@
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									µÚÒ»´Î²é¿´Õß:&nbsp;
+									ç¬¬ä¸€æ¬¡æŸ¥çœ‹è€…:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.viewUser}
 								</td>
 								<td height="30" align="right">
-									µÚÒ»´Î²é¿´Ê±¼ä:&nbsp;
+									ç¬¬ä¸€æ¬¡æŸ¥çœ‹æ—¶é—´:&nbsp;
 								</td>
 								<td height="30" nowrap="nowrap">
-									<fmt:formatDate value="${sysLog.viewDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<s:date name="viewDate" format="yyyy-MM-dd HH:mm:ss"/>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									×´Ì¬:&nbsp;
+									çŠ¶æ€:&nbsp;
 								</td>
 								<td height="30">
 									${sysLog.state}
 								</td>
 								<td height="30" align="right">
-									´´½¨Ê±¼ä:&nbsp;
+									åˆ›å»ºæ—¶é—´:&nbsp;
 								</td>
 								<td height="30" >
-									<fmt:formatDate value="${sysLog.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<s:date name="sysLog.createTime" format="yyyy-MM-dd HH:mm:ss"/>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right">
-									½¨Òé´¦Àí·½Ê½:&nbsp;
+									å»ºè®®å¤„ç†æ–¹å¼:&nbsp;
 								</td>
 								<td height="30" colspan="3">
 									${sysLog.approach}
@@ -156,7 +152,7 @@
 							</tr>
 							<tr>
 								<td height="30" align="right" >
-									ÈÕÖ¾ÄÚÈİ:&nbsp;
+									æ—¥å¿—å†…å®¹:&nbsp;
 								</td>
 								<td height="30" colspan="3"  >
 									${sysLog.content}
@@ -170,7 +166,7 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="button" value="¹Ø±Õ" id="input_btn2" name="ok"
+									<input type="button" value="å…³é—­" id="input_btn2" name="ok"
 										onclick="javascript:window.close();" />
 								</td>
 							</tr>
@@ -184,8 +180,9 @@
 			</div>
 		</div>
 
-		<!--°æÈ¨ÇøÓò-->
+		<!--ç‰ˆæƒåŒºåŸŸ-->
 		<div class="bottom">
 			<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 		</div>
 	</body>
+</html>

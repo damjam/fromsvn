@@ -1,16 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<title>ÐÂÔö×Öµä</title>
+		<title>æ–°å¢žå­—å…¸</title>
 		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
@@ -21,9 +17,6 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/popUp.js"/>
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			$(function(){
 				$('#btnClear').click(function(){
@@ -40,8 +33,8 @@
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-<f:msg styleClass="msg"/>
-	<html:form action="/sysDictAction.do?action=addSysDict" styleId="sysDictForm" method="post" styleClass="validate">
+<f:msg />
+	<form action="sysDictAction.do?action=addSysDict" id="sysDictForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -49,56 +42,49 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
+					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel nes">Öµ</td>
+						    <td class="formlabel nes">å€¼</td>
 						    <td>
-						    	<html:text property="dictValue"  styleId="dictId" styleClass="{required:true,stringNum:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">×ÖÄ¸»òÊý×Ö</span>
+						    	<s:textfield name="id.dictValue"  id="dictId" class="{required:true,stringNum:true}" maxlength="20"/>
+						    	<span class="field_tipinfo">å­—æ¯æˆ–æ•°å­—</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">Ãû³Æ</td>
+						    <td class="formlabel nes">åç§°</td>
 						    <td>
-						    	<html:text property="dictName" styleId="dictName"  styleClass="{required:true}" />
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<s:textfield name="dictName" id="dictName"  class="{required:true}" />
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes">ÀàÐÍ</td>
+						     <td class="formlabel nes">ç±»åž‹</td>
 						     <td>
-								<html:select property="dictType" styleClass="{required:true}">
-									<html:option value="">---ÇëÑ¡Ôñ---</html:option>
-									<html:options collection="dictTypes" labelProperty="name" property="value" />
-								</html:select>
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+								<s:select name="id.dictType" list="#request.dictTypes" listKey="value" listValue="name"/>
+								<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							</td>
 					   </tr>
 					   <tr>
-						     <td class="formlabel nes">ÏÔÊ¾</td>
+						     <td class="formlabel nes">æ˜¾ç¤º</td>
 						     <td>
-								<html:select property="display" styleClass="{required:true}">
-									<html:option value="">---ÇëÑ¡Ôñ---</html:option>
-									<html:option value="Y">ÊÇ</html:option>
-									<html:option value="N">·ñ</html:option>
-								</html:select>
-								<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+								<s:select name="display" list="#{'Y':'æ˜¯','N':'å¦'}" listKey="key" listValue="value"/>
+								<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 							</td>
 					   </tr>
 					    <tr>
-						     <td align="right">±¸×¢</td>
+						     <td align="right">å¤‡æ³¨</td>
 						     <td>
-								<html:text property="remark" maxlength="100"></html:text>
+								<s:textfield name="remark" maxlength="100"></s:textfield>
 								<span class="field_tipinfo"></span>
 							</td>
 					   </tr>
 					     <tr>
 						     
 						     <td colspan="2" align="center">
-								 <input type="submit" id="btnSumit" value="Ìá½»"/>
-								 <input type="button" id="btnClear" value="Çå³ý"/>
-								 <input type="button" id="btnReturn" value="·µ»Ø"/>
+								 <input type="submit" id="btnSumit" value="æäº¤"/>
+								 <input type="button" id="btnClear" value="æ¸…é™¤"/>
+								 <input type="button" id="btnReturn" value="è¿”å›ž"/>
 							</td>
 					   </tr>
 				  </table>
@@ -109,8 +95,8 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
-	<!--°æÈ¨ÇøÓò-->
+	</form>	
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

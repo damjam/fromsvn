@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -45,7 +45,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄÒøÐÐÀàÐÍ£¬ÓÐÇÒ½öÓÐÒ»Ìõ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„é“¶è¡Œç±»åž‹ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 						return false;
 					}
 					
@@ -83,7 +83,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÒøÐÐÐÐ±ðÑ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">é“¶è¡Œè¡Œåˆ«é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -92,13 +92,13 @@
 							cellpadding="0">
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									ÐÐ±ð
+									è¡Œåˆ«
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="bankType" id="bankType" value="${bankTypeInfo.bankType }"/>
 								</td>
 								<td height="30" align="right">
-									ÐÐ±ðÃû³Æ
+									è¡Œåˆ«åç§°
 								</td>
 								<td height="30">
 									<input type="text"  style="width: 260px;" name="bankName" id="bankName" value="${bankTypeInfo.bankName }"/>
@@ -110,9 +110,9 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
+									<input type="submit" value="æŸ¥è¯¢" />
 									<input onclick="clearData();" style="margin-left: 30px;"
-										type="button" value="Çå³ý" />
+										type="button" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -124,19 +124,19 @@
 				</div>
 			</div>
 
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇëÑ¡Ôñ
+								è¯·é€‰æ‹©
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÐÐ±ð
+								è¡Œåˆ«
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÐÐ±ðÃû³Æ
+								è¡Œåˆ«åç§°
 							</th>
 						</tr>
 					</thead>
@@ -146,7 +146,7 @@
 						<c:if test="${empty bankTypeInfoList}">
 							<tr>
 								<td colspan="10">
-									Ã»ÓÐÊý¾Ý
+									æ²¡æœ‰æ•°æ®
 								</td>
 							</tr>
 						</c:if>
@@ -179,9 +179,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="È·¶¨" id="selBankTypeInfo"  />
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBankTypeInfo"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selBankTypeInfo"  />
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBankTypeInfo"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

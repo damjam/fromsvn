@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//ºº×ÖlenÒª¼Ó1
+// 		 	  for ( var i = 0; i < content.length; i++) {//æ±‰å­—lenè¦åŠ 1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -48,7 +44,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(curnum < prenum){
-						alert('±¾ÆÚ¶ÁÊý²»ÄÜÐ¡ÓÚÉÏÆÚ¶ÁÊý');
+						alert('æœ¬æœŸè¯»æ•°ä¸èƒ½å°äºŽä¸ŠæœŸè¯»æ•°');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -90,7 +86,7 @@
 				    	 $('#liftFee').val(liftFee);
 				    	 $('#amount').val(amount);
 				    	 if(supPay != ''){
-				    		 if(window.confirm("ÒµÖ÷ÉÏ´Î°´80%ÊÕÈ¡µÄÎïÒµ·ÑÎ´µ½ÆÚ£¬ÊÇ·ñ²¹½ÉÒÑ¼õÃâµÄ20%?")){
+				    		 if(window.confirm("ä¸šä¸»ä¸Šæ¬¡æŒ‰80%æ”¶å–çš„ç‰©ä¸šè´¹æœªåˆ°æœŸï¼Œæ˜¯å¦è¡¥ç¼´å·²å‡å…çš„20%?")){
 				    			 $('#tr1').show();
 				    			 $('#supFee').val(supPay);
 				    			 $('#csBillId').val(csBillId);
@@ -105,7 +101,7 @@
 				    	 }
 					 },
 					 error:function(data){   
-	                     alert("Á¬½Ó·þÎñÆ÷Ê§°Ü");
+	                     alert("è¿žæŽ¥æœåŠ¡å™¨å¤±è´¥");
 	                 }   
 				});
 			}
@@ -126,70 +122,70 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr class="houseSn">
-						    <td class="formlabel nes">·¿ÎÝ±àºÅ</td>
+						    <td class="formlabel nes">æˆ¿å±‹ç¼–å·</td>
 						    <td>
 						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getHouseInfo()" styleClass="{required:true}"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ÒµÖ÷ÐÕÃû</td>
+						    <td class="formlabel nes">ä¸šä¸»å§“å</td>
 						    <td>
 						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">·¿ÎÝÃæ»ý</td>
+						    <td class="formlabel nes">æˆ¿å±‹é¢ç§¯</td>
 						    <td>
 						    	<html:text property="area" styleId="area" styleClass="{required:true}" maxlength="6" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">Â¥²ã</td>
+						    <td class="formlabel nes">æ¥¼å±‚</td>
 						    <td>
 						    	<html:text property="floor" styleId="floor" styleClass="{required:true}" maxlength="6" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">À¬»øÇåÔË·Ñµ¥¼Û</td>
+						    <td class="formlabel nes">åžƒåœ¾æ¸…è¿è´¹å•ä»·</td>
 						    <td>
 						    <html:text property="cleanPrice"  styleId="cleanPrice" styleClass="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">À¬»øÇåÔË·Ñ</td>
+						    <td class="formlabel nes">åžƒåœ¾æ¸…è¿è´¹</td>
 						    <td>
 						    <html:text property="cleanAmount"  styleId="cleanAmount" styleClass="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">µçÌÝÉÏÁÏÊ¹ÓÃ·Ñ</td>
+						    <td class="formlabel nes">ç”µæ¢¯ä¸Šæ–™ä½¿ç”¨è´¹</td>
 						    <td>
 						    <html:text property="liftFee"  styleId="liftFee" styleClass="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">ºÏ¼Æ½ð¶î</td>
+						    <td class="formlabel nes">åˆè®¡é‡‘é¢</td>
 						    <td>
 						    <html:text property="amount"  styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr id="tr1" style="display: none;">
-						    <td class="formlabel nes">²¹½ÉÎïÒµ·Ñ</td>
+						    <td class="formlabel nes">è¡¥ç¼´ç‰©ä¸šè´¹</td>
 						    <td>
 						    <html:text property="supFee"  styleId="supFee" styleClass="{num:true}" maxlength="10" readonly="true"/>
-						    	<span class="field_tipinfo">²»ÄÜÎª¿Õ</span>
+						    	<span class="field_tipinfo">ä¸èƒ½ä¸ºç©º</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">±¸×¢</td>
+						    <td class="formlabel">å¤‡æ³¨</td>
 						    <td>
 						    <html:text property="remark"  styleId="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
@@ -197,8 +193,8 @@
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="±£´æ" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="È¡Ïû" onclick="gotoUrl('/decorateServiceBill.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="ä¿å­˜" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="å–æ¶ˆ" onclick="gotoUrl('/decorateServiceBill.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>
@@ -208,7 +204,7 @@
 			</div>
 		</div>	
 	</html:form>
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

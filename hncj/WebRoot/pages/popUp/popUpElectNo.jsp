@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -50,7 +50,7 @@
 					});
 					
 					if(i==0 || i>1){
-						alert("ÇëÑ¡ÔñÐèÒªµÄµç×ÓÁªÐÐºÅ£¬ÓÐÇÒ½öÓÐÒ»Ìõ");
+						alert("è¯·é€‰æ‹©éœ€è¦çš„ç”µå­è”è¡Œå·ï¼Œæœ‰ä¸”ä»…æœ‰ä¸€æ¡");
 						return false;
 					}
 					window.returnValue=selValue;
@@ -69,7 +69,7 @@
 				});
 			});
 	 	</script>
-	 	<title>µç×ÓÁªÐÐºÅÑ¡Ôñ</title>
+	 	<title>ç”µå­è”è¡Œå·é€‰æ‹©</title>
 	 	
 	</head>
 
@@ -87,7 +87,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">µç×ÓÁªÐÐºÅÑ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ç”µå­è”è¡Œå·é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -96,13 +96,13 @@
 							cellpadding="0">
 							<tr>
 								<td  height="30" align="right">
-									µç×ÓÁªÐÐºÅ
+									ç”µå­è”è¡Œå·
 								</td>
 								<td width="270" height="30">
 									<input type="text" class="userbox_bt"  name="electNo" id="electNo"  value="${electronBank.electNo }"/>
 								</td>
 								<td  height="30" align="right">
-									Ãû³Æ
+									åç§°
 								</td>
 								<td height="30">
 									<input class="userbox_bt"  name="electName" type="text" id="electName"  value="${electronBank.electName }" />
@@ -115,8 +115,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input style="margin-left: 30px;" type="reset" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input style="margin-left: 30px;" type="reset" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -130,7 +130,7 @@
 		</form>
 		
 
-		<!-- Êý¾ÝÁÐ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr></tr>
@@ -139,13 +139,13 @@
 				<thead>
 					<tr>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							ÇëÑ¡Ôñ
+							è¯·é€‰æ‹©
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							µç×ÓÁªÐÐºÅ
+							ç”µå­è”è¡Œå·
 						</th>
 						<th align="center" nowrap="nowrap" class="titlebg">
-							Ãû³Æ
+							åç§°
 						</th>
 					</tr>
 				</thead>
@@ -155,7 +155,7 @@
 					<c:if test="${empty electronBankList}">
 						<tr>
 							<td colspan="10">
-								Ã»ÓÐÊý¾Ý
+								æ²¡æœ‰æ•°æ®
 							</td>
 						</tr>
 					</c:if>
@@ -184,9 +184,9 @@
 				<tr></tr>
 				<tr>
 					<td height="30" colspan="3" align="center">
-						<input type="submit" value="È·¶¨" id="selElectNo"/>
-						<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearElectNo"/>
-						<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+						<input type="submit" value="ç¡®å®š" id="selElectNo"/>
+						<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearElectNo"/>
+						<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 					</td>
 				</tr>
 			</table>

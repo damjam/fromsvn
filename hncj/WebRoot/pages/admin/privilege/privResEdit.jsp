@@ -1,14 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -50,55 +47,43 @@ html {
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<html:form action="/privilegeAction.do?action=editPrivRes"
-					styleId="inputForm" styleClass="validate">
-					<html:hidden property="limitId" styleId="limitId"/>
-					<html:hidden property="id"/>
-					<table class="form_grid" width="100%" border="0" cellspacing="3"
-						cellpadding="0">
+				<form action="privilegeResourceAction.do?action=doEdit"
+					id="inputForm" class="validate" method="post">
+					<s:hidden name="limitId" id="limitId"/>
+					<s:hidden name="id"/>
+					<table class="form_grid">
 						<caption>
 							${ACT.name}
 						</caption>
 
 						<tr>
 							<td class="formlabel nes">
-								路径
+								璺緞
 							</td>
 							<td>
-								<html:text property="url"
-									styleClass="userbox_bt {required:true}" maxlength="100" size="100" />
-								<span class="field_tipinfo"></span><span class="error_tipinfo">必填</span>
+								<s:textfield name="url"
+									class="userbox_bt {required:true}" maxlength="100" size="100" />
+								<span class="field_tipinfo"></span><span class="error_tipinfo">蹇呭～</span>
 							</td>
 						</tr>
 
 						<tr>
 							<td class="formlabel nes">
-								参数
+								鍙傛暟
 							</td>
 							<td>
-								<html:text property="param"
-									styleClass="userbox_bt {required:true}" maxlength="100" size="100" />
-								<span class="field_tipinfo"></span><span class="error_tipinfo">必填</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="formlabel nes">
-								是否入口
-							</td>
-							<td>
-								<html:select property="isEntry">
-									<html:option value="N">否</html:option>
-									<html:option value="Y">是</html:option>
-								</html:select>
+								<s:textfield name="param"
+									class="userbox_bt {required:true}" maxlength="100" size="100" />
+								<span class="field_tipinfo"></span><span class="error_tipinfo">蹇呭～</span>
 							</td>
 						</tr>
 					</table>
 					<div class="btnbox" align="center">
-						<input type='submit' value='提交' />
+						<input type='submit' value='鎻愪氦' />
 						<input type='button' onclick="goBack();"
-							value='返回' />
+							value='杩斿洖' />
 					</div>
-				</html:form>
+				</form>
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>

@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -32,7 +25,7 @@
 				});
 				$('#btnCheck').click(function(){
 					
-					if(window.confirm("Éú³ÉÕËµ¥ºó¼ÇÂ¼½«²»¿ÉÉ¾³ý£¬È·ÈÏ²Ù×÷?")){
+					if(window.confirm("ç”Ÿæˆè´¦å•åŽè®°å½•å°†ä¸å¯åˆ é™¤ï¼Œç¡®è®¤æ“ä½œ?")){
 						$(':button').attr('disabled', true);
 						gotoUrl('/elecRecord.do?action=checkAll');
 						
@@ -43,12 +36,12 @@
 				});
 			});
 			function check(id){
-				if(window.confirm("Éú³ÉÕËµ¥ºó¼ÇÂ¼½«²»¿ÉÉ¾³ý£¬È·ÈÏ²Ù×÷?")){
+				if(window.confirm("ç”Ÿæˆè´¦å•åŽè®°å½•å°†ä¸å¯åˆ é™¤ï¼Œç¡®è®¤æ“ä½œ?")){
 					gotoUrl('/elecRecord.do?action=check&id='+id);
 				}
 			}
 			function delRecord(id){
-				if(window.confirm("È·ÈÏÉ¾³ý?")){
+				if(window.confirm("ç¡®è®¤åˆ é™¤?")){
 					gotoUrl('/elecRecord.do?action=delete&id='+id);
 				}
 			}
@@ -59,7 +52,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/elecRecord.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -67,14 +60,14 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								´´½¨ÈÕÆÚ
+								åˆ›å»ºæ—¥æœŸ
 							</td>
 							<td>
 								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
-								·¿ÎÝ±àºÅ
+								æˆ¿å±‹ç¼–å·
 							</td>
 							<td>
 								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
@@ -83,30 +76,30 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="È«²¿Éú³ÉÕËµ¥" id="btnCheck"/>&nbsp;
-								<input type="button" value="µ¼Èëµç±í¼ÇÂ¼" id="btnImp"/>&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="å…¨éƒ¨ç”Ÿæˆè´¦å•" id="btnCheck"/>&nbsp;
+								<input type="button" value="å¯¼å…¥ç”µè¡¨è®°å½•" id="btnImp"/>&nbsp;
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >·¿ÎÝ±àºÅ</td>
-						 	<td >ÓÃµçÔÂ·Ý</td>
-						    <td >ÉÏÆÚ¶ÁÊý</td>
-						    <td >ÉÏÆÚ³­±íÈÕÆÚ</td>
-						    <td >±¾ÆÚ¶ÁÊý</td>
-						    <td >±¾ÆÚ³­±íÈÕÆÚ</td>
-						    <td >Êµ¼ÊÓÃÁ¿</td>
-						    <td >´´½¨Ê±¼ä</td>
-						    <td >²Ù×÷</td>
+						 	<td >æˆ¿å±‹ç¼–å·</td>
+						 	<td >ç”¨ç”µæœˆä»½</td>
+						    <td >ä¸ŠæœŸè¯»æ•°</td>
+						    <td >ä¸ŠæœŸæŠ„è¡¨æ—¥æœŸ</td>
+						    <td >æœ¬æœŸè¯»æ•°</td>
+						    <td >æœ¬æœŸæŠ„è¡¨æ—¥æœŸ</td>
+						    <td >å®žé™…ç”¨é‡</td>
+						    <td >åˆ›å»ºæ—¶é—´</td>
+						    <td >æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -124,9 +117,9 @@
 							    <td class="redlink">
 							    	<logic:equal value="00" name="element" property="state">
 							    		<c:if test="${element.num > 0}">
-							    			<a href="javascript:check(${element.id})" title="Éú³ÉÕËµ¥ºó½«²»¿ÉÉ¾³ý">Éú³ÉÕËµ¥</a>
+							    			<a href="javascript:check(${element.id})" title="ç”Ÿæˆè´¦å•åŽå°†ä¸å¯åˆ é™¤">ç”Ÿæˆè´¦å•</a>
 							    		</c:if>
-							    		<a href="javascript:delRecord(${element.id})">É¾³ý</a>
+							    		<a href="javascript:delRecord(${element.id})">åˆ é™¤</a>
 							    	</logic:equal>
 							    </td>
 						    </tr>

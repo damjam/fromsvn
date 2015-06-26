@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -18,7 +18,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>�˻�ԭ��ѡ��</title>
+		<title>退汇原因选择</title>
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -47,7 +47,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("��ѡ����Ҫ���˻�ԭ�����ҽ���һ��");
+					alert("请选择需要的退汇原因，有且仅有一条");
 					return false;
 				}
 				
@@ -91,12 +91,12 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">�û�ѡ��</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">用户选择</span>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									�˻�ԭ��
+									退汇原因
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="reason"/>
@@ -109,8 +109,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="��ѯ" /> 
-									<input id="btnClear" style="margin-left: 30px;" type="button" value="���" />
+									<input type="submit" value="查询" /> 
+									<input id="btnClear" style="margin-left: 30px;" type="button" value="清除" />
 								</td>
 							</tr>
 						</table>
@@ -122,16 +122,16 @@
 				</div>
 			</div>
 
-			<!-- �����б��� -->
+			<!-- 数据列表区 -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								��ѡ��
+								请选择
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								�˻�ԭ��
+								退汇原因
 							</th>
 						</tr>
 					</thead>
@@ -141,7 +141,7 @@
 						<c:if test="${empty feebackReasonInfoList}">
 							<tr>
 								<td colspan="10">
-									û������
+									没有数据
 								</td>
 							</tr>
 						</c:if>
@@ -171,8 +171,8 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="ȷ��" id="selUserInfo"/>
-					<input style="margin-left: 30px;" type="button" value="�ر�" id="winClose"/>
+					<input type="submit" value="确定" id="selUserInfo"/>
+					<input style="margin-left: 30px;" type="button" value="关闭" id="winClose"/>
 				</td>
 			</tr>
 		</table>

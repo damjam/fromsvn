@@ -1,18 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
-		<title>¿Í»§ÁÐ±í</title>
+		<%@ include file="/pages/common/meta.jsp" %>
+		<%@ include file="/pages/common/sys.jsp" %>
+		<title>å®¢æˆ·åˆ—è¡¨</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
@@ -46,7 +40,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/custMngAction.do?action=list" styleId="custInfoActionForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -54,29 +48,29 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ÊÖ»úºÅ
+								æ‰‹æœºå·
 							</td>
 							<td>
 								<html:text property="mobile" styleId="mobile"  />
 							</td>
 							<td class="formlabel">
-								Ö¤¼þºÅ
+								è¯ä»¶å·
 							</td>
 							<td>
 								<html:text property="idCard" styleId="idCard"  />
 							</td>
-							<td class="formlabel">ÓÊÏä</td>
+							<td class="formlabel">é‚®ç®±</td>
 							<td>
 								<html:text property="email" styleId="email"  />
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel">
-								¿Í»§ÀàÐÍ
+								å®¢æˆ·ç±»åž‹
 							</td>
 							<td>
 								<html:select property="custType">
-									<html:option value="">---È«²¿---</html:option>
+									<html:option value="">---å…¨éƒ¨---</html:option>
 									<html:options collection="custTypes" labelProperty="name" property="value"/>
 								</html:select>
 							</td>
@@ -84,29 +78,29 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear"/>&nbsp;
-								<input type="button" value="ÐÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear"/>&nbsp;
+								<input type="button" value="æ–°å¢ž" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td>ÊÖ»úºÅ</td>
-						    <td>ÕæÊµÐÕÃû</td>
-						    <td>ÐÔ±ð</td>
-						    <td>Ö¤¼þÀàÐÍ</td>
-						    <td>Ö¤¼þºÅÂë</td>
-						    <td>¿Í»§ÀàÐÍ</td>
-						    <td>Í¨Ñ¶µØÖ·</td>
-						    <td>ÓÊÏä</td>
-						    <td>²Ù×÷</td>
+						    <td>æ‰‹æœºå·</td>
+						    <td>çœŸå®žå§“å</td>
+						    <td>æ€§åˆ«</td>
+						    <td>è¯ä»¶ç±»åž‹</td>
+						    <td>è¯ä»¶å·ç </td>
+						    <td>å®¢æˆ·ç±»åž‹</td>
+						    <td>é€šè®¯åœ°å€</td>
+						    <td>é‚®ç®±</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -127,7 +121,7 @@
 							    <td>${element.email}</td>
 							    <td align="center">
 							       <span class="redlink">
-							       		<a href="javascript:void(0)" onclick="return detailedCustInfo('${element.id}');">²é¿´Ã÷Ï¸</a>
+							       		<a href="javascript:void(0)" onclick="return detailedCustInfo('${element.id}');">æŸ¥çœ‹æ˜Žç»†</a>
 							 	   </span>
 							  </td>
 						    </tr>

@@ -1,15 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<%@ include file="/pages/common/meta.jsp" %>
-		<%@ include file="/pages/common/sys.jsp" %>
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -36,7 +32,7 @@
 		 	{
 		 	   var content=$("#content").val();
 		 	   var len=content.length;
-// 		 	  for ( var i = 0; i < content.length; i++) {//汉字len要加1
+// 		 	  for ( var i = 0; i < content.length; i++) {//姹夊瓧len瑕佸姞1
 // 					if (content.charCodeAt(i) > 127) {
 // 						len++;
 // 					}
@@ -48,7 +44,7 @@
 				var curnum = $('#curnum').val();
 				if(prenum != '' && curnum != ''){
 					if(parseInt(curnum, 10) < parseInt(prenum, 10)){
-						alert('本期读数不能小于上期读数');
+						alert('鏈湡璇绘暟涓嶈兘灏忎簬涓婃湡璇绘暟');
 						return;
 					}
 					$('#num').val(curnum-prenum);
@@ -109,59 +105,59 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					  <tr>
-						    <td class="formlabel nes">房屋编号</td>
+						    <td class="formlabel nes">鎴垮眿缂栧彿</td>
 						    <td>
 						    	<html:text property="houseSn"  styleId="houseSn" styleClass="{required:true}" maxlength="10" onblur="getPreRecord()"/>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo">涓嶈兘涓虹┖</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">用电月份</td>
+						    <td class="formlabel nes">鐢ㄧ數鏈堜唤</td>
 						    <td>
 						    	<html:text property="recordMonth" styleId="recordMonth" styleClass="{required:true}" />
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo">涓嶈兘涓虹┖</span>
 						    </td>
 					   </tr>
 					  <tr>
-						    <td class="formlabel nes">上期抄表日期</td>
+						    <td class="formlabel nes">涓婃湡鎶勮〃鏃ユ湡</td>
 						    <td>
 						    	<html:text property="preRecordDate" styleId="preRecordDate" styleClass="{required:true,digit:true}" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo">涓嶈兘涓虹┖</span>
 						    </td>
 					   </tr>
 					   <!--  -->
 					   <tr>
-						    <td class="formlabel nes">上期读数</td>
+						    <td class="formlabel nes">涓婃湡璇绘暟</td>
 						    <td>
 						    <html:text property="prenum"  styleId="prenum" styleClass="{required:true,digit:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<span class="field_tipinfo">璇疯緭鍏ユ纭殑鏁板瓧</span>
 						    </td>
 					   </tr> 
 					   <tr>
-						    <td class="formlabel nes">本期抄表日期</td>
+						    <td class="formlabel nes">鏈湡鎶勮〃鏃ユ湡</td>
 						    <td>
 						    <html:text property="curRecordDate"  styleId="curRecordDate" styleClass="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker();"/>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo">涓嶈兘涓虹┖</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">本期读数</td>
+						    <td class="formlabel nes">鏈湡璇绘暟</td>
 						    <td>
 						    <html:text property="curnum"  styleId="curnum" styleClass="{required:true,digit:true}" maxlength="8" onblur="checkNum()"/>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<span class="field_tipinfo">璇疯緭鍏ユ纭殑鏁板瓧</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">实际用量</td>
+						    <td class="formlabel nes">瀹為檯鐢ㄩ噺</td>
 						    <td>
 						    <html:text property="num"  styleId="num" styleClass="{required:true}" maxlength="25" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo">涓嶈兘涓虹┖</span>
 						    </td>
 					   </tr>
 				  </table>
 				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/elecRecord.do?action=list')"/>
+					 <input type="button" id="btnSumit" value="淇濆瓨" onclick="save()"/>
+					 <input type="button" id="btnReturn" value="鍙栨秷" onclick="gotoUrl('/elecRecord.do?action=list')"/>
 				  </div>
 				</div>
 				<b class="b4"></b>
@@ -171,7 +167,7 @@
 			</div>
 		</div>	
 	</html:form>	
-	<!--版权区域-->
+	<!--鐗堟潈鍖哄煙-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</div>

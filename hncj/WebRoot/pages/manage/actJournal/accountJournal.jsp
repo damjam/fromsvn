@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -50,7 +43,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/accountJournal.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -58,27 +51,27 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ÈÕÆÚ
+								æ—¥æœŸ
 							</td>
 							<td>
 								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
-								ÊÕÖ§ÀàÐÍ
+								æ”¶æ”¯ç±»åž‹
 							</td>
 							<td>
 								<html:select property="inoutType" styleId="inoutType">
-						    		<html:option value="">---È«²¿---</html:option>
+						    		<html:option value="">---å…¨éƒ¨---</html:option>
 						    		<html:options collection="inoutTypes" property="value" labelProperty="name" />
 						    	</html:select>
 							</td>
 							<td class="formlabel">
-								½»Ò×ÀàÐÍ
+								äº¤æ˜“ç±»åž‹
 							</td>
 							<td>
 								<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="">---È«²¿---</html:option>
+						    		<html:option value="">---å…¨éƒ¨---</html:option>
 						    		<html:options collection="tradeTypes" property="value" labelProperty="name" />
 						    	</html:select>
 							</td>
@@ -86,11 +79,11 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ÊÕÈë" onclick="addDeposit()"/>&nbsp;
-								<input type="button" value="Ö§³ö" onclick="addWithdraw()"/>&nbsp;
-								<input type="button" value="³åÕý" onclick="addReverse()"/>&nbsp;
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ”¶å…¥" onclick="addDeposit()"/>&nbsp;
+								<input type="button" value="æ”¯å‡º" onclick="addWithdraw()"/>&nbsp;
+								<input type="button" value="å†²æ­£" onclick="addReverse()"/>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -98,17 +91,17 @@
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
-			<!-- »ã×ÜÐÅÏ¢ -->
+			<!-- æ±‡æ€»ä¿¡æ¯ -->
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
-					<caption>»ã×ÜÐÅÏ¢</caption>
+					<caption>æ±‡æ€»ä¿¡æ¯</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">ÊÕÈë±ÊÊý</td>
-							<td align="center">ÊÕÈë½ð¶î£¨Ôª£©</td>
-							<td align="center">Ö§³ö±ÊÊý</td>
-							<td align="center">Ö§³ö½ð¶î£¨Ôª£©</td>
-							<td align="center">×Ü±ÊÊý</td>
-							<td align="center">¾»ÊÕÈë£¨Ôª£©</td>
+							<td align="center">æ”¶å…¥ç¬”æ•°</td>
+							<td align="center">æ”¶å…¥é‡‘é¢ï¼ˆå…ƒï¼‰</td>
+							<td align="center">æ”¯å‡ºç¬”æ•°</td>
+							<td align="center">æ”¯å‡ºé‡‘é¢ï¼ˆå…ƒï¼‰</td>
+							<td align="center">æ€»ç¬”æ•°</td>
+							<td align="center">å‡€æ”¶å…¥ï¼ˆå…ƒï¼‰</td>
 						</tr>
 					</thead>
 					<tr>
@@ -122,20 +115,20 @@
 				</table>
 			</div>
 			
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >Á÷Ë®ºÅ</td>
-						 	<td >ÊÕÖ§ÀàÐÍ</td>
-						 	<td >½»Ò×ÀàÐÍ</td>
-						 	<td >½»Ò×½ð¶î</td>
-						    <td >½»Ò×Ê±¼ä</td>
-						    <td >¹ØÁªÕËµ¥ºÅ</td>
-						    <td >µ±Ç°Óà¶î</td>
-						    <td >±¸×¢</td>
-						    <td >¾­ÊÖÈË</td>
+						 	<td >æµæ°´å·</td>
+						 	<td >æ”¶æ”¯ç±»åž‹</td>
+						 	<td >äº¤æ˜“ç±»åž‹</td>
+						 	<td >äº¤æ˜“é‡‘é¢</td>
+						    <td >äº¤æ˜“æ—¶é—´</td>
+						    <td >å…³è”è´¦å•å·</td>
+						    <td >å½“å‰ä½™é¢</td>
+						    <td >å¤‡æ³¨</td>
+						    <td >ç»æ‰‹äºº</td>
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">

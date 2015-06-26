@@ -1,24 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%
-	response.setHeader("Cache-Control", "no-cache");
-%>
-<jsp:directive.page import="flink.util.Paginater;" />
-
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		<title>ำรปงักิ๑</title>
+		<title>็”จๆท้€ๆฉ</title>
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -46,7 +32,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("ว๋ักิ๑ะ่าชตฤำรปงฃฌำะวาฝ๖ำะาปฬ๕");
+					alert("่ฏท้€ๆฉ้€่ฆ็็”จๆท๏ผๆไธ”ไป…ๆไธ€ๆก");
 					return false;
 				}
 				
@@ -89,18 +75,18 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ำรปงักิ๑</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">็”จๆท้€ๆฉ</span>
 								</td>
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									ำรปงฑเบล
+									็”จๆท็ผ–ๅท
 								</td>
 								<td  height="30">
 									<input type="text"  style="width: 260px;" name="userId"  value="${UserInfoForm.map.userId}"/>
 								</td>
 								<td height="30" align="right">
-									ำรปงร๛ณฦ
+									็”จๆทๅ็งฐ
 								</td>
 								<td height="30">
 									<input type="text" style="width: 260px;" name="userName"  value="${UserInfoForm.map.userName}"/>
@@ -113,8 +99,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="ฒ้ัฏ" /> 
-									<input id="btnClear" style="margin-left: 30px;" type="button" value="วๅณý" />
+									<input type="submit" value="ๆฅ่ฏข" /> 
+									<input id="btnClear" style="margin-left: 30px;" type="button" value="ๆธ…้ค" />
 								</td>
 							</tr>
 						</table>
@@ -126,19 +112,19 @@
 				</div>
 			</div>
 
-			<!-- สýพÝมะฑํว๘ -->
+			<!-- ๆ•ฐๆฎๅ—่กจๅบ -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ว๋ักิ๑
+								่ฏท้€ๆฉ
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ำรปงฑเบล
+								็”จๆท็ผ–ๅท
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ำรปงร๛ณฦ
+								็”จๆทๅ็งฐ
 							</th>
 						</tr>
 					</thead>
@@ -148,7 +134,7 @@
 						<c:if test="${empty userInfoList}">
 							<tr>
 								<td colspan="10">
-									รปำะสýพÝ
+									ๆฒกๆๆ•ฐๆฎ
 								</td>
 							</tr>
 						</c:if>
@@ -181,9 +167,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="ศทถจ" id="selUserInfo"/>
-					<input style="margin-left: 30px;" type="submit" value="วๅณý" id="clearUserInfo"/>
-					<input style="margin-left: 30px;" type="button" value="นุฑี" id="winClose"/>
+					<input type="submit" value="็กฎๅฎ" id="selUserInfo"/>
+					<input style="margin-left: 30px;" type="submit" value="ๆธ…้ค" id="clearUserInfo"/>
+					<input style="margin-left: 30px;" type="button" value="ๅ…ณ้—ญ" id="winClose"/>
 				</td>
 			</tr>
 		</table>

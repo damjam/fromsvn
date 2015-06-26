@@ -1,21 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ include file="/pages/common/taglibs.jsp" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 <head>
-	
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 		
@@ -24,10 +14,6 @@
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/paginater.js"/>
 		<f:js src="/js/common.js" />
-
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		
 		<script type="text/javascript">
 			function clearData(){
@@ -44,26 +30,26 @@
 				var parname=document.getElementById("parname").value;
 				
 				if(code.length==0 && parname.length==0){
-					alert("ÇëÊäÈëÖÁÉÙÒ»¸ö²éÑ¯Ìõ¼ş");
+					alert("è¯·è¾“å…¥è‡³å°‘ä¸€ä¸ªæŸ¥è¯¢æ¡ä»¶");
 					return false;
 				}
 				
 				return true;
 		   }
 		   
-		   // ÖØĞÂ¼ÓÔØÏµÍ³²ÎÊı.
+		   // é‡æ–°åŠ è½½ç³»ç»Ÿå‚æ•°.
 			function reloadSysParm() {
 				$.post(CONTEXT_PATH + '/sysParmManage.do?action=reload', function(data) {
-					if (data.indexOf('ÖØĞÂ¼ÓÔØÏµÍ³²ÎÊı') > -1) {
+					if (data.indexOf('é‡æ–°åŠ è½½ç³»ç»Ÿå‚æ•°') > -1) {
 						alert(data);
 					}
 					else {
-						alert('¼ÓÔØÊ§°Ü');
+						alert('åŠ è½½å¤±è´¥');
 					}
 				});
 			}
 		   function backup1(){
-			   if(!window.confirm('È·ÈÏ±¸·İ?')){
+			   if(!window.confirm('ç¡®è®¤å¤‡ä»½?')){
 				   return;
 			   }
 			   $(':button').attr('disabled', true);
@@ -72,15 +58,18 @@
 				   if(data != null){
 				    	var jsonObj = eval('(' + data + ')');
 					    if (jsonObj.indexOf('') > -1) {
-							alert('±¸·İ³É¹¦');
+							alert('å¤‡ä»½æˆåŠŸ');
 						}else {
-							alert('±¸·İÊ§°Ü');
+							alert('å¤‡ä»½å¤±è´¥');
 						}
 				    } else {
-						alert('±¸·İÊ§°Ü');
+						alert('å¤‡ä»½å¤±è´¥');
 					}*/
 				});
 			   $(':button').attr('disabled', false);
+		   }
+		   function query1(queryForm){
+			   queryForm.submit();
 		   }
 		</script>
 </head>
@@ -89,10 +78,9 @@
 	 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<f:msg/>
-<!-- ²éÑ¯¹¦ÄÜÇø -->
+<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 	<form id="query" action="sysParmManage.do?action=query" method="post" >
 		<div class="userbox">
-		<div>
 		<b class="b1"></b>
 		<b class="b2"></b>
 		<b class="b3"></b>
@@ -101,22 +89,20 @@
 		<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 		  <caption>${ACT.name}</caption>	
 		  <tr>
-		    <td class="formlabel">²ÎÊı´úÂë</td>
-		    <td><input type="text" name="code" id="code"  /></td>
-		    <td class="formlabel">²ÎÊıÃû³Æ</td>
-		    <td><input name="parname" type="text" id="parname" /></td>
+		    <td class="formlabel">å‚æ•°ä»£ç </td>
+		    <td><s:textfield name="code" id="code"  /></td>
+		    <td class="formlabel">å‚æ•°åç§°</td>
+		    <td><s:textfield name="parname" id="parname" /></td>
 		    <td class="formlabel" align="left">&nbsp;</td>
 		    <td></td>
 		  </tr>
 		  <tr>
 		    <td>&nbsp;</td>
 		    <td colspan="5">
-		      <input type="submit" value="²éÑ¯" id="input_btn2"   />&nbsp;&nbsp;
-		      <input onclick="clearData();"   type="button" value="ÖØÖÃ"  />&nbsp;&nbsp;
-		   	  <input onclick="addSysParm();"  type="button" value="Ôö¼Ó"   />&nbsp;&nbsp;
-			  <input onclick="reloadSysParm();"  type="button" value="ÖØĞÂ¼ÓÔØ"   />&nbsp;&nbsp;
-			  <!-- 
-			  <input onclick="backup1();"  type="button" value="±¸·İÊı¾İ¿â"   /> -->
+		      <input type="button" value="æŸ¥è¯¢" id="input_btn2"   onclick="query1(this.form);"/>&nbsp;&nbsp;
+		      <input onclick="clearData();"   type="button" value="é‡ç½®"  />&nbsp;&nbsp;
+		   	  <input onclick="addSysParm();"  type="button" value="æ–°å¢"   />&nbsp;&nbsp;
+			  <input onclick="reloadSysParm();"  type="button" value="é‡æ–°åŠ è½½"   />&nbsp;&nbsp;
 		    </td>
 		  </tr>
 		  </table>
@@ -126,48 +112,42 @@
 		<b class="b2"></b>
 		<b class="b1"></b>	
 		</div>
-		</div>
 	
-		<!-- Êı¾İÁĞ±íÇø -->
+		<!-- æ•°æ®åˆ—è¡¨åŒº -->
 		<div class="tablebox">
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 				  <tr>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊı´úÂë</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊıÃû³Æ</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²ÎÊıÖµ</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">±¸×¢</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">²Ù×÷</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°ä»£ç </th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°åç§°</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å‚æ•°å€¼</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">å¤‡æ³¨</th>
+				    <th align="center" nowrap="nowrap" class="titlebg">æ“ä½œ</th>
 				  </tr>
 				 </thead>
-				 <tbody>
-				  <logic:notEmpty name="sysParmList">
-				  	<logic:iterate name="sysParmList" id="sysPram">
+				 <f:showDataGrid name="list" msg=" " styleClass="data_grid">
+				  	  <c:forEach items="${list}" var="sysPram">
 					  <tr align="center">
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="code" /></td>
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="parname" /></td>
-					    <td nowrap="nowrap"><bean:write name="sysPram" property="parvalue" /></td>
-						<td nowrap="nowrap"><bean:write name="sysPram" property="remark" /></td>
+					    <td nowrap="nowrap">${sysPram.code}</td>
+					    <td nowrap="nowrap">${sysPram.parname}</td>
+					    <td nowrap="nowrap">${sysPram.parvalue}</td>
+						<td nowrap="nowrap">${sysPram.remark}</td>
 					    <td nowrap="nowrap">
 						    <span class="redlink">
-						   		 <a href="sysParmManage.do?action=update&code=${sysPram.code}">ĞŞ¸Ä</a>
-						   		 <!-- 
-						   		 <a onclick="return confirm('ÄãÈ·ÈÏÒªÉ¾³ıÂğ?');" href="sysParmManage.do?action=delete&code=${sysPram.code }" >É¾³ı</a>
-						   		 -->
+						   		 <a href="sysParmManage.do?action=update&code=${sysPram.code}">ä¿®æ”¹</a>
+						   		 
+						   		 <a onclick="return confirm('ä½ ç¡®è®¤è¦åˆ é™¤å—?');" href="sysParmManage.do?action=delete&code=${sysPram.code }" >åˆ é™¤</a>
 						    </span>
 					    </td>
 					  </tr>
-					 </logic:iterate>
-					</logic:notEmpty>
-				</tbody>
+					 </c:forEach>
+				</f:showDataGrid>
 			</table>
-			
 			<f:paginate />	
-		
 		</div>
 	</form>
 	
-	<!--°æÈ¨ÇøÓò-->
+	<!--ç‰ˆæƒåŒºåŸŸ-->
  	<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%
 	response.setHeader("Cache-Control", "no-cache");
 %>
@@ -52,7 +52,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("ÇëÑ¡ÔñÐèÒªµÄÒµÎñÀà±ð");
+					alert("è¯·é€‰æ‹©éœ€è¦çš„ä¸šåŠ¡ç±»åˆ«");
 					return false;
 				}
 				
@@ -82,10 +82,10 @@
 	<body>
 
 		<div class="location">
-			Äúµ±Ç°ËùÔÚÎ»ÖÃ£º
-			<span class="redlink"><a href="javascript: return;">Ê×Ò³</a> </span> > ¹¦ÄÜ²Ù×÷ >ÒµÎñÀà±ð¹ÜÀí
+			æ‚¨å½“å‰æ‰€åœ¨ä½ç½®ï¼š
+			<span class="redlink"><a href="javascript: return;">é¦–é¡µ</a> </span> > åŠŸèƒ½æ“ä½œ >ä¸šåŠ¡ç±»åˆ«ç®¡ç†
 		</div>
-		<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 		<form id="query" action="businessClass.do?action=queryPopUpBusinessClass"
 			method="post">
 			<div class="userbox">
@@ -99,7 +99,7 @@
 							<tr>
 								<td align="center">
 									<span
-										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÒµÎñÀà±ðÑ¡Ôñ</span>
+										style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ä¸šåŠ¡ç±»åˆ«é€‰æ‹©</span>
 								</td>
 							</tr>
 						</table>
@@ -108,14 +108,14 @@
 							cellpadding="0">
 							<tr>
 								<td width="100" height="30" align="right">
-									Àà±ð±àºÅ
+									ç±»åˆ«ç¼–å·
 								</td>
 								<td width="270" height="30">
 									<input type="text"  style="width: 260px;" name="busiClassNo" 
 										id="busiClassNo" value="${businessClass.busiClassNo }"/>
 								</td>
 								<td width="100" height="30" align="right">
-									Àà±ðÃû³Æ
+									ç±»åˆ«åç§°
 								</td>
 								<td height="30">
 									<input  style="width: 260px;" name="busiClassName" type="text" 
@@ -124,13 +124,13 @@
 							</tr>
 							<tr>
 								<td width="100" height="30" align="right">
-									·þÎñÀàÐÍ
+									æœåŠ¡ç±»åž‹
 								</td>
 								<td width="270" height="30">
 									<select name="serviceType"  id="serviceType">
-										<option value="">---ÇëÑ¡Ôñ---</option>
-										<option value="1">´úÊÕ</option>
-										<option value="0">´ú¸¶</option>
+										<option value="">---è¯·é€‰æ‹©---</option>
+										<option value="1">ä»£æ”¶</option>
+										<option value="0">ä»£ä»˜</option>
 									</select>
 									<input  type="hidden" id="hidServiceType" value="${businessClass.serviceType }"/>
 								</td>
@@ -142,8 +142,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" />
-									<input style="margin-left: 30px;" type="reset" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" />
+									<input style="margin-left: 30px;" type="reset" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -155,15 +155,15 @@
 				</div>
 			</div>
 
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-							<th align="center" nowrap="nowrap" class="titlebg">ÇëÑ¡Ôñ</th>
-							<th align="center" nowrap="nowrap" class="titlebg">Àà±ð±àºÅ</th>
-							<th align="center" nowrap="nowrap" class="titlebg">·þÎñÀàÐÍ</th>
-							<th align="center" nowrap="nowrap" class="titlebg">Àà±ðÃû³Æ</th>
+							<th align="center" nowrap="nowrap" class="titlebg">è¯·é€‰æ‹©</th>
+							<th align="center" nowrap="nowrap" class="titlebg">ç±»åˆ«ç¼–å·</th>
+							<th align="center" nowrap="nowrap" class="titlebg">æœåŠ¡ç±»åž‹</th>
+							<th align="center" nowrap="nowrap" class="titlebg">ç±»åˆ«åç§°</th>
 						</tr>
 					</thead>
 					
@@ -172,7 +172,7 @@
 						<c:if test="${empty businessClassList}">
 							<tr>
 								<td colspan="10">
-									Ã»ÓÐÊý¾Ý
+									æ²¡æœ‰æ•°æ®
 								</td>
 							</tr>
 						</c:if>
@@ -186,8 +186,8 @@
 										${businessClass.busiClassNo}
 									</td>
 									<td align="center" nowrap="nowrap">
-										<c:if test="${businessClass.serviceType eq '1'}">´úÊÕ</c:if>
-										<c:if test="${businessClass.serviceType eq '0'}">´ú¸¶</c:if>
+										<c:if test="${businessClass.serviceType eq '1'}">ä»£æ”¶</c:if>
+										<c:if test="${businessClass.serviceType eq '0'}">ä»£ä»˜</c:if>
 									</td>
 									<td align="center" nowrap="nowrap">
 										${businessClass.busiClassName}
@@ -208,9 +208,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="3" align="center">
-					<input type="submit" value="È·¶¨" id="selBusinessClass"/>
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBusinessClass"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selBusinessClass"/>
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBusinessClass"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

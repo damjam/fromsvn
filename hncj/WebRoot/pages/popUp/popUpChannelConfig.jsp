@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean"%>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
@@ -50,7 +50,7 @@
 				});
 				
 				if(i==0 || i>1){
-					alert("ÇëÑ¡ÔñÐèÒªµÄÇþµÀ±àºÅ");
+					alert("è¯·é€‰æ‹©éœ€è¦çš„æ¸ é“ç¼–å·");
 					return false;
 				}
 				
@@ -77,7 +77,7 @@
 
 	<body>
 		<f:msg styleClass="msg" />
-		<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 		<html:form action="channelConfigManage.do?action=queryPopUpChannelConfig" method="post" >
 			<div class="userbox">
 				<div>
@@ -91,19 +91,19 @@
 							cellpadding="0">
 							<tr>
 								<td colspan="4" align="left">
-									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">ÇþµÀ²ÎÊýÅäÖÃÑ¡Ôñ</span>
+									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">æ¸ é“å‚æ•°é…ç½®é€‰æ‹©</span>
 								</td>
 							</tr>
 							<tr>
 								<td width="100" height="30" align="right">
-									ÇþµÀ±àºÅ
+									æ¸ é“ç¼–å·
 								</td>
 								<td width="270" height="30">
 									<html:text styleClass="" size="20" property="chnlNo"
 										styleId="chnlNo" />
 								</td>
 								<td width="100" height="30" align="right">
-									ÇþµÀÃû³Æ
+									æ¸ é“åç§°
 								</td>
 								<td height="30">
 									<html:text styleClass="" size="20" property="chnlName" styleId="chnlName" />
@@ -119,8 +119,8 @@
 									&nbsp;
 								</td>
 								<td height="30" colspan="3">
-									<input type="submit" value="²éÑ¯" id="input_btn2" />
-									<input onclick="FormUtils.reset('channelConfigManageActionForm');" style="margin-left: 30px;" type="button" value="Çå³ý" />
+									<input type="submit" value="æŸ¥è¯¢" id="input_btn2" />
+									<input onclick="FormUtils.reset('channelConfigManageActionForm');" style="margin-left: 30px;" type="button" value="æ¸…é™¤" />
 								</td>
 							</tr>
 						</table>
@@ -132,7 +132,7 @@
 				</div>
 			</div>
 
-			<!-- Êý¾ÝÁÐ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0"
 					cellpadding="0">
@@ -140,25 +140,25 @@
 						<tr>
 							
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇëÑ¡Ôñ
+								è¯·é€‰æ‹©
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇþµÀ±àºÅ
+								æ¸ é“ç¼–å·
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇþµÀÃû³Æ
+								æ¸ é“åç§°
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÇþµÀ´úÊÕ¸¶ÀàÐÍ
+								æ¸ é“ä»£æ”¶ä»˜ç±»åž‹
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								ÊÇ·ñÐèÒªÑéÖ¤Ð­Òé
+								æ˜¯å¦éœ€è¦éªŒè¯åè®®
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								×´Ì¬
+								çŠ¶æ€
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								²Ù×÷
+								æ“ä½œ
 							</th>
 						</tr>
 					</thead>
@@ -166,7 +166,7 @@
 						<logic:empty name="channelConfigList">
 							<tr>
 								<td nowrap="nowrap" colspan="6">
-									Ã»ÓÐÊý¾Ý
+									æ²¡æœ‰æ•°æ®
 								</td>
 							</tr>
 						</logic:empty>
@@ -184,31 +184,31 @@
 									</td>
 									<td align="center" nowrap="nowrap">
 										<c:choose>
-											<c:when test="${channelConfig.chnlPayType eq '0'}">´úÊÕ/´ú¸¶</c:when>
-											<c:when test="${channelConfig.chnlPayType eq '1'}">´úÊÕ</c:when>
-											<c:when test="${channelConfig.chnlPayType eq '2'}">´ú¸¶</c:when>
-											<c:otherwise>ÆäËû</c:otherwise>
+											<c:when test="${channelConfig.chnlPayType eq '0'}">ä»£æ”¶/ä»£ä»˜</c:when>
+											<c:when test="${channelConfig.chnlPayType eq '1'}">ä»£æ”¶</c:when>
+											<c:when test="${channelConfig.chnlPayType eq '2'}">ä»£ä»˜</c:when>
+											<c:otherwise>å…¶ä»–</c:otherwise>
 										</c:choose>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<c:choose>
-											<c:when test="${channelConfig.ifProt eq '0'}">ÊÇ</c:when>
-											<c:when test="${channelConfig.ifProt eq '1'}">·ñ</c:when>
-											<c:otherwise>ÆäËû</c:otherwise>
+											<c:when test="${channelConfig.ifProt eq '0'}">æ˜¯</c:when>
+											<c:when test="${channelConfig.ifProt eq '1'}">å¦</c:when>
+											<c:otherwise>å…¶ä»–</c:otherwise>
 										</c:choose>
 									</td>
 
 									<td align="center" nowrap="nowrap">
 										<c:choose>
-											<c:when test="${channelConfig.state eq '00'}">ÉúÐ§</c:when>
-											<c:when test="${channelConfig.state eq '01'}">×¢Ïú</c:when>
-											<c:otherwise>ÆäËû</c:otherwise>
+											<c:when test="${channelConfig.state eq '00'}">ç”Ÿæ•ˆ</c:when>
+											<c:when test="${channelConfig.state eq '01'}">æ³¨é”€</c:when>
+											<c:otherwise>å…¶ä»–</c:otherwise>
 										</c:choose>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<span class="redlink"> 
 											<html:link
-												href="javascript:openContextDialog('/channelConfigManage.do?action=channelConfigDetail&chnlNo=${channelConfig.chnlNo}',false)">Ã÷Ï¸</html:link>
+												href="javascript:openContextDialog('/channelConfigManage.do?action=channelConfigDetail&chnlNo=${channelConfig.chnlNo}',false)">æ˜Žç»†</html:link>
 										</span>
 									</td>
 								</tr>
@@ -217,7 +217,7 @@
 					</tbody>
 				</table>
 
-				<!-- ·ÖÒ³ -->
+				<!-- åˆ†é¡µ -->
 				<div class="table_navi">
 					<f:paginate />
 				</div>
@@ -230,9 +230,9 @@
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="submit" value="È·¶¨" id="selChnlConfig"/>
-					<input style="margin-left: 30px;" type="submit" value="Çå³ý" id="clearBankAddress"/>
-					<input style="margin-left: 30px;" type="button" value="¹Ø±Õ" id="winClose"/>
+					<input type="submit" value="ç¡®å®š" id="selChnlConfig"/>
+					<input style="margin-left: 30px;" type="submit" value="æ¸…é™¤" id="clearBankAddress"/>
+					<input style="margin-left: 30px;" type="button" value="å…³é—­" id="winClose"/>
 				</td>
 			</tr>
 		</table>

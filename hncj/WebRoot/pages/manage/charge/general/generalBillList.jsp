@@ -1,18 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<%@ include file="/pages/common/meta.jsp"%>
-<%@ include file="/pages/common/sys.jsp"%>
-
-<html>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
-		
+		<%@ include file="/pages/common/meta.jsp"%>
+		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -36,7 +29,7 @@
 				
 			});
 			function charge(id){
-				if(window.confirm("È·ÈÏÊÕ·Ñ?")){
+				if(window.confirm("ç¡®è®¤æ”¶è´¹?")){
 					gotoUrl('/generalBill.do?action=charge&id='+id);
 				}
 			}
@@ -44,13 +37,13 @@
 				window.open(CONTEXT_PATH+'/reportAction.do?action=generalBill&id='+id);
 			}
 			function delRecord(id){
-				if(!window.confirm("È·ÈÏÉ¾³ı?")){
+				if(!window.confirm("ç¡®è®¤åˆ é™¤?")){
 					return;
 				}
 				gotoUrl('/generalBill.do?action=deleteBill&id='+id);
 			}
 			function refund(id){
-				if(!window.confirm("È·ÈÏÍË¿î?")){
+				if(!window.confirm("ç¡®è®¤é€€æ¬¾?")){
 					return;
 				}
 				gotoUrl('/generalBill.do?action=refund&id='+id);
@@ -61,7 +54,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
 		<html:form action="/generalBill.do?action=list" styleId="queryForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -69,35 +62,35 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								ÊÕ¿îÈÕÆÚ
+								æ”¶æ¬¾æ—¥æœŸ
 							</td>
 							<td>
 								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
-								¹Ø¼ü×Ö
+								å…³é”®å­—
 							</td>
 							<td>
 								<html:text property="keyword" styleId="keyword" maxlength="20"/>
 							</td>
-							<td class="formlabel nes">×´Ì¬</td>
+							<td class="formlabel nes">çŠ¶æ€</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---È«²¿---</html:option>
+						    		<html:option value="">---å…¨éƒ¨---</html:option>
 						    		<html:options collection="billStates" property="value" labelProperty="name" />
 						    	</html:select>
 						    </td>
 					    </tr>
 						<tr>
 							<td class="formlabel">
-								ÕËµ¥ºÅ
+								è´¦å•å·
 							</td>
 							<td>
 								<html:text property="id" styleId="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
-								Äê·İ
+								å¹´ä»½
 							</td>
 							<td>
 								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
@@ -106,24 +99,24 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="ÖØÖÃ" id="btnClear" />&nbsp;
-								<input type="button" value="ĞÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear" />&nbsp;
+								<input type="button" value="æ–°å¢" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- »ã×ÜĞÅÏ¢ -->
+			<!-- æ±‡æ€»ä¿¡æ¯ -->
 			 
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
-					<caption>»ã×ÜĞÅÏ¢</caption>
+					<caption>æ±‡æ€»ä¿¡æ¯</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">×Ü±ÊÊı</td>
-							<td align="center">×Ü½ğ¶î£¨Ôª£©</td>
+							<td align="center">æ€»ç¬”æ•°</td>
+							<td align="center">æ€»é‡‘é¢ï¼ˆå…ƒï¼‰</td>
 						</tr>
 					</thead>
 					<tr>
@@ -132,23 +125,23 @@
 					</tr>
 				</table>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >ÕËµ¥ºÅ</td>
-						    <td >ÊÕ·ÑÏîÄ¿</td>
-						    <td >µ¥¼Û</td>
-						    <td >ÊıÁ¿</td>
-						    <td >×Ü¶î</td>
-						    <td >ÊµÊÕ½ğ¶î</td>
-						    <td >¸¶¿îÈË</td>
-						    <td >¸¶¿îÊ±¼ä</td>
-						    <td >ÊÕ¿îÈË</td>
-						    <td >×´Ì¬</td>
-						    <td >±¸×¢</td>
-						    <td>²Ù×÷</td>
+						 	<td >è´¦å•å·</td>
+						    <td >æ”¶è´¹é¡¹ç›®</td>
+						    <td >å•ä»·</td>
+						    <td >æ•°é‡</td>
+						    <td >æ€»é¢</td>
+						    <td >å®æ”¶é‡‘é¢</td>
+						    <td >ä»˜æ¬¾äºº</td>
+						    <td >ä»˜æ¬¾æ—¶é—´</td>
+						    <td >æ”¶æ¬¾äºº</td>
+						    <td >çŠ¶æ€</td>
+						    <td >å¤‡æ³¨</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
@@ -170,11 +163,11 @@
 								<td>${element.remark}</td>
 								<td class="redlink">
 							    	<logic:equal value="00" name="element" property="state">
-							    		<a href="javascript:charge('${element.id}')">ÊÕ·Ñ</a>
-							    		<a href="javascript:delRecord('${element.id}')">É¾³ı</a>
+							    		<a href="javascript:charge('${element.id}')">æ”¶è´¹</a>
+							    		<a href="javascript:delRecord('${element.id}')">åˆ é™¤</a>
 							    	</logic:equal>
 							    	<logic:equal value="01" name="element" property="state">
-							    		<a href="javascript:openReport('${element.id}')">´òÓ¡</a>
+							    		<a href="javascript:openReport('${element.id}')">æ‰“å°</a>
 							    	</logic:equal>
 							    </td>
 						    </tr>

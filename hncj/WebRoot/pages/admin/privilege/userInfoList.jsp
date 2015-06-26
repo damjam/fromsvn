@@ -1,18 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/pages/common/taglibs.jsp" %>
 <%@ include file="/pages/common/meta.jsp"%>
 <%@ include file="/pages/common/sys.jsp"%>
-
 <html>
 	<head>
 		
-		<title>ÓÃ»§ÁĞ±í</title>
+		<title>ç”¨æˆ·åˆ—è¡¨</title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -43,7 +37,7 @@
 			}
 			
 			function deleteUserInfo(userId){
-				if(confirm("È·ÈÏÒªÉ¾³ıÂğ?")){
+				if(confirm("ç¡®è®¤è¦åˆ é™¤å—?")){
 					var url="/userInfoAction.do?action=deleteUserInfo&userId="+userId;
 					gotoUrl(url);
 				}else{
@@ -63,9 +57,9 @@
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-		<f:msg styleClass="msg" />
-		<html:form action="/userInfoAction.do?action=listUserInfo" styleId="userInfoForm">
-			<!-- ²éÑ¯¹¦ÄÜÇø -->
+		<f:msg  />
+		<form action="userInfoAction.do?action=listUserInfo" id="userInfoForm" method="post">
+			<!-- æŸ¥è¯¢åŠŸèƒ½åŒº -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
@@ -73,46 +67,46 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								µÇÂ¼Ãû
+								ç™»å½•å
 							</td>
 							<td>
-								<html:text property="loginId" styleId="loginId"  />
+								<s:textfield name="loginId" id="loginId" maxlength="20"></s:textfield>
 							</td>
 							<td class="formlabel">
-								ÓÃ»§Ãû³Æ
+								ç”¨æˆ·åç§°
 							</td>
 							<td>
-								<html:text property="userName" styleId="userName" />
+								<s:textfield name="userName" id="userName" maxlength="20"></s:textfield>
 							</td>
 						</tr>
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="²éÑ¯" id="btnQry"/>&nbsp;
-								<input type="button" value="Çå³ı" id="btnClear"/>&nbsp;
-								<input type="button" value="ĞÂÔö" id="btnAdd"/>
+								<input type="button" value="æŸ¥è¯¢" id="btnQry"/>&nbsp;
+								<input type="button" value="é‡ç½®" id="btnClear"/>&nbsp;
+								<input type="button" value="æ–°å¢" id="btnAdd"/>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<!-- Êı¾İÁĞ±íÇø -->
+			<!-- æ•°æ®åˆ—è¡¨åŒº -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
-						    <td>ÓÃ»§±àºÅ</td>
-						    <td>µÇÂ½Ãû</td>
-						     <td>ÓÃ»§Ãû</td>
-						    <td>ÓÃ»§ÀàĞÍ</td>
-						    <td>ËùÊô»ú¹¹</td>
-						    <td>²Ù×÷</td>
+						    <td>ç”¨æˆ·ç¼–å·</td>
+						    <td>ç™»å½•å</td>
+						     <td>ç”¨æˆ·å</td>
+						    <td>ç”¨æˆ·ç±»å‹</td>
+						    <td>æ‰€å±æœºæ„</td>
+						    <td>æ“ä½œ</td>
 						 </tr>
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.userId}</td>
 							    <td>${element.loginId}</td>
@@ -124,19 +118,19 @@
 							    <td align="center">
 							       <span class="redlink">
 							       		<c:if test="${element.loginId ne 'super'}">
-							       			<a href="javascript:void(0)" onclick="return updateUserInfo('${element.userId}');">ĞŞ¸Ä</a>
-								       		<a href="javascript:void(0)" onclick="return deleteUserInfo('${element.userId}');">É¾³ı</a>
-								       		<a href="javascript:void(0)" onclick="return manageUserRole('${element.userId}');">ÓÃ»§½ÇÉ«¹ÜÀí</a>
+							       			<a href="javascript:void(0)" onclick="return updateUserInfo('${element.userId}');">ä¿®æ”¹</a>
+								       		<a href="javascript:void(0)" onclick="return deleteUserInfo('${element.userId}');">åˆ é™¤</a>
+								       		<a href="javascript:void(0)" onclick="return manageUserRole('${element.userId}');">ç”¨æˆ·è§’è‰²ç®¡ç†</a>
 							       		</c:if>
-							       		<a href="javascript:void(0)" onclick="return resetPwd('${element.userId}');">ÃÜÂëÖØÖÃ</a>
+							       		<a href="javascript:void(0)" onclick="return resetPwd('${element.userId}');">å¯†ç é‡ç½®</a>
 							 	   </span>
 							  </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</form>
 	</body>
 </html>
