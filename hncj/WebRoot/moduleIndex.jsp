@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,7 +13,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		
-		<!-- ��¼�ɹ���ʾ�� -->
+		<!-- 登录成功提示区 -->
 		<div class="okbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
@@ -25,12 +25,12 @@
 							</td>
 							<td>
 								<p style="font-size:14px; font-weight:bold;">
-									ϵͳ��¼��ʾ
+									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									�𾴵��û������Ѿ��ɹ���¼${comInfo.sp}����ͨ�������˵�������Ӧ���ܲ�����
-									�������ʹ�ù����������ʣ�����ϵ
-									<span class="redfont">����֧�ֵ绰��<strong>${comInfo.tel}</strong>
+									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
+									如果您在使用过程中有疑问，请拨打
+									<span class="redfont">24小时客服热线：<strong>${comInfo.tel}</strong>
 									</span>
 								</p>
 							</td>
@@ -41,7 +41,7 @@
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
 
-		<!--��Ȩ����-->
+		<!--版权区域-->
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>
