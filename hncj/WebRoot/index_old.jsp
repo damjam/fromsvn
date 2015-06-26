@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/sys.jsp" %>
 		
@@ -24,20 +23,20 @@
 				});
 			});
 			
-			//µÇÂ¼
+			//ç™»å½•
 			function log(){
 				if(isEmpty() || $('#password').val() == ''){
-					$('#errorMsg').html('ÓÃ»§Ãû»òÃÜÂë²»ÄÜÎª¿Õ');
+					$('#errorMsg').html('ç”¨æˆ·åæˆ–å¯†ç ä¸èƒ½ä¸ºç©º');
 					return false;
 				}
 				if($('#verifyCode').val().trim().length != 4){
-					$('#errorMsg').html('ÇëÊäÈë4Î»ÑéÖ¤Âë');
+					$('#errorMsg').html('è¯·è¾“å…¥4ä½éªŒè¯ç ');
 					return false;
 				}
 				var form = $('#logForm');	
 				var DOMForm = form[0];
 				
-				//ÃÜÂë¼ÓÃÜ form.password.value
+				//å¯†ç åŠ å¯† form.password.value
 				DOMForm.password.value = hex_md5(DOMForm.password.value);
 				DOMForm.submit();			
 				return false;
@@ -75,7 +74,7 @@
 				}
 				return false;
 			}
-			//var tip = 'ÊÖ»úºÅ/Ö¤¼şºÅÂë';
+			//var tip = 'æ‰‹æœºå·/è¯ä»¶å·ç ';
 			var tip = '';
 			function bindEvent(){
 				$('#code').blur(function(){
@@ -100,7 +99,7 @@
 	</head>
 
 	<body class="fullwidth">
-	    <!--µÇÂ¼¿ÚÍ·²¿-->
+	    <!--ç™»å½•å£å¤´éƒ¨-->
 	    <div class="top">
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
@@ -113,7 +112,7 @@
 		</div>
 		
 		
-	    <!--µÇÂ¼±íµ¥ÇøÓò-->
+	    <!--ç™»å½•è¡¨å•åŒºåŸŸ-->
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">
@@ -127,31 +126,31 @@
 		        	<form action="login.do?action=login" method="post" id="logForm">
 		        		<input type="hidden" name="tag" value="${tag}"/>
 				        <div class="formbox">
-				            <div class="formleft"><img title="ÓÃ»§µÇÂ¼" src="images/user.gif" /></div>
-				            <div class="formright"><span style="font-size:14px;font-weight:bold; padding-left:5px;">ÓÃ»§µÇÂ¼</span>
+				            <div class="formleft"><img title="ç”¨æˆ·ç™»å½•" src="images/user.gif" /></div>
+				            <div class="formright"><span style="font-size:14px;font-weight:bold; padding-left:5px;">ç”¨æˆ·ç™»å½•</span>
 				            <span class="redfont" id="errorMsg">${msg}</span></div>
 				        </div>
 				        <div class="formbox">
-				            <div class="formleft">ÕËºÅ</div>
+				            <div class="formleft">è´¦å·</div>
 				            <div class="formright"><input class="forminput" id="code" name="code" type="text" value="${code}" maxlength="20"/></div>
 				        </div>
 				        
 				        <div class="formbox">
-				            <div class="formleft">ÃÜÂë</div>
+				            <div class="formleft">å¯†ç </div>
 				            <div class="formright"><input class="forminput" id="password" name="password" type="password" value=""/>
 				            </div>
 				        </div>
 				        <div class="formbox">
-				            <div class="formleft">ÑéÖ¤Âë</div>
+				            <div class="formleft">éªŒè¯ç </div>
 				            <div class="formright"><input class="forminput" id="verifyCode" name="verifyCode" type="text" style="width: 40px;" size="4" maxlength="4"/>
 				            	<img src="${CONTEXT_PATH}/servlet/verifyCode" id="randomImg" align="middle" />
-				            		<a href="javascript:void(0)" id="flushImg"><font color="#c94600">»»Ò»¸ö</font></a>
+				            		<a href="javascript:void(0)" id="flushImg"><font color="#c94600">æ¢ä¸€ä¸ª</font></a>
 				            		
 				            </div>
 				        </div>
 				        <div class="formbox">
 				            <div class="formleft"></div>
-				            <div class="formright"><label><input onfocus="this.blur()" name="remenber" type="checkbox" value="1" checked="checked" />ÔÚ´ËµçÄÔÉÏ¼Ç×¡ÓÃ»§Ãû</label>
+				            <div class="formright"><label><input onfocus="this.blur()" name="remenber" type="checkbox" value="1" checked="checked" />åœ¨æ­¤ç”µè„‘ä¸Šè®°ä½ç”¨æˆ·å</label>
 				            	<a href="javascript:void(0)" onclick="javascript:toRegister()"><font style="text-decoration:underline"></font></a> 
 				            	<a href="javascript:void(0)" onclick="javascript:findPwd()"><font style="text-decoration:underline"></font></a>
 				            	</span></div>
@@ -160,15 +159,15 @@
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formbtbox">
-				            <input type="image" src="images/enter.gif" title="µã»÷µÇÂ¼ÏµÍ³" onclick="return log();"/>
+				            <input type="image" src="images/enter.gif" title="ç‚¹å‡»ç™»å½•ç³»ç»Ÿ" onclick="return log();"/>
 				           </div>
 				        </div>
 						<!-- 
 				        <div class="formbox">
 							<div class="formleft"></div>
 				        	<div class="formright" style="_padding-top:20px">
-				        		<img src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline" href="#">ÏÂÔØUSBÇı¶¯</a>
-				        		<img style="padding-left:30px" src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline;" href="SignOcx.rar">ÏÂÔØÍøÂç°²È«²å¼ş</a>
+				        		<img src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline" href="#">ä¸‹è½½USBé©±åŠ¨</a>
+				        		<img style="padding-left:30px" src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline;" href="SignOcx.rar">ä¸‹è½½ç½‘ç»œå®‰å…¨æ’ä»¶</a>
 				        	</div>
 				        </div> -->
 					</form>
@@ -176,7 +175,7 @@
 			</div>
 	    </div>
 	    
-	    <!--µÇÂ¼¿Úµ×²¿-->
+	    <!--ç™»å½•å£åº•éƒ¨-->
 	    <jsp:include page="/footer.jsp"></jsp:include>
 	</body>
 </html>

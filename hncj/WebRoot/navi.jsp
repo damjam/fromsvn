@@ -1,9 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
@@ -25,20 +24,20 @@
 				});
 			});
 			
-			//µÇÂ¼
+			//ç™»å½•
 			function log(){
 				if(isEmpty() || $('#password').val() == ''){
-					$('#errorMsg').html('ÓÃ»§Ãû»òÃÜÂë²»ÄÜÎª¿Õ');
+					$('#errorMsg').html('ç”¨æˆ·åæˆ–å¯†ç ä¸èƒ½ä¸ºç©º');
 					return false;
 				}
 				if($('#verifyCode').val().trim().length != 4){
-					$('#errorMsg').html('ÇëÊäÈë4Î»ÑéÖ¤Âë');
+					$('#errorMsg').html('è¯·è¾“å…¥4ä½éªŒè¯ç ');
 					return false;
 				}
 				var form = $('#logForm');	
 				var DOMForm = form[0];
 				
-				//ÃÜÂë¼ÓÃÜ form.password.value
+				//å¯†ç åŠ å¯† form.password.value
 				DOMForm.password.value = hex_md5(DOMForm.password.value);
 				DOMForm.submit();			
 				return false;
@@ -76,7 +75,7 @@
 				}
 				return false;
 			}
-			var tip = 'ÊÖ»úºÅ/Ö¤¼şºÅÂë';
+			var tip = 'æ‰‹æœºå·/è¯ä»¶å·ç ';
 			function bindEvent(){
 				$('#code').blur(function(){
 					var code = $('#code').val();
@@ -100,7 +99,7 @@
 	</head>
 
 	<body class="fullwidth">
-	    <!--µÇÂ¼¿ÚÍ·²¿-->
+	    <!--ç™»å½•å£å¤´éƒ¨-->
 	    <div class="top">
 	        <div class="topbg">
 	            <div style="float:left;"><img src="images/top_left.jpg" width="8" height="39" /></div>
@@ -111,7 +110,7 @@
 		</div>
 		
 		
-	    <!--µÇÂ¼±íµ¥ÇøÓò-->
+	    <!--ç™»å½•è¡¨å•åŒºåŸŸ-->
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">
@@ -129,7 +128,7 @@
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright" style="font-weight: normal">
-				           	 Ñ¡ÔñµÇÂ¼»ú¹¹</div>
+				           	 é€‰æ‹©ç™»å½•æœºæ„</div>
 				        </div>
 				        <div class="formbox">
 				            <div class="formleft"></div>
@@ -141,13 +140,13 @@
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/dg">¶«İ¸ÒøĞĞ</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}/dg">ä¸œèé“¶è¡Œ</a>
 				            </div>
 				        </div>
 				        <div class="formbox">
 				            <div class="formleft"></div>
 				            <div class="formright">
-				            	<a class="redlink" href="${CONTEXT_PATH}/gz">¹ãÖİÒøĞĞ</a>
+				            	<a class="redlink" href="${CONTEXT_PATH}/gz">å¹¿å·é“¶è¡Œ</a>
 				            </div>
 				        </div>
 				        -->
@@ -155,8 +154,8 @@
 				        <div class="formbox">
 							<div class="formleft"></div>
 				        	<div class="formright" style="_padding-top:20px">
-				        		<img src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline" href="#">ÏÂÔØUSBÇı¶¯</a>
-				        		<img style="padding-left:30px" src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline;" href="SignOcx.rar">ÏÂÔØÒøÁªÍøÂç°²È«²å¼ş</a>
+				        		<img src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline" href="#">ä¸‹è½½USBé©±åŠ¨</a>
+				        		<img style="padding-left:30px" src="images/down.gif" width="14" height="15" /><a style="text-decoration:underline;" href="SignOcx.rar">ä¸‹è½½é“¶è”ç½‘ç»œå®‰å…¨æ’ä»¶</a>
 				        	</div>
 				        </div> -->
 					</form>

@@ -1,12 +1,8 @@
-<!-- 
-	@ submit element.
-	@ 2006-12-23.
-//-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ include file="/pages/common/sys.jsp"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-<html>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<title>操作超时</title>
 		<link rel="stylesheet" href="${CONTEXT_PATH}/css/page.css"

@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ page language="java" contentType="text/html; charset=GBK"%>
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%response.setHeader("Cache-Control", "no-cache");%>
+<%@ include file="/pages/common/taglibs.jsp" %>
+<html lang="zh-cn"> 
 	<head>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
@@ -29,12 +29,12 @@
 
 	<body class="fullwidth">
 		<div class="location">
-			����ǰ����λ�ã�
-			<span class="redlink"><a href="javascript: return;">��ҳ</a>
-			</span> > ϵͳ��ʾ > ����ʧ��
+			您当前所在位置：
+			<span class="redlink"><a href="javascript: return;">首页</a>
+			</span> > 系统提示 > 操作失败
 		</div>
 
-		<!-- ���������ʾ�� -->
+		<!-- 操作结果提示区 -->
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -50,7 +50,7 @@
 							</td>
 							<td width="180" height="30">
 								<span
-									style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">����ʧ����Ϣ</span>
+									style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">操作失败信息</span>
 							</td>
 							<td width=""></td>
 						</tr>
@@ -63,7 +63,7 @@
 						<tr>
 							<td></td>
 							<td height="30" colspan="4">
-								<input type="submit" value=" �� �� " class="inp_L3"
+								<input type="submit" value=" 返 回 " class="inp_L3"
 									onclick="forward();" onmouseover="this.className='inp_L4'"
 									onmouseout="this.className='inp_L3'" id="input_btn3"
 									name="escape" />

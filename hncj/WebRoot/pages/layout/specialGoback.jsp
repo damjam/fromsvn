@@ -1,11 +1,11 @@
-<%@ page language="java"  pageEncoding="GBK"%>
+<%@ page language="java"  pageEncoding="utf-8"%>
 <script type="text/javascript">
 	function goback()
 	{
 	    var nBacklevel=certificateForm.gobacklevel.value;
 		var backlevel = -1*nBacklevel;
-		history.go(backlevel)
+		history.go(backlevel);
 	}	
 </script>
-<input name="gobackbutton"  type="button" value="·µ»Ø" onclick="goback()"/>
+<input name="gobackbutton"  type="button" value="è¿”å›ž" onclick="goback()"/>
 
