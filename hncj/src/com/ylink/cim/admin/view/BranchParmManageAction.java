@@ -10,6 +10,8 @@ import net.sf.json.JSONObject;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.domain.BranchParm;
@@ -29,6 +31,8 @@ import flink.web.BaseAction;
 /**
  * 系统参数管理action
  */
+@Scope("prototype")
+@Component 
 public class BranchParmManageAction extends BaseAction implements ModelDriven<BranchParm> {
 
 	private static final long serialVersionUID = 3419813256406264742L;

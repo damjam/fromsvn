@@ -4,6 +4,7 @@
 <%@ include file="/pages/common/taglibs.jsp" %>
 <html lang="zh-cn"> 
 	<head>
+		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
 

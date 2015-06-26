@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import com.ylink.cim.admin.domain.SysDictId;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.LimitGroupInfoService;
 import com.ylink.cim.admin.service.LimitGroupService;
-import com.ylink.cim.admin.service.PrivilegeService;
 import com.ylink.cim.admin.service.RoleInfoService;
 import com.ylink.cim.admin.service.SysDictService;
 import com.ylink.cim.common.type.SysDictType;

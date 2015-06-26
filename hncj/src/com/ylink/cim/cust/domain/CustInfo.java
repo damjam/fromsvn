@@ -54,6 +54,26 @@ public class CustInfo implements java.io.Serializable {
 
 	private String busiType;
 	private String areaCode;
+	private String confirmPwd;
+	private String oriMobile;
+	
+	
+	
+	public String getOriMobile() {
+		return oriMobile;
+	}
+
+	public void setOriMobile(String oriMobile) {
+		this.oriMobile = oriMobile;
+	}
+
+	public String getConfirmPwd() {
+		return confirmPwd;
+	}
+
+	public void setConfirmPwd(String confirmPwd) {
+		this.confirmPwd = confirmPwd;
+	}
 
 	public String getActiveState() {
 		return activeState;
