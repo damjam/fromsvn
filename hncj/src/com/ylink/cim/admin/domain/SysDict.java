@@ -2,7 +2,7 @@ package com.ylink.cim.admin.domain;
 
 public class SysDict {
 
-	private SysDictId id;
+	private SysDictId id = new SysDictId();
 
 	private String dictName;
 
