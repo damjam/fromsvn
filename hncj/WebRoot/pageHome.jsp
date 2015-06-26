@@ -51,7 +51,7 @@
 
 	<body>
 		<div class="location">
-			您当前所在位置：<span class="redlink"><a href="javascript: void(0);">首页</a>
+			您当前所在位置：<span class="redlink"><a href="javascript: void(0);">首页</a></span>
 		</div>
 		
 		<!-- 登录成功提示区 -->
@@ -69,9 +69,9 @@
 									系统登录提示
 								</p>
 								<p style=" text-indent:2em; line-height:20px;">
-									尊敬的用户，您已经成功登录${comInfo.sp}，请通过左侧导航菜单进行相应功能操作！
+									尊敬的用户，您已经成功登录，请通过左侧导航菜单进行相应功能操作！
 									如果您在使用过程中有疑问，请拨打
-									<span class="redfont">技术支持电话：18520827190<strong></strong>
+									<span class="redfont">24小时客服热线：<strong></strong>
 									</span>
 								</p>
 							</td>
@@ -88,7 +88,7 @@
 				<div style="padding: 15px 15px 25px 15px; overflow: hidden;">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td width="52" align="center" valign="top">
+							<td width="52" align="center" valign="top" >
 								<img src="images/icon14.gif" width="37" height="41" />
 							</td>
 							<td>
@@ -105,7 +105,7 @@
 					<table class="data_grid myclass" width="100%" border="0" cellspacing="0"
 						cellpadding="0" style="border-collapse:collapse; padding-left: 20px;">
 						<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-							<logic:iterate id="element" name="list" indexId="ind">
+							<c:forEach items="list" var="element">
 								<tr align="center">
 									<td width="150">
 										${element.subject}
@@ -117,7 +117,7 @@
 										<a href="javascript:void(0)" onclick="hasRead(this, ${element.id})">标记为已读</a>
 									</td>
 								</tr>
-							</logic:iterate>
+							</c:forEach>
 						</f:showDataGrid>
 					</table>
 				</div>
@@ -157,7 +157,7 @@
 								<strong>步骤二</strong>：
 								<br />
 								<br />
-								在打开的窗口中输入查询条件，点击“查询”按钮进行查询。
+								在打开的窗口中点击“浏览”按钮xxxx。
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
@@ -166,7 +166,7 @@
 								<strong>步骤三</strong>：
 								<br />
 								<br />
-								在编辑页面输入要新增/修改的内容，点击“保存”按钮。
+								
 							</td>
 							<td>
 								<img src="images/arrow.gif" width="51" height="124" />
