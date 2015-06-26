@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
+
 <%@ include file="/pages/common/taglibs.jsp" %>
+
+
 <html lang="zh-cn">
 <head>
 	
@@ -13,16 +16,10 @@
 		<f:js src="/js/paginater.js"/>
 		<f:js src="/js/common.js"/>
 		<f:css href="/css/page.css"/>
-
-
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 		
 		 function detailUserLog(userLogId){
-			 var url = "/userLog.do?action=queryUserLogContent&userLogId="+userLogId;
+			 var url = "/userLog.do?action=queryUserLogContent&id="+userLogId;
 				gotoUrl(url);
 		 }
 		</script>
@@ -31,7 +28,7 @@
 <body>
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 	<!-- 查询功能区 -->
-	<html:form styleId="query" action="userLog.do?action=queryUserLog" method="post" >
+	<form id="query" action="userLog.do?action=queryUserLog" method="post" >
 		<div class="userbox">
 		<div>
 		<b class="b1"></b>
@@ -39,7 +36,7 @@
 		<b class="b3"></b>
 		<b class="b4"></b>
 		<div class="contentb">
-		<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
+		<table class="form_grid" style="width: 100%">
 		  <caption>用户日志查询</caption>
 		  <tr>
 		    <td class="formlabel">用户编号</td>
@@ -48,10 +45,8 @@
 		    <td><input name="limitId" type="text" id="limitId" value ="${param.limitId}" /></td>
 		    <td class="formlabel">日志类型</td>
 		    <td>
-				<html:select property="logType">
-					<html:option value="">---请选择---</html:option>
-					<html:options collection="userLogTypes" labelProperty="name" property="value"/>
-				</html:select>
+				<s:select name="logType" list="#request.userLogTypes" headerKey="" headerValue="---请选择---" listKey="value" listValue="name">
+				</s:select>
 			</td>
 		  </tr>
 		   <tr>
@@ -69,44 +64,44 @@
 		<b class="b1"></b>	
 		</div>
 		</div>
-	</html:form>
+	</form>
 		<!-- 数据列表区 -->
 		<div class="tablebox">
-			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table class='data_grid' style="width: 100%">
 				<thead>
 				  <tr align="center">
-				    <th class="titlebg" width="10%">用户编号</th>
-				    <th class="titlebg" width="10%">用户姓名</th>
-				    <th class="titlebg" width="10%">模块编号</th>
-				    <th class="titlebg" width="10%">模块名称</th>
-				    <th class="titlebg" width="10%">日志类型</th>
-				    <th class="titlebg" width="15%">创建时间</th>
-				    <th class="titlebg" width="30%">内容</th>
-				    <th class="titlebg" width="10%">操作</th> 
+				    <th class="titlebg">用户编号</th>
+				    <th class="titlebg">用户姓名</th>
+				    <th class="titlebg">模块编号</th>
+				    <th class="titlebg">模块名称</th>
+				    <th class="titlebg">日志类型</th>
+				    <th class="titlebg">创建时间</th>
+				    <th class="titlebg">内容</th>
+				    <th class="titlebg">操作</th> 
 				  </tr>
 				 </thead>
 				 <tbody>
 			  	<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-				<logic:iterate id="userLog" name="list">
+			  	<c:forEach var="element" items="${list}">
 				  <tr align="center">
-				    <td>${userLog.userId}</td>
-				    <td>${userLog.userName}</td>
-				    <td>${userLog.limitId}</td>
-				    <td>${userLog.limitName}</td>
-				    <td><f:type className="UserLogType" value="${userLog.logType}"/></td>
+				    <td>${element.userId}</td>
+				    <td>${element.userName}</td>
+				    <td>${element.limitId}</td>
+				    <td>${element.limitName}</td>
+				    <td><f:type className="UserLogType" value="${element.logType}"/></td>
 				    <td>
-						<fmt:formatDate value="${userLog.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>   
+						<fmt:formatDate value="${element.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>   
 					</td>
-					 <td align="left" title="${userLog.content}">
-					 	${userLog.contentAbbr}
+					 <td align="left" title="${element.content}">
+					 	${element.contentAbbr}
 					 </td>
 					 <td>
 						 <span class="redlink">
-						 	<a href="#" onclick='detailUserLog(${userLog.id})'>明细</a>
+						 	<a href="#" onclick='detailUserLog(${element.id})'>明细</a>
 						 </span>
 					 </td>
 				  </tr>
-				 </logic:iterate>
+				  </c:forEach>
 				 </f:showDataGrid>
 				</tbody>
 			</table>
