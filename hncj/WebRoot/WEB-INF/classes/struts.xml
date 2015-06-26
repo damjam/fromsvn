@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Include struts defaults (from struts JAR). -->
+	<include file="struts-default.xml" />
+	<constant name="struts.devMode" value="false"/>
+	<constant name="struts.action.extension" value="do"/>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.ui.templateDir" value="template" />
+	<constant name="struts.ui.templateSuffix" value="ftl" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.custom.i18n.resources" value="jwh" />
+	<constant name="struts.multipart.maxSize" value="52428800" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory.spring.autoWire" value="name" />
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<!-- Configuration for the default package. -->
+	<package name="default" extends="struts-default">
+		<!-- 
+		<interceptors> 
+           <interceptor name="flinkException" class="flink.web.intercept.FlinkExceptionIntercept"/>
+           <interceptor-stack name="flinkDefault"> 
+              <interceptor-ref name="defaultStack" /> 
+              <interceptor-ref name="flinkException" /> 
+           </interceptor-stack> 
+		</interceptors>
+		<default-interceptor-ref name="flinkDefault" /> 
+		 -->
+		<global-results>
+			<result name="failure">/error.jsp</result>
+			<result name="bizException">/error.jsp</result>
+			<result name="exception">/error.jsp</result>
+			<result name="nullPointerException">/error.jsp</result>
+			<result name="login">/index.jsp</result>
+			<result name="overtime">/pages/common/overtime</result>
+			<result name="invalid">/pages/common/invalid.jsp</result>
+			<result name="success">/success.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="invalid.token">/common/resubmit.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="bizException" exception="flink.etc.BizException"/>
+			<exception-mapping result="nullPointerException" exception="java.lang.NullPointer"/>
+			<exception-mapping result="exception" exception="java.lang.Exception"/>
+		</global-exception-mappings>
+		
+		<action name="login" class="loginAction">
+			<result name="changePwd">/pages/admin/changePassword.jsp</result>
+			<result name="index">/index.jsp</result>
+			<result name="toLoginPage">/index_old.jsp</result>
+			<result name="toMainPage">/main.jsp</result>
+			<result name="topbutton">/pages/layout/topbutton.jsp</result>
+		</action>
+		
+	</package>
+	
+	<include file="struts/struts-admin.xml" />
+	<include file="struts/struts-manage.xml" />
+</struts>

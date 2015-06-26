@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="true"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<!-- 登录后资源 -->
+	<bean id="LoginedResource" class="com.ylink.cim.admin.view.LoginedResource">
+		<property name="reses">
+			<list>
+				<value>/routeTemplate.do?action=queryPopUpTradeRouteTemplate</value>
+				<value>/privilege.do?action=queryPrivilege</value>
+				<value>/branchAction.do?action=queryPopUpBranchInfo</value>
+				<value>/merchantInfo.do?action=queryPopUpMerchantInfo</value>
+				<value>/parkingInfo.do?action=queryPopUpParkingInfo</value>
+				<value>/deptInfoAction.do?action=queryPopUpDepartmentInfo</value>
+				<value>/roleInfoAction.do?action=queryPopUpRoleInfo</value>
+				<value>/userInfoAction.do?action=queryPopUpUserInfo</value>
+				<value>/roleInfoAction.do?action=toMenuBind</value>
+				<value>/roleInfoAction.do?action=menuBind</value>
+				<value>/templateConfig.do?action=queryPopUpTemplateConfig</value>
+				<value>/businessType.do?action=queryPopUpBusinessType</value>
+				<value>/businessClass.do?action=queryPopUpBusinessClass</value>
+				<value>/timerCommand.do?action=queryPopUpTimerCommand</value>
+				<value>/pages/popUp/popUpBankAddress.jsp</value>
+				<value>/bankAddress.do?action=queryPopUpBankAddress</value>
+				<value>/pages/popUp/popUpAddressInfo.jsp</value>
+				<value>/addressInfo.do?action=queryPopUpAddressInfo</value>
+				<value>/channelConfigManage.do?action=queryPopUpChannelConfig</value>
+				<value>/pages/popUp/popUpChnlAbst.jsp</value>
+				<value>/businessType.do?action=queryBusiNoByServiceType</value>
+				<value>/channelAccountManage.do?action=queryPopUpChannelAccount</value>
+				<value>/businessType.do?action=queryBusiNoByServiceType</value>
+				<value>/pages/popUp/popUpChnlAbst.jsp</value>
+				<value>/bankAddress.do?action=queryBankAddr</value>
+				<value>/bankInfo.do?action=queryPopUpBankNo</value>
+				<value>/bankTypeInfo.do?action=queryPopUpBankTypeInfo</value>
+				<value>/electronBankManage.do?action=queryPopUpElectNo</value>
+				<value>/main.jsp</value>
+				<value>/error.jsp</value>
+				<value>/success.jsp</value>
+				<value>/pageHome.jsp</value>
+				<value>/moduleIndex.jsp</value>
+				<value>/login.do?action=loadUserPrivilegeTopButton</value>
+				<value>/pages/user/doubleCheck.jsp</value>
+				<value>/userInfoAction.do?action=doubleCheck</value>
+				<value>/noticeMsgAction.do?action=showNotice</value>
+				<value>/noticeMsgAction.do?action=hasRead</value>
+				<value>/pushMngAction.do?action=getBusiType</value>
+				<value>/noticeMsgAction.do?action=list</value>
+				<value>/waterRecord.do?action=getPreRecord</value>
+				<value>/parkingBill.do?action=getOwnerInfo</value>
+			</list>
+		</property>
+	</bean>
+</beans>
