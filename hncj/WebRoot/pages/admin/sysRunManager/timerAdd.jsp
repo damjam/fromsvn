@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 <%@ include file="/pages/common/taglibs.jsp" %>
+
 <html lang="zh-cn">  
 <head>
          <%@ include file="/pages/common/meta.jsp" %>

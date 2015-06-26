@@ -2,9 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 <%@ include file="/pages/common/taglibs.jsp" %>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html lang="zh-cn">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
