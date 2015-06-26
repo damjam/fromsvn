@@ -36,6 +36,16 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	protected HttpServletResponse response;
 	protected Map<String, Object> session;
 	protected String action;
+	private String uri;
+	
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
 	/**
 	 * ¥¶¿Ì“Ï≥£, for override.
 	 * 
@@ -70,6 +80,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	}*/
 	public String execute() {
 		try {
+			uri = request.getRequestURI();
 			super.execute();
 			successFlag = executeMethod(getAction()); 
 			return successFlag;
