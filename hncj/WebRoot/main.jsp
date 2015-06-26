@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%response.setHeader("Cache-Control", "no-cache");%>
-<%@ include file="/pages/common/taglibs.jsp" %>
-<html lang="zh-cn"> 
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-
+		<%@ include file="/pages/common/taglibs.jsp" %>
 		<title>${comInfo.sp}</title>
 		<f:css href="/css/screen.css" />
 		<f:css href="/css/menutree.css" />
@@ -139,11 +139,11 @@ $().ready(function(){
 					
 					<!-- 加载快捷菜单 -->
 					<div class="top_button" id="topbutton">
-						<logic:notEmpty name="quickMenus">
-							<logic:iterate id="quick" name="quickMenus">
-								<html:link page="${quick.entry}" onfocus="this.blur()" target="main_area">${quick.name}</html:link>
-							</logic:iterate>
-						</logic:notEmpty>
+						<c:if test="${not empty quickMenus}">
+							<c:forEach var="quick" items="${quickMenus}">
+								<a href="${CONTEXT_PATH}${quick.entry}" target="main_area" onfocus="this.blur();">${quick.name}</a>
+							</c:forEach>
+						</c:if>
 					</div>
 				</div>
 				
@@ -159,34 +159,34 @@ $().ready(function(){
 
 		<!--左侧菜单区-->
 		<div class="side" id="menu" style="overflow-x:hidden; padding-top:4px;padding-bottom:20px;">
-				<logic:iterate id="menu1" name="USER_MENU" property="children"><!-- 一级子菜单 -->
-						<h1 onclick="javascript:ShowMenu(this,'${menu1.code}',1)"> + ${menu1.name}</h1>
+			
+					<s:iterator id="menu1" value="userMenu.children">
+					<h1 onclick="javascript:ShowMenu(this,'${menu1.code}',1)"> + ${menu1.name}</h1>
 						<span id="${menu1.code}" class="no">
-							<logic:iterate id="menu2" name="menu1" property="children">	<!-- 二级子菜单 -->
-								<!-- 带子菜单 -->	
-								<logic:empty name="menu2" property="entry">
+							<s:iterator id="menu2" value="children">
+								<s:if test='#menu2.entry == null || "".equals(#menu2.entry)'>
 									<h2 onclick="javascript:ShowMenu(this,'${menu2.code}',2)"> + ${menu2.name}</h2>
 									<ul id="${menu2.code}" class="no">
-										<logic:iterate id="menu3" name="menu2" property="children">	<!-- 三级子菜单 -->
-											<html:link page="${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)"><li>${menu3.name}</li></html:link>
-										</logic:iterate>
+										<s:iterator id="menu3" value="children">
+											<a href="${CONTEXT_PATH}${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)"><li>${menu3.name}</li></a>
+										</s:iterator>
 									</ul>
-								</logic:empty>
-								<!-- 不带子菜单:三级菜单填写为自己 -->
-								<logic:notEmpty name="menu2" property="entry">
-									<h2>&nbsp;&nbsp;&nbsp;<html:link page="${menu2.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu2.name}</html:link>
+								</s:if>
+								<s:else>
+									<h2>&nbsp;&nbsp;&nbsp;
+										 <a href="${CONTEXT_PATH}${menu2.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu2.name}</a>
 									</h2>
-								</logic:notEmpty>
-							</logic:iterate>
+								</s:else>
+							</s:iterator>
 						</span>
-				</logic:iterate>
+				</s:iterator>
 				<div style="overflow-x:hidden; padding-top:1px;"></div>
 		</div>
 
 		<!--显示隐藏按钮-->
 		<div class="main_bt">
 			<input type="image" id="yc" onclick="menu_xsyc()" src="images/yc_icon.gif" onfocus="this.blur()" title="点击显示/隐藏左侧菜单"
-				width="7" height="80" border="0"/>
+				 style="width: 7;height: 80;border: 0"/>
 		</div>
 
 		<!--载入内容区-->
