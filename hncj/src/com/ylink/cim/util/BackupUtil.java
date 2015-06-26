@@ -26,11 +26,12 @@ public class BackupUtil {
 			while ((line = input1.readLine()) != null) {
 				System.out.println("错误信息11" + line + "~~~~~~~~~~");
 			}
-			//String cmd = "C:/Program Files/MySQL/MySQL Server 5.0/bin/mysqldump.exe -ucims -pcims cims> "+backDir+"\\cims"+today+".sql";
-			String cmd = "mysqldump -h localhost -ucims -pcims cims> "+backDir+"\\cims"+today+".sql"; // 一定要加
+			// String cmd =
+			// "C:/Program Files/MySQL/MySQL Server 5.0/bin/mysqldump.exe -ucims -pcims cims> "+backDir+"\\cims"+today+".sql";
+			String cmd = "mysqldump -h localhost -ucims -pcims cims> " + backDir + "\\cims" + today + ".sql"; // 一定要加
 			// -h
 			// localhost(或是服务器IP地址)
-			Process process = rt.exec("cmd /c "+cmd);
+			Process process = rt.exec("cmd /c " + cmd);
 			InputStreamReader isr = new InputStreamReader(process.getErrorStream());
 			LineNumberReader input = new LineNumberReader(isr);
 			while ((line = input.readLine()) != null) {
@@ -39,15 +40,16 @@ public class BackupUtil {
 			System.out.println("备份成功!");
 			// 删除以往文件
 			String yesterday = DateUtil.formatDate("yyyyMMdd", DateUtil.addDays(DateUtil.getCurrent(), -1));
-			
-			File file = new File("d:\\"+backDir+"\\cims"+yesterday+".sql");
+
+			File file = new File("d:\\" + backDir + "\\cims" + yesterday + ".sql");
 			file.deleteOnExit();
 			process.destroy();
 		} catch (IOException e) {
 			System.out.println("备份失败!");
 			e.printStackTrace();
-		} 
+		}
 	}
+
 	public static void main(String[] args) {
 		backup();
 	}

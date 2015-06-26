@@ -10,17 +10,14 @@ import flink.util.SpringContext;
 public class SystemContextServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	public void init() throws ServletException {
 		super.init();
-		
+
 		SpringContext.getInstance().initContext(getServletContext());
 		getServletContext().setAttribute("comInfo", SpringContext.getService("comInfo"));
-		
+
 		ParaManager.init();
-		
+
 	}
 
-
-	
 }

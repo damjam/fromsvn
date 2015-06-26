@@ -198,8 +198,7 @@ public class WaterRecordAction extends BaseAction implements ModelDriven<WaterRe
 		}
 		return null;
 	}
-	public String list(
-			) throws Exception {
+	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
 		
 		map.put("startCreateDate", model.getStartCreateDate());
@@ -211,8 +210,7 @@ public class WaterRecordAction extends BaseAction implements ModelDriven<WaterRe
 		//return forward("/pages/manage/meter/water/waterRecordList.jsp");
 		return "list";
 	}
-	public String toAdd(
-			) throws Exception {
+	public String toAdd() throws Exception {
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 		String preRecordDate = "";
 		String curRecordDate = "";

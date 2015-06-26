@@ -37,8 +37,8 @@ public class BillTrackDaoImpl extends BaseDaoHibernateImpl implements BillTrackD
 		}
 		helper.append("and houseSn = ?", MapUtils.getString(map, "houseSn"));
 		helper.append("and ownerCel = ?", MapUtils.getString(map, "ownerCel"));
+		helper.append("and ownerName = ?", MapUtils.getString(map, "ownerName"));
 		helper.append("and state = ?", MapUtils.getString(map, "state"));
-		helper.append("and ownerCel like ?", MapUtils.getString(map, "ownerCel"), MatchMode.START);
 		if (MapUtils.getInteger(map, "leftDays") != null && MapUtils.getInteger(map, "leftDays") > 0) {
 			helper.append("and leftDays <= ?", MapUtils.getInteger(map, "leftDays"));
 		}

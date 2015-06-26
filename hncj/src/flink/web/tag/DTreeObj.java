@@ -24,88 +24,88 @@ public class DTreeObj {
 	
 	private boolean open;
 
+	public String getNodeIcon() {
+		return nodeIcon;
+	}
+
 	public String getNodeId() {
 		return nodeId;
-	}
-
-	public void setNodeId(String nodeId) {
-		this.nodeId = nodeId;
-	}
-
-	public String getNodePid() {
-		return nodePid;
-	}
-
-	public void setNodePid(String nodePid) {
-		this.nodePid = nodePid;
 	}
 
 	public String getNodeLabel() {
 		return nodeLabel;
 	}
 
-	public void setNodeLabel(String nodeLabel) {
-		this.nodeLabel = nodeLabel;
-	}
-
-	public String getNodeValue() {
-		return nodeValue;
-	}
-
-	public void setNodeValue(String nodeValue) {
-		this.nodeValue = nodeValue;
-	}
-
 	public String getNodeName() {
 		return nodeName;
 	}
 
-	public void setNodeName(String nodeName) {
-		this.nodeName = nodeName;
-	}
-
-	public String getNodeUrl() {
-		return nodeUrl;
-	}
-
-	public void setNodeUrl(String nodeUrl) {
-		this.nodeUrl = nodeUrl;
+	public String getNodePid() {
+		return nodePid;
 	}
 
 	public String getNodeTarget() {
 		return nodeTarget;
 	}
 
-	public void setNodeTarget(String nodeTarget) {
-		this.nodeTarget = nodeTarget;
-	}
-
 	public String getNodeTitle() {
 		return nodeTitle;
 	}
 
-	public void setNodeTitle(String nodeTitle) {
-		this.nodeTitle = nodeTitle;
+	public String getNodeUrl() {
+		return nodeUrl;
 	}
 
-	public String getNodeIcon() {
-		return nodeIcon;
-	}
-
-	public void setNodeIcon(String nodeIcon) {
-		this.nodeIcon = nodeIcon;
+	public String getNodeValue() {
+		return nodeValue;
 	}
 
 	public boolean isNodeIconOpen() {
 		return nodeIconOpen;
 	}
 
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setNodeIcon(String nodeIcon) {
+		this.nodeIcon = nodeIcon;
+	}
+
 	public void setNodeIconOpen(boolean nodeIconOpen) {
 		this.nodeIconOpen = nodeIconOpen;
 	}
 
-	public boolean isOpen() {
-		return open;
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+
+	public void setNodeLabel(String nodeLabel) {
+		this.nodeLabel = nodeLabel;
+	}
+
+	public void setNodeName(String nodeName) {
+		this.nodeName = nodeName;
+	}
+
+	public void setNodePid(String nodePid) {
+		this.nodePid = nodePid;
+	}
+
+	public void setNodeTarget(String nodeTarget) {
+		this.nodeTarget = nodeTarget;
+	}
+
+	public void setNodeTitle(String nodeTitle) {
+		this.nodeTitle = nodeTitle;
+	}
+
+	public void setNodeUrl(String nodeUrl) {
+		this.nodeUrl = nodeUrl;
+	}
+
+	public void setNodeValue(String nodeValue) {
+		this.nodeValue = nodeValue;
 	}
 
 	public void setOpen(boolean open) {

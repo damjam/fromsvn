@@ -7,12 +7,12 @@ import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.CustState;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.PushType;
 import com.ylink.cim.cust.dao.CustInfoDao;
 import com.ylink.cim.cust.domain.CustInfo;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.etc.Symbol;
 import flink.hibernate.BaseDaoHibernateImpl;
@@ -21,6 +21,9 @@ import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("custInfoDao")
 public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao{
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#findByParams(java.util.Map)
+	 */
 	public List<CustInfo> findByParams(Map<String, Object> params) {
 		if (params == null) {
 			params = MapUtils.EMPTY_MAP;
@@ -37,6 +40,9 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		helper.append("and exists (select s.id from ServiceRecord s where s.custId = t.id and s.busiType = ?)", params.get("busiType"));
 		return super.getList(helper);
 	}
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#findByParamsForNotice(java.util.Map, flink.util.Pager)
+	 */
 	public List<CustInfo> findByParamsForNotice(Map<String, Object> params,
 			Pager pager) {
 		if (params == null) {
@@ -55,6 +61,9 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		return super.getPageData(helper, pager).getList();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#findCustPager(com.ylink.cim.cust.domain.CustInfo, com.ylink.cim.admin.domain.UserInfo, flink.util.Pager)
+	 */
 	public Paginater findCustPager(CustInfo custInfo, UserInfo userInfo, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from CustInfo t where 1=1");
@@ -70,6 +79,9 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 		return super.getPageData(helper, pager);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#findForPushPlan(java.util.Map, flink.util.Pager)
+	 */
 	public List<CustInfo> findForPushPlan(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from CustInfo t where 1=1");
@@ -98,6 +110,9 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#getCustInfoByUserId(java.lang.String)
+	 */
 	public CustInfo getCustInfoByUserId(String userId) {
 		return (CustInfo) getUniqueResult(CustInfo.class, "userId", userId);
 	}
@@ -105,6 +120,9 @@ public class CustInfoDaoImpl extends BaseDaoHibernateImpl implements CustInfoDao
 	protected Class<CustInfo> getModelClass() {
 		return CustInfo.class;
 	}
+	/* (non-Javadoc)
+	 * @see com.ylink.cim.cust.dao.impl.CustInfoDao#getUniqueCustInfo(java.lang.String, java.lang.Object)
+	 */
 	public CustInfo getUniqueCustInfo(String property, Object value) {
 		return (CustInfo) getUniqueResult(CustInfo.class, property, value);
 	}

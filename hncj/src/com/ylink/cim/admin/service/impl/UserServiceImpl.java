@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
 
 	/**
-	 * @see com.ylink.cim.user.service.UserService#updateUserInfo(java.util.Map)
+	 * @see com.ylink.cim.admin.service.UserService#updateUserInfo(java.util.Map)
 	 */
 	public void updateUserInfo(final Map<String, String> map,UserInfo operUser) throws BizException{
 		String userId = map.get("userId");

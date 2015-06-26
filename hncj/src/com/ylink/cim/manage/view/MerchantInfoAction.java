@@ -73,8 +73,7 @@ public class MerchantInfoAction extends BaseAction implements ModelDriven<Mercha
 	public MerchantInfo getModel() {
 		return model;
 	}
-	public String list(
-			) throws Exception {
+	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
 		map.put("branchNo", getSessionBranchNo(request));

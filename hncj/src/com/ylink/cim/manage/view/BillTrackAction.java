@@ -26,9 +26,11 @@ import flink.etc.BizException;
 import flink.util.LogUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack>{
+public class BillTrackAction extends BaseAction implements
+		ModelDriven<BillTrack> {
 	/**
 	 * 
 	 */
@@ -40,18 +42,18 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 
 	public String toAdd() throws Exception {
 		initSelect(request);
-		//return forward("/pages/manage/track/trackInfoAdd.jsp");
+		// return forward("/pages/manage/track/trackInfoAdd.jsp");
 		return "add";
 	}
 
 	public String doAdd() throws Exception {
 		try {
-			
+
 			BillTrack billTrack = new BillTrack();
 			BeanUtils.copyProperties(billTrack, model);
 			billTrackService.add(billTrack, getSessionUser(request));
 			setResult(true, "添加成功", request);
-			
+
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toAdd();
@@ -63,10 +65,9 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		return list();
 	}
 
-	public String list(
-			) throws Exception {
+	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		
+
 		map.put("houseSn", model.getHouseSn());
 		map.put("billId", model.getBillId());
 		map.put("ownerName", model.getOwnerName());
@@ -76,15 +77,15 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		map.put("branchNo", getSessionBranchNo(request));
 		map.put("billType", model.getBillType());
 		map.put("state", BillTrackState.VALID.getValue());
-		Paginater paginater = billTrackDao.findPaginater(map, getPager(request));
+		Paginater paginater = billTrackDao
+				.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		//return forward("/pages/manage/track/billTrackList.jsp");
+		// return forward("/pages/manage/track/billTrackList.jsp");
 		return "list";
 	}
 
-	public String sendNotice(
-			) throws Exception {
+	public String sendNotice() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billTrackService.sendNotice(id);
@@ -98,8 +99,8 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		}
 		return list();
 	}
-	public String delete(
-			) throws Exception {
+
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billTrackService.delete(id, getSessionUser(request));
@@ -113,13 +114,14 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		}
 		return list();
 	}
-	public String discard(
-			) throws Exception {
+
+	public String discard() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			billTrackService.discard(id, getSessionUser(request));
 			String msg = LogUtils.r("废弃账单到期提醒,记录id为{?}", id);
-			logUserOperate(request, UserLogType.DELETE.getValue(), StringUtils.abbreviate(msg, 100));
+			logUserOperate(request, UserLogType.DELETE.getValue(),
+					StringUtils.abbreviate(msg, 100));
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			e.printStackTrace();
@@ -130,6 +132,7 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		}
 		return list();
 	}
+
 	public void initSelect(HttpServletRequest request) throws Exception {
 		Map<String, String> buildingNos = new LinkedHashMap<String, String>();
 		Map<String, String> unitsNos = new LinkedHashMap<String, String>();
@@ -137,8 +140,10 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 		for (int i = 1; i < 4; i++) {
 			unitsNos.put(String.valueOf(i), String.valueOf(i));
 		}
-		Map<String, String> rent = ParaManager.getSysDict(SysDictType.RentType.getValue());
-		Map<String, String> economical = ParaManager.getSysDict(SysDictType.EconomicalType.getValue());
+		Map<String, String> rent = ParaManager.getSysDict(SysDictType.RentType
+				.getValue());
+		Map<String, String> economical = ParaManager
+				.getSysDict(SysDictType.EconomicalType.getValue());
 
 		buildingNos.putAll(economical);
 		buildingNos.putAll(rent);
@@ -156,5 +161,6 @@ public class BillTrackAction extends BaseAction implements ModelDriven<BillTrack
 	public BillTrack getModel() {
 		return model;
 	}
+
 	private BillTrack model = new BillTrack();
 }

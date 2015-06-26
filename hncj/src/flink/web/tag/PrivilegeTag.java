@@ -1,6 +1,7 @@
 package flink.web.tag;
 
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.struts.taglib.TagUtils;
 
 import com.ylink.cim.admin.domain.Privilege;
 
@@ -28,8 +27,23 @@ public class PrivilegeTag extends TagSupport {
 	private String pid;
 	private String style;
 
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
 	public int doEndTag() throws JspException {
-		TagUtils.getInstance().write(pageContext, "</span>");
+		try {
+			pageContext.getOut().write("</span>");  
+		} catch (IOException e) {
+		}
 		return EVAL_PAGE;
 	}
 
@@ -57,20 +71,10 @@ public class PrivilegeTag extends TagSupport {
 		String span = hasPrivilege ? 
 			"<span style=\"" + style + "\">" : 
 			"<span class=\"no-privilege\" style=\"display:none;" + style + "\">";
-		TagUtils.getInstance().write(pageContext, span);
-		
+		try {
+			pageContext.getOut().write(span);  
+		} catch (IOException e) {
+		}
 		return EVAL_BODY_INCLUDE;
-	}
-
-	public String getStyle() {
-		return style;
-	}
-
-	public void setPid(String pid) {
-		this.pid = pid;
-	}
-
-	public void setStyle(String style) {
-		this.style = style;
 	}
 }

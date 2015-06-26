@@ -18,9 +18,11 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class ParkingInfoAction extends BaseAction implements ModelDriven<ParkingInfo>{
+public class ParkingInfoAction extends BaseAction implements
+		ModelDriven<ParkingInfo> {
 	/**
 	 * 
 	 */
@@ -30,25 +32,23 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 	@Autowired
 	private ParkingInfoService parkingInfoService;
 
-	
 	public String toEdit() throws Exception {
 		String id = model.getId();
 		ParkingInfo parkingInfo = parkingInfoDao.findById(id);
 		BeanUtils.copyProperties(model, parkingInfo);
 		ParkingState.setInReq(request);
-		//return forward("/pages/manage/parking/parkingInfoEdit.jsp");
+		// return forward("/pages/manage/parking/parkingInfoEdit.jsp");
 		return "edit";
 	}
-	
+
 	public String toAdd() throws Exception {
 		ParkingState.setInReq(request);
-		//return forward("/pages/manage/parking/parkingInfoAdd.jsp");
+		// return forward("/pages/manage/parking/parkingInfoAdd.jsp");
 		return "add";
 	}
-	public String doAdd(
-			) throws Exception {
+
+	public String doAdd() throws Exception {
 		try {
-			
 			Map<String, Object> params = getParaMap();
 			params.put("sn", model.getSn());
 			params.put("branchNo", getSessionBranchNo(request));
@@ -57,7 +57,7 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 			BeanUtils.copyProperties(parkingInfo, model);
 			parkingInfoService.save(parkingInfo, getSessionUser(request));
 			clearForm();
-		}catch (BizException e) {
+		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toAdd();
 		} catch (Exception e) {
@@ -65,10 +65,10 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 			e.printStackTrace();
 			return toAdd();
 		}
-		
+
 		return list();
 	}
-	
+
 	private void clearForm() {
 		model.setOwnerName("");
 		model.setOwnerCel("");
@@ -77,10 +77,9 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 		model.setState("");
 	}
 
-	public String doEdit(
-			) throws Exception {
+	public String doEdit() throws Exception {
 		try {
-			
+
 			ParkingInfo parkingInfo = parkingInfoDao.findById(model.getCarSn());
 			String createUser = parkingInfo.getCreateUser();
 			Date createDate = parkingInfo.getCreateDate();
@@ -106,19 +105,18 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 	public String list() throws Exception {
 		ParkingState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		
+
 		map.put("carSn", model.getCarSn());
 		map.put("ownerName", model.getOwnerName());
 		map.put("ownerCel", model.getOwnerCel());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = parkingInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		//return forward("/pages/manage/parking/parkingInfoList.jsp");
+		// return forward("/pages/manage/parking/parkingInfoList.jsp");
 		return "list";
 	}
 
-	public String delete(
-			) throws Exception {
+	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
 			parkingInfoService.delete(id, getSessionUser(request));
@@ -138,18 +136,20 @@ public class ParkingInfoAction extends BaseAction implements ModelDriven<Parking
 			Map<String, Object> params = getParaMap();
 			params.put("branchNo", getSessionBranchNo(request));
 			params.put("avai", true);
-			Paginater paginater = this.parkingInfoDao.findPager(params, getPager(request));
+			Paginater paginater = this.parkingInfoDao.findPager(params,
+					getPager(request));
 			saveQueryResult(request, paginater);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//return forward("/pages/popUp/popUpParkingInfo.jsp");
-		return "info";
+
+		// return forward("/pages/popUp/popUpParkingInfo.jsp");
+		return "popUp";
 	}
 
 	public ParkingInfo getModel() {
 		return model;
 	}
+
 	private ParkingInfo model = new ParkingInfo();
 }

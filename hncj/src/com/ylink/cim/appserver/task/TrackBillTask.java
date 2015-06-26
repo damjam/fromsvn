@@ -14,7 +14,7 @@ import com.ylink.cim.busioper.service.BillTrackService;
 public class TrackBillTask extends BaseCmdTask {
 
 	@Autowired
-	private BillTrackService trackBillService;
+	private BillTrackService billTrackService;
 	@Autowired
 	private TimerDoDao timerDoDao;
 	@Autowired
@@ -22,7 +22,7 @@ public class TrackBillTask extends BaseCmdTask {
 	protected void doRun() {
 		String id = getCmdId();
 		try {
-			trackBillService.exeTimerDo(id);
+			billTrackService.exeTimerDo(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			TimerDo timerDo = timerDoDao.findById(id);

@@ -9,24 +9,28 @@ import java.util.Collection;
  */
 public interface IPrivilege {
 	/**
+	 * 获取所有的子节点
+	 * @return
+	 */
+	public Collection<IPrivilege> getAllChildren();
+	
+	/**
 	 * 权限编号.
 	 * @return
 	 */
 	String getCode();
-	
-	void setCode(String code);
-	
-	/**
-	 * 权限名称.
-	 * @return
-	 */
-	String getName();
 	
 	/**
 	 * 权限入口.
 	 * @return
 	 */
 	String getEntry();
+	
+	/**
+	 * 权限名称.
+	 * @return
+	 */
+	String getName();
 	
 	/**
 	 * 父级权限编号.
@@ -47,10 +51,6 @@ public interface IPrivilege {
 	void setChildren(Collection<IPrivilege> children);
 	
 	
-	/**
-	 * 获取所有的子节点
-	 * @return
-	 */
-	public Collection<IPrivilege> getAllChildren();
+	void setCode(String code);
 	
 }

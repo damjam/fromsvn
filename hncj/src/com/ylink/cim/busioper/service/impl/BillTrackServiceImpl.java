@@ -50,7 +50,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 			if (StringUtils.isEmpty(expireDate)) {
 				continue;
 			}
-			int leftDays = DateUtil.getDateDiffDays(now, DateUtil.getDateByYYYMMDD(expireDate));
+			int leftDays = DateUtil.getDateDiffDays(DateUtil.getDateByYYYMMDD(expireDate), now);
 			if (leftDays >= 0) {
 				track.setLeftDays(leftDays);
 				track.setOverDays(0);
@@ -71,10 +71,6 @@ public class BillTrackServiceImpl implements BillTrackService {
 			String ownerCel, String branchNo) throws BizException {
 		Date endDate = DateUtil.getDayEndByYYYMMDD(expireDate);
 		Date today = DateUtil.getCurrent();
-		int leftDays = DateUtil.getDateDiffDays(endDate, today);
-		if (leftDays <= 0) {
-			return;
-		}
 		BillTrack track = new BillTrack();
 		track.setBillType(billType);
 		String id = idFactoryService.generateId(Constants.BILL_TRACK_ID);
@@ -83,8 +79,14 @@ public class BillTrackServiceImpl implements BillTrackService {
 		track.setOwnerName(ownerName);
 		track.setOwnerCel(ownerCel);
 		track.setBillType(billType);
-		track.setLeftDays(leftDays);
-		track.setOverDays(0);
+		int leftDays = DateUtil.getDateDiffDays(endDate, today);
+		if (leftDays > 0) {
+			track.setLeftDays(leftDays);
+			track.setOverDays(0);
+		}else {
+			track.setLeftDays(0);
+			track.setOverDays(-leftDays);
+		}
 		track.setCreateDate(today);
 		track.setBillId(billId);
 		track.setExpireDate(expireDate);

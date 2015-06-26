@@ -2,7 +2,7 @@ package com.ylink.cim.user.service;
 
 import java.util.List;
 
-import com.ylink.cim.user.domain.UserInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 
 import flink.etc.BizException;
 import flink.util.IPrivilege;

@@ -1,5 +1,6 @@
 package flink.web.tag;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.struts.taglib.TagUtils;
 
 /**
  * 显示表格, 如果表格无数据, 则显示提示信息.
@@ -56,7 +56,10 @@ public class ShowDataGridTag extends TagSupport {
 	}
 
 	public int doEndTag() throws JspException {
-		TagUtils.getInstance().write(pageContext, "</div>");
+		try {
+			pageContext.getOut().write("</div>");
+		} catch (IOException e) {
+		}
 		return EVAL_PAGE;
 	}
 
@@ -98,7 +101,11 @@ public class ShowDataGridTag extends TagSupport {
 			divSb.append(msg);
 		}
 		
-		TagUtils.getInstance().write(pageContext, divSb.toString());
+		try {
+			pageContext.getOut().write(divSb.toString());
+		} catch (IOException e) {
+			
+		}
 		
 		return hasData ? EVAL_BODY_INCLUDE : SKIP_BODY;
 	}

@@ -35,7 +35,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 	public String toAdd() throws Exception {
 		initSelect(request);
 		//return forward("/pages/manage/house/houseInfoAdd.jsp");
-		return "";
+		return "add";
 	}
 
 	public String doAdd() throws Exception {

@@ -177,8 +177,7 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 		//return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
 		return "import";
 	}
-	public String getPreRecord(
-			) throws Exception {
+	public String getPreRecord() throws Exception {
 		try {
 			String houseSn = request.getParameter("houseSn");
 			ElecRecord elecRecord = elecRecordService.getPreRecord(houseSn);

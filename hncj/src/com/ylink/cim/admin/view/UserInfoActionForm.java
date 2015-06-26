@@ -1,14 +1,14 @@
-package com.ylink.cim.user.domain;
+package com.ylink.cim.admin.view;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo implements Serializable {
+import org.apache.struts.action.ActionForm;
+
+public class UserInfoActionForm extends ActionForm {
 
 	/**
 	 * 
 	 */
-	public static final String INIT_PWD = "111111";
 	private static final long serialVersionUID = 1L;
 
 	private String userId;
@@ -19,7 +19,11 @@ public class UserInfo implements Serializable {
 
 	private String loginId;
 
+	private String oldLoginPwd;
+
 	private String loginPwd;
+
+	private String confirmPwd;
 
 	private Date createTime;
 
@@ -27,52 +31,15 @@ public class UserInfo implements Serializable {
 
 	private Date updateTime;
 
-	private Integer pwdErrorTimes;
-	
-	private Date errorTime;
-	
 	private String branchNo;
-	private String branchName;
-	private String userTypeName;
 	
-	public String getBranchName() {
-		return branchName;
-	}
-
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
-
-	public String getUserTypeName() {
-		return userTypeName;
-	}
-
-	public void setUserTypeName(String userTypeName) {
-		this.userTypeName = userTypeName;
-	}
-
+	
 	public String getBranchNo() {
 		return branchNo;
 	}
 
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
-	}
-
-	public Date getErrorTime() {
-		return errorTime;
-	}
-
-	public void setErrorTime(Date errorTime) {
-		//this.errorTime = errorTime;
-	}
-
-	public Integer getPwdErrorTimes() {
-		return pwdErrorTimes;
-	}
-
-	public void setPwdErrorTimes(Integer pwdErrorTimes) {
-		this.pwdErrorTimes = pwdErrorTimes;
 	}
 
 	public String getUserId() {
@@ -138,4 +105,21 @@ public class UserInfo implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	public String getConfirmPwd() {
+		return confirmPwd;
+	}
+
+	public void setConfirmPwd(String confirmPwd) {
+		this.confirmPwd = confirmPwd;
+	}
+
+	public String getOldLoginPwd() {
+		return oldLoginPwd;
+	}
+
+	public void setOldLoginPwd(String oldLoginPwd) {
+		this.oldLoginPwd = oldLoginPwd;
+	}
+
 }

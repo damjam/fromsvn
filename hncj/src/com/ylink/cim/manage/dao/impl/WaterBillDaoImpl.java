@@ -62,7 +62,6 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		//helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
 		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
@@ -123,7 +122,6 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
 			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		}
@@ -137,14 +135,8 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 					WaterBill record2 = (WaterBill) o2;
 					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
 					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
-					if (!h1.getBuildingNo().equals(h2.getBuildingNo())) {
-						return Integer.parseInt(h1.getBuildingNo()) - Integer.parseInt(h2.getBuildingNo());
-					}
-					if (!h1.getUnitNo().equals(h2.getUnitNo())) {
-						return Integer.parseInt(h1.getUnitNo()) - Integer.parseInt(h2.getUnitNo());
-					}
-					if (!h1.getPosition().equals(h2.getPosition())) {
-						return Integer.parseInt(h1.getPosition()) - Integer.parseInt(h2.getPosition());
+					if (!h1.getOrderSn().equals(h2.getOrderSn())) {
+						return Integer.parseInt(h1.getOrderSn()) - Integer.parseInt(h2.getOrderSn());
 					}
 					return 0;
 				} catch (Exception e) {

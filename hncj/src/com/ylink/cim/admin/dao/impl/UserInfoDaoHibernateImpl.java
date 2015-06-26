@@ -1,4 +1,4 @@
-package com.ylink.cim.user.dao.impl;
+package com.ylink.cim.admin.dao.impl;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.util.List;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.dao.UserInfoDao;
 import com.ylink.cim.admin.domain.Privilege;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.type.UserType;
 import com.ylink.cim.common.util.ParaManager;
-import com.ylink.cim.user.dao.UserInfoDao;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.hibernate.BaseDaoHibernateImpl;
 import flink.hibernate.QueryHelper;

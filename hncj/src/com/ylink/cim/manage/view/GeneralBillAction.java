@@ -100,6 +100,6 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 		YesNoType.setInReq(request);
 		CheckinState.setInReq(request);
 		//return forward("/pages/manage/charge/general/generalBillAdd.jsp");
-		return "list";
+		return "add";
 	}
 }

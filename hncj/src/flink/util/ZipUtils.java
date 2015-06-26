@@ -16,41 +16,6 @@ import org.apache.commons.io.IOUtils;
  */
 public abstract class ZipUtils {
 	/**
-	 * zip 压缩字节数组.
-	 * 
-	 * @param data
-	 * @return
-	 */
-	public static byte[] zip(byte[] data) {
-		if (data == null) {
-			return null;
-		}
-		
-		ByteArrayOutputStream bos = null;
-		ZipOutputStream zip = null;
-
-		try {
-			bos = new ByteArrayOutputStream();
-			zip = new ZipOutputStream(bos);
-			
-			ZipEntry entry = new ZipEntry("zip");
-			entry.setSize(data.length);
-			zip.putNextEntry(entry);
-			zip.write(data);
-			zip.closeEntry();
-
-			return bos.toByteArray();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} finally {
-			IOUtils.closeQuietly(bos);
-			IOUtils.closeQuietly(zip);
-		}
-
-		return null;
-	}
-
-	/**
 	 * zip 解压字节数组.
 	 * 
 	 * @param data
@@ -87,6 +52,41 @@ public abstract class ZipUtils {
 			IOUtils.closeQuietly(zip);
 		}
 		
+		return null;
+	}
+
+	/**
+	 * zip 压缩字节数组.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static byte[] zip(byte[] data) {
+		if (data == null) {
+			return null;
+		}
+		
+		ByteArrayOutputStream bos = null;
+		ZipOutputStream zip = null;
+
+		try {
+			bos = new ByteArrayOutputStream();
+			zip = new ZipOutputStream(bos);
+			
+			ZipEntry entry = new ZipEntry("zip");
+			entry.setSize(data.length);
+			zip.putNextEntry(entry);
+			zip.write(data);
+			zip.closeEntry();
+
+			return bos.toByteArray();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(bos);
+			IOUtils.closeQuietly(zip);
+		}
+
 		return null;
 	}
 }

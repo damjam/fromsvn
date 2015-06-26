@@ -134,7 +134,7 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 		}
 		model.setItemIds(itemIds);
 		// return forward("/pages/admin/chargeParam/chargeParamItemAdd.jsp");
-		return "add";
+		return "item_add";
 	}
 
 	public String doAddItem() throws Exception {

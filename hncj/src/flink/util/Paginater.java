@@ -25,11 +25,11 @@ public class Paginater implements Serializable {
 	private long maxRowCount;
 
 	private int pageSize = PAGE_SIZE;
-	
+
 	private int index;
 
 	private Collection data;
-	
+
 	public Paginater(long maxRowCount, long currentPage) {
 		this.maxRowCount = maxRowCount;
 		this.countMaxPage();
@@ -39,7 +39,7 @@ public class Paginater implements Serializable {
 	private static Paginater getEmptyPaginater() {
 		Paginater p = new Paginater(0, 0);
 		p.setData(Collections.EMPTY_LIST);
-		
+
 		return p;
 	}
 
@@ -54,25 +54,25 @@ public class Paginater implements Serializable {
 		this.maxRowCount = maxRowCount;
 		this.countMaxPage();
 		this.setCurrentPage(currentPage);
-		
+
 		this.data = new ArrayList();
 		this.data.add(dataObj);
 	}
-	
+
 	public Paginater(long maxRowCount, long currentPage, int pageSize) {
 		this.maxRowCount = maxRowCount;
 		this.pageSize = pageSize;
 		this.countMaxPage();
 		this.setCurrentPage(currentPage);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Paginater(int pageSize, Object dataObj) {
 		this.maxRowCount = 1;
 		this.pageSize = pageSize;
 		this.countMaxPage();
 		this.setCurrentPage(1);
-		
+
 		this.data = new ArrayList();
 		this.data.add(dataObj);
 	}
@@ -87,14 +87,13 @@ public class Paginater implements Serializable {
 	public long getIndex() {
 		return ++index + this.getOffsetIndex();
 	}
+
 	public void setCurrentPage(long currentPage) {
 		if (currentPage < 1) {
 			this.currentPage = 1;
-		} 
-		else if (currentPage > this.maxPage) {
+		} else if (currentPage > this.maxPage) {
 			this.currentPage = this.maxPage;
-		} 
-		else {
+		} else {
 			this.currentPage = currentPage;
 		}
 
@@ -106,8 +105,7 @@ public class Paginater implements Serializable {
 	public void setCurrentPage(String currentPage) {
 		try {
 			setCurrentPage(Integer.parseInt(currentPage));
-		} 
-		catch (NumberFormatException ex) {
+		} catch (NumberFormatException ex) {
 			setCurrentPage(1);
 		}
 	}
@@ -163,8 +161,7 @@ public class Paginater implements Serializable {
 	private void countMaxPage() {
 		if (this.maxRowCount % this.pageSize == 0) {
 			this.maxPage = this.maxRowCount / this.pageSize;
-		} 
-		else {
+		} else {
 			this.maxPage = this.maxRowCount / this.pageSize + 1;
 		}
 	}
@@ -172,7 +169,7 @@ public class Paginater implements Serializable {
 	public List getBatchPages(int batchSize) {
 		return new BatchPage(this, batchSize).getBatchPages();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List getCurrentPageData(List list) {
 		if (list.size() < 1) {
@@ -187,7 +184,7 @@ public class Paginater implements Serializable {
 				break;
 			}
 
-			result.add(list.get((int)i - 1));
+			result.add(list.get((int) i - 1));
 		}
 
 		return result;
@@ -204,7 +201,7 @@ public class Paginater implements Serializable {
 	public List getList() {
 		return (List) data;
 	}
-	
+
 	public Set getSet() {
 		return (Set) data;
 	}
@@ -213,7 +210,7 @@ public class Paginater implements Serializable {
 class BatchPage {
 	private Paginater p;
 	private int batchSize;
-	
+
 	BatchPage(Paginater p, int batchSize) {
 		this.p = p;
 		this.batchSize = batchSize;
@@ -221,11 +218,11 @@ class BatchPage {
 
 	public List getBatchPages() {
 		List list = new ArrayList();
-		
+
 		appendPriorPages(list);
 		appendCurrentPage(list);
 		appendNextPages(list);
-		
+
 		return list;
 	}
 
@@ -238,11 +235,11 @@ class BatchPage {
 		if (p.getCurrentPage() == p.getMaxPage()) {
 			return;
 		}
-		
+
 		int nextPageNum = this.batchSize - list.size();
 		long remainPageNum = p.getMaxPage() - p.getCurrentPage();
 		long appendPageNum = nextPageNum < remainPageNum ? nextPageNum : remainPageNum;
-		
+
 		for (long i = 0; i < appendPageNum; i++) {
 			addOnePage(list, p.getCurrentPage() + (i + 1));
 		}
@@ -266,20 +263,19 @@ class BatchPage {
 		if (p.getCurrentPage() == 1) {
 			return;
 		}
-		
+
 		long appendPageNum = 0;
 		long currentPage = p.getCurrentPage();
 		long remainPageNum = p.getMaxPage() - p.getCurrentPage();
-		
+
 		if (remainPageNum < this.batchSize / 2) {
 			appendPageNum = this.batchSize - remainPageNum - 1;
 			appendPageNum = appendPageNum < currentPage ? appendPageNum : (currentPage - 1);
-		}
-		else {
+		} else {
 			long priorPageNum = this.batchSize / 2;
 			appendPageNum = priorPageNum < currentPage ? priorPageNum : (currentPage - 1);
 		}
-		
+
 		for (long i = 0; i < appendPageNum; i++) {
 			addOnePage(list, currentPage - appendPageNum + i);
 		}

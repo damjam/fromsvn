@@ -7,10 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.user.dao.UserInfoDao;
-import com.ylink.cim.user.dao.impl.UserInfoDaoHibernateImpl;
-import com.ylink.cim.user.domain.UserInfo;
-import com.ylink.cim.user.service.UserService;
+import com.ylink.cim.admin.dao.UserInfoDao;
+import com.ylink.cim.admin.dao.impl.UserInfoDaoHibernateImpl;
+import com.ylink.cim.admin.domain.UserInfo;
+import com.ylink.cim.admin.service.UserService;
 
 import flink.MD5Util;
 import flink.etc.BizException;
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
 
 	/**
-	 * @see com.ylink.cim.user.service.UserService#updateUserInfo(java.util.Map)
+	 * @see com.ylink.cim.admin.service.UserService#updateUserInfo(java.util.Map)
 	 */
 	public void updateUserInfo(final Map<String, String> map,UserInfo operUser) throws BizException{
 		String userId = map.get("userId");

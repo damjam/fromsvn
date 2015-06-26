@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.RoleInfoDao;
+import com.ylink.cim.admin.dao.UserInfoDao;
 import com.ylink.cim.admin.dao.UserRoleDao;
 import com.ylink.cim.admin.domain.RoleInfo;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.domain.UserRole;
 import com.ylink.cim.admin.domain.UserRoleId;
 import com.ylink.cim.common.msg.handle.MsgA0010;
@@ -34,8 +36,6 @@ import com.ylink.cim.cust.service.CustInfoService;
 import com.ylink.cim.invest.dao.SignContractDao;
 import com.ylink.cim.invest.domain.SignContract;
 import com.ylink.cim.invest.service.SignContractService;
-import com.ylink.cim.user.dao.UserInfoDao;
-import com.ylink.cim.user.domain.UserInfo;
 
 import flink.etc.BizException;
 import flink.util.DateUtil;

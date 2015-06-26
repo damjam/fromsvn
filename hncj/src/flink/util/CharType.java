@@ -9,7 +9,7 @@ public class CharType {
 	/**
 	 * Êý×Ö.
 	 */
-	public static final int N = 0;	
+	public static final int N = 0;
 	/**
 	 * ×ÖÄ¸.
 	 */
@@ -18,7 +18,7 @@ public class CharType {
 	 * ±êµã·ûºÅ.
 	 */
 	public static final int I = 2;
-	
+
 	/**
 	 * Êý×Ö, ×ÖÄ¸.
 	 */
@@ -32,12 +32,12 @@ public class CharType {
 	 */
 	public static final int L_I = 5;
 	/**
-	 * Êý×Ö, ×ÖÄ¸, ±êµã·ûºÅ.	
+	 * Êý×Ö, ×ÖÄ¸, ±êµã·ûºÅ.
 	 */
 	public static final int N_L_I = 6;
-	
+
 	/**
-	 * Êý×Ö, ×ÖÄ¸, ±êµã·ûºÅ, ºº×Ö.	
+	 * Êý×Ö, ×ÖÄ¸, ±êµã·ûºÅ, ºº×Ö.
 	 */
 	public static final int ALL = 99;
 }

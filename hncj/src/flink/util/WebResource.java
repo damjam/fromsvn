@@ -23,26 +23,20 @@ public abstract class WebResource {
 	public static final String PARAM_NAME = "action";
 
 	/**
-	 * 获取url地址.
-	 *
+	 * 由请求参数获取link.
+	 * 
+	 * @param request
 	 * @return
 	 */
-	public abstract String getUrl();
+	public static String getLink(HttpServletRequest request) {
+		String url = request.getRequestURI().substring(request.getContextPath().length());
+		String param = request.getParameter(WebResource.PARAM_NAME);
 
-	/**
-	 * 获取参数值.
-	 *
-	 * @return
-	 */
-	public abstract String getParamValue();
+		if (StringUtils.isNotEmpty(param)) {
+			url = getLink(url, param);
+		}
 
-	/**
-	 * 将url和param拼接.
-	 *
-	 * @return
-	 */
-	public String getLink() {
-		return getLink(getUrl(), getParamValue());
+		return url;
 	}
 
 	/**
@@ -86,20 +80,26 @@ public abstract class WebResource {
 	}
 
 	/**
-	 * 由请求参数获取link.
-	 * 
-	 * @param request
+	 * 将url和param拼接.
+	 *
 	 * @return
 	 */
-	public static String getLink(HttpServletRequest request) {
-		String url = request.getRequestURI().substring(request.getContextPath().length());
-		String param = request.getParameter(WebResource.PARAM_NAME);
-
-		if (StringUtils.isNotEmpty(param)) {
-			url = getLink(url, param);
-		}
-
-		return url;
+	public String getLink() {
+		return getLink(getUrl(), getParamValue());
 	}
+
+	/**
+	 * 获取参数值.
+	 *
+	 * @return
+	 */
+	public abstract String getParamValue();
+
+	/**
+	 * 获取url地址.
+	 *
+	 * @return
+	 */
+	public abstract String getUrl();
 
 }

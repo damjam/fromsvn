@@ -50,7 +50,7 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 			BeanUtils.copyProperties(model, contact);
 		}
 		// return forward("/pages/manage/contact/contact.jsp");
-		return "contact";
+		return "edit";
 	}
 
 	public String doEdit() throws Exception {

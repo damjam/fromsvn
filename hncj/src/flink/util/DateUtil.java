@@ -198,20 +198,13 @@ public abstract class DateUtil {
 	 */
 	public static int getDateDiffDays(Date curDate, Date oriDate) {
 		final int MS_PER_DAY = 1000 * 60 * 60 * 24;
-		Date startDate = new Date();
-		Date endDate = new Date();
-
-		try {
-			startDate = new java.text.SimpleDateFormat("yyyy-MM-dd")
-					.parse(getDate(curDate));
-			endDate = new java.text.SimpleDateFormat("yyyy-MM-dd")
-					.parse(getDate(oriDate));
-		} catch (ParseException ex) {
-			ex.printStackTrace();
-		}
-
-		return (int) Math.abs((startDate.getTime() - endDate.getTime())
-				/ MS_PER_DAY);
+		Calendar cal = Calendar.getInstance();    
+        cal.setTime(curDate);    
+        long time1 = cal.getTimeInMillis();                 
+        cal.setTime(oriDate);    
+        long time2 = cal.getTimeInMillis();         
+        long interval = (time1-time2)/(MS_PER_DAY);  
+        return (int)interval;
 	}
     
     public static String getDateYYYYMM(Date date)
@@ -393,8 +386,10 @@ public abstract class DateUtil {
         return false;
     }
     public static void main(String[] args) {
-		
-		System.err.println(getNextDate("20131220", "yyyyMMdd"));
+    	String expireDate = "20141130";
+    	Date endDate = DateUtil.string2Date(expireDate, "yyyyMMdd");
+		Date today = DateUtil.getCurrent();
+		System.err.println(getDateDiffDays(today, endDate));
 	}
     /**
 	 * getDate

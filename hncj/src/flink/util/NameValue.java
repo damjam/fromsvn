@@ -9,16 +9,17 @@ package flink.util;
  */
 public interface NameValue {
 	String getName();
+
 	String getValue();
 }
 
 class NameValuePair implements NameValue {
 	private String name;
 	private String value;
-	
+
 	public NameValuePair() {
 	}
-	
+
 	public NameValuePair(String name, String value) {
 		super();
 		this.name = name;
@@ -40,8 +41,7 @@ class NameValuePair implements NameValue {
 	public String getValue() {
 		return this.value;
 	}
-	
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");
@@ -51,7 +51,7 @@ class NameValuePair implements NameValue {
 		sb.append(this.getValue());
 		sb.append("\"");
 		sb.append("}");
-		
+
 		return sb.toString();
 	}
 

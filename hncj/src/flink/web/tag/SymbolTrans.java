@@ -12,10 +12,6 @@ public class SymbolTrans extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String symbol;
 	
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
-	}
-
 	public void doTag() throws JspException, IOException {
 		String s = null;
 		
@@ -30,5 +26,9 @@ public class SymbolTrans extends SimpleTagSupport {
 		}
 		
 		this.getJspContext().getOut().write(s);
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 }

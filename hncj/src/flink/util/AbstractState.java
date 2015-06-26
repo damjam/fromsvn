@@ -19,33 +19,33 @@ public abstract class AbstractState implements State {
 	protected static List getOrderedList(Map all) {
 		List orderedList = new ArrayList();
 		orderedList.addAll(all.values());
-		
+
 		Collections.sort(orderedList, new Comparator() {
 			public int compare(Object o1, Object o2) {
 				AbstractState state1 = (AbstractState) o1;
 				AbstractState state2 = (AbstractState) o2;
-				
+
 				return state1.getValue().compareTo(state2.getValue());
 			}
 		});
-		
+
 		return orderedList;
 	}
-	
+
 	public static String[] values(State[] states) {
 		if (ArrayUtils.isEmpty(states)) {
 			return null;
 		}
-		
+
 		String[] result = new String[states.length];
-		
+
 		for (int i = 0; i < states.length; i++) {
 			result[i] = states[i] == null ? null : states[i].getValue();
 		}
-		
+
 		return result;
 	}
-	
+
 	private NameValuePair nameValue = new NameValuePair();
 
 	protected AbstractState(String name, String value) {
@@ -57,35 +57,36 @@ public abstract class AbstractState implements State {
 		if (obj == null) {
 			return false;
 		}
-		
+
 		if (obj.getClass() != this.getClass()) {
 			return false;
 		}
-		
+
 		return this.nameValue.getValue().equals(((State) obj).getValue());
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.flink.model.State#getName()
 	 */
 	public String getName() {
 		return this.nameValue.getName();
 	}
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.flink.model.State#getValue()
 	 */
 	public String getValue() {
 		return this.nameValue.getValue();
 	}
-	
+
 	public int hashCode() {
 		return this.nameValue.getValue().hashCode();
 	}
 
-	
 	public String toString() {
 		return this.nameValue.toString();
 	}
