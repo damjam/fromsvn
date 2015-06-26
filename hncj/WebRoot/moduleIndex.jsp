@@ -6,7 +6,7 @@
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-
+		
 		<link rel="stylesheet" href="css/page.css" type="text/css" media="screen, projection" />
 	</head>
 
