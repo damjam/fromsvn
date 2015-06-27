@@ -61,5 +61,6 @@
 		<action name="timerDo" class="timerDoAction">
 			<result name="list">/pages/admin/sysRunManager/timerDoList.jsp</result>
 		</action>
+		
 	</package>
 </struts>
