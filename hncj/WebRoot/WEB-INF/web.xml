@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
-	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0" metadata-complete="true">
 	<filter>
 		<filter-name>openSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -13,7 +12,7 @@
 		<filter-name>openSessionInViewFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
@@ -66,7 +65,7 @@
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 
-	
+
 	<!-- 此应用的启动顺序必须在SystemContextServlet之后 -->
 	<servlet>
 		<servlet-name>AppServerServlet</servlet-name>
@@ -95,8 +94,8 @@
 		<servlet-name>verifyCode</servlet-name>
 		<url-pattern>/servlet/verifyCode</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<filter>
 		<filter-name>encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -125,10 +124,10 @@
 			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
 		</filter-class>
 	</filter>
-<!-- 	<filter> -->
-<!-- 		<filter-name>userLogFilter</filter-name> -->
-<!-- 		<filter-class>com.ylink.cim.admin.view.UserLogFilter</filter-class> -->
-<!-- 	</filter> -->
+	<!-- <filter> -->
+	<!-- <filter-name>userLogFilter</filter-name> -->
+	<!-- <filter-class>com.ylink.cim.admin.view.UserLogFilter</filter-class> -->
+	<!-- </filter> -->
 
 	<filter-mapping>
 		<filter-name>privilege</filter-name>
@@ -146,11 +145,11 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>userLogFilter</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-	
+	<!-- <filter-mapping> -->
+	<!-- <filter-name>userLogFilter</filter-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- </filter-mapping> -->
+
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
@@ -160,6 +159,6 @@
 		<location>/login.do?action=index</location>
 	</error-page>
 	<session-config>
-		<session-timeout>-1</session-timeout> 
-	</session-config> 
+		<session-timeout>-1</session-timeout>
+	</session-config>
 </web-app>
