@@ -42,7 +42,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/accountJournal.do?action=list" styleId="queryForm">
+		<s:form action="accountJournal.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -54,26 +54,20 @@
 								日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startCreateDate" id="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endCreateDate" id="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
 								收支类型
 							</td>
 							<td>
-								<html:select property="inoutType" styleId="inoutType">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="inoutTypes" property="value" labelProperty="name" />
-						    	</html:select>
+								<s:select name="inoutType" list="#request.inoutTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
 							<td class="formlabel">
 								交易类型
 							</td>
 							<td>
-								<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="tradeTypes" property="value" labelProperty="name" />
-						    	</html:select>
+								<s:select name="tradeType" list="#request.tradeTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
 						</tr>
 						<tr>
@@ -106,11 +100,17 @@
 					</thead>
 					<tr>
 						<td align="center">${sumInfo.inCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="inAmt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.inAmt }" pattern="##0.00"></fmt:formatNumber>
+						</td>
 						<td align="center">${sumInfo.outCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="outAmt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.outAmt }" pattern="##0.00"></fmt:formatNumber>
+						</td>
 						<td align="center">${sumInfo.totalCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="netAmt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.netAmt }" pattern="##0.00"></fmt:formatNumber>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -132,23 +132,29 @@
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.id}</td>
 								<td><f:type className="InoutType" value="${element.inoutType}"/></td>
 								<td><f:type className="TradeType" value="${element.tradeType}"/></td>
-								<td align="right"><bean:write name="element" property="amount" format="##0.00"/></td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td align="right">
+									<fmt:formatNumber value="${element.amount }" pattern="##0.00"></fmt:formatNumber>
+								</td>
+								<td>
+									<fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
 								<td>${element.billId}</td>
-								<td align="right"><bean:write name="element" property="balance" format="##0.00"/></td>
+								<td align="right">
+									<fmt:formatNumber value="${element.balance }" pattern="##0.00"></fmt:formatNumber>
+						    	</td>
 						    	<td>${element.remark}</td>
 						    	<td>${element.createUser}</td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

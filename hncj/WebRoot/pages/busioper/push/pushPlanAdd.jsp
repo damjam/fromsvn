@@ -90,7 +90,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="pushMngAction.do?action=doAdd" method="post" styleClass="validate">
+	<s:form action="pushMngAction.do?action=doAdd" method="post" styleClass="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -104,7 +104,7 @@
 					    <tr>
 						    <td class="formlabel nes">客户类型</td>
 						    <td>
-						    	<html:select property="custType"  styleId="custType">
+						    	<html:select property="custType"  id="custType">
 									<html:option value="">不限</html:option>
 									<html:options collection="custTypes" labelProperty="name" property="value"/>
 								</html:select>
@@ -113,7 +113,7 @@
 					   <tr>
 						    <td class="formlabel nes">机构类型</td>
 						    <td>
-						    	<html:select property="branchNo"  styleId="branchNo" onchange="changeBranch();">
+						    	<html:select property="branchNo"  id="branchNo" onchange="changeBranch();">
 									<html:option value="">不限</html:option>
 									<html:options collection="branchTypes" labelProperty="value" property="key"/>
 								</html:select>
@@ -123,7 +123,7 @@
 					   <tr>
 						    <td class="formlabel nes">业务类型</td>
 						    <td>
-						    	<html:select property="busiType"  styleId="busiType">
+						    	<html:select property="busiType"  id="busiType">
 									<html:option value="">不限</html:option>
 									<html:options collection="busiTypes" labelProperty="value" property="key"/>
 								</html:select>
@@ -132,7 +132,7 @@
 					    <tr>
 						    <td class="formlabel nes">订阅状态</td>
 						    <td>
-						    	<html:select property="subsState"  styleId="subsState">
+						    	<html:select property="subsState"  id="subsState">
 									<html:option value="">不限</html:option>
 									<html:options collection="subsStates" labelProperty="value" property="key"/>
 								</html:select>
@@ -141,15 +141,13 @@
 					  <tr>
 						    <td class="formlabel nes">推送方式</td>
 						    <td>
-						    	<html:select property="pushType"  styleId="pushType" onchange="changePushType()">
-									<html:options collection="pushTypes" labelProperty="name" property="value"/>
-								</html:select>
+						    	<s:select name="pushType" id="pushType" list="#request.pushTypes" listKey="value" listValue="name" onchange="changePushType()"></s:select>
 						    </td>
 					   </tr>
 					  <tr id="subTr">
 						    <td class="formlabel nes">主题</td>
 						    <td>
-						    	<html:text property="subject"  styleId="subject" styleClass="{required:true}" maxlength="25"/>
+						    	<s:textfield name="subject"  id="subject" styleClass="{required:true}" maxlength="25"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -157,7 +155,7 @@
 						    <td class="formlabel nes">内容</td>
 						    <td>
 						    	<div id="txtNum">当前输入的字数为：<span id="txtNumLen" style="color: red;">0</span></div>
-						    	<html:textarea property="content"  styleId="content" styleClass="{required:true,maxlength:1000}" onkeyup="inputTextNum();" onblur="inputTextNum();" rows="20" cols="50"/>
+						    	<html:textarea property="content"  id="content" styleClass="{required:true,maxlength:1000}" onkeyup="inputTextNum();" onblur="inputTextNum();" rows="20" cols="50"/>
 						    	<span class="field_tipinfo">不能为空,1000字以内</span>
 						    </td>
 					   </tr>
@@ -173,7 +171,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

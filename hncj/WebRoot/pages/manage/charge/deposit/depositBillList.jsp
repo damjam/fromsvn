@@ -53,7 +53,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/depositBill.do?action=list" styleId="queryForm">
+		<s:form action="depositBill.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -65,42 +65,39 @@
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								收款日期
 							</td>
 							<td>
-								<html:text property="startDepositDate" styleId="startDepositDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endDepositDate" styleId="endDepositDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startDepositDate" id="startDepositDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endDepositDate" id="endDepositDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
 								退款日期
 							</td>
 							<td>
-								<html:text property="startRefundDate" styleId="startRefundDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endRefundDate" styleId="endRefundDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startRefundDate" id="startRefundDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endRefundDate" id="endRefundDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">状态</td>
 						    <td>
-						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="billStates" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
 							<td class="formlabel">
 								账单号
 							</td>
 							<td>
-								<html:text property="id" styleId="id" maxlength="20"/>
+								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<s:textfield name="year" id="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>	
 						<tr>
@@ -131,11 +128,13 @@
 					</thead>
 					<tr>
 						<td align="center">${sumInfo.refundCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="refundAmt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.refundAmt }" pattern="##0.00"/>
+						</td>
 						<td align="center">${sumInfo.paidCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="paidAmt" format="##0.00"/></td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.paidAmt }" pattern="##0.00"/></td>
 						<td align="center">${sumInfo.totalCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="totalAmt" format="##0.00"/></td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.totalAmt }" pattern="##0.00"/></td>
 					</tr>
 				</table>
 			</div>
@@ -162,16 +161,20 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.id}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.payerName}</td>
-								<td width="120"><bean:write name="element" property="depositDate" format="yyyy-MM-dd HH:mm:ss"/></td>
-								<td><bean:write name="element" property="amount" format="##0.00"/></td>
+								<td width="120">
+									<fmt:formatDate value="${element.depositDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
+								<td><fmt:formatNumber value="${element.amount }" pattern="##0.00"/></td>
 								<td>${element.purpose}</td>
 								<td>${element.depositUser}</td>
-								<td width="120"><bean:write name="element" property="refundDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td width="120">
+									<fmt:formatDate value="${element.refundDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
 								<!-- 
 								<td><bean:write name="element" property="refundAmount" format="##0.00"/></td>
 								 --><td>${element.refundUser}</td>
@@ -180,21 +183,21 @@
 							    </td>
 								<td>${element.remark}</td>
 								<td class="redlink">
-							    	<logic:equal value="00" name="element" property="state">
+							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>
 							    		<a href="javascript:delRecord('${element.id}')">删除</a>
-							    	</logic:equal>
-							    	<logic:equal value="01" name="element" property="state">
+							    	</c:if>
+							    	<c:if test="${element.state eq '01'}">
 							    		<a href="javascript:openReport('${element.id}')">打印</a>
 							    		<a href="javascript:refund('${element.id}')">退款</a>
-							    	</logic:equal>
+							    	</c:if>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

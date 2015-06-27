@@ -27,9 +27,11 @@
 		 		var tradeType = $('#tradeType').val();
 		 		if(tradeType == '98'){
 		 			var remark = $('#remark').val();
-		 			alert('请在备注中注明收款项目');
-		 			$('#remark').focus();
-		 			return;
+		 			if(remark == ''){
+		 				alert('请在备注中注明收款项目');
+			 			$('#remark').focus();
+			 			return;
+		 			}
 		 		}
 		 		FormUtils.submitFirstTokenForm();
 		 	}
@@ -115,7 +117,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="generalBill.do?action=doAdd" styleId="dataForm" method="post" styleClass="validate">
+	<s:form action="generalBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -128,54 +130,49 @@
 					   <tr>
 						    <td class="formlabel nes">收费项目</td>
 						    <td>
-						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="07">智能卡办理费</html:option>
-						    		<html:option value="08">临时出入证办理费</html:option>
-						    		<html:option value="20">广告位租赁费</html:option>
-						    		<html:option value="98">其他</html:option>
-						    	</html:select>
+						    	<s:select name="tradeType" id="tradeType" list="#request.generalTradeTypes" listKey="value" listValue="name"></s:select>
 						    	<span class="field_tipinfo">如收费项目为其他，请在备注中说明</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">单价</td>
 						    <td>
-						    <html:text property="unitPrice"  styleId="unitPrice" styleClass="{required:true,num:true}" maxlength="8" onblur="count()"/>
+						    <s:textfield name="unitPrice"  id="unitPrice" class="{required:true,num:true}" maxlength="8" onblur="count()"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">数量</td>
 						    <td>
-						    <html:text property="num"  styleId="num" styleClass="{required:true,digits:true}" maxlength="8" onblur="count()" value="1"/>
+						    <s:textfield name="num"  id="num" class="{required:true,digits:true}" maxlength="8" onblur="count()" value="1"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">金额</td>
 						    <td>
-						    <html:text property="totalAmt"  styleId="totalAmt" styleClass="{required:true,num:true}" maxlength="12"/>
+						    <s:textfield name="totalAmt"  id="totalAmt" class="{required:true,num:true}" maxlength="12"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">实收</td>
 						    <td>
-						    <html:text property="paidAmt"  styleId="paidAmt" styleClass="{required:true,num:true}" maxlength="12"/>
+						    <s:textfield name="paidAmt"  id="paidAmt" class="{required:true,num:true}" maxlength="12"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">付款人</td>
 						    <td>
-						    	<html:text property="payerName" styleId="payerName" styleClass="{required:true}" maxlength="10" />
+						    	<s:textfield name="payerName" id="payerName" class="{required:true}" maxlength="10" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -191,7 +188,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

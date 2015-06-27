@@ -55,8 +55,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="account.do?action=withdraw" styleId="accountActionForm" method="post" styleClass="validate">
-		<html:hidden property="id"/>
+	<s:form action="account.do?action=withdraw" id="accountActionForm" method="post" class="validate">
+		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -70,13 +70,13 @@
 					  <tr>
 						    <td class="formlabel nes">账户余额</td>
 						    <td>
-						    	<html:text property="balance" styleId="balance" readonly="true"/>
+						    	<s:textfield name="balance" id="balance" readonly="true"/>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">提现金额</td>
 						    <td>
-						    	<html:text property="amount" styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    	<s:textfield name="amount" id="amount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请填写正确的数字</span>
 						    </td>
 					   </tr>
@@ -93,7 +93,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

@@ -75,8 +75,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="chargeParam.do?action=doEdit" styleId="chargeParamActionForm" method="post" styleClass="validate">
-		<html:hidden property="id" />
+	<s:form action="chargeParam.do?action=doEdit" id="chargeParamActionForm" method="post" styleClass="validate">
+		<s:hidden name="id" />
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -89,21 +89,19 @@
 					   <tr>
 						    <td class="formlabel nes">适用范围</td>
 						    <td>
-						    	<html:select property="rangeCode">
-						    		<html:options collection="paramRanges" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="rangeCode" id="rangeCode" list="#request.paramRanges" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 					   	   <td class="formlabel nes">计费对象</td>
 						    <td>
-						    	<html:text property="chargeObj" styleId="chargeObj" maxlength="25"></html:text>
+						    	<s:textfield name="chargeObj" id="chargeObj" maxlength="25"/>
 						    </td>		
 					   </tr>
 					   <tr>
 					   		<td class="formlabel">备注</td>
 						    <td>
-						    	<html:text property="remark" styleId="remark" maxlength="25"></html:text>
+						    	<s:textfield name="remark" id="remark" maxlength="25"/>
 						    </td>
 					   </tr>
 				  </table>
@@ -118,7 +116,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

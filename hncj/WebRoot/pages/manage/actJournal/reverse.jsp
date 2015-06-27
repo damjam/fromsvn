@@ -55,7 +55,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="accountJournal.do?action=reverse" styleId="accountActionForm" method="post" styleClass="validate">
+	<s:form action="accountJournal.do?action=reverse" id="accountActionForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -68,26 +68,20 @@
 					   <tr>
 						    <td class="formlabel nes">账单类型</td>
 						    <td>
-						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="01">水费</html:option>
-						    		<html:option value="00">物业费</html:option>
-						    		<html:option value="05">停车费</html:option>
-						    		<html:option value="04">装修服务费</html:option>
-						    		<html:option value="03">押金</html:option>
-						    	</html:select>
+						    	<s:select name="tradeType" id="tradeType" list="#request.tradeTypes" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">账单号</td>
 						    <td>
-						    	<html:text property="billId" styleId="billId" styleClass="{required:true}" maxlength="20"/>
+						    	<s:textfield name="billId" id="billId" class="{required:true}" maxlength="20"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					  <tr>
 						    <td class="formlabel nes">原因</td>
 						    <td>
-						    	<html:text property="remark" styleId="remark" maxlength="50" styleClass="{required:true}"/>
+						    	<s:textfield name="remark" id="remark" maxlength="50" class="{required:true}"/>
 						    	<span class="field_tipinfo">请注明冲正原因</span>
 						    </td>
 					   </tr>
@@ -103,7 +97,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

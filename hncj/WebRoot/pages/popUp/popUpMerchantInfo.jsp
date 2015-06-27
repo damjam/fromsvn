@@ -155,7 +155,7 @@ body {
 					</thead>
 
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr class="shortcut">
 								<td align="center" nowrap="nowrap" width="30">
 									<input name="merchantInfo" type="radio" 
@@ -171,7 +171,7 @@ body {
 									${element.busiScope}
 								</td>
 							</tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate />

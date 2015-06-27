@@ -115,7 +115,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="merchantInfo.do?action=doEdit" styleId="dataForm" method="post" styleClass="validate">
+	<s:form action="merchantInfo.do?action=doEdit" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -128,28 +128,28 @@
 					   <tr>
 						    <td class="formlabel nes">商户名称</td>
 						    <td>
-						    	<html:text property="mrname"  styleId="mrname" styleClass="{required:true}" maxlength="20"/>
+						    	<s:textfield name="mrname"  id="mrname" class="{required:true}" maxlength="20"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">所属行业</td>
 						    <td>
-						    <html:text property="industry"  styleId="industry" styleClass="{required:true}" maxlength="10"/>
+						    <s:textfield name="industry"  id="industry" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">经营范围</td>
 						    <td>
-						    <html:text property="busiScope"  styleId="busiScope" styleClass="{required:true}" maxlength="10"/>
+						    <s:textfield name="busiScope"  id="busiScope" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">地址</td>
 						    <td>
-						    <html:text property="addr"  styleId="addr"  maxlength="50" styleClass="{required:true}"/>
+						    <s:textfield name="addr"  id="addr"  maxlength="50" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -157,28 +157,28 @@
 					   <tr>
 						    <td class="formlabel nes">联系人</td>
 						    <td>
-						    <html:text property="manager"  styleId="manager" styleClass="{required:true}" maxlength="12"/>
+						    <s:textfield name="manager"  id="manager" class="{required:true}" maxlength="12"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">固话</td>
 						    <td>
-						    	<html:text property="tel" styleId="tel" maxlength="15" styleClass="{required:true}"/>
+						    	<s:textfield name="tel" id="tel" maxlength="15" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">手机</td>
 						    <td>
-						    	<html:text property="mobile" styleId="mobile" maxlength="15" styleClass="{required:true}"/>
+						    	<s:textfield name="mobile" id="mobile" maxlength="15" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -194,7 +194,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

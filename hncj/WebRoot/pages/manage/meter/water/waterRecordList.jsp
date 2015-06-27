@@ -51,7 +51,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/waterRecord.do?action=list" styleId="queryForm">
+		<s:form action="waterRecord.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -63,14 +63,14 @@
 								创建日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startCreateDate" id="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endCreateDate" id="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
@@ -104,7 +104,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.houseSn}</td>
 								<td>${element.recordMonth}</td>
@@ -113,21 +113,21 @@
 								<td>${element.curnum}</td>
 								<td>${element.curRecordDate}</td>
 								<td>${element.num}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
-							    	<logic:equal value="00" name="element" property="state">
+							    	<c:if test="${element.state eq '00'}">
 							    		<c:if test="${element.num > 0}">
 							    			<a href="javascript:check(${element.id})" title="生成账单后将不可删除">生成账单</a>
 							    		</c:if>
 							    		<a href="javascript:delRecord(${element.id})">删除</a>
-							    	</logic:equal>
+							    	</c:if>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

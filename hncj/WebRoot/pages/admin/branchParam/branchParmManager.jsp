@@ -121,21 +121,20 @@
 			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
 				<thead>
 				  <tr>
-				    <th align="center" nowrap="nowrap" class="titlebg">参数代码</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">参数名称</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">参数值</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">备注</th>
-				    <th align="center" nowrap="nowrap" class="titlebg">操作</th>
+				    <th class="titlebg">参数代码</th>
+				    <th class="titlebg">参数名称</th>
+				    <th class="titlebg">参数值</th>
+				    <th class="titlebg">备注</th>
+				    <th class="titlebg">操作</th>
 				  </tr>
 				 </thead>
 				 <tbody>
-				  <logic:notEmpty name="branchParmList">
-				  	<logic:iterate name="branchParmList" id="branchPram">
+				  	<c:forEach items="${branchParmList}" var="element">
 					  <tr align="center">
-					    <td nowrap="nowrap"><bean:write name="branchPram" property="code" /></td>
-					    <td nowrap="nowrap"><bean:write name="branchPram" property="parname" /></td>
-					    <td nowrap="nowrap"><bean:write name="branchPram" property="parvalue" /></td>
-						<td nowrap="nowrap"><bean:write name="branchPram" property="remark" /></td>
+					    <td nowrap="nowrap">${element.code}</td>
+					    <td nowrap="nowrap">${element.parname}</td>
+					    <td nowrap="nowrap">${element.parvalue}</td>
+						<td nowrap="nowrap">${element.remark}</td>
 					    <td nowrap="nowrap">
 						    <span class="redlink">
 						   		 <a href="branchParmManage.do?action=update&code=${branchPram.code}">修改</a>
@@ -145,8 +144,7 @@
 						    </span>
 					    </td>
 					  </tr>
-					 </logic:iterate>
-					</logic:notEmpty>
+					 </c:forEach>
 				</tbody>
 			</table>
 			

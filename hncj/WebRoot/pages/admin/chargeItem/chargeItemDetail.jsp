@@ -42,7 +42,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/carInfo.do?action=list" styleId="queryForm">
+		<s:form action="carInfo.do?action=list" styleId="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -54,15 +54,9 @@
 								房屋类型
 							</td>
 							<td>
-								<html:select property="">
-									<html:option value="00">住宅</html:option>
-									<html:option value="01">公寓</html:option>
-									<html:option value="02">商铺</html:option>
-								</html:select>
+								<s:select name="" id="" list="{'00':'住宅','01':'公寓','02':'商铺'}" listKey="value" listValue="name"></s:select>
 							</td>
-							
 						</tr>
-							
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -93,7 +87,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.carSn}</td>
 								<td>${element.brand}${element.model}</td>
@@ -101,17 +95,17 @@
 								<td>${element.ownerCel}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.parkingSn}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

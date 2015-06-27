@@ -43,7 +43,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/merchantInfo.do?action=list" styleId="queryForm">
+		<s:form action="merchantInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -55,7 +55,7 @@
 								商户名称
 							</td>
 							<td>
-								<html:text property="mrname" styleId="mrname" maxlength="20"/>
+								<s:textfield name="mrname" id="mrname" maxlength="20"/>
 							</td>
 					    </tr>
 						<tr>
@@ -89,7 +89,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.mrname}</td>
 								<td>${element.industry} </td>
@@ -98,18 +98,18 @@
 								<td>${element.manager}</td>
 								<td>${element.tel}</td>
 								<td>${element.mobile}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.remark}</td>
 								<td class="redlink">
 						    		<a href="javascript:update('${element.id}')">修改</a>
 						    		<a href="javascript:delRecord('${element.id}')">删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

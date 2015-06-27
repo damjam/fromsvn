@@ -73,8 +73,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="carInfo.do?action=doEdit" styleId="carInfoActionForm" method="post" styleClass="validate">
-		<html:hidden property="id" />
+	<s:form action="carInfo.do?action=doEdit" id="carInfoActionForm" method="post" class="validate">
+		<s:hidden name="id" />
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -87,21 +87,21 @@
 					   <tr>
 						    <td class="formlabel nes">车牌号</td>
 						    	<td>
-						    	<html:text property="carSn" styleId="carSn" maxlength="10" readonly="true"></html:text>
+						    	<s:textfield name="carSn" id="carSn" maxlength="10" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">品牌</td>
 						    <td>
-						    	<html:text property="brand" styleId="brand" maxlength="10"></html:text>
+						    	<s:textfield name="brand" id="brand" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">型号</td>
 						    <td>
-						    	<html:text property="model" styleId="model" maxlength="10"></html:text>
+						    	<s:textfield name="model" id="model" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -109,28 +109,28 @@
 					   <tr>
 						    <td class="formlabel">车主房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="15" onblur="getOwnerInfo()"></html:text>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="15" onblur="getOwnerInfo()"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车主姓名</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" maxlength="10" styleClass="{required:true}"></html:text>
+						    	<s:textfield name="ownerName" id="ownerName" maxlength="10" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车主联系电话</td>
 						    <td>
-						    	<html:text property="ownerCel" styleId="ownerCel" maxlength="20" styleClass="{required:true}"></html:text>
+						    	<s:textfield name="ownerCel" id="ownerCel" maxlength="20" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">车位编号</td>
 						    <td>
-						    	<html:text property="parkingSn" styleId="parkingSn" maxlength="10" readonly="true"></html:text>
+						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10" readonly="true"/>
 						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
 									alt="搜索" onclick="popUp.popUpParkingInfo('parkingSn');" />
 						    </td>
@@ -147,7 +147,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

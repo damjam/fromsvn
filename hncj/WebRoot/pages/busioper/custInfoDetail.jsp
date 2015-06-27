@@ -41,7 +41,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="custInfoAction.do?action=toAddSignInfo" styleId="custInfoForm" method="post" styleClass="validate">
+	<s:form action="custInfoAction.do?action=toAddSignInfo" id="custInfoForm" method="post" styleClass="validate">
 		<input type="hidden" id="oriMobile" value="${custInfoActionForm.mobile}"/>
 		<div class="userbox">
 			<div>
@@ -132,7 +132,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

@@ -45,7 +45,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="houseInfo.do?action=doAdd" styleId="houseInfoActionForm" method="post" styleClass="validate">
+	<s:form action="houseInfo.do?action=doAdd" id="houseInfoActionForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -59,39 +59,35 @@
 					  <tr>
 						    <td class="formlabel nes">楼号</td>
 						    <td>
-						    	<html:select property="buildingNo" style="width:166px">
-									<html:options collection="buildingNos" property="key" labelProperty="value" />
-								</html:select>
+						    	<s:select name="buildingNo" id="buildingNo" list="#request.buildingNos" listKey="key" listValue="value" headerKey="" headerValue="---全部---" style="width:166px;"></s:select>
 						    </td>
 					   </tr>
 					   <!-- 
 					   <tr>
 						    <td class="formlabel nes">单元</td>
 						    <td>
-						    	<html:select property="unitNo" style="width:166px">
-									<html:options collection="unitNos" property="key" labelProperty="value" />
-								</html:select>
+						    	<s:select name="unitNo" id="unitNo" list="#request.unitNos" listKey="key" listValue="value" style="width:166px;"></s:select>
 						    </td>
 					   </tr>
-					    -->
+					     -->
 					   <tr>
 						    <td class="formlabel nes">房间</td>
 						    <td>
-						    	<html:text property="position" styleId="position" maxlength="4" styleClass="{required:true,digit:true,minlength:3}"></html:text>
+						    	<s:textfield name="position" id="position" maxlength="4" class="{required:true,digit:true,minlength:3}"/>
 						    	<span class="field_tipinfo">请输入正确的房间号</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">面积</td>
 						    <td>
-						    	<html:text property="area" styleId="area" maxlength="6" styleClass="{required:true,num:true}"></html:text>
+						    	<s:textfield name="area" id="area" maxlength="6" class="{required:true,num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">交房日期</td>
 						    <td>
-						    	<html:text property="deliveryDate" styleId="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"></html:text>
+						    	<s:textfield name="deliveryDate" id="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"/>
 						    </td>
 					   </tr>
 				  </table>
@@ -106,7 +102,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

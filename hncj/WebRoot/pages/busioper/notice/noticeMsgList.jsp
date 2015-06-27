@@ -34,7 +34,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/noticeMsgAction.do?action=list" styleId="noticeMsgForm">
+		<s:form action="/noticeMsgAction.do?action=list" id="noticeMsgForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -46,14 +46,14 @@
 								创建日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker()"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker()"/>
+								<s:textfield name="startCreateDate" id="startCreateDate" style="width:70px;" onclick="WdatePicker()"/>&nbsp;-
+								<s:textfield name="endCreateDate" id="endCreateDate" style="width:70px;" onclick="WdatePicker()"/>
 							</td>
 							<td class="formlabel">
 								主题
 							</td>
 							<td>
-								<html:text property="subject" styleId="subject"  maxlength="25"/>
+								<s:textfield name="subject" id="subject"  maxlength="25"/>
 							</td>
 						</tr>
 						<tr>
@@ -84,7 +84,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.id}</td>
 								<td>${element.subject}</td>
@@ -100,11 +100,11 @@
 							    </td>
 							    <td><bean:write name="element" property="createTime" format="yyyy-MM-dd HH:mm:ss"/></td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

@@ -46,7 +46,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/commonServiceBill.do?action=list" styleId="queryForm">
+		<s:form action="commonServiceBill.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -59,21 +59,18 @@
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								收款日期
 							</td>
 							<td>
-								<html:text property="startChargeDate" styleId="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endChargeDate" styleId="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startChargeDate" id="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endChargeDate" id="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">状态</td>
 						    <td>
-						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="billStates" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
 						</tr>
 						<tr>
@@ -81,13 +78,13 @@
 								账单号
 							</td>
 							<td>
-								<html:text property="id" styleId="id" maxlength="20"/>
+								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<s:textfield name="year" id="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>
 						<tr>
@@ -118,11 +115,13 @@
 					</thead>
 					<tr>
 						<td align="center">${sumInfo.totalCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="totalAmt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.totalAmt }" pattern="##0.00"></fmt:formatNumber>
+						</td>
 						<td align="center">${sumInfo.paidCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="paidAmt" format="##0.00"/></td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.paidAmt }" pattern="##0.00"></fmt:formatNumber></td>
 						<td align="center">${sumInfo.unpayCnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="unpayAmt" format="##0.00"/></td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.unpayAmt }" pattern="##0.00"/></td>
 					</tr>
 				</table>
 			</div>
@@ -148,37 +147,38 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
+						
 							<tr align="center">
 								<td>${element.id}</td>
 								<td>${element.ownerName}</td>
 								<td>${element.houseSn}</td>
-								<td><bean:write name="element" property="area" format="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.area }" pattern="##0.00"/></td>
 								<td>${element.startDate}—${element.endDate}</td>
-								<td><bean:write name="element" property="servicePrice" format="##0.00"/></td>
-								<td><bean:write name="element" property="lightPrice" format="##0.00"/></td>
-								<td><bean:write name="element" property="totalAmount" format="##0.00"/></td>
-								<td width="120"><bean:write name="element" property="chargeDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatNumber value="${element.servicePrice}" pattern="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.lightPrice}" pattern="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.totalAmount}" pattern="##0.00"/></td>
+								<td><fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.chargeUser}</td>
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>
 								<td>${element.remark}</td>
 								<td class="redlink">
-							    	<logic:equal value="00" name="element" property="state">
+							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>
 							    		<a href="javascript:delRecord('${element.id}')">删除</a>
-							    	</logic:equal>
-							    	<logic:equal value="01" name="element" property="state">
+							    	</c:if>
+							    	<c:if test="${element.state eq '01'}">
 							    		<a href="javascript:openReport('${element.id}')">打印</a>
-							    	</logic:equal>
+							    	</c:if>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

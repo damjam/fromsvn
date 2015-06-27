@@ -48,7 +48,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/parkingBill.do?action=list" styleId="queryForm">
+		<s:form action="parkingBill.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -60,40 +60,37 @@
 								车位号
 							</td>
 							<td>
-								<html:text property="parkingSn" styleId="parkingSn" maxlength="10"/>
+								<s:textfield name="parkingSn" id="parkingSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								车牌号
 							</td>
 							<td>
-								<html:text property="carSn" styleId="carSn" maxlength="10"/>
+								<s:textfield name="carSn" id="carSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">状态</td>
 						    <td>
-						    	<html:select property="state" styleId="state">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="billStates" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
 							<td class="formlabel">
 								账单号
 							</td>
 							<td>
-								<html:text property="id" styleId="id" maxlength="20"/>
+								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
 							<td class="formlabel">
 								年份
 							</td>
 							<td>
-								<html:text property="year" styleId="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
+								<s:textfield name="year" id="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>
 						<tr>
@@ -120,7 +117,9 @@
 					</thead>
 					<tr>
 						<td align="center">${sumInfo.cnt}</td>
-						<td align="center"><bean:write name="sumInfo" property="amt" format="##0.00"/></td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.amt}" pattern="##0.00"/>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -145,7 +144,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.id}</td>
 								<td>${element.parkingSn}</td>
@@ -153,28 +152,30 @@
 								<td>${element.ownerName}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.beginDate}—${element.endDate}</td>
-								<td><bean:write name="element" property="amount" format="##0.00"/></td>
-								<td width="120"><bean:write name="element" property="chargeDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
+								<td width="120">
+									<fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
 								<td>${element.chargeUser}</td>
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>
 							    <td>${element.remark}</td>
 								<td class="redlink">
-							    	<logic:equal value="00" name="element" property="state">
+							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>
 							    		<a href="javascript:delRecord('${element.id}')">删除</a>
-							    	</logic:equal>
-							    	<logic:equal value="01" name="element" property="state">
+							    	</c:if>
+							    	<c:if test="${element.state eq '01'}">
 							    		<a href="javascript:openReport('${element.id}')">打印</a>
-							    	</logic:equal>
+							    	</c:if>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

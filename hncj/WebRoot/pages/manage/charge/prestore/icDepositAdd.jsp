@@ -89,7 +89,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="icDeposit.do?action=doAdd" styleId="dataForm" method="post" styleClass="validate">
+	<s:form action="icDeposit.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -103,36 +103,34 @@
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getOwnerName()"/>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getOwnerName()"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">付款人</td>
 						    <td>
-						    	<html:text property="payerName" styleId="payerName" styleClass="{required:true}" maxlength="10" />
+						    	<s:textfield name="payerName" id="payerName" class="{required:true}" maxlength="10" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">IC卡类型</td>
 						    <td>
-						    	<html:select property="cardType" styleId="cardType">
-						    		<html:options collection="icCardTypes" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="property" id="property" list="#request.icCardTypes" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">充值金额</td>
 						    <td>
-						    <html:text property="amount"  styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    <s:textfield name="amount"  id="amount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -148,7 +146,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

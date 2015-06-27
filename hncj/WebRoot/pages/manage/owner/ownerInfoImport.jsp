@@ -69,20 +69,20 @@
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<html:form action="ownerInfo.do?action=doImport" styleId="dataForm" enctype="multipart/form-data" styleClass="validate">
+				<s:form action="ownerInfo.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 						<caption>${ACT.name}</caption>
 						
 						<tr>
 							<td class="formlabel nes">请选择导入的文件</td>
 							<td>
-								<html:file property="file" styleId="file" style="width:400px" styleClass="userbox_bt {required:true}" />
+								<s:file id="file" name="file" class="userbox_bt {required:true}"></s:file>
 								<span class="field_tipinfo">请选择文件</span>
 								<span><a href="${CONTEXT_PATH}/">下载模板</a> </span>
 							</td>
 						</tr>
 					</table>
-				</html:form>
+				</s:form>
 				<div class="btnbox">
 					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 					<input type="button" value="返回" class="inp_L3" style="margin-left:30px;" onclick="gotoUrl('/ownerInfo.do?action=list');"/>

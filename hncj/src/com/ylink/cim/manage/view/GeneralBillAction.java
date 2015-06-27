@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
+import com.ylink.cim.common.type.GeneralTradeType;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.manage.dao.GeneralBillDao;
 import com.ylink.cim.manage.domain.GeneralBill;
@@ -93,12 +94,14 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = generalBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
+		GeneralTradeType.setInReq(request);
 		//return forward("/pages/manage/charge/general/generalBillList.jsp");
 		return "list";
 	}
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
 		CheckinState.setInReq(request);
+		GeneralTradeType.setInReq(request);
 		//return forward("/pages/manage/charge/general/generalBillAdd.jsp");
 		return "add";
 	}

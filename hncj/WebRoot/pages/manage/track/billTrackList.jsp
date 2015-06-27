@@ -56,7 +56,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/billTrack.do?action=list" styleId="queryForm">
+		<s:form action="billTrack.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -68,19 +68,19 @@
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								业主姓名
 							</td>
 							<td>
-								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
+								<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								联系电话
 							</td>
 							<td>
-								<html:text property="ownerCel" styleId="ownerCel" maxlength="10"/>
+								<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
@@ -88,19 +88,13 @@
 								到期天数
 							</td>
 							<td>
-								<html:select property="leftDays" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="remainDays" property="value" labelProperty="name" />
-								</html:select>
+								<s:select name="leftDays" id="leftDays" list="#request.remainDays" style="width:166px" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
 							<td class="formlabel">
 								账单类型
 							</td>
 							<td>
-								<html:select property="billType" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="billTypes" property="value" labelProperty="name" />
-								</html:select>
+								<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>	
 						</tr>	
 						<tr>
@@ -134,7 +128,7 @@
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.houseSn}</td>
 								<td>${element.ownerName}</td>
@@ -150,11 +144,11 @@
 							    	<a href="javascript:sendNotice('${element.id}','${element.ownerCel}')" >发送通知</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

@@ -115,8 +115,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="contact.do?action=doEdit" styleId="dataForm" method="post" styleClass="validate">
-		<html:hidden property="merchantNo" styleId="merchantNo"/>
+	<s:form action="contact.do?action=doEdit" id="dataForm" method="post" class="validate">
+		<s:hidden name="merchantNo" id="merchantNo"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -129,22 +129,20 @@
 					   <tr>
 						    <td class="formlabel nes">姓名</td>
 						    <td>
-						    	<html:text property="contactName"  styleId="contactName" styleClass="{required:true}" maxlength="20"/>
+						    	<s:textfield name="contactName"  id="contactName" class="{required:true}" maxlength="20"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">性别</td>
 						    <td>
-						    	<html:select property="sex">
-						    		<html:options collection="sexTypes" property="value" labelProperty="name"/>
-						    	</html:select>
+						    	<s:select name="sex" id="sex" list="#request.sexTypes" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">商户</td>
 						    <td>
-						    	<html:text property="merchantName"  styleId="merchantName" styleClass="{required:true}" maxlength="20" readonly="readonly"></html:text>
+						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="20" readonly="readonly"/>
 						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
 									alt="搜索" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
 						    	<span class="field_tipinfo">不能为空</span>
@@ -153,28 +151,28 @@
 					   <tr>
 						    <td class="formlabel nes">所属行业</td>
 						    <td>
-						    <html:text property="industry"  styleId="industry" styleClass="{required:true}" maxlength="10"/>
+						    <s:textfield name="industry"  id="industry" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">职位</td>
 						    <td>
-						    <html:text property="position"  styleId="position" styleClass="{required:true}" maxlength="10"/>
+						    <s:textfield name="position"  id="position" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">电话</td>
 						    <td>
-						    	<html:text property="mobile" styleId="mobile" maxlength="15" styleClass="{required:true}"/>
+						    	<s:textfield name="mobile" id="mobile" maxlength="15" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -190,7 +188,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

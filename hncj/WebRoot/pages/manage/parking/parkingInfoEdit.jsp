@@ -45,8 +45,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="parkingInfo.do?action=doAdd" styleId="parkingInfoActionForm" method="post" styleClass="validate">
-		<html:hidden property="id" />
+	<s:form action="parkingInfo.do?action=doAdd" id="parkingInfoActionForm" method="post" class="validate">
+		<s:hidden name="id" />
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -59,44 +59,42 @@
 					   <tr>
 						    <td class="formlabel nes">车位编号</td>
 						    <td>
-						    	<html:text property="sn" styleId="sn" maxlength="10" readonly="true"></html:text>
+						    	<s:textfield name="sn" id="sn" maxlength="10" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">车位产权人</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" maxlength="10"></html:text>
+						    	<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">产权人电话</td>
 						    <td>
-						    	<html:text property="ownerCel" styleId="ownerCel" maxlength="10"></html:text>
+						    	<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">车位使用人</td>
 						    <td>
-						    	<html:text property="endUser" styleId="endUser" maxlength="10"></html:text>
+						    	<s:textfield name="endUser" id="endUser" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">使用人电话</td>
 						    <td>
-						    	<html:text property="endUserCel" styleId="endUserCel" maxlength="10"></html:text>
+						    	<s:textfield name="endUserCel" id="endUserCel" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车位状态</td>
 						    <td>
-						    	<html:select property="state" style="width:166px">
-									<html:options collection="parkingStates" property="value" labelProperty="name" />
-								</html:select>
+						    	<s:select name="state" id="state" list="#request.parkingStates" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 				  </table>
@@ -111,7 +109,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

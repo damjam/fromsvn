@@ -44,7 +44,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/carInfo.do?action=list" styleId="queryForm">
+		<s:form action="carInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -56,19 +56,19 @@
 								车主姓名
 							</td>
 							<td>
-								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
+								<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								车牌号
 							</td>
 							<td>
-								<html:text property="carSn" styleId="carSn" maxlength="10"/>
+								<s:textfield name="carSn" id="carSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								车主手机号
 							</td>
 							<td>
-								<html:text property="ownerCel" styleId="ownerCel" maxlength="10"/>
+								<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
@@ -76,19 +76,19 @@
 								车主房屋编号
 							</td>
 							<td>
-								<html:text property="carSn" styleId="carSn" maxlength="10"/>
+								<s:textfield name="carSn" id="carSn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								品牌
 							</td>
 							<td>
-								<html:text property="brand" styleId="brand" maxlength="10"/>
+								<s:textfield name="brand" id="brand" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								型号
 							</td>
 							<td>
-								<html:text property="model" styleId="model" maxlength="10"/>
+								<s:textfield name="model" id="model" maxlength="10"/>
 							</td>
 						</tr>	
 						<tr>
@@ -120,7 +120,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.carSn}</td>
 								<td>${element.brand}${element.model}</td>
@@ -128,17 +128,19 @@
 								<td>${element.ownerCel}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.parkingSn}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>
+									<fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

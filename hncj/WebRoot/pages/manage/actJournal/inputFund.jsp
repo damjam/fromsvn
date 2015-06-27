@@ -55,8 +55,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="accountJournal.do?action=deposit" styleId="accountActionForm" method="post" styleClass="validate">
-		<html:hidden property="id"/>
+	<s:form action="accountJournal.do?action=deposit" id="accountActionForm" method="post" class="validate">
+		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -69,23 +69,20 @@
 					   <tr>
 						    <td class="formlabel nes">交易类型</td>
 						    <td>
-						    	<html:select property="tradeType" styleId="tradeType">
-						    		<html:option value="06">内部充值</html:option>
-						    		<html:option value="09">其他</html:option>
-						    	</html:select>
+						    	<s:select name="tradeType" id="tradeType" list="${'06':'内部充值','09','其他'}" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">收入金额</td>
 						    <td>
-						    	<html:text property="amount" styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    	<s:textfield name="amount" id="amount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请填写正确的数字</span>
 						    </td>
 					   </tr>
 					  <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    	<html:text property="remark" styleId="remark" maxlength="50"/>
+						    	<s:textfield name="remark" id="remark" maxlength="50"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -101,7 +98,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

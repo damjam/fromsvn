@@ -44,7 +44,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/parkingInfo.do?action=list" styleId="queryForm">
+		<s:form action="parkingInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -56,19 +56,19 @@
 								车位产权人
 							</td>
 							<td>
-								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
+								<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								产权人电话
 							</td>
 							<td>
-								<html:text property="ownerCel" styleId="ownerCel" maxlength="10"/>
+								<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								车位使用人
 							</td>
 							<td>
-								<html:text property="endUser" styleId="endUser" maxlength="10"/>
+								<s:textfield name="endUser" id="endUser" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
@@ -76,16 +76,13 @@
 								使用人电话
 							</td>
 							<td>
-								<html:text property="endUserCel" styleId="endUserCel" maxlength="10"/>
+								<s:textfield name="endUserCel" id="endUserCel" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								状态
 							</td>
 							<td>
-								<html:select property="state" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="parkingStates" property="value" labelProperty="name" />
-								</html:select>
+								<s:select name="state" id="state" list="#request.parkingStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>	
 						</tr>	
 						<tr>
@@ -117,7 +114,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.sn}</td>
 								<td>${element.ownerName}</td>
@@ -125,17 +122,17 @@
 								<td>${element.endUser}</td>
 								<td>${element.endUserCel}</td>
 								<td><f:state className="ParkingState" value="${element.state }" /></td> 
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

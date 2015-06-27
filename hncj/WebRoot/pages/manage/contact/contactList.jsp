@@ -50,7 +50,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/contact.do?action=list" styleId="queryForm">
+		<s:form action="contact.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -62,19 +62,19 @@
 								姓名
 							</td>
 							<td>
-								<html:text property="contactName" styleId="contactName" maxlength="20"/>
+								<s:textfield name="contactName" id="contactName" maxlength="20"/>
 							</td>
 							<td class="formlabel">
 								电话
 							</td>
 							<td>
-								<html:text property="mobile" styleId="mobile" maxlength="20"/>
+								<s:textfield name="mobile" id="mobile" maxlength="20"/>
 							</td>
 							<td class="formlabel">
 								备注关键字
 							</td>
 							<td>
-								<html:text property="remark" styleId="remark" maxlength="20"/>
+								<s:textfield name="remark" id="remark" maxlength="20"/>
 							</td>
 					    </tr>
 						
@@ -108,7 +108,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.contactName}</td>
 								<td><f:type className="SexType" value="${element.sex}" /> </td>
@@ -116,18 +116,18 @@
 								<td>${element.position}</td>
 								<td>${element.mobile}</td>
 								<td>${element.merchantName}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.remark}</td>
 								<td class="redlink">
 						    		<a href="javascript:update('${element.id}')">修改</a>
 						    		<a href="javascript:delRecord('${element.id}')">删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

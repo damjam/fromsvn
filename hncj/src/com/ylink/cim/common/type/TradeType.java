@@ -20,9 +20,9 @@ public class TradeType extends AbstractType {
 	public static final TradeType INNER_DEPOSIT = new TradeType("内部充值", "06");
 	public static final TradeType CARD_FEE = new TradeType("智能卡办理费", "07");
 	public static final TradeType PASS_FEE = new TradeType("临时出入证办理费", "08");
-	public static final TradeType IN_OTHER = new TradeType("其他收入", "98");
 	public static final TradeType AD_RENT = new TradeType("广告位租赁费", "20");
 	public static final TradeType IC_DEPOSIT = new TradeType("IC卡充值", "21");
+	public static final TradeType IN_OTHER = new TradeType("其他收入", "98");
 	
 	public static final TradeType REFUND = new TradeType("退押金", "10");
 	public static final TradeType ELECTRIC = new TradeType("交电费", "11");
@@ -49,3 +49,4 @@ public class TradeType extends AbstractType {
 		request.setAttribute("tradeTypes", TradeType.ALL.values());
 	}
 }
+

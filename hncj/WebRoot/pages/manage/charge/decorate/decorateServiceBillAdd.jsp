@@ -110,8 +110,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="decorateServiceBill.do?action=doAdd" styleId="dataForm" method="post" styleClass="validate">
-		<html:hidden property="csBillId" styleId="csBillId"/>
+	<s:form action="decorateServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
+		<s:hidden name="csBillId" id="csBillId"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -124,70 +124,70 @@
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getHouseInfo()" styleClass="{required:true}"/>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getHouseInfo()" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">业主姓名</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" readonly="true"/>
+						    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">房屋面积</td>
 						    <td>
-						    	<html:text property="area" styleId="area" styleClass="{required:true}" maxlength="6" readonly="true"/>
+						    	<s:textfield name="area" id="area" class="{required:true}" maxlength="6" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">楼层</td>
 						    <td>
-						    	<html:text property="floor" styleId="floor" styleClass="{required:true}" maxlength="6" readonly="true"/>
+						    	<s:textfield name="floor" id="floor" class="{required:true}" maxlength="6" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">垃圾清运费单价</td>
 						    <td>
-						    <html:text property="cleanPrice"  styleId="cleanPrice" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="cleanPrice"  id="cleanPrice" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">垃圾清运费</td>
 						    <td>
-						    <html:text property="cleanAmount"  styleId="cleanAmount" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="cleanAmount"  id="cleanAmount" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">电梯上料使用费</td>
 						    <td>
-						    <html:text property="liftFee"  styleId="liftFee" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="liftFee"  id="liftFee" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">合计金额</td>
 						    <td>
-						    <html:text property="amount"  styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    <s:textfield name="amount"  id="amount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr id="tr1" style="display: none;">
 						    <td class="formlabel nes">补缴物业费</td>
 						    <td>
-						    <html:text property="supFee"  styleId="supFee" styleClass="{num:true}" maxlength="10" readonly="true"/>
+						    <s:textfield name="supFee"  id="supFee" class="{num:true}" maxlength="10" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -203,7 +203,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

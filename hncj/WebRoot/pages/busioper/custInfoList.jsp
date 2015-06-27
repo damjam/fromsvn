@@ -39,7 +39,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/custMngAction.do?action=list" styleId="custInfoActionForm">
+		<s:form action="/custMngAction.do?action=list" id="custInfoActionForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -51,17 +51,17 @@
 								手机号
 							</td>
 							<td>
-								<html:text property="mobile" styleId="mobile"  />
+								<s:textfield name="mobile" id="mobile"  />
 							</td>
 							<td class="formlabel">
 								证件号
 							</td>
 							<td>
-								<html:text property="idCard" styleId="idCard"  />
+								<s:textfield name="idCard" id="idCard"  />
 							</td>
 							<td class="formlabel">邮箱</td>
 							<td>
-								<html:text property="email" styleId="email"  />
+								<s:textfield name="email" id="email"  />
 							</td>
 						</tr>
 						<tr>
@@ -105,7 +105,7 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.mobile }</td>
 							    <td>${element.name }</td>
@@ -125,11 +125,11 @@
 							 	   </span>
 							  </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

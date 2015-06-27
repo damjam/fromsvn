@@ -52,7 +52,7 @@
 							    <td>
 							    	<input class="{required:true,maxlength:6} readonly" disabled="disabled"  name="code" type="text" value="${branchParm.code}"  />
 							    	<span class="field_tipinfo">1-6位字符，包括字母和数字</span>
-							    	<html:hidden property="code"   value="${branchParm.code}"/>
+							    	<input type="hidden" name="code" value="${branchParm.code}">
 							    </td>
 							    </tr>
 							   <tr>

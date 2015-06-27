@@ -85,7 +85,7 @@ body {
 	</head>
 
 	<body>
-		<html:form action="parkingInfo.do?action=queryPopUpParkingInfo"
+		<s:form action="parkingInfo.do?action=queryPopUpParkingInfo"
 			method="post">
 			<div class="userbox">
 				<div>
@@ -108,7 +108,7 @@ body {
 									车位编号
 								</td>
 								<td height="30">
-									<html:text property="sn"></html:text>
+									<s:textfield name="sn"/>
 								</td>
 							</tr>
 							<tr></tr>
@@ -157,7 +157,7 @@ body {
 					</thead>
 
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr class="shortcut">
 								<td align="center" nowrap="nowrap" width="30">
 									<input name="parkingInfo" type="radio" 
@@ -176,12 +176,12 @@ body {
 									<f:state className="ParkingState" value="${element.state }" />
 								</td>
 							</tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate />
 			</div>
-		</html:form>
+		</s:form>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"
 			align="center">

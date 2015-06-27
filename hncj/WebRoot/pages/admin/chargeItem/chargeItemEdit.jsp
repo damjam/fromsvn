@@ -92,8 +92,8 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="chargeItem.do?action=doEdit" method="post" styleClass="validate">
-		<html:hidden property="id" />
+	<s:form action="chargeItem.do?action=doEdit" method="post" styleClass="validate">
+		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -106,67 +106,63 @@
 					   <tr>
 						    <td class="formlabel nes">计费项名称</td>
 						    <td>
-						    	<html:text property="itemName" styleId="itemName" maxlength="10" styleClass="{required:true}"></html:text>
+						    	<s:textfield name="itemName" id="itemName" maxlength="10" styleClass="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">计费项目</td>
 						    	<td>
-						    	<html:select property="item">
-						    		<html:options collection="chargeTypes" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="item" id="item" list="#request.chargeTypes" listKey="value" listValue="name"></s:select>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">计费方式</td>
 						    <td>
-						    	<html:select property="way" onchange="changeWay(this.value);" styleId="way">
-						    		<html:options collection="chargeWays" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="way" id="way" list="#request.chargeWays" listKey="value" listValue="name"></s:select>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr class="unit">
 						    <td class="formlabel nes">计费单价</td>
 						    <td>
-						    	<html:text property="unitPrice" styleId="unitPrice" maxlength="10" styleClass="{num:true}"></html:text>
+						    	<s:textfield name="unitPrice" id="unitPrice" maxlength="10" styleClass="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">起步价</td>
 						    <td>
-						    	<html:text property="basePrice" styleId="basePrice" maxlength="10" styleClass="{num:true}"></html:text>
+						    	<s:textfield name="basePrice" id="basePrice" maxlength="10" styleClass="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">起步楼层</td>
 						    <td>
-						    	<html:text property="baseFloor" styleId="baseFloor" maxlength="10" styleClass="{digit:true}"></html:text>
+						    	<s:textfield name="baseFloor" id="baseFloor" maxlength="10" styleClass="{digit:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">递增价</td>
 						    <td>
-						    	<html:text property="stepPrice" styleId="stepPrice" maxlength="10" styleClass="{num:true}"></html:text>
+						    	<s:textfield name="stepPrice" id="stepPrice" maxlength="10" styleClass="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">封顶价</td>
 						    <td>
-						    	<html:text property="capPrice" styleId="capPrice" maxlength="10" styleClass="{num:true}"></html:text>
+						    	<s:textfield name="capPrice" id="capPrice" maxlength="10" styleClass="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="seg">
 						    <td class="formlabel nes">分段价格</td>
 						    <td>
-						    	<html:text property="segRule" styleId="segRule" maxlength="30"></html:text>
+						    	<s:textfield name="segRule" id="segRule" maxlength="30"/>
 						    	<span class="field_tipinfo">格式如:1-18:10;19-32:20</span>
 						    	<span class="error_tipinfo">不能为空</span>
 						    </td>
@@ -174,7 +170,7 @@
 					   <tr>
 					   		<td class="formlabel">备注</td>
 						    <td>
-						    	<html:text property="remark" styleId="remark" maxlength="25"></html:text>
+						    	<s:textfield name="remark" id="remark" maxlength="25"/>
 						    </td>
 					   </tr>
 				  </table>
@@ -189,7 +185,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

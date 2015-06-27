@@ -14,6 +14,7 @@ import com.ylink.cim.common.type.InoutType;
 import com.ylink.cim.common.type.InputTradeType;
 import com.ylink.cim.common.type.OutputTradeType;
 import com.ylink.cim.common.type.TradeType;
+import com.ylink.cim.common.type.TradeType4Reverse;
 import com.ylink.cim.manage.dao.AccountJournalDao;
 import com.ylink.cim.manage.domain.AccountJournal;
 import com.ylink.cim.manage.domain.InnerAcct;
@@ -77,7 +78,7 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 	}
 
 	public String toReverse() throws Exception {
-		InputTradeType.setInReq(request);
+		TradeType4Reverse.setInReq(request);
 		// return forward("/pages/manage/actJournal/reverse.jsp");
 		return "reverse";
 	}

@@ -74,7 +74,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="noticeMsgAction.do?action=doAdd" styleId="noticeMsgForm" method="post" styleClass="validate">
+	<s:form action="noticeMsgAction.do?action=doAdd" id="noticeMsgForm" method="post" styleClass="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -87,7 +87,7 @@
 					     <tr>
 						    <td class="formlabel nes">客户类型</td>
 						    <td>
-						    	<html:select property="custType"  styleId="custType">
+						    	<html:select property="custType"  id="custType">
 									<html:option value="">不限</html:option>
 									<html:options collection="custTypes" labelProperty="name" property="value"/>
 								</html:select>
@@ -97,7 +97,7 @@
 					   <tr>
 						    <td class="formlabel nes">机构类型</td>
 						    <td>
-						    	<html:select property="branchNo"  styleId="branchNo" onchange="changeBranch();">
+						    	<html:select property="branchNo"  id="branchNo" onchange="changeBranch();">
 									<html:option value="">不限</html:option>
 									<html:options collection="branchTypes" labelProperty="value" property="key"/>
 								</html:select>
@@ -107,7 +107,7 @@
 					      <tr>
 						    <td class="formlabel nes">业务类型</td>
 						    <td>
-						    	<html:select property="busiType"  styleId="busiType">
+						    	<html:select property="busiType"  id="busiType">
 									<html:option value="">不限</html:option>
 									<html:options collection="busiTypes" labelProperty="value" property="key"/>
 								</html:select>
@@ -117,7 +117,7 @@
 					  <tr>
 						    <td class="formlabel nes">主题</td>
 						    <td>
-						    	<html:text property="subject"  styleId="subject" styleClass="{required:true}" maxlength="25"/>
+						    	<s:textfield name="subject"  id="subject" styleClass="{required:true}" maxlength="25"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -125,7 +125,7 @@
 						    <td class="formlabel nes">内容</td>
 						    <td>
 						    <div id="txtNum">当前输入的字数为：<span id="txtNumLen" style="color: red;">0</span></div>
-						    	<html:textarea property="content"  styleId="content" onkeyup="inputTextNum();" onblur="inputTextNum();" styleClass="{required:true,maxlength:500}" rows="5" cols="50"/>
+						    	<html:textarea property="content"  id="content" onkeyup="inputTextNum();" onblur="inputTextNum();" styleClass="{required:true,maxlength:500}" rows="5" cols="50"/>
 						    	<span class="field_tipinfo">不能为空,500字以内</span>
 						    </td>
 					   </tr>
@@ -141,7 +141,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

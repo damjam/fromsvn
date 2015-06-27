@@ -76,7 +76,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="custMngAction.do?action=doAdd" styleId="custInfoForm" method="post" styleClass="validate">
+	<s:form action="custMngAction.do?action=doAdd" id="custInfoForm" method="post" styleClass="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -89,21 +89,21 @@
 					  <tr>
 						    <td class="formlabel nes">手机号</td>
 						    <td>
-						    	<html:text property="mobile" styleClass="{required:true,digit:true,mobile:true,minlength:11,maxlength:11}" maxlength="11"/>
+						    	<s:textfield name="mobile" styleClass="{required:true,digit:true,mobile:true,minlength:11,maxlength:11}" maxlength="11"/>
 						    	<span class="field_tipinfo">请输入有效的手机号</span>
 						    </td>
 					   </tr>
 					   <tr>
 					   		<td class="formlabel nes">真实姓名</td>
 					   		<td>
-					   			<html:text property="name" styleClass="required:true" maxlength="30" />
+					   			<s:textfield name="name" styleClass="required:true" maxlength="30" />
 					   			<span class="field_tipinfo">请输入真实姓名</span>
 					   		</td>
 					   </tr>
 					   <tr>
 					   		<td class="formlabel nes">证件类型</td>
 					   		<td>
-						    	<html:select property="cardType" styleId="cardType" onchange="checkChange()">
+						    	<html:select property="cardType" id="cardType" onchange="checkChange()">
 									<html:options collection="idCardTypes" labelProperty="name" property="value"  />
 								</html:select>
 						    </td>
@@ -111,28 +111,28 @@
 					   <tr>
 					   		<td class="formlabel nes">证件号</td>
 					   		<td>
-					   			<html:text property="idCard" styleClass="{required:true,idcard:true}" maxlength="30" styleId="idCard" />
+					   			<s:textfield name="idCard" styleClass="{required:true,idcard:true}" maxlength="30" id="idCard" />
 					   			<span class="field_tipinfo">请输入您有效的证件号</span>
 					   		</td>
 					   </tr>
 <%--					   <tr>--%>
 <%--					   		<td class="formlabel nes">测试输入银行卡号</td>--%>
 <%--					   		<td>--%>
-<%--					   			<html:text property="bankno" styleClass="{required:true,bankno:true}" maxlength="30" styleId="bankno" />--%>
+<%--					   			<s:textfield name="bankno" styleClass="{required:true,bankno:true}" maxlength="30" id="bankno" />--%>
 <%--					   			<span class="field_tipinfo">请输入您的银行卡号</span>--%>
 <%--					   		</td>--%>
 <%--					   </tr>--%>
 					   <tr>
 							<td class="formlabel">通讯地址</td>
 							<td>
-					   			<html:text property="addr" maxlength="100" />
+					   			<s:textfield name="addr" maxlength="100" />
 					   			<span class="field_tipinfo">通讯地址</span>
 					   		</td>
 						</tr>
 					    <tr>
 					    	<td class="formlabel">邮箱</td>
 						     <td>
-								<html:text property="email" styleId="email" styleClass="{email:true}" maxlength="30" onblur="checkEmail()"/>
+								<s:textfield name="email" id="email" styleClass="{email:true}" maxlength="30" onblur="checkEmail()"/>
 								<span class="field_tipinfo">有效的邮箱</span>
 							</td>
 					   </tr>
@@ -158,7 +158,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

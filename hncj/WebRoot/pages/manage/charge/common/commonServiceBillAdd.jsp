@@ -199,7 +199,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="commonServiceBill.do?action=doAdd" styleId="dataForm" method="post" styleClass="validate">
+	<s:form action="commonServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -207,108 +207,103 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+					<table class="form_grid" style="width: 100%;border: 0;" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getHouseInfo()" styleClass="{required:true}"/>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getHouseInfo()" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">业主姓名</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" readonly="true"/>
+						    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">房屋面积</td>
 						    <td>
-						    	<html:text property="area" styleId="area" styleClass="{required:true}" maxlength="6" readonly="true"/>
+						    	<s:textfield name="area" id="area" class="{required:true}" maxlength="6" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">物业费单价</td>
 						    <td>
-						    <html:text property="servicePrice"  styleId="servicePrice" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="servicePrice"  id="servicePrice" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">公共照明费单价</td>
 						    <td>
-						    <html:text property="lightPrice"  styleId="lightPrice" styleClass="{required:true,num:true}" maxlength="5" />
+						    <s:textfield name="lightPrice"  id="lightPrice" class="{required:true,num:true}" maxlength="5" />
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					  <tr>
 						    <td class="formlabel nes">计费起始日期</td>
 						    <td>
-						    <html:text property="startDate"  styleId="startDate" styleClass="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+						    <s:textfield name="startDate"  id="startDate" class="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">缴费月数</td>
 						    <td>
-						    <html:text property="monthNum"  styleId="monthNum" styleClass="{required:true,digit:true}" maxlength="2" value="12" onblur="getAcctInfo()"/>
+						    <s:textfield name="monthNum"  id="monthNum" class="{required:true,digit:true}" maxlength="2" value="12" onblur="getAcctInfo()"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">计费结束日期</td>
 						    <td>
-						    <html:text property="endDate"  styleId="endDate" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="endDate"  id="endDate" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">物业费金额</td>
 						    <td>
-						    <html:text property="serviceAmount"  styleId="serviceAmount" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="serviceAmount"  id="serviceAmount" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">照明费金额</td>
 						    <td>
-						    <html:text property="lightAmount"  styleId="lightAmount" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="lightAmount"  id="lightAmount" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr id="tr1">
 						    <td class="formlabel nes">一年内是否入住</td>
 						    <td>
-						    	<html:select property="checkinState" styleId="checkinState" onchange="check()">
-						    		<html:options collection="yesNos" property="value" labelProperty="name" />
-						    	</html:select>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<s:select name="checkinState" id="checkinState" list="#request.yesNos" onchange="check()" listKey="value" listValue="name"></s:select>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr id="tr2">
-					   		<td class="formlabel nes">是否为补缴20%</td>
+					   		<td class="formlabel nes">是否补缴款(20%)</td>
 						    <td>
-						    	<html:select property="suPayState" styleId="suPayState" onchange="checkSuPay()">
-						    		<html:option value="N">否</html:option>
-						    		<html:option value="Y">是</html:option>
-						    	</html:select>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<s:select name="suPayState" id="suPayState" list="{'N':'否','Y':'是'}" listKey="value" listValue="name"></s:select>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">合计金额</td>
 						    <td>
-						    <html:text property="totalAmount"  styleId="totalAmount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    <s:textfield name="totalAmount"  id="totalAmount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -324,7 +319,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

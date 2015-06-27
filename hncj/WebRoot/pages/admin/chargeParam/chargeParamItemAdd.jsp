@@ -40,8 +40,8 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/chargeParam.do?action=doAddItem" styleId="queryForm">
-			<html:hidden property="id" />
+		<s:form action="/chargeParam.do?action=doAddItem" id="queryForm">
+			<s:hidden name="id"/>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -58,25 +58,27 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								<td><html:multibox property="itemIds" value="${element.id}"/> </td>
+								<td>
+									<input type="checkbox" name="itemIds" value="${element.id}">
+								</td>
 								<td>${ element.itemName}</td>
 								<td><f:type className="ChargeType" value="${ element.item}" /> </td>
 								<td><f:type className="ChargeWay" value="${ element.way}" /> </td>
 								<td>${element.ruleDesc}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td>${element.remark }</td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>
 				<div class="btnbox clear">
-					<input type="button" id="" onclick="save()" value="保存"></button>
-					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="返回"></button>
+					<input type="button" id="" onclick="save()" value="保存"/>
+					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="返回"/>
 				</div>		
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

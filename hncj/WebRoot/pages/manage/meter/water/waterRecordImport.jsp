@@ -83,39 +83,39 @@
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<html:form action="waterRecord.do?action=doImport" styleId="dataForm" enctype="multipart/form-data" styleClass="validate">
+				<s:form action="waterRecord.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">用水月份</td>
 							<td>
-								<html:text property="recordMonth" styleId="recordMonth" styleClass="{required:true}" maxlength="13"/>
+								<s:textfield name="recordMonth" id="recordMonth" class="{required:true}" maxlength="13"/>
 								<span class="field_tipinfo">请输入用水月份,例如201409-201410</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">上期抄表日期</td>
 							<td>
-								<html:text property="preRecordDate" styleId="preRecordDate" styleClass="{required:true}" onfocus="WdatePicker();" readonly="true"/>
+								<s:textfield name="preRecordDate" id="preRecordDate" class="{required:true}" onfocus="WdatePicker();" readonly="true"/>
 								<span class="field_tipinfo">请输入上期抄表日期</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">本期抄表日期</td>
 							<td>
-								<html:text property="curRecordDate" styleId="curRecordDate" styleClass="{required:true}" onfocus="WdatePicker();" readonly="true"/>
+								<s:textfield name="curRecordDate" id="curRecordDate" class="{required:true}" onfocus="WdatePicker();" readonly="true"/>
 								<span class="field_tipinfo">请输入本期抄表日期</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">请选择导入的文件</td>
 							<td>
-								<html:file property="file" styleId="file" style="width:400px" styleClass="userbox_bt {required:true}" />
+								<s:file name="file" id="file" class="userbox_bt {required:true}"/>
 								<span class="field_tipinfo">请选择文件</span>
 							</td>
 						</tr>
 					</table>
-				</html:form>
+				</s:form>
 				<div class="btnbox">
 					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 				 </div>

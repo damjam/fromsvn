@@ -46,7 +46,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="chargeItem.do?action=list" styleId="queryForm">
+		<s:form action="chargeItem.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -58,14 +58,9 @@
 								计费项类型
 							</td>
 							<td>
-								<html:select property="item">
-									<html:option value="">---全部---</html:option>
-						    		<html:options collection="chargeTypes" property="value" labelProperty="name" />
-								</html:select>
+								<s:select name="item" id="item" list="#request.chargeTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
-							
 						</tr>
-							
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -94,24 +89,24 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${ element.itemName}</td>
 								<td><f:type className="ChargeType" value="${ element.item}" /> </td>
 								<td><f:type className="ChargeWay" value="${ element.way}" /> </td>
 								<td>${element.ruleDesc}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td>${element.remark }</td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

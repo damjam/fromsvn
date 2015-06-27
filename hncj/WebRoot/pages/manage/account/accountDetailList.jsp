@@ -33,8 +33,8 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/account.do?action=detail" styleId="queryForm">
-			<html:hidden property="acctNo"/>
+		<s:form action="account.do?action=detail" id="queryForm">
+			<s:hidden name="acctNo" id="acctNo"/>
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -46,17 +46,14 @@
 								日期
 							</td>
 							<td>
-								<html:text property="startCreateDate" styleId="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
-								<html:text property="endCreateDate" styleId="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+								<s:textfield name="startCreateDate" id="startCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endCreateDate" id="endCreateDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							<td class="formlabel">
 								变动类型
 							</td>
 							<td>
-								<html:select property="type" styleId="type">
-						    		<html:option value="">---全部---</html:option>
-						    		<html:options collection="changeTypes" property="value" labelProperty="name" />
-						    	</html:select>
+								<s:select list="#request.changeTypes" id="type" headerKey="" headerValue="---全部---" listKey="value" listValue="name"></s:select>
 							</td>
 						</tr>
 						<tr>
@@ -87,15 +84,21 @@
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach var="element" items="${list}">
 							<tr align="center">
 								<td>${element.id}</td>
 								<td><f:type className="InoutType" value="${element.inoutType}"/></td>
 								<td><f:type className="AccountChangeType" value="${element.type}"/></td>
-								<td><bean:write name="element" property="amount" format="##0.00"/></td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td>
+									<fmt:formatNumber pattern="##0.00" value="${element.amount }"></fmt:formatNumber>
+								</td>
+								<td>
+									<fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</td>
 								<td>${element.billId}</td>
-								<td><bean:write name="element" property="balance" format="##0.00"/></td>
+								<td>
+									<fmt:formatNumber value="${element.balance }" pattern="##0.00"></fmt:formatNumber>
+								</td>
 						    	<td>${element.remark}</td>
 						    	<td class="redlink">
 						    		<c:if test="${element.type eq '01'}">
@@ -103,11 +106,11 @@
 						    		</c:if>
 						    	</td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

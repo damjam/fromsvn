@@ -60,7 +60,7 @@
 	</head>
 
 	<body>
-		<html:form styleId="query" action="/routeTemplate.do?action=queryPopUpTradeRouteTemplate" method="post" >
+		<s:form id="query" action="/routeTemplate.do?action=queryPopUpTradeRouteTemplate" method="post" >
 			<div class="userbox">
 				<div>
 					<b class="b1"></b>
@@ -111,7 +111,7 @@
 					<b class="b1"></b>
 				</div>
 			</div>
-			</html:form>
+			</s:form>
 			<!-- 数据列表区 -->
 			<div class="tablebox">
 				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">

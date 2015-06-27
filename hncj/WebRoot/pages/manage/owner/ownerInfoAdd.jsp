@@ -55,7 +55,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="ownerInfo.do?action=doAdd" styleId="ownerInfoActionForm" method="post" styleClass="validate">
+	<s:form action="ownerInfo.do?action=doAdd" id="ownerInfoActionForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -68,77 +68,67 @@
 					  <tr>
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn"  styleId="houseSn" styleClass="{required:true}" maxlength="10"/>
+						    	<s:textfield name="houseSn"  id="houseSn" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					  <tr>
 						    <td class="formlabel nes">业主姓名</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10"/>
+						    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">性别</td>
 						    <td>
-						    	<html:select property="gender" style="width:166px">
-									<html:options collection="sexTypes" property="value" labelProperty="name" />
-								</html:select>
+						    	<s:select name="gender" id="gender" list="#request.sexTypes" listKey="value" listValue="name" style="166px;"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">证件号码</td>
 						    <td>
-						    <html:text property="idCard"  styleId="idCard"  maxlength="20"/>
+						    <s:textfield name="idCard"  id="idCard"  maxlength="20"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">手机号</td>
 						    <td>
-						    <html:text property="mobile"  styleId="mobile" styleClass="{required:true,digit:true}" maxlength="11"/>
+						    <s:textfield name="mobile"  id="mobile" class="{required:true,digit:true}" maxlength="11"/>
 						    	<span class="field_tipinfo">请输入正确的手机号</span>
 						    </td>
 					   </tr>
 					   	<tr>
 						    <td class="formlabel">邮箱</td>
 						    <td>
-						    <html:text property="email"  styleId="email" styleClass="{email:true}" />
+						    <s:textfield name="email"  id="email" class="{email:true}" />
 						    	<span class="field_tipinfo">请输入正确格式的邮箱</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">重要级别</td>
 						    <td>
-						    	<html:select property="grade" style="width:166px">
-									<html:options collection="ownerGrades" property="value" labelProperty="name" />
-								</html:select>
+						    	<s:select name="grade" id="grade" list="#request.ownerGrades" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">入住日期</td>
 						    <td>
-						    	<html:text property="checkinDate" styleId="checkinDate" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
+						    	<s:textfield name="checkinDate" id="checkinDate" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车辆数</td>
 						    <td>
-						    	<html:select property="carNum" style="width:166px">
-						    		<html:option value="0">0</html:option>
-									<html:option value="1">1</html:option>
-									<html:option value="2">2</html:option>
-									<html:option value="3">3</html:option>
-									<html:option value="4">4</html:option>
-								</html:select>
+						    	<s:select list="{'0','1','2','3','4'}" name="carNum" style="width:166px;" />
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    	<html:text property="remark" styleId="remark" maxlength="25"/>
+						    	<s:textfield name="remark" id="remark" maxlength="25"/>
 						    </td>
 					   </tr>
 				  </table>
@@ -153,7 +143,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

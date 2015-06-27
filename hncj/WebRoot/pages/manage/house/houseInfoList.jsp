@@ -41,7 +41,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/houseInfo.do?action=list" styleId="queryForm">
+		<s:form action="houseInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -53,28 +53,19 @@
 								楼号
 							</td>
 							<td>
-								<html:select property="buildingNo" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="buildingNos" property="key" labelProperty="value" />
-								</html:select>
+								<s:select name="buildingNo" id="buildingNo" list="#request.buildingNos" listKey="key" listValue="value" headerKey="" headerValue="---全部---" style="width:166px;"></s:select>
 							</td>
 							<td class="formlabel">
 								单元
 							</td>
 							<td>
-								<html:select property="unitNo" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="unitNos" property="key" labelProperty="value" />
-								</html:select>
+								<s:select name="unitNo" id="unitNo" list="#request.unitNos" listKey="key" listValue="value" headerKey="" headerValue="---全部---" style="width:166px;"></s:select>
 							</td>
 							<td class="formlabel">
 								楼层
 							</td>
 							<td>
-								<html:select property="floor" style="width:166px">
-									<html:option value="">---全部---</html:option>
-									<html:options collection="floors" property="key" labelProperty="value" />
-								</html:select>
+								<s:select name="floor" id="floor" list="#request.floors" listKey="key" listValue="value" headerKey="" headerValue="---全部---" style="width:166px;"></s:select>
 							</td>
 						</tr>
 						<tr>
@@ -82,7 +73,7 @@
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 						</tr>	
 						<tr>
@@ -115,25 +106,25 @@
 					</thead>
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.houseSn}</td>
 								<td>${element.buildingNo}</td>
 								<td>${element.unitNo}</td>
 								<td>${element.floor}</td>
 								<td>${element.houseDesc}</td>
-								<td><bean:write name="element" property="area" format="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.area}" pattern="##0.00"/></td>
 								<td>${element.deliveryDate}</td>
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
 							    	<a href="javascript:delInfo('${element.houseSn}')" >删除</a>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>

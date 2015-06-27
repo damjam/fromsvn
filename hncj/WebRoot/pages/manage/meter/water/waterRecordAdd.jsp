@@ -94,7 +94,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="waterRecord.do?action=doAdd" styleId="waterRecordActionForm" method="post" styleClass="validate">
+	<s:form action="waterRecord.do?action=doAdd" id="waterRecordActionForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -107,21 +107,21 @@
 					  <tr>
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn"  styleId="houseSn" styleClass="{required:true}" maxlength="10" onblur="getPreRecord()"/>
+						    	<s:textfield name="houseSn"  id="houseSn" class="{required:true}" maxlength="10" onblur="getPreRecord()"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">用水月份</td>
 						    <td>
-						    	<html:text property="recordMonth" styleId="recordMonth" styleClass="{required:true}" />
+						    	<s:textfield name="recordMonth" id="recordMonth" class="{required:true}" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					  <tr>
 						    <td class="formlabel nes">上期抄表日期</td>
 						    <td>
-						    	<html:text property="preRecordDate" styleId="preRecordDate" styleClass="{required:true,digit:true}" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
+						    	<s:textfield name="preRecordDate" id="preRecordDate" class="{required:true,digit:true}" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -129,28 +129,28 @@
 					   <tr>
 						    <td class="formlabel nes">上期读数</td>
 						    <td>
-						    <html:text property="prenum"  styleId="prenum" styleClass="{required:true,digit:true}" maxlength="8"/>
+						    <s:textfield name="prenum"  id="prenum" class="{required:true,digit:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr> 
 					   <tr>
 						    <td class="formlabel nes">本期抄表日期</td>
 						    <td>
-						    <html:text property="curRecordDate"  styleId="curRecordDate" styleClass="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker();"/>
+						    <s:textfield name="curRecordDate"  id="curRecordDate" class="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker();"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">本期读数</td>
 						    <td>
-						    <html:text property="curnum"  styleId="curnum" styleClass="{required:true,digit:true}" maxlength="8" onblur="checkNum()"/>
+						    <s:textfield name="curnum"  id="curnum" class="{required:true,digit:true}" maxlength="8" onblur="checkNum()"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">实际用量</td>
 						    <td>
-						    <html:text property="num"  styleId="num" styleClass="{required:true}" maxlength="25" readonly="true"/>
+						    <s:textfield name="num"  id="num" class="{required:true}" maxlength="25" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -166,7 +166,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>	
+	</s:form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

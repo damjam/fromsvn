@@ -108,7 +108,7 @@
 				    	 var endDate = data.endDate;
 				    	 var amount = data.amount;
 				    	 $('#endDate').val(endDate);
-				    	 //$('#amount').val(amount);
+				    	 $('#amount').val(amount);
 					 },
 					 error:function(data){   
 	                     alert("连接服务器失败");
@@ -120,7 +120,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<html:form action="parkingBill.do?action=doAdd" styleId="dataForm" method="post" styleClass="validate">
+	<s:form action="parkingBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -133,14 +133,14 @@
 					  <tr>
 						    <td class="formlabel nes">车位号</td>
 						    <td>
-						    	<html:text property="parkingSn"  styleId="parkingSn" styleClass="{required:true}" maxlength="10" />
+						    	<s:textfield name="parkingSn"  id="parkingSn" class="{required:true}" maxlength="10" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车牌号</td>
 						    <td>
-						    	<html:text property="carSn" styleId="carSn" styleClass="{required:true}"/>
+						    	<s:textfield name="carSn" id="carSn" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -148,58 +148,56 @@
 					   <tr>
 						    <td class="formlabel nes">是否小区业主</td>
 						    <td>
-						    	<html:select property="isInternal" onchange="change()" styleId="isInternal">
-						    		<html:options collection="yesNos" property="value" labelProperty="name" />
-						    	</html:select>
+						    	<s:select name="isInternal" id="isInternal" list="#request.yesNos" listKey="value" listValue="name" onchange="change()"></s:select>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr class="houseSn">
 						    <td class="formlabel">房屋编号</td>
 						    <td>
-						    	<html:text property="houseSn" styleId="houseSn" maxlength="10" onblur="getOwnerName()"/>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getOwnerName()"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">车主姓名</td>
 						    <td>
-						    	<html:text property="ownerName" styleId="ownerName" styleClass="{required:true}" maxlength="10" />
+						    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">起始日期</td>
 						    <td>
-						    <html:text property="beginDate"  styleId="beginDate" styleClass="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+						    <s:textfield name="beginDate"  id="beginDate" class="{required:true}" maxlength="8" readonly="true" onfocus="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">缴费月数</td>
 						    <td>
-						    <html:text property="monthNum"  styleId="monthNum" styleClass="{required:true,digit:true}" maxlength="2" onblur="getAcctInfo()"/>
+						    <s:textfield name="monthNum"  id="monthNum" class="{required:true,digit:true}" maxlength="2" onblur="getAcctInfo()"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr> 
 					   <tr>
 						    <td class="formlabel nes">结束日期</td>
 						    <td>
-						    <html:text property="endDate"  styleId="endDate" styleClass="{required:true}" maxlength="8" readonly="true"/>
+						    <s:textfield name="endDate"  id="endDate" class="{required:true}" maxlength="8" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel nes">金额</td>
 						    <td>
-						    <html:text property="amount"  styleId="amount" styleClass="{required:true,num:true}" maxlength="8"/>
+						    <s:textfield name="amount"  id="amount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr>
 						    <td class="formlabel">备注</td>
 						    <td>
-						    <html:text property="remark"  styleId="remark" maxlength="25"/>
+						    <s:textfield name="remark"  id="remark" maxlength="25"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -215,7 +213,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</html:form>
+	</s:form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

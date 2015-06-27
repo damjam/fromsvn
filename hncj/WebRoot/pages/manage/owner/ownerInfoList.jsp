@@ -57,7 +57,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<html:form action="/ownerInfo.do?action=list" styleId="queryForm">
+		<s:form action="ownerInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -69,13 +69,13 @@
 								业主姓名
 							</td>
 							<td>
-								<html:text property="ownerName" styleId="ownerName" maxlength="10"/>
+								<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
 								房屋编号
 							</td>
 							<td>
-								<html:text property="houseSn" styleId="houseSn" maxlength="10"/>
+								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>
@@ -113,7 +113,7 @@
 						 </tr>
 					</thead>
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
-						<logic:iterate id="element" name="list">
+						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.ownerName}</td>
 								<td><f:type className="SexType" value="${element.gender}"/> </td>
@@ -127,24 +127,23 @@
 								<td>${element.oweTimes}</td>
 								<td>${element.oweDays}</td>
 								 -->
-								<td><bean:write name="element" property="createDate" format="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td><f:state className="OwnerState" value="${element.state}"/></td>
 							    <td class="redlink">
-						    		<logic:equal value="00" name="element" property="state">
-						    			
+						    		<c:if test="${element.state eq '00'}">	
 						    			<a href="javascript:updateInfo('${element.id}')">修改</a>
 							    		<a href="javascript:canceInfo('${element.id}')" >销户</a>
-							    		<logic:notEqual value="Y" name="element" property="hasAcct">
+							    		<c:if test="${element.hasAcct ne 'Y'}">
 							    			<a href="javascript:openAcct('${element.id}')" >开通账户</a>
-							    		</logic:notEqual>
-						    		</logic:equal>
+							    		</c:if>
+						    		</c:if>
 							    </td>
 						    </tr>
-						</logic:iterate>
+						</c:forEach>
 					</f:showDataGrid>
 				</table>
 				<f:paginate/>			
 			</div> 
-		</html:form>
+		</s:form>
 	</body>
 </html>
