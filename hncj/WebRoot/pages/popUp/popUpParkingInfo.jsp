@@ -85,7 +85,7 @@ body {
 	</head>
 
 	<body>
-		<s:form action="parkingInfo.do?action=queryPopUpParkingInfo"
+		<form action="parkingInfo.do?action=queryPopUpParkingInfo"
 			method="post">
 			<div class="userbox">
 				<div>
@@ -181,7 +181,7 @@ body {
 				</table>
 				<f:paginate />
 			</div>
-		</s:form>
+		</form>
 
 		<table width="100%" border="0" cellspacing="0" cellpadding="0"
 			align="center">

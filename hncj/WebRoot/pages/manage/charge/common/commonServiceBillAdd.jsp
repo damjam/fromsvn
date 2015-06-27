@@ -199,7 +199,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<s:form action="commonServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
+	<form action="commonServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -289,7 +289,7 @@
 					   <tr id="tr2">
 					   		<td class="formlabel nes">是否补缴款(20%)</td>
 						    <td>
-						    	<s:select name="suPayState" id="suPayState" list="{'N':'否','Y':'是'}" listKey="value" listValue="name"></s:select>
+						    	<s:select name="suPayState" id="suPayState" list="#{'N':'否','Y':'是'}" listKey="key" listValue="value"></s:select>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -319,7 +319,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</s:form>
+	</form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

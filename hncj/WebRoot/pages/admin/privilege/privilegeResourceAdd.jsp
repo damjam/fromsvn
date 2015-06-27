@@ -71,7 +71,7 @@
 					    <tr>
 					    	<td class="formlabel nes" align="right">是否入口</td>
 						     <td >
-								<s:select name="isEntry" class="{required:true}" list="{'Y':'是','N':'否'}" listKey="key" listValue="value"/>
+								<s:select name="isEntry" class="{required:true}" list="#{'Y':'是','N':'否'}" listKey="key" listValue="value"/>
 								<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>

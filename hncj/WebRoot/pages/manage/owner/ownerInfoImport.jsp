@@ -69,7 +69,7 @@
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<s:form action="ownerInfo.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
+				<form action="ownerInfo.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 						<caption>${ACT.name}</caption>
 						
@@ -82,7 +82,7 @@
 							</td>
 						</tr>
 					</table>
-				</s:form>
+				</form>
 				<div class="btnbox">
 					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 					<input type="button" value="返回" class="inp_L3" style="margin-left:30px;" onclick="gotoUrl('/ownerInfo.do?action=list');"/>

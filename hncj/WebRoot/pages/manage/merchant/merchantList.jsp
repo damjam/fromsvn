@@ -43,7 +43,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<s:form action="merchantInfo.do?action=list" id="queryForm">
+		<form action="merchantInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -110,6 +110,6 @@
 				</table>
 				<f:paginate/>			
 			</div> 
-		</s:form>
+		</form>
 	</body>
 </html>

@@ -110,7 +110,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<s:form action="decorateServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
+	<form action="decorateServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<s:hidden name="csBillId" id="csBillId"/>
 		<div class="userbox">
 			<div>
@@ -203,7 +203,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</s:form>
+	</form>
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

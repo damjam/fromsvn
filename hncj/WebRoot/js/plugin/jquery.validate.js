@@ -81,7 +81,7 @@ $.extend($.fn, {
 							hidden.remove();
 						}
 //						return false;
-						// henry 2009-11-18 ĞŞ¸Ä						
+						// henry 2009-11-18 ï¿½Ş¸ï¿½						
 						return true;
 					}
 					return true;
@@ -277,7 +277,7 @@ $.extend($.validator, {
 		url: "Please enter a valid URL.",
 		date: "Please enter a valid date.",
 		dateISO: "Please enter a valid date (ISO).",
-		dateDE: "Bitte geben Sie ein g¨¹ltiges Datum ein.",
+		dateDE: "Bitte geben Sie ein gï¿½ï¿½ltiges Datum ein.",
 		number: "Please enter a valid number.",
 		numberDE: "Bitte geben Sie eine Nummer ein.",
 		digits: "Please enter only digits",
@@ -290,17 +290,17 @@ $.extend($.validator, {
 		range: $.validator.format("Please enter a value between {0} and {1}."),
 		max: $.validator.format("Please enter a value less than or equal to {0}."),
 		min: $.validator.format("Please enter a value greater than or equal to {0}."),
-		mobile:"ÕıÈ·¸ñÊ½µÄÊÖ»úºÅ",
+		mobile:"ï¿½ï¿½È·ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½",
 		// begin, add by henry 2009-11-17
-		letter: "Ö»ÄÜÊäÈë×ÖÄ¸.",
-		digitOrLetter: "Ö»ÄÜÊäÈë×ÖÄ¸»òÊı×Ö",
-		digit: "Ö»ÄÜÊäÈëÕûÊı",
-		num: "Ö»ÄÜÊäÈëÊı×Ö",
+		letter: "Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸.",
+		digitOrLetter: "Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
+		digit: "Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
+		num: "Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
 		// end.
 		// begin, add by luoejun 2013-05-06
-		idcard : "ÇëÕıÈ·ÊäÈëÄúµÄÉí·İÖ¤ºÅÂë",
-		bankno : "ÇëÊäÈëÕıÈ·µÄÒøĞĞ¿¨ºÅ",
-		passport : "ÇëÊäÈëÕıÈ·µÄ»¤ÕÕ±àºÅ"
+		idcard : "ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½",
+		bankno : "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½ï¿½",
+		passport : "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä»ï¿½ï¿½Õ±ï¿½ï¿½"
 		// end.
 	},
 	
@@ -1071,7 +1071,7 @@ $.extend($.validator, {
 		date: function(value, element) {
 //			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
 
-			/* ÅĞ¶Ï¸ñÊ½ */
+			/* ï¿½Ğ¶Ï¸ï¿½Ê½ */
 			if (!/^\d{4}([-]?\d{2}){2}|\d{4}([\/]?\d{2}){2}$/.test(value)) {
 				return false;
 			}
@@ -1079,7 +1079,7 @@ $.extend($.validator, {
 			var month = null;
 			var day = null;
 			
-			/* ÌáÈ¡ÄêÔÂÈÕ²¿·Ö */
+			/* ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ */
 			if (value.length == 8) {
 				year = value.substr(0, 4);
 				month = value.substr(4, 2);
@@ -1094,14 +1094,14 @@ $.extend($.validator, {
 				return false;
 			}
 	
-			/* ÅĞ¶ÏÈÕÆÚ·¶Î§ */
+			/* ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ú·ï¿½Î§ */
 			if (year < 1000 
 				|| (month < 1 || month > 12) 
 				|| (day < 1 || day > 31)) {
 				return false;
 			}
 	
-			/* ÅĞ¶ÏÊÇ·ñÄÜÕıÈ·×ª»»ÎªÈÕÆÚ */
+			/* ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½È·×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ */
 			var date = new Date(year, month - 1, day);
 	
 			if (date.getFullYear() != year
@@ -1265,5 +1265,5 @@ $.format = $.validator.format;
 		triggerEvent: function(type, target) {
 			return this.triggerHandler(type, [$.event.fix({ type: type, target: target })]);
 		}
-	})
+	});
 })(jQuery);

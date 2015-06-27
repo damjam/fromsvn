@@ -2,11 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 <%@ include file="/pages/common/taglibs.jsp" %>
+<%@ include file="/pages/common/sys.jsp"%>
 <html lang="zh-cn"> 
 	<head>
 		<title>操作超时</title>
-		<link rel="stylesheet" href="${CONTEXT_PATH}/css/page.css"
-			type="text/css" media="screen, projection" />
+		<f:css href="/css/page.css"/>	
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.blockUI.js"/>
 		<script>

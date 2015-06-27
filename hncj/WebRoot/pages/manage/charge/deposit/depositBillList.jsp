@@ -53,7 +53,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<s:form action="depositBill.do?action=list" id="queryForm">
+		<form action="depositBill.do?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -83,7 +83,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="formlabel nes">状态</td>
+							<td class="formlabel">状态</td>
 						    <td>
 						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
@@ -198,6 +198,6 @@
 				</table>
 				<f:paginate/>			
 			</div> 
-		</s:form>
+		</form>
 	</body>
 </html>

@@ -40,7 +40,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<s:form action="/chargeParam.do?action=doAddItem" id="queryForm">
+		<form action="/chargeParam.do?action=doAddItem" id="queryForm">
 			<s:hidden name="id"/>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
@@ -79,6 +79,6 @@
 					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="返回"/>
 				</div>		
 			</div> 
-		</s:form>
+		</form>
 	</body>
 </html>

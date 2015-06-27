@@ -55,7 +55,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<s:form action="ownerInfo.do?action=doUpdate" id="ownerInfoActionForm" method="post" class="validate">
+	<form action="ownerInfo.do?action=doUpdate" id="ownerInfoActionForm" method="post" class="validate">
 		<s:hidden name="id" id="id"/>
 		<div class="userbox">
 			<div>
@@ -123,7 +123,7 @@
 					   <tr>
 						    <td class="formlabel nes">车辆数</td>
 						    <td>
-						    	<s:select list="{'0','1','2','3','4'}" name="carNum" style="width:166px;" />
+						    	<s:select list="#{'0','1','2','3','4'}" name="carNum" style="width:166px;" />
 						    </td>
 					   </tr>
 					   <tr>
@@ -144,7 +144,7 @@
 				<b class="b1"></b>	
 			</div>
 		</div>	
-	</s:form>	
+	</form>	
 	<!--版权区域-->
 	<div class="bottom">
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

@@ -42,7 +42,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<s:form action="carInfo.do?action=list" styleId="queryForm">
+		<form action="carInfo.do?action=list" styleId="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -54,7 +54,7 @@
 								房屋类型
 							</td>
 							<td>
-								<s:select name="" id="" list="{'00':'住宅','01':'公寓','02':'商铺'}" listKey="value" listValue="name"></s:select>
+								<s:select name="" id="" list="#{'00':'住宅','01':'公寓','02':'商铺'}" listKey="value" listValue="name"></s:select>
 							</td>
 						</tr>
 						<tr>
@@ -106,6 +106,6 @@
 				</table>
 				<f:paginate/>			
 			</div> 
-		</s:form>
+		</form>
 	</body>
 </html>

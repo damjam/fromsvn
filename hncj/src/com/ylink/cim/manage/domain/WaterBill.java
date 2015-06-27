@@ -40,6 +40,7 @@ public class WaterBill implements java.io.Serializable {
 	private String endCreateDate;
 	private String buildingNo;
 	private String year;
+	//±íµ¥ÔªËØ
 	
 	public String getBuildingNo() {
 		return buildingNo;
