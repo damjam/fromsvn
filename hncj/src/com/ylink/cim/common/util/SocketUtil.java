@@ -21,18 +21,17 @@ import flink.util.SpringContext;
 
 public class SocketUtil {
 	private static Logger logger = Logger.getLogger(SocketUtil.class);
-	
 
-	public static String recvMsg(Socket socket, int timeoutSeconds, String charset,
-			boolean closeSocket) throws BizException {
+	public static String recvMsg(Socket socket, int timeoutSeconds,
+			String charset, boolean closeSocket) throws BizException {
 		try {
-			
+
 			socket.setSoTimeout(timeoutSeconds * 1000);
 			InputStream is = socket.getInputStream();
 			DataInputStream dis = new DataInputStream(is);
-			byte[] b=new byte[8];
+			byte[] b = new byte[8];
 			dis.read(b);
-			int len=Integer.parseInt(new String(b));
+			int len = Integer.parseInt(new String(b));
 			// 获取报文头字节数
 			byte[] msgBuf = new byte[len];
 			int n = 0;
@@ -41,17 +40,17 @@ public class SocketUtil {
 				int onceLen = dis.read(temp);
 				if (onceLen > 0) {
 					for (int i = 0; i < onceLen; i++) {
-						msgBuf[n+i] = temp[i];
+						msgBuf[n + i] = temp[i];
 					}
-					n+=onceLen;
+					n += onceLen;
 				}
 			}
 			/*
-			if (n != len) {
-				throw new BizException(String.format("报文长度字节数不足%d<%d", n, len));
-			}*/
+			 * if (n != len) { throw new
+			 * BizException(String.format("报文长度字节数不足%d<%d", n, len)); }
+			 */
 			String msg = new String(msgBuf, charset);
-//			logger.debug("收到报文[" + msg + "]");
+			// logger.debug("收到报文[" + msg + "]");
 			if (closeSocket) {
 				socket.close();
 			}
@@ -70,16 +69,17 @@ public class SocketUtil {
 		}
 	}
 
-	public static void sendMsg(Socket socket, String sendMsg, int timeoutSeconds, String charset) throws BizException {
+	public static void sendMsg(Socket socket, String sendMsg,
+			int timeoutSeconds, String charset) throws BizException {
 		try {
 			OutputStream os = socket.getOutputStream();
-			DataOutputStream dataOutputStream=new DataOutputStream(os);
-			int len=sendMsg.getBytes().length;//渠道接口文档要求前4位传报文长度，不足的补0
-			String lenStr=MsgUtil.fill(len+"", '0', 8, 'L');
+			DataOutputStream dataOutputStream = new DataOutputStream(os);
+			int len = sendMsg.getBytes().length;// 渠道接口文档要求前4位传报文长度，不足的补0
+			String lenStr = MsgUtil.fill(len + "", '0', 8, 'L');
 			dataOutputStream.write(lenStr.getBytes());
 			dataOutputStream.write(sendMsg.getBytes(charset));
 			dataOutputStream.flush();
-//			logger.debug("发送报文:[" + sendMsg + "]");
+			// logger.debug("发送报文:[" + sendMsg + "]");
 			// socket.shutdownOutput();
 		} catch (Exception e) {
 			if (socket != null) {
@@ -93,8 +93,8 @@ public class SocketUtil {
 		}
 	}
 
-	public static Socket sendMsg(String ipAddr, int port, String sendMsg, int timeoutSeconds, String charset)
-			throws BizException {
+	public static Socket sendMsg(String ipAddr, int port, String sendMsg,
+			int timeoutSeconds, String charset) throws BizException {
 		Socket socket = null;
 		try {
 			socket = new Socket();
@@ -114,29 +114,40 @@ public class SocketUtil {
 		}
 	}
 
-	public static String sendRecv(String ipAddr, int port, String sendMsg, int timeoutSeconds, String charset,
-			int headLen, int footLen, boolean closeSocket) throws BizException {
-		Socket socket = SocketUtil.sendMsg(ipAddr, port, sendMsg, timeoutSeconds, charset);
-		return SocketUtil.recvMsg(socket, timeoutSeconds, charset,  closeSocket);
+	public static String sendRecv(String ipAddr, int port, String sendMsg,
+			int timeoutSeconds, String charset, int headLen, int footLen,
+			boolean closeSocket) throws BizException {
+		Socket socket = SocketUtil.sendMsg(ipAddr, port, sendMsg,
+				timeoutSeconds, charset);
+		return SocketUtil.recvMsg(socket, timeoutSeconds, charset, closeSocket);
 	}
+
 	@Deprecated()
 	public static String sendRecInPool(String sendMsg) throws BizException {
-		SocketParams socketParams = (SocketParams)SpringContext.getService("socketParams");
-		ConnectionAdapter socket = ConnectionProvider.getInstance().getConnection();
-		SocketUtil.sendMsg(socket, sendMsg, socketParams.getTimeout(), socketParams.getCharset());
-		logger.debug("请求报文["+sendMsg+"]");
-		String resMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(), socketParams.getCharset(),  false);
-		logger.debug("响应报文["+resMsg+"]");
+		SocketParams socketParams = (SocketParams) SpringContext
+				.getService("socketParams");
+		ConnectionAdapter socket = ConnectionProvider.getInstance()
+				.getConnection();
+		SocketUtil.sendMsg(socket, sendMsg, socketParams.getTimeout(),
+				socketParams.getCharset());
+		logger.debug("请求报文[" + sendMsg + "]");
+		String resMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(),
+				socketParams.getCharset(), false);
+		logger.debug("响应报文[" + resMsg + "]");
 		socket.release();
 		return resMsg;
 	}
-	
+
 	public static String sendRec(String sendMsg) throws BizException {
-		SocketParams socketParams = (SocketParams)SpringContext.getService("socketParams");
-		Socket socket=SocketUtil.sendMsg(socketParams.getHostName(), socketParams.getPortNum(), sendMsg, socketParams.getTimeout(), socketParams.getCharset());
-		logger.debug("请求报文["+sendMsg+"]");
-		String resMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(), socketParams.getCharset(),  true);
-		logger.debug("响应报文["+resMsg+"]");
+		SocketParams socketParams = (SocketParams) SpringContext
+				.getService("socketParams");
+		Socket socket = SocketUtil.sendMsg(socketParams.getHostName(),
+				socketParams.getPortNum(), sendMsg, socketParams.getTimeout(),
+				socketParams.getCharset());
+		logger.debug("请求报文[" + sendMsg + "]");
+		String resMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(),
+				socketParams.getCharset(), true);
+		logger.debug("响应报文[" + resMsg + "]");
 		return resMsg;
 	}
 

@@ -23,7 +23,7 @@ public class LogClassType extends AbstractType {
 	}
 
 	public static LogClassType valueOf(String value) {
-		LogClassType type = (LogClassType) ALL.get(value);
+		LogClassType type = ALL.get(value);
 		if (type == null) {
 			throw new RuntimeBizException("²Ù×÷ÀàÐÍ´íÎó" + value);
 		}

@@ -16,14 +16,17 @@ import flink.util.Paginater;
 @Component("timerDao")
 public class TimerDaoImpl extends BaseDaoImpl implements TimerDao {
 
+	@Override
 	public List<Timer> findAllValidTimer() {
 		return null;
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return Timer.class;
 	}
 
+	@Override
 	public Paginater getTimerList(Pager pager, Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Timer where 1=1");

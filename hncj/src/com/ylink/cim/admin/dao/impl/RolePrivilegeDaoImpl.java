@@ -11,8 +11,10 @@ import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("rolePrivilegeDao")
-public class RolePrivilegeDaoImpl extends BaseDaoImpl implements RolePrivilegeDao {
+public class RolePrivilegeDaoImpl extends BaseDaoImpl implements
+		RolePrivilegeDao {
 
+	@Override
 	public List<RolePrivilege> getRolePrivilegeByRoleId(String roleId) {
 
 		QueryHelper helper = new QueryHelper();
@@ -23,6 +25,7 @@ public class RolePrivilegeDaoImpl extends BaseDaoImpl implements RolePrivilegeDa
 		return super.getList(helper);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return RolePrivilege.class;
 	}

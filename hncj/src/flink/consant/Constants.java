@@ -1,6 +1,5 @@
 package flink.consant;
 
-
 public abstract class Constants {
 	// 用户全部权限点.
 	public static final String USER_PRIVILEGE = "USER_PRIVILEGE";
@@ -113,6 +112,6 @@ public abstract class Constants {
 	public static final String TAKEOUT_MOBILE_MSG = "尊敬的客户，您于{?}年{?}月{?}日成功赎回{?}克黄金（实物赎回），扣款金额{?}元。目前，您的黄金账户共有黄金{?}克，资金账户余额{?}元。请您于约定的提货日携带您的身份证件到指定网点办理提货手续。";
 	/** 现金赎回完成的短信内容 */
 	public static final String SOLD_MOBILE_MSG = "尊敬的客户，您于{?}年{?}月{?}日成功赎回{?}克黄金（现金赎回），扣款手续费后的返还金额为{?}元。目前，您的黄金账户共有黄金{?}克，资金账户余额{?}元。现金赎回的资金将于五个工作日内返还至您的银行卡。";
-	/**物业费催款通知*/
+	/** 物业费催款通知 */
 	public static final String SERVICE_BILL_DUE_MSG = "尊敬的业主，你的物业费将于{?}到期，为了更好的为您服务，请您于近期缴纳物业费";
 }

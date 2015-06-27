@@ -108,7 +108,8 @@ public abstract class Validator {
 		for (int i = 0, len = s.length(); i < len; i++) {
 			char ch = s.charAt(i);
 
-			if (INTERPUNCTION.indexOf(ch) == -1 && !Character.isLetter(ch) && !Character.isDigit(ch)) {
+			if (INTERPUNCTION.indexOf(ch) == -1 && !Character.isLetter(ch)
+					&& !Character.isDigit(ch)) {
 				return false;
 			}
 		}
@@ -142,7 +143,8 @@ public abstract class Validator {
 		for (int i = 0, len = s.length(); i < len; i++) {
 			char ch = s.charAt(i);
 
-			if (!Character.isDigit(ch) && !Character.isUpperCase(ch) && !Character.isLowerCase(ch)) {
+			if (!Character.isDigit(ch) && !Character.isUpperCase(ch)
+					&& !Character.isLowerCase(ch)) {
 				return false;
 			}
 		}

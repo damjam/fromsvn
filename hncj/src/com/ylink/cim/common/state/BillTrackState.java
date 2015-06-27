@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import flink.util.AbstractState;
 import flink.util.ExceptionUtils;
 
-
 public class BillTrackState extends AbstractState {
 	public static Map<String, BillTrackState> ALL = new LinkedHashMap<String, BillTrackState>();
 
 	public static final BillTrackState VALID = new BillTrackState("有效", "00");
-	public static final BillTrackState EXPIRED= new BillTrackState("失效", "01");
+	public static final BillTrackState EXPIRED = new BillTrackState("失效", "01");
+
 	protected BillTrackState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

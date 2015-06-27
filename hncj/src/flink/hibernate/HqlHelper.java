@@ -31,7 +31,8 @@ public class HqlHelper {
 	private static final String AS = "as";
 	private static final String AS_WITH_SPACE = SPACE.concat(AS).concat(SPACE);
 
-	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
+	private static final String LINE_SEPARATOR = System
+			.getProperty("line.separator");
 
 	private StringBuffer hql = new StringBuffer();
 	private List params = new ArrayList();
@@ -140,7 +141,8 @@ public class HqlHelper {
 	 * @return
 	 */
 	public HqlHelper orderBy(String orderBy) {
-		return StringUtils.isEmpty(orderBy) ? this : appendHql("order by").appendHql(orderBy);
+		return StringUtils.isEmpty(orderBy) ? this : appendHql("order by")
+				.appendHql(orderBy);
 	}
 
 	/**
@@ -156,7 +158,8 @@ public class HqlHelper {
 			orderType = StringUtils.EMPTY;
 		}
 
-		return StringUtils.isEmpty(orderBy) ? this : appendHql("order by").appendHql(orderBy).appendHql(orderType);
+		return StringUtils.isEmpty(orderBy) ? this : appendHql("order by")
+				.appendHql(orderBy).appendHql(orderType);
 	}
 
 	/**
@@ -273,14 +276,16 @@ public class HqlHelper {
 	 * @return
 	 */
 	public Query getQuery(Session session) {
-		return session.createQuery(hql.toString()).setParameters(params.toArray(), ArrayHelper.toTypeArray(paramTypes));
+		return session.createQuery(hql.toString()).setParameters(
+				params.toArray(), ArrayHelper.toTypeArray(paramTypes));
 	}
 
 	public SQLQuery getSQLQuery(Session session) {
 		SQLQuery query = session.createSQLQuery(hql.toString());
 
 		for (Iterator i = scalars.iterator(); i.hasNext();) {
-			NativeSQLQueryScalarReturn scalar = (NativeSQLQueryScalarReturn) i.next();
+			NativeSQLQueryScalarReturn scalar = (NativeSQLQueryScalarReturn) i
+					.next();
 			query.addScalar(scalar.getColumnAlias(), scalar.getType());
 		}
 
@@ -300,8 +305,10 @@ public class HqlHelper {
 		hql = replaceHqlHead(hql);
 		hql = replaceHqlTail(hql);
 
-		Long count = (Long) session.createQuery(hql)
-				.setParameters(params.toArray(), ArrayHelper.toTypeArray(paramTypes)).uniqueResult();
+		Long count = (Long) session
+				.createQuery(hql)
+				.setParameters(params.toArray(),
+						ArrayHelper.toTypeArray(paramTypes)).uniqueResult();
 
 		return count.intValue();
 	}
@@ -312,8 +319,11 @@ public class HqlHelper {
 	public int getRecordCountBySql(Session session) {
 		String hql = this.hql.toString().trim();
 
-		BigDecimal count = (BigDecimal) session.createSQLQuery("select count(*) from (".concat(hql).concat(") t"))
-				.setParameters(params.toArray(), ArrayHelper.toTypeArray(paramTypes)).uniqueResult();
+		BigDecimal count = (BigDecimal) session
+				.createSQLQuery(
+						"select count(*) from (".concat(hql).concat(") t"))
+				.setParameters(params.toArray(),
+						ArrayHelper.toTypeArray(paramTypes)).uniqueResult();
 
 		return count.intValue();
 	}
@@ -428,13 +438,16 @@ public class HqlHelper {
 	 * @return
 	 */
 	private String[] padSeparatorKeyword(String keyword) {
-		return new String[] { SPACE.concat(keyword).concat(SPACE), SPACE.concat(keyword).concat(TAB),
+		return new String[] { SPACE.concat(keyword).concat(SPACE),
+				SPACE.concat(keyword).concat(TAB),
 				SPACE.concat(keyword).concat(LINE_SEPARATOR),
 
-				TAB.concat(keyword).concat(SPACE), TAB.concat(keyword).concat(TAB),
+				TAB.concat(keyword).concat(SPACE),
+				TAB.concat(keyword).concat(TAB),
 				TAB.concat(keyword).concat(LINE_SEPARATOR),
 
-				LINE_SEPARATOR.concat(keyword).concat(SPACE), LINE_SEPARATOR.concat(keyword).concat(TAB),
+				LINE_SEPARATOR.concat(keyword).concat(SPACE),
+				LINE_SEPARATOR.concat(keyword).concat(TAB),
 				LINE_SEPARATOR.concat(keyword).concat(LINE_SEPARATOR) };
 	}
 
@@ -450,7 +463,8 @@ public class HqlHelper {
 		return this.getQuery(session).uniqueResult();
 	}
 
-	public Object getUniqueResult(Session session, String alias, LockMode lockMode) {
+	public Object getUniqueResult(Session session, String alias,
+			LockMode lockMode) {
 		return this.getQuery(session).setLockMode(alias, lockMode).list();
 	}
 
@@ -469,11 +483,13 @@ public class HqlHelper {
 		}
 
 		List list = new ArrayList();
-		String entityAliasPrefix = StringUtils.isEmpty(entityAlias) ? StringUtils.EMPTY : entityAlias.concat(DOT);
+		String entityAliasPrefix = StringUtils.isEmpty(entityAlias) ? StringUtils.EMPTY
+				: entityAlias.concat(DOT);
 
 		for (int i = 0; i < properties.length; i++) {
 			String property = properties[i];
-			list.add(entityAliasPrefix.concat(property).concat(AS_WITH_SPACE).concat(property));
+			list.add(entityAliasPrefix.concat(property).concat(AS_WITH_SPACE)
+					.concat(property));
 		}
 
 		return StringUtils.join(list.iterator(), ",".concat(SPACE));

@@ -14,12 +14,14 @@ import flink.etc.BizException;
 public class ConnectUtil {
 	private static Logger logger = Logger.getLogger(ConnectUtil.class);
 
-	public static String recvMsg(ConnectionAdapter socket, int timeoutSeconds, String charset) throws BizException {
+	public static String recvMsg(ConnectionAdapter socket, int timeoutSeconds,
+			String charset) throws BizException {
 		try {
 			socket.setSoTimeout(3000);
 			InputStream inputStream = socket.getInputStream();
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "GBK"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					inputStream, "GBK"));
 
 			char[] contents = new char[1024];
 
@@ -42,7 +44,8 @@ public class ConnectUtil {
 		}
 	}
 
-	public static void sendMsg(Socket socket, String sendMsg, int timeoutSeconds, String charset) throws BizException {
+	public static void sendMsg(Socket socket, String sendMsg,
+			int timeoutSeconds, String charset) throws BizException {
 		try {
 			OutputStream os = socket.getOutputStream();
 			os.write(sendMsg.getBytes(charset));
@@ -60,7 +63,8 @@ public class ConnectUtil {
 		}
 	}
 
-	public static String sendRecv(String sendMsg, int timeoutSeconds, String charset) throws BizException {
+	public static String sendRecv(String sendMsg, int timeoutSeconds,
+			String charset) throws BizException {
 		ConnectionProvider provider = ConnectionProvider.getInstance();
 		ConnectionAdapter socket = provider.getConnection();
 		sendMsg(socket, sendMsg, timeoutSeconds, charset);

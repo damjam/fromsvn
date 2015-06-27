@@ -16,11 +16,16 @@ import flink.util.ExceptionUtils;
 public class PlanApplyReason extends AbstractType {
 	public static Map<String, PlanApplyReason> ALL = new LinkedHashMap<String, PlanApplyReason>();
 
-	public static final PlanApplyReason APPLY_REASON_1 = new PlanApplyReason("–¬…Í«Î", "1");
-	public static final PlanApplyReason APPLY_REASON_2 = new PlanApplyReason("…Í«Î–ﬁ∏ƒ->…Í«Î", "2");
-	public static final PlanApplyReason APPLY_REASON_3 = new PlanApplyReason("…˙–ß–ﬁ∏ƒ->…Í«Î", "3");
-	public static final PlanApplyReason APPLY_REASON_4 = new PlanApplyReason("…˙–ß‘›Õ£->…Í«Î£®‘›Õ££©", "4");
-	public static final PlanApplyReason APPLY_REASON_5 = new PlanApplyReason("‘›Õ£ª÷∏¥->…Í«Î", "5");
+	public static final PlanApplyReason APPLY_REASON_1 = new PlanApplyReason(
+			"–¬…Í«Î", "1");
+	public static final PlanApplyReason APPLY_REASON_2 = new PlanApplyReason(
+			"…Í«Î–ﬁ∏ƒ->…Í«Î", "2");
+	public static final PlanApplyReason APPLY_REASON_3 = new PlanApplyReason(
+			"…˙–ß–ﬁ∏ƒ->…Í«Î", "3");
+	public static final PlanApplyReason APPLY_REASON_4 = new PlanApplyReason(
+			"…˙–ß‘›Õ£->…Í«Î£®‘›Õ££©", "4");
+	public static final PlanApplyReason APPLY_REASON_5 = new PlanApplyReason(
+			"‘›Õ£ª÷∏¥->…Í«Î", "5");
 
 	protected PlanApplyReason(String name, String value) {
 		super(name, value);

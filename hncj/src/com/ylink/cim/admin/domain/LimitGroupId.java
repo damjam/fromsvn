@@ -11,7 +11,7 @@ public class LimitGroupId implements java.io.Serializable {
 	public LimitGroupId() {
 	}
 
-
+	@Override
 	public boolean equals(final Object other) {
 		if ((this == other))
 			return true;
@@ -22,8 +22,10 @@ public class LimitGroupId implements java.io.Serializable {
 		LimitGroupId castOther = (LimitGroupId) other;
 
 		return ((getLimitGroupId() == castOther.getLimitGroupId()) || (getLimitGroupId() != null
-				&& castOther.getLimitGroupId() != null && getLimitGroupId().equals(castOther.getLimitGroupId())))
-				&& ((getLimitId() == castOther.getLimitId()) || (getLimitId() != null && castOther.getLimitId() != null && getLimitId()
+				&& castOther.getLimitGroupId() != null && getLimitGroupId()
+				.equals(castOther.getLimitGroupId())))
+				&& ((getLimitId() == castOther.getLimitId()) || (getLimitId() != null
+						&& castOther.getLimitId() != null && getLimitId()
 						.equals(castOther.getLimitId())));
 	}
 
@@ -35,11 +37,15 @@ public class LimitGroupId implements java.io.Serializable {
 		return this.limitId;
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getLimitGroupId() == null ? 0 : getLimitGroupId().hashCode());
-		result = 37 * result + (getLimitId() == null ? 0 : getLimitId().hashCode());
+		result = 37
+				* result
+				+ (getLimitGroupId() == null ? 0 : getLimitGroupId().hashCode());
+		result = 37 * result
+				+ (getLimitId() == null ? 0 : getLimitId().hashCode());
 		return result;
 	}
 

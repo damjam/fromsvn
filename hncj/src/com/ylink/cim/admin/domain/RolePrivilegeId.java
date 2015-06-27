@@ -29,7 +29,7 @@ public class RolePrivilegeId implements Serializable {
 		this.roleId = roleId;
 	}
 
-	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -38,7 +38,7 @@ public class RolePrivilegeId implements Serializable {
 		return result;
 	}
 
-	
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -60,5 +60,4 @@ public class RolePrivilegeId implements Serializable {
 		return true;
 	}
 
-	
 }

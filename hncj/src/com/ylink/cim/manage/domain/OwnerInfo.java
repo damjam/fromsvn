@@ -39,7 +39,6 @@ public class OwnerInfo implements java.io.Serializable {
 	private String branchNo;
 	private String fileName;
 	private File file;
-	
 
 	public File getFile() {
 		return file;

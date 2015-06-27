@@ -62,7 +62,8 @@ public abstract class PoiUtils {
 	 * @param value
 	 * @return
 	 */
-	public static HSSFCell createCell(HSSFRow row, int index, Date value, HSSFCellStyle style) {
+	public static HSSFCell createCell(HSSFRow row, int index, Date value,
+			HSSFCellStyle style) {
 		HSSFCell cell = createCell(row, index);
 
 		if (value != null) {
@@ -96,7 +97,8 @@ public abstract class PoiUtils {
 	 * @param value
 	 * @return
 	 */
-	public static HSSFCell createCell(HSSFRow row, int index, Double value, HSSFCellStyle style) {
+	public static HSSFCell createCell(HSSFRow row, int index, Double value,
+			HSSFCellStyle style) {
 		HSSFCell cell = createCell(row, index);
 
 		if (value != null) {
@@ -186,15 +188,19 @@ public abstract class PoiUtils {
 	 * @param rowTo
 	 * @param colTo
 	 */
-	public static void mergeCell(HSSFSheet sheet, int rowFrom, int colFrom, int rowTo, int colTo) {
-		sheet.addMergedRegion(new CellRangeAddress(rowFrom, colFrom, rowTo, colTo));
+	public static void mergeCell(HSSFSheet sheet, int rowFrom, int colFrom,
+			int rowTo, int colTo) {
+		sheet.addMergedRegion(new CellRangeAddress(rowFrom, colFrom, rowTo,
+				colTo));
 	}
 
-	public static void respondExcel(HttpServletResponse response, HSSFWorkbook workBook, String fileName) {
+	public static void respondExcel(HttpServletResponse response,
+			HSSFWorkbook workBook, String fileName) {
 		OutputStream output = null;
 
 		try {
-			response.addHeader("Content-Disposition", "attachment;filename=" + fileName);
+			response.addHeader("Content-Disposition", "attachment;filename="
+					+ fileName);
 			response.setContentType("application/vnd.ms-excel");
 
 			output = response.getOutputStream();

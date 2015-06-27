@@ -38,9 +38,11 @@ public abstract class BoUtils {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public static void addProperty(List targetList, String targetKeyName, String targetPropertyName, List sourceList,
-			String sourceKeyName, String sourcePropertyName) {
-		if (CollectionUtils.isEmpty(targetList) || CollectionUtils.isEmpty(sourceList)) {
+	public static void addProperty(List targetList, String targetKeyName,
+			String targetPropertyName, List sourceList, String sourceKeyName,
+			String sourcePropertyName) {
+		if (CollectionUtils.isEmpty(targetList)
+				|| CollectionUtils.isEmpty(sourceList)) {
 			return;
 		}
 
@@ -49,8 +51,10 @@ public abstract class BoUtils {
 			Map sourceMap = new HashMap();
 			for (Iterator i = sourceList.iterator(); i.hasNext();) {
 				Object element = i.next();
-				Object keyValue = PropertyUtils.getProperty(element, sourceKeyName);
-				Object propertyValue = PropertyUtils.getProperty(element, sourcePropertyName);
+				Object keyValue = PropertyUtils.getProperty(element,
+						sourceKeyName);
+				Object propertyValue = PropertyUtils.getProperty(element,
+						sourcePropertyName);
 
 				sourceMap.put(keyValue, propertyValue);
 			}
@@ -58,18 +62,21 @@ public abstract class BoUtils {
 			// 设置目标属性.
 			for (Iterator i = targetList.iterator(); i.hasNext();) {
 				Object element = i.next();
-				Object keyValue = PropertyUtils.getProperty(element, targetKeyName);
+				Object keyValue = PropertyUtils.getProperty(element,
+						targetKeyName);
 				Object propertyValue = sourceMap.get(keyValue);
 
-				PropertyUtils.setProperty(element, targetPropertyName, propertyValue);
+				PropertyUtils.setProperty(element, targetPropertyName,
+						propertyValue);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static void addProperty(List targetList, String targetKeyName, String targetPropertyName,
-			Map<String, String> sourceMap, String sourceKeyName, String sourcePropertyName) {
+	public static void addProperty(List targetList, String targetKeyName,
+			String targetPropertyName, Map<String, String> sourceMap,
+			String sourceKeyName, String sourcePropertyName) {
 		if (CollectionUtils.isEmpty(targetList) || MapUtils.isEmpty(sourceMap)) {
 			return;
 		}
@@ -78,10 +85,12 @@ public abstract class BoUtils {
 			// 设置目标属性.
 			for (Iterator i = targetList.iterator(); i.hasNext();) {
 				Object element = i.next();
-				Object keyValue = PropertyUtils.getProperty(element, targetKeyName);
+				Object keyValue = PropertyUtils.getProperty(element,
+						targetKeyName);
 				Object propertyValue = sourceMap.get(keyValue);
 
-				PropertyUtils.setProperty(element, targetPropertyName, propertyValue);
+				PropertyUtils.setProperty(element, targetPropertyName,
+						propertyValue);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -105,7 +114,8 @@ public abstract class BoUtils {
 		Set result = new HashSet();
 		try {
 			for (Iterator i = list.iterator(); i.hasNext();) {
-				Object value = PropertyUtils.getProperty(i.next(), propertyName);
+				Object value = PropertyUtils
+						.getProperty(i.next(), propertyName);
 
 				if (value != null) {
 					result.add(value);

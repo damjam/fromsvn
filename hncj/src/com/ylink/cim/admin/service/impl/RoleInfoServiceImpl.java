@@ -36,12 +36,14 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 		this.rolePrivilegeDao = rolePrivilegeDao;
 	}
 	
+	@Override
 	public Paginater getRoleInfoPageList(RoleInfo roleInfo, Pager pager)
 			throws BizException {
 		
 		return this.roleInfoDao.getRoleInfoPageList(roleInfo, pager);
 	}
 
+	@Override
 	public void deleteRoleInfo(RoleInfo roleInfo) throws BizException {
 		try{
 			this.roleInfoDao.deleteRoleLimits(roleInfo);
@@ -51,6 +53,7 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 		}
 	}
 
+	@Override
 	public void saveRoleAndLimits(RoleInfo roleInfo) throws BizException {
 		roleInfoDao.save(roleInfo);
 		this.saveRoleLimit(roleInfo);
@@ -78,12 +81,14 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 	}
 
 
+	@Override
 	public RoleInfo getRoleInfoByRoleId(String roleId) throws BizException {
 		 
 		return this.roleInfoDao.findById(roleId);
 	}
 
 
+	@Override
 	public void updateRoleAndLimits(RoleInfo roleInfo) throws BizException {
 		try{
 			roleInfoDao.deleteRoleLimits(roleInfo);
@@ -95,12 +100,14 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 		
 	}
 
+	@Override
 	public boolean isExistRole(RoleInfo roleInfo) throws BizException {
 	 
 		 return this.roleInfoDao.findById(roleInfo.getRoleId())!=null;
 	}
 
 	//通过权限组id查角色
+	@Override
 	public List<RoleInfo> queryRoleInfoByLimitGroupId(String limitGroupId)
 			throws BizException {
 		return roleInfoDao.queryRoleInfoByLimitGroupId(limitGroupId);

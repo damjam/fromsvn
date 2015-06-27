@@ -40,6 +40,7 @@ public class RoleInfoDaoImpl extends BaseDaoImpl implements RoleInfoDao {
 		return ls;
 	}
 
+	@Override
 	public void deleteRoleLimits(RoleInfo roleInfo) {
 
 		QueryHelper helper = new QueryHelper();
@@ -49,11 +50,13 @@ public class RoleInfoDaoImpl extends BaseDaoImpl implements RoleInfoDao {
 		super.execute(helper);
 	}
 
+	@Override
 	protected Class getModelClass() {
 
 		return RoleInfo.class;
 	}
 
+	@Override
 	public RoleInfo getRoleInfo(RoleInfo roleInfo) {
 
 		QueryHelper helper = new QueryHelper();
@@ -68,14 +71,17 @@ public class RoleInfoDaoImpl extends BaseDaoImpl implements RoleInfoDao {
 		return this.convert(ls).get(0);
 	}
 
+	@Override
 	public Paginater getRoleInfoPageList(RoleInfo roleInfo, Pager pager) {
 
 		QueryHelper helper = new QueryHelper();
 		helper.append("from RoleInfo ri,LimitGroupInfo lgi");
 		helper.append("where 1=1");
 		helper.append("and ri.limitGroupId=lgi.limitGroupId");
-		helper.append("and ri.roleName like ? ", roleInfo.getRoleName(), MatchMode.ANYWHERE);
-		helper.append("and lgi.limitGroupName like ? ", roleInfo.getLimitGroupName(), MatchMode.ANYWHERE);
+		helper.append("and ri.roleName like ? ", roleInfo.getRoleName(),
+				MatchMode.ANYWHERE);
+		helper.append("and lgi.limitGroupName like ? ",
+				roleInfo.getLimitGroupName(), MatchMode.ANYWHERE);
 
 		Paginater paginater = super.getPageData(helper, pager);
 		List<RoleInfo> ls = convert((List) paginater.getData());
@@ -84,6 +90,7 @@ public class RoleInfoDaoImpl extends BaseDaoImpl implements RoleInfoDao {
 		return paginater;
 	}
 
+	@Override
 	public List<RoleInfo> queryRoleInfoByLimitGroupId(String limitGroupId) {
 
 		QueryHelper helper = new QueryHelper();

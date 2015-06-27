@@ -15,22 +15,25 @@ import flink.util.ExceptionUtils;
 public class PlanState extends AbstractState {
 
 	public static Map<String, PlanState> ALL = new LinkedHashMap<String, PlanState>();
+
 	protected PlanState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
 	}
-	
+
 	public static final PlanState APPLY = new PlanState("…Í«Î", "1");
 	public static final PlanState EFFECT = new PlanState("…˙–ß", "2");
 	public static final PlanState PAUSE = new PlanState("‘›Õ£", "3");
 	public static final PlanState TERMINAL = new PlanState("÷’÷π", "4");
+
 	public static PlanState valueOf(String value) throws Exception {
 		PlanState state = ALL.get(value);
-		if(null == state){
+		if (null == state) {
 			ExceptionUtils.logException(PlanState.class, "◊¥Ã¨¥ÌŒÛ");
 		}
 		return state;
 	}
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("planStates", PlanState.ALL.values());
 	}

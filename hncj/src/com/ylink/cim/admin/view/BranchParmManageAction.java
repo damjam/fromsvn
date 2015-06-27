@@ -25,6 +25,7 @@ import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -60,7 +61,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_D, sessionUser.getUserId() + "("
 					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.DELETE_SUCCESS);
-			String msg = LogUtils.r("删除系统参数成功,删除内容为：{?}", request, getCurPrivilegeCode(request), Constants.LOG_USER_D,
+			String msg = MsgUtils.r("删除系统参数成功,删除内容为：{?}", request, getCurPrivilegeCode(request), Constants.LOG_USER_D,
 					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode()
 							+ "成功");
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
@@ -70,7 +71,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
 					+ ")删除系统参数 addrId=" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
-			String msg = LogUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(), error);
+			String msg = MsgUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(), error);
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			return this.query();
 		}
@@ -90,7 +91,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 
 		Paginater paginater = branchParmService.findAll(getPager(request), model);
 		saveQueryResult(request, paginater);
-		String msg = LogUtils.r("系统参数查询成功");
+		String msg = MsgUtils.r("系统参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "list";
 		// "/pages/admin/sysRunManager/sysParmManager.jsp"
@@ -146,7 +147,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.SAVE_SUCCESS);
 			setReturnUrl("/sysParmManage.do?action=query", request);
-			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			setSucResult("操作成功", request);
 			return "toMain";
@@ -158,7 +159,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 			logger.debug(error + ",失败原因:" + e.getMessage());
 			this.logErrorWithReason(request, getCurPrivilegeCode(request), error, e.getMessage());
 			setResult(false, e.getMessage(), request);
-			String msg = LogUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			setResult(false, e.getMessage(), request);
 			return toAdd();
@@ -166,24 +167,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 
 	}
 
-	/**
-	 * 新增系统参数
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	/**
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
+	
 	public String saveUpdate() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		UserInfo sessionUser = getSessionUser(request);
@@ -199,7 +183,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 					"用户" + sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),修改系统参数 code="
 							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_SUCCESS);
-			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			setSucResult("操作成功", request);
 			return "toMain";
@@ -210,7 +194,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
 					error + e.getMessage());
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_FAIL);
-			String msg = LogUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return update();
 		}
@@ -271,6 +255,7 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 		return null;
 	}
 
+	@Override
 	public BranchParm getModel() {
 		return model;
 	}

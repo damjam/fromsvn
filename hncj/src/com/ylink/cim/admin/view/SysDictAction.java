@@ -15,6 +15,7 @@ import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
 import flink.util.ExceptionUtils;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -34,7 +35,7 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 		saveQueryResult(request, paginater);
 
 		SysDictType.setInReq(request);
-		String msg = LogUtils.r("字典管理查询成功");
+		String msg = MsgUtils.r("字典管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return ActionConstant.TO_LIST_PAGE;
 	}
@@ -52,14 +53,14 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 				this.sysDictService.saveSysDict(model);
 				setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
 			}
-			String msg = LogUtils.r("添加字典成功,添加内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("添加字典成功,添加内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			return this.toAddPage();
 		} catch (Exception e) {
 			ExceptionUtils.logBizException(SysDictAction.class, e.getMessage());
 			// setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
-			String msg = LogUtils.r("添加字典失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加字典失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			throw e;
 		}
@@ -73,11 +74,11 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
 			model.getId().setDictValue(null);
 			model.setDictName(null);
-			String msg = LogUtils.r("删除字典成功,删除内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("删除字典成功,删除内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			return this.listSysDict();
 		} catch (Exception e) {
-			String msg = LogUtils.r("删除字典失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("删除字典失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logBizException(this.getClass(), e.getMessage());
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
@@ -86,6 +87,7 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 		}
 	}
 
+	@Override
 	public SysDict getModel() {
 		return model;
 	}

@@ -110,6 +110,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		return list();
 	}
 
+	@Override
 	public CarInfo getModel() {
 		return model;
 	}

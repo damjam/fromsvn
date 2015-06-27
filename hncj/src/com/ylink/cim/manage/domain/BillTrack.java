@@ -27,10 +27,7 @@ public class BillTrack implements java.io.Serializable {
 	private String houseSn;
 	private String billId;
 	private String branchNo;
-	
-	
-	
-	
+
 	// Constructors
 
 	public String getBranchNo() {
@@ -85,8 +82,9 @@ public class BillTrack implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public BillTrack(String id, String billType, String expireDate, String ownerName, String ownerCel,
-			Integer noticeTimes, Date createDate, String endUser, String state, String endUserCel) {
+	public BillTrack(String id, String billType, String expireDate,
+			String ownerName, String ownerCel, Integer noticeTimes,
+			Date createDate, String endUser, String state, String endUserCel) {
 		this.id = id;
 		this.billType = billType;
 		this.expireDate = expireDate;
@@ -142,7 +140,7 @@ public class BillTrack implements java.io.Serializable {
 	}
 
 	public Integer getNoticeTimes() {
-		return this.noticeTimes == null? 0:noticeTimes;
+		return this.noticeTimes == null ? 0 : noticeTimes;
 	}
 
 	public void setNoticeTimes(Integer noticeTimes) {

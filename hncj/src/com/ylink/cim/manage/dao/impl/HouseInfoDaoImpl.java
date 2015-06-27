@@ -18,6 +18,7 @@ import flink.util.Paginater;
 
 @Repository("houseInfoDao")
 public class HouseInfoDaoImpl extends BaseDaoImpl implements HouseInfoDao {
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from HouseInfo t where 1=1");

@@ -16,7 +16,7 @@ import com.ylink.cim.admin.service.UserLogService;
 import com.ylink.cim.common.type.UserLogType;
 
 import flink.util.BoUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -38,6 +38,7 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 
 	private UserLog model = new UserLog();
 
+	@Override
 	public UserLog getModel() {
 		return model;
 	}
@@ -51,7 +52,7 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 		BoUtils.addProperty(paginater.getList(), "userId", "userName", userList, "userId", "userName");
 		saveQueryResult(request, paginater);
 		UserLogType.setInReq(request);
-		String msg = LogUtils.r("用户日志查询成功");
+		String msg = MsgUtils.r("用户日志查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "success";
 	}
@@ -69,7 +70,7 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 	public String queryUserLogContent() throws Exception {
 		UserLog userLog = userLogService.getUserLogDtl(model.getId());
 		request.setAttribute("userLog", userLog);
-		String msg = LogUtils.r("查看用户日志成功");
+		String msg = MsgUtils.r("查看用户日志成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "detail";
 	}

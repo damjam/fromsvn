@@ -15,7 +15,8 @@ public class DoubleUtil {
 	public static double stringToDouble(String d, int pointLen) {
 		int len = d.length();
 		if (len > 0) {
-			return Double.parseDouble(d.substring(0, len - pointLen) + "." + d.substring(len - pointLen));
+			return Double.parseDouble(d.substring(0, len - pointLen) + "."
+					+ d.substring(len - pointLen));
 		} else {
 			return 0;
 		}

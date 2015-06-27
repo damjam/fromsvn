@@ -12,18 +12,21 @@ public class CustState extends AbstractState {
 
 	public static Map<String, CustState> ALL = new LinkedHashMap<String, CustState>();
 	public static final CustState NORMAL = new CustState("Õý³£", "0");
-	
+
 	public static final CustState CANCEL = new CustState("×¢Ïú", "1");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("custStates", CustState.ALL.values());
 	}
+
 	public static CustState valueOf(String value) throws Exception {
 		CustState state = ALL.get(value);
-		if(null == state){
+		if (null == state) {
 			ExceptionUtils.logException(CustState.class, "×´Ì¬´íÎó");
 		}
 		return state;
 	}
+
 	protected CustState(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

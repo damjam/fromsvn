@@ -26,25 +26,36 @@ import flink.util.SpringContext;
 
 @Repository("elecBillDao")
 public class ElecBillDaoImpl extends BaseDaoImpl implements ElecBillDao {
+	@Override
 	public Paginater findBillPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecBill t where 1=1");
-		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
-		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
-		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
-		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
-		helper.append("and chargeDate >= ?", MapUtils.getString(params, "startChargeDate"));
-		helper.append("and chargeDate <= ?", MapUtils.getString(params, "endChargeDate"));
+		helper.append("and recordMonth >= ?",
+				MapUtils.getString(params, "startRecordMonth"));
+		helper.append("and recordMonth <= ?",
+				MapUtils.getString(params, "endRecordMonth"));
+		helper.append("and createDate >= ?",
+				MapUtils.getString(params, "startCreateDate"));
+		helper.append("and createDate <= ?",
+				MapUtils.getString(params, "endCreateDate"));
+		helper.append("and chargeDate >= ?",
+				MapUtils.getString(params, "startChargeDate"));
+		helper.append("and chargeDate <= ?",
+				MapUtils.getString(params, "endChargeDate"));
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and branchNo = ?",
+				MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
-			HouseInfoDao houseInfoDao = (HouseInfoDao) SpringContext.getService("houseInfoDao");
+			HouseInfoDao houseInfoDao = (HouseInfoDao) SpringContext
+					.getService("houseInfoDao");
 
+			@Override
 			public int compare(Object o1, Object o2) {
 				try {
 					ElecBill record1 = (ElecBill) o1;
@@ -52,13 +63,16 @@ public class ElecBillDaoImpl extends BaseDaoImpl implements ElecBillDao {
 					HouseInfo h1 = houseInfoDao.findById(record1.getHouseSn());
 					HouseInfo h2 = houseInfoDao.findById(record2.getHouseSn());
 					if (!h1.getBuildingNo().equals(h2.getBuildingNo())) {
-						return Integer.parseInt(h1.getBuildingNo()) - Integer.parseInt(h2.getBuildingNo());
+						return Integer.parseInt(h1.getBuildingNo())
+								- Integer.parseInt(h2.getBuildingNo());
 					}
 					if (!h1.getUnitNo().equals(h2.getUnitNo())) {
-						return Integer.parseInt(h1.getUnitNo()) - Integer.parseInt(h2.getUnitNo());
+						return Integer.parseInt(h1.getUnitNo())
+								- Integer.parseInt(h2.getUnitNo());
 					}
 					if (!h1.getPosition().equals(h2.getPosition())) {
-						return Integer.parseInt(h1.getPosition()) - Integer.parseInt(h2.getPosition());
+						return Integer.parseInt(h1.getPosition())
+								- Integer.parseInt(h2.getPosition());
 					}
 					return 0;
 				} catch (Exception e) {
@@ -83,32 +97,44 @@ public class ElecBillDaoImpl extends BaseDaoImpl implements ElecBillDao {
 		return ElecBill.class;
 	}
 
+	@Override
 	public List<ElecBill> findBills(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ElecBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and state in ?", (String[]) params.get("states"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by id");
 		return super.getList(helper);
 	}
 
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, t.state as state) from ElecBill t where 1=1");
-		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
-		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
-		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
-		helper.append("and createDate <= ?", MapUtils.getString(params, "endCreateDate"));
+		helper.append("and recordMonth >= ?",
+				MapUtils.getString(params, "startRecordMonth"));
+		helper.append("and recordMonth <= ?",
+				MapUtils.getString(params, "endRecordMonth"));
+		helper.append("and createDate >= ?",
+				MapUtils.getString(params, "startCreateDate"));
+		helper.append("and createDate <= ?",
+				MapUtils.getString(params, "endCreateDate"));
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		// helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "buildingNo"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "buildingNo"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
@@ -158,12 +184,14 @@ public class ElecBillDaoImpl extends BaseDaoImpl implements ElecBillDao {
 		return sumInfo;
 	}
 
+	@Override
 	public List findErr() {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(w.id as id) from ElecBill w, ElecBill w2 where 1=1 and w.recordMonth = w2.recordMonth and w.id>w2.id and w.houseSn=w2.houseSn");
 		return super.getList(helper);
 	}
 
+	@Override
 	public AccountDetail getstDeta(String id) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from AccountDetail t where t.acctNo=? ", id);

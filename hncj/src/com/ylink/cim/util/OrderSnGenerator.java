@@ -9,10 +9,10 @@ public class OrderSnGenerator {
 		String unitNo = houseInfo.getUnitNo();
 		String position = houseInfo.getPosition();
 		if (buildNo.length() == 1) {
-			buildNo = "0"+buildNo;
+			buildNo = "0" + buildNo;
 		}
 		if (position.length() == 3) {
-			position = "0"+position;
+			position = "0" + position;
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(buildNo);

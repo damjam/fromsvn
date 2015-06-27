@@ -11,8 +11,10 @@ import flink.util.ExceptionUtils;
 public class DepositBillState extends AbstractType {
 	public static Map<String, DepositBillState> ALL = new LinkedHashMap<String, DepositBillState>();
 
-	public static final DepositBillState PAID = new DepositBillState("已缴纳", "00");
-	public static final DepositBillState RETURN = new DepositBillState("已退还", "01");
+	public static final DepositBillState PAID = new DepositBillState("已缴纳",
+			"00");
+	public static final DepositBillState RETURN = new DepositBillState("已退还",
+			"01");
 
 	protected DepositBillState(String name, String value) {
 		super(name, value);

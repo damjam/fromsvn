@@ -1,6 +1,5 @@
 package flink.web.tag;
 
-
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +19,7 @@ import flink.consant.Constants;
  */
 public class PrivilegeTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * privilge id.
 	 */
@@ -39,40 +38,43 @@ public class PrivilegeTag extends TagSupport {
 		this.pid = pid;
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.getOut().write("</span>");  
+			pageContext.getOut().write("</span>");
 		} catch (IOException e) {
 		}
 		return EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
-		HttpSession session = (HttpSession) ((HttpServletRequest) this.pageContext.getRequest()).getSession();
+		HttpSession session = ((HttpServletRequest) this.pageContext
+				.getRequest()).getSession();
 		List privileges = (List) session.getAttribute(Constants.USER_PRIVILEGE);
 		boolean hasPrivilege = false;
-		
+
 		if (privileges != null) {
 			for (Iterator i = privileges.iterator(); i.hasNext();) {
 				Privilege p = (Privilege) i.next();
-				
+
 				if (p == null || p.getLimitId() == null) {
 					continue;
 				}
-				
+
 				if (p.getLimitId().equals(pid)) {
 					hasPrivilege = true;
-					
+
 					break;
 				}
 			}
 		}
-		
-		String span = hasPrivilege ? 
-			"<span style=\"" + style + "\">" : 
-			"<span class=\"no-privilege\" style=\"display:none;" + style + "\">";
+
+		String span = hasPrivilege ? "<span style=\"" + style + "\">"
+				: "<span class=\"no-privilege\" style=\"display:none;" + style
+						+ "\">";
 		try {
-			pageContext.getOut().write(span);  
+			pageContext.getOut().write(span);
 		} catch (IOException e) {
 		}
 		return EVAL_BODY_INCLUDE;

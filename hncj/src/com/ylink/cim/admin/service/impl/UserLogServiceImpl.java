@@ -14,12 +14,15 @@ import flink.util.Pager;
 import flink.util.Paginater;
 
 @Component("userLogService")
-public class UserLogServiceImpl implements com.ylink.cim.admin.service.UserLogService {
+public class UserLogServiceImpl implements
+		com.ylink.cim.admin.service.UserLogService {
 
 	@Autowired
 	private UserLogDao userLogDao;
 
-	public Paginater getUserLogPageList(UserLog userLog, Pager pager, UserInfo userInfo) throws BizException {
+	@Override
+	public Paginater getUserLogPageList(UserLog userLog, Pager pager,
+			UserInfo userInfo) throws BizException {
 
 		try {
 			return this.userLogDao.getUserLogPageList(userLog, pager, userInfo);
@@ -29,11 +32,12 @@ public class UserLogServiceImpl implements com.ylink.cim.admin.service.UserLogSe
 		}
 	}
 
+	@Override
 	public void saveUserLog(UserLog userLog) throws BizException {
 		// 检查数据
 		Assert.notEmpty(userLog.getUserId(), "所属用户编号不能为空");
 		// Assert.notEmpty(userLog.getBranchNo(), "所属机构编号不能为空");
-		//Assert.notEmpty(userLog.getLimitId(), "所属模块编号不能为空");
+		// Assert.notEmpty(userLog.getLimitId(), "所属模块编号不能为空");
 		Assert.notEmpty(userLog.getLogType(), "日志类类型不能为空");
 
 		if (Constants.LOG_USER_TYPE.indexOf(userLog.getLogType()) < 0) {
@@ -50,10 +54,9 @@ public class UserLogServiceImpl implements com.ylink.cim.admin.service.UserLogSe
 		this.userLogDao = userLogDao;
 	}
 
+	@Override
 	public UserLog getUserLogDtl(String id) throws BizException {
 		return userLogDao.findById(id);
 	}
-	
-	
 
 }

@@ -21,7 +21,8 @@ import flink.web.BaseAction;
 
 @Scope("prototype")
 @Component
-public class WaterBillAction extends BaseAction implements ModelDriven<WaterBill> {
+public class WaterBillAction extends BaseAction implements
+		ModelDriven<WaterBill> {
 	/**
 	 * 
 	 */
@@ -56,7 +57,8 @@ public class WaterBillAction extends BaseAction implements ModelDriven<WaterBill
 		map.put("buildingNo", model.getBuildingNo());
 		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = waterBillDao.findWaterBillPager(map, getPager(request));
+		Paginater paginater = waterBillDao.findWaterBillPager(map,
+				getPager(request));
 		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),
 		// "houseSn");
 		// List<String> accounts = accountDao.findAcctByHouseSn(houseSns);
@@ -66,8 +68,10 @@ public class WaterBillAction extends BaseAction implements ModelDriven<WaterBill
 		Map<String, Object> sumInfo = waterBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
 		Map<String, String> buildingNos = new LinkedHashMap<String, String>();
-		Map<String, String> rent = ParaManager.getSysDict(SysDictType.RentType.getValue());
-		Map<String, String> economical = ParaManager.getSysDict(SysDictType.EconomicalType.getValue());
+		Map<String, String> rent = ParaManager.getSysDict(SysDictType.RentType
+				.getValue());
+		Map<String, String> economical = ParaManager
+				.getSysDict(SysDictType.EconomicalType.getValue());
 		buildingNos.putAll(economical);
 		buildingNos.putAll(rent);
 		request.setAttribute("buildingNos", buildingNos);
@@ -75,6 +79,7 @@ public class WaterBillAction extends BaseAction implements ModelDriven<WaterBill
 		return "list";
 	}
 
+	@Override
 	public WaterBill getModel() {
 		// TODO Auto-generated method stub
 		return model;

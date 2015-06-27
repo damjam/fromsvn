@@ -22,11 +22,14 @@ public class ConnectionProvider {
 	private static class ResourceHolder {
 		public static ConnectionProvider resource = new ConnectionProvider();
 	}
+
 	// private static Object object_lock = new Object();
 	private static Logger logger = Logger.getLogger(ConnectionProvider.class);
+
 	public static ConnectionProvider getInstance() {
 		return ResourceHolder.resource;
 	}
+
 	private String ip;
 	private int port;
 	public static final String SERVER_IP = "SERVER_HOST_IP";
@@ -64,7 +67,8 @@ public class ConnectionProvider {
 		// port = readProperties.getValByKey(SERVER_PORT);
 		// SocketParams socketParams =
 		// (SocketParams)SpringContext.getService("socketParams");
-		SocketParams socketParams = new SocketParams("168.33.120.25", 13000, 5, "GBK");
+		SocketParams socketParams = new SocketParams("168.33.120.25", 13000, 5,
+				"GBK");
 		ip = socketParams.getHostName();
 		port = socketParams.getPortNum();
 		try {
@@ -82,7 +86,7 @@ public class ConnectionProvider {
 	public void destroy() {
 		for (int i = 0; i < socketpool.length; i++) {
 			if (socketpool[i] != null) {
-				ConnectionAdapter adapter = (ConnectionAdapter) socketpool[i];
+				ConnectionAdapter adapter = socketpool[i];
 				adapter.destroy();
 			}
 		}

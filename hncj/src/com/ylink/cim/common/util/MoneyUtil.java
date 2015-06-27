@@ -77,10 +77,10 @@ public class MoneyUtil {
 	 * @return
 	 */
 	public static String getFormatStr(Double d) {
-		return NumberFormat.getCurrencyInstance().format(d.doubleValue()).replaceAll("￥", "").replace("$","");
+		return NumberFormat.getCurrencyInstance().format(d.doubleValue())
+				.replaceAll("￥", "").replace("$", "");
 	}
 
-	
 	/**
 	 * 获取金额的格式化字符串，格式为：xx,xxx,xxx.xx
 	 * 
@@ -88,20 +88,20 @@ public class MoneyUtil {
 	 * @return
 	 */
 	public static String getFormatStr2(Double d) {
-		//return NumberFormat.getCurrencyInstance().format(d).replaceAll("$", "").replaceAll("￥", "");
+		// return NumberFormat.getCurrencyInstance().format(d).replaceAll("$",
+		// "").replaceAll("￥", "");
 		DecimalFormat df = new DecimalFormat("######.##");
 		String money = df.format(d);
-		if(!money.contains(".")){
-			money = money+".00";
+		if (!money.contains(".")) {
+			money = money + ".00";
 		}
-		if(org.apache.commons.lang.ObjectUtils.toString(money.charAt(money.length()-2)).equals(".")){
-			money = money+"0";
+		if (org.apache.commons.lang.ObjectUtils.toString(
+				money.charAt(money.length() - 2)).equals(".")) {
+			money = money + "0";
 		}
 		return money;
 	}
 
-	
-	
 	/**
 	 * 获取金额的格式化字符串，格式为：xxxxxxxx.xx
 	 * 
@@ -192,8 +192,9 @@ public class MoneyUtil {
 		if (inte == 0)
 			return SignStr + TailStr;
 
-		return SignStr + PositiveIntegerToHanStr(org.apache.commons.lang.ObjectUtils.toString(inte)) + "元"
-				+ TailStr;
+		return SignStr
+				+ PositiveIntegerToHanStr(org.apache.commons.lang.ObjectUtils
+						.toString(inte)) + "元" + TailStr;
 	}
 
 	// 将金额转换成逗号分隔的
@@ -214,19 +215,24 @@ public class MoneyUtil {
 			A = "0" + org.apache.commons.lang.ObjectUtils.toString(xiaoshu);
 		else
 			A = org.apache.commons.lang.ObjectUtils.toString(xiaoshu);
-		if (logger.isDebugEnabled()) {logger.debug("========" + A);}
+		if (logger.isDebugEnabled()) {
+			logger.debug("========" + A);
+		}
 		if (xiaoshu >= 100) {
 			zhengshu = zhengshu + 1;
-			money = org.apache.commons.lang.ObjectUtils.toString(zhengshu) + "." + "00";
+			money = org.apache.commons.lang.ObjectUtils.toString(zhengshu)
+					+ "." + "00";
 		} else
-			money = org.apache.commons.lang.ObjectUtils.toString(zhengshu) + "." + org.apache.commons.lang.ObjectUtils.toString(A);
+			money = org.apache.commons.lang.ObjectUtils.toString(zhengshu)
+					+ "." + org.apache.commons.lang.ObjectUtils.toString(A);
 		return money;
 
 	}
 
 	// 转换金额中的长度问题，将其转成2位小数
 	public static String CheckMoney(String money) {
-		//if (logger.isDebugEnabled()) {logger.debug("======>oldmoney" + money);}
+		// if (logger.isDebugEnabled()) {logger.debug("======>oldmoney" +
+		// money);}
 		String newmoney = money + "";
 		if (newmoney.indexOf("E") >= 0 && newmoney.indexOf(".") >= 0)// 处理带小数的科学记数法
 		{
@@ -235,25 +241,25 @@ public class MoneyUtil {
 					moneyarr[0].indexOf(".") + 1, moneyarr[0].length());
 			String checkmoney = moneyarr[0].replace(".", "");
 			int cifang = Integer.parseInt(moneyarr[1]);
-			
-			if(Integer.valueOf(moneyarr[1]) < 0){//次方数小于0
+
+			if (Integer.valueOf(moneyarr[1]) < 0) {// 次方数小于0
 				int len = checkmoney.length();
 				String Zero = "";
-				while(checkmoney.substring(len - 1, len).equals("0")){
-					len = len -1;
+				while (checkmoney.substring(len - 1, len).equals("0")) {
+					len = len - 1;
 				}
-				
+
 				checkmoney = checkmoney.substring(0, len);
-				
+
 				cifang = cifang * -1;
-				
-				for(int i = 0; i < cifang - 1; i++){
+
+				for (int i = 0; i < cifang - 1; i++) {
 					Zero += "0";
 				}
-				
+
 				return "0" + "." + Zero + checkmoney;
 			}
-			
+
 			if (xiaoshu.length() > cifang)// 如果科学记数的结果是一个小数
 			{
 				if (xiaoshu.length() - cifang == 1) {
@@ -268,14 +274,14 @@ public class MoneyUtil {
 									checkmoney.length());
 				} else {
 					int x = xiaoshu.length() - cifang;
-					String newmoney1 = checkmoney.substring(0, checkmoney
-							.length()
-							- x)
+					String newmoney1 = checkmoney.substring(0,
+							checkmoney.length() - x)
 							+ "."
 							+ checkmoney.substring(checkmoney.length() - x,
 									checkmoney.length());
-					if (logger.isDebugEnabled()) {logger.debug("+++++++++++++++++++"
-							+ newmoney1);}
+					if (logger.isDebugEnabled()) {
+						logger.debug("+++++++++++++++++++" + newmoney1);
+					}
 					newmoney = ChangeMoney(newmoney1);
 					return newmoney;
 				}
@@ -307,8 +313,10 @@ public class MoneyUtil {
 				return newmoney + ".00";
 			String xiaoshu = newmoney.substring(newmoney.indexOf(".") + 1,
 					newmoney.length());
-			if (logger.isDebugEnabled()) {logger.debug("+++++++++++++++++++" + xiaoshu.length()
-					+ "=====" + xiaoshu);}
+			if (logger.isDebugEnabled()) {
+				logger.debug("+++++++++++++++++++" + xiaoshu.length() + "====="
+						+ xiaoshu);
+			}
 			if (xiaoshu.length() == 1) {
 				newmoney = newmoney + "0";
 				return newmoney;
@@ -322,95 +330,96 @@ public class MoneyUtil {
 
 	}
 
-	public static String moneyFormat(String s)
-	{
-		DecimalFormat df=(DecimalFormat) NumberFormat.getCurrencyInstance();
+	public static String moneyFormat(String s) {
+		DecimalFormat df = (DecimalFormat) NumberFormat.getCurrencyInstance();
 		df.applyPattern("#,###,##0.00");
-		if(s.equals("0")||s.equals("0.0")||s.equals("0.00")){
-			df.applyPattern("0.00");	
+		if (s.equals("0") || s.equals("0.0") || s.equals("0.00")) {
+			df.applyPattern("0.00");
 		}
-		String ns=df.format(Double.parseDouble(s));
+		String ns = df.format(Double.parseDouble(s));
 		return ns;
 	}
-	
-	public static String throwZero(String s)
-	{
-		if(s==null || s.equals("")){
+
+	public static String throwZero(String s) {
+		if (s == null || s.equals("")) {
 			s = "0";
 		}
-		
-		DecimalFormat df=(DecimalFormat) NumberFormat.getCurrencyInstance();
+
+		DecimalFormat df = (DecimalFormat) NumberFormat.getCurrencyInstance();
 		df.applyPattern("#,###,###,###,##0.00");
-		if(Long.parseLong(s)==0){
-			df.applyPattern("0.00");	
+		if (Long.parseLong(s) == 0) {
+			df.applyPattern("0.00");
 		}
-		String ns=df.format(Double.valueOf(s));
+		String ns = df.format(Double.valueOf(s));
 		return ns;
 	}
-	
-	public static String throwZeroInt(String s)
-	{
-		if(s==null || s.equals("")){
+
+	public static String throwZeroInt(String s) {
+		if (s == null || s.equals("")) {
 			s = "0";
 		}
-		DecimalFormat df=(DecimalFormat) NumberFormat.getCurrencyInstance();
+		DecimalFormat df = (DecimalFormat) NumberFormat.getCurrencyInstance();
 		df.applyPattern("#####0");
-		if(Long.parseLong(s)==0){
-			df.applyPattern("0");	
+		if (Long.parseLong(s) == 0) {
+			df.applyPattern("0");
 		}
-		String ns=df.format(Double.valueOf(s));
+		String ns = df.format(Double.valueOf(s));
 		return ns;
 	}
-	
-	public static String formatMoney (String s) {
-		 NumberFormat nf1 = NumberFormat.getInstance(); 
-		 Object obj1 = null; 
-		 String money = "";
-         // 基于格式的解析 
-         try { 
-             obj1 = nf1.parse(s); 
-             money = obj1.toString();
-         } 
-         catch (ParseException e1) { 
-             if (logger.isDebugEnabled()) {logger.debug(e1); }
-         } 
-         return money;
+
+	public static String formatMoney(String s) {
+		NumberFormat nf1 = NumberFormat.getInstance();
+		Object obj1 = null;
+		String money = "";
+		// 基于格式的解析
+		try {
+			obj1 = nf1.parse(s);
+			money = obj1.toString();
+		} catch (ParseException e1) {
+			if (logger.isDebugEnabled()) {
+				logger.debug(e1);
+			}
+		}
+		return money;
 	}
-	
-	//将金额小数点去掉,然后前面补"0"
-	public static String getAmount(String amount){
+
+	// 将金额小数点去掉,然后前面补"0"
+	public static String getAmount(String amount) {
 		DecimalFormat df = (DecimalFormat) NumberFormat.getCurrencyInstance();
 		df.applyPattern("0000000000000.00");
-		String ns=df.format(Double.valueOf(amount));
+		String ns = df.format(Double.valueOf(amount));
 		String[] str = ns.split("\\.");
 		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < str.length; i++){
+		for (int i = 0; i < str.length; i++) {
 			sb.append(str[i]);
 		}
 		return sb.toString();
 	}
+
 	/**
 	 * /将金额小数点去掉,然后前面补"0" 总共15位
+	 * 
 	 * @param money
 	 * @return
 	 */
-	public static String switchMoney(double money){
+	public static String switchMoney(double money) {
 		DecimalFormat df = new DecimalFormat("0.00");
-		String str = df.format(money*100);
-		str = str.substring(0,str.indexOf("."));
+		String str = df.format(money * 100);
+		str = str.substring(0, str.indexOf("."));
 		return str;
 	}
 
 	/**
-	 * 从报文中取出的金额以科学计数法显示在页面
-	 * 如:RMB000000040132453 转换为:RMB 4,013,324.53
-	 * @param money 从报文中取出的金额(包含货币符号,如:RMB)
-	 * @return 
+	 * 从报文中取出的金额以科学计数法显示在页面 如:RMB000000040132453 转换为:RMB 4,013,324.53
+	 * 
+	 * @param money
+	 *            从报文中取出的金额(包含货币符号,如:RMB)
+	 * @return
 	 */
-	public static String showMoney (String money) {
-		if(money != null && money.length() > 2){
-			String huobiType = money.substring(0, 3); //取货币符号
-		
+	public static String showMoney(String money) {
+		if (money != null && money.length() > 2) {
+			String huobiType = money.substring(0, 3); // 取货币符号
+
 			int num = 0;
 			for (int i = 3; i < money.length(); i++) {
 				if (money.charAt(i) > '9' || money.charAt(i) < '1') {
@@ -421,15 +430,16 @@ public class MoneyUtil {
 			}
 			String oldMoney = money.substring(3 + num);
 			if (!"".equals(oldMoney) && oldMoney.length() > 2) {
-				
+
 				StringBuffer sb = new StringBuffer(huobiType);
 				sb.append(" ");
 				for (int i = 0; i < oldMoney.length(); i++) {
-					if ((oldMoney.length() - i) % 3 == 2 && i != oldMoney.length() - 2 && i != 0){
+					if ((oldMoney.length() - i) % 3 == 2
+							&& i != oldMoney.length() - 2 && i != 0) {
 						sb.append(",");
 					}
 					sb.append(oldMoney.charAt(i));
-					if (oldMoney.length() - i == 3){
+					if (oldMoney.length() - i == 3) {
 						sb.append(".");
 					}
 				}
@@ -445,17 +455,18 @@ public class MoneyUtil {
 			return "";
 		}
 	}
-	
+
 	/**
-	 * 从报文中取出的金额以科学计数法显示在页面
-	 * 如:RMB000000040132453 转换为:RMB 4,013,324.53
-	 * @param money 从报文中取出的金额(不包含包含货币符号,如:RMB)
-	 * @return 
+	 * 从报文中取出的金额以科学计数法显示在页面 如:RMB000000040132453 转换为:RMB 4,013,324.53
+	 * 
+	 * @param money
+	 *            从报文中取出的金额(不包含包含货币符号,如:RMB)
+	 * @return
 	 */
-	public static String _showMoney (String money) {
-		if(money != null && money.length() > 2){
-			//String huobiType = money.substring(0, 3); //取货币符号
-		
+	public static String _showMoney(String money) {
+		if (money != null && money.length() > 2) {
+			// String huobiType = money.substring(0, 3); //取货币符号
+
 			int num = 0;
 			for (int i = 0; i < money.length(); i++) {
 				if (money.charAt(i) > '9' || money.charAt(i) < '1') {
@@ -466,21 +477,22 @@ public class MoneyUtil {
 			}
 			String oldMoney = money.substring(num);
 			if (!"".equals(oldMoney) && oldMoney.length() > 2) {
-				
+
 				StringBuffer sb = new StringBuffer("");
 				sb.append(" ");
 				for (int i = 0; i < oldMoney.length(); i++) {
-					if ((oldMoney.length() - i) % 3 == 2 && i != oldMoney.length() - 2 && i != 0){
+					if ((oldMoney.length() - i) % 3 == 2
+							&& i != oldMoney.length() - 2 && i != 0) {
 						sb.append(",");
 					}
 					sb.append(oldMoney.charAt(i));
-					if (oldMoney.length() - i == 3){
+					if (oldMoney.length() - i == 3) {
 						sb.append(".");
 					}
 				}
 				return sb.toString();
 			} else if (oldMoney.length() == 2) {
-				return  " 0." + oldMoney;
+				return " 0." + oldMoney;
 			} else if (oldMoney.length() == 1) {
 				return " 0.0" + oldMoney;
 			} else {
@@ -492,85 +504,92 @@ public class MoneyUtil {
 	}
 
 	public static void main(String[] args) {
-	 if (logger.isDebugEnabled()) {logger.debug(ChangeMoneyToTwoxiaoshu("30.0"));}
+		if (logger.isDebugEnabled()) {
+			logger.debug(ChangeMoneyToTwoxiaoshu("30.0"));
+		}
 	}
-	
-	
-	
+
 	/*
 	 * 一下方法是解决JAVA中DOUBLE 相加的精度问题
 	 */
 	private static final int DEF_DIV_SCALE = 10;
-    
-    /**
-      * 两个Double数相加
-      * @param v1
-      * @param v2
-      * @return Double
-     */
-    public static Double add(Double v1,Double v2){
-         BigDecimal b1 = new BigDecimal(v1.toString());
-         BigDecimal b2 = new BigDecimal(v2.toString());
-        return b1.add(b2).doubleValue();
-     }
-    
-    /**
-      * 两个Double数相减
-      * @param v1
-      * @param v2
-      * @return Double
-     */
-    public static Double sub(Double v1,Double v2){
-         BigDecimal b1 = new BigDecimal(v1.toString());
-         BigDecimal b2 = new BigDecimal(v2.toString());
-        return b1.subtract(b2).doubleValue();
-     }
-    
-    /**
-      * 两个Double数相乘
-      * @param v1
-      * @param v2
-      * @return Double
-     */
-    public static Double mul(Double v1,Double v2){
-         BigDecimal b1 = new BigDecimal(v1.toString());
-         BigDecimal b2 = new BigDecimal(v2.toString());
-        return b1.multiply(b2).doubleValue();
-     }
-    
-    /**
-      * 两个Double数相除
-      * @param v1
-      * @param v2
-      * @return Double
-     */
-    public static Double div(Double v1,Double v2){
-         BigDecimal b1 = new BigDecimal(v1.toString());
-         BigDecimal b2 = new BigDecimal(v2.toString());
-        return b1.divide(b2,DEF_DIV_SCALE,BigDecimal.ROUND_HALF_UP).doubleValue();
-     }
-    
-    /**
-      * 两个Double数相除，并保留scale位小数
-      * @param v1
-      * @param v2
-      * @param scale
-      * @return Double
-     */
-    public static Double div(Double v1,Double v2,int scale){
-        if(scale<0){
-            throw new IllegalArgumentException(
-            "The scale must be a positive integer or zero");
-         }
-         BigDecimal b1 = new BigDecimal(v1.toString());
-         BigDecimal b2 = new BigDecimal(v2.toString());
-        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
-     }
-//	 将小数大于等于三位的四舍五入转成两位
+
+	/**
+	 * 两个Double数相加
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double add(Double v1, Double v2) {
+		BigDecimal b1 = new BigDecimal(v1.toString());
+		BigDecimal b2 = new BigDecimal(v2.toString());
+		return b1.add(b2).doubleValue();
+	}
+
+	/**
+	 * 两个Double数相减
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double sub(Double v1, Double v2) {
+		BigDecimal b1 = new BigDecimal(v1.toString());
+		BigDecimal b2 = new BigDecimal(v2.toString());
+		return b1.subtract(b2).doubleValue();
+	}
+
+	/**
+	 * 两个Double数相乘
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double mul(Double v1, Double v2) {
+		BigDecimal b1 = new BigDecimal(v1.toString());
+		BigDecimal b2 = new BigDecimal(v2.toString());
+		return b1.multiply(b2).doubleValue();
+	}
+
+	/**
+	 * 两个Double数相除
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double div(Double v1, Double v2) {
+		BigDecimal b1 = new BigDecimal(v1.toString());
+		BigDecimal b2 = new BigDecimal(v2.toString());
+		return b1.divide(b2, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP)
+				.doubleValue();
+	}
+
+	/**
+	 * 两个Double数相除，并保留scale位小数
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @param scale
+	 * @return Double
+	 */
+	public static Double div(Double v1, Double v2, int scale) {
+		if (scale < 0) {
+			throw new IllegalArgumentException(
+					"The scale must be a positive integer or zero");
+		}
+		BigDecimal b1 = new BigDecimal(v1.toString());
+		BigDecimal b2 = new BigDecimal(v2.toString());
+		return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+	// 将小数大于等于三位的四舍五入转成两位
 	public static String ChangeMoneyToTwoxiaoshu(String money) {
-		
+
 		String str[] = money.replace(".", ",").split(",");
-		if(str[1].length()>=3){
+		if (str[1].length() >= 3) {
 			String[] moneyarr = money.replace(".", ",").split(",");
 			String temp = moneyarr[1].substring(2, 3);
 			long zhengshu = Long.parseLong(moneyarr[0]);
@@ -582,18 +601,23 @@ public class MoneyUtil {
 				A = "0" + org.apache.commons.lang.ObjectUtils.toString(xiaoshu);
 			else
 				A = org.apache.commons.lang.ObjectUtils.toString(xiaoshu);
-			if (logger.isDebugEnabled()) {logger.debug("========" + A);}
+			if (logger.isDebugEnabled()) {
+				logger.debug("========" + A);
+			}
 			if (xiaoshu >= 100) {
 				zhengshu = zhengshu + 1;
-				money = org.apache.commons.lang.ObjectUtils.toString(zhengshu) + "." + "00";
+				money = org.apache.commons.lang.ObjectUtils.toString(zhengshu)
+						+ "." + "00";
 			} else
-				money = org.apache.commons.lang.ObjectUtils.toString(zhengshu) + "." + org.apache.commons.lang.ObjectUtils.toString(A);
+				money = org.apache.commons.lang.ObjectUtils.toString(zhengshu)
+						+ "." + org.apache.commons.lang.ObjectUtils.toString(A);
 			return money;
-		}else{
-			return money;	
+		} else {
+			return money;
 		}
 	}
-	public static double replaceFormat(String money){
+
+	public static double replaceFormat(String money) {
 		String m = money.replace(",", "").trim();
 		System.out.println(m);
 		return Double.parseDouble(money);

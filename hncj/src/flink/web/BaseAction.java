@@ -98,7 +98,8 @@ public abstract class BaseAction extends RootAction {
 	 * @param message
 	 * @param request
 	 */
-	public void setResult(final String result, final String message, final HttpServletRequest request) {
+	public void setResult(final String result, final String message,
+			final HttpServletRequest request) {
 		request.setAttribute("result", result);
 		request.setAttribute("msg", message);
 	}
@@ -132,8 +133,10 @@ public abstract class BaseAction extends RootAction {
 	 * java.lang.Exception, java.lang.String)
 	 */
 
-	protected String dealException(final HttpServletRequest request, final HttpServletResponse response,
-			final Exception e, final String methodName) {
+	@Override
+	protected String dealException(final HttpServletRequest request,
+			final HttpServletResponse response, final Exception e,
+			final String methodName) {
 		e.printStackTrace();
 		try {
 			String limitId = getCurPrivilegeCode(request);
@@ -163,22 +166,26 @@ public abstract class BaseAction extends RootAction {
 		return ActionConstant.FAILURE;
 	}
 
-	protected void logErrorWithReason(final HttpServletRequest request, final String limitId, final String content,
-			final String errorReason) throws BizException {
+	protected void logErrorWithReason(final HttpServletRequest request,
+			final String limitId, final String content, final String errorReason)
+			throws BizException {
 		StringBuffer sb = new StringBuffer();
 		sb.append(content).append(";失败原因:").append(errorReason);
 		saveUserLog(request, limitId, Constants.LOG_USER_O, sb.toString());
 	}
 
-	protected void saveSysLog(final HttpServletRequest request, final String limitId, final String errorCode,
-			final String logType, final String logClass, final String logContent) throws BizException {
+	protected void saveSysLog(final HttpServletRequest request,
+			final String limitId, final String errorCode, final String logType,
+			final String logClass, final String logContent) throws BizException {
 
-		SysLog sysLog = getSysLog(request, limitId, errorCode, logType, logClass, logContent);
+		SysLog sysLog = getSysLog(request, limitId, errorCode, logType,
+				logClass, logContent);
 		this.sysLogService.saveSysLog(sysLog);
 	}
 
-	private SysLog getSysLog(final HttpServletRequest request, final String limitId, final String errorCode,
-			final String logType, final String logClass, final String logContent) throws BizException {
+	private SysLog getSysLog(final HttpServletRequest request,
+			final String limitId, final String errorCode, final String logType,
+			final String logClass, final String logContent) throws BizException {
 
 		UserInfo sessionUser = getSessionUser(request);
 		SysLog sysLog = new SysLog();
@@ -214,14 +221,17 @@ public abstract class BaseAction extends RootAction {
 		return sysLog;
 	}
 
-	protected void saveUserLog(final HttpServletRequest request, final String limitId, final String logType,
-			final String logContent) throws BizException {
-		UserLog userLog = getUserLog(request, limitId, logType, StringUtils.abbreviate(logContent, 250));
+	protected void saveUserLog(final HttpServletRequest request,
+			final String limitId, final String logType, final String logContent)
+			throws BizException {
+		UserLog userLog = getUserLog(request, limitId, logType,
+				StringUtils.abbreviate(logContent, 250));
 		this.userLogService.saveUserLog(userLog);
 	}
 
-	private UserLog getUserLog(final HttpServletRequest request, String limitId, final String logType,
-			final String logContent) throws BizException {
+	private UserLog getUserLog(final HttpServletRequest request,
+			String limitId, final String logType, final String logContent)
+			throws BizException {
 
 		String ip = request.getRemoteAddr();
 		UserLog userLog = new UserLog();
@@ -255,8 +265,8 @@ public abstract class BaseAction extends RootAction {
 		return userLog;
 	}
 
-	protected void logError(final HttpServletRequest request, String operType, final String content)
-			throws BizException {
+	protected void logError(final HttpServletRequest request, String operType,
+			final String content) throws BizException {
 		String limitId = getCurPrivilegeCode(request);
 
 		// 无权限点不记录数据库日志.
@@ -279,8 +289,8 @@ public abstract class BaseAction extends RootAction {
 	 */
 	@SuppressWarnings("unchecked")
 	protected String getCurPrivilegeCode(final HttpServletRequest request) {
-		Map<String, PrivilegeResource> privileges = (Map<String, PrivilegeResource>) WebUtils.getSessionAttribute(
-				request, Constants.USER_PRIVILEGE_RES);
+		Map<String, PrivilegeResource> privileges = (Map<String, PrivilegeResource>) WebUtils
+				.getSessionAttribute(request, Constants.USER_PRIVILEGE_RES);
 
 		if (privileges == null) {
 			return null;
@@ -305,7 +315,8 @@ public abstract class BaseAction extends RootAction {
 	protected long getPageNumber(final HttpServletRequest request) {
 		String pageNumber = request.getParameter(Paginater.PAGE_NUMBER);
 
-		return NumberUtils.isDigits(pageNumber) ? Long.parseLong(pageNumber) : 1;
+		return NumberUtils.isDigits(pageNumber) ? Long.parseLong(pageNumber)
+				: 1;
 	}
 
 	/**
@@ -324,7 +335,8 @@ public abstract class BaseAction extends RootAction {
 	 * @param request
 	 * @return
 	 */
-	protected Pager getPager(final HttpServletRequest request, final int pageSize) {
+	protected Pager getPager(final HttpServletRequest request,
+			final int pageSize) {
 		return new Pager(getPageNumber(request), pageSize);
 	}
 
@@ -337,7 +349,8 @@ public abstract class BaseAction extends RootAction {
 	protected int getPageSize(final HttpServletRequest request) {
 		String pageSize = request.getParameter(Constants.PAGE_SIZE);
 
-		return NumberUtils.isDigits(pageSize) ? Integer.parseInt(pageSize) : Constants.DEFAULT_PAGE_SIZE;
+		return NumberUtils.isDigits(pageSize) ? Integer.parseInt(pageSize)
+				: Constants.DEFAULT_PAGE_SIZE;
 	}
 
 	/**
@@ -347,7 +360,8 @@ public abstract class BaseAction extends RootAction {
 	 * @return
 	 */
 	protected UserInfo getSessionUser(final HttpServletRequest request) {
-		return (UserInfo) WebUtils.getSessionAttribute(request, Constants.SESSION_USER);
+		return (UserInfo) WebUtils.getSessionAttribute(request,
+				Constants.SESSION_USER);
 	}
 
 	/**
@@ -368,7 +382,8 @@ public abstract class BaseAction extends RootAction {
 	 */
 	protected boolean isValidKey(final HttpServletRequest request) {
 		String key = request.getParameter(TOKEN_YLINK_KEY);
-		String oldToken = (String) request.getSession().getAttribute(TOKEN_YLINK_KEY);
+		String oldToken = (String) request.getSession().getAttribute(
+				TOKEN_YLINK_KEY);
 
 		if (StringUtils.equals(key, oldToken)) {
 			setResult(false, "非法或重复的操作", request);
@@ -405,7 +420,8 @@ public abstract class BaseAction extends RootAction {
 	 * @param msg
 	 * @return
 	 */
-	protected String respond(final HttpServletResponse response, final String msg) {
+	protected String respond(final HttpServletResponse response,
+			final String msg) {
 		PrintWriter writer = null;
 
 		try {
@@ -432,7 +448,8 @@ public abstract class BaseAction extends RootAction {
 		request.getSession().setAttribute(TOKEN_YLINK_KEY, key);
 	}
 
-	protected void setForward(final HttpServletRequest request, final String forward) {
+	protected void setForward(final HttpServletRequest request,
+			final String forward) {
 		request.setAttribute(FORWARD, forward);
 	}
 
@@ -447,7 +464,8 @@ public abstract class BaseAction extends RootAction {
 	 * @param message
 	 * @param request
 	 */
-	protected void setResult(final boolean success, final String message, final HttpServletRequest request) {
+	protected void setResult(final boolean success, final String message,
+			final HttpServletRequest request) {
 		request.setAttribute("result", Boolean.valueOf(success));
 		this.result = success;
 		this.msg = message;
@@ -480,15 +498,18 @@ public abstract class BaseAction extends RootAction {
 	}
 
 	protected String getSessionCustId(HttpServletRequest request) {
-		return (String) WebUtils.getSessionAttribute(request, Constants.SESSION_CUSTOM_ID);
+		return (String) WebUtils.getSessionAttribute(request,
+				Constants.SESSION_CUSTOM_ID);
 	}
 
 	protected String[] getSessionInvestAcctNos(HttpServletRequest request) {
-		return (String[]) WebUtils.getSessionAttribute(request, Constants.INVEST_ACCT_NOS);
+		return (String[]) WebUtils.getSessionAttribute(request,
+				Constants.INVEST_ACCT_NOS);
 	}
 
 	protected String getSessionBranchTag(HttpServletRequest request) {
-		String tag = (String) WebUtils.getSessionAttribute(request, Constants.BRANCH_TAG);
+		String tag = (String) WebUtils.getSessionAttribute(request,
+				Constants.BRANCH_TAG);
 		if (tag == null) {
 			tag = "";
 		}
@@ -499,12 +520,13 @@ public abstract class BaseAction extends RootAction {
 		return getSessionUser(request).getBranchNo();
 	}
 
-	protected void logSuccess(final HttpServletRequest request, String operType, final String content)
-			throws BizException {
+	protected void logSuccess(final HttpServletRequest request,
+			String operType, final String content) throws BizException {
 		logUserOperate(request, operType, content);
 	}
 
-	protected void logUserOperate(HttpServletRequest request, String operType, String logContent) throws BizException {
+	protected void logUserOperate(HttpServletRequest request, String operType,
+			String logContent) throws BizException {
 		saveUserLog(request, getCurPrivilegeCode(request), operType, logContent);
 	}
 
@@ -543,10 +565,12 @@ public abstract class BaseAction extends RootAction {
 		request.getSession().setAttribute("backUrl", url);
 		Map paraMap = request.getParameterMap();
 		JSONObject json = new JSONObject();
-		for (Iterator iterator = paraMap.entrySet().iterator(); iterator.hasNext();) {
+		for (Iterator iterator = paraMap.entrySet().iterator(); iterator
+				.hasNext();) {
 			Map.Entry entry = (Map.Entry) iterator.next();
 			String key = (String) entry.getKey();
-			if (StringUtils.isEmpty(key) || "updateSymbol".equals(key) || "msg".equals(key)) {
+			if (StringUtils.isEmpty(key) || "updateSymbol".equals(key)
+					|| "msg".equals(key)) {
 				continue;
 			}
 			Object value = entry.getValue();

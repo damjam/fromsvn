@@ -41,10 +41,12 @@ public class MsgA2031 {
 	// MsgField.cert_num
 	};
 
-	public static MsgField[] A2031RES = { MsgField.aip_no, MsgField.account_no, MsgField.is_sign, MsgField.cust_name,
-			cert_type, MsgField.cert_num, MsgField.acct_stat, branch_id, broker_id, grade_id, area_code,
-			MsgField.mobile_phone, MsgField.tel, MsgField.fax, MsgField.addr, MsgField.zipcode, MsgField.email, memo,
-			MsgField.o_term_type, MsgField.o_teller_id, o_date, MsgField.m_term_type, MsgField.m_teller_id,
-			MsgField.m_date };
+	public static MsgField[] A2031RES = { MsgField.aip_no, MsgField.account_no,
+			MsgField.is_sign, MsgField.cust_name, cert_type, MsgField.cert_num,
+			MsgField.acct_stat, branch_id, broker_id, grade_id, area_code,
+			MsgField.mobile_phone, MsgField.tel, MsgField.fax, MsgField.addr,
+			MsgField.zipcode, MsgField.email, memo, MsgField.o_term_type,
+			MsgField.o_teller_id, o_date, MsgField.m_term_type,
+			MsgField.m_teller_id, MsgField.m_date };
 
 }

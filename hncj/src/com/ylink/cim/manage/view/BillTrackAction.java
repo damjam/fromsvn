@@ -24,6 +24,7 @@ import com.ylink.cim.manage.domain.BillTrack;
 
 import flink.etc.BizException;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -119,7 +120,7 @@ public class BillTrackAction extends BaseAction implements
 		try {
 			String id = request.getParameter("id");
 			billTrackService.discard(id, getSessionUser(request));
-			String msg = LogUtils.r("废弃账单到期提醒,记录id为{?}", id);
+			String msg = MsgUtils.r("废弃账单到期提醒,记录id为{?}", id);
 			logUserOperate(request, UserLogType.DELETE.getValue(),
 					StringUtils.abbreviate(msg, 100));
 			setResult(true, "操作成功", request);
@@ -158,6 +159,7 @@ public class BillTrackAction extends BaseAction implements
 		RemainDays.setInReq(request);
 	}
 
+	@Override
 	public BillTrack getModel() {
 		return model;
 	}

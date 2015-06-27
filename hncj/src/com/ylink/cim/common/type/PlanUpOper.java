@@ -17,13 +17,20 @@ public class PlanUpOper extends AbstractType {
 	public static Map<String, PlanUpOper> ALL = new LinkedHashMap<String, PlanUpOper>();
 
 	public static final PlanUpOper APPLY_TO_UNDO = new PlanUpOper("…Í«Î->≥∑œ˙", "1");
-	public static final PlanUpOper APPLY_TO_MODIFY = new PlanUpOper("…Í«Î->–ﬁ∏ƒ", "2");
-	public static final PlanUpOper EFFECT_TO_MODIFY = new PlanUpOper("…˙–ß->–ﬁ∏ƒ", "3");
-	public static final PlanUpOper EFFECT_TO_TERMINAL = new PlanUpOper("…˙–ß->÷’÷π", "4");
-	public static final PlanUpOper EFFECT_TO_PAUSE = new PlanUpOper("…˙–ß->‘›Õ£", "5");
-	public static final PlanUpOper PAUSE_TO_RESTORE = new PlanUpOper("‘›Õ£->ª÷∏¥", "6");
-	public static final PlanUpOper PAUSE_TO_TERMINAL = new PlanUpOper("‘›Õ£->÷’÷π", "7");
-	public static final PlanUpOper MORETHAN_FAILUREPHASES_TO_TERMINAL = new PlanUpOper("≥¨π˝ø€øÓ ß∞‹∆⁄ ˝->÷’÷π", "8");
+	public static final PlanUpOper APPLY_TO_MODIFY = new PlanUpOper("…Í«Î->–ﬁ∏ƒ",
+			"2");
+	public static final PlanUpOper EFFECT_TO_MODIFY = new PlanUpOper("…˙–ß->–ﬁ∏ƒ",
+			"3");
+	public static final PlanUpOper EFFECT_TO_TERMINAL = new PlanUpOper(
+			"…˙–ß->÷’÷π", "4");
+	public static final PlanUpOper EFFECT_TO_PAUSE = new PlanUpOper("…˙–ß->‘›Õ£",
+			"5");
+	public static final PlanUpOper PAUSE_TO_RESTORE = new PlanUpOper("‘›Õ£->ª÷∏¥",
+			"6");
+	public static final PlanUpOper PAUSE_TO_TERMINAL = new PlanUpOper("‘›Õ£->÷’÷π",
+			"7");
+	public static final PlanUpOper MORETHAN_FAILUREPHASES_TO_TERMINAL = new PlanUpOper(
+			"≥¨π˝ø€øÓ ß∞‹∆⁄ ˝->÷’÷π", "8");
 
 	protected PlanUpOper(String name, String value) {
 		super(name, value);

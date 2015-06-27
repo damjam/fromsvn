@@ -48,7 +48,8 @@ public class CPSHttpSessionListener implements HttpSessionListener {
 	 * @param userSession
 	 *            ÓÃ»§µÄHttpSession
 	 */
-	public static void putSession(final String userId, final HttpSession userSession) {
+	public static void putSession(final String userId,
+			final HttpSession userSession) {
 		logOff(userId);
 		sessionMap.put(userId, userSession);
 	}
@@ -67,14 +68,17 @@ public class CPSHttpSessionListener implements HttpSessionListener {
 	/**
 	 * @see javax.servlet.http.HttpSessionListener#sessionCreated(javax.servlet.http.HttpSessionEvent)
 	 */
+	@Override
 	public void sessionCreated(final HttpSessionEvent se) {
 	}
 
 	/**
 	 * @see javax.servlet.http.HttpSessionListener#sessionDestroyed(javax.servlet.http.HttpSessionEvent)
 	 */
+	@Override
 	public void sessionDestroyed(final HttpSessionEvent se) {
-		UserInfo user = (UserInfo) se.getSession().getAttribute(Constants.SESSION_USER);
+		UserInfo user = (UserInfo) se.getSession().getAttribute(
+				Constants.SESSION_USER);
 		if (user != null) {
 			String id = user.getUserId();
 			sessionMap.remove(id);

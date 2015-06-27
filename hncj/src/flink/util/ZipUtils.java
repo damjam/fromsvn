@@ -40,18 +40,16 @@ public abstract class ZipUtils {
 				IOUtils.write(b, bos);
 				bos.flush();
 			}
-			
+
 			return bos.toByteArray();
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			ex.printStackTrace();
-		} 
-		finally {
+		} finally {
 			IOUtils.closeQuietly(bos);
 			IOUtils.closeQuietly(bis);
 			IOUtils.closeQuietly(zip);
 		}
-		
+
 		return null;
 	}
 
@@ -65,14 +63,14 @@ public abstract class ZipUtils {
 		if (data == null) {
 			return null;
 		}
-		
+
 		ByteArrayOutputStream bos = null;
 		ZipOutputStream zip = null;
 
 		try {
 			bos = new ByteArrayOutputStream();
 			zip = new ZipOutputStream(bos);
-			
+
 			ZipEntry entry = new ZipEntry("zip");
 			entry.setSize(data.length);
 			zip.putNextEntry(entry);

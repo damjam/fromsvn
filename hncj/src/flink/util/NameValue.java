@@ -34,14 +34,17 @@ class NameValuePair implements NameValue {
 		this.value = value;
 	}
 
+	@Override
 	public String getName() {
 		return this.name;
 	}
 
+	@Override
 	public String getValue() {
 		return this.value;
 	}
 
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("{");

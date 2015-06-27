@@ -24,6 +24,7 @@ public class SysParmServiceImpl implements SysParmService {
 	/**
 	 * 根据主键删除记录
 	 */
+	@Override
 	public void delete(String id) throws BizException {
 
 		try {
@@ -44,6 +45,7 @@ public class SysParmServiceImpl implements SysParmService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Paginater findAll(Pager pager, SysParm sysParm) throws BizException {
 
 		Paginater paginater = null;
@@ -62,11 +64,12 @@ public class SysParmServiceImpl implements SysParmService {
 	 * 
 	 * @throws BizException
 	 */
+	@Override
 	public SysParm findById(String id) throws BizException {
 
 		SysParm sysParm;
 		try {
-			sysParm = (SysParm) this.sysParmDao.findSysParmById(id);
+			sysParm = this.sysParmDao.findSysParmById(id);
 			return sysParm;
 		} catch (Exception e) {
 			throw new BizException(e.getMessage());
@@ -74,6 +77,7 @@ public class SysParmServiceImpl implements SysParmService {
 
 	}
 
+	@Override
 	public SysParm findByIdWithLock(String code) throws BizException {
 
 		return this.sysParmDao.findByIdWithLock(code);
@@ -81,6 +85,7 @@ public class SysParmServiceImpl implements SysParmService {
 
 
 
+	@Override
 	public void save(SysParm sysParm) throws BizException {
 		try {
 			if (sysParmDao.hasParm(sysParm.getCode())) {
@@ -94,6 +99,7 @@ public class SysParmServiceImpl implements SysParmService {
 		}
 	}
 
+	@Override
 	public void update(SysParm sysParm) throws BizException {
 
 		try {

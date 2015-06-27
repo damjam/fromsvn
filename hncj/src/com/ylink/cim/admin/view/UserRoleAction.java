@@ -19,7 +19,7 @@ import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
 import flink.util.BoUtils;
 import flink.util.ExceptionUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -40,10 +40,11 @@ public class UserRoleAction extends BaseAction implements ModelDriven<UserRole> 
 
 	public String listUserRole() throws Exception {
 
-		Paginater list = this.userRoleService.getUserRolePageList(model, super.getPager(request));
+		Paginater list = this.userRoleService.getUserRolePageList(model,
+				super.getPager(request));
 
 		saveQueryResult(request, list);
-		String msg = LogUtils.r("用户角色查询成功");
+		String msg = MsgUtils.r("用户角色查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return ActionConstant.TO_LIST_PAGE;
 	}
@@ -53,11 +54,12 @@ public class UserRoleAction extends BaseAction implements ModelDriven<UserRole> 
 		try {
 			this.userRoleService.deleteUserRole(model.getId());
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("删除用户角色成功,删除内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("删除用户角色成功,删除内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			return ActionConstant.TO_LIST_PAGE;
 		} catch (Exception e) {
-			String msg = LogUtils.r("删除用户角色失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("删除用户角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logException(UserRoleAction.class, e.getMessage());
 			throw e;
@@ -75,9 +77,10 @@ public class UserRoleAction extends BaseAction implements ModelDriven<UserRole> 
 			model.setRoleIds(roleIds);
 		}
 		List<LimitGroupInfo> list = limitGroupInfoDao.findAll();
-		Paginater paginater = userRoleDao.getAvailableRoles(userId, getPager(request));
-		BoUtils.addProperty(paginater.getList(), "limitGroupId", "limitGroupName", list, "limitGroupId",
-				"limitGroupName");
+		Paginater paginater = userRoleDao.getAvailableRoles(userId,
+				getPager(request));
+		BoUtils.addProperty(paginater.getList(), "limitGroupId",
+				"limitGroupName", list, "limitGroupId", "limitGroupName");
 		saveQueryResult(request, paginater);
 		return ActionConstant.TO_ASSIGN_ROLE_PAGE;
 	}
@@ -87,19 +90,23 @@ public class UserRoleAction extends BaseAction implements ModelDriven<UserRole> 
 			if (!isValidKey(request)) {
 				return toAssignRole();
 			}
-			this.userRoleService.saveUserRole(model.getUserId(), model.getRoleIds());
+			this.userRoleService.saveUserRole(model.getUserId(),
+					model.getRoleIds());
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("添加用户角色成功,添加内容为：{?}",
-					"[UserId=" + model.getUserId() + ",RoleIds=" + FeildUtils.arrayToString(model.getRoleIds()));
+			String msg = MsgUtils.r(
+					"添加用户角色成功,添加内容为：{?}",
+					"[UserId=" + model.getUserId() + ",RoleIds="
+							+ FeildUtils.arrayToString(model.getRoleIds()));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			return this.toAssignRole();
 		} catch (Exception e) {
-			String msg = LogUtils.r("添加用户角色失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加用户角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			throw e;
 		}
 	}
 
+	@Override
 	public UserRole getModel() {
 		return model;
 	}

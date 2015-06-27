@@ -10,7 +10,7 @@ import flink.util.AbstractType;
 public class TradeType extends AbstractType {
 
 	public static Map<String, TradeType> ALL = new LinkedHashMap<String, TradeType>();
-	
+
 	public static final TradeType SERVICE = new TradeType("物业费(含公共能源费)", "00");
 	public static final TradeType WATER = new TradeType("水费", "01");
 	public static final TradeType DEPOSIT = new TradeType("业主充值", "02");
@@ -23,7 +23,7 @@ public class TradeType extends AbstractType {
 	public static final TradeType AD_RENT = new TradeType("广告位租赁费", "20");
 	public static final TradeType IC_DEPOSIT = new TradeType("IC卡充值", "21");
 	public static final TradeType IN_OTHER = new TradeType("其他收入", "98");
-	
+
 	public static final TradeType REFUND = new TradeType("退押金", "10");
 	public static final TradeType ELECTRIC = new TradeType("交电费", "11");
 	public static final TradeType SALARY = new TradeType("支付工资", "12");
@@ -34,19 +34,18 @@ public class TradeType extends AbstractType {
 	public static final TradeType INNER_WITHDRAW = new TradeType("清算提现", "17");
 	public static final TradeType IN_REVERSE = new TradeType("冲正交易", "18");
 	public static final TradeType OUT_OTHER = new TradeType("其他支出", "99");
-	
+
 	protected TradeType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
 	}
-	
+
 	public static TradeType valueOf(String value) {
 		TradeType type = ALL.get(value);
 		return type;
 	}
-	
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("tradeTypes", TradeType.ALL.values());
 	}
 }
-

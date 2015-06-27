@@ -6,6 +6,7 @@ import com.ylink.client.view.AipPlanForm;
 
 public class AipPlanServiceImpl implements AipPlanService {
 
+	@Override
 	public AipPlanInfo findAipPlanService(AipPlanForm aipPlanForm) {
 		return null;
 	}

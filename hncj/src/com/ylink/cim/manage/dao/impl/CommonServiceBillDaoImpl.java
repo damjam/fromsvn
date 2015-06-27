@@ -19,23 +19,33 @@ import flink.hibernate.QueryHelper;
 import flink.util.DateUtil;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Repository("commonServiceBillDao")
-public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServiceBillDao{
-	public Paginater findPager(Map<String, Object> params, Pager pager){
+public class CommonServiceBillDaoImpl extends BaseDaoImpl implements
+		CommonServiceBillDao {
+	@Override
+	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from CommonServiceBill t where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
-			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by t.id desc");
 		return super.getPageData(helper, pager);
@@ -46,21 +56,29 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServi
 		return CommonServiceBill.class;
 	}
 
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.totalAmount) as sumAmt, t.state as state) from CommonServiceBill t where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
-			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("group by t.state");
 		List<Map<String, Object>> sumList = super.getList(helper);
@@ -73,9 +91,9 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServi
 		Double unpayAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
-			String state = (String)map.get("state");
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
+			String state = (String) map.get("state");
+			Long cnt = (Long) map.get("cnt");
+			Double sumAmt = (Double) map.get("sumAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -85,10 +103,10 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServi
 			if (BillState.PAID.getValue().equals(state)) {
 				paidCnt = cnt;
 				paidAmt = sumAmt;
-			}else if (BillState.UNPAY.getValue().equals(state)) {
+			} else if (BillState.UNPAY.getValue().equals(state)) {
 				unpayCnt = cnt;
 				unpayAmt = sumAmt;
-			}else if (BillState.REVERSE.getValue().equals(state)) {
+			} else if (BillState.REVERSE.getValue().equals(state)) {
 				continue;
 			}
 			totalCnt += cnt;
@@ -103,9 +121,11 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServi
 		return sumInfo;
 	}
 
+	@Override
 	public CommonServiceBill getLastBill(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("from CommonServiceBill where state = ?", BillState.PAID.getValue());
+		helper.append("from CommonServiceBill where state = ?",
+				BillState.PAID.getValue());
 		helper.append("and houseSn = ?", MapUtils.getString(map, "houseSn"));
 		helper.append("order by id desc");
 		List<CommonServiceBill> list = super.getList(helper);
@@ -119,9 +139,8 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements CommonServi
 		if (!StringUtils.isBlank(year)) {
 			helper.append("and createDate >= ?", year);
 			Integer yearInt = Integer.parseInt(year);
-			helper.append("and createDate <= ?", String.valueOf(yearInt+1));
+			helper.append("and createDate <= ?", String.valueOf(yearInt + 1));
 		}
 	}
 
-	
 }

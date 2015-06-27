@@ -33,7 +33,8 @@ public interface PrivilegeDao extends BaseDao {
 	 * @return
 	 * @throws BizException
 	 */
-	public List<PrivilegeTreeNode> getRoleTreeByRole(String roleId) throws BizException;
+	public List<PrivilegeTreeNode> getRoleTreeByRole(String roleId)
+			throws BizException;
 
 	/**
 	 * 获得权限树

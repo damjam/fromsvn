@@ -19,19 +19,24 @@ import flink.util.Paginater;
 @Component("chargeItemDao")
 public class ChargeItemDaoImpl extends BaseDaoImpl implements ChargeItemDao {
 
+	@Override
 	public List<ChargeItem> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeItem where 1=1");
 		helper.append("and way = ?", MapUtils.getString(params, "way"));
 		helper.append("and item = ?", MapUtils.getString(params, "item"));
-		helper.append("and itemName = ?", MapUtils.getString(params, "itemName"));
+		helper.append("and itemName = ?",
+				MapUtils.getString(params, "itemName"));
 		helper.append("and id <> ?", MapUtils.getString(params, "exceptId"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<Long> findItemNum(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select count(id) from ChargeItem where 1=1");
@@ -40,13 +45,16 @@ public class ChargeItemDaoImpl extends BaseDaoImpl implements ChargeItemDao {
 		return super.getList(helper);
 	}
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeItem where 1=1");
 		helper.append("and way = ?", MapUtils.getString(params, "way"));
 		helper.append("and item = ?", MapUtils.getString(params, "item"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		return super.getPageData(helper, pager);
 	}

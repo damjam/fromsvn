@@ -11,9 +11,10 @@ import com.ylink.cim.sys.service.TimerDoService;
 
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class TimerDoAction extends BaseAction implements ModelDriven<TimerDo>{
+public class TimerDoAction extends BaseAction implements ModelDriven<TimerDo> {
 	/**
 	 * 
 	 */
@@ -25,11 +26,13 @@ public class TimerDoAction extends BaseAction implements ModelDriven<TimerDo>{
 	TimerDoDao timerDoDao;
 
 	public String list() throws Exception {
-		Paginater paginater = this.timerDoDao.getPagerList(model, getPager(request));
+		Paginater paginater = this.timerDoDao.getPagerList(model,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		return "list";
 	}
 
+	@Override
 	public TimerDo getModel() {
 		return model;
 	}

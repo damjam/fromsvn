@@ -14,6 +14,7 @@ import flink.hibernate.QueryHelper;
 @Component("pushRecordDao")
 public class PushRecordDaoImpl extends BaseDaoImpl implements PushRecordDao {
 
+	@Override
 	public List<PushRecord> findByParams(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from PushRecord where 1=1");
@@ -23,6 +24,7 @@ public class PushRecordDaoImpl extends BaseDaoImpl implements PushRecordDao {
 		return super.getList(helper);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return PushRecord.class;
 	}

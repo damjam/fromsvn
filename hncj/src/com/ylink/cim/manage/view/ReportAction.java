@@ -74,14 +74,13 @@ import flink.web.BaseAction;
 @Component
 public class ReportAction extends BaseAction {
 
-	
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	private static final ComInfo comInfo = (ComInfo)getService("comInfo");
+	private static final ComInfo comInfo = (ComInfo) getService("comInfo");
 	@Autowired
-	private WaterBillDao waterBillDao = (WaterBillDao)getService("waterBillDao");
+	private WaterBillDao waterBillDao = (WaterBillDao) getService("waterBillDao");
 	@Autowired
-	private GeneralBillDao generalBillDao = (GeneralBillDao)getService("generalBillDao");
+	private GeneralBillDao generalBillDao = (GeneralBillDao) getService("generalBillDao");
 	@Autowired
 	private DepositBillDao depositBillDao;
 	@Autowired
@@ -94,10 +93,13 @@ public class ReportAction extends BaseAction {
 	private AccountJournalDao accountJournalDao;
 	@Autowired
 	private AdrentBillDao adrentBillDao;
+
 	public String waterBill() throws Exception {
 		String waterBillId = request.getParameter("id");
 		WaterBill bill = waterBillDao.findById(WaterBill.class, waterBillId);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("content", "水费");
@@ -106,17 +108,24 @@ public class ReportAction extends BaseAction {
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getAmount()));
-		map.put("price", MoneyUtil.getFormatStr2(Double.parseDouble(ParaManager.getWaterPrice())));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getAmount()));
-		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
+		map.put("price", MoneyUtil.getFormatStr2(Double.parseDouble(ParaManager
+				.getWaterPrice())));
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getAmount()));
+		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+				bill.getHouseSn());
 		map.put("houseDesc", houseInfo.getHouseDesc());
-		String startDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill.getPreRecordDate()), "yyyy-MM-dd");
-		String endDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill.getCurRecordDate()), "yyyy-MM-dd");
-		map.put("period", startDate+"--"+endDate);
+		String startDate = DateUtil.getDate(
+				DateUtil.getDateByYYYMMDD(bill.getPreRecordDate()),
+				"yyyy-MM-dd");
+		String endDate = DateUtil.getDate(
+				DateUtil.getDateByYYYMMDD(bill.getCurRecordDate()),
+				"yyyy-MM-dd");
+		map.put("period", startDate + "--" + endDate);
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("adrentBill.jasper", map, request, response);
 		return null;
 	}
+
 	public String waterBillDetail() throws Exception {
 		String buildingNo = request.getParameter("buildingNo");
 		String startCreateDate = request.getParameter("startCreateDate");
@@ -130,78 +139,98 @@ public class ReportAction extends BaseAction {
 		generateReportWithConn("waterBillDetail.jasper", map, request, response);
 		return null;
 	}
+
 	public String parkingBill() throws Exception {
 		String id = request.getParameter("id");
 		ParkingBill parkingBill = waterBillDao.findById(ParkingBill.class, id);
-		Assert.isTrue(canPrint(parkingBill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(parkingBill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(parkingBill);
 		map.putAll(request.getParameterMap());
 		map.put("ownerName", parkingBill.getOwnerName());
 		map.put("today", DateUtil.getCurrentDate());
-		//map.put("price", ParaManager.getWaterPrice());
+		// map.put("price", ParaManager.getWaterPrice());
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", parkingBill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(parkingBill.getAmount()));
-		map.put("price", MoneyUtil.getFormatStr2(Double.parseDouble(ParaManager.getWaterPrice())));
-		map.put("chineseAmount"," "+MoneyUtil.numToRMBStr(parkingBill.getAmount()));
+		map.put("price", MoneyUtil.getFormatStr2(Double.parseDouble(ParaManager
+				.getWaterPrice())));
+		map.put("chineseAmount",
+				" " + MoneyUtil.numToRMBStr(parkingBill.getAmount()));
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("parkingBill.jasper", map, request, response);
 		return null;
 	}
+
 	public String decorateServiceBill() throws Exception {
 		String id = request.getParameter("id");
-		DecorateServiceBill bill = waterBillDao.findById(DecorateServiceBill.class, id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		DecorateServiceBill bill = waterBillDao.findById(
+				DecorateServiceBill.class, id);
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
-		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
-		map.put("area", MoneyUtil.getFormatStr2(houseInfo.getArea())+"㎡");
+		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+				bill.getHouseSn());
+		map.put("area", MoneyUtil.getFormatStr2(houseInfo.getArea()) + "㎡");
 		map.put("houseDesc", houseInfo.getHouseDesc());
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("totalAmount", MoneyUtil.getFormatStr2(bill.getAmount()));
-		map.put("cleanPrice", MoneyUtil.getFormatStr2(bill.getCleanPrice())+"元/㎡");
+		map.put("cleanPrice", MoneyUtil.getFormatStr2(bill.getCleanPrice())
+				+ "元/㎡");
 		map.put("cleanAmount", MoneyUtil.getFormatStr2(bill.getCleanAmount()));
 		map.put("liftFee", MoneyUtil.getFormatStr2(bill.getLiftFee()));
 		map.put("liftFeeDesc", "二层收100元，二层以上每层加收20元");
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getAmount()));
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getAmount()));
 		map.put("sumTitle", "汇总金额");
 		map.put("comName", comInfo.getName());
-		generateReportWithConn("decorateServiceBill.jasper", map, request, response);
+		generateReportWithConn("decorateServiceBill.jasper", map, request,
+				response);
 		return null;
 	}
+
 	public String depositBill() throws Exception {
 		String id = request.getParameter("id");
 		DepositBill bill = depositBillDao.findById(id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
-		//map.put("price", ParaManager.getWaterPrice());
-		HouseInfo houseInfo = depositBillDao.findById(HouseInfo.class, bill.getHouseSn());
+		// map.put("price", ParaManager.getWaterPrice());
+		HouseInfo houseInfo = depositBillDao.findById(HouseInfo.class,
+				bill.getHouseSn());
 		map.put("houseDesc", houseInfo.getHouseDesc());
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getAmount()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getAmount()));
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getAmount()));
 		map.put("content", "押金");
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("depositBill.jasper", map, request, response);
 		return null;
 	}
-	//业主充值
+
+	// 业主充值
 	public String depositDetailBill() throws Exception {
 		String id = request.getParameter("id");
 		AccountDetail detail = accountDetailDao.findById(id);
 		String acctNo = detail.getAcctNo();
 		Account account = accountDao.findById(acctNo);
-		Assert.isTrue(canPrint(account.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(account.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(detail);
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
-		//map.put("price", ParaManager.getWaterPrice());
-		OwnerInfo ownerInfo = depositBillDao.findById(OwnerInfo.class, detail.getAcctNo());
+		// map.put("price", ParaManager.getWaterPrice());
+		OwnerInfo ownerInfo = depositBillDao.findById(OwnerInfo.class,
+				detail.getAcctNo());
 		String houseSn = ownerInfo.getHouseSn();
 		HouseInfo houseInfo = depositBillDao.findById(HouseInfo.class, houseSn);
 		map.put("payerName", ownerInfo.getOwnerName());
@@ -209,38 +238,56 @@ public class ReportAction extends BaseAction {
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", detail.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(detail.getAmount()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(detail.getAmount()));
+		map.put("chineseAmount",
+				" " + MoneyUtil.numToRMBStr(detail.getAmount()));
 		map.put("content", "预存水费");
-		map.put("remark", "本次充值后余额："+MoneyUtil.getFormatStr2(detail.getBalance())+"元");
+		map.put("remark",
+				"本次充值后余额：" + MoneyUtil.getFormatStr2(detail.getBalance()) + "元");
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("depositBill.jasper", map, request, response);
 		return null;
 	}
+
 	public String commonServiceBill() throws Exception {
 		String id = request.getParameter("id");
-		CommonServiceBill bill = waterBillDao.findById(CommonServiceBill.class, id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		CommonServiceBill bill = waterBillDao.findById(CommonServiceBill.class,
+				id);
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
-		//map.put("price", ParaManager.getWaterPrice());
-		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
-		map.put("houseDesc", houseInfo.getHouseSn()+"，面积:"+MoneyUtil.getFormatStr2(bill.getArea())+"㎡");
+		// map.put("price", ParaManager.getWaterPrice());
+		HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+				bill.getHouseSn());
+		map.put("houseDesc",
+				houseInfo.getHouseSn() + "，面积:"
+						+ MoneyUtil.getFormatStr2(bill.getArea()) + "㎡");
 		map.put("billSn", bill.getId());
 		map.put("totalAmount", MoneyUtil.getFormatStr2(bill.getTotalAmount()));
-		map.put("servicePrice", MoneyUtil.getFormatStr2(bill.getServicePrice())+"元/月.平米");
-		map.put("serviceAmount", MoneyUtil.getFormatStr2(bill.getServiceAmount()));
-		map.put("lightPrice", MoneyUtil.getFormatStr2(bill.getLightPrice())+"元/月");
+		map.put("servicePrice", MoneyUtil.getFormatStr2(bill.getServicePrice())
+				+ "元/月.平米");
+		map.put("serviceAmount",
+				MoneyUtil.getFormatStr2(bill.getServiceAmount()));
+		map.put("lightPrice", MoneyUtil.getFormatStr2(bill.getLightPrice())
+				+ "元/月");
 		map.put("lightAmount", MoneyUtil.getFormatStr2(bill.getLightAmount()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getTotalAmount()));
-		String startDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill.getStartDate()));
-		String endDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill.getEndDate()));
-		map.put("period", startDate+"—"+endDate);
+		map.put("chineseAmount",
+				" " + MoneyUtil.numToRMBStr(bill.getTotalAmount()));
+		String startDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill
+				.getStartDate()));
+		String endDate = DateUtil.getDate(DateUtil.getDateByYYYMMDD(bill
+				.getEndDate()));
+		map.put("period", startDate + "—" + endDate);
 		map.put("comName", comInfo.getName());
-		generateReportWithConn("commonServiceBill.jasper", map, request, response);
-		//generateReportWithData("commonServiceBill.jasper", map, null, request, response);
+		generateReportWithConn("commonServiceBill.jasper", map, request,
+				response);
+		// generateReportWithData("commonServiceBill.jasper", map, null,
+		// request, response);
 		return null;
 	}
+
 	public String tradeReport() throws Exception {
 		String tradeDate = request.getParameter("tradeDate");
 		Map<String, Object> map = getParaMap();
@@ -248,11 +295,11 @@ public class ReportAction extends BaseAction {
 		map.put("endCreateDate", tradeDate);
 		map.put("branchNo", getSessionBranchNo(request));
 		Map<String, Object> sumInfo = accountJournalDao.findSumInfo(map);
-		Long inCnt = (Long)sumInfo.get("inCnt");
-		Double inAmtDouble = (Double)sumInfo.get("inAmt");
+		Long inCnt = (Long) sumInfo.get("inCnt");
+		Double inAmtDouble = (Double) sumInfo.get("inAmt");
 		String inAmt = MoneyUtil.getFormatStr(inAmtDouble);
-		Long outCnt = (Long)sumInfo.get("outCnt");
-		Double outAmtDouble = (Double)sumInfo.get("outAmt");
+		Long outCnt = (Long) sumInfo.get("outCnt");
+		Double outAmtDouble = (Double) sumInfo.get("outAmt");
 		String outAmt = MoneyUtil.getFormatStr(outAmtDouble);
 		Map<String, Object> params = getParaMap();
 		params.put("branchNo", getSessionBranchNo(request));
@@ -263,10 +310,12 @@ public class ReportAction extends BaseAction {
 		params.put("inAmt", inAmt);
 		params.put("outCnt", outCnt);
 		params.put("outAmt", outAmt);
-		params.put("netAmt", MoneyUtil.getFormatStr((Double)sumInfo.get("netAmt")));
+		params.put("netAmt",
+				MoneyUtil.getFormatStr((Double) sumInfo.get("netAmt")));
 		generateReportWithConn("tradeReport.jasper", params, request, response);
 		return null;
 	}
+
 	public String gather() throws Exception {
 		String gatherWay = request.getParameter("gatherWay");
 		String gatherPeriod = request.getParameter("gatherPeriod");
@@ -274,7 +323,8 @@ public class ReportAction extends BaseAction {
 		params.put("gatherWay", gatherWay);
 		params.put("gatherPeriod", gatherPeriod);
 		params.put("branchNo", getSessionBranchNo(request));
-		List<Map<String, Object>> sumList = accountJournalDao.findGatherInfo(params);
+		List<Map<String, Object>> sumList = accountJournalDao
+				.findGatherInfo(params);
 		List<Map<String, Object>> inList = new LinkedList<Map<String, Object>>();
 		List<Map<String, Object>> outList = new LinkedList<Map<String, Object>>();
 		Map<String, Object> sumInfo = new HashMap<String, Object>();
@@ -286,10 +336,11 @@ public class ReportAction extends BaseAction {
 		Double outAmt = 0d;
 		for (int i = 0; i < sumList.size(); i++) {
 			Map<String, Object> map = sumList.get(i);
-			map.put("tradeTypeName", TradeType.valueOf((String)map.get("tradeType")).getName());
-			String inoutType = (String)map.get("inoutType");
-			Long cnt = (Long)map.get("cnt");
-			Double sumAmt = (Double)map.get("sumAmt");
+			map.put("tradeTypeName",
+					TradeType.valueOf((String) map.get("tradeType")).getName());
+			String inoutType = (String) map.get("inoutType");
+			Long cnt = (Long) map.get("cnt");
+			Double sumAmt = (Double) map.get("sumAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -300,7 +351,7 @@ public class ReportAction extends BaseAction {
 				inCnt += cnt;
 				inAmt += sumAmt;
 				inList.add(map);
-			}else {
+			} else {
 				outCnt += cnt;
 				outAmt += sumAmt;
 				outList.add(map);
@@ -313,18 +364,19 @@ public class ReportAction extends BaseAction {
 		sumInfo.put("outCnt", outCnt);
 		sumInfo.put("outAmt", MoneyUtil.getFormatStr2(outAmt));
 		sumInfo.put("totalCnt", totalCnt);
-		sumInfo.put("netAmt", MoneyUtil.getFormatStr2(AmountUtils.add(inAmt, -outAmt)));
+		sumInfo.put("netAmt",
+				MoneyUtil.getFormatStr2(AmountUtils.add(inAmt, -outAmt)));
 		sumInfo.putAll(request.getParameterMap());
 		sumInfo.put("today", DateUtil.getCurrentDate());
-		String gatherTitle  = "";
+		String gatherTitle = "";
 		String pattern = "";
 		if ("D".equals(gatherWay)) {
 			gatherTitle = "汇总日期:";
 			pattern = "yyyyMMdd";
-		}else if("M".equals(gatherWay)){
+		} else if ("M".equals(gatherWay)) {
 			gatherTitle = "汇总月份:";
 			pattern = "yyyyMM";
-		}else if ("Y".equals(gatherWay)){
+		} else if ("Y".equals(gatherWay)) {
 			gatherTitle = "汇总年份:";
 			pattern = "yyyy";
 		}
@@ -337,8 +389,10 @@ public class ReportAction extends BaseAction {
 		generateReportWithConn("gatherBill.jasper", sumInfo, request, response);
 		return null;
 	}
+
 	/**
 	 * 通用收据
+	 * 
 	 * @param mapping
 	 * @param form
 	 * @param request
@@ -349,7 +403,9 @@ public class ReportAction extends BaseAction {
 	public String generalBill() throws Exception {
 		String id = request.getParameter("id");
 		GeneralBill bill = generalBillDao.findById(GeneralBill.class, id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("content", TradeType.valueOf(bill.getTradeType()).getName());
@@ -359,17 +415,21 @@ public class ReportAction extends BaseAction {
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getPaidAmt()));
 		map.put("price", MoneyUtil.getFormatStr2(bill.getUnitPrice()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getPaidAmt()));
-		//HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
-		//map.put("houseDesc", houseInfo.getHouseDesc());
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getPaidAmt()));
+		// HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+		// bill.getHouseSn());
+		// map.put("houseDesc", houseInfo.getHouseDesc());
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("generalBill.jasper", map, request, response);
 		return null;
 	}
+
 	public String icDepositBill() throws Exception {
 		String id = request.getParameter("id");
 		IcDeposit bill = icDepositDao.findById(IcDeposit.class, id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("cardType", IcCardType.valueOf(bill.getCardType()).getName());
@@ -377,18 +437,22 @@ public class ReportAction extends BaseAction {
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getAmount()));
-		//map.put("price", MoneyUtil.getFormatStr2(bill.getUnitPrice()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getAmount()));
-		//HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
-		//map.put("houseDesc", houseInfo.getHouseDesc());
+		// map.put("price", MoneyUtil.getFormatStr2(bill.getUnitPrice()));
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getAmount()));
+		// HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+		// bill.getHouseSn());
+		// map.put("houseDesc", houseInfo.getHouseDesc());
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("icDepositBill.jasper", map, request, response);
 		return null;
 	}
+
 	public String adrentBill() throws Exception {
 		String id = request.getParameter("id");
 		AdrentBill bill = adrentBillDao.findById(AdrentBill.class, id);
-		Assert.isTrue(canPrint(bill.getBranchNo(), getSessionBranchNo(request)), "单号错误，无法打印");
+		Assert.isTrue(
+				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
+				"单号错误，无法打印");
 		Map<String, Object> map = PropertyUtils.describe(bill);
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
@@ -396,74 +460,81 @@ public class ReportAction extends BaseAction {
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getPaidAmt()));
-		map.put("period", bill.getBeginDate()+"-"+bill.getEndDate());
-		//map.put("price", MoneyUtil.getFormatStr2(bill.getUnitPrice()));
-		map.put("chineseAmount", " "+MoneyUtil.numToRMBStr(bill.getPaidAmt()));
-		//HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class, bill.getHouseSn());
-		//map.put("houseDesc", houseInfo.getHouseDesc());
+		map.put("period", bill.getBeginDate() + "-" + bill.getEndDate());
+		// map.put("price", MoneyUtil.getFormatStr2(bill.getUnitPrice()));
+		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getPaidAmt()));
+		// HouseInfo houseInfo = waterBillDao.findById(HouseInfo.class,
+		// bill.getHouseSn());
+		// map.put("houseDesc", houseInfo.getHouseDesc());
 		map.put("comName", comInfo.getName());
 		generateReportWithConn("adrentBill.jasper", map, request, response);
 		return null;
 	}
-	private void generateReportWithData(String jasperFileName, Map<String, Object> parameters,
-			List<?> data, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	private void generateReportWithData(String jasperFileName,
+			Map<String, Object> parameters, List<?> data,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		path = path.endsWith(File.separator) ? path : path + File.separator;
 		String fullPath = path + "jasper" + File.separator + jasperFileName;
-	    JasperReport jasperReport = (JasperReport)JRLoader.loadObject(fullPath);
-	    JasperPrint jasperPrint = null;
-	    if (data != null)
-	    {
-	      JRMapCollectionDataSource ds = new JRMapCollectionDataSource(data);
-	      jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, ds);
-	    }
-	    else {
-	      jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
-	    }
-	    if (jasperPrint != null) {
-	      FileBufferedOutputStream fbos = new FileBufferedOutputStream();
-	      JRPdfExporter exporter = new JRPdfExporter();
-	      exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, fbos);
-	      exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-	      exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "pdf文件");
-	      try {
-	        exporter.exportReport();
-	        fbos.close();
-	        response.setContentType("application/pdf");
-	        response.setContentLength(fbos.size());
-	        ServletOutputStream ouputStream = response.getOutputStream();
-	        try {
-	          fbos.writeData(ouputStream);
-	          fbos.dispose();
-	          ouputStream.flush();
-	        } finally {
-	          if (ouputStream != null)
-	            ouputStream.close();
-	        }
-	      }
-	      finally{
-	    	IOUtils.closeQuietly(fbos);
-	        if (fbos != null) {
-	          fbos.close();
-	          fbos.dispose();
-	        }
-	      }
-	    }
+		JasperReport jasperReport = (JasperReport) JRLoader
+				.loadObject(fullPath);
+		JasperPrint jasperPrint = null;
+		if (data != null) {
+			JRMapCollectionDataSource ds = new JRMapCollectionDataSource(data);
+			jasperPrint = JasperFillManager.fillReport(jasperReport,
+					parameters, ds);
+		} else {
+			jasperPrint = JasperFillManager
+					.fillReport(jasperReport, parameters);
+		}
+		if (jasperPrint != null) {
+			FileBufferedOutputStream fbos = new FileBufferedOutputStream();
+			JRPdfExporter exporter = new JRPdfExporter();
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, fbos);
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "pdf文件");
+			try {
+				exporter.exportReport();
+				fbos.close();
+				response.setContentType("application/pdf");
+				response.setContentLength(fbos.size());
+				ServletOutputStream ouputStream = response.getOutputStream();
+				try {
+					fbos.writeData(ouputStream);
+					fbos.dispose();
+					ouputStream.flush();
+				} finally {
+					if (ouputStream != null)
+						ouputStream.close();
+				}
+			} finally {
+				IOUtils.closeQuietly(fbos);
+				if (fbos != null) {
+					fbos.close();
+					fbos.dispose();
+				}
+			}
+		}
 	}
-	
-	private void generateReportWithConn(String jasperFileName, Map<String, Object> parameters, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	private void generateReportWithConn(String jasperFileName,
+			Map<String, Object> parameters, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		String path = request.getSession().getServletContext().getRealPath("/");
 		path = path.endsWith(File.separator) ? path : path + File.separator;
 		String fullPath = path + "jasper" + File.separator + jasperFileName;
 		System.out.println(fullPath);
-		DataSource p = (DataSource)SpringContext.getService("dataSource");
+		DataSource p = (DataSource) SpringContext.getService("dataSource");
 		Connection conn = p.getConnection();
 		response.reset();
 		response.setContentType("application/pdf");
 		ServletOutputStream ouputStream = null;
 		try {
 			ouputStream = response.getOutputStream();
-			byte[] bytepdf = JasperRunManager.runReportToPdf(fullPath, parameters, conn);
+			byte[] bytepdf = JasperRunManager.runReportToPdf(fullPath,
+					parameters, conn);
 			response.setContentLength(bytepdf.length);
 			ouputStream.write(bytepdf, 0, bytepdf.length);
 		} catch (JRException e) {
@@ -478,11 +549,12 @@ public class ReportAction extends BaseAction {
 			}
 		}
 	}
+
 	private static boolean canPrint(String billBranchNo, String sessionBranchNo) {
 		if (BranchType.HQ_0000.getValue().equals(sessionBranchNo)) {
 			return true;
 		}
-		return StringUtils.equals(billBranchNo, sessionBranchNo); 
+		return StringUtils.equals(billBranchNo, sessionBranchNo);
 	}
-	
+
 }

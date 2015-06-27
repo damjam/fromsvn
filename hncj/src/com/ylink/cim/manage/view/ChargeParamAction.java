@@ -194,6 +194,7 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 		return list();
 	}
 
+	@Override
 	public ChargeParam getModel() {
 		return model;
 	}

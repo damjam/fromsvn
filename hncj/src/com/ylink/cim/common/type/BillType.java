@@ -12,12 +12,13 @@ public class BillType extends AbstractType {
 
 	public static final BillType SERVICE = new BillType("物业费", "00");
 	public static final BillType PARKING = new BillType("停车费", "05");
+
 	protected BillType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
 	}
 
-	public static BillType valueOf(String value)  {
+	public static BillType valueOf(String value) {
 		BillType type = ALL.get(value);
 		return type;
 	}

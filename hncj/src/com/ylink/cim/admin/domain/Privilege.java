@@ -31,6 +31,7 @@ public class Privilege implements IPrivilege, Serializable {
 		this.usedToTree = usedToTree;
 	}
 
+	@Override
 	public boolean isMenu() {
 		return Symbol.YES.equals(getIsMenu());
 	}
@@ -63,6 +64,7 @@ public class Privilege implements IPrivilege, Serializable {
 		this.hasSubPris = hasSubPris;
 	}
 
+	@Override
 	public Collection getAllChildren() {
 		return children;
 	}
@@ -74,8 +76,9 @@ public class Privilege implements IPrivilege, Serializable {
 		setLimitId(limitId);
 	}
 
-	public Privilege(final String limitId, final String limitName, final String parent, final String isMenu,
-			final Integer menuOrder, final String ifAudit, final String entry) {
+	public Privilege(final String limitId, final String limitName,
+			final String parent, final String isMenu, final Integer menuOrder,
+			final String ifAudit, final String entry) {
 		super();
 		this.limitId = limitId;
 		this.limitName = limitName;
@@ -86,6 +89,7 @@ public class Privilege implements IPrivilege, Serializable {
 		this.entry = entry;
 	}
 
+	@Override
 	public boolean equals(final Object rhs) {
 		if (rhs == null)
 			return false;
@@ -101,10 +105,12 @@ public class Privilege implements IPrivilege, Serializable {
 		return this.children;
 	}
 
+	@Override
 	public String getCode() {
 		return this.limitId;
 	}
 
+	@Override
 	public String getEntry() {
 		return this.entry;
 	}
@@ -129,28 +135,34 @@ public class Privilege implements IPrivilege, Serializable {
 		return this.menuOrder;
 	}
 
+	@Override
 	public String getName() {
 		return this.limitName;
 	}
 
+	@Override
 	public java.lang.String getParent() {
 		return this.parent;
 	}
 
+	@Override
 	public int hashCode() {
 		if (this.hashValue == 0) {
 			int result = 17;
-			int limitIdValue = getLimitId() == null ? 0 : getLimitId().hashCode();
+			int limitIdValue = getLimitId() == null ? 0 : getLimitId()
+					.hashCode();
 			result = result * 37 + limitIdValue;
 			this.hashValue = result;
 		}
 		return this.hashValue;
 	}
 
+	@Override
 	public void setChildren(final Collection children) {
 		this.children = children;
 	}
 
+	@Override
 	public void setCode(final String code) {
 		this.limitId = code;
 	}

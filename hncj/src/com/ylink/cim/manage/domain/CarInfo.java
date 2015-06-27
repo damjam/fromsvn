@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -27,22 +28,17 @@ public class CarInfo implements java.io.Serializable {
 	private String ownerCel;
 	private String snCity;
 	private String id;
-	
-	
-	
+
 	/** default constructor */
 	public CarInfo() {
 	}
-
-
 
 	/** minimal constructor */
 	public CarInfo(String carSn) {
 		this.carSn = carSn;
 	}
 
-
-
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -52,87 +48,79 @@ public class CarInfo implements java.io.Serializable {
 			return false;
 		CarInfo castOther = (CarInfo) other;
 
-		return ((this.getCarSn() == castOther.getCarSn()) || (this.getCarSn() != null && castOther.getCarSn() != null && this
-				.getCarSn().equals(castOther.getCarSn())))
-				&& ((this.getBrand() == castOther.getBrand()) || (this.getBrand() != null
-						&& castOther.getBrand() != null && this.getBrand().equals(castOther.getBrand())))
-				&& ((this.getModel() == castOther.getModel()) || (this.getModel() != null
-						&& castOther.getModel() != null && this.getModel().equals(castOther.getModel())))
-				&& ((this.getOwnerId() == castOther.getOwnerId()) || (this.getOwnerId() != null
-						&& castOther.getOwnerId() != null && this.getOwnerId().equals(castOther.getOwnerId())))
-				&& ((this.getParkingSn() == castOther.getParkingSn()) || (this.getParkingSn() != null
-						&& castOther.getParkingSn() != null && this.getParkingSn().equals(castOther.getParkingSn())))
-				&& ((this.getCreateDate() == castOther.getCreateDate()) || (this.getCreateDate() != null
-						&& castOther.getCreateDate() != null && this.getCreateDate().equals(castOther.getCreateDate())))
-				&& ((this.getCreateUser() == castOther.getCreateUser()) || (this.getCreateUser() != null
-						&& castOther.getCreateUser() != null && this.getCreateUser().equals(castOther.getCreateUser())))
-				&& ((this.getUpdateDate() == castOther.getUpdateDate()) || (this.getUpdateDate() != null
-						&& castOther.getUpdateDate() != null && this.getUpdateDate().equals(castOther.getUpdateDate())))
-				&& ((this.getUpdateUser() == castOther.getUpdateUser()) || (this.getUpdateUser() != null
-						&& castOther.getUpdateUser() != null && this.getUpdateUser().equals(castOther.getUpdateUser())));
+		return ((this.getCarSn() == castOther.getCarSn()) || (this.getCarSn() != null
+				&& castOther.getCarSn() != null && this.getCarSn().equals(
+				castOther.getCarSn())))
+				&& ((this.getBrand() == castOther.getBrand()) || (this
+						.getBrand() != null && castOther.getBrand() != null && this
+						.getBrand().equals(castOther.getBrand())))
+				&& ((this.getModel() == castOther.getModel()) || (this
+						.getModel() != null && castOther.getModel() != null && this
+						.getModel().equals(castOther.getModel())))
+				&& ((this.getOwnerId() == castOther.getOwnerId()) || (this
+						.getOwnerId() != null && castOther.getOwnerId() != null && this
+						.getOwnerId().equals(castOther.getOwnerId())))
+				&& ((this.getParkingSn() == castOther.getParkingSn()) || (this
+						.getParkingSn() != null
+						&& castOther.getParkingSn() != null && this
+						.getParkingSn().equals(castOther.getParkingSn())))
+				&& ((this.getCreateDate() == castOther.getCreateDate()) || (this
+						.getCreateDate() != null
+						&& castOther.getCreateDate() != null && this
+						.getCreateDate().equals(castOther.getCreateDate())))
+				&& ((this.getCreateUser() == castOther.getCreateUser()) || (this
+						.getCreateUser() != null
+						&& castOther.getCreateUser() != null && this
+						.getCreateUser().equals(castOther.getCreateUser())))
+				&& ((this.getUpdateDate() == castOther.getUpdateDate()) || (this
+						.getUpdateDate() != null
+						&& castOther.getUpdateDate() != null && this
+						.getUpdateDate().equals(castOther.getUpdateDate())))
+				&& ((this.getUpdateUser() == castOther.getUpdateUser()) || (this
+						.getUpdateUser() != null
+						&& castOther.getUpdateUser() != null && this
+						.getUpdateUser().equals(castOther.getUpdateUser())));
 	}
-
-
 
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public String getBrand() {
 		return this.brand;
 	}
-
-
 
 	public String getCarSn() {
 		return this.carSn;
 	}
 
-
-
 	public Date getCreateDate() {
 		return this.createDate;
 	}
-
-
 
 	public String getCreateUser() {
 		return this.createUser;
 	}
 
-
-
 	public String getHouseSn() {
 		return houseSn;
 	}
-
-
 
 	public String getId() {
 		return id;
 	}
 
-
-
 	public String getModel() {
 		return this.model;
 	}
-
-
 
 	public String getOwnerCel() {
 		return ownerCel;
 	}
 
-
-
 	public String getOwnerId() {
 		return this.ownerId;
 	}
-
-
 
 	public String getOwnerName() {
 		return ownerName;
@@ -145,7 +133,6 @@ public class CarInfo implements java.io.Serializable {
 	public String getRemark() {
 		return remark;
 	}
-
 
 	// Property accessors
 
@@ -161,24 +148,43 @@ public class CarInfo implements java.io.Serializable {
 		return this.updateUser;
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getCarSn() == null ? 0 : this.getCarSn().hashCode());
-		result = 37 * result + (getBrand() == null ? 0 : this.getBrand().hashCode());
-		result = 37 * result + (getModel() == null ? 0 : this.getModel().hashCode());
-		result = 37 * result + (getOwnerId() == null ? 0 : this.getOwnerId().hashCode());
-		result = 37 * result + (getParkingSn() == null ? 0 : this.getParkingSn().hashCode());
-		result = 37 * result + (getCreateDate() == null ? 0 : this.getCreateDate().hashCode());
-		result = 37 * result + (getCreateUser() == null ? 0 : this.getCreateUser().hashCode());
-		result = 37 * result + (getUpdateDate() == null ? 0 : this.getUpdateDate().hashCode());
-		result = 37 * result + (getUpdateUser() == null ? 0 : this.getUpdateUser().hashCode());
+		result = 37 * result
+				+ (getCarSn() == null ? 0 : this.getCarSn().hashCode());
+		result = 37 * result
+				+ (getBrand() == null ? 0 : this.getBrand().hashCode());
+		result = 37 * result
+				+ (getModel() == null ? 0 : this.getModel().hashCode());
+		result = 37 * result
+				+ (getOwnerId() == null ? 0 : this.getOwnerId().hashCode());
+		result = 37 * result
+				+ (getParkingSn() == null ? 0 : this.getParkingSn().hashCode());
+		result = 37
+				* result
+				+ (getCreateDate() == null ? 0 : this.getCreateDate()
+						.hashCode());
+		result = 37
+				* result
+				+ (getCreateUser() == null ? 0 : this.getCreateUser()
+						.hashCode());
+		result = 37
+				* result
+				+ (getUpdateDate() == null ? 0 : this.getUpdateDate()
+						.hashCode());
+		result = 37
+				* result
+				+ (getUpdateUser() == null ? 0 : this.getUpdateUser()
+						.hashCode());
 		return result;
 	}
 
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	public void setBrand(String brand) {

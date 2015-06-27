@@ -26,7 +26,7 @@ public class UserLogType extends AbstractType {
 	}
 
 	public static UserLogType valueOf(String value) {
-		UserLogType type = (UserLogType) ALL.get(value);
+		UserLogType type = ALL.get(value);
 
 		if (type == null) {
 			throw new RuntimeBizException("²Ù×÷ÀàÐÍ´íÎó" + value);

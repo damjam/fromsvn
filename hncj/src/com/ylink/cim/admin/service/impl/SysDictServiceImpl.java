@@ -13,41 +13,49 @@ import com.ylink.cim.admin.service.SysDictService;
 import flink.etc.BizException;
 import flink.util.Pager;
 import flink.util.Paginater;
+
 @Component("sysDictService")
-public class SysDictServiceImpl implements SysDictService{
+public class SysDictServiceImpl implements SysDictService {
 
 	@Autowired
 	private SysDictDao sysDictDao;
-	
+
+	@Override
 	public void deleteSysDict(SysDict sysDict) throws BizException {
 
 		this.sysDictDao.deleteById(sysDict.getId());
-		
+
 	}
 
+	@Override
 	public SysDict getSysDict(SysDictId id) throws BizException {
-		
+
 		return this.sysDictDao.findById(id);
 	}
 
+	@Override
 	public List<SysDict> getSysDictByDictType(String dictType)
 			throws BizException {
-		 
+
 		return this.sysDictDao.getSysDictByDictType(dictType);
 	}
 
-	public Paginater getSysDictPageList(SysDict sysDict,Pager pager) throws BizException {
-		
+	@Override
+	public Paginater getSysDictPageList(SysDict sysDict, Pager pager)
+			throws BizException {
+
 		return this.sysDictDao.getSysDictPageList(sysDict, pager);
 	}
 
+	@Override
 	public boolean isExist(SysDictId id) throws BizException {
-	
-		return null!=this.sysDictDao.findById(id);
+
+		return null != this.sysDictDao.findById(id);
 	}
 
+	@Override
 	public void saveSysDict(SysDict sysDict) throws BizException {
-		
+
 		this.sysDictDao.save(sysDict);
 	}
 

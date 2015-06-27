@@ -34,8 +34,9 @@ public abstract class FtpUtils {
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean upload(String ip, int port, String username, String password, String path, String fileName,
-			InputStream input) throws IOException {
+	public static boolean upload(String ip, int port, String username,
+			String password, String path, String fileName, InputStream input)
+			throws IOException {
 		FTPClient ftp = new FTPClient();
 
 		try {
@@ -63,16 +64,20 @@ public abstract class FtpUtils {
 		}
 	}
 
-	public static boolean upload(String ip, int port, String username, String password, String path, String fileName,
-			String localPath, String localFileName) throws IOException {
-		InputStream in = new FileInputStream(new File(localPath + File.separator + localFileName));
-		boolean result = upload(ip, port, username, password, path, fileName, in);
+	public static boolean upload(String ip, int port, String username,
+			String password, String path, String fileName, String localPath,
+			String localFileName) throws IOException {
+		InputStream in = new FileInputStream(new File(localPath
+				+ File.separator + localFileName));
+		boolean result = upload(ip, port, username, password, path, fileName,
+				in);
 		in.close();
 		return result;
 	}
 
-	public static boolean download(String ip, int port, String username, String password, String path, String fileName,
-			String localPath, String localFileName) throws IOException {
+	public static boolean download(String ip, int port, String username,
+			String password, String path, String fileName, String localPath,
+			String localFileName) throws IOException {
 		FTPClient ftp = new FTPClient();
 
 		try {
@@ -121,7 +126,8 @@ public abstract class FtpUtils {
 		}
 	}
 
-	public static byte[] getFile(String ip, int port, String username, String password, String path, String fileName) {
+	public static byte[] getFile(String ip, int port, String username,
+			String password, String path, String fileName) {
 		FTPClient ftp = new FTPClient();
 		InputStream input = null;
 
@@ -149,7 +155,8 @@ public abstract class FtpUtils {
 		}
 	}
 
-	public static long getFileSize(String ip, int port, String username, String password, String path, String fileName) {
+	public static long getFileSize(String ip, int port, String username,
+			String password, String path, String fileName) {
 		FTPClient ftp = new FTPClient();
 		InputStream input = null;
 
@@ -195,7 +202,8 @@ public abstract class FtpUtils {
 	}
 
 	public static void main(String[] args) throws Exception {
-		FtpUtils.download("10.211.16.129", 21, "root", "root", "/a/checkfile/M01", "aaa", "d:/abc/def/aaa", "test.zip");
+		FtpUtils.download("10.211.16.129", 21, "root", "root",
+				"/a/checkfile/M01", "aaa", "d:/abc/def/aaa", "test.zip");
 		// InputStream in = new FileInputStream(new
 		// File("d:/download/PowerDesiner.v12.0.zip"));
 		// FtpUtils.upload("10.211.16.129", 21, "root", "root",

@@ -150,7 +150,8 @@ public interface BaseDao {
 
 	void lock(Object entity, LockMode lockMode);
 
-	Long findCountByParam(Class<?> clazz, Map<String, Object> params, String idKey, Object idValue);
+	Long findCountByParam(Class<?> clazz, Map<String, Object> params,
+			String idKey, Object idValue);
 
 	<E> E getUniqueResult(Class clazz, String property, Object value);
 

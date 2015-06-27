@@ -3,25 +3,25 @@ package flink.web.tag;
 public class DTreeObj {
 
 	private String nodeId;
-	
+
 	private String nodePid;
-	
+
 	private String nodeLabel;
-	
+
 	private String nodeValue;
-	
+
 	private String nodeName;
-	
+
 	private String nodeUrl;
-	
+
 	private String nodeTarget;
-	
+
 	private String nodeTitle;
-	
+
 	private String nodeIcon;
-	
+
 	private boolean nodeIconOpen;
-	
+
 	private boolean open;
 
 	public String getNodeIcon() {
@@ -111,7 +111,5 @@ public class DTreeObj {
 	public void setOpen(boolean open) {
 		this.open = open;
 	}
-	
-	
-	
+
 }

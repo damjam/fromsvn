@@ -37,6 +37,7 @@ public class TimerAppServer implements IAppServer {
 
 	private SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");// 时间格式化
 
+	@Override
 	public void doProcess() throws InterruptedException {
 		logger.info("开始定时主控");
 		String sTriggerDate;// 触发日期
@@ -62,7 +63,8 @@ public class TimerAppServer implements IAppServer {
 				}
 			}
 
-			List<TimerDo> timerDoList = timerDoDao.getAllCanExcuteCommand(sTriggerDate, sCurrentTime);// 当前可以执行的命令
+			List<TimerDo> timerDoList = timerDoDao.getAllCanExcuteCommand(
+					sTriggerDate, sCurrentTime);// 当前可以执行的命令
 			if (CollectionUtils.isEmpty(timerDoList)) {
 				// logger.info("当前待执行的定时命令为空！");
 				Thread.sleep(sleepTime);
@@ -77,17 +79,21 @@ public class TimerAppServer implements IAppServer {
 				try {
 					// BaseCmdTask baseCmd = (BaseCmdTask)
 					// Class.forName(timerDo.getClassName()).newInstance();
-					BaseCmdTask baseCmd = (BaseCmdTask) SpringContext.getService(timerDo.getBeanName());
+					BaseCmdTask baseCmd = (BaseCmdTask) SpringContext
+							.getService(timerDo.getBeanName());
 					baseCmd.setCmdName(timerDo.getBeanNameCh());
 					baseCmd.setCmdId(timerDo.getId());
 					baseCmd.start();
 				} catch (NullPointerException e) {
 					logger.error("定时明细执行失败。bean没找到:" + e, e);
-					timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_SUCESS, "bean没找到[" + e.getMessage() + "]");
+					timerDoService.updateTimerDo(timerDo,
+							TimerDo.BUSINESS_SUCESS,
+							"bean没找到[" + e.getMessage() + "]");
 				} catch (Exception e) {
 					e.printStackTrace();
 					logger.error("定时明细执行失败。其他错误:" + e, e);
-					timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_SUCESS, "未知错误");
+					timerDoService.updateTimerDo(timerDo,
+							TimerDo.BUSINESS_SUCESS, "未知错误");
 				}
 			}
 			Thread.sleep(sleepTime);

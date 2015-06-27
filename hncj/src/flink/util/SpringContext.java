@@ -20,7 +20,7 @@ public class SpringContext {
 	public static SpringContext getInstance() {
 		return instance;
 	}
-	
+
 	public ApplicationContext initContext(ServletContext sc) {
 		context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(sc);
@@ -50,10 +50,11 @@ public class SpringContext {
 
 	public static DefaultListableBeanFactory getBeanFactory() {
 		ApplicationContext context = instance.getContext();
-		
-		return (DefaultListableBeanFactory) ((AbstractApplicationContext) context).getBeanFactory();
+
+		return (DefaultListableBeanFactory) ((AbstractApplicationContext) context)
+				.getBeanFactory();
 	}
-	
+
 	public static Object getSingleton(String beanName) {
 		return getBeanFactory().getSingleton(beanName);
 	}

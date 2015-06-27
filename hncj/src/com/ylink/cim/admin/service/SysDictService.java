@@ -11,7 +11,8 @@ import flink.util.Paginater;
 
 public interface SysDictService {
 
-	public Paginater getSysDictPageList(SysDict sysDict, Pager pager) throws BizException;
+	public Paginater getSysDictPageList(SysDict sysDict, Pager pager)
+			throws BizException;
 
 	public void saveSysDict(SysDict sysDict) throws BizException;
 
@@ -19,7 +20,8 @@ public interface SysDictService {
 
 	public boolean isExist(SysDictId id) throws BizException;
 
-	public List<SysDict> getSysDictByDictType(String dictType) throws BizException;
+	public List<SysDict> getSysDictByDictType(String dictType)
+			throws BizException;
 
 	public SysDict getSysDict(SysDictId id) throws BizException;
 

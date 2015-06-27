@@ -23,16 +23,23 @@ import flink.util.Pager;
 import flink.util.Paginater;
 
 @Repository("accountJournalDao")
-public class AccountJournalDaoImpl extends BaseDaoImpl implements AccountJournalDao {
+public class AccountJournalDaoImpl extends BaseDaoImpl implements
+		AccountJournalDao {
 
+	@Override
 	public List<Map<String, Object>> findGatherInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, t.tradeType as tradeType, t.inoutType as inoutType) from AccountJournal t where 1=1");
-		helper.append("and t.tradeType = ?", MapUtils.getString(params, "tradeType"));
-		helper.append("and t.inoutType = ?", MapUtils.getString(params, "inoutType"));
-		helper.append("and t.tradeType <> ?", TradeType.INNER_WITHDRAW.getValue());
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and t.tradeType = ?",
+				MapUtils.getString(params, "tradeType"));
+		helper.append("and t.inoutType = ?",
+				MapUtils.getString(params, "inoutType"));
+		helper.append("and t.tradeType <> ?",
+				TradeType.INNER_WITHDRAW.getValue());
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		String gatherWay = MapUtils.getString(params, "gatherWay");
 		String gatherPeriod = MapUtils.getString(params, "gatherPeriod");
@@ -73,17 +80,23 @@ public class AccountJournalDaoImpl extends BaseDaoImpl implements AccountJournal
 		 */
 	}
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from AccountJournal where 1=1");
-		helper.append("and tradeType = ?", MapUtils.getString(params, "tradeType"));
-		helper.append("and inoutType = ?", MapUtils.getString(params, "inoutType"));
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
-			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		helper.append("and tradeType = ?",
+				MapUtils.getString(params, "tradeType"));
+		helper.append("and inoutType = ?",
+				MapUtils.getString(params, "inoutType"));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startCreateDate"))) {
+			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and createDate <= ?",
-					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and createDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endCreateDate")));
 		}
 		String year = MapUtils.getString(params, "year");
 		if (!StringUtils.isBlank(year)) {
@@ -91,28 +104,39 @@ public class AccountJournalDaoImpl extends BaseDaoImpl implements AccountJournal
 			Integer yearInt = Integer.parseInt(year);
 			helper.append("and createDate <= ?", String.valueOf(yearInt + 1));
 		}
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, t.inoutType as inoutType) from AccountJournal t where 1=1");
-		helper.append("and t.tradeType = ?", MapUtils.getString(params, "tradeType"));
-		helper.append("and t.inoutType = ?", MapUtils.getString(params, "inoutType"));
-		helper.append("and t.tradeType <> ?", TradeType.INNER_WITHDRAW.getValue());
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
-			helper.append("and t.createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		helper.append("and t.tradeType = ?",
+				MapUtils.getString(params, "tradeType"));
+		helper.append("and t.inoutType = ?",
+				MapUtils.getString(params, "inoutType"));
+		helper.append("and t.tradeType <> ?",
+				TradeType.INNER_WITHDRAW.getValue());
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startCreateDate"))) {
+			helper.append("and t.createDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and t.createDate <= ?",
-					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and t.createDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endCreateDate")));
 		}
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		String year = MapUtils.getString(params, "year");
 		if (!StringUtils.isBlank(year)) {

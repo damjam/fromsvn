@@ -16,7 +16,7 @@ import com.ylink.cim.common.type.LogClassType;
 import com.ylink.cim.common.type.UserLogType;
 
 import flink.util.BoUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Pager;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -37,12 +37,14 @@ public class SysLogAction extends BaseAction implements ModelDriven<SysLog> {
 
 	public String querySysLog() throws Exception {
 		Pager pager = new Pager(getPageNumber(request), getPageSize(request));
-		Paginater paginater = this.sysLogService.getSysLogPageList(model, pager);
+		Paginater paginater = this.sysLogService
+				.getSysLogPageList(model, pager);
 		List<Privilege> list = privilegeDao.findAll();
-		BoUtils.addProperty(paginater.getList(), "limitId", "limitName", list, "limitId", "limitName");
+		BoUtils.addProperty(paginater.getList(), "limitId", "limitName", list,
+				"limitId", "limitName");
 		saveQueryResult(request, paginater);
 		LogClassType.setInReq(request);
-		String msg = LogUtils.r("系统日志查询成功");
+		String msg = MsgUtils.r("系统日志查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "success";
 	}
@@ -58,13 +60,15 @@ public class SysLogAction extends BaseAction implements ModelDriven<SysLog> {
 			this.sysLogService.updateSysLog(sysLog);
 		}
 		Pager pager = new Pager(getPageNumber(request), getPageSize(request));
-		Paginater paginater = this.sysLogService.getSysLogPageList(model, pager);
+		Paginater paginater = this.sysLogService
+				.getSysLogPageList(model, pager);
 		request.setAttribute(Paginater.PAGINATER, paginater);
-		String msg = LogUtils.r("系统日志明细查看成功");
+		String msg = MsgUtils.r("系统日志明细查看成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "detail";
 	}
 
+	@Override
 	public SysLog getModel() {
 		return model;
 	}

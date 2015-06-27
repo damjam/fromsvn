@@ -12,13 +12,15 @@ public class AccountChangeType extends AbstractType {
 
 	public static Map<String, AccountChangeType> ALL = new LinkedHashMap<String, AccountChangeType>();
 
-	public static final AccountChangeType WATER_FEE = new AccountChangeType("扣水费", "00");
-	
-	public static final AccountChangeType DEPOSIT = new AccountChangeType("充值", "01");
+	public static final AccountChangeType WATER_FEE = new AccountChangeType(
+			"扣水费", "00");
 
-	public static final AccountChangeType WITHDRAW = new AccountChangeType("提现", "02");
-	
-	
+	public static final AccountChangeType DEPOSIT = new AccountChangeType("充值",
+			"01");
+
+	public static final AccountChangeType WITHDRAW = new AccountChangeType(
+			"提现", "02");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("changeTypes", AccountChangeType.ALL.values());
 	}

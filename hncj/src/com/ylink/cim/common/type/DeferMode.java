@@ -16,9 +16,11 @@ import flink.util.ExceptionUtils;
 public class DeferMode extends AbstractState {
 	public static Map<String, DeferMode> ALL = new LinkedHashMap<String, DeferMode>();
 
-	public static final DeferMode MODE_TRANSEXTENDED = new DeferMode("交易顺延模式", "1");
+	public static final DeferMode MODE_TRANSEXTENDED = new DeferMode("交易顺延模式",
+			"1");
 
 	public static final DeferMode MODE_FUNDDEDUCE = new DeferMode("资金扣划模式", "2");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("deferModes", DeferMode.ALL.values());
 	}

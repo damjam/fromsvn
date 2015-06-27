@@ -44,45 +44,49 @@ public class TypeTag extends SimpleTagSupport {
 		this.value = value;
 	}
 
-	
+	@Override
 	public void doTag() throws JspException, IOException {
 		if (StringUtils.isEmpty(className) || StringUtils.isEmpty(value)) {
 			return;
 		}
-		
+
 		String packName = getPackage();
 		if (StringUtils.isEmpty(packName)) {
 			return;
 		}
-		
+
 		try {
-			Class typeClass = Class.forName(packName.concat(".").concat(className));
+			Class typeClass = Class.forName(packName.concat(".").concat(
+					className));
 			if (typeClass == null) {
 				return;
 			}
-			
-			
-			Map allType = (Map) ReflectionUtils.findField(typeClass, "ALL").get(typeClass);
+
+			Map allType = (Map) ReflectionUtils.findField(typeClass, "ALL")
+					.get(typeClass);
 			Type type = (Type) allType.get(value);
-			
+
 			if (allType.get(value) == null) {
 				return;
 			}
-			
+
 			if (StringUtils.isEmpty(property)) {
 				property = "name";
 			}
-			
-			String html = ObjectUtils.toString(PropertyUtils.getProperty(type, property));
+
+			String html = ObjectUtils.toString(PropertyUtils.getProperty(type,
+					property));
 			this.getJspContext().getOut().write(html);
 		} catch (Exception e) {
 			// do nothing.
 		}
 	}
-	
+
 	private String getPackage() {
-		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
-		
-		return request.getSession().getServletContext().getInitParameter("typePackageName");
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
+
+		return request.getSession().getServletContext()
+				.getInitParameter("typePackageName");
 	}
 }

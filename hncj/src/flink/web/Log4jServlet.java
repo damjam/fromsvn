@@ -12,6 +12,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class Log4jServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void init() throws ServletException {
 		super.init();
 		String file = getInitParameter("log4j");

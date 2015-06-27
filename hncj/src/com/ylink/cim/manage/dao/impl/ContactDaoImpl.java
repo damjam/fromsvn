@@ -17,6 +17,7 @@ import flink.util.Paginater;
 @Repository("contactDao")
 public class ContactDaoImpl extends BaseDaoImpl implements ContactDao {
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Contact t where 1=1");

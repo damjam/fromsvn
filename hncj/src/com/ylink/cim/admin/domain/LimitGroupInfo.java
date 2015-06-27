@@ -17,14 +17,16 @@ public class LimitGroupInfo implements java.io.Serializable {
 	public LimitGroupInfo() {
 	}
 
-	public LimitGroupInfo(final String limitGroupId, final String userType, final String limitGroupName) {
+	public LimitGroupInfo(final String limitGroupId, final String userType,
+			final String limitGroupName) {
 		this.limitGroupId = limitGroupId;
 		this.userType = userType;
 		this.limitGroupName = limitGroupName;
 	}
 
-	public LimitGroupInfo(final String limitGroupId, final String userType, final String limitGroupName,
-			final String branchNo, final String merchantNo, final String deptId) {
+	public LimitGroupInfo(final String limitGroupId, final String userType,
+			final String limitGroupName, final String branchNo,
+			final String merchantNo, final String deptId) {
 		this.limitGroupId = limitGroupId;
 		this.userType = userType;
 		this.limitGroupName = limitGroupName;

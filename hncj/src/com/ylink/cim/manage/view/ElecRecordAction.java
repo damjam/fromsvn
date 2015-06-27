@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.view;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,9 +32,11 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class ElecRecordAction extends BaseAction implements ModelDriven<ElecRecord>{
+public class ElecRecordAction extends BaseAction implements
+		ModelDriven<ElecRecord> {
 	/**
 	 * 
 	 */
@@ -46,7 +47,7 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 	private HouseInfoDao houseInfoDao;
 	@Autowired
 	private ElecRecordService elecRecordService;
-	
+
 	public String check() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -57,14 +58,16 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 			e.printStackTrace();
 		}
 		return list();
-		
+
 	}
+
 	public String checkAll() throws Exception {
 		try {
-			Integer num = elecRecordService.checkAllRecord(getSessionUser(request));
+			Integer num = elecRecordService
+					.checkAllRecord(getSessionUser(request));
 			if (num > 0) {
-				setResult(true, "已生成"+num+"条账单", request);
-			}else {
+				setResult(true, "已生成" + num + "条账单", request);
+			} else {
 				setResult(true, "没有需要生成账单的记录", request);
 			}
 		} catch (Exception e) {
@@ -72,8 +75,9 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 			e.printStackTrace();
 		}
 		return list();
-		
+
 	}
+
 	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -85,23 +89,26 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 		}
 		return list();
 	}
+
 	public String doAdd() throws Exception {
 		try {
 			ElecRecord elecRecord = new ElecRecord();
 			BeanUtils.copyProperties(elecRecord, model);
-			elecRecordService.saveElecRecord(elecRecord, getSessionUser(request));
+			elecRecordService.saveElecRecord(elecRecord,
+					getSessionUser(request));
 			setResult(true, "数据已保存", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 		} catch (Exception e) {
-			setResult(false, "保存失败"+e.getMessage(), request);
+			setResult(false, "保存失败" + e.getMessage(), request);
 		}
-		//return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		// return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
 		return "add";
 	}
+
 	public String doImport() throws Exception {
 		try {
-			
+
 			String recordMonth = model.getRecordMonth();
 			String preRecordDate = model.getPreRecordDate();
 			String curRecordDate = model.getCurRecordDate();
@@ -137,13 +144,15 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 						if (StringUtils.isEmpty(houseSn)) {
 							throw new Exception("房屋编号为空");
 						}
-						houseSn = StringUtils.trimToEmpty(houseSn.replace("盛世浩苑", ""));
-						HouseInfo houseInfo = houseInfoDao.findById(HouseInfo.class, houseSn);
-						Assert.notNull(houseInfo, "房屋编号"+houseSn+"不存在");
+						houseSn = StringUtils.trimToEmpty(houseSn.replace(
+								"盛世浩苑", ""));
+						HouseInfo houseInfo = houseInfoDao.findById(
+								HouseInfo.class, houseSn);
+						Assert.notNull(houseInfo, "房屋编号" + houseSn + "不存在");
 						double prenumd = row.getCell(1).getNumericCellValue();
-						Integer prenum = (int)prenumd;
+						Integer prenum = (int) prenumd;
 						double curnumd = row.getCell(2).getNumericCellValue();
-						Integer curnum = (int)curnumd;
+						Integer curnum = (int) curnumd;
 						if (curnum < prenum) {
 							throw new Exception("本期读数小于上期读数");
 						}
@@ -155,14 +164,15 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 						record.setHouseSn(houseSn);
 						record.setPrenum(prenum);
 						record.setCurnum(curnum);
-						record.setNum(curnum-prenum);
+						record.setNum(curnum - prenum);
 						record.setRecordMonth(recordMonth);
 						record.setPreRecordDate(preRecordDate);
 						record.setCurRecordDate(curRecordDate);
 						record.setRemark(remark);
 						list.add(record);
 					} catch (Exception e) {
-						throw new Exception("第" + (i+1) +"个工作表中第"+ (j+1) +"行:" + e.getMessage());
+						throw new Exception("第" + (i + 1) + "个工作表中第" + (j + 1)
+								+ "行:" + e.getMessage());
 					}
 				}
 			}
@@ -174,9 +184,10 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 			e.printStackTrace();
 			setResult(false, "操作失败:" + e.getMessage(), request);
 		}
-		//return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+		// return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
 		return "import";
 	}
+
 	public String getPreRecord() throws Exception {
 		try {
 			String houseSn = request.getParameter("houseSn");
@@ -198,47 +209,54 @@ public class ElecRecordAction extends BaseAction implements ModelDriven<ElecReco
 		}
 		return null;
 	}
+
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("houseSn", model.getHouseSn());
 		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = elecRecordDao.findRecordPager(map, getPager(request));
+		Paginater paginater = elecRecordDao.findRecordPager(map,
+				getPager(request));
 		saveQueryResult(request, paginater);
-		//return forward("/pages/manage/meter/elec/elecRecordList.jsp");
+		// return forward("/pages/manage/meter/elec/elecRecordList.jsp");
 		return "list";
 	}
+
 	public String toAdd() throws Exception {
 		int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 		String preRecordDate = "";
 		String curRecordDate = "";
 		String beginDate = "";
-		if(day > 26){
+		if (day > 26) {
 			preRecordDate = DateUtil.getMaxMonthDate(-1);
 			curRecordDate = DateUtil.getCurrentDate();
 			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -1);
 			beginDate = DateUtil.getDateYYYYMM(d1);
-		}else {
+		} else {
 			preRecordDate = DateUtil.getMaxMonthDate(-2);
 			curRecordDate = DateUtil.getMaxMonthDate(-1);
 			Date d1 = DateUtil.addMonths(DateUtil.getCurrent(), -2);
 			beginDate = DateUtil.getDateYYYYMM(d1);
 		}
-		//DateUtil.addMonths(date, num);
-		String recordMonth = beginDate+"-"+curRecordDate.substring(0, 6);
+		// DateUtil.addMonths(date, num);
+		String recordMonth = beginDate + "-" + curRecordDate.substring(0, 6);
 		model.setPreRecordDate(preRecordDate);
 		model.setCurRecordDate(curRecordDate);
 		model.setRecordMonth(recordMonth);
-		//return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
+		// return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
 		return "add";
 	}
+
 	public String toImport() throws Exception {
-		//return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
+		// return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
 		return "import";
 	}
+
+	@Override
 	public ElecRecord getModel() {
 		return model;
 	}
+
 	private ElecRecord model = new ElecRecord();
 }

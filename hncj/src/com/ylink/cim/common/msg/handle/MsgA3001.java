@@ -13,7 +13,8 @@ public class MsgA3001 {
 			// TODO: handle exception
 		}
 	}
-	public static MsgField[] A3001REQ = { MsgField.aip_no, MsgField.account_no, deduct_type, MsgField.exch_bal };
+	public static MsgField[] A3001REQ = { MsgField.aip_no, MsgField.account_no,
+			deduct_type, MsgField.exch_bal };
 
 	public static MsgField[] A3001RES = { MsgField.order_no };
 

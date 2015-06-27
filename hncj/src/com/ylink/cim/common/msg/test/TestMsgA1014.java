@@ -29,7 +29,8 @@ public class TestMsgA1014 {
 		String resMsg = SocketUtil.sendRecInPool(ip);
 		// String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
 		Map<String, MsgField> headMap = MsgUtil.parseResHead(resMsg);
-		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg, MsgA1014.A1014RES);
+		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg,
+				MsgA1014.A1014RES);
 	}
 
 }

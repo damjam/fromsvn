@@ -100,23 +100,30 @@ public final class Constant {
 	public final static String MSG_FLAG_RSP = "2";
 
 	/** 当前过行环境的字符集 */
-	public static String CFG_CHARSET_NAME = CommUtil.getConfigByString("CHARSET_NAME", "GBK");
+	public static String CFG_CHARSET_NAME = CommUtil.getConfigByString(
+			"CHARSET_NAME", "GBK");
 
 	/** 不需要压缩响应报文的最大字节数 */
-	public static int CFG_NOT_ZIP_MAX_SIZE = CommUtil.getConfigByInt("CFT_NOT_ZIP_MAX_SIZE", 500);
+	public static int CFG_NOT_ZIP_MAX_SIZE = CommUtil.getConfigByInt(
+			"CFT_NOT_ZIP_MAX_SIZE", 500);
 
 	/** Socket心跳包发送的间隔时间(秒) */
-	public static int CFG_SOCKET_TEST_INV_TIME = CommUtil.getConfigByInt("SOCKET_TEST_INV_TIME", 5);
+	public static int CFG_SOCKET_TEST_INV_TIME = CommUtil.getConfigByInt(
+			"SOCKET_TEST_INV_TIME", 5);
 
 	/** Socket尝试连接的时间间隔（秒） */
-	public static int CFG_SOCKET_LINK_INV_TIME = CommUtil.getConfigByInt("SOCKET_LINK_INV_TIME", 3);
+	public static int CFG_SOCKET_LINK_INV_TIME = CommUtil.getConfigByInt(
+			"SOCKET_LINK_INV_TIME", 3);
 
 	/** Socket主动断开连接的超时时间（秒） */
-	public static int CFG_SOCKET_TIMEOUT_TIME = CommUtil.getConfigByInt("SOCKET_TIMEOUT_TIME", 100);
+	public static int CFG_SOCKET_TIMEOUT_TIME = CommUtil.getConfigByInt(
+			"SOCKET_TIMEOUT_TIME", 100);
 
 	/** 交易服务器IP地址 */
-	public static String CFG_SERVER_HOST_IP = CommUtil.getConfigByString("SERVER_HOST_IP", "18.18.18.102");
+	public static String CFG_SERVER_HOST_IP = CommUtil.getConfigByString(
+			"SERVER_HOST_IP", "18.18.18.102");
 	/** 交易服务器IP地址 */
-	public static int CFG_SERVER_HOST_PORT = CommUtil.getConfigByInt("SERVER_HOST_PORT", 13000);
+	public static int CFG_SERVER_HOST_PORT = CommUtil.getConfigByInt(
+			"SERVER_HOST_PORT", 13000);
 
 }

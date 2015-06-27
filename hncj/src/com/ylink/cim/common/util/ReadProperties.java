@@ -8,7 +8,8 @@ public class ReadProperties {
 	private static Properties config = null;
 
 	public ReadProperties(String path) {
-		InputStream in = ReadProperties.class.getClassLoader().getResourceAsStream(path);
+		InputStream in = ReadProperties.class.getClassLoader()
+				.getResourceAsStream(path);
 		config = new Properties();
 		try {
 			config.load(in);

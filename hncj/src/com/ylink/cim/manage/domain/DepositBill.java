@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -35,93 +36,64 @@ public class DepositBill implements java.io.Serializable {
 	private String endRefundDate;
 	private String isInternal;
 	private String year;
-	
-	
+
 	public String getStartDepositDate() {
 		return startDepositDate;
 	}
-
-
 
 	public void setStartDepositDate(String startDepositDate) {
 		this.startDepositDate = startDepositDate;
 	}
 
-
-
 	public String getEndDepositDate() {
 		return endDepositDate;
 	}
-
-
 
 	public void setEndDepositDate(String endDepositDate) {
 		this.endDepositDate = endDepositDate;
 	}
 
-
-
 	public String getStartRefundDate() {
 		return startRefundDate;
 	}
-
-
 
 	public void setStartRefundDate(String startRefundDate) {
 		this.startRefundDate = startRefundDate;
 	}
 
-
-
 	public String getEndRefundDate() {
 		return endRefundDate;
 	}
-
-
 
 	public void setEndRefundDate(String endRefundDate) {
 		this.endRefundDate = endRefundDate;
 	}
 
-
-
 	public String getIsInternal() {
 		return isInternal;
 	}
-
-
 
 	public void setIsInternal(String isInternal) {
 		this.isInternal = isInternal;
 	}
 
-
-
 	public String getYear() {
 		return year;
 	}
-
-
 
 	public void setYear(String year) {
 		this.year = year;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
-	// Constructors
 
-	
-	
+	// Constructors
 
 	public String getRemark() {
 		return remark;
@@ -164,8 +136,6 @@ public class DepositBill implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
-
 	// Property accessors
 
 	public String getId() {
@@ -199,7 +169,6 @@ public class DepositBill implements java.io.Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-
 
 	public String getOwnerId() {
 		return ownerId;
@@ -240,7 +209,5 @@ public class DepositBill implements java.io.Serializable {
 	public void setRefundUser(String refundUser) {
 		this.refundUser = refundUser;
 	}
-
-	
 
 }

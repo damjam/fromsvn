@@ -22,6 +22,7 @@ public class SysLogServiceImpl implements SysLogService {
 	@Autowired
 	private SysLogDao sysLogDao;
 
+	@Override
 	public SysLog getSysLogById(Long id) throws BizException {
 
 		try {
@@ -31,6 +32,7 @@ public class SysLogServiceImpl implements SysLogService {
 		}
 	}
 
+	@Override
 	public Paginater getSysLogPageList(SysLog sysLog, Pager pager) throws BizException {
 		try {
 			return this.sysLogDao.getSysLogPagList(sysLog, pager);
@@ -39,6 +41,7 @@ public class SysLogServiceImpl implements SysLogService {
 		}
 	}
 
+	@Override
 	public void saveSysLog(SysLog sysLog) throws BizException {
 
 		Assert.notEmpty(sysLog.getLimitId(), "模块编号不能为空");
@@ -61,6 +64,7 @@ public class SysLogServiceImpl implements SysLogService {
 		this.sysLogDao = sysLogDao;
 	}
 
+	@Override
 	public void updateSysLog(SysLog sysLog) throws BizException {
 		try {
 			this.sysLogDao.updateUserLog(sysLog);
@@ -69,6 +73,7 @@ public class SysLogServiceImpl implements SysLogService {
 		}
 	}
 
+	@Override
 	public void writeErrorSyslog(String content) {
 		logger.debug(content);
 
@@ -93,6 +98,7 @@ public class SysLogServiceImpl implements SysLogService {
 		}
 	}
 
+	@Override
 	public void writeInfoSyslog(String content) {
 		logger.debug(content);
 		

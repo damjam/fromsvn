@@ -21,6 +21,7 @@ public class PassWordUtil {
 
 	/**
 	 * ²úÉúËæ»ú×Ö·û´®
+	 * 
 	 * @param length
 	 * @return
 	 */
@@ -35,7 +36,7 @@ public class PassWordUtil {
 		}
 		return sb.toString();
 	}
-	
+
 	public static void main(String[] args) {
 		System.out.println(genernatePassword());
 	}

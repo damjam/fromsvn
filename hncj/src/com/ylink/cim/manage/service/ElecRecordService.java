@@ -9,7 +9,8 @@ import flink.etc.BizException;
 
 public interface ElecRecordService {
 
-	void saveElecRecord(ElecRecord elecRecord, UserInfo userInfo) throws BizException;
+	void saveElecRecord(ElecRecord elecRecord, UserInfo userInfo)
+			throws BizException;
 
 	Integer checkAllRecord(UserInfo userInfo) throws BizException;
 
@@ -19,5 +20,6 @@ public interface ElecRecordService {
 
 	ElecRecord getPreRecord(String houseSn) throws BizException;
 
-	void importDeposit(List<ElecRecord> list, UserInfo sessionUser) throws BizException;
+	void importDeposit(List<ElecRecord> list, UserInfo sessionUser)
+			throws BizException;
 }

@@ -16,12 +16,14 @@ import flink.consant.ActionConstant;
 import flink.etc.Assert;
 import flink.etc.Symbol;
 import flink.util.ExceptionUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class PrivilegeResourceAction extends BaseAction implements ModelDriven<PrivilegeResource>{
+public class PrivilegeResourceAction extends BaseAction implements
+		ModelDriven<PrivilegeResource> {
 
 	/**
 	 * 
@@ -33,83 +35,94 @@ public class PrivilegeResourceAction extends BaseAction implements ModelDriven<P
 	private PrivilegeResourceDao privilegeResourceDao;
 	private PrivilegeResource model = new PrivilegeResource();
 
-	
-	public String addPrivilegeResource() throws Exception{
-		
-		try{
-			//privilegeResource.setId(Long.valueOf(IdFactoryHelper.getId(IdFactoryConstant.PRIVILEG_ERESOURCE_ID.getValue())));
+	public String addPrivilegeResource() throws Exception {
+
+		try {
+			// privilegeResource.setId(Long.valueOf(IdFactoryHelper.getId(IdFactoryConstant.PRIVILEG_ERESOURCE_ID.getValue())));
 			this.privilegeResourceService.savePrivilegeResource(model);
 			setResult(true, "新增成功", request);
 			return ActionConstant.TO_ADD_PAGE;
-		}catch (Exception e) {
-			ExceptionUtils.logException(PrivilegeResource.class, e.getMessage());
+		} catch (Exception e) {
+			ExceptionUtils
+					.logException(PrivilegeResource.class, e.getMessage());
 			throw e;
 		}
-		
+
 	}
-	
 
 	public String delete() throws Exception {
 		try {
-			PrivilegeResource p = privilegeResourceDao.findById(PrivilegeResource.class, model.getId());
+			PrivilegeResource p = privilegeResourceDao.findById(
+					PrivilegeResource.class, model.getId());
 			privilegeResourceService.deletePrivilegeResource(p);
 			setResult(true, "操作成功", request);
-			String msg = LogUtils.r("删除子权限成功,删除的内容为：{?}",FeildUtils.toString(p));
+			String msg = MsgUtils.r("删除子权限成功,删除的内容为：{?}",
+					FeildUtils.toString(p));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 		} catch (Exception e) {
-			setResult(false, "操作失败:"+e.getMessage(), request);
-//			e.printStackTrace();
-			String msg = LogUtils.r("删除子权限失败,失败原因:{?}", e.getMessage());
+			setResult(false, "操作失败:" + e.getMessage(), request);
+			// e.printStackTrace();
+			String msg = MsgUtils.r("删除子权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 		}
 		return listPriRes();
 	}
-	//添加权限资源
+
+	// 添加权限资源
 	public String doEdit() throws Exception {
 		try {
 			if (Symbol.YES.equals(model.getIsEntry())) {
-				boolean exist = privilegeResourceDao.existPriRes(model.getLimitId(), model.getId());
+				boolean exist = privilegeResourceDao.existPriRes(
+						model.getLimitId(), model.getId());
 				Assert.notTrue(exist, "入口已存在");
 			}
 			PrivilegeResource p = null;
 			if (model.getId() != null) {
-				 p = privilegeResourceDao.findById(PrivilegeResource.class, model.getId());
+				p = privilegeResourceDao.findById(PrivilegeResource.class,
+						model.getId());
 			} else {
 				p = new PrivilegeResource();
 			}
 			BeanUtils.copyProperties(p, model);
 			privilegeResourceService.savePrivilegeResource(p);
 			setResult(true, "操作成功", request);
-			String msg = LogUtils.r("修改子权限成功,修改内容为：{?}",FeildUtils.toString(p));
+			String msg = MsgUtils
+					.r("修改子权限成功,修改内容为：{?}", FeildUtils.toString(p));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 		} catch (Exception e) {
-			setResult(false, "操作失败:"+e.getMessage(), request);
-//			e.printStackTrace();
-			String msg = LogUtils.r("修改子权限失败,失败原因:{?}", e.getMessage());
+			setResult(false, "操作失败:" + e.getMessage(), request);
+			// e.printStackTrace();
+			String msg = MsgUtils.r("修改子权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 		}
 		return toEdit();
 	}
+
+	@Override
 	public PrivilegeResource getModel() {
 		return model;
 	}
-	//权限资源查询
+
+	// 权限资源查询
 	public String listPriRes() throws Exception {
-		Paginater paginater = privilegeResourceDao.findPrivRes(model, getPager(request));
+		Paginater paginater = privilegeResourceDao.findPrivRes(model,
+				getPager(request));
 		saveQueryResult(request, paginater);
-		String msg = LogUtils.r("权限资源查询成功");
+		String msg = MsgUtils.r("权限资源查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "privResList";
-		//"/pages/admin/privilege/privResList.jsp"
+		// "/pages/admin/privilege/privResList.jsp"
 	}
-	//修改权限资源
+
+	// 修改权限资源
 	public String toEdit() throws Exception {
 		Long id = model.getId();
 		if (id != null && id != 0) {
-			PrivilegeResource privilegeResource = privilegeResourceDao.findById(PrivilegeResource.class, id);
+			PrivilegeResource privilegeResource = privilegeResourceDao
+					.findById(PrivilegeResource.class, id);
 			BeanUtils.copyProperties(model, privilegeResource);
 		}
 		return "privResEdit";
-		//"/pages/admin/privilege/privResEdit.jsp";
+		// "/pages/admin/privilege/privResEdit.jsp";
 	}
 }

@@ -21,6 +21,7 @@ public abstract class AbstractState implements State {
 		orderedList.addAll(all.values());
 
 		Collections.sort(orderedList, new Comparator() {
+			@Override
 			public int compare(Object o1, Object o2) {
 				AbstractState state1 = (AbstractState) o1;
 				AbstractState state2 = (AbstractState) o2;
@@ -53,6 +54,7 @@ public abstract class AbstractState implements State {
 		this.nameValue.setValue(value);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -70,6 +72,7 @@ public abstract class AbstractState implements State {
 	 * 
 	 * @see com.flink.model.State#getName()
 	 */
+	@Override
 	public String getName() {
 		return this.nameValue.getName();
 	}
@@ -79,14 +82,17 @@ public abstract class AbstractState implements State {
 	 * 
 	 * @see com.flink.model.State#getValue()
 	 */
+	@Override
 	public String getValue() {
 		return this.nameValue.getValue();
 	}
 
+	@Override
 	public int hashCode() {
 		return this.nameValue.getValue().hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return this.nameValue.toString();
 	}

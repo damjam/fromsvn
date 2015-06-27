@@ -113,14 +113,16 @@ public class NioSocketChannel {
 			this.closeSocket();
 			m_Socket = new Socket();
 			// 客户端给出IP和端口号
-			SocketAddress socketAddress = new InetSocketAddress(v_sHost, v_iPort);
+			SocketAddress socketAddress = new InetSocketAddress(v_sHost,
+					v_iPort);
 			if (m_TimeOut > 0)
 				m_Socket.connect(socketAddress, m_TimeOut);
 			else
 				m_Socket.connect(socketAddress);
 
 			m_inputStream = new DataInputStream(this.m_Socket.getInputStream());
-			m_outputStream = new DataOutputStream(this.m_Socket.getOutputStream());
+			m_outputStream = new DataOutputStream(
+					this.m_Socket.getOutputStream());
 
 			return true;
 		} catch (IOException e) {
@@ -137,8 +139,8 @@ public class NioSocketChannel {
 	public void SendStringMsg(String v_sMsg) throws Exception {
 		if (v_sMsg == null || v_sMsg.length() <= 0 || m_Socket == null)
 			return;
-		v_sMsg = CommUtil.FILL(String.valueOf(v_sMsg.toString().length()), '0', Constant.MSG_LEN_LEN, 'L')
-				+ v_sMsg.toString();
+		v_sMsg = CommUtil.FILL(String.valueOf(v_sMsg.toString().length()), '0',
+				Constant.MSG_LEN_LEN, 'L') + v_sMsg.toString();
 		// v_sMsg =
 		// CommUtil.FillHeadLength(v_sMsg.toString(),'0',Constant.MSG_LEN_LEN,
 		// 'L');
@@ -153,7 +155,8 @@ public class NioSocketChannel {
 	 * @throws Exception
 	 */
 	public void SendBufferMsg(StringBuffer v_sMsg) throws Exception {
-		ByteBuffer msgBuff = ByteBuffer.wrap(MsgUtil.StringToBytes(v_sMsg.toString()));
+		ByteBuffer msgBuff = ByteBuffer.wrap(MsgUtil.StringToBytes(v_sMsg
+				.toString()));
 		System.out.println(new String(msgBuff.toString()));
 		doWriteBufferMsg(msgBuff);
 	}
@@ -163,7 +166,8 @@ public class NioSocketChannel {
 	 * 
 	 * @throws Exception
 	 */
-	public synchronized void doWriteBufferMsg(ByteBuffer msgBuff) throws Exception {
+	public synchronized void doWriteBufferMsg(ByteBuffer msgBuff)
+			throws Exception {
 		ByteBuffer writeBuff = msgBuff;
 
 		// 先加密后压缩
@@ -173,8 +177,8 @@ public class NioSocketChannel {
 			// 增加压缩后加密
 			if (this.mEncryptMode == SSLConstant.ENCRYPT_MODE_DEFAULT_ZIP) {
 				byte[] zipBytes = this.zipWriteBytes(writeBuff.array());
-				zipBuff = ByteBuffer.wrap(DESede.encryptSrcMsg(this.mHeadLen, this.mEncryptMode, this.mSessionId,
-						zipBytes));
+				zipBuff = ByteBuffer.wrap(DESede.encryptSrcMsg(this.mHeadLen,
+						this.mEncryptMode, this.mSessionId, zipBytes));
 			} else {
 				byte[] zipBytes = this.zipWriteBytes(writeBuff.array());
 				zipBuff = ByteBuffer.wrap(zipBytes);
@@ -212,19 +216,22 @@ public class NioSocketChannel {
 			unzipByte = bMsgs;
 
 		byte stmpEncryptMode = unzipByte[len - 1];
-		if (stmpEncryptMode != SSLConstant.ENCRYPT_MODE_DEFAULT && stmpEncryptMode != SSLConstant.ENCRYPT_MODE_SESSION
+		if (stmpEncryptMode != SSLConstant.ENCRYPT_MODE_DEFAULT
+				&& stmpEncryptMode != SSLConstant.ENCRYPT_MODE_SESSION
 				&& stmpEncryptMode != SSLConstant.ENCRYPT_MODE_DEFAULT_ZIP) // 会话密钥
 		{
 			stmpEncryptMode = SSLConstant.ENCRYPT_MODE_NO;
 		}
 
 		// 判断加密模式是不是允许的 ，若是不允许的直接关闭Socket add by csl 2010.11.1
-		if ((stmpEncryptMode == SSLConstant.ENCRYPT_MODE_NO || stmpEncryptMode == SSLConstant.ENCRYPT_MODE_DEFAULT
+		if ((stmpEncryptMode == SSLConstant.ENCRYPT_MODE_NO
+				|| stmpEncryptMode == SSLConstant.ENCRYPT_MODE_DEFAULT
 				|| stmpEncryptMode == SSLConstant.ENCRYPT_MODE_SESSION || stmpEncryptMode == SSLConstant.ENCRYPT_MODE_DEFAULT_ZIP)) {
 			descryptByte = unzipByte;
 			this.closeSocket();
 		} else {
-			if (stmpEncryptMode == SSLConstant.ENCRYPT_MODE_NO || this.bIsAutoDecryptByReqMsg == false) {
+			if (stmpEncryptMode == SSLConstant.ENCRYPT_MODE_NO
+					|| this.bIsAutoDecryptByReqMsg == false) {
 				descryptByte = unzipByte;
 			} else {
 				descryptByte = DESede.decryptSrcMsg(this.mHeadLen, unzipByte);
@@ -285,20 +292,24 @@ public class NioSocketChannel {
 	 */
 	private byte[] zipWriteBytes(byte[] vWriteBytes) {
 		try {
-			if (this.bIsAutoUnZipByReqMsg == true && vWriteBytes.length > Constant.CFG_NOT_ZIP_MAX_SIZE) {
+			if (this.bIsAutoUnZipByReqMsg == true
+					&& vWriteBytes.length > Constant.CFG_NOT_ZIP_MAX_SIZE) {
 				if (vWriteBytes[this.mHeadLen] == SSLConstant.ENCRYPT_MODE_DEFAULT
 						|| vWriteBytes[this.mHeadLen] == SSLConstant.ENCRYPT_MODE_SESSION)
 					return vWriteBytes;
 
 				byte[] zipBuff = CommUtil.zip(vWriteBytes);
 				byte[] outBuff = new byte[zipBuff.length + this.mHeadLen + 1];
-				byte[] lenBuff = CommUtil.FILL("" + (zipBuff.length + 1), '0', this.mHeadLen, 'L').getBytes();
+				byte[] lenBuff = CommUtil.FILL("" + (zipBuff.length + 1), '0',
+						this.mHeadLen, 'L').getBytes();
 
 				outBuff[this.mHeadLen] = 0x01;
 				System.arraycopy(lenBuff, 0, outBuff, 0, this.mHeadLen);
-				System.arraycopy(zipBuff, 0, outBuff, this.mHeadLen + 1, zipBuff.length);
+				System.arraycopy(zipBuff, 0, outBuff, this.mHeadLen + 1,
+						zipBuff.length);
 
-				System.out.println("对输出报文已压缩[原长度=" + vWriteBytes.length + ",压缩后长度=" + outBuff.length + "]");
+				System.out.println("对输出报文已压缩[原长度=" + vWriteBytes.length
+						+ ",压缩后长度=" + outBuff.length + "]");
 
 				return outBuff;
 			}
@@ -317,9 +328,12 @@ public class NioSocketChannel {
 	 */
 	private byte[] unzipReadBytes(byte[] vReadBytes) {
 		try {
-			if (vReadBytes.length > this.mHeadLen && vReadBytes[this.mHeadLen] == 0x1) {
-				byte[] unzipBuff = new byte[vReadBytes.length - this.mHeadLen - 1];
-				System.arraycopy(vReadBytes, this.mHeadLen + 1, unzipBuff, 0, unzipBuff.length);
+			if (vReadBytes.length > this.mHeadLen
+					&& vReadBytes[this.mHeadLen] == 0x1) {
+				byte[] unzipBuff = new byte[vReadBytes.length - this.mHeadLen
+						- 1];
+				System.arraycopy(vReadBytes, this.mHeadLen + 1, unzipBuff, 0,
+						unzipBuff.length);
 				return CommUtil.unzip(unzipBuff);
 			}
 		} catch (Exception e) {

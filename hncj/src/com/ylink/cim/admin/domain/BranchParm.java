@@ -28,8 +28,7 @@ public class BranchParm implements java.io.Serializable {
 	private String parvalue;
 
 	private String branchNo;
-	
-	
+
 	public String getBranchNo() {
 		return branchNo;
 	}
@@ -82,7 +81,7 @@ public class BranchParm implements java.io.Serializable {
 		return this.remark;
 	}
 
-	
+	@Override
 	public int hashCode() {
 		int result = 17;
 		int code = this.getCode() == null ? 0 : this.getCode().hashCode();

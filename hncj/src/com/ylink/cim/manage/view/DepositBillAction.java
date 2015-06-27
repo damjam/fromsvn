@@ -122,6 +122,7 @@ public class DepositBillAction extends BaseAction implements ModelDriven<Deposit
 		return "add";
 	}
 
+	@Override
 	public DepositBill getModel() {
 		return model;
 	}

@@ -18,10 +18,12 @@ public class AppServerServlet extends HttpServlet {
 	Logger logger = Logger.getLogger(this.getClass());
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public void destroy() {
 
 	}
 
+	@Override
 	public void init() throws ServletException {
 		// 主控只在管理端运行
 		if (ParaManager.isCustServer()) {
@@ -29,8 +31,10 @@ public class AppServerServlet extends HttpServlet {
 		}
 		try {
 			Thread t = new Thread() {
+				@Override
 				public void run() {
-					IAppServer appServer = (IAppServer) SpringContext.getService("timerAppServer");
+					IAppServer appServer = (IAppServer) SpringContext
+							.getService("timerAppServer");
 					try {
 						appServer.doProcess();
 					} catch (Exception e) {

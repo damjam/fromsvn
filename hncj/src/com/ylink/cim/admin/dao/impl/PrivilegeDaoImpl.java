@@ -26,10 +26,12 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 	 * @see flink.hibernate.BaseDaoImpl#getModelClass()
 	 */
 
+	@Override
 	protected Class<Privilege> getModelClass() {
 		return Privilege.class;
 	}
 
+	@Override
 	public Map<String, List<PrivilegeResource>> getPrivResource(String[] privs) {
 		Map<String, List<PrivilegeResource>> result = new HashMap<String, List<PrivilegeResource>>();
 		if (privs == null || privs.length == 0) {
@@ -41,7 +43,8 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 			condtion = condtion + ",'" + p + "'";
 		}
 		condtion = condtion.substring(1);
-		String hql = "from PrivilegeResource r where r.limitId in(" + condtion + ")";
+		String hql = "from PrivilegeResource r where r.limitId in(" + condtion
+				+ ")";
 		List<PrivilegeResource> allResource = this.getList(hql);
 
 		for (PrivilegeResource r : allResource) {
@@ -55,18 +58,22 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 		return result;
 	}
 
+	@Override
 	public Paginater getPrivilegePageList(Privilege privilege, Pager pager) {
 		QueryHelper queryHelper = new QueryHelper();
 		queryHelper.append("from Privilege p");
 		queryHelper.append("where 1=1");
 		queryHelper.append(" and p.ifAudit = ?", privilege.getIfAudit());
 		queryHelper.append("and p.limitId=?", privilege.getLimitId());
-		queryHelper.append("and p.limitName like ?", privilege.getLimitName(), MatchMode.ANYWHERE);
+		queryHelper.append("and p.limitName like ?", privilege.getLimitName(),
+				MatchMode.ANYWHERE);
 
 		return super.getPageData(queryHelper, pager);
 	}
 
-	public List<PrivilegeTreeNode> getRoleTreeByRole(String roleId) throws BizException {
+	@Override
+	public List<PrivilegeTreeNode> getRoleTreeByRole(String roleId)
+			throws BizException {
 		List<PrivilegeTreeNode> result = new ArrayList<PrivilegeTreeNode>();
 		String hql = "select p from Privilege p, RolePrivilege rp where p.limitId=rp.id.limitId and rp.id.roleId='"
 				+ roleId + "'";
@@ -76,7 +83,8 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 			node.setCode(p.getLimitId());
 			node.setName(p.getLimitName());
 			String parent = p.getParent();
-			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT : parent);
+			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT
+					: parent);
 			result.add(node);
 		}
 		return result;
@@ -87,17 +95,19 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 	 * 
 	 * @see gnete.dsf.biz.dao.PrivilegeDao#getRoleTree(java.util.List)
 	 */
+	@Override
 	public List<PrivilegeTreeNode> getRoleTree(String limitGroupId) {
 		List<PrivilegeTreeNode> treeList = new ArrayList<PrivilegeTreeNode>();
 		List<Map> prList = getLimitGroupPrivilege(limitGroupId);
 		for (int i = 0; i < prList.size(); i++) {
-			Map map = (Map) prList.get(i);
+			Map map = prList.get(i);
 			PrivilegeTreeNode node = new PrivilegeTreeNode();
 			node.setCode((String) map.get("limitId"));
 			node.setName((String) map.get("limitName"));
 			String parent = (String) map.get("parent");
 			// node.setParentCode(parent == null?PrivilegeTreeNode.ROOT:parent);
-			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT : parent);
+			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT
+					: parent);
 			treeList.add(node);
 		}
 		return treeList;
@@ -109,6 +119,7 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 	 * @see
 	 * gnete.dsf.biz.dao.PrivilegeDao#getLimitGroupPrivilege(java.lang.String)
 	 */
+	@Override
 	public List<Map> getLimitGroupPrivilege(String limitGroupId) {
 
 		QueryHelper sql = new QueryHelper();
@@ -126,16 +137,18 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 	 * 
 	 * @see gnete.dsf.biz.dao.PrivilegeDao#getRoleTree(java.util.List)
 	 */
+	@Override
 	public List getRoleTree() {
 		List<PrivilegeTreeNode> treeList = new ArrayList<PrivilegeTreeNode>();
 		List<Privilege> prList = getLimitGroupPrivilege();
 		for (int i = 0; i < prList.size(); i++) {
-			Privilege pg = (Privilege) prList.get(i);
+			Privilege pg = prList.get(i);
 			PrivilegeTreeNode node = new PrivilegeTreeNode();
 			node.setCode(pg.getLimitId());
 			node.setName(pg.getLimitName());
 			String parent = pg.getParent();
-			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT : parent);
+			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT
+					: parent);
 			treeList.add(node);
 		}
 		return treeList;
@@ -155,30 +168,39 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 		return getList(sql);
 	}
 
+	@Override
 	public List<Privilege> getPrivilegeList(Privilege privilege) {
 
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Privilege p");
 		helper.append("where 1=1");
 		helper.append("and p.limitId=?", privilege.getLimitId());
-		helper.append("and p.limitName like ? ", privilege.getLimitName(), MatchMode.ANYWHERE);
+		helper.append("and p.limitName like ? ", privilege.getLimitName(),
+				MatchMode.ANYWHERE);
 		helper.append(" order by p.menuOrder ");
 
 		return super.getList(helper);
 	}
 
+	@Override
 	public boolean hasSubPris(String limitId) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("select new map(count(p.limitId) as subNum) from Privilege p where p.parent = ?", limitId);
-		Map<String, Object> map = (Map<String, Object>) super.getUniqueResult(helper);
+		helper.append(
+				"select new map(count(p.limitId) as subNum) from Privilege p where p.parent = ?",
+				limitId);
+		Map<String, Object> map = (Map<String, Object>) super
+				.getUniqueResult(helper);
 		return (Long) map.get("subNum") > 0 ? true : false;
 	}
 
+	@Override
 	public Paginater findPrivs(Privilege Privilege, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Privilege where 1=1");
-		helper.append("and limitId like ?", Privilege.getLimitId(), MatchMode.ANYWHERE);
-		helper.append("and limitName like ?", Privilege.getLimitName(), MatchMode.ANYWHERE);
+		helper.append("and limitId like ?", Privilege.getLimitId(),
+				MatchMode.ANYWHERE);
+		helper.append("and limitName like ?", Privilege.getLimitName(),
+				MatchMode.ANYWHERE);
 		helper.append("and parent = ?", Privilege.getParent());
 		helper.append("and isMenu = ?", Privilege.getIsMenu());
 		helper.append("and ifAudit = ?", Privilege.getIfAudit());
@@ -186,11 +208,13 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public Integer getNextIndex(String parent) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(max(menuOrder) as index) from Privilege where 1=1");
 		helper.append("and parent = ?", parent);
-		Map<String, Object> map = (Map<String, Object>) super.getUniqueResult(helper);
+		Map<String, Object> map = (Map<String, Object>) super
+				.getUniqueResult(helper);
 		Integer index = (Integer) map.get("index");
 		if (index == null) {
 			return 0;

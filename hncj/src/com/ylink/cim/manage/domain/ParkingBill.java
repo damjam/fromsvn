@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -32,30 +33,27 @@ public class ParkingBill implements java.io.Serializable {
 	private String chargeUser;
 	private String remark;
 	private String year;
-	
+
 	// Constructors
-	
+
 	public String getYear() {
 		return year;
 	}
-
-
 
 	public void setYear(String year) {
 		this.year = year;
 	}
 
 	private String branchNo;
-	
+
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
@@ -195,6 +193,7 @@ public class ParkingBill implements java.io.Serializable {
 		this.parkingSn = parkingSn;
 	}
 
+	@Override
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -204,35 +203,59 @@ public class ParkingBill implements java.io.Serializable {
 			return false;
 		ParkingBill castOther = (ParkingBill) other;
 
-		return ((this.getId() == castOther.getId()) || (this.getId() != null && castOther.getId() != null && this
-				.getId().equals(castOther.getId())))
-				&& ((this.getOwnerId() == castOther.getOwnerId()) || (this.getOwnerId() != null
-						&& castOther.getOwnerId() != null && this.getOwnerId().equals(castOther.getOwnerId())))
-				&& ((this.getCreateDate() == castOther.getCreateDate()) || (this.getCreateDate() != null
-						&& castOther.getCreateDate() != null && this.getCreateDate().equals(castOther.getCreateDate())))
-				&& ((this.getCreateUser() == castOther.getCreateUser()) || (this.getCreateUser() != null
-						&& castOther.getCreateUser() != null && this.getCreateUser().equals(castOther.getCreateUser())))
-				&& ((this.getAmount() == castOther.getAmount()) || (this.getAmount() != null
-						&& castOther.getAmount() != null && this.getAmount().equals(castOther.getAmount())))
-				&& ((this.getBeginDate() == castOther.getBeginDate()) || (this.getBeginDate() != null
-						&& castOther.getBeginDate() != null && this.getBeginDate().equals(castOther.getBeginDate())))
-				&& ((this.getEndDate() == castOther.getEndDate()) || (this.getEndDate() != null
-						&& castOther.getEndDate() != null && this.getEndDate().equals(castOther.getEndDate())))
-				&& ((this.getParkingSn() == castOther.getParkingSn()) || (this.getParkingSn() != null
-						&& castOther.getParkingSn() != null && this.getParkingSn().equals(castOther.getParkingSn())));
+		return ((this.getId() == castOther.getId()) || (this.getId() != null
+				&& castOther.getId() != null && this.getId().equals(
+				castOther.getId())))
+				&& ((this.getOwnerId() == castOther.getOwnerId()) || (this
+						.getOwnerId() != null && castOther.getOwnerId() != null && this
+						.getOwnerId().equals(castOther.getOwnerId())))
+				&& ((this.getCreateDate() == castOther.getCreateDate()) || (this
+						.getCreateDate() != null
+						&& castOther.getCreateDate() != null && this
+						.getCreateDate().equals(castOther.getCreateDate())))
+				&& ((this.getCreateUser() == castOther.getCreateUser()) || (this
+						.getCreateUser() != null
+						&& castOther.getCreateUser() != null && this
+						.getCreateUser().equals(castOther.getCreateUser())))
+				&& ((this.getAmount() == castOther.getAmount()) || (this
+						.getAmount() != null && castOther.getAmount() != null && this
+						.getAmount().equals(castOther.getAmount())))
+				&& ((this.getBeginDate() == castOther.getBeginDate()) || (this
+						.getBeginDate() != null
+						&& castOther.getBeginDate() != null && this
+						.getBeginDate().equals(castOther.getBeginDate())))
+				&& ((this.getEndDate() == castOther.getEndDate()) || (this
+						.getEndDate() != null && castOther.getEndDate() != null && this
+						.getEndDate().equals(castOther.getEndDate())))
+				&& ((this.getParkingSn() == castOther.getParkingSn()) || (this
+						.getParkingSn() != null
+						&& castOther.getParkingSn() != null && this
+						.getParkingSn().equals(castOther.getParkingSn())));
 	}
 
+	@Override
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + (getId() == null ? 0 : this.getId().hashCode());
-		result = 37 * result + (getOwnerId() == null ? 0 : this.getOwnerId().hashCode());
-		result = 37 * result + (getCreateDate() == null ? 0 : this.getCreateDate().hashCode());
-		result = 37 * result + (getCreateUser() == null ? 0 : this.getCreateUser().hashCode());
-		result = 37 * result + (getAmount() == null ? 0 : this.getAmount().hashCode());
-		result = 37 * result + (getBeginDate() == null ? 0 : this.getBeginDate().hashCode());
-		result = 37 * result + (getEndDate() == null ? 0 : this.getEndDate().hashCode());
-		result = 37 * result + (getParkingSn() == null ? 0 : this.getParkingSn().hashCode());
+		result = 37 * result
+				+ (getOwnerId() == null ? 0 : this.getOwnerId().hashCode());
+		result = 37
+				* result
+				+ (getCreateDate() == null ? 0 : this.getCreateDate()
+						.hashCode());
+		result = 37
+				* result
+				+ (getCreateUser() == null ? 0 : this.getCreateUser()
+						.hashCode());
+		result = 37 * result
+				+ (getAmount() == null ? 0 : this.getAmount().hashCode());
+		result = 37 * result
+				+ (getBeginDate() == null ? 0 : this.getBeginDate().hashCode());
+		result = 37 * result
+				+ (getEndDate() == null ? 0 : this.getEndDate().hashCode());
+		result = 37 * result
+				+ (getParkingSn() == null ? 0 : this.getParkingSn().hashCode());
 		return result;
 	}
 

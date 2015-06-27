@@ -9,8 +9,10 @@ import com.ylink.cim.busioper.service.PushMngService;
 import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
+
 /**
  * 添加推送记录任务
+ * 
  * @author libaozhu
  * @date 2013-5-5
  */
@@ -23,6 +25,8 @@ public class AddPushTask extends BaseCmdTask {
 	private TimerDoService timerDoService;
 	@Autowired
 	private TimerDoDao timerDoDao;
+
+	@Override
 	protected void doRun() {
 		super.doRun();
 		String id = getCmdId();
@@ -31,7 +35,8 @@ public class AddPushTask extends BaseCmdTask {
 		} catch (Exception e) {
 			e.printStackTrace();
 			TimerDo timerDo = timerDoDao.findById(id);
-			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE, StringUtils.abbreviate(e.getMessage(), 100));
+			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE,
+					StringUtils.abbreviate(e.getMessage(), 100));
 		}
 	}
 }

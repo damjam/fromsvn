@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class UserRoleId implements Serializable {
 
-	 
 	/**
 	 * 
 	 */
@@ -33,7 +32,7 @@ public class UserRoleId implements Serializable {
 		this.userId = userId;
 	}
 
-	
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -42,7 +41,7 @@ public class UserRoleId implements Serializable {
 		return result;
 	}
 
-	
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

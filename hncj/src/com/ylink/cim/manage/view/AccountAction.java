@@ -21,6 +21,7 @@ import com.ylink.cim.manage.service.AccountService;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
 public class AccountAction extends BaseAction implements ModelDriven<Account> {
@@ -47,10 +48,13 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 
 	public String deposit() throws Exception {
 		try {
-			Double balance = accountService.deposit(model.getId(), model.getAmount(), getSessionUser(request));
+			Double balance = accountService.deposit(model.getId(),
+					model.getAmount(), getSessionUser(request));
 			String tip = "操作成功";
 			if (balance < model.getAmount()) {
-				tip += "，已扣除待缴水费" + MoneyUtil.getFormatStr2(model.getAmount() - balance) + "元";
+				tip += "，已扣除待缴水费"
+						+ MoneyUtil.getFormatStr2(model.getAmount() - balance)
+						+ "元";
 			}
 			tip += "，当前账户余额" + MoneyUtil.getFormatStr2(balance) + "元";
 			setResult(true, tip, request);
@@ -77,7 +81,7 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = accountDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		//return forward("/pages/manage/account/accountList.jsp");
+		// return forward("/pages/manage/account/accountList.jsp");
 		return "list";
 	}
 
@@ -93,7 +97,8 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 	public String withdraw() throws Exception {
 		try {
 
-			accountService.withdraw(model.getId(), model.getAmount(), getSessionUser(request));
+			accountService.withdraw(model.getId(), model.getAmount(),
+					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
@@ -120,12 +125,14 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 		params.put("type", model.getType());
 		params.put("startCreateDate", model.getStartCreateDate());
 		params.put("endCreateDate", model.getEndCreateDate());
-		Paginater paginater = accountDetailDao.findPager(params, getPager(request));
+		Paginater paginater = accountDetailDao.findPager(params,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/account/accountDetailList.jsp");
 		return "detail_list";
 	}
 
+	@Override
 	public Account getModel() {
 		return model;
 	}

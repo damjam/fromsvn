@@ -44,7 +44,8 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		if (!StringUtils.isEmpty(id)) {
 			Contact contact = (Contact) contactDao.findById(id);
 			if (StringUtils.isNotEmpty(contact.getMerchantNo())) {
-				MerchantInfo merchantInfo = merchantInfoDao.findById(contact.getMerchantNo());
+				MerchantInfo merchantInfo = merchantInfoDao.findById(contact
+						.getMerchantNo());
 				contact.setMerchantName(merchantInfo.getMrname());
 			}
 			BeanUtils.copyProperties(model, contact);
@@ -87,7 +88,8 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		Map<String, Object> params = getParaMap();
 		params.put("branchNo", getSessionBranchNo(request));
 		List<MerchantInfo> list = merchantInfoDao.findList(params);
-		BoUtils.addProperty(paginater.getList(), "merchantNo", "merchantName", list, "id", "mrname");
+		BoUtils.addProperty(paginater.getList(), "merchantNo", "merchantName",
+				list, "id", "mrname");
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/contact/contactList.jsp");
 		return "list";
@@ -105,6 +107,7 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		return list();
 	}
 
+	@Override
 	public Contact getModel() {
 		return model;
 	}

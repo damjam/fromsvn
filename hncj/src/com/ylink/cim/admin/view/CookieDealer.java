@@ -27,19 +27,23 @@ public class CookieDealer {
 	public static final String FROM_BRANCH = "fromBranch";
 	/**
 	 * 获取当前请求中带的所有的cookie
-	 * @param keyToGetCookie  获取cookie的name列表
-	 * @param keyForRemenberNames  cookie保存到request中的key列表
+	 * 
+	 * @param keyToGetCookie
+	 *            获取cookie的name列表
+	 * @param keyForRemenberNames
+	 *            cookie保存到request中的key列表
 	 * @param request
 	 * @param response
 	 */
 	public static Map<String, String> branchMap = new HashMap<String, String>();
-	static{
+	static {
 		branchMap.put("848348906ed5cadbd217473007ca5e71", "1");
 		branchMap.put("6d76641d5910cee05f05c770fd6cbe17", "2");
 	}
-	public static void dealAllCookieInCurrentReq(String[] keyToGetCookie,String[] keyForRemenberNames,
-			HttpServletRequest request) {
-		if(request.getAttribute(keyForRemenberNames[0])!=null){//说明参数已经有值了，不需要再使用cookie中的值
+
+	public static void dealAllCookieInCurrentReq(String[] keyToGetCookie,
+			String[] keyForRemenberNames, HttpServletRequest request) {
+		if (request.getAttribute(keyForRemenberNames[0]) != null) {// 说明参数已经有值了，不需要再使用cookie中的值
 			return;
 		}
 		if (keyToGetCookie == null || keyToGetCookie.length == 0) {
@@ -59,7 +63,8 @@ public class CookieDealer {
 	 * @param keyOfAttr
 	 * @param request
 	 */
-	public static String getCookieValue(String keyOfCookie, HttpServletRequest request) {
+	public static String getCookieValue(String keyOfCookie,
+			HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies == null) {
 			return "";
@@ -83,33 +88,40 @@ public class CookieDealer {
 	 * @param request
 	 * @param response
 	 */
-	public static void putAllToCookie(String keyIfCookie, List<String> keyForRemenberNames,
-			List<String> keyToGetCookie, HttpServletRequest request, HttpServletResponse response) {
+	public static void putAllToCookie(String keyIfCookie,
+			List<String> keyForRemenberNames, List<String> keyToGetCookie,
+			HttpServletRequest request, HttpServletResponse response) {
 		if (keyForRemenberNames == null || keyToGetCookie == null) {
 			log.error("传入的键值为空！");
 			return;
 		}
-		CookieDealer.putAllToCookie(keyIfCookie, (String[]) keyForRemenberNames.toArray(),
+		CookieDealer.putAllToCookie(keyIfCookie,
+				(String[]) keyForRemenberNames.toArray(),
 				(String[]) keyToGetCookie.toArray(), request, response);
 	}
 
 	/**
 	 * 将所有信息保存到cookie
 	 * 
-	 * @param keyIfCookie  是否保存cookie
-	 * @param values       要保存到cookie中的值  
+	 * @param keyIfCookie
+	 *            是否保存cookie
+	 * @param values
+	 *            要保存到cookie中的值
 	 * @param keyToGetCookie
 	 * @param request
 	 * @param response
 	 */
 	public static void putAllToCookie(String keyIfCookie, String[] values,
-			String[] keyToGetCookie, HttpServletRequest request, HttpServletResponse response) {
-		if(values == null || values.length==0 || keyToGetCookie ==null || keyToGetCookie.length==0){
+			String[] keyToGetCookie, HttpServletRequest request,
+			HttpServletResponse response) {
+		if (values == null || values.length == 0 || keyToGetCookie == null
+				|| keyToGetCookie.length == 0) {
 			log.error("传入的参数为空，或者键值的数量不一！");
-			return ;
+			return;
 		}
 		for (int i = 0; i < values.length; i++) {
-			saveCookie(keyIfCookie, keyToGetCookie[i], values[i], request, response);// 将当前信息保存到cookie中
+			saveCookie(keyIfCookie, keyToGetCookie[i], values[i], request,
+					response);// 将当前信息保存到cookie中
 		}
 	}
 
@@ -120,14 +132,14 @@ public class CookieDealer {
 	 * @param keyOfAttrInReq
 	 * @param request
 	 */
-	private static void putCookieToReqAttr(String keyOfCookie, String keyOfAttrInReq,
-			HttpServletRequest request) {
+	private static void putCookieToReqAttr(String keyOfCookie,
+			String keyOfAttrInReq, HttpServletRequest request) {
 		String value = getCookieValue(keyOfCookie, request);
 		request.setAttribute(keyOfAttrInReq, value);
 	}
 
-	
-	public static void saveBranch(String fromBranch, HttpServletResponse response) {
+	public static void saveBranch(String fromBranch,
+			HttpServletResponse response) {
 		Cookie cookie = new Cookie(FROM_BRANCH, fromBranch);
 		cookie.setMaxAge(-1);
 		response.addCookie(cookie);
@@ -158,5 +170,5 @@ public class CookieDealer {
 			response.addCookie(deleteNewCookie);
 		}
 	}
-	
+
 }

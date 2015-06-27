@@ -9,6 +9,7 @@ import com.ylink.cim.sys.dao.TimerDoDao;
 import com.ylink.cim.sys.domain.TimerDo;
 import com.ylink.cim.sys.service.TimerDoService;
 import com.ylink.cim.busioper.service.BillTrackService;
+
 @Scope("prototype")
 @Component("trackBillTask")
 public class TrackBillTask extends BaseCmdTask {
@@ -19,6 +20,8 @@ public class TrackBillTask extends BaseCmdTask {
 	private TimerDoDao timerDoDao;
 	@Autowired
 	private TimerDoService timerDoService;
+
+	@Override
 	protected void doRun() {
 		String id = getCmdId();
 		try {
@@ -26,7 +29,8 @@ public class TrackBillTask extends BaseCmdTask {
 		} catch (Exception e) {
 			e.printStackTrace();
 			TimerDo timerDo = timerDoDao.findById(id);
-			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE, StringUtils.abbreviate(e.getMessage(), 100));
+			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE,
+					StringUtils.abbreviate(e.getMessage(), 100));
 		}
 	}
 }

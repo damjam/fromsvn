@@ -16,15 +16,19 @@ import flink.util.Paginater;
 @Component("timerDoDao")
 public class TimerDoDaoImpl extends BaseDaoImpl implements TimerDoDao {
 
-	public List<TimerDo> getAllCanExcuteCommand(String sTriggerDate, String sCurrentTime) {
+	@Override
+	public List<TimerDo> getAllCanExcuteCommand(String sTriggerDate,
+			String sCurrentTime) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from TimerDo ti where 1=1");
 		helper.append(" and ti.state in ?", TimerDo.NEED_EXC_STRINGS);
 		helper.append(" and ti.triggerDate= ?", sTriggerDate);
-		helper.append(" and ti.triggerTime <=? order by ti.triggerTime", sCurrentTime);
+		helper.append(" and ti.triggerTime <=? order by ti.triggerTime",
+				sCurrentTime);
 		return getList(helper);
 	}
 
+	@Override
 	public List getAllCommand(String sTriggerDate) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from TimerDo where 1=1");
@@ -32,16 +36,20 @@ public class TimerDoDaoImpl extends BaseDaoImpl implements TimerDoDao {
 		return getList(helper);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return TimerDo.class;
 	}
 
+	@Override
 	public Paginater getPagerList(TimerDo timerDo, Pager pager) {
 		QueryHelper queryHelper = new QueryHelper();
 		queryHelper.append("from TimerDo t");
 		queryHelper.append("where 1=1 ");
-		queryHelper.append("and t.beanName like ?", timerDo.getBeanName(), MatchMode.ANYWHERE);
-		queryHelper.append("and t.beanNameCh like ?", timerDo.getBeanNameCh(), MatchMode.ANYWHERE);
+		queryHelper.append("and t.beanName like ?", timerDo.getBeanName(),
+				MatchMode.ANYWHERE);
+		queryHelper.append("and t.beanNameCh like ?", timerDo.getBeanNameCh(),
+				MatchMode.ANYWHERE);
 		queryHelper.append("and t.state = ?", timerDo.getState());
 		queryHelper.append("order by t.id desc");
 		return super.getPageData(queryHelper, pager);

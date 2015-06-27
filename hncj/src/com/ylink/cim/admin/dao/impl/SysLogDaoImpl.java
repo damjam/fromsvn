@@ -19,19 +19,20 @@ import flink.util.Paginater;
 @Component("sysLogDao")
 public class SysLogDaoImpl extends BaseDaoImpl implements SysLogDao {
 
-	
+	@Override
 	protected Class getModelClass() {
 
 		return SysLog.class;
 	}
 
-
-
-	public Paginater getSysLogPagList(SysLog sysLog, Pager pager) throws Exception {
+	@Override
+	public Paginater getSysLogPagList(SysLog sysLog, Pager pager)
+			throws Exception {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from SysLog where 1=1");
 		helper.append("and limitId = ?", sysLog.getLimitId());
-		helper.append("and content like ?", sysLog.getContent(), MatchMode.ANYWHERE);
+		helper.append("and content like ?", sysLog.getContent(),
+				MatchMode.ANYWHERE);
 		helper.append("and logType = ?", sysLog.getLogType());
 		helper.append("and userId = ?", sysLog.getUserId());
 		helper.append("and state = ?", sysLog.getState());
@@ -40,10 +41,12 @@ public class SysLogDaoImpl extends BaseDaoImpl implements SysLogDao {
 		return getPageData(helper, pager);
 	}
 
+	@Override
 	public void saveSysLog(SysLog sysLog) throws Exception {
 		this.save(sysLog);
 	}
 
+	@Override
 	public void updateUserLog(SysLog sysLog) throws Exception {
 		super.update(sysLog);
 	}

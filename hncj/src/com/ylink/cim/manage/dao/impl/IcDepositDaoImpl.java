@@ -23,29 +23,39 @@ import flink.util.Paginater;
 
 @Repository("icDepositDao")
 public class IcDepositDaoImpl extends BaseDaoImpl implements IcDepositDao {
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from IcDeposit t where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
-			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?",
-					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endChargeDate")));
 		}
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
-			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startCreateDate"))) {
+			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startCreateDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endCreateDate"))) {
-			helper.append("and createDate <= ?",
-					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
+			helper.append("and createDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endCreateDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by t.id desc");
 		return super.getPageData(helper, pager);
@@ -64,24 +74,31 @@ public class IcDepositDaoImpl extends BaseDaoImpl implements IcDepositDao {
 		return IcDeposit.class;
 	}
 
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(id) as cnt, sum(amount) as sumAmt, cardType as cardType) from IcDeposit where 1=1");
-		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
-			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
+		if (StringUtils.isNotEmpty(MapUtils
+				.getString(params, "startChargeDate"))) {
+			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils
+					.getString(params, "startChargeDate")));
 		}
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
-			helper.append("and chargeDate <= ?",
-					DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
+			helper.append("and chargeDate <= ?", DateUtil
+					.getDayEndByYYYMMDD(MapUtils.getString(params,
+							"endChargeDate")));
 		}
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 
-		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
+		helper.append("and houseSn like ?",
+				MapUtils.getString(params, "houseSn"), MatchMode.START);
 		// helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and state = ?", BillState.PAID.getValue());
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("group by cardType");
 		List<Map<String, Object>> sumList = super.getList(helper);
@@ -104,13 +121,16 @@ public class IcDepositDaoImpl extends BaseDaoImpl implements IcDepositDao {
 			if (sumAmt == null) {
 				sumAmt = 0d;
 			}
-			if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.ELEC.getValue())) {
+			if (StringUtils.equals(MapUtils.getString(map, "cardType"),
+					IcCardType.ELEC.getValue())) {
 				elecCnt = cnt;
 				elecAmt = sumAmt;
-			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"),
+					IcCardType.WATER.getValue())) {
 				waterCnt = cnt;
 				waterAmt = sumAmt;
-			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"), IcCardType.WATER.getValue())) {
+			} else if (StringUtils.equals(MapUtils.getString(map, "cardType"),
+					IcCardType.WATER.getValue())) {
 				gasCnt = cnt;
 				gasAmt = sumAmt;
 			}

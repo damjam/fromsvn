@@ -16,7 +16,8 @@ public interface SysLogService {
 	 * @param syslog
 	 * @param pager
 	 */
-	public Paginater getSysLogPageList(SysLog syslog, Pager pager) throws BizException;
+	public Paginater getSysLogPageList(SysLog syslog, Pager pager)
+			throws BizException;
 
 	/**
 	 * 保存系统日志

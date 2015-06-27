@@ -10,5 +10,5 @@ public interface HouseInfoService {
 	void delete(String id, UserInfo userInfo) throws BizException;
 
 	void add(HouseInfo houseInfo, UserInfo sessionUser) throws BizException;
-	
+
 }

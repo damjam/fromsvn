@@ -25,7 +25,8 @@ public class TestMsgA2034 {
 		String resMsg = SocketUtil.sendRecInPool(ip);
 		// String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
 		Map<String, MsgField> headMap = MsgUtil.parseResHead(resMsg);
-		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg, MsgA2034.A2034RES);
+		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg,
+				MsgA2034.A2034RES);
 	}
 
 }

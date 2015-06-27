@@ -4,7 +4,6 @@ import java.util.Date;
 
 // default package
 
-
 /**
  * MerchantInfo domain. @author MyEclipse Persistence Tools
  */
@@ -26,48 +25,36 @@ public class MerchantInfo implements java.io.Serializable {
 	private Date updateDate;
 	private String branchNo;
 	private String remark;
-	
-	
 
 	public String getRemark() {
 		return remark;
 	}
 
-
-
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
-
 
 	public String getBusiScope() {
 		return busiScope;
 	}
 
-
-
 	public void setBusiScope(String busiScope) {
 		this.busiScope = busiScope;
 	}
-
-
 
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	/** default constructor */
 	public MerchantInfo() {
 	}
-
 
 	// Property accessors
 
@@ -78,32 +65,22 @@ public class MerchantInfo implements java.io.Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-
 
 	public String getMrname() {
 		return mrname;
 	}
 
-
-
 	public void setMrname(String mrname) {
 		this.mrname = mrname;
 	}
-
-
 
 	public String getAddr() {
 		return addr;
 	}
 
-
-
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-
-
 
 	public String getTel() {
 		return this.tel;

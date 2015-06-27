@@ -34,6 +34,7 @@ public class Paginate extends SimpleTagSupport {
 		this.formIndex = formIndex;
 	}
 
+	@Override
 	public void doTag() throws JspException, IOException {
 		if (!isExistPaginater()) {
 			return;
@@ -52,7 +53,8 @@ public class Paginate extends SimpleTagSupport {
 	 * check paginater is exist.
 	 */
 	private boolean isExistPaginater() {
-		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
 
 		String key = StringUtils.isEmpty(name) ? Paginater.PAGINATER : name;
 		return (Paginater) request.getAttribute(key) != null;
@@ -83,7 +85,8 @@ public class Paginate extends SimpleTagSupport {
 	 * @param html
 	 */
 	private void appendPageNavigationHtml(StringBuffer html) {
-		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
 		String key = StringUtils.isEmpty(name) ? Paginater.PAGINATER : name;
 		Paginater p = (Paginater) request.getAttribute(key);
 
@@ -93,7 +96,8 @@ public class Paginate extends SimpleTagSupport {
 
 		// 是否显示总结信息.
 		String showSingleSummary = null;
-		showSingleSummary = request.getSession().getServletContext().getInitParameter("showSingleSummary");
+		showSingleSummary = request.getSession().getServletContext()
+				.getInitParameter("showSingleSummary");
 
 		if (StringUtils.isNotEmpty(showSingleSummary)) {
 			if (Boolean.parseBoolean(showSingleSummary) && showSummary) {
@@ -106,11 +110,14 @@ public class Paginate extends SimpleTagSupport {
 		}
 
 		if (StringUtils.isEmpty(navigateStyle)) {
-			navigateStyle = request.getSession().getServletContext().getInitParameter("htmlNavigator");
+			navigateStyle = request.getSession().getServletContext()
+					.getInitParameter("htmlNavigator");
 		}
 
-		HtmlNavigator navigator = HtmlNavigatorFactory.getInstance(navigateStyle);
-		html.append(navigator.getHtmlNavigation(request.getContextPath(), p, formIndex, tidy));
+		HtmlNavigator navigator = HtmlNavigatorFactory
+				.getInstance(navigateStyle);
+		html.append(navigator.getHtmlNavigation(request.getContextPath(), p,
+				formIndex, tidy));
 	}
 
 	/**
@@ -123,7 +130,8 @@ public class Paginate extends SimpleTagSupport {
 		html.append("<div class=\"pageSummary\">");
 
 		if (tidy) {
-			html.append("第" + p.getCurrentPage() + "/" + p.getMaxPage() + "页&nbsp;");
+			html.append("第" + p.getCurrentPage() + "/" + p.getMaxPage()
+					+ "页&nbsp;");
 			html.append("共" + p.getMaxRowCount() + "笔&nbsp;");
 		} else {
 			html.append("第" + p.getCurrentPage() + "页&nbsp;");

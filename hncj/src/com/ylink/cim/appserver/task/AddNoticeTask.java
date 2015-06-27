@@ -20,6 +20,7 @@ public class AddNoticeTask extends BaseCmdTask {
 	@Autowired
 	private TimerDoDao timerDoDao;
 
+	@Override
 	protected void doRun() {
 		super.doRun();
 		String id = getCmdId();
@@ -28,8 +29,8 @@ public class AddNoticeTask extends BaseCmdTask {
 		} catch (Exception e) {
 			e.printStackTrace();
 			TimerDo timerDo = timerDoDao.findById(id);
-			timerDoService
-					.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE, StringUtils.abbreviate(e.getMessage(), 100));
+			timerDoService.updateTimerDo(timerDo, TimerDo.BUSINESS_FAILURE,
+					StringUtils.abbreviate(e.getMessage(), 100));
 		}
 
 	}

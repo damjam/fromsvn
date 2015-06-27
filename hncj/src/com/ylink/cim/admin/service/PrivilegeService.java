@@ -10,9 +10,9 @@ import flink.etc.BizException;
  *
  */
 public interface PrivilegeService {
-	
+
 	public void savePrivilege(Privilege privilege) throws BizException;
-	
+
 	public void delete(String id) throws BizException;
-	
+
 }

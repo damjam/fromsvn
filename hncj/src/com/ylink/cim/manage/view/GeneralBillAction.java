@@ -19,14 +19,17 @@ import com.ylink.cim.manage.service.BillService;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 /**
  * 通用收款
+ * 
  * @author libaozhu
  * @date 2015-3-17
  */
 @Scope("prototype")
 @Component
-public class GeneralBillAction extends BaseAction implements ModelDriven<GeneralBill>{
+public class GeneralBillAction extends BaseAction implements
+		ModelDriven<GeneralBill> {
 	/**
 	 * 
 	 */
@@ -35,8 +38,9 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 	private GeneralBillDao generalBillDao;
 	@Autowired
 	private BillService billService;
-	
+
 	private GeneralBill model = new GeneralBill();
+
 	public String charge() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -50,10 +54,12 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 		}
 		return list();
 	}
+
 	public String deleteBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.deleteBill(GeneralBill.class, id, getSessionUser(request));
+			billService.deleteBill(GeneralBill.class, id,
+					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (Exception e) {
 			setResult(false, "删除失败", request);
@@ -61,6 +67,7 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 		}
 		return list();
 	}
+
 	public String doAdd() throws Exception {
 		try {
 			GeneralBill bill = new GeneralBill();
@@ -73,14 +80,17 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 			return toAdd();
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResult(false, "保存失败"+e.getMessage(), request);
+			setResult(false, "保存失败" + e.getMessage(), request);
 			return toAdd();
 		}
 		return list();
 	}
+
+	@Override
 	public GeneralBill getModel() {
 		return model;
 	}
+
 	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
@@ -90,19 +100,21 @@ public class GeneralBillAction extends BaseAction implements ModelDriven<General
 		map.put("id", model.getId());
 		map.put("branchNo", getSessionBranchNo(request));
 		map.put("keyword", model.getKeyword());
-		Paginater paginater = generalBillDao.findBillPager(map, getPager(request));
+		Paginater paginater = generalBillDao.findBillPager(map,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = generalBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
 		GeneralTradeType.setInReq(request);
-		//return forward("/pages/manage/charge/general/generalBillList.jsp");
+		// return forward("/pages/manage/charge/general/generalBillList.jsp");
 		return "list";
 	}
+
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
 		CheckinState.setInReq(request);
 		GeneralTradeType.setInReq(request);
-		//return forward("/pages/manage/charge/general/generalBillAdd.jsp");
+		// return forward("/pages/manage/charge/general/generalBillAdd.jsp");
 		return "add";
 	}
 }

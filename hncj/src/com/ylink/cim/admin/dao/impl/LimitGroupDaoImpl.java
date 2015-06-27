@@ -40,6 +40,7 @@ public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 		return limitGroups;
 	}
 
+	@Override
 	public void deleteByLimitGroupId(String limitGroupId) {
 
 		QueryHelper helper = new QueryHelper();
@@ -50,6 +51,7 @@ public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 		super.execute(helper);
 	}
 
+	@Override
 	public List<LimitGroup> getByLimitGroupId(String limitGroupId) {
 
 		QueryHelper helper = new QueryHelper();
@@ -60,6 +62,7 @@ public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<LimitGroup> getLimitGroup(LimitGroup limitGroup) {
 
 		QueryHelper helper = new QueryHelper();
@@ -67,7 +70,8 @@ public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 		helper.append("where 1=1");
 		helper.append("and lg.id.limitGroupId=lgi.limitGroupId");
 		helper.append("and lg.id.limitId=p.limitId");
-		helper.append("and lg.id.limitGroupId=?", limitGroup.getId().getLimitGroupId());
+		helper.append("and lg.id.limitGroupId=?", limitGroup.getId()
+				.getLimitGroupId());
 
 		List list = super.getList(helper);
 		List<LimitGroup> limitGroups = convert(list);
@@ -75,6 +79,7 @@ public class LimitGroupDaoImpl extends BaseDaoImpl implements LimitGroupDao {
 		return limitGroups;
 	}
 
+	@Override
 	protected Class<LimitGroup> getModelClass() {
 		return LimitGroup.class;
 	}

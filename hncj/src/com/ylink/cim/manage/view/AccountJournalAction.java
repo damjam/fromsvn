@@ -28,7 +28,8 @@ import flink.web.BaseAction;
 
 @Scope("prototype")
 @Component
-public class AccountJournalAction extends BaseAction implements ModelDriven<AccountJournal> {
+public class AccountJournalAction extends BaseAction implements
+		ModelDriven<AccountJournal> {
 	/**
 	 * 
 	 */
@@ -50,7 +51,8 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = accountJournalDao.findPager(map, getPager(request));
+		Paginater paginater = accountJournalDao.findPager(map,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = accountJournalDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
@@ -65,7 +67,8 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 		map.remove("16");
 		request.setAttribute("tradeTypes", map.values());
 
-		InnerAcct innerAcct = accountJournalDao.findById(InnerAcct.class, Constants.INNER_ACCTID);
+		InnerAcct innerAcct = accountJournalDao.findById(InnerAcct.class,
+				Constants.INNER_ACCTID);
 		BeanUtils.copyProperties(model, innerAcct);
 		// return forward("/pages/manage/actJournal/outputFund.jsp");
 		return "output_fund";
@@ -98,7 +101,8 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 	public String reverse() throws Exception {
 		try {
 
-			accountJournalService.reverse(model.getTradeType(), model.getBillId(), model.getRemark(),
+			accountJournalService.reverse(model.getTradeType(),
+					model.getBillId(), model.getRemark(),
 					getSessionUser(request));
 			model.setTradeType("");
 			setResult(true, "操作成功", request);
@@ -116,7 +120,8 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 	public String withdraw() throws Exception {
 		try {
 
-			accountJournalService.deduct(model.getTradeType(), model.getAmount(), "", model.getRemark(),
+			accountJournalService.deduct(model.getTradeType(),
+					model.getAmount(), "", model.getRemark(),
 					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
@@ -133,8 +138,8 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 	public String deposit() throws Exception {
 		try {
 
-			accountJournalService.add(model.getTradeType(), model.getAmount(), "", model.getRemark(),
-					getSessionUser(request));
+			accountJournalService.add(model.getTradeType(), model.getAmount(),
+					"", model.getRemark(), getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
@@ -147,6 +152,7 @@ public class AccountJournalAction extends BaseAction implements ModelDriven<Acco
 		return list();
 	}
 
+	@Override
 	public AccountJournal getModel() {
 		return model;
 	}

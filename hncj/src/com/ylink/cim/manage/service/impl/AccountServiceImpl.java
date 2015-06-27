@@ -48,6 +48,7 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountJournalService accountJournalService;
 	
+	@Override
 	public void add(String ownerId, UserInfo sessionUser) throws BizException {
 		Account account = new Account();
 		OwnerInfo ownerInfo = ownerInfoDao.findByIdWithLock(ownerId);
@@ -67,6 +68,7 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 
+	@Override
 	public String addAccountDetail(Account account, Double amount, String type, String inoutType, String billId, String remark, UserInfo userInfo) throws BizException {
 		AccountDetail detail = new AccountDetail();
 		String id = idFactoryService.generateId(Constants.ACCOUNT_DETAIL_ID);
@@ -132,6 +134,7 @@ public class AccountServiceImpl implements AccountService {
 		}
 		return account.getBalance();
 	}
+	@Override
 	public Double deposit(String no, Double amount, UserInfo userInfo) throws BizException {
 		Account account = accountDao.findByIdWithLock(no);
 		account.setBalance(AmountUtils.add(account.getBalance(), amount));
@@ -144,6 +147,7 @@ public class AccountServiceImpl implements AccountService {
 		return checkDebt(no, houseSn, userInfo);
 	}
 	
+	@Override
 	public void payBill(String no, Double amount, String billId, String remark, UserInfo userInfo) throws BizException {
 		Account account = accountDao.findByIdWithLock(no);
 		Double balance = AmountUtils.subtract(account.getBalance(), amount);
@@ -153,6 +157,7 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 
+	@Override
 	public void withdraw(String no, Double amount, UserInfo userInfo) throws BizException {
 		Account account = accountDao.findByIdWithLock(no);
 		Double balance = AmountUtils.subtract(account.getBalance(), amount);

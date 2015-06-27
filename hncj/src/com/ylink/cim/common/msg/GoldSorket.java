@@ -15,10 +15,13 @@ public class GoldSorket {
 	public static String sendMessage(String sendMsg) throws BizException {
 		String rspMsg = "";
 		try {
-			SocketParams socketParams = (SocketParams) SpringContext.getService("socketParams");
-			Socket socket = SocketUtil.sendMsg(socketParams.getHostName(), socketParams.getPortNum(), sendMsg,
+			SocketParams socketParams = (SocketParams) SpringContext
+					.getService("socketParams");
+			Socket socket = SocketUtil.sendMsg(socketParams.getHostName(),
+					socketParams.getPortNum(), sendMsg,
 					socketParams.getTimeout(), socketParams.getCharset());
-			rspMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(), socketParams.getCharset(), true);
+			rspMsg = SocketUtil.recvMsg(socket, socketParams.getTimeout(),
+					socketParams.getCharset(), true);
 		} catch (Exception e) {
 			rspMsg = "";
 			log.error("error:发送/接收报文异常" + e.getMessage());

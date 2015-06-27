@@ -11,7 +11,8 @@ import flink.util.Paginater;
 
 public interface LimitGroupInfoDao extends BaseDao {
 
-	public Paginater getLimitGroupInfoPageList(LimitGroupInfo limitGroupInfo, Pager pager);
+	public Paginater getLimitGroupInfoPageList(LimitGroupInfo limitGroupInfo,
+			Pager pager);
 
 	public List<SysDict> getSysDictNoLimitGroup();
 

@@ -170,6 +170,7 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 		return null;
 	}
 
+	@Override
 	public DecorateServiceBill getModel() {
 		return model;
 	}

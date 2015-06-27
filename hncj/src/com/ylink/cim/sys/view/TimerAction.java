@@ -88,6 +88,7 @@ public class TimerAction extends BaseAction implements ModelDriven<Timer> {
 		}
 	}
 
+	@Override
 	public Timer getModel() {
 		return model;
 	}

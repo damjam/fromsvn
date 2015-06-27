@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 public class IpAddrUtil {
 
 	private static Logger logger = Logger.getLogger(IpAddrUtil.class);
+
 	public static String getAddresses(String ip, String encodingString)
 			throws Exception {
 		String url = "http://ip.taobao.com/service/getIpInfo.php";
@@ -37,7 +38,6 @@ public class IpAddrUtil {
 		return null;
 	}
 
-
 	public static String getRes(String urlStr, String ip, String encoding)
 			throws Exception {
 		HttpClient client = new HttpClient();
@@ -48,13 +48,12 @@ public class IpAddrUtil {
 		NameValuePair[] data = { new NameValuePair("ip", ip) };// ÉèÖÃ¶ÌÐÅÄÚÈÝ
 		post.setRequestBody(data);
 		client.executeMethod(post);
-		//Header[] headers = post.getResponseHeaders();
+		// Header[] headers = post.getResponseHeaders();
 		int statusCode = post.getStatusCode();
 		logger.debug("·µ»Ø×´Ì¬Âë:" + statusCode);
 		/*
-		for (Header h : headers) {
-			System.out.println(h.toString());
-		}*/
+		 * for (Header h : headers) { System.out.println(h.toString()); }
+		 */
 		String result = new String(post.getResponseBodyAsString().getBytes(
 				encoding));
 		return result;

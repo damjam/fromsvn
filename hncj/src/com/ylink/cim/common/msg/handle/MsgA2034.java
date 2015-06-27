@@ -36,13 +36,18 @@ public class MsgA2034 {
 
 	}
 
-	public static MsgField[] A2034REQ = { MsgField.aip_no, MsgField.local_serial_no, MsgField.aip_type,
-			MsgField.start_date, MsgField.end_date, MsgField.entr_source, MsgField.deal_stat, MsgField.bs_flag };
+	public static MsgField[] A2034REQ = { MsgField.aip_no,
+			MsgField.local_serial_no, MsgField.aip_type, MsgField.start_date,
+			MsgField.end_date, MsgField.entr_source, MsgField.deal_stat,
+			MsgField.bs_flag };
 
-	public static MsgField[] A2034RES = { MsgField.entr_date, MsgField.exch_date, MsgField.order_no, MsgField.aip_no,
-			MsgField.account_no, MsgField.cust_name, aip_type, aip_mode, bs_flag, MsgField.aip_bal, MsgField.aip_amt,
-			MsgField.match_bal, MsgField.match_amt, exch_bal, MsgField.real_exch_bal, MsgField.pro_fee,
-			MsgField.pub_price, MsgField.deal_time, deal_stat, MsgField.deal_rate, entr_source, MsgField.charge_stat,
+	public static MsgField[] A2034RES = { MsgField.entr_date,
+			MsgField.exch_date, MsgField.order_no, MsgField.aip_no,
+			MsgField.account_no, MsgField.cust_name, aip_type, aip_mode,
+			bs_flag, MsgField.aip_bal, MsgField.aip_amt, MsgField.match_bal,
+			MsgField.match_amt, exch_bal, MsgField.real_exch_bal,
+			MsgField.pro_fee, MsgField.pub_price, MsgField.deal_time,
+			deal_stat, MsgField.deal_rate, entr_source, MsgField.charge_stat,
 			memo, MsgField.origin_order_no };
 
 }

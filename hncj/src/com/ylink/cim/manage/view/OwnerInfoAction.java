@@ -31,9 +31,11 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo>{
+public class OwnerInfoAction extends BaseAction implements
+		ModelDriven<OwnerInfo> {
 	/**
 	 * 
 	 */
@@ -46,6 +48,7 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 	private AccountService accountService;
 	@Autowired
 	private HouseInfoDao houseInfoDao;
+
 	public String cancel() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -59,10 +62,12 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 		}
 		return list();
 	}
+
 	private void clearForm() {
 		model.setOwnerName(null);
 		model.setHouseSn(null);
 	}
+
 	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -74,9 +79,10 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 		}
 		return list();
 	}
+
 	public String doAdd() throws Exception {
 		try {
-			
+
 			OwnerInfo ownerInfo = new OwnerInfo();
 			BeanUtils.copyProperties(ownerInfo, model);
 			ownerInfoService.add(ownerInfo, getSessionUser(request));
@@ -93,6 +99,7 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 		}
 		return list();
 	}
+
 	public String doImport() throws Exception {
 		try {
 			InputStream is = new FileInputStream(model.getFile());
@@ -124,15 +131,16 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 						Assert.notNull(row, "行数据为空");
 						String houseSn = "";
 						houseSn = row.getCell(0).getStringCellValue();
-						houseSn = StringUtils.trimToEmpty(houseSn.replace("东外滩", ""));
+						houseSn = StringUtils.trimToEmpty(houseSn.replace(
+								"东外滩", ""));
 						if (StringUtils.isEmpty(houseSn)) {
 							throw new Exception("房屋编号为空");
 						}
-						if(houseInfoDao.findById(houseSn) != null){
-							throw new Exception("房屋编号为"+houseSn+"的房屋信息已存在");
+						if (houseInfoDao.findById(houseSn) != null) {
+							throw new Exception("房屋编号为" + houseSn + "的房屋信息已存在");
 						}
 						Double area = row.getCell(1).getNumericCellValue();
-						if (area == null || area<= 0) {
+						if (area == null || area <= 0) {
 							throw new Exception("面积有误");
 						}
 						String ownerName = row.getCell(2).getStringCellValue();
@@ -140,10 +148,11 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 							throw new Exception("姓名为空");
 						}
 						String sexType = "";
-						String sexTypeName = row.getCell(3).getStringCellValue();
+						String sexTypeName = row.getCell(3)
+								.getStringCellValue();
 						if (SexType.SEX_M.getName().equals(sexTypeName)) {
 							sexType = "M";
-						}else if (SexType.SEX_F.getName().equals(sexTypeName)) {
+						} else if (SexType.SEX_F.getName().equals(sexTypeName)) {
 							sexType = "F";
 						}
 						String mobile = row.getCell(4).getStringCellValue();
@@ -151,7 +160,7 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 							throw new Exception("联系电话为空");
 						}
 						String idCard = row.getCell(5).getStringCellValue();
-						
+
 						OwnerInfo ownerInfo = new OwnerInfo();
 						ownerInfo.setHouseSn(houseSn);
 						ownerInfo.setGender(sexType);
@@ -162,7 +171,8 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 						ownerInfo.setGrade(OwnerGrade.NORMAL.getValue());
 						list.add(ownerInfo);
 					} catch (Exception e) {
-						throw new Exception("第" + (i+1) +"个工作表中第"+ (j+1) +"行:" + e.getMessage());
+						throw new Exception("第" + (i + 1) + "个工作表中第" + (j + 1)
+								+ "行:" + e.getMessage());
 					}
 				}
 			}
@@ -174,13 +184,14 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 			e.printStackTrace();
 			setResult(false, "操作失败:" + e.getMessage(), request);
 		}
-		//return forward("/pages/manage/owner/ownerInfoImport.jsp");
+		// return forward("/pages/manage/owner/ownerInfoImport.jsp");
 		return "import";
 	}
+
 	public String doUpdate() throws Exception {
 		try {
 			OwnerInfo ownerInfo = OwnerInfoDao.findById(model.getId());
-			OwnerInfo owner = (OwnerInfo)BeanUtils.cloneBean(ownerInfo);
+			OwnerInfo owner = (OwnerInfo) BeanUtils.cloneBean(ownerInfo);
 			BeanUtils.copyProperties(ownerInfo, model);
 			ownerInfo.setCreateDate(owner.getCreateDate());
 			ownerInfo.setCreateUser(owner.getCreateUser());
@@ -191,21 +202,24 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 		}
 		return toUpdate();
 	}
+
 	public void initSelect(HttpServletRequest request) throws Exception {
 		SexType.setInReq(request);
 		OwnerGrade.setInReq(request);
 	}
+
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		
+
 		map.put("ownerName", model.getOwnerName());
 		map.put("houseSn", model.getHouseSn());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		//return forward("/pages/manage/owner/ownerInfoList.jsp");
+		// return forward("/pages/manage/owner/ownerInfoList.jsp");
 		return "list";
 	}
+
 	public String openAcct() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -217,27 +231,33 @@ public class OwnerInfoAction extends BaseAction implements ModelDriven<OwnerInfo
 		}
 		return list();
 	}
+
 	public String toAdd() throws Exception {
 		initSelect(request);
-		//return forward("/pages/manage/owner/ownerInfoAdd.jsp");
+		// return forward("/pages/manage/owner/ownerInfoAdd.jsp");
 		return "add";
 	}
+
 	public String toImport() throws Exception {
-		
-		//return forward("/pages/manage/owner/ownerInfoImport.jsp");
+
+		// return forward("/pages/manage/owner/ownerInfoImport.jsp");
 		return "import";
 	}
+
 	public String toUpdate() throws Exception {
 		initSelect(request);
 		String id = request.getParameter("id");
 		OwnerInfo ownerInfo = OwnerInfoDao.findById(id);
-		
+
 		BeanUtils.copyProperties(model, ownerInfo);
-		//return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
+		// return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
 		return "update";
 	}
+
+	@Override
 	public OwnerInfo getModel() {
 		return model;
 	}
+
 	private OwnerInfo model = new OwnerInfo();
 }

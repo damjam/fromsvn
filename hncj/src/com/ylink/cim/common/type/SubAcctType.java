@@ -16,8 +16,10 @@ import flink.util.ExceptionUtils;
 public class SubAcctType extends AbstractType {
 	public static Map<String, SubAcctType> ALL = new LinkedHashMap<String, SubAcctType>();
 
-	public static final SubAcctType ACCOUNT_TRADING = new SubAcctType("交易账户", "1");
-	public static final SubAcctType ACCOUNT_ACTUAL = new SubAcctType("实物账户", "2");
+	public static final SubAcctType ACCOUNT_TRADING = new SubAcctType("交易账户",
+			"1");
+	public static final SubAcctType ACCOUNT_ACTUAL = new SubAcctType("实物账户",
+			"2");
 
 	protected SubAcctType(String name, String value) {
 		super(name, value);

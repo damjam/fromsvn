@@ -20,18 +20,21 @@ import flink.util.Paginater;
 @Component("sysParmDao")
 public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 
+	@Override
 	public void deleteSysParmById(String id) throws Exception {
 
 		this.deleteById(id);
 
 	}
 
+	@Override
 	public SysParm findSysParmById(String id) throws Exception {
 
 		return (SysParm) this.findById(id);
 
 	}
 
+	@Override
 	public String generateFeeSettingIndex() {
 		SysParm sysParm = findById("7211");
 		int index = Integer.parseInt(sysParm.getParvalue()) + 1;
@@ -40,6 +43,7 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 		return Integer.toString(index);
 	}
 
+	@Override
 	public Date getDbTime() {
 		QueryHelper sql = new QueryHelper();
 		sql.append("select current_timestamp as t from dual");
@@ -48,10 +52,12 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 		return (Date) getUniqueResultBySql(sql);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return SysParm.class;
 	}
 
+	@Override
 	public Paginater getPageList(Pager pager, SysParm sysParm) throws Exception {
 
 		QueryHelper helper = new QueryHelper();
@@ -61,11 +67,13 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 		return this.getPageData(helper, pager);
 	}
 
+	@Override
 	public SysParm getSysParmInfo(String code) {
 
 		return (SysParm) findById(SysParm.class, code);
 	}
 
+	@Override
 	public boolean hasParm(String code) throws Exception {
 		return this.findById(code) != null;
 	}
@@ -75,11 +83,13 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 		return false;
 	}
 
+	@Override
 	public void saveSysParm(SysParm sysParm) throws Exception {
 
 		this.save(sysParm);
 	}
 
+	@Override
 	public void saveSysParmInTransaction(SysParm sysParm) throws Exception {
 		Transaction beginTransaction = super.getHibernateTemplate().getSessionFactory().getCurrentSession()
 				.beginTransaction();
@@ -119,11 +129,13 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 
 	}
 
+	@Override
 	public void updateSysParm(SysParm sysParm) throws Exception {
 
 		this.update(sysParm);
 	}
 
+	@Override
 	public void updSysParm(SysParm sysParm) {
 
 		update(sysParm);

@@ -17,9 +17,12 @@ public class AipEntrState extends AbstractState {
 	public static Map<String, AipEntrState> ALL = new LinkedHashMap<String, AipEntrState>();
 
 	public static final AipEntrState APPLY = new AipEntrState("申请", "1");
-	public static final AipEntrState ALREADY_IN_FORCE = new AipEntrState("已生效", "2");
-	public static final AipEntrState HAVE_BEEN_PROCESSED = new AipEntrState("已处理", "3");
-	public static final AipEntrState HAVE_BEEN_REVOKED = new AipEntrState("已撤销", "4");
+	public static final AipEntrState ALREADY_IN_FORCE = new AipEntrState("已生效",
+			"2");
+	public static final AipEntrState HAVE_BEEN_PROCESSED = new AipEntrState(
+			"已处理", "3");
+	public static final AipEntrState HAVE_BEEN_REVOKED = new AipEntrState(
+			"已撤销", "4");
 
 	protected AipEntrState(String name, String value) {
 		super(name, value);

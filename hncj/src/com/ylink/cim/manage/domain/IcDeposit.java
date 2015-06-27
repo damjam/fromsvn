@@ -2,8 +2,6 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-import com.ylink.cim.admin.domain.Privilege;
-
 // default package
 
 /**
@@ -32,8 +30,7 @@ public class IcDeposit implements java.io.Serializable {
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
-	
-	
+
 	public String getYear() {
 		return year;
 	}
@@ -93,7 +90,6 @@ public class IcDeposit implements java.io.Serializable {
 	public String getChargeUser() {
 		return this.chargeUser;
 	}
-
 
 	public String getCreateUser() {
 		return createUser;
@@ -178,5 +174,5 @@ public class IcDeposit implements java.io.Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	
+
 }

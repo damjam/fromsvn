@@ -3,7 +3,6 @@
  */
 package flink.util;
 
-
 /**
  * type interface.
  * 

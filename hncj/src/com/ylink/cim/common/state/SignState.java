@@ -22,7 +22,8 @@ public class SignState extends AbstractState {
 	public static final SignState CANCELED_ACCT = new SignState("已销户", "2");
 	public static final SignState UNCONFIRM_UPDATE = new SignState("更改待确认", "3");
 	public static final SignState CANCELING_ACCT = new SignState("销户解约中", "4");
-	public static final SignState CANCELING_SIGN = new SignState("更改账户绑定解约中", "5");
+	public static final SignState CANCELING_SIGN = new SignState("更改账户绑定解约中",
+			"5");
 	public static final SignState UNSIGN = new SignState("未签约", "6");// 解约后
 
 	// 无关联签约卡时

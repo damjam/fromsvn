@@ -20,17 +20,20 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 	@Autowired
 	private IdFactoryDao idFactoryDao;
 
+	@Override
 	public void deleteIdFactory(String seqIdName) throws BizException {
 		this.idFactoryDao.deleteIdFactory(seqIdName);
 	}
 
+	@Override
 	public String generateId(String seqIdName) throws BizException {
 
 		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName);
 		idFactoryDao.lock(idFactory, LockMode.UPGRADE);
 		idFactoryDao.refresh(idFactory);
 		if (null == idFactory) {
-			ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "不存在对的id: " + seqIdName);
+			ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "不存在对的id: "
+					+ seqIdName);
 		}
 		if (StringUtils.isEmpty(idFactory.getInitValue())) {
 			idFactory.setInitValue("100000");
@@ -76,14 +79,17 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 		if (currentValue.length() < maxLength) {
 			if (Constants.LEFT.equals(idFactory.getDirection())) {
 				retVal = dateVal + curVal;
-				retVal = StringUtils.leftPad(retVal, maxLength, idFactory.getFillValue());
+				retVal = StringUtils.leftPad(retVal, maxLength,
+						idFactory.getFillValue());
 			} else if (Constants.RIGHT.equals(idFactory.getDirection())) {
 				retVal = dateVal + curVal;
-				retVal = StringUtils.rightPad(retVal, maxLength, idFactory.getFillValue());
+				retVal = StringUtils.rightPad(retVal, maxLength,
+						idFactory.getFillValue());
 			} else {
 				if (Constants.CENTER.equals(idFactory.getDirection())) {
 					retVal = dateVal
-							+ StringUtils.leftPad(String.valueOf(curVal), maxLength - dateLength,
+							+ StringUtils.leftPad(String.valueOf(curVal),
+									maxLength - dateLength,
 									idFactory.getFillValue());
 				}
 			}
@@ -94,6 +100,7 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 		return retVal;
 	}
 
+	@Override
 	public void saveIdFactory(IdFactory idFactory) throws BizException {
 		this.idFactoryDao.saveIdFactory(idFactory);
 

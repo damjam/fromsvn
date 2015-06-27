@@ -2,7 +2,6 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-
 /**
  * ElecBill domain. @author MyEclipse Persistence Tools
  */
@@ -40,17 +39,17 @@ public class ElecBill implements java.io.Serializable {
 	private String endChargeDate;
 	private String buildingNo;
 	private String year;
-	
+
 	/** default constructor */
 	public ElecBill() {
 	}
 
-
-
 	/** full constructor */
-	public ElecBill(String id, String houseSn, Integer prenum, Integer curnum, Integer num, Double amount,
-			Double paidAmt, String state, String preRecordDate, String curRecordDate, String createUser,
-			Date createDate, Date chargeDate, String chargeUser, String recordMonth) {
+	public ElecBill(String id, String houseSn, Integer prenum, Integer curnum,
+			Integer num, Double amount, Double paidAmt, String state,
+			String preRecordDate, String curRecordDate, String createUser,
+			Date createDate, Date chargeDate, String chargeUser,
+			String recordMonth) {
 		this.id = id;
 		this.houseSn = houseSn;
 		this.prenum = prenum;
@@ -68,73 +67,49 @@ public class ElecBill implements java.io.Serializable {
 		this.recordMonth = recordMonth;
 	}
 
-
-
 	public Double getAmount() {
 		return this.amount;
 	}
-
-
 
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public String getBuildingNo() {
 		return buildingNo;
 	}
-
-
 
 	public Date getChargeDate() {
 		return this.chargeDate;
 	}
 
-
-
 	public String getChargeUser() {
 		return this.chargeUser;
 	}
-
-
 
 	public Date getCreateDate() {
 		return this.createDate;
 	}
 
-
-
 	public String getCreateUser() {
 		return this.createUser;
 	}
-
-
 
 	public Integer getCurnum() {
 		return this.curnum;
 	}
 
-
-
 	public String getCurRecordDate() {
 		return this.curRecordDate;
 	}
-
-
 
 	public String getEndChargeDate() {
 		return endChargeDate;
 	}
 
-
-
 	public String getEndCreateDate() {
 		return endCreateDate;
 	}
-
-
 
 	public String getHouseSn() {
 		return this.houseSn;
@@ -201,6 +176,7 @@ public class ElecBill implements java.io.Serializable {
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	public void setBuildingNo(String buildingNo) {

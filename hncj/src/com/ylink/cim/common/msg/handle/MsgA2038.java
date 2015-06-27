@@ -29,10 +29,14 @@ public class MsgA2038 {
 
 	}
 
-	public static MsgField[] A2038REQ = { MsgField.aip_no, MsgField.local_serial_no, MsgField.start_app_date,
+	public static MsgField[] A2038REQ = { MsgField.aip_no,
+			MsgField.local_serial_no, MsgField.start_app_date,
 			MsgField.end_app_date };
 
-	public static MsgField[] A2038RES = { MsgField.aip_no, MsgField.account_no, MsgField.cust_name,
+	public static MsgField[] A2038RES = {
+			MsgField.aip_no,
+			MsgField.account_no,
+			MsgField.cust_name,
 			MsgField.stat,
 			MsgField.local_serial_no,
 			variety_id,
@@ -42,9 +46,10 @@ public class MsgA2038 {
 			// MsgField.city_code,
 			// MsgField.rsp_msg,
 			// MsgField.sheet_no,
-			MsgField.city_code, branch_id, MsgField.stor_id, MsgField.contacter, addr, MsgField.exch_date,
-			MsgField.b_contacter, MsgField.b_addr, tel, MsgField.take_margin, MsgField.take_fare, MsgField.re_margin,
-			MsgField.diff_bal, MsgField.process_cost
+			MsgField.city_code, branch_id, MsgField.stor_id,
+			MsgField.contacter, addr, MsgField.exch_date, MsgField.b_contacter,
+			MsgField.b_addr, tel, MsgField.take_margin, MsgField.take_fare,
+			MsgField.re_margin, MsgField.diff_bal, MsgField.process_cost
 
 	};
 

@@ -48,6 +48,7 @@ public class MsgBase {
 	/**
 	 * 生成符合黄金二级系统1.0接口要求的报文
 	 */
+	@Override
 	public String toString() {
 		return toStringBuffer().toString();
 	}
@@ -79,7 +80,8 @@ public class MsgBase {
 			Field[] fields = this.getFields(this.getClass());
 			for (int i = 0; i < fields.length; i++) {
 				String fieldName = fields[i].getName();
-				if (sFilterFields != null && sFilterFields.indexOf("," + fieldName + ",") != -1)
+				if (sFilterFields != null
+						&& sFilterFields.indexOf("," + fieldName + ",") != -1)
 					continue;
 				String fieldValue = MsgUtil.getFieldValue(this, fields[i]);
 				MsgBase.addMsgFieldValue(sb, fieldName, fieldValue);
@@ -103,7 +105,8 @@ public class MsgBase {
 	/**
 	 * 追加字符属性
 	 */
-	public static StringBuffer addMsgFieldValue(StringBuffer sbSrc, String sFieldName, String sFieldValue) {
+	public static StringBuffer addMsgFieldValue(StringBuffer sbSrc,
+			String sFieldName, String sFieldValue) {
 
 		if (sFieldName != null && sFieldValue.length() > 0) {
 			// 组属性名

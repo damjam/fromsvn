@@ -26,9 +26,11 @@ import flink.util.SpringContext;
 public abstract class ParaManager {
 	private static Log log = LogFactory.getLog(ParaManager.class);
 
-	private static SysParmDao sysParmDao = (SysParmDao) SpringContext.getService("sysParmDao");
+	private static SysParmDao sysParmDao = (SysParmDao) SpringContext
+			.getService("sysParmDao");
 
-	private static SysDictDao sysDictDao = (SysDictDao) SpringContext.getService("sysDictDao");
+	private static SysDictDao sysDictDao = (SysDictDao) SpringContext
+			.getService("sysDictDao");
 
 	// 系统参数.
 	private static Map<String, String> paraMap = new ConcurrentHashMap<String, String>();
@@ -79,7 +81,8 @@ public abstract class ParaManager {
 				Map<String, String> map = new HashMap<String, String>();
 				sysDictMap.put(sysDict.getId().getDictType(), map);
 			}
-			sysDictMap.get(sysDict.getId().getDictType()).put(sysDict.getId().getDictValue(), sysDict.getDictName());
+			sysDictMap.get(sysDict.getId().getDictType()).put(
+					sysDict.getId().getDictValue(), sysDict.getDictName());
 		}
 	}
 
@@ -97,16 +100,20 @@ public abstract class ParaManager {
 		return sysDictMap.get(dictType).get(value);
 	}
 
-	public static void setDictInReq(HttpServletRequest request, SysDictType dictType) {
-		request.setAttribute(StringUtils.uncapitalize(dictType.getValue()) + "s", getSysDict(dictType.getValue()));
+	public static void setDictInReq(HttpServletRequest request,
+			SysDictType dictType) {
+		request.setAttribute(StringUtils.uncapitalize(dictType.getValue())
+				+ "s", getSysDict(dictType.getValue()));
 	}
 
-	public static void setDictInReq(HttpServletRequest request, SysDictType dictType, String name) {
+	public static void setDictInReq(HttpServletRequest request,
+			SysDictType dictType, String name) {
 		request.setAttribute(name, getSysDict(dictType.getValue()));
 
 	}
 
-	public static void setDictInReq(HttpServletRequest request, SysDictType[] dictTypes) {
+	public static void setDictInReq(HttpServletRequest request,
+			SysDictType[] dictTypes) {
 		if (ArrayUtils.isEmpty(dictTypes)) {
 			return;
 		}
@@ -194,7 +201,8 @@ public abstract class ParaManager {
 	}
 
 	public static String getLightPrice(String buildingNo) {
-		Map<String, String> rentTypes = getSysDict(SysDictType.RentType.getValue());
+		Map<String, String> rentTypes = getSysDict(SysDictType.RentType
+				.getValue());
 		if (rentTypes.get(buildingNo) != null) {
 			return getRentLightPrice();
 		} else {

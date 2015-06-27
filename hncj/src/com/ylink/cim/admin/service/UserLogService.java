@@ -14,7 +14,8 @@ public interface UserLogService {
 	 * 
 	 * @return
 	 */
-	public Paginater getUserLogPageList(UserLog userLog, Pager pager, UserInfo userInfo) throws BizException;
+	public Paginater getUserLogPageList(UserLog userLog, Pager pager,
+			UserInfo userInfo) throws BizException;
 
 	/**
 	 * 保存用户日志
@@ -22,6 +23,6 @@ public interface UserLogService {
 	 * @param userLog
 	 */
 	public void saveUserLog(UserLog userLog) throws BizException;
-	
-	public UserLog getUserLogDtl(String id)throws BizException;
+
+	public UserLog getUserLogDtl(String id) throws BizException;
 }

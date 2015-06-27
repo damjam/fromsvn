@@ -18,7 +18,8 @@ public class TestMsg {
 
 	private static void printMap(Map<String, MsgField> map) {
 		for (Map.Entry<String, MsgField> entry : map.entrySet()) {
-			System.out.println(entry.getKey() + "=" + entry.getValue().getValue());
+			System.out.println(entry.getKey() + "="
+					+ entry.getValue().getValue());
 		}
 	}
 
@@ -51,10 +52,12 @@ public class TestMsg {
 		// SocketUtil.sendMsg(socket2, msg, 3, "GBK");
 		String resMsg = SocketUtil.sendRecInPool(ip);
 		Map<String, MsgField> reqheadMap = MsgUtil.parseReqHead(msg);
-		Map<String, MsgField> reqbodyMap = MsgUtil.parseReqBody(msg, MsgA0010.A0010REQ);
+		Map<String, MsgField> reqbodyMap = MsgUtil.parseReqBody(msg,
+				MsgA0010.A0010REQ);
 		// String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
 		Map<String, MsgField> headMap = MsgUtil.parseResHead(resMsg);
-		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg, MsgA0010.A0010RES);
+		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg,
+				MsgA0010.A0010RES);
 	}
 
 	private static void testA0011() throws Exception {
@@ -81,10 +84,12 @@ public class TestMsg {
 		// SocketUtil.sendMsg(socket2, msg, 3, "GBK");
 		String resMsg = SocketUtil.sendRecInPool(ip);
 		Map<String, MsgField> reqheadMap = MsgUtil.parseReqHead(msg);
-		Map<String, MsgField> reqbodyMap = MsgUtil.parseReqBody(msg, MsgA0011.A0011REQ);
+		Map<String, MsgField> reqbodyMap = MsgUtil.parseReqBody(msg,
+				MsgA0011.A0011REQ);
 		// String resMsg = ConnectUtil.sendRecv(msg, 3, "GBK");
 		Map<String, MsgField> headMap = MsgUtil.parseResHead(resMsg);
-		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg, MsgA0011.A0011RES);
+		Map<String, MsgField> bodyMap = MsgUtil.parseResBody(resMsg,
+				MsgA0011.A0011RES);
 	}
 
 	public static void testBuild() {
@@ -107,7 +112,8 @@ public class TestMsg {
 		System.out.println("开始打印响应报文头");
 		printMap(headMap);
 		System.out.println("开始打印响应报文体");
-		List<Map<String, MsgField>> bodyList = MsgUtil.parseResBodyList(msg, MsgA2040.A2040RES);
+		List<Map<String, MsgField>> bodyList = MsgUtil.parseResBodyList(msg,
+				MsgA2040.A2040RES);
 		for (int i = 0; i < bodyList.size(); i++) {
 			printMap(bodyList.get(i));
 		}

@@ -22,18 +22,22 @@ public class Msg extends SimpleTagSupport {
 		this.styleClass = styleClass;
 	}
 
+	@Override
 	public void doTag() throws JspException, IOException {
-		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
 		String msg = (String) request.getAttribute("msg");
 
 		if (StringUtils.isEmpty(msg)) {
 			return;
 		}
 
-		String classHtml = StringUtils.isEmpty(styleClass) ? " class=\"msg\" " : " class=\"".concat(styleClass).concat(
-				"\"");
-		String styleHtml = StringUtils.isEmpty(style) ? "" : " style=\"".concat(style).concat("\" ");
-		String html = "<div".concat(classHtml).concat(styleHtml).concat(">").concat(msg).concat("</div>");
+		String classHtml = StringUtils.isEmpty(styleClass) ? " class=\"msg\" "
+				: " class=\"".concat(styleClass).concat("\"");
+		String styleHtml = StringUtils.isEmpty(style) ? "" : " style=\""
+				.concat(style).concat("\" ");
+		String html = "<div".concat(classHtml).concat(styleHtml).concat(">")
+				.concat(msg).concat("</div>");
 
 		this.getJspContext().getOut().write(html);
 	}

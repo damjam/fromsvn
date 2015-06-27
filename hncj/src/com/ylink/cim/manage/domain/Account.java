@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -27,120 +28,84 @@ public class Account implements java.io.Serializable {
 	private String year;
 	private String type;
 	private Double amount;
-	
+
 	/** default constructor */
 	public Account() {
 	}
-
-
 
 	public String getAcctNo() {
 		return acctNo;
 	}
 
-
-
 	public Double getAmount() {
 		return amount;
 	}
-
-
 
 	public Double getBalance() {
 		return this.balance;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
-
-
 
 	public Date getCreateDate() {
 		return this.createDate;
 	}
 
-
-
 	public String getCreateUser() {
 		return this.createUser;
 	}
-
-
 
 	public Double getCreditAmt() {
 		return this.creditAmt;
 	}
 
-
-
 	public String getEndCreateDate() {
 		return endCreateDate;
 	}
-
-
 
 	public Double getFreezeAmt() {
 		return this.freezeAmt;
 	}
 
-
-
 	public String getHouseSn() {
 		return houseSn;
 	}
-
-
 
 	public String getId() {
 		return id;
 	}
 
-
-
 	public String getOwnerId() {
 		return this.ownerId;
 	}
-
-
 
 	public String getOwnerName() {
 		return this.ownerName;
 	}
 
-
-
 	public String getStartCreateDate() {
 		return startCreateDate;
 	}
 
-	
-	
 	// Property accessors
 
 	public String getState() {
 		return this.state;
 	}
 
-
-
 	public String getType() {
 		return type;
 	}
-	
+
 	public String getYear() {
 		return year;
 	}
 
-
-
 	public void setAcctNo(String acctNo) {
 		this.acctNo = acctNo;
 	}
-
-
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
@@ -205,6 +170,5 @@ public class Account implements java.io.Serializable {
 	public void setYear(String year) {
 		this.year = year;
 	}
-
 
 }

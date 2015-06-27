@@ -12,9 +12,10 @@ import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 
 @Component("noticeMsgRecordDao")
-public class NoticeMsgRecordDaoImpl extends BaseDaoImpl implements NoticeMsgRecordDao {
+public class NoticeMsgRecordDaoImpl extends BaseDaoImpl implements
+		NoticeMsgRecordDao {
 
-	
+	@Override
 	public List<NoticeMsgRecord> findByParams(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from NoticeMsgRecord t where 1=1");
@@ -24,10 +25,9 @@ public class NoticeMsgRecordDaoImpl extends BaseDaoImpl implements NoticeMsgReco
 		return super.getList(helper);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return NoticeMsgRecord.class;
 	}
 
-	
-	
 }

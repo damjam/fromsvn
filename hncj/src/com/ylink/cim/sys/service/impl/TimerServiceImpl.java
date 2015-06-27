@@ -24,15 +24,18 @@ public class TimerServiceImpl implements TimerService {
 	@Autowired
 	private IdFactoryService idFactoryService;
 
+	@Override
 	public void delete(String id) throws BizException {
 		timerDao.deleteById(id);
 
 	}
 
-	public Paginater findPager(Pager pager, Map<String, Object> params) throws BizException {
+	public Paginater findPager(Pager pager, Map<String, Object> params)
+			throws BizException {
 		return timerDao.getTimerList(pager, params);
 	}
 
+	@Override
 	public void save(Timer timer, UserInfo userInfo) throws BizException {
 		timer.setId(idFactoryService.generateId(Constants.TIMER_ID));
 		timer.setCreateTime(DateUtil.getCurrent());
@@ -41,6 +44,7 @@ public class TimerServiceImpl implements TimerService {
 		timerDao.save(timer);
 	}
 
+	@Override
 	public void update(Timer timer, UserInfo userInfo) throws BizException {
 		this.timerDao.update(timer);
 	}

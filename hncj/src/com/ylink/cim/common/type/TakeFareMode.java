@@ -21,8 +21,10 @@ public class TakeFareMode extends AbstractType {
 		ALL.put(value, this);
 	}
 
-	public static final TakeFareMode MODE_FIXED = new TakeFareMode("固定收费模式", "1");
-	public static final TakeFareMode MODE_FLOATING = new TakeFareMode("浮动收费模式", "2");
+	public static final TakeFareMode MODE_FIXED = new TakeFareMode("固定收费模式",
+			"1");
+	public static final TakeFareMode MODE_FLOATING = new TakeFareMode("浮动收费模式",
+			"2");
 
 	public static TakeFareMode valueOf(String value) throws Exception {
 		TakeFareMode type = ALL.get(value);

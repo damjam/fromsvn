@@ -44,6 +44,7 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 	private static final String OVERTIME_URL = "/pages/common/overtime.jsp";
 	private static final String INVALID_URL = "/error.jsp";
 
+	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
 		try {
@@ -95,6 +96,7 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 		return uri;
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.filterConfig = filterConfig;
 
@@ -136,7 +138,7 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 			request.setAttribute("PRIVILEGE_PATH", getPrivilegePath(privileges, res.getLimitId()));
 
 			// 当前动作.
-			request.setAttribute("ACT", (Privilege) PrivilegeHelper.getPrivilege(res.getLimitId(), privileges));
+			request.setAttribute("ACT", PrivilegeHelper.getPrivilege(res.getLimitId(), privileges));
 		} else {
 			logger.debug("用户[" + ((UserInfo) request.getSession().getAttribute(Constants.SESSION_USER)).getUserId()
 					+ "]没有权限, " + link);
@@ -247,6 +249,7 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 	private static String[] LOGINED_PUBLIC_URLS;
 
 	// Clean up resources
+	@Override
 	public void destroy() {
 		this.filterConfig = null;
 	}

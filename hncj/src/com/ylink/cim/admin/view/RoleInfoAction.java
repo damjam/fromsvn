@@ -38,7 +38,7 @@ import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.ExceptionUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 import flink.web.tag.DTreeObj;
@@ -72,10 +72,11 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 
 	public String listRoleInfo() throws Exception {
 
-		Paginater paginater = this.roleInfoService.getRoleInfoPageList(model, super.getPager(request));
+		Paginater paginater = this.roleInfoService.getRoleInfoPageList(model,
+				super.getPager(request));
 
 		saveQueryResult(request, paginater);
-		String msg = LogUtils.r("角色管理查询成功");
+		String msg = MsgUtils.r("角色管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 
 		return ActionConstant.TO_LIST_PAGE;
@@ -99,8 +100,10 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 			Map<String, Object> params = new HashMap<String, Object>();
 
 			params.put("roleName", model.getRoleName());
-			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params, null, null);
-			Assert.isTrue(count == 0, LogUtils.r("已存在角色名称[{?}]", model.getRoleName()));
+			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params,
+					null, null);
+			Assert.isTrue(count == 0,
+					MsgUtils.r("已存在角色名称[{?}]", model.getRoleName()));
 			model.setRoleId(idFactoryService.generateId(Constants.ROLE_INFO_ID));
 			if (this.roleInfoService.isExistRole(model)) {
 				setResult(false, ActionMessageConstant.OPER_FAIL_EXIST, request);
@@ -109,15 +112,16 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 
 			this.roleInfoService.saveRoleAndLimits(model);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("添加角色成功,添加内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("添加角色成功,添加内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 		} catch (BizException e) {
-			String msg = LogUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
 			setResult(false, msg, request);
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 		} catch (Exception e) {
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
-			String msg = LogUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 		}
 		model.setLimitGroupId(null);
@@ -128,17 +132,20 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 	}
 
 	public String toUpdatePage() throws Exception {
-		RoleInfo roleInfo = this.roleInfoService.getRoleInfoByRoleId(model.getRoleId());
+		RoleInfo roleInfo = this.roleInfoService.getRoleInfoByRoleId(model
+				.getRoleId());
 		BeanUtils.copyProperties(model, roleInfo);
 		this.initLimitGroupInfo(request);
 		this.initLimitGroup(request, model.getLimitGroupId());
 		String limitGroupId = model.getLimitGroupId();
 		LimitGroupInfo lgi = limitGroupInfoDao.findById(limitGroupId);
 		request.setAttribute("limitGroupName", lgi.getLimitGroupName());
-		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree(model.getLimitGroupId());
+		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree(model
+				.getLimitGroupId());
 
 		// 取得角色权限信息
-		List<RolePrivilege> rolePrivilegeList = rolePrivilegeDao.getRolePrivilegeByRoleId(model.getRoleId());
+		List<RolePrivilege> rolePrivilegeList = rolePrivilegeDao
+				.getRolePrivilegeByRoleId(model.getRoleId());
 
 		saveQueryResult(request, list);
 		request.setAttribute("rolePrivilegeList", rolePrivilegeList);
@@ -153,22 +160,27 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("roleName", model.getRoleName());
-			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params, "roleId", model.getRoleId());
-			Assert.isTrue(count == 0, LogUtils.r("已存在角色名称[{?}]", model.getRoleName()));
+			Long count = roleInfoDao.findCountByParam(RoleInfo.class, params,
+					"roleId", model.getRoleId());
+			Assert.isTrue(count == 0,
+					MsgUtils.r("已存在角色名称[{?}]", model.getRoleName()));
 			this.roleInfoService.updateRoleAndLimits(model);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("更新角色成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("更新角色成功,更新内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage();
 		} catch (BizException e) {
-			setResult(true, LogUtils.r("已存在角色名称[{?}]", model.getRoleName()), request);
-			String msg = LogUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
+			setResult(true, MsgUtils.r("已存在角色名称[{?}]", model.getRoleName()),
+					request);
+			String msg = MsgUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage();
 		} catch (Exception e) {
 			// e.printStackTrace();
-			setResult(true, ActionMessageConstant.OPER_FAIL + e.getMessage(), request);
-			String msg = LogUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
+			setResult(true, ActionMessageConstant.OPER_FAIL + e.getMessage(),
+					request);
+			String msg = MsgUtils.r("更新角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage();
 		}
@@ -179,7 +191,8 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 			return;
 		}
 
-		List<RolePrivilege> list = this.rolePrivilegeService.getRolePrivilegeByRoleId(roleId);
+		List<RolePrivilege> list = this.rolePrivilegeService
+				.getRolePrivilegeByRoleId(roleId);
 		if (null == list || list.size() == 0) {
 			return;
 		}
@@ -193,7 +206,8 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 		request.setAttribute("initCheck", initCheck.deleteCharAt(0).toString());
 	}
 
-	private void initLimitGroup(HttpServletRequest request, String limitGroupId) throws Exception {
+	private void initLimitGroup(HttpServletRequest request, String limitGroupId)
+			throws Exception {
 
 		if (null == limitGroupId) {
 			return;
@@ -204,7 +218,8 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 		LimitGroup limitGroup = new LimitGroup();
 		limitGroup.setId(id);
 
-		List<LimitGroup> list = this.limitGroupService.getLimitGroup(limitGroup);
+		List<LimitGroup> list = this.limitGroupService
+				.getLimitGroup(limitGroup);
 		convertToTree(list, request);
 	}
 
@@ -246,12 +261,13 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 			RoleInfo roleInfo = roleInfoDao.findById(model.getRoleId());
 			this.roleInfoService.deleteRoleInfo(roleInfo);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("删除角色成功,删除内容为：{?}", FeildUtils.toString(roleInfo));
+			String msg = MsgUtils.r("删除角色成功,删除内容为：{?}",
+					FeildUtils.toString(roleInfo));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			return this.listRoleInfo();
 
 		} catch (Exception e) {
-			String msg = LogUtils.r("删除角色失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("删除角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logException(RoleInfo.class, e.getMessage());
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
@@ -275,24 +291,27 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 	public String loadTree() throws BizException {
 		// 取得页面权限组，如果为空则取登录用户权限组
 
-		String limitGroupId = (String) request.getParameter("limitGroupId");
+		String limitGroupId = request.getParameter("limitGroupId");
 		if (StringUtils.isEmpty(limitGroupId)) {
 			saveQueryResult(request, new ArrayList());
 			return "loadTree";
 		}
 		// 获取权限组
-		LimitGroupInfo lg = (LimitGroupInfo) limitGroupInfoDao.findById(limitGroupId);
+		LimitGroupInfo lg = (LimitGroupInfo) limitGroupInfoDao
+				.findById(limitGroupId);
 		if (limitGroupId == null || limitGroupId.trim().equals("")) {
 			saveQueryResult(request, new ArrayList());
 			return "loadTree";
 		}
 		// 取得权限树
-		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree(lg.getLimitGroupId());
+		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree(lg
+				.getLimitGroupId());
 		request.setAttribute("limitGroupId", lg.getLimitGroupId());
 		saveQueryResult(request, list);
 		return "loadTree";
 	}
 
+	@Override
 	public RoleInfo getModel() {
 		return model;
 	}

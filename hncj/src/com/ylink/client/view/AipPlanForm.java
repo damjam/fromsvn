@@ -7,19 +7,18 @@ import com.ylink.cim.common.type.AipMode;
 import com.ylink.cim.common.type.AipPeriod;
 
 public class AipPlanForm {
-	private String branch_id;		// 代理机构
-	private Date start_date;		// *起始日期
-	private Date end_date;			// *结束日期
-	private String grade_id;		// 客户级别
-	private String acct_no;			// 客户号
-	private String cust_name;		// 客户姓名
-	private String account_no;		// 银行账号
-	private String order_no;		// 申请流水号
-	private PlanState plan_stat;	// 计划状态
-	private AipMode aip_mode;		// 定投模式
-	private AipPeriod aip_periods;	// 定投周期
+	private String branch_id; // 代理机构
+	private Date start_date; // *起始日期
+	private Date end_date; // *结束日期
+	private String grade_id; // 客户级别
+	private String acct_no; // 客户号
+	private String cust_name; // 客户姓名
+	private String account_no; // 银行账号
+	private String order_no; // 申请流水号
+	private PlanState plan_stat; // 计划状态
+	private AipMode aip_mode; // 定投模式
+	private AipPeriod aip_periods; // 定投周期
 
-	
 	public AipPlanForm() {
 	}
 

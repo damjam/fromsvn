@@ -22,7 +22,8 @@ public class MsgA1016 {
 		}
 
 	}
-	public static MsgField[] A1016REQ = { MsgField.aip_no, MsgField.plan_exch_date, variety_id, MsgField.take_weight,
+	public static MsgField[] A1016REQ = { MsgField.aip_no,
+			MsgField.plan_exch_date, variety_id, MsgField.take_weight,
 			city_code, branch_id };
 
 	public static MsgField[] A1016RES = { MsgField.local_serial_no };

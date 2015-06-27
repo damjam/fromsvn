@@ -16,11 +16,13 @@ import flink.util.Paginater;
 @Component("sysDictDao")
 public class SysDictDaoImpl extends BaseDaoImpl implements SysDictDao {
 
+	@Override
 	protected Class getModelClass() {
 
 		return SysDict.class;
 	}
 
+	@Override
 	public Paginater getSysDictPageList(SysDict sysDict, Pager pager) {
 
 		QueryHelper helper = new QueryHelper();
@@ -33,6 +35,7 @@ public class SysDictDaoImpl extends BaseDaoImpl implements SysDictDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public List<SysDict> getSysDictByDictType(String dictType) {
 
 		QueryHelper helper = new QueryHelper();
@@ -43,6 +46,7 @@ public class SysDictDaoImpl extends BaseDaoImpl implements SysDictDao {
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<SysDict> findByParam(Map<String, Object> map) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from SysDict t where 1=1");

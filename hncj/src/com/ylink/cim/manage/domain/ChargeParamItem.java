@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 /**
@@ -21,8 +22,5 @@ public class ChargeParamItem {
 	public void setId(ChargeParamItemId id) {
 		this.id = id;
 	}
-	
-	
-	
 
 }

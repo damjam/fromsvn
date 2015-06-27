@@ -25,12 +25,14 @@ import com.ylink.cim.common.util.FeildUtils;
 
 import flink.etc.Symbol;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
 @Scope("prototype")
 @Component
-public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg> {
+public class NoticeMsgAction extends BaseAction implements
+		ModelDriven<NoticeMsg> {
 
 	/**
 	 * 
@@ -47,14 +49,16 @@ public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg
 		NoticeMsg noticeMsg = new NoticeMsg();
 		BeanUtils.copyProperties(noticeMsg, model);
 		if (StringUtils.isEmpty(model.getBranchNo())
-				&& !BranchType.HQ_0000.getValue().equals(getSessionUser(request).getBranchNo())) {
+				&& !BranchType.HQ_0000.getValue().equals(
+						getSessionUser(request).getBranchNo())) {
 			noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());
 		}
 		// noticeMsg.setBranchNo(getSessionUser(request).getBranchNo());
 		noticeMngService.saveNoticeMsg(noticeMsg);
 		setResult(true, "添加成功", request);
 		setReturnUrl("/noticeMsgAction.do?action=list", request);
-		String msg = LogUtils.r("消息提醒添加成功,添加内容为：{?}", FeildUtils.toString(noticeMsg));
+		String msg = MsgUtils.r("消息提醒添加成功,添加内容为：{?}",
+				FeildUtils.toString(noticeMsg));
 		super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 		return SUCCESS;
 	}
@@ -67,14 +71,15 @@ public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg
 			record.setReadTime(new Date());
 			noticeMngService.updateMsgRecord(record);
 			request.setAttribute("readOne", Symbol.YES);
-			String msg = LogUtils.r("客户阅读消息提醒成功,所更新的内容为：{?}", FeildUtils.toString(record));
+			String msg = MsgUtils.r("客户阅读消息提醒成功,所更新的内容为：{?}",
+					FeildUtils.toString(record));
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
 			return showNotice();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			// respond(response, "error");
-			String msg = LogUtils.r("客户阅读消息提醒失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("客户阅读消息提醒失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.OTHER.getValue(), msg);
 		}
 		return showNotice();
@@ -96,12 +101,13 @@ public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg
 			map.put("endCreateDate", model.getEndCreateDate());
 			map.put("subject", model.getSubject());
 			map.put("branchNo", getSessionUser(request).getBranchNo());
-			Paginater paginater = noticeMsgDao.findPaginater(map, getPager(request));
+			Paginater paginater = noticeMsgDao.findPaginater(map,
+					getPager(request));
 			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("消息提醒管理查询成功");
+			String msg = MsgUtils.r("消息提醒管理查询成功");
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		} catch (Exception e) {
-			String msg = LogUtils.r("消息提醒管理查询失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("消息提醒管理查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 			throw new Exception(e);
 		}
@@ -117,7 +123,7 @@ public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg
 		List<NoticeMsgRecord> list = noticeMsgRecordDao.findByParams(map);
 		saveQueryResult(request, list);
 		request.setAttribute("msgCnt", list.size());
-		String msg = LogUtils.r("消息提醒查看成功");
+		String msg = MsgUtils.r("消息提醒查看成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		// return forward("/pageHome.jsp");
 		return "home";
@@ -131,6 +137,7 @@ public class NoticeMsgAction extends BaseAction implements ModelDriven<NoticeMsg
 		return "add";
 	}
 
+	@Override
 	public NoticeMsg getModel() {
 		return model;
 	}

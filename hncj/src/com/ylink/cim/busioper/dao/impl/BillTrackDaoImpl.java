@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.busioper.dao.BillTrackDao;
@@ -21,6 +20,7 @@ import flink.util.Paginater;
 @Component("billTrackDao")
 public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 
+	@Override
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from BillTrack t where 1=1");
@@ -47,10 +47,12 @@ public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 		return getPageData(helper, pager);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return BillTrack.class;
 	}
 
+	@Override
 	public List<BillTrack> findList(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from BillTrack t where 1=1");
@@ -63,6 +65,7 @@ public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 		return super.getList(helper);
 	}
 
+	@Override
 	public int expireBillTrack(String houseSn, String billType, String branchNo) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("update BillTrack t set state = ? where 1=1", BillTrackState.EXPIRED.getValue());

@@ -15,76 +15,74 @@ import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
-@Component("limitGroupInfoDao")
-public class LimitGroupInfoDaoImpl extends BaseDaoImpl implements LimitGroupInfoDao {
 
-	
+@Component("limitGroupInfoDao")
+public class LimitGroupInfoDaoImpl extends BaseDaoImpl implements
+		LimitGroupInfoDao {
+
 	private List<LimitGroupInfo> convertToGroupInfo(List data) {
-	
-		List<LimitGroupInfo> ls=new ArrayList<LimitGroupInfo>();
-		for(int i=0;i<data.size();i++){
-			Object[] objects =(Object[])data.get(i);
-			LimitGroupInfo limitGroupInfo=(LimitGroupInfo)objects[0];
-			SysDict sysDict=(SysDict)objects[1];
-			
+
+		List<LimitGroupInfo> ls = new ArrayList<LimitGroupInfo>();
+		for (int i = 0; i < data.size(); i++) {
+			Object[] objects = (Object[]) data.get(i);
+			LimitGroupInfo limitGroupInfo = (LimitGroupInfo) objects[0];
+			SysDict sysDict = (SysDict) objects[1];
+
 			limitGroupInfo.setUserTypeName(sysDict.getDictName());
-			
+
 			ls.add(limitGroupInfo);
 		}
 		return ls;
 	}
 
-	
+	@Override
 	public List<LimitGroupInfo> getAll() {
-		
-		QueryHelper helper=new QueryHelper();
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("from LimitGroupInfo lgi");
 		helper.append("where 1=1");
 
 		return super.getList(helper);
 	}
 
+	@Override
+	public Paginater getLimitGroupInfoPageList(LimitGroupInfo limitGroupInfo,
+			Pager pager) {
 
-	
-	public Paginater getLimitGroupInfoPageList(
-			LimitGroupInfo limitGroupInfo, Pager pager) {
-	
-		QueryHelper helper=new QueryHelper();
+		QueryHelper helper = new QueryHelper();
 		helper.append("from LimitGroupInfo lgi,SysDict sd ");
 		helper.append("where 1=1");
 		helper.append("and lgi.userType=sd.id.dictValue ");
-		helper.append("and sd.id.dictType=?",SysDictType.UserType.getValue());
-		helper.append("and lgi.limitGroupName like ? ",limitGroupInfo.getLimitGroupName(),MatchMode.ANYWHERE);
-	
+		helper.append("and sd.id.dictType=?", SysDictType.UserType.getValue());
+		helper.append("and lgi.limitGroupName like ? ",
+				limitGroupInfo.getLimitGroupName(), MatchMode.ANYWHERE);
+
 		Paginater pageData = super.getPageData(helper, pager);
-		List<LimitGroupInfo> limitGroupInfos=convertToGroupInfo((List)pageData.getData());
+		List<LimitGroupInfo> limitGroupInfos = convertToGroupInfo((List) pageData
+				.getData());
 		pageData.setData(limitGroupInfos);
-		
+
 		return pageData;
 	}
 
-
+	@Override
 	protected Class getModelClass() {
-		
+
 		return LimitGroupInfo.class;
 	}
 
-
+	@Override
 	public List<SysDict> getSysDictNoLimitGroup() {
-		
-		QueryHelper helper=new QueryHelper();
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("from SysDict sd ");
 		helper.append("where 1=1");
-		helper.append("and sd.id.dictType = ?",SysDictType.UserType.getValue());
+		helper.append("and sd.id.dictType = ?", SysDictType.UserType.getValue());
 		helper.append("and sd.id.dictValue not in ( ");
 		helper.append("select distinct lgi.userType from LimitGroupInfo lgi");
 		helper.append(")");
-		
+
 		return super.getList(helper);
 	}
 
-	
-	
 }
-
-

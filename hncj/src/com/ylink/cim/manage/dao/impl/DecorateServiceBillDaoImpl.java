@@ -19,6 +19,7 @@ import flink.util.Pager;
 import flink.util.Paginater;
 @Repository("decorateServiceBillDao")
 public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateServiceBillDao{
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from DecorateServiceBill t where 1=1");
@@ -44,6 +45,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 		return DecorateServiceBill.class;
 	}
 
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, sum(t.liftFee) as liftAmt, sum(t.cleanAmount) as cleanAmt) from DecorateServiceBill t where 1=1");

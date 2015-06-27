@@ -33,7 +33,8 @@ public class MsgUtil {
 	public static String CHARSET = "GBK";
 	private static Logger logger = Logger.getLogger(MsgUtil.class);
 
-	public static void appendField(StringBuilder builder, String fieldValue, MsgField msgField) {
+	public static void appendField(StringBuilder builder, String fieldValue,
+			MsgField msgField) {
 		try {
 			builder.append(format(fieldValue, msgField));
 		} catch (Exception e) {
@@ -42,14 +43,17 @@ public class MsgUtil {
 		}
 	}
 
-	public static StringBuilder buildMsgBody(StringBuilder builder, Map<String, String> map, MsgField[] msgFields) {
+	public static StringBuilder buildMsgBody(StringBuilder builder,
+			Map<String, String> map, MsgField[] msgFields) {
 		StringBuilder sb = new StringBuilder();
 		// sb.append("请求报文内容[");
 		sb.append("\n请求报文体解析内容：\n");
 		for (int i = 0; i < msgFields.length; i++) {
 			MsgField msgField = msgFields[i];
-			MsgUtil.appendField(builder, map.get(msgField.getFieldCode()), msgField);
-			sb.append(msgField.getFieldCode() + "=" + map.get(msgField.getFieldCode()));
+			MsgUtil.appendField(builder, map.get(msgField.getFieldCode()),
+					msgField);
+			sb.append(msgField.getFieldCode() + "="
+					+ map.get(msgField.getFieldCode()));
 			// sb.append(",");
 			sb.append("\n");
 		}
@@ -59,12 +63,15 @@ public class MsgUtil {
 		return builder;
 	}
 
-	private static StringBuilder buildReqHead(StringBuilder builder, Map<String, String> map) throws Exception {
+	private static StringBuilder buildReqHead(StringBuilder builder,
+			Map<String, String> map) throws Exception {
 		MsgField[] REQ_HEAD = MsgHead.REQ_HEAD;
 		String gateway = fill(new StringBuilder("G"), 'G', 36, 'R').toString();
-		map.put(MsgField.h_gateway_header.getFieldCode(), fill(gateway, ' ', 76, 'L'));
+		map.put(MsgField.h_gateway_header.getFieldCode(),
+				fill(gateway, ' ', 76, 'L'));
 		map.put(MsgField.h_bk_tx_date.getFieldCode(), DateUtil.getCurrentDate());
-		map.put(MsgField.h_bk_tx_time.getFieldCode(), DateUtil.getCurrentPrettyTime());
+		map.put(MsgField.h_bk_tx_time.getFieldCode(),
+				DateUtil.getCurrentPrettyTime());
 		map.put(MsgField.h_exch_date.getFieldCode(), DateUtil.getCurrentDate());
 		map.put(MsgField.h_channel.getFieldCode(), "5");
 		map.put(MsgField.h_term_id.getFieldCode(), "0000");
@@ -100,8 +107,10 @@ public class MsgUtil {
 		sb.append("\n请求报文头解析内容:\n");
 		for (int i = 0; i < REQ_HEAD.length; i++) {
 			MsgField msgField = REQ_HEAD[i];
-			MsgUtil.appendField(builder, map.get(msgField.getFieldCode()), msgField);
-			sb.append(msgField.getFieldCode() + "=" + map.get(msgField.getFieldCode()));
+			MsgUtil.appendField(builder, map.get(msgField.getFieldCode()),
+					msgField);
+			sb.append(msgField.getFieldCode() + "="
+					+ map.get(msgField.getFieldCode()));
 			// sb.append(",");
 			sb.append("\n");
 		}
@@ -111,7 +120,8 @@ public class MsgUtil {
 		return builder;
 	}
 
-	public static String buildReqMsg(Map<String, String> map, MsgField[] msgFields) {
+	public static String buildReqMsg(Map<String, String> map,
+			MsgField[] msgFields) {
 		StringBuilder builder = new StringBuilder();
 		// 添加请求报文头
 
@@ -128,12 +138,14 @@ public class MsgUtil {
 		// return prefix.append(builder).toString();
 	}
 
-	private static StringBuilder buildResHead(StringBuilder builder, Map<String, String> map) {
+	private static StringBuilder buildResHead(StringBuilder builder,
+			Map<String, String> map) {
 
 		return null;
 	}
 
-	public static String buildResMsg(Map<String, String> map, MsgField[] msgFields) {
+	public static String buildResMsg(Map<String, String> map,
+			MsgField[] msgFields) {
 		StringBuilder builder = new StringBuilder();
 		// 添加返回报文头
 		buildResHead(builder, map);
@@ -177,7 +189,8 @@ public class MsgUtil {
 	 * str.toString().getBytes(); } catch (Exception e) { } return null; }
 	 */
 
-	public static StringBuilder fill(StringBuilder s, char c, int n, char f) throws Exception {
+	public static StringBuilder fill(StringBuilder s, char c, int n, char f)
+			throws Exception {
 		int iByteLen = MsgUtil.StringToBytes(s.toString()).length;
 		if (iByteLen >= n) {
 			return s;
@@ -192,7 +205,8 @@ public class MsgUtil {
 		return s.append(new String(fillChars, CHARSET));
 	}
 
-	public static String format(String field, MsgField msgField) throws Exception {
+	public static String format(String field, MsgField msgField)
+			throws Exception {
 		if (field == null) {
 			field = "";
 		}
@@ -212,7 +226,8 @@ public class MsgUtil {
 				return "";
 			}
 		} else {
-			if (FIELD_DOUBLE.equals(fieldType) || FIELD_INTEGER.equals(fieldType)) {
+			if (FIELD_DOUBLE.equals(fieldType)
+					|| FIELD_INTEGER.equals(fieldType)) {
 				return fill(field, '0', length, 'L');
 			} else {
 				return fill(field, ' ', length, 'R');
@@ -259,13 +274,14 @@ public class MsgUtil {
 		return REQ_HEAD_LENGTH + getMsgBodyLength(msgFields);
 	}
 
-	public static Map<String, MsgField> getResBody(Map<String, String> map, MsgField[] reqFields, MsgField[] resFields)
-			throws BizException {
+	public static Map<String, MsgField> getResBody(Map<String, String> map,
+			MsgField[] reqFields, MsgField[] resFields) throws BizException {
 		String reqMsg = buildReqMsg(map, reqFields);
 		String resMsg = SocketUtil.sendRec(reqMsg);
 		logger.debug("\n响应报文:" + resMsg);
 		Map<String, MsgField> resHeadMap = MsgUtil.parseResHead(resMsg);
-		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode()).getValue();
+		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode())
+				.getValue();
 		if (!InvestErrCodeType.DT0000.getValue().equals(resCode)) {
 			// String resErrMsg =
 			// resHeadMap.get(MsgField.h_rsp_msg.getFieldCode()).getValue();
@@ -276,9 +292,11 @@ public class MsgUtil {
 		return resMp;
 	}
 
-	public static MsgField getResBodyField(String msg, String fieldCode, MsgField[] msgFields) throws Exception {
+	public static MsgField getResBodyField(String msg, String fieldCode,
+			MsgField[] msgFields) throws Exception {
 		byte[] byteMsg = msg.getBytes(CHARSET);
-		byte[] byteBody = ArrayUtils.subarray(byteMsg, RES_HEAD_LENGTH, byteMsg.length);
+		byte[] byteBody = ArrayUtils.subarray(byteMsg, RES_HEAD_LENGTH,
+				byteMsg.length);
 		int startIndex = 0;
 		MsgField msgField = null;
 		for (int i = 0; i < msgFields.length; i++) {
@@ -289,7 +307,8 @@ public class MsgUtil {
 				break;
 			}
 		}
-		byte[] fieldMsg = ArrayUtils.subarray(byteBody, startIndex, startIndex + msgField.getLength());
+		byte[] fieldMsg = ArrayUtils.subarray(byteBody, startIndex, startIndex
+				+ msgField.getLength());
 		String str = "";
 		try {
 			str = new String(fieldMsg, CHARSET);
@@ -299,7 +318,8 @@ public class MsgUtil {
 		}
 		MsgField field = new MsgField();
 		field.setValue(MsgUtil.trim(str, msgField));
-		if (FIELD_INTEGER.equals(msgField.getFieldType()) || FIELD_DOUBLE.equals(msgField.getFieldType())) {
+		if (FIELD_INTEGER.equals(msgField.getFieldType())
+				|| FIELD_DOUBLE.equals(msgField.getFieldType())) {
 			field.setNumVal(Double.parseDouble(str));
 		}
 		field.setFieldCode(fieldCode);
@@ -309,62 +329,77 @@ public class MsgUtil {
 		return field;
 	}
 
-	public static List<Map<String, MsgField>> getResBodyList(Map<String, String> map, MsgField[] reqFields,
-			MsgField[] resFields) throws BizException {
+	public static List<Map<String, MsgField>> getResBodyList(
+			Map<String, String> map, MsgField[] reqFields, MsgField[] resFields)
+			throws BizException {
 		String reqMsg = buildReqMsg(map, reqFields);
 		String resMsg = SocketUtil.sendRec(reqMsg);
 		logger.debug("\n响应报文:" + resMsg);
 		Map<String, MsgField> resHeadMap = MsgUtil.parseResHead(resMsg);
-		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode()).getValue();
+		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode())
+				.getValue();
 		if (!InvestErrCodeType.DT0000.getValue().equals(resCode)) {
 			if (InvestErrCodeType.DT0003.getValue().equals(resCode)) {
 				return new ArrayList<Map<String, MsgField>>();
 			} else {
-				String resErrMsg = resHeadMap.get(MsgField.h_rsp_msg.getFieldCode()).getValue();
+				String resErrMsg = resHeadMap.get(
+						MsgField.h_rsp_msg.getFieldCode()).getValue();
 				throw new BizException(resErrMsg);
 			}
 		}
-		List<Map<String, MsgField>> resMpList = MsgUtil.parseResBodyList(resMsg, resFields);
+		List<Map<String, MsgField>> resMpList = MsgUtil.parseResBodyList(
+				resMsg, resFields);
 		logger.debug(getListContent(resMpList));
 		return MsgUtil.parseResBodyList(resMsg, resFields);
 	}
 
-	public static Paginater getResBodyPager(Map<String, String> map, MsgField[] reqFields, MsgField[] resFields,
-			Pager pager) throws BizException {
-		map.put(MsgField.h_start_num.getFieldCode(), String.valueOf(pager.getPageNumber()));
-		map.put(MsgField.h_query_num.getFieldCode(), String.valueOf(pager.getPageSize()));
+	public static Paginater getResBodyPager(Map<String, String> map,
+			MsgField[] reqFields, MsgField[] resFields, Pager pager)
+			throws BizException {
+		map.put(MsgField.h_start_num.getFieldCode(),
+				String.valueOf(pager.getPageNumber()));
+		map.put(MsgField.h_query_num.getFieldCode(),
+				String.valueOf(pager.getPageSize()));
 		String reqMsg = buildReqMsg(map, reqFields);
 		String resMsg = SocketUtil.sendRec(reqMsg);
 		logger.debug("\n响应报文:" + resMsg);
 		Map<String, MsgField> resHeadMap = MsgUtil.parseResHead(resMsg);
-		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode()).getValue();
+		String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode())
+				.getValue();
 		List<Map<String, MsgField>> list = null;
 		if (!InvestErrCodeType.DT0000.getValue().equals(resCode)) {
 			if (InvestErrCodeType.DT0003.getValue().equals(resCode)) {
 				list = new ArrayList<Map<String, MsgField>>();
 			} else {
-				String resErrMsg = resHeadMap.get(MsgField.h_rsp_msg.getFieldCode()).getValue();
+				String resErrMsg = resHeadMap.get(
+						MsgField.h_rsp_msg.getFieldCode()).getValue();
 				throw new BizException(resErrMsg);
 			}
 		} else {
-			List<Map<String, MsgField>> resMpList = MsgUtil.parseResBodyList(resMsg, resFields);
+			List<Map<String, MsgField>> resMpList = MsgUtil.parseResBodyList(
+					resMsg, resFields);
 			logger.debug(getListContent(resMpList));
 		}
 		list = MsgUtil.parseResBodyList(resMsg, resFields);
 		list = MsgUtil.getResBodyList(map, reqFields, resFields);
-		long maxRowCount = Long.parseLong(resHeadMap.get(MsgField.h_rsp_num.getFieldCode()).getValue());
-		int currentPage = Integer.parseInt(resHeadMap.get(MsgField.h_start_num.getFieldCode()).getValue());
-		int pageSize = Integer.parseInt(resHeadMap.get(MsgField.h_query_num.getFieldCode()).getValue());
+		long maxRowCount = Long.parseLong(resHeadMap.get(
+				MsgField.h_rsp_num.getFieldCode()).getValue());
+		int currentPage = Integer.parseInt(resHeadMap.get(
+				MsgField.h_start_num.getFieldCode()).getValue());
+		int pageSize = Integer.parseInt(resHeadMap.get(
+				MsgField.h_query_num.getFieldCode()).getValue());
 		Paginater paginater = new Paginater(maxRowCount, currentPage, pageSize);
 		paginater.setData(list);
 		return paginater;
 	}
 
-	public static MsgField getResHeadField(String msg, String fieldCode) throws Exception {
+	public static MsgField getResHeadField(String msg, String fieldCode)
+			throws Exception {
 		int startIndex = 0;
 		MsgField msgField = null;
 		for (int i = 0; i < MsgHead.RES_HEAD.length; i++) {
-			if (!StringUtils.equals(fieldCode, MsgHead.RES_HEAD[i].getFieldCode())) {
+			if (!StringUtils.equals(fieldCode,
+					MsgHead.RES_HEAD[i].getFieldCode())) {
 				startIndex += MsgHead.RES_HEAD[i].getLength();
 			} else {
 				msgField = MsgHead.RES_HEAD[i];
@@ -372,11 +407,13 @@ public class MsgUtil {
 			}
 		}
 		byte[] byteMsg = msg.getBytes(CHARSET);
-		byte[] byteField = ArrayUtils.subarray(byteMsg, startIndex, startIndex + msgField.getLength());
+		byte[] byteField = ArrayUtils.subarray(byteMsg, startIndex, startIndex
+				+ msgField.getLength());
 		String str = new String(byteField, CHARSET);
 		MsgField field = new MsgField();
 		field.setValue(MsgUtil.trim(str, msgField));
-		if (FIELD_INTEGER.equals(msgField.getFieldType()) || FIELD_DOUBLE.equals(msgField.getFieldType())) {
+		if (FIELD_INTEGER.equals(msgField.getFieldType())
+				|| FIELD_DOUBLE.equals(msgField.getFieldType())) {
 			field.setNumVal(Double.parseDouble(str));
 		}
 		field.setFieldCode(fieldCode);
@@ -405,14 +442,16 @@ public class MsgUtil {
 
 	}
 
-	private static List<Map<String, MsgField>> parseBodyList(byte[] bodyMsg, MsgField[] msgFields) {
+	private static List<Map<String, MsgField>> parseBodyList(byte[] bodyMsg,
+			MsgField[] msgFields) {
 		int startIndex = 0;
 		List<Map<String, MsgField>> list = new ArrayList<Map<String, MsgField>>();
 		while (startIndex < bodyMsg.length) {
 			Map<String, MsgField> map = new LinkedHashMap<String, MsgField>();
 			for (int i = 0; i < msgFields.length; i++) {
 				MsgField msgField = msgFields[i];
-				byte[] byteField = ArrayUtils.subarray(bodyMsg, startIndex, startIndex + msgField.getLength());
+				byte[] byteField = ArrayUtils.subarray(bodyMsg, startIndex,
+						startIndex + msgField.getLength());
 				String str = "";
 				try {
 					str = new String(byteField, CHARSET);
@@ -426,7 +465,8 @@ public class MsgUtil {
 				field.setFieldCode(msgField.getFieldCode());
 				field.setFieldType(msgField.getFieldType());
 				field.setValue(str);
-				if (FIELD_INTEGER.equals(msgField.getFieldType()) || FIELD_DOUBLE.equals(msgField.getFieldType())) {
+				if (FIELD_INTEGER.equals(msgField.getFieldType())
+						|| FIELD_DOUBLE.equals(msgField.getFieldType())) {
 					field.setNumVal(Double.parseDouble(str));
 				}
 				map.put(msgField.getFieldCode(), field);
@@ -440,12 +480,14 @@ public class MsgUtil {
 		return list;
 	}
 
-	private static Map<String, MsgField> parseMsgField(byte[] byteMsg, MsgField[] msgFields) {
+	private static Map<String, MsgField> parseMsgField(byte[] byteMsg,
+			MsgField[] msgFields) {
 		Map<String, MsgField> map = new LinkedHashMap<String, MsgField>();
 		int startIndex = 0;
 		for (int i = 0; i < msgFields.length; i++) {
 			MsgField msgField = msgFields[i];
-			byte[] byteFiled = ArrayUtils.subarray(byteMsg, startIndex, startIndex + msgField.getLength());
+			byte[] byteFiled = ArrayUtils.subarray(byteMsg, startIndex,
+					startIndex + msgField.getLength());
 			startIndex += msgField.getLength();
 			String str = "";
 			try {
@@ -460,7 +502,8 @@ public class MsgUtil {
 			str = trim(str, msgField);
 			MsgField field = new MsgField();
 			field.setValue(str);
-			if (FIELD_INTEGER.equals(msgField.getFieldType()) || FIELD_DOUBLE.equals(msgField.getFieldType())) {
+			if (FIELD_INTEGER.equals(msgField.getFieldType())
+					|| FIELD_DOUBLE.equals(msgField.getFieldType())) {
 				field.setNumVal(Double.parseDouble(str));
 			}
 			field.setFieldCode(msgField.getFieldCode());
@@ -471,9 +514,11 @@ public class MsgUtil {
 	}
 
 	@Deprecated
-	public static Map<String, MsgField> parseReqBody(String msg, MsgField[] msgFields) throws Exception {
+	public static Map<String, MsgField> parseReqBody(String msg,
+			MsgField[] msgFields) throws Exception {
 		byte[] byteMsg = msg.getBytes(CHARSET);
-		byte[] byteBody = ArrayUtils.subarray(byteMsg, REQ_HEAD_LENGTH, byteMsg.length);
+		byte[] byteBody = ArrayUtils.subarray(byteMsg, REQ_HEAD_LENGTH,
+				byteMsg.length);
 		Map<String, MsgField> map = parseMsgField(byteBody, msgFields);
 		logger.debug("\n请求报文体单条22222内容\n" + getMapContent(map));
 		return map;
@@ -484,20 +529,24 @@ public class MsgUtil {
 		return parseMsgField(msg.getBytes(), MsgHead.REQ_HEAD);
 	}
 
-	public static Map<String, MsgField> parseResBody(String msg, MsgField[] msgFields) {
+	public static Map<String, MsgField> parseResBody(String msg,
+			MsgField[] msgFields) {
 		try {
 			Map<String, MsgField> resHeadMap = MsgUtil.parseResHead(msg);
-			String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode()).getValue();
+			String resCode = resHeadMap.get(MsgField.h_rsp_code.getFieldCode())
+					.getValue();
 			if (!InvestErrCodeType.DT0000.getValue().equals(resCode)) {
 				if (InvestErrCodeType.DT0003.getValue().equals(resCode)) {
 					return new HashMap<String, MsgField>();
 				} else {
-					String resErrMsg = resHeadMap.get(MsgField.h_rsp_msg.getFieldCode()).getValue();
+					String resErrMsg = resHeadMap.get(
+							MsgField.h_rsp_msg.getFieldCode()).getValue();
 					throw new BizException(resErrMsg);
 				}
 			}
 			byte[] byteMsg = msg.getBytes(CHARSET);
-			byte[] byteBody = ArrayUtils.subarray(byteMsg, RES_HEAD_LENGTH, byteMsg.length);
+			byte[] byteBody = ArrayUtils.subarray(byteMsg, RES_HEAD_LENGTH,
+					byteMsg.length);
 			Map<String, MsgField> map = parseMsgField(byteBody, msgFields);
 			logger.debug("\n响应报文体内容(单条)\n" + getMapContent(map));
 			return map;
@@ -508,11 +557,14 @@ public class MsgUtil {
 		}
 	}
 
-	public static List<Map<String, MsgField>> parseResBodyList(String msg, MsgField[] msgFields) {
+	public static List<Map<String, MsgField>> parseResBodyList(String msg,
+			MsgField[] msgFields) {
 		try {
 			byte[] bodyMsg = msg.getBytes(CHARSET);
-			byte[] byteBodyMsg = ArrayUtils.subarray(bodyMsg, RES_HEAD_LENGTH, bodyMsg.length);
-			List<Map<String, MsgField>> list = parseBodyList(byteBodyMsg, msgFields);
+			byte[] byteBodyMsg = ArrayUtils.subarray(bodyMsg, RES_HEAD_LENGTH,
+					bodyMsg.length);
+			List<Map<String, MsgField>> list = parseBodyList(byteBodyMsg,
+					msgFields);
 			System.out.println(getListContent(list));
 			logger.debug("\n响应报文体多条内容\n" + getListContent(list));
 			return list;
@@ -553,8 +605,10 @@ public class MsgUtil {
 		}
 		fieldStr = fieldStr.trim();
 		// 数字,去零
-		if (FIELD_INTEGER.equals(msgField.getFieldType()) || FIELD_DOUBLE.equals(msgField.getFieldType())) {
-			fieldStr = DoubleUtil.formatNumber(fieldStr, msgField.getDeciLength());
+		if (FIELD_INTEGER.equals(msgField.getFieldType())
+				|| FIELD_DOUBLE.equals(msgField.getFieldType())) {
+			fieldStr = DoubleUtil.formatNumber(fieldStr,
+					msgField.getDeciLength());
 		}
 		return fieldStr;
 	}

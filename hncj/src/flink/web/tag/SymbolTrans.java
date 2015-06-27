@@ -12,6 +12,7 @@ public class SymbolTrans extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String symbol;
 	
+	@Override
 	public void doTag() throws JspException, IOException {
 		String s = null;
 		

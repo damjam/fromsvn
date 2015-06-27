@@ -24,18 +24,24 @@ public class ParkingInfoDaoImpl extends BaseDaoImpl implements ParkingInfoDao {
 		return ParkingInfo.class;
 	}
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ParkingInfo t where 1=1");
 		helper.append("and sn = ?", MapUtils.getString(params, "sn"));
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
-		helper.append("and ownerName = ?", MapUtils.getString(params, "ownerName"));
-		helper.append("and ownerCel = ?", MapUtils.getString(params, "ownerCel"));
+		helper.append("and ownerName = ?",
+				MapUtils.getString(params, "ownerName"));
+		helper.append("and ownerCel = ?",
+				MapUtils.getString(params, "ownerCel"));
 		helper.append("and endUser = ?", MapUtils.getString(params, "endUser"));
-		helper.append("and endUserCel = ?", MapUtils.getString(params, "endUserCel"));
+		helper.append("and endUserCel = ?",
+				MapUtils.getString(params, "endUserCel"));
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		if (MapUtils.getBooleanValue(params, "avai")) {
 			helper.append("and sn not in (select parkingSn from CarInfo)");
@@ -44,11 +50,13 @@ public class ParkingInfoDaoImpl extends BaseDaoImpl implements ParkingInfoDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public List<ParkingInfo> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ParkingInfo t where 1=1");
 		helper.append("and sn = ?", MapUtils.getString(params, "sn"));
-		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and branchNo = ?",
+				MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 

@@ -21,6 +21,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
 	@Autowired
 	private IdFactoryService idFactoryService;
 
+	@Override
 	public void saveOrUpdate(MerchantInfo merchantInfo, UserInfo userInfo) throws BizException {
 		if (StringUtils.isEmpty(merchantInfo.getId())) {
 			merchantInfo.setId(idFactoryService.generateId(Constants.MERCHANT_INFO_ID));
@@ -34,6 +35,7 @@ public class MerchantInfoServiceImpl implements MerchantInfoService {
 
 	}
 
+	@Override
 	public void delete(String id) throws BizException {
 		merchantInfoDao.deleteById(id);
 	}

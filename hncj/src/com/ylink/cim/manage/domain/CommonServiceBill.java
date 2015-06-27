@@ -1,4 +1,5 @@
 package com.ylink.cim.manage.domain;
+
 // default package
 
 import java.util.Date;
@@ -34,55 +35,41 @@ public class CommonServiceBill implements java.io.Serializable {
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
-	
+
 	public String getYear() {
 		return year;
 	}
-
-
 
 	public void setYear(String year) {
 		this.year = year;
 	}
 
-
-
 	public String getStartChargeDate() {
 		return startChargeDate;
 	}
-
-
 
 	public void setStartChargeDate(String startChargeDate) {
 		this.startChargeDate = startChargeDate;
 	}
 
-
-
 	public String getEndChargeDate() {
 		return endChargeDate;
 	}
-
-
 
 	public void setEndChargeDate(String endChargeDate) {
 		this.endChargeDate = endChargeDate;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
-
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Property accessors
 
-	
 	public String getRemark() {
 		return remark;
 	}
@@ -234,6 +221,5 @@ public class CommonServiceBill implements java.io.Serializable {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	
 
 }

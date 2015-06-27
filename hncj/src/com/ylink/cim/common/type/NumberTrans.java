@@ -31,6 +31,7 @@ public class NumberTrans extends AbstractType {
 	public static final NumberTrans NUM_18 = new NumberTrans("十八", "18");
 	public static final NumberTrans NUM_19 = new NumberTrans("十九", "19");
 	public static final NumberTrans NUM_20 = new NumberTrans("二十", "20");
+
 	protected NumberTrans(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

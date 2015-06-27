@@ -20,26 +20,37 @@ import flink.util.Paginater;
 @Component("chargeParamDao")
 public class ChargeParamDaoImpl extends BaseDaoImpl implements ChargeParamDao {
 
+	@Override
 	public List<ChargeParam> findBy(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeParam where 1=1");
-		helper.append("and rangeCode = ?", MapUtils.getString(params, "rangeCode"));
-		helper.append("and chargeObj = ?", MapUtils.getString(params, "chargeObj"));
-		helper.append("and paramName like ?", MapUtils.getString(params, "paramName"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and rangeCode = ?",
+				MapUtils.getString(params, "rangeCode"));
+		helper.append("and chargeObj = ?",
+				MapUtils.getString(params, "chargeObj"));
+		helper.append("and paramName like ?",
+				MapUtils.getString(params, "paramName"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("and id <> ?", MapUtils.getString(params, "exceptId"));
 		return super.getList(helper);
 	}
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from ChargeParam where 1=1");
-		helper.append("and rangeCode = ?", MapUtils.getString(params, "rangeCode"));
-		helper.append("and paramName like ?", MapUtils.getString(params, "paramName"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and rangeCode = ?",
+				MapUtils.getString(params, "rangeCode"));
+		helper.append("and paramName like ?",
+				MapUtils.getString(params, "paramName"), MatchMode.START);
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		return super.getPageData(helper, pager);
 	}

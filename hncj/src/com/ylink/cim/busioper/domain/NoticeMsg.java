@@ -1,4 +1,5 @@
 package com.ylink.cim.busioper.domain;
+
 // default package
 
 import java.util.Date;
@@ -24,7 +25,7 @@ public class NoticeMsg implements java.io.Serializable {
 	private String custType;
 	private String startCreateDate;
 	private String endCreateDate;
-	
+
 	// Constructors
 
 	public String getStartCreateDate() {
@@ -46,26 +47,22 @@ public class NoticeMsg implements java.io.Serializable {
 	/** default constructor */
 	public NoticeMsg() {
 	}
-	
+
 	public String getBranchNo() {
 		return branchNo;
 	}
-
 
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
 
-
 	public String getSubject() {
 		return subject;
 	}
 
-
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-
 
 	public String getId() {
 		return this.id;
@@ -106,6 +103,5 @@ public class NoticeMsg implements java.io.Serializable {
 	public void setCustType(String custType) {
 		this.custType = custType;
 	}
-	
-	
+
 }

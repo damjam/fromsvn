@@ -99,6 +99,7 @@ public class PrivilegeResource extends WebResource implements Serializable {
 	 * @return java.lang.String
 	 */
 
+	@Override
 	public java.lang.String getUrl() {
 		return this.url;
 	}
@@ -156,6 +157,7 @@ public class PrivilegeResource extends WebResource implements Serializable {
 	 * @return boolean
 	 */
 
+	@Override
 	public boolean equals(Object rhs) {
 		if (rhs == null)
 			return false;
@@ -175,6 +177,7 @@ public class PrivilegeResource extends WebResource implements Serializable {
 	 * @return int
 	 */
 
+	@Override
 	public int hashCode() {
 		if (this.hashValue == 0) {
 			int result = 17;
@@ -185,6 +188,7 @@ public class PrivilegeResource extends WebResource implements Serializable {
 		return this.hashValue;
 	}
 
+	@Override
 	public String getParamValue() {
 		return this.param;
 	}

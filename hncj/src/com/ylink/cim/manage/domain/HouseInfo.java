@@ -24,25 +24,18 @@ public class HouseInfo implements java.io.Serializable {
 	private String remark;
 	private String branchNo;
 	private String orderSn;
-	
-	
+
 	/** default constructor */
 	public HouseInfo() {
 	}
-
-
 
 	public Double getArea() {
 		return area;
 	}
 
-
-
 	public String getBranchNo() {
 		return branchNo;
 	}
-
-
 
 	public String getBuildingNo() {
 		return this.buildingNo;
@@ -52,19 +45,15 @@ public class HouseInfo implements java.io.Serializable {
 		return createDate;
 	}
 
-
 	// Property accessors
 
 	public String getCreateUser() {
 		return createUser;
 	}
 
-
 	public String getDeliveryDate() {
 		return this.deliveryDate;
 	}
-
-
 
 	public String getFloor() {
 		return this.floor;
@@ -73,7 +62,6 @@ public class HouseInfo implements java.io.Serializable {
 	public String getHouseDesc() {
 		return houseDesc;
 	}
-
 
 	public String getHouseSn() {
 		return this.houseSn;
@@ -98,7 +86,7 @@ public class HouseInfo implements java.io.Serializable {
 	public String getUnitNo() {
 		return this.unitNo;
 	}
-	
+
 	public void setArea(Double area) {
 		this.area = area;
 	}
@@ -106,6 +94,7 @@ public class HouseInfo implements java.io.Serializable {
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	public void setBuildingNo(String buildingNo) {
@@ -155,6 +144,5 @@ public class HouseInfo implements java.io.Serializable {
 	public void setUnitNo(String unitNo) {
 		this.unitNo = unitNo;
 	}
-	
 
 }

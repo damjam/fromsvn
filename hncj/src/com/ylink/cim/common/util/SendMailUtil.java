@@ -15,7 +15,8 @@ import com.flink.mail.info.SimpleTextMailInfo;
 import flink.util.SpringContext;
 
 public class SendMailUtil {
-	static MailConfig config = (MailConfig) SpringContext.getService("mailServerConfig");
+	static MailConfig config = (MailConfig) SpringContext
+			.getService("mailServerConfig");
 
 	private static void sendTextMail(SimpleTextMailInfo info) throws Exception {
 		IBaseFlinkMailComponent baseFlinkMailComponent = new FlinkMailComponent();
@@ -44,7 +45,8 @@ public class SendMailUtil {
 		System.out.println(InetAddress.getLocalHost());
 	}
 
-	public static boolean sendTextMail(String[] receivers, String subject, String content) {
+	public static boolean sendTextMail(String[] receivers, String subject,
+			String content) {
 		try {
 			SimpleTextMailInfo info = new SimpleTextMailInfo();
 			info.setSubject(subject);
@@ -60,7 +62,8 @@ public class SendMailUtil {
 		}
 	}
 
-	public static boolean sendTextMail(String receiver, String subject, String content) {
+	public static boolean sendTextMail(String receiver, String subject,
+			String content) {
 		try {
 			SimpleTextMailInfo info = new SimpleTextMailInfo();
 			info.setSubject(subject);
@@ -77,11 +80,13 @@ public class SendMailUtil {
 		}
 	}
 
-	public static boolean sendHtmlMail(String receiver, String subject, String content) {
+	public static boolean sendHtmlMail(String receiver, String subject,
+			String content) {
 		try {
 			SimpleHtmlMailInfo info = new SimpleHtmlMailInfo();
 			info.setSubject(subject);
-			info.setSubject(MimeUtility.encodeText(info.getSubject(), MailConstant.CHARSET_GBK, null));
+			info.setSubject(MimeUtility.encodeText(info.getSubject(),
+					MailConstant.CHARSET_GBK, null));
 			info.setEncoding(MailConstant.CHARSET_GBK);
 			info.setHtmlContent(content);
 			info.setFrom(new String[] { config.getSendUserName() });
@@ -94,7 +99,8 @@ public class SendMailUtil {
 		}
 	}
 
-	public static void sendActiveMail(String contextPath, String receiver, String custId, String v) {
+	public static void sendActiveMail(String contextPath, String receiver,
+			String custId, String v) {
 		try {
 			String subject = "激活订阅功能";
 			InetAddress addr = InetAddress.getLocalHost();
@@ -103,8 +109,9 @@ public class SendMailUtil {
 			if (localIp.endsWith("82")) {
 				port = ":8443";
 			}
-			String content = "请<a href=\"https://" + localIp + contextPath + port
-					+ "/custInfoAction.do?action=verifyEmail&c=" + custId + "&v=" + v + "\">点击此处</a>激活";
+			String content = "请<a href=\"https://" + localIp + contextPath
+					+ port + "/custInfoAction.do?action=verifyEmail&c="
+					+ custId + "&v=" + v + "\">点击此处</a>激活";
 			sendHtmlMail(receiver, subject, content);
 		} catch (Exception e) {
 			e.printStackTrace();

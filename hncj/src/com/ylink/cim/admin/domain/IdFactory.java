@@ -12,21 +12,21 @@ public class IdFactory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String seqIdName;
-	
+
 	private String initValue;
-	
+
 	private String currentValue;
-	
+
 	private String stepValue;
-	
+
 	private String fillValue;
-	
+
 	private String maxLength;
-	
+
 	private String dateLength;
-	
+
 	private String remark;
-	
+
 	private String direction;
 
 	public String getSeqIdName() {
@@ -103,7 +103,5 @@ public class IdFactory implements Serializable {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-	
-	
-	
+
 }

@@ -23,36 +23,40 @@ public class GoogleHtmlNavigator implements HtmlNavigator {
 			if (p.getCurrentPage() == Integer.parseInt(page)) {
 				pages.append(" " + page + " ");
 			} else {
-				pages.append(" <a href=\"javascript: Paginater.toPage(" + formIndex + "," + page + ")\">" + page
-						+ "</a> ");
+				pages.append(" <a href=\"javascript: Paginater.toPage("
+						+ formIndex + "," + page + ")\">" + page + "</a> ");
 			}
 		}
 
 		return pages;
 	}
 
-	public String getHtmlNavigation(String contextPath, Paginater p, int formIndex, boolean tidy) {
+	@Override
+	public String getHtmlNavigation(String contextPath, Paginater p,
+			int formIndex, boolean tidy) {
 		StringBuffer html = new StringBuffer();
 		html.append("<div class=\"pageNavigation\">");
 
 		if (tidy) {
-			html.append("<a href=\"javascript: Paginater.toPage(" + formIndex + "," + p.getCurrentPage()
+			html.append("<a href=\"javascript: Paginater.toPage(" + formIndex
+					+ "," + p.getCurrentPage()
 					+ ")\" id=\"_refresh\" style=\"display:none\">[刷新]</a>");
 			html.append(getBatchPages(p, formIndex));
 		} else {
-			html.append("<a href=\"javascript: Paginater.toPage(" + formIndex + "," + p.getCurrentPage()
+			html.append("<a href=\"javascript: Paginater.toPage(" + formIndex
+					+ "," + p.getCurrentPage()
 					+ ")\" id=\"_refresh\">[刷新]</a>");
 
 			if (p.getCurrentPage() != p.getFirstPage()) {
-				html.append("<a href=\"javascript: Paginater.toPage(" + formIndex + "," + p.getPriorPage()
-						+ ")\">[上一页]</a>");
+				html.append("<a href=\"javascript: Paginater.toPage("
+						+ formIndex + "," + p.getPriorPage() + ")\">[上一页]</a>");
 			}
 
 			html.append(getBatchPages(p, formIndex));
 
 			if (p.getCurrentPage() != p.getLastPage()) {
-				html.append("<a href=\"javascript: Paginater.toPage(" + formIndex + "," + p.getNextPage()
-						+ ")\">[下一页]</a>");
+				html.append("<a href=\"javascript: Paginater.toPage("
+						+ formIndex + "," + p.getNextPage() + ")\">[下一页]</a>");
 			}
 		}
 

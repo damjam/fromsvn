@@ -14,9 +14,10 @@ public interface OwnerInfoService {
 	void add(OwnerInfo houseInfo, UserInfo sessionUser) throws BizException;
 
 	void update(OwnerInfo ownerInfo, UserInfo sessionUser) throws BizException;
-	
+
 	void cancel(String id, UserInfo sessionUser) throws BizException;
 
-	void importOwnerInfo(List<OwnerInfo> list, UserInfo sessionUser) throws BizException;
-	
+	void importOwnerInfo(List<OwnerInfo> list, UserInfo sessionUser)
+			throws BizException;
+
 }

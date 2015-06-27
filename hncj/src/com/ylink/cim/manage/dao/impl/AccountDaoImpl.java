@@ -27,25 +27,31 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		return Account.class;
 	}
 
+	@Override
 	public Paginater findPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Account t where 1=1");
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
-		helper.append("and ownerName = ?", MapUtils.getString(params, "ownerName"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("and ownerName = ?",
+				MapUtils.getString(params, "ownerName"));
+		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "branchNo"))) {
+			helper.append("and branchNo = ?",
+					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public List<String> findAcctByHouseSn(List<String> houseSns) {
 		if (CollectionUtils.isEmpty(houseSns)) {
 			return Collections.EMPTY_LIST;
 		}
 		QueryHelper hql = new QueryHelper();
-		hql.append("from Account t where t.state = ?", OwnerState.NORMAL.getValue());
+		hql.append("from Account t where t.state = ?",
+				OwnerState.NORMAL.getValue());
 		hql.append("and houseSn in ?", houseSns.toArray(new String[0]));
 
 		return getList(hql);

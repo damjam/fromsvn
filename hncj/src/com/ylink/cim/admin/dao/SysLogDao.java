@@ -9,7 +9,8 @@ import flink.util.Paginater;
 public interface SysLogDao extends BaseDao {
 
 	// 获取查询结果
-	public Paginater getSysLogPagList(SysLog sysLog, Pager pager) throws Exception;
+	public Paginater getSysLogPagList(SysLog sysLog, Pager pager)
+			throws Exception;
 
 	/**
 	 * 保存日志

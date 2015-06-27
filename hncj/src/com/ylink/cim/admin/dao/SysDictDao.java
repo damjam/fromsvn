@@ -12,8 +12,8 @@ import flink.util.Paginater;
 public interface SysDictDao extends BaseDao {
 
 	public List<SysDict> findByParam(Map<String, Object> map);
-	
+
 	public List<SysDict> getSysDictByDictType(String dictType);
-	
-	public Paginater getSysDictPageList(SysDict sysDict,Pager pager);
+
+	public Paginater getSysDictPageList(SysDict sysDict, Pager pager);
 }

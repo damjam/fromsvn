@@ -61,84 +61,103 @@ public class ReqMsg {
 	protected long sStartTime = System.currentTimeMillis();
 
 	public ReqMsg() {
-		
+
 	}
 
 	public void parse(String sReqMsg) {
 		int index = 0;
-		this.h_exch_code = sReqMsg.substring(index, index + H_EXCH_CODE_LEN).trim();
+		this.h_exch_code = sReqMsg.substring(index, index + H_EXCH_CODE_LEN)
+				.trim();
 		index += H_EXCH_CODE_LEN;
-		
-		this.h_bk_tx_date = sReqMsg.substring(index, index + H_BK_TX_DATE_LEN).trim();
+
+		this.h_bk_tx_date = sReqMsg.substring(index, index + H_BK_TX_DATE_LEN)
+				.trim();
 		index += H_BK_TX_DATE_LEN;
-		
-		this.h_bk_tx_time = sReqMsg.substring(index, index + H_BK_TX_TIME_LEN).trim();
+
+		this.h_bk_tx_time = sReqMsg.substring(index, index + H_BK_TX_TIME_LEN)
+				.trim();
 		index += H_BK_TX_TIME_LEN;
-		
-		this.h_bk_serial_no = sReqMsg.substring(index, index + H_BK_SERIAL_NO_LEN).trim();
+
+		this.h_bk_serial_no = sReqMsg.substring(index,
+				index + H_BK_SERIAL_NO_LEN).trim();
 		index += H_BK_SERIAL_NO_LEN;
-		
-		this.h_exch_date = sReqMsg.substring(index, index + H_EXCH_DATE_LEN).trim();
+
+		this.h_exch_date = sReqMsg.substring(index, index + H_EXCH_DATE_LEN)
+				.trim();
 		index += H_EXCH_DATE_LEN;
-		
+
 		this.h_proxy = sReqMsg.substring(index, index + H_PROXY_LEN).trim();
 		index += H_PROXY_LEN;
-		
+
 		this.h_bank_no = sReqMsg.substring(index, index + H_BANK_NO_LEN).trim();
 		index += H_BANK_NO_LEN;
-		
-		this.h_branch_id = sReqMsg.substring(index, index + H_BRANCH_ID_LEN).trim();
+
+		this.h_branch_id = sReqMsg.substring(index, index + H_BRANCH_ID_LEN)
+				.trim();
 		index += H_BRANCH_ID_LEN;
-		
-		this.h_teller_id = sReqMsg.substring(index, index + H_TELLER_ID_LEN).trim();
+
+		this.h_teller_id = sReqMsg.substring(index, index + H_TELLER_ID_LEN)
+				.trim();
 		index += H_TELLER_ID_LEN;
-		
-		this.h_cashier_no_undef = sReqMsg.substring(index, index + H_CASHIER_NO_UNDEF_LEN).trim();
+
+		this.h_cashier_no_undef = sReqMsg.substring(index,
+				index + H_CASHIER_NO_UNDEF_LEN).trim();
 		index += H_CASHIER_NO_UNDEF_LEN;
-		
-		this.h_teller_id1 = sReqMsg.substring(index, index + H_TELLER_ID1_LEN).trim();
+
+		this.h_teller_id1 = sReqMsg.substring(index, index + H_TELLER_ID1_LEN)
+				.trim();
 		index += H_TELLER_ID1_LEN;
-		
-		this.h_teller_id2 = sReqMsg.substring(index, index + H_TELLER_ID2_LEN).trim();
+
+		this.h_teller_id2 = sReqMsg.substring(index, index + H_TELLER_ID2_LEN)
+				.trim();
 		index += H_TELLER_ID2_LEN;
-		
+
 		this.h_channel = sReqMsg.substring(index, index + H_CHANNEL_LEN).trim();
 		index += H_CHANNEL_LEN;
-		
+
 		this.h_term_id = sReqMsg.substring(index, index + H_TERM_ID_LEN).trim();
 		index += H_TERM_ID_LEN;
-		
-		this.h_rsp_type = sReqMsg.substring(index, index + H_RSP_TYPE_LEN).trim();
+
+		this.h_rsp_type = sReqMsg.substring(index, index + H_RSP_TYPE_LEN)
+				.trim();
 		index += H_RSP_TYPE_LEN;
-		
-		this.h_req_type = sReqMsg.substring(index, index + H_REQ_TYPE_LEN).trim();
+
+		this.h_req_type = sReqMsg.substring(index, index + H_REQ_TYPE_LEN)
+				.trim();
 		index += H_REQ_TYPE_LEN;
-		
-		this.h_auth_lvl = sReqMsg.substring(index, index + H_AUTH_LVL_LEN).trim();
+
+		this.h_auth_lvl = sReqMsg.substring(index, index + H_AUTH_LVL_LEN)
+				.trim();
 		index += H_AUTH_LVL_LEN;
-		
-		this.h_start_num = sReqMsg.substring(index, index + H_START_NUM_LEN).trim();
+
+		this.h_start_num = sReqMsg.substring(index, index + H_START_NUM_LEN)
+				.trim();
 		index += H_START_NUM_LEN;
-		
-		this.h_query_num = sReqMsg.substring(index, index + H_QUERY_NUM_LEN).trim();
+
+		this.h_query_num = sReqMsg.substring(index, index + H_QUERY_NUM_LEN)
+				.trim();
 		index += H_QUERY_NUM_LEN;
-		
-		this.h_spare_01 = sReqMsg.substring(index, index + H_SPARE_01_LEN).trim();
+
+		this.h_spare_01 = sReqMsg.substring(index, index + H_SPARE_01_LEN)
+				.trim();
 		index += H_SPARE_01_LEN;
-		
-		this.h_spare_02 = sReqMsg.substring(index, index + H_SPARE_02_LEN).trim();
+
+		this.h_spare_02 = sReqMsg.substring(index, index + H_SPARE_02_LEN)
+				.trim();
 		index += H_SPARE_02_LEN;
-		
-		this.h_spare_03 = sReqMsg.substring(index, index + H_SPARE_03_LEN).trim();
+
+		this.h_spare_03 = sReqMsg.substring(index, index + H_SPARE_03_LEN)
+				.trim();
 		index += H_SPARE_03_LEN;
-		
-		this.h_spare_04 = sReqMsg.substring(index, index + H_SPARE_04_LEN).trim();
+
+		this.h_spare_04 = sReqMsg.substring(index, index + H_SPARE_04_LEN)
+				.trim();
 		index += H_SPARE_04_LEN;
-		
+
 		this.sbMsgBody = sbMsgBody.append(sReqMsg.substring(index).trim());
 	}
 
-	
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 
@@ -152,8 +171,7 @@ public class ReqMsg {
 				ReqMsg.H_BK_SERIAL_NO_LEN));
 		sb.append(MsgUtil.addSpaceForString(this.h_exch_date,
 				ReqMsg.H_EXCH_DATE_LEN));
-		sb.append(MsgUtil.addSpaceForString(this.h_proxy,
-				ReqMsg.H_PROXY_LEN));
+		sb.append(MsgUtil.addSpaceForString(this.h_proxy, ReqMsg.H_PROXY_LEN));
 		sb.append(MsgUtil.addSpaceForString(this.h_bank_no,
 				ReqMsg.H_BANK_NO_LEN));
 		sb.append(MsgUtil.addSpaceForString(this.h_branch_id,

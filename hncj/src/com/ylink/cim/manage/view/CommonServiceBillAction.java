@@ -32,7 +32,8 @@ import flink.web.BaseAction;
 
 @Scope("prototype")
 @Component
-public class CommonServiceBillAction extends BaseAction implements ModelDriven<CommonServiceBill> {
+public class CommonServiceBillAction extends BaseAction implements
+		ModelDriven<CommonServiceBill> {
 	/**
 	 * 
 	 */
@@ -82,7 +83,8 @@ public class CommonServiceBillAction extends BaseAction implements ModelDriven<C
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
 		map.put("branchNo", getSessionBranchNo(request));
-		Paginater paginater = commonServiceBillDao.findPager(map, getPager(request));
+		Paginater paginater = commonServiceBillDao.findPager(map,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = commonServiceBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
@@ -107,7 +109,8 @@ public class CommonServiceBillAction extends BaseAction implements ModelDriven<C
 	public String deleteBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.deleteBill(CommonServiceBill.class, id, getSessionUser(request));
+			billService.deleteBill(CommonServiceBill.class, id,
+					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (Exception e) {
 			setResult(false, "删除失败", request);
@@ -130,11 +133,13 @@ public class CommonServiceBillAction extends BaseAction implements ModelDriven<C
 				ownerName = ownerInfo.getOwnerName();
 				checkinState = ownerInfo.getCheckinState();
 			}
-			HouseInfo houseInfo = commonServiceBillDao.findById(HouseInfo.class, houseSn);
+			HouseInfo houseInfo = commonServiceBillDao.findById(
+					HouseInfo.class, houseSn);
 			Assert.notNull(houseInfo, "编号为" + houseSn + "的房屋信息不存在!");
 			Double area = houseInfo.getArea();
 			areaStr = String.valueOf(area);
-			servicePrice = ParaManager.getServicePrice(Integer.parseInt(houseInfo.getFloor()));
+			servicePrice = ParaManager.getServicePrice(Integer
+					.parseInt(houseInfo.getFloor()));
 			lightPrice = ParaManager.getLightPrice(houseInfo.getBuildingNo());
 			// return null;
 		} catch (Exception e) {
@@ -170,14 +175,19 @@ public class CommonServiceBillAction extends BaseAction implements ModelDriven<C
 			// HouseInfo houseInfo =
 			// commonServiceBillDao.findById(HouseInfo.class, houseSn);
 			Integer monthNum = Integer.parseInt(monthNumStr);
-			Date endDate = DateUtil.addMonths(DateUtil.getDateByYYYMMDD(startDate), monthNum);
+			Date endDate = DateUtil.addMonths(
+					DateUtil.getDateByYYYMMDD(startDate), monthNum);
 			endDate = DateUtil.addDays(endDate, -1);
 			endDateStr = DateUtil.getDateYYYYMMDD(endDate);
 
-			serviceAmount = MoneyUtil.getFormatStr2(Double.parseDouble(servicePriceStr) * area * monthNum);
+			serviceAmount = MoneyUtil.getFormatStr2(Double
+					.parseDouble(servicePriceStr) * area * monthNum);
 
-			lightAmount = MoneyUtil.getFormatStr2(Double.parseDouble(lightPrice) * monthNum);
-			totalAmount = MoneyUtil.getFormatStr2(Double.parseDouble(serviceAmount) + Double.parseDouble(lightAmount));
+			lightAmount = MoneyUtil.getFormatStr2(Double
+					.parseDouble(lightPrice) * monthNum);
+			totalAmount = MoneyUtil.getFormatStr2(Double
+					.parseDouble(serviceAmount)
+					+ Double.parseDouble(lightAmount));
 		} catch (Exception e) {
 			setResult(false, "失败", request);
 			e.printStackTrace();
@@ -191,6 +201,7 @@ public class CommonServiceBillAction extends BaseAction implements ModelDriven<C
 		return null;
 	}
 
+	@Override
 	public CommonServiceBill getModel() {
 		return model;
 	}

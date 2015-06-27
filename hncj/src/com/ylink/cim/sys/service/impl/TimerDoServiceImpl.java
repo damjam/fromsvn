@@ -17,8 +17,6 @@ import com.ylink.cim.sys.service.TimerDoService;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
-import flink.util.Pager;
-import flink.util.Paginater;
 
 @Component("timerDoService")
 public class TimerDoServiceImpl implements TimerDoService {
@@ -30,6 +28,7 @@ public class TimerDoServiceImpl implements TimerDoService {
 	@Autowired
 	private IdFactoryService idFactoryService;
 
+	@Override
 	public void addTimerDo(Class<?> clazz, Date date) {
 
 	}
@@ -59,6 +58,7 @@ public class TimerDoServiceImpl implements TimerDoService {
 
 	}
 
+	@Override
 	public boolean insertInitTask(String sTriggerDate) throws BizException {
 		try {
 			List lstResult = timerDoDao.getAllCommand(sTriggerDate);
@@ -74,6 +74,7 @@ public class TimerDoServiceImpl implements TimerDoService {
 		return true;
 	}
 
+	@Override
 	public void updateTimerDo(TimerDo timerDo, String state, String remark) {
 		timerDo.setState(state);
 		timerDo.setRemark(remark);

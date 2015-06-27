@@ -26,8 +26,10 @@ public class MsgA2033 {
 
 	}
 
-	public static MsgField[] A2033REQ = { MsgField.aip_no, MsgField.start_date, MsgField.end_date };
+	public static MsgField[] A2033REQ = { MsgField.aip_no, MsgField.start_date,
+			MsgField.end_date };
 
-	public static MsgField[] A2033RES = { MsgField.exch_time, MsgField.change_type, MsgField.exch_weight };
+	public static MsgField[] A2033RES = { MsgField.exch_time,
+			MsgField.change_type, MsgField.exch_weight };
 
 }

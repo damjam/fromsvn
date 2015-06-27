@@ -147,6 +147,7 @@ public class ParkingInfoAction extends BaseAction implements
 		return "popUp";
 	}
 
+	@Override
 	public ParkingInfo getModel() {
 		return model;
 	}

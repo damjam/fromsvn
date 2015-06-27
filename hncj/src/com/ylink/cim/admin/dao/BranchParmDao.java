@@ -32,7 +32,8 @@ public interface BranchParmDao extends BaseDao {
 	 */
 	public Date getDbTime();
 
-	public Paginater getPageList(Pager pager, BranchParm sysParm) throws Exception;
+	public Paginater getPageList(Pager pager, BranchParm sysParm)
+			throws Exception;
 
 	/**
 	 * 获取系统参数表中某条数据信息
@@ -50,7 +51,8 @@ public interface BranchParmDao extends BaseDao {
 
 	public void saveBranchParm(BranchParm sysParm) throws Exception;
 
-	public void saveBranchParmInTransaction(BranchParm sysParm) throws Exception;
+	public void saveBranchParmInTransaction(BranchParm sysParm)
+			throws Exception;
 
 	public void updateBranchParm(BranchParm sysParm) throws Exception;
 

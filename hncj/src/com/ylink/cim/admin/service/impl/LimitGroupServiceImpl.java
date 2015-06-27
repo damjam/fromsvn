@@ -21,11 +21,13 @@ public class LimitGroupServiceImpl implements LimitGroupService {
 		this.limitGroupDao = limitGroupDao;
 	}
 
+	@Override
 	public List<LimitGroup> getByLimitGroupId(String limitGroupId) throws BizException {
 
 		return this.limitGroupDao.getByLimitGroupId(limitGroupId);
 	}
 
+	@Override
 	public List<LimitGroup> getLimitGroup(LimitGroup limitGroup) throws BizException {
 		return this.limitGroupDao.getLimitGroup(limitGroup);
 	}

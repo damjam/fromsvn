@@ -23,6 +23,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	/**
 	 * 根据主键删除记录
 	 */
+	@Override
 	public void delete(String id) throws BizException {
 
 		try {
@@ -43,6 +44,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public Paginater findAll(Pager pager, BranchParm branchParm) throws BizException {
 
 		Paginater paginater = null;
@@ -61,11 +63,12 @@ public class BranchParmServiceImpl implements BranchParmService {
 	 * 
 	 * @throws BizException
 	 */
+	@Override
 	public BranchParm findById(String id) throws BizException {
 
 		BranchParm branchParm;
 		try {
-			branchParm = (BranchParm) this.branchParmDao.findBranchParmById(id);
+			branchParm = this.branchParmDao.findBranchParmById(id);
 			return branchParm;
 		} catch (Exception e) {
 			throw new BizException(e.getMessage());
@@ -73,11 +76,13 @@ public class BranchParmServiceImpl implements BranchParmService {
 
 	}
 
+	@Override
 	public BranchParm findByIdWithLock(String code) throws BizException {
 
 		return this.branchParmDao.findByIdWithLock(code);
 	}
 
+	@Override
 	public void save(BranchParm branchParm) throws BizException {
 		try {
 			if (branchParmDao.hasParm(branchParm.getCode())) {
@@ -91,6 +96,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 		}
 	}
 
+	@Override
 	public void update(BranchParm branchParm) throws BizException {
 
 		try {

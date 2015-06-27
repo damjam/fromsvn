@@ -19,7 +19,8 @@ import flink.web.BaseAction;
 
 @Scope("prototype")
 @Component
-public class AdrentBillAction extends BaseAction implements ModelDriven<AdrentBill> {
+public class AdrentBillAction extends BaseAction implements
+		ModelDriven<AdrentBill> {
 	/**
 	 * 
 	 */
@@ -74,7 +75,8 @@ public class AdrentBillAction extends BaseAction implements ModelDriven<AdrentBi
 		map.put("state", model.getState());
 		map.put("startChargeDate", model.getStartChargeDate());
 		map.put("endChargeDate", model.getEndChargeDate());
-		Paginater paginater = adrentBillDao.findBillPager(map, getPager(request));
+		Paginater paginater = adrentBillDao.findBillPager(map,
+				getPager(request));
 		saveQueryResult(request, paginater);
 		BillState.setInReq(request);
 		Map<String, Object> sumInfo = adrentBillDao.findSumInfo(map);
@@ -86,7 +88,8 @@ public class AdrentBillAction extends BaseAction implements ModelDriven<AdrentBi
 	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.deleteBill(AdrentBill.class, id, getSessionUser(request));
+			billService.deleteBill(AdrentBill.class, id,
+					getSessionUser(request));
 			setResult(true, "²Ù×÷³É¹¦", request);
 
 			model.setId("");
@@ -100,6 +103,7 @@ public class AdrentBillAction extends BaseAction implements ModelDriven<AdrentBi
 		return list();
 	}
 
+	@Override
 	public AdrentBill getModel() {
 		return model;
 	}

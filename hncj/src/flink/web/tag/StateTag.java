@@ -24,6 +24,7 @@ public class StateTag extends SimpleTagSupport {
 	private String value;
 	private String property;
 
+	@Override
 	public void doTag() throws JspException, IOException {
 		if (StringUtils.isEmpty(className) || StringUtils.isEmpty(value)) {
 			return;
@@ -35,7 +36,8 @@ public class StateTag extends SimpleTagSupport {
 		}
 
 		try {
-			Class stateClass = Class.forName(packName.concat(".").concat(className));
+			Class stateClass = Class.forName(packName.concat(".").concat(
+					className));
 			if (stateClass == null) {
 				return;
 			}
@@ -55,7 +57,8 @@ public class StateTag extends SimpleTagSupport {
 				property = "name";
 			}
 
-			String html = ObjectUtils.toString(PropertyUtils.getProperty(state, property));
+			String html = ObjectUtils.toString(PropertyUtils.getProperty(state,
+					property));
 			this.getJspContext().getOut().write(html);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,9 +74,11 @@ public class StateTag extends SimpleTagSupport {
 	 * 
 	 */
 	private String getPackage() {
-		HttpServletRequest request = (HttpServletRequest) ((PageContext) this.getJspContext()).getRequest();
+		HttpServletRequest request = (HttpServletRequest) ((PageContext) this
+				.getJspContext()).getRequest();
 
-		return (String) request.getSession().getServletContext().getInitParameter("statePackageName");
+		return request.getSession().getServletContext()
+				.getInitParameter("statePackageName");
 	}
 
 	public String getValue() {

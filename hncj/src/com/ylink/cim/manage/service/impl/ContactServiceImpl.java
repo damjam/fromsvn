@@ -20,6 +20,7 @@ public class ContactServiceImpl implements ContactService {
 	private ContactDao contactDao;
 	@Autowired
 	private IdFactoryService idFactoryService;
+	@Override
 	public void save(Contact contact, UserInfo userInfo) throws BizException{
 		String id = idFactoryService.generateId(Constants.CONTACT_ID);
 		contact.setId(id);
@@ -27,6 +28,7 @@ public class ContactServiceImpl implements ContactService {
 		contact.setBranchNo(userInfo.getBranchNo());
 		contactDao.save(contact);
 	}
+	@Override
 	public void delete(String id) throws BizException {
 		contactDao.deleteById(id);
 	}

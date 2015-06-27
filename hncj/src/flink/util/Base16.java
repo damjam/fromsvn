@@ -2,8 +2,8 @@ package flink.util;
 
 public class Base16 {
 
-	private static final char[] bcdLookup = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-			'e', 'f' };
+	private static final char[] bcdLookup = { '0', '1', '2', '3', '4', '5',
+			'6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	/**
 	 * Transform the specified byte into a Hex String form.
@@ -41,7 +41,8 @@ public class Base16 {
 		bytes = new byte[s.length() / 2];
 
 		for (int i = 0; i < bytes.length; i++) {
-			bytes[i] = (byte) Integer.parseInt(s.substring(2 * i, 2 * i + 2), 16);
+			bytes[i] = (byte) Integer.parseInt(s.substring(2 * i, 2 * i + 2),
+					16);
 		}
 
 		return bytes;

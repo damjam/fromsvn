@@ -26,39 +26,52 @@ public class LimitGroupInfoServiceImpl implements LimitGroupInfoService {
 	@Autowired
 	private LimitGroupDao limitGroupDao;
 
+	@Override
 	public void deleteLimitGroupInfo(String limitGroupId) throws BizException {
 		try {
 			this.limitGroupInfoDao.deleteById(limitGroupId);
 			this.limitGroupDao.deleteByLimitGroupId(limitGroupId);
 		} catch (Exception e) {
-			ExceptionUtils.logBizException(LimitGroupInfoServiceImpl.class, e.getMessage());
+			ExceptionUtils.logBizException(LimitGroupInfoServiceImpl.class,
+					e.getMessage());
 		}
 	}
 
+	@Override
 	public List<LimitGroupInfo> getAll() throws BizException {
 
 		return this.limitGroupInfoDao.getAll();
 	}
 
-	public LimitGroupInfo getLimitGroupInfoById(String limitGroupId) throws BizException {
+	@Override
+	public LimitGroupInfo getLimitGroupInfoById(String limitGroupId)
+			throws BizException {
 
 		return this.limitGroupInfoDao.findById(limitGroupId);
 	}
 
-	public Paginater getLimitGroupInfoPageList(LimitGroupInfo limitGroupInfo, Pager pager) throws BizException {
+	@Override
+	public Paginater getLimitGroupInfoPageList(LimitGroupInfo limitGroupInfo,
+			Pager pager) throws BizException {
 
-		return this.limitGroupInfoDao.getLimitGroupInfoPageList(limitGroupInfo, pager);
+		return this.limitGroupInfoDao.getLimitGroupInfoPageList(limitGroupInfo,
+				pager);
 	}
 
+	@Override
 	public List<SysDict> getSysDictNoLimitGroup() throws BizException {
 
 		return this.limitGroupInfoDao.getSysDictNoLimitGroup();
 	}
 
-	public void saveLimitGroup(LimitGroupInfo limitGroupInfo) throws BizException {
+	@Override
+	public void saveLimitGroup(LimitGroupInfo limitGroupInfo)
+			throws BizException {
 
-		if (null == limitGroupInfo.getLimitIds() || limitGroupInfo.getLimitIds().length == 0) {
-			ExceptionUtils.logBizException(LimitGroupInfoService.class, "请选择权限点");
+		if (null == limitGroupInfo.getLimitIds()
+				|| limitGroupInfo.getLimitIds().length == 0) {
+			ExceptionUtils.logBizException(LimitGroupInfoService.class,
+					"请选择权限点");
 		}
 
 		try {
@@ -66,7 +79,8 @@ public class LimitGroupInfoServiceImpl implements LimitGroupInfoService {
 			this.saveLimitGroups(limitGroupInfo);
 
 		} catch (Exception e) {
-			ExceptionUtils.logBizException(LimitGroupInfoDao.class, e.getMessage());
+			ExceptionUtils.logBizException(LimitGroupInfoDao.class,
+					e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -91,15 +105,19 @@ public class LimitGroupInfoServiceImpl implements LimitGroupInfoService {
 		this.limitGroupInfoDao = limitGroupInfoDao;
 	}
 
-	public void updateLimitGroupInfo(LimitGroupInfo limitGroupInfo) throws BizException {
+	@Override
+	public void updateLimitGroupInfo(LimitGroupInfo limitGroupInfo)
+			throws BizException {
 
 		try {
-			this.limitGroupDao.deleteByLimitGroupId(limitGroupInfo.getLimitGroupId());
+			this.limitGroupDao.deleteByLimitGroupId(limitGroupInfo
+					.getLimitGroupId());
 
 			saveLimitGroups(limitGroupInfo);
 			limitGroupInfoDao.update(limitGroupInfo);
 		} catch (Exception e) {
-			ExceptionUtils.logBizException(LimitGroupInfoServiceImpl.class, e.getMessage());
+			ExceptionUtils.logBizException(LimitGroupInfoServiceImpl.class,
+					e.getMessage());
 		}
 	}
 

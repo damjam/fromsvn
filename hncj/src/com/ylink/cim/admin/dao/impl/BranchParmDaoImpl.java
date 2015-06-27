@@ -20,18 +20,21 @@ import flink.util.Paginater;
 @Component("branchParmDao")
 public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 
+	@Override
 	public void deleteBranchParmById(String id) throws Exception {
 
 		this.deleteById(id);
 
 	}
 
+	@Override
 	public BranchParm findBranchParmById(String id) throws Exception {
 
 		return (BranchParm) this.findById(id);
 
 	}
 
+	@Override
 	public String generateFeeSettingIndex() {
 		BranchParm sysParm = findById("7211");
 		int index = Integer.parseInt(sysParm.getParvalue()) + 1;
@@ -40,6 +43,7 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 		return Integer.toString(index);
 	}
 
+	@Override
 	public Date getDbTime() {
 		QueryHelper sql = new QueryHelper();
 		sql.append("select current_timestamp as t from dual");
@@ -48,10 +52,12 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 		return (Date) getUniqueResultBySql(sql);
 	}
 
+	@Override
 	protected Class getModelClass() {
 		return BranchParm.class;
 	}
 
+	@Override
 	public Paginater getPageList(Pager pager, BranchParm sysParm) throws Exception {
 
 		QueryHelper helper = new QueryHelper();
@@ -61,11 +67,13 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 		return this.getPageData(helper, pager);
 	}
 
+	@Override
 	public BranchParm getBranchParmInfo(String code) {
 
 		return (BranchParm) findById(BranchParm.class, code);
 	}
 
+	@Override
 	public boolean hasParm(String code) throws Exception {
 		return this.findById(code) != null;
 	}
@@ -75,11 +83,13 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 		return false;
 	}
 
+	@Override
 	public void saveBranchParm(BranchParm sysParm) throws Exception {
 
 		this.save(sysParm);
 	}
 
+	@Override
 	public void saveBranchParmInTransaction(BranchParm sysParm) throws Exception {
 		Transaction beginTransaction = super.getHibernateTemplate().getSessionFactory().getCurrentSession()
 				.beginTransaction();
@@ -119,11 +129,13 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 
 	}
 
+	@Override
 	public void updateBranchParm(BranchParm sysParm) throws Exception {
 
 		this.update(sysParm);
 	}
 
+	@Override
 	public void updBranchParm(BranchParm sysParm) {
 
 		update(sysParm);

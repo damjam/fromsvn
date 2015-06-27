@@ -109,6 +109,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		request.setAttribute("floors", floors);
 	}
 
+	@Override
 	public HouseInfo getModel() {
 		return model;
 	}

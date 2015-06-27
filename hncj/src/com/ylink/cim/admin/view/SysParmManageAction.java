@@ -24,7 +24,7 @@ import com.ylink.cim.common.util.ParaManager;
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -33,18 +33,19 @@ import flink.web.BaseAction;
  */
 @Scope("prototype")
 @Component()
-public class SysParmManageAction extends BaseAction implements ModelDriven<SysParm>{
+public class SysParmManageAction extends BaseAction implements
+		ModelDriven<SysParm> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3419813256406264742L;
 
-	private static final Logger logger = Logger.getLogger(SysParmManageAction.class);
+	private static final Logger logger = Logger
+			.getLogger(SysParmManageAction.class);
 
 	@Autowired
 	SysParmService sysParmService;
-
 
 	/**
 	 * 页面删除
@@ -61,25 +62,29 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 		UserInfo sessionUser = getSessionUser(request);
 		try {
 			sysParmService.delete(model.getCode());
-			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_D, sessionUser.getUserId() + "("
-					+ sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode() + "成功");
-			request.setAttribute(Constants.OPER_INFO, Constants.DELETE_SUCCESS);
-			String msg = LogUtils.r("删除系统参数成功,删除内容为：{?}", request, getCurPrivilegeCode(request), Constants.LOG_USER_D,
-					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code="
+			this.saveUserLog(request, getCurPrivilegeCode(request),
+					Constants.LOG_USER_D, sessionUser.getUserId() + "("
+							+ sessionUser.getUserName() + "),删除系统参数" + "code="
 							+ model.getCode() + "成功");
+			request.setAttribute(Constants.OPER_INFO, Constants.DELETE_SUCCESS);
+			String msg = MsgUtils.r("删除系统参数成功,删除内容为：{?}", request,
+					getCurPrivilegeCode(request), Constants.LOG_USER_D,
+					sessionUser.getUserId() + "(" + sessionUser.getUserName()
+							+ "),删除系统参数" + "code=" + model.getCode() + "成功");
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			model.setCode(null);
 			return this.query();
 		} catch (Exception e) {
-			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")删除系统参数 addrId=" + model.getCode() + "失败";
+			String error = "用户" + getSessionUserCode(request) + "("
+					+ getSessionUser(request).getUserName() + ")删除系统参数 addrId="
+					+ model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
-			String msg = LogUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(), error);
+			String msg = MsgUtils.r("删除系统参数失败,失败原因:{?}，错误:{?}", e.getMessage(),
+					error);
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			return this.query();
 		}
 	}
-
 
 	/**
 	 * 页面查询
@@ -95,10 +100,10 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 
 		Paginater paginater = sysParmService.findAll(getPager(request), model);
 		saveQueryResult(request, paginater);
-		String msg = LogUtils.r("系统参数查询成功");
+		String msg = MsgUtils.r("系统参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "list";
-		//"/pages/admin/sysRunManager/sysParmManager.jsp"
+		// "/pages/admin/sysRunManager/sysParmManager.jsp"
 	}
 
 	/**
@@ -129,7 +134,7 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 	 */
 	public String toAdd() throws Exception {
 		return "add";
-		//"/pages/admin/sysRunManager/sysParmAdd.jsp";
+		// "/pages/admin/sysRunManager/sysParmAdd.jsp";
 	}
 
 	public String save() throws Exception {
@@ -143,24 +148,28 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 				return toAdd();
 			}
 			sysParmService.save(model);
-			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_A, "用户"
-					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),新增系统参数 code="
-					+ model.getCode() + "成功");
+			this.saveUserLog(request, getCurPrivilegeCode(request),
+					Constants.LOG_USER_A, "用户" + sessionUser.getUserId() + "("
+							+ sessionUser.getUserName() + "),新增系统参数 code="
+							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.SAVE_SUCCESS);
 			setReturnUrl("/sysParmManage.do?action=query", request);
-			String msg = LogUtils.r("添加系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("添加系统参数成功,更新内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			setSucResult("操作成功", request);
 			return "toMain";
 		} catch (BizException e) {
 			// e.printStackTrace();
-			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
+			String error = "用户" + getSessionUserCode(request) + "("
+					+ getSessionUser(request).getUserName()
 
-			+ ")新增系统参数 code" + model.getCode() + "失败";
+					+ ")新增系统参数 code" + model.getCode() + "失败";
 			logger.debug(error + ",失败原因:" + e.getMessage());
-			this.logErrorWithReason(request, getCurPrivilegeCode(request), error, e.getMessage());
+			this.logErrorWithReason(request, getCurPrivilegeCode(request),
+					error, e.getMessage());
 			setResult(false, e.getMessage(), request);
-			String msg = LogUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			setResult(false, e.getMessage(), request);
 			return toAdd();
@@ -194,22 +203,26 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 		}
 		try {
 			sysParmService.update(model);
-			this.saveUserLog(request, getCurPrivilegeCode(request), Constants.LOG_USER_U, "用户"
-					+ sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),修改系统参数 code="
-					+ model.getCode() + "成功");
+			this.saveUserLog(request, getCurPrivilegeCode(request),
+					Constants.LOG_USER_U, "用户" + sessionUser.getUserId() + "("
+							+ sessionUser.getUserName() + "),修改系统参数 code="
+							+ model.getCode() + "成功");
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_SUCCESS);
-			String msg = LogUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("更新系统参数成功,更新内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			setSucResult("操作成功", request);
 			return "toMain";
 		} catch (Exception e) {
-			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
-					+ ")修改系统参数 code=" + model.getCode() + "失败";
+			String error = "用户" + getSessionUserCode(request) + "("
+					+ getSessionUser(request).getUserName() + ")修改系统参数 code="
+					+ model.getCode() + "失败";
 			logger.debug(error + ",原因：" + e.getMessage());
-			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
+			this.saveSysLog(request, getCurPrivilegeCode(request), "",
+					Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
 					error + e.getMessage());
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_FAIL);
-			String msg = LogUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			return update();
 		}
@@ -229,7 +242,7 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 	public String update() throws Exception {
 		SysParm parm = sysParmService.findById(model.getCode());
 		BeanUtils.copyProperties(model, parm);
-		//setModel(parm);
+		// setModel(parm);
 		return "modify";
 	}
 
@@ -240,15 +253,17 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 			Runtime rt = Runtime.getRuntime();
 			String dir = "D:\\data_back";
 			File file = new File(dir);
-			//file.make
+			// file.make
 			if (!file.exists()) {
 				file.mkdir();
 			}
-			String cmd = "mysqldump -h localhost -ucims -pcims cims> d:\\data_back\\cims" + today + ".sql"; // 一定要加
+			String cmd = "mysqldump -h localhost -ucims -pcims cims> d:\\data_back\\cims"
+					+ today + ".sql"; // 一定要加
 			// -h
 			// localhost(或是服务器IP地址)
 			Process process = rt.exec("cmd /c " + cmd);
-			InputStreamReader isr = new InputStreamReader(process.getErrorStream());
+			InputStreamReader isr = new InputStreamReader(
+					process.getErrorStream());
 			LineNumberReader input = new LineNumberReader(isr);
 			String line;
 			while ((line = input.readLine()) != null) {
@@ -256,8 +271,9 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 			}
 			System.out.println("备份成功!");
 			// 删除以往文件
-			String yesterday = DateUtil.getDateYYYYMMDD(DateUtil.addDays(DateUtil.getCurrent(), -1));
-			File oldFile = new File(dir+"\\cims" + yesterday + ".sql");
+			String yesterday = DateUtil.getDateYYYYMMDD(DateUtil.addDays(
+					DateUtil.getCurrent(), -1));
+			File oldFile = new File(dir + "\\cims" + yesterday + ".sql");
 			oldFile.deleteOnExit();
 			jsonObject.put("tip", "备份成功");
 			respond(response, jsonObject.toString());
@@ -270,15 +286,15 @@ public class SysParmManageAction extends BaseAction implements ModelDriven<SysPa
 		return null;
 	}
 
+	@Override
 	public SysParm getModel() {
 		return model;
 	}
-	private SysParm model = new SysParm();
 
+	private SysParm model = new SysParm();
 
 	public void setModel(SysParm model) {
 		this.model = model;
 	}
 
-	
 }

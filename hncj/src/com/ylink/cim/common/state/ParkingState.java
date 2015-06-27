@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import flink.util.AbstractState;
 import flink.util.ExceptionUtils;
 
-
 public class ParkingState extends AbstractState {
 	public static Map<String, ParkingState> ALL = new LinkedHashMap<String, ParkingState>();
 
@@ -17,6 +16,7 @@ public class ParkingState extends AbstractState {
 	public static final ParkingState HIRED = new ParkingState("在租", "02");
 	public static final ParkingState OCCUPIED = new ParkingState("内部使用", "03");
 	public static final ParkingState RESERVE = new ParkingState("预留", "04");
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("parkingStates", ParkingState.ALL.values());
 	}

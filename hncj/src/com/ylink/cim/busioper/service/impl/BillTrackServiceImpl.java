@@ -22,7 +22,7 @@ import com.ylink.cim.sys.domain.TimerDo;
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 
 @Component("billTrackService")
 public class BillTrackServiceImpl implements BillTrackService {
@@ -34,6 +34,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 	@Autowired
 	private IdFactoryService idFactoryService;
 
+	@Override
 	public void exeTimerDo(String timerDoId) {
 		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
 		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
@@ -50,7 +51,8 @@ public class BillTrackServiceImpl implements BillTrackService {
 			if (StringUtils.isEmpty(expireDate)) {
 				continue;
 			}
-			int leftDays = DateUtil.getDateDiffDays(DateUtil.getDateByYYYMMDD(expireDate), now);
+			int leftDays = DateUtil.getDateDiffDays(
+					DateUtil.getDateByYYYMMDD(expireDate), now);
 			if (leftDays >= 0) {
 				track.setLeftDays(leftDays);
 				track.setOverDays(0);
@@ -67,8 +69,10 @@ public class BillTrackServiceImpl implements BillTrackService {
 		timerDoDao.update(timerDo);
 	}
 
-	public void addBillTrack(String houseSn, String billType, String billId, String expireDate, String ownerName,
-			String ownerCel, String branchNo) throws BizException {
+	@Override
+	public void addBillTrack(String houseSn, String billType, String billId,
+			String expireDate, String ownerName, String ownerCel,
+			String branchNo) throws BizException {
 		Date endDate = DateUtil.getDayEndByYYYMMDD(expireDate);
 		Date today = DateUtil.getCurrent();
 		BillTrack track = new BillTrack();
@@ -83,7 +87,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 		if (leftDays > 0) {
 			track.setLeftDays(leftDays);
 			track.setOverDays(0);
-		}else {
+		} else {
 			track.setLeftDays(0);
 			track.setOverDays(-leftDays);
 		}
@@ -96,30 +100,36 @@ public class BillTrackServiceImpl implements BillTrackService {
 		billTrackDao.save(track);
 	}
 
+	@Override
 	public void expirePreTracks(String houseSn, String billType, String branchNo) {
 		billTrackDao.expireBillTrack(houseSn, billType, branchNo);
 	}
 
+	@Override
 	public void delete(String id, UserInfo userInfo) throws BizException {
 		billTrackDao.deleteById(id);
 	}
 
+	@Override
 	public void add(BillTrack billTrack, UserInfo userInfo) throws BizException {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void sendNotice(String id) throws BizException {
 		// ·¢ËÍ¶ÌÐÅ
 		BillTrack track = billTrackDao.findById(id);
 		billTrackDao.lock(track, LockMode.UPGRADE);
 		String cel = track.getOwnerCel();
-		String content = LogUtils.r(Constants.SERVICE_BILL_DUE_MSG, track.getExpireDate());
+		String content = MsgUtils.r(Constants.SERVICE_BILL_DUE_MSG,
+				track.getExpireDate());
 		track.setNoticeTimes(track.getNoticeTimes() + 1);
 		billTrackDao.update(track);
 		// SendMobilMsgUtil.sendMsgFw(cel, content);
 	}
 
+	@Override
 	public void discard(String id, UserInfo userInfo) throws BizException {
 		BillTrack track = billTrackDao.findById(id);
 		track.setState(BillTrackState.EXPIRED.getValue());

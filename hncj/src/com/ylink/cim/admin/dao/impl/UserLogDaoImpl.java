@@ -15,6 +15,7 @@ import flink.util.Paginater;
 
 @Component("userLogDao")
 public class UserLogDaoImpl extends BaseDaoImpl implements UserLogDao {
+	@Override
 	protected Class getModelClass() {
 		return UserLog.class;
 	}
@@ -25,11 +26,14 @@ public class UserLogDaoImpl extends BaseDaoImpl implements UserLogDao {
 	 * @param pageDataBySql
 	 * @return
 	 */
-	public Paginater getUserLogPageList(UserLog userLog, Pager pager, UserInfo userInfo) {
+	@Override
+	public Paginater getUserLogPageList(UserLog userLog, Pager pager,
+			UserInfo userInfo) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from UserLog where 1=1");
 		helper.append("and limitId = ?", userLog.getLimitId());
-		helper.append("and content like ?", userLog.getContent(), MatchMode.ANYWHERE);
+		helper.append("and content like ?", userLog.getContent(),
+				MatchMode.ANYWHERE);
 		helper.append("and logType = ?", userLog.getLogType());
 		helper.append("and loginIp = ?", userLog.getLoginIp());
 		helper.append("and limitId = ?", userLog.getLimitId());
@@ -41,6 +45,7 @@ public class UserLogDaoImpl extends BaseDaoImpl implements UserLogDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	public void saveUserLog(UserLog userLog) throws Exception {
 		this.save(userLog);
 

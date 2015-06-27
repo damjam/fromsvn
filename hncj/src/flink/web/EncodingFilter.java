@@ -17,11 +17,14 @@ public class EncodingFilter extends HttpServlet implements Filter {
 	private FilterConfig filterConfig;
 	private String encoding;
 
+	@Override
 	public void destroy() {
 		super.destroy();
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) {
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain filterChain) {
 		try {
 			String encode = request.getParameter("encode");
 
@@ -39,6 +42,7 @@ public class EncodingFilter extends HttpServlet implements Filter {
 		}
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.encoding = filterConfig.getInitParameter("encoding");
 		this.filterConfig = filterConfig;

@@ -51,7 +51,8 @@ public class ArrayListMsg extends ArrayList<Object> {
 
 				StringBuffer sb = new StringBuffer();
 				for (int i = 0; i < v_strMsg.length(); i++) {
-					boolean bSepChar = (v_strMsg.substring(i, i + 1).equals("" + Constant.SEPARATOR_RECORD[v_level]));
+					boolean bSepChar = (v_strMsg.substring(i, i + 1).equals(""
+							+ Constant.SEPARATOR_RECORD[v_level]));
 					boolean bLast = (i == v_strMsg.length() - 1);
 					if (bSepChar || bLast) {
 						if (!bSepChar && bLast)
@@ -79,7 +80,8 @@ public class ArrayListMsg extends ArrayList<Object> {
 	private boolean isHaveSperatorChar(String v_strMsg, int v_level) {
 		for (; v_level < Constant.SEPARATOR_RECORD.length; v_level++) {
 			for (int i = v_strMsg.length() - 1; i >= 0; i--) {
-				if (v_strMsg.substring(i, i + 1).equals("" + Constant.SEPARATOR_RECORD[v_level]))
+				if (v_strMsg.substring(i, i + 1).equals(
+						"" + Constant.SEPARATOR_RECORD[v_level]))
 					return true;
 			}
 		}
@@ -126,6 +128,7 @@ public class ArrayListMsg extends ArrayList<Object> {
 	/**
 	 * 生成与黄金二级系统1.0接口规范一致的报文字符串
 	 */
+	@Override
 	public String toString() {
 		return this.toString(0);
 	}
@@ -143,14 +146,14 @@ public class ArrayListMsg extends ArrayList<Object> {
 			if (this.get(0) instanceof String) {
 				for (int i = 0; i < this.size(); i++) {
 					sbSubMsgBuff.append((String) this.get(i));
-					sbSubMsgBuff.append((char) Constant.SEPARATOR_RECORD[v_level]);
+					sbSubMsgBuff.append(Constant.SEPARATOR_RECORD[v_level]);
 				}
 				sbMsgBuff.append(sbSubMsgBuff);
 			} else {
 				for (int i = 0; i < this.size(); i++) {
 					ArrayListMsg alSubMsgList = (ArrayListMsg) this.get(i);
 					sbSubMsgBuff.append(alSubMsgList.toString(v_level + 1));
-					sbSubMsgBuff.append((char) Constant.SEPARATOR_RECORD[v_level]);
+					sbSubMsgBuff.append(Constant.SEPARATOR_RECORD[v_level]);
 				}
 				sbMsgBuff.append(sbSubMsgBuff);
 			}

@@ -20,12 +20,17 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 	private ParkingInfoDao parkingInfoDao;
 	@Autowired
 	private IdFactoryService idFactoryService;
-	public void saveOrUpdate(ParkingInfo parkingInfo, UserInfo userInfo) throws BizException{
+
+	@Override
+	public void saveOrUpdate(ParkingInfo parkingInfo, UserInfo userInfo)
+			throws BizException {
 		parkingInfo.setBranchNo(userInfo.getBranchNo());
 		parkingInfoDao.saveOrUpdate(parkingInfo);
 	}
 
-	public void save(ParkingInfo parkingInfo, UserInfo userInfo) throws BizException{
+	@Override
+	public void save(ParkingInfo parkingInfo, UserInfo userInfo)
+			throws BizException {
 		String id = idFactoryService.generateId(Constants.PARKING_INFO_ID);
 		parkingInfo.setId(id);
 		parkingInfo.setBranchNo(userInfo.getBranchNo());
@@ -34,16 +39,17 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 		parkingInfoDao.save(parkingInfo);
 	}
 
-	public void update(ParkingInfo parkingInfo, UserInfo userInfo) throws BizException{
+	@Override
+	public void update(ParkingInfo parkingInfo, UserInfo userInfo)
+			throws BizException {
 		parkingInfo.setBranchNo(userInfo.getBranchNo());
 		parkingInfoDao.update(parkingInfo);
 	}
 
-	public void delete(String id, UserInfo sessionUser) throws BizException{
+	@Override
+	public void delete(String id, UserInfo sessionUser) throws BizException {
 		parkingInfoDao.deleteById(id);
-		
+
 	}
-
-
 
 }

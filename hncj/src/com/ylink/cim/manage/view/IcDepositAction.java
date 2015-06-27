@@ -26,7 +26,8 @@ import flink.web.BaseAction;
  */
 @Scope("prototype")
 @Component
-public class IcDepositAction extends BaseAction implements ModelDriven<IcDeposit> {
+public class IcDepositAction extends BaseAction implements
+		ModelDriven<IcDeposit> {
 	/**
 	 * 
 	 */
@@ -98,7 +99,8 @@ public class IcDepositAction extends BaseAction implements ModelDriven<IcDeposit
 	public String deleteIcDeposit() throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.deleteBill(IcDeposit.class, id, getSessionUser(request));
+			billService
+					.deleteBill(IcDeposit.class, id, getSessionUser(request));
 			setResult(true, "²Ù×÷³É¹¦", request);
 			model.setId("");
 		} catch (Exception e) {
@@ -108,6 +110,7 @@ public class IcDepositAction extends BaseAction implements ModelDriven<IcDeposit
 		return list();
 	}
 
+	@Override
 	public IcDeposit getModel() {
 		return model;
 	}

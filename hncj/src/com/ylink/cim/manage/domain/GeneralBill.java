@@ -2,7 +2,6 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-
 /**
  * GeneralBill domain. @author MyEclipse Persistence Tools
  */
@@ -28,66 +27,50 @@ public class GeneralBill implements java.io.Serializable {
 	private String startChargeDate;
 	private String endChargeDate;
 	private String keyword;
-	
-	
+
 	/** default constructor */
 	public GeneralBill() {
 	}
-
 
 	public String getBranchNo() {
 		return branchNo;
 	}
 
-
 	public Date getChargeDate() {
 		return chargeDate;
 	}
-
 
 	public String getChargeUser() {
 		return this.chargeUser;
 	}
 
-
 	public Date getCreateDate() {
 		return this.createDate;
 	}
-
 
 	public String getCreateUser() {
 		return createUser;
 	}
 
-
 	public String getEndChargeDate() {
 		return endChargeDate;
 	}
-
 
 	public String getId() {
 		return this.id;
 	}
 
-
-
 	public String getKeyword() {
 		return keyword;
 	}
-
-
 
 	public Integer getNum() {
 		return this.num;
 	}
 
-
-
 	public Double getPaidAmt() {
 		return paidAmt;
 	}
-
-
 
 	public String getPayerName() {
 		return payerName;
@@ -97,27 +80,22 @@ public class GeneralBill implements java.io.Serializable {
 		return this.remark;
 	}
 
-
 	public String getStartChargeDate() {
 		return startChargeDate;
 	}
-
 
 	public String getState() {
 		return this.state;
 	}
 
-
 	public Double getTotalAmt() {
 		return this.totalAmt;
 	}
-
 
 	public String getTradeType() {
 		return this.tradeType;
 	}
 
-	
 	// Property accessors
 
 	public Double getUnitPrice() {
@@ -127,6 +105,7 @@ public class GeneralBill implements java.io.Serializable {
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	public void setChargeDate(Date chargeDate) {

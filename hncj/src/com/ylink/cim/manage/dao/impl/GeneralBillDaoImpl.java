@@ -28,6 +28,7 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 		
 		return list;
 	}
+	@Override
 	public Paginater findBillPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
 		helper.append("from GeneralBill t where 1=1");
@@ -51,6 +52,7 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
+			@Override
 			public int compare(Object o1, Object o2) {
 				try {
 					WaterRecord record1 = (WaterRecord) o1;
@@ -75,6 +77,7 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 		});
 		return paginater;
 	}
+	@Override
 	public List<GeneralBill> findBills(Map<String, Object> params) {
 		return null;
 	}
@@ -92,6 +95,7 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 		}
 	}
 	
+	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("select new map(count(t.id) as totalCnt, sum(t.totalAmt) as totalAmt) from GeneralBill t where 1=1");

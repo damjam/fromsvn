@@ -36,7 +36,7 @@ import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
 import flink.consant.Constants;
 import flink.util.ExceptionUtils;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 import flink.web.tag.DTreeObj;
@@ -47,12 +47,13 @@ import flink.web.tag.DTreeObj;
  */
 @Scope("prototype")
 @Component
-public class LimitGroupInfoAction extends BaseAction implements ModelDriven<LimitGroupInfo> {
+public class LimitGroupInfoAction extends BaseAction implements
+		ModelDriven<LimitGroupInfo> {
 
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = -3917589214310429849L;
 	@Autowired
 	private LimitGroupInfoService limitGroupInfoService;
@@ -74,12 +75,13 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 	public String listLimitGroupInfo() throws Exception {
 		try {
 
-			Paginater paginater = this.limitGroupInfoService.getLimitGroupInfoPageList(info, super.getPager(request));
+			Paginater paginater = this.limitGroupInfoService
+					.getLimitGroupInfoPageList(info, super.getPager(request));
 			saveQueryResult(request, paginater);
-			String msg = LogUtils.r("权限分组管理查询成功");
+			String msg = MsgUtils.r("权限分组管理查询成功");
 			super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		} catch (Exception e) {
-			String msg = LogUtils.r("权限分组管理查询失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("权限分组管理查询失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.SEARCH.getValue(), msg);
 			throw new Exception(e);
 		}
@@ -89,21 +91,25 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 
 	public String deleteLimitGroupInfo() throws Exception {
 		try {
-			List<RoleInfo> list = roleInfoService.queryRoleInfoByLimitGroupId(info.getLimitGroupId());
+			List<RoleInfo> list = roleInfoService
+					.queryRoleInfoByLimitGroupId(info.getLimitGroupId());
 			if (list != null && list.size() > 0) {
 				setResult(false, "删除失败,失败原因:该权限组已被某一角色使用，不能删除！", request);
-				String msg = LogUtils.r("删除权限失败,失败原因:{?}", "该权限组已被某一角色使用，不能删除！");
+				String msg = MsgUtils
+						.r("删除权限失败,失败原因:{?}", "该权限组已被某一角色使用，不能删除！");
 				super.logError(request, UserLogType.DELETE.getValue(), msg);
 				return this.listLimitGroupInfo();
 			} else {
-				this.limitGroupInfoService.deleteLimitGroupInfo(info.getLimitGroupId());
+				this.limitGroupInfoService.deleteLimitGroupInfo(info
+						.getLimitGroupId());
 				info.setLimitGroupId(null);
-				String msg = LogUtils.r("删除权限组成功，删除的权限组id为:{?}" + info.getLimitGroupId());
+				String msg = MsgUtils.r("删除权限组成功，删除的权限组id为:{?}"
+						+ info.getLimitGroupId());
 				super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			}
 		} catch (Exception e) {
 			setResult(false, "删除失败,失败原因:" + e.getMessage(), request);
-			String msg = LogUtils.r("删除权限失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("删除权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 		}
 		return this.listLimitGroupInfo();
@@ -117,15 +123,18 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 
 			return ActionConstant.TO_ADD_PAGE;
 		} catch (Exception e) {
-			setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT_GROUP, request);
+			setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT_GROUP,
+					request);
 
 			return this.listLimitGroupInfo();
 		}
 	}
 
-	public void initUserTypeCollections(HttpServletRequest request) throws Exception {
+	public void initUserTypeCollections(HttpServletRequest request)
+			throws Exception {
 
-		List<SysDict> list = this.limitGroupInfoService.getSysDictNoLimitGroup();
+		List<SysDict> list = this.limitGroupInfoService
+				.getSysDictNoLimitGroup();
 
 		if (null == list || list.size() == 0) {
 			throw new Exception("没用需要创建的权限组");
@@ -138,7 +147,8 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 	public void initPrivilegeTree(HttpServletRequest request) throws Exception {
 
 		// 初始化权限树
-		List<Privilege> privilegeList = this.privilegeDao.getPrivilegeList(new Privilege());
+		List<Privilege> privilegeList = this.privilegeDao
+				.getPrivilegeList(new Privilege());
 		List<PrivilegeTreeNode> list = privilegeDao.getRoleTree();
 		saveQueryResult(request, list);
 		List<DTreeObj> dtreeLs = new ArrayList<DTreeObj>();
@@ -148,9 +158,11 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 
 	}
 
-	public void initPrivilegeSelect(HttpServletRequest request, String limitGroupId) throws Exception {
+	public void initPrivilegeSelect(HttpServletRequest request,
+			String limitGroupId) throws Exception {
 
-		List<LimitGroup> list = this.limitGroupService.getByLimitGroupId(limitGroupId);
+		List<LimitGroup> list = this.limitGroupService
+				.getByLimitGroupId(limitGroupId);
 		if (null == list || list.size() == 0) {
 			return;
 		}
@@ -165,7 +177,8 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 		request.setAttribute("initCheck", inititSelect.toString());
 	}
 
-	private void convertToDtree(List<DTreeObj> dtreeLs, List<Privilege> privilegeList) {
+	private void convertToDtree(List<DTreeObj> dtreeLs,
+			List<Privilege> privilegeList) {
 
 		if (null == privilegeList) {
 			return;
@@ -190,28 +203,35 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 		try {
 
 			if (ArrayUtils.isEmpty(info.getLimitIds())) {
-				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT, request);
+				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT,
+						request);
 				return ActionConstant.TO_ADD_PAGE;
 			}
 
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("limitGroupName", info.getLimitGroupName());
-			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class, params, null, null);
+			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class,
+					params, null, null);
 			if (count > 0) {
-				setResult(false, LogUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()), request);
+				setResult(false,
+						MsgUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()),
+						request);
 				return this.toAddPage();
 			}
-			info.setLimitGroupId(idFactoryService.generateId(Constants.LIMIT_GROUP_INFO_ID));
+			info.setLimitGroupId(idFactoryService
+					.generateId(Constants.LIMIT_GROUP_INFO_ID));
 			this.limitGroupInfoService.saveLimitGroup(info);
 
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("添加权限组成功,添加内容为：{?}", FeildUtils.toString(info));
+			String msg = MsgUtils.r("添加权限组成功,添加内容为：{?}",
+					FeildUtils.toString(info));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			return this.listLimitGroupInfo();
 		} catch (Exception e) {
-			String msg = LogUtils.r("添加权限组失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加权限组失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-			ExceptionUtils.logException(LimitGroupInfoAction.class, e.getMessage());
+			ExceptionUtils.logException(LimitGroupInfoAction.class,
+					e.getMessage());
 			throw e;
 		}
 
@@ -224,7 +244,8 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 
 	public String toUpdatePage() throws Exception {
 		String limitGroupId = info.getLimitGroupId();
-		LimitGroupInfo limitGroupInfo = this.limitGroupInfoService.getLimitGroupInfoById(info.getLimitGroupId());
+		LimitGroupInfo limitGroupInfo = this.limitGroupInfoService
+				.getLimitGroupInfoById(info.getLimitGroupId());
 		info.setLimitGroupId(limitGroupInfo.getLimitGroupId());
 		info.setLimitGroupName(limitGroupInfo.getLimitGroupName());
 		info.setUserType(limitGroupInfo.getUserType());
@@ -242,7 +263,8 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 
 		this.initPrivilegeTree(request);
 		this.initPrivilegeSelect(request, info.getLimitGroupId());
-		LimitGroupInfo gr = (LimitGroupInfo) limitGroupInfoDao.findById(limitGroupId);
+		LimitGroupInfo gr = (LimitGroupInfo) limitGroupInfoDao
+				.findById(limitGroupId);
 
 		List<LimitGroup> lgList = limitGroupDao.getByLimitGroupId(limitGroupId);
 		request.setAttribute("groupPrivilegeList", lgList);
@@ -258,32 +280,38 @@ public class LimitGroupInfoAction extends BaseAction implements ModelDriven<Limi
 			}
 
 			if (null == info.getLimitIds() || info.getLimitIds().length == 0) {
-				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT, request);
+				setResult(false, ActionMessageConstant.OPER_FAIL_NO_LIMIT,
+						request);
 				return this.toUpdatePage();
 			}
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("limitGroupName", info.getLimitGroupName());
-			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class, params, "limitGroupId",
-					info.getLimitGroupId());
+			Long count = limitGroupDao.findCountByParam(LimitGroupInfo.class,
+					params, "limitGroupId", info.getLimitGroupId());
 			if (count > 0) {
-				setResult(false, LogUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()), request);
+				setResult(false,
+						MsgUtils.r("权限组名称[{?}]已存在", info.getLimitGroupName()),
+						request);
 				return this.toUpdatePage();
 			}
 			this.limitGroupInfoService.updateLimitGroupInfo(info);
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("修改权限组成功，修改的权限组内容为:{?}", FeildUtils.toString(info));
+			String msg = MsgUtils.r("修改权限组成功，修改的权限组内容为:{?}",
+					FeildUtils.toString(info));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			return this.toUpdatePage();
 		} catch (Exception e) {
 			setResult(false, "修改失败,失败原因:" + e.getMessage(), request);
-			String msg = LogUtils.r("修改权限失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("修改权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
-			ExceptionUtils.logException(LimitGroupInfoAction.class, e.getMessage());
+			ExceptionUtils.logException(LimitGroupInfoAction.class,
+					e.getMessage());
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
+	@Override
 	public LimitGroupInfo getModel() {
 		return info;
 	}

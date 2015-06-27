@@ -21,11 +21,13 @@ public class CarInfoServiceImpl implements CarInfoService {
 	@Autowired
 	private IdFactoryService idFactoryService;
 
+	@Override
 	public void saveOrUpdate(CarInfo carInfo, UserInfo userInfo) throws BizException {
 		carInfo.setBranchNo(userInfo.getBranchNo());
 		carInfoDao.saveOrUpdate(carInfo);
 	}
 
+	@Override
 	public void save(CarInfo carInfo, UserInfo userInfo) throws BizException {
 		String id = idFactoryService.generateId(Constants.CAR_INFO_ID);
 		carInfo.setId(id);
@@ -35,11 +37,13 @@ public class CarInfoServiceImpl implements CarInfoService {
 		carInfoDao.save(carInfo);
 	}
 
+	@Override
 	public void update(CarInfo carInfo, UserInfo userInfo) throws BizException {
 		carInfo.setBranchNo(userInfo.getBranchNo());
 		carInfoDao.update(carInfo);
 	}
 
+	@Override
 	public void delete(String id, UserInfo sessionUser) throws BizException {
 		carInfoDao.deleteById(id);
 

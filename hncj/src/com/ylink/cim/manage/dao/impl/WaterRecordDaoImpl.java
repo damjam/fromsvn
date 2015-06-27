@@ -27,6 +27,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		
 		return list;
 	}
+	@Override
 	public WaterRecord findPreRecord(String houseSn) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from WaterRecord where 1=1");
@@ -39,6 +40,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 			return null;
 		}
 	}
+	@Override
 	public List<WaterRecord> findPreRecords(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from WaterRecord where 1=1");
@@ -50,6 +52,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<WaterRecord> findRecords(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from WaterRecord where 1=1");
@@ -60,6 +63,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		return super.getList(helper);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Paginater findWaterRecordPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
@@ -80,6 +84,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
 			HouseInfoDao houseInfoDao = (HouseInfoDao)SpringContext.getService("houseInfoDao");
+			@Override
 			public int compare(Object o1, Object o2) {
 				try {
 					WaterRecord record1 = (WaterRecord) o1;

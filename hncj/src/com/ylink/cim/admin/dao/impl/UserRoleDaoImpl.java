@@ -23,7 +23,8 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 
 	private void assignRoleInfoValue(RoleInfo roleInfo, Object[] objects) {
 
-		String[] columns = new String[] { "roleId", "roleName", "limitGroupId", "limitGroupName" };
+		String[] columns = new String[] { "roleId", "roleName", "limitGroupId",
+				"limitGroupName" };
 		for (int i = 0; i < columns.length; i++) {
 			Object object = objects[i];
 			String value = "";
@@ -53,7 +54,8 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 
 	private void assingUserRoleValue(UserRole userRole, Object[] objects) {
 
-		String[] columns = new String[] { "userId", "userName", "loginId", "userType", "roleId", "roleName" };
+		String[] columns = new String[] { "userId", "userName", "loginId",
+				"userType", "roleId", "roleName" };
 
 		for (int i = 0; i < columns.length; i++) {
 
@@ -132,12 +134,14 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 
 	}
 
+	@Override
 	public void delRoleByUser(String userId) {
 		HqlHelper helper = new HqlHelper();
 		helper.append("delete from UserRole t where t.id.userId = ?", userId);
 		super.execute(helper);
 	}
 
+	@Override
 	public Paginater getAvailableRoles(String userId, Pager pager) {
 		UserInfo userInfo = super.findById(UserInfo.class, userId);
 		QueryHelper helper = new QueryHelper();
@@ -147,29 +151,35 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
 	protected Class getModelClass() {
 
 		return UserRole.class;
 	}
 
+	@Override
 	public List<RoleInfo> getRoleByUser(String userId) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("from RoleInfo t where t.roleId in (select u.id.roleId from UserRole u where u.id.userId = ?)",
+		helper.append(
+				"from RoleInfo t where t.roleId in (select u.id.roleId from UserRole u where u.id.userId = ?)",
 				userId);
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<UserRole> getUserRoleByRole(String roleId) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from UserRole t where t.id.roleId = ?", roleId);
 		return super.getList(helper);
 	}
 
+	@Override
 	public List<UserRole> getUserRoleByUser(final String id) {
 		String hql = "from UserRole u where u.id.userId='" + id + "'";
 		return getList(hql);
 	}
 
+	@Override
 	public Paginater getUserRolePageList(UserRole userRole, Pager pager) {
 
 		QueryHelper helper = new QueryHelper();
@@ -182,7 +192,8 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 		helper.append("and ui.userId=ur.id.userId");
 		helper.append("and ur.id.roleId=ri.roleId");
 		helper.append("and ui.userId=?", userRole.getId().getUserId());
-		helper.append("and ri.roleName like ?", userRole.getRoleName(), MatchMode.ANYWHERE);
+		helper.append("and ri.roleName like ?", userRole.getRoleName(),
+				MatchMode.ANYWHERE);
 
 		Paginater pageData = super.getPageData(helper, pager);
 		List<UserRole> lsRoleInfo = convertToUserRole((List) pageData.getData());
@@ -192,6 +203,7 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 		return pageData;
 	}
 
+	@Override
 	public Paginater getWaitAssignRolePageList(String userId, Pager pager) {
 
 		QueryHelper helper = new QueryHelper();
@@ -205,11 +217,14 @@ public class UserRoleDaoImpl extends BaseDaoImpl implements UserRoleDao {
 		helper.append("inner join user_info ui on ui.user_type=lgi.user_type");
 		helper.append("where  1=1");
 		helper.append("and ui.user_id=?", userId);
-		helper.append("and ri.role_id not in (select ur.role_id from user_role ur where ui.user_id= ? )", userId);
+		helper.append(
+				"and ri.role_id not in (select ur.role_id from user_role ur where ui.user_id= ? )",
+				userId);
 
 		Paginater paginater = super.getPageDataBySql(helper, pager);
 
-		List<RoleInfo> lsRoleInfo = convertToRoleInfo((List) paginater.getData());
+		List<RoleInfo> lsRoleInfo = convertToRoleInfo((List) paginater
+				.getData());
 		paginater.setData(lsRoleInfo);
 
 		return paginater;

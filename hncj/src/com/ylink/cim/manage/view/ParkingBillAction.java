@@ -25,9 +25,11 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+
 @Scope("prototype")
 @Component
-public class ParkingBillAction extends BaseAction implements ModelDriven<ParkingBill>{
+public class ParkingBillAction extends BaseAction implements
+		ModelDriven<ParkingBill> {
 	/**
 	 * 
 	 */
@@ -41,13 +43,13 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
-		//return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
+		// return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
 		return "add";
 	}
 
 	public String doAdd() throws Exception {
 		try {
-			
+
 			ParkingBill parkingBill = new ParkingBill();
 			BeanUtils.copyProperties(parkingBill, model);
 			billService.saveParkingBill(parkingBill, getSessionUser(request));
@@ -78,7 +80,7 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		//return forward("/pages/manage/charge/parking/parkingBillList.jsp");
+		// return forward("/pages/manage/charge/parking/parkingBillList.jsp");
 		return "list";
 	}
 
@@ -98,7 +100,8 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 	public String deleteBill() throws Exception {
 		try {
 			String id = request.getParameter("id");
-			billService.deleteBill(ParkingBill.class, id, getSessionUser(request));
+			billService.deleteBill(ParkingBill.class, id,
+					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (Exception e) {
 			setResult(false, "删除失败", request);
@@ -107,14 +110,14 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 		return list();
 	}
 
-	public String getOwnerName(
-			) throws Exception {
+	public String getOwnerName() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		String mobile = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
-			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn), "编号为" + houseSn + "的房屋信息不存在!");
+			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
+					"编号为" + houseSn + "的房屋信息不存在!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
@@ -133,14 +136,15 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 		respond(response, jsonObject.toString());
 		return null;
 	}
-	public String getOwnerInfo(
-			) throws Exception {
+
+	public String getOwnerInfo() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String ownerName = "";
 		String mobile = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
-			//Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn), "编号为" + houseSn + "的房屋信息不存在!");
+			// Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
+			// "编号为" + houseSn + "的房屋信息不存在!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
@@ -159,8 +163,7 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 		return null;
 	}
 
-	public String getAcctInfo(
-			) throws Exception {
+	public String getAcctInfo() throws Exception {
 		JSONObject jsonObject = new JSONObject();
 		String endDateStr = "";
 		Double amount = 0d;
@@ -169,7 +172,8 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 			String monthNumStr = request.getParameter("monthNum");
 			String priceStr = request.getParameter("price");
 			Integer monthNum = Integer.parseInt(monthNumStr);
-			Date endDate = DateUtil.addMonths(DateUtil.getDateByYYYMMDD(startDate), monthNum);
+			Date endDate = DateUtil.addMonths(
+					DateUtil.getDateByYYYMMDD(startDate), monthNum);
 			endDate = DateUtil.addDays(endDate, -1);
 			endDateStr = DateUtil.getDateYYYYMMDD(endDate);
 			// amount =
@@ -185,9 +189,11 @@ public class ParkingBillAction extends BaseAction implements ModelDriven<Parking
 		return null;
 	}
 
+	@Override
 	public ParkingBill getModel() {
 		return model;
 	}
+
 	private ParkingBill model = new ParkingBill();
-	
+
 }

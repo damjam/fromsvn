@@ -15,6 +15,7 @@ public class PositionType extends AbstractType {
 	public static final PositionType EAST_NORTH = new PositionType("东北", "4");
 	public static final PositionType WEST_SOUTH = new PositionType("西南", "5");
 	public static final PositionType WEST_NORTH = new PositionType("西北", "6");
+
 	protected PositionType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

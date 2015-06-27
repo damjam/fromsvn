@@ -15,11 +15,12 @@ import flink.util.ExceptionUtils;
  */
 public class ProductType extends AbstractState {
 	public static Map<String, ProductType> ALL = new LinkedHashMap<String, ProductType>();
+
 	protected ProductType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);
 	}
-	
+
 	public static final ProductType TYPE_00 = new ProductType("×°ÊÎ", "00");
 	public static final ProductType TYPE_01 = new ProductType("´É×©", "01");
 	public static final ProductType TYPE_02 = new ProductType("Ç½ÆáÍ¿ÁÏ", "02");
@@ -37,13 +38,15 @@ public class ProductType extends AbstractState {
 	public static final ProductType TYPE_14 = new ProductType("´°Á±", "14");
 	public static final ProductType TYPE_15 = new ProductType("ÁÀÒÂ¼Ü", "15");
 	public static final ProductType TYPE_16 = new ProductType("ÆäËû", "16");
+
 	public static ProductType valueOf(String value) throws Exception {
 		ProductType flag = ALL.get(value);
-		if(null == flag){
+		if (null == flag) {
 			ExceptionUtils.logException(ProductType.class, "±êÊ¶´íÎó");
 		}
 		return flag;
 	}
+
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("yesOrNos", ProductType.ALL.values());
 	}

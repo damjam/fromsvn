@@ -78,6 +78,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 		
 		return forward;
 	}*/
+	@Override
 	public String execute() {
 		try {
 			uri = request.getRequestURI();
@@ -179,9 +180,11 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	public void setAction(String action) {
 		this.action = action;
 	}
+	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+	@Override
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 		
@@ -189,6 +192,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 
 
 
+	@Override
 	public void setSession(Map<String, Object> map) {
 		this.session = map;
 	}

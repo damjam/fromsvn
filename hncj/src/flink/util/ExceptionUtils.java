@@ -8,7 +8,8 @@ import flink.etc.BizException;
  */
 public class ExceptionUtils {
 
-	public static void logBizException(Class cls, String msg) throws BizException {
+	public static void logBizException(Class cls, String msg)
+			throws BizException {
 
 		LoggerCacheUtils.getLogger(cls).debug(msg);
 		throw new BizException(msg);

@@ -7,7 +7,7 @@ import com.ylink.cim.busioper.domain.PushRecord;
 
 import flink.hibernate.BaseDao;
 
-public interface PushRecordDao extends BaseDao{
+public interface PushRecordDao extends BaseDao {
 
 	public List<PushRecord> findByParams(Map<String, Object> map);
 }

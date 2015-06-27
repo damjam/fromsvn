@@ -17,5 +17,6 @@ public interface WaterRecordDao extends BaseDao {
 
 	public List<WaterRecord> findRecords(Map<String, Object> params);
 
-	public Paginater findWaterRecordPager(Map<String, Object> params, Pager pager);
+	public Paginater findWaterRecordPager(Map<String, Object> params,
+			Pager pager);
 }

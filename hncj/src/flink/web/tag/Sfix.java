@@ -14,16 +14,17 @@ public class Sfix extends SimpleTagSupport {
 	private static final long serialVersionUID = 1L;
 	private String value;
 	private String length;
-	
+
+	@Override
 	public void doTag() throws JspException, IOException {
 		if (value == null) {
 			value = "";
 		}
-		
+
 		if (StringUtils.isNotEmpty(length) && StringUtils.isNumeric(length)) {
 			value = StringUtils.abbreviate(value, Integer.parseInt(length));
 		}
-		
+
 		this.getJspContext().getOut().write(value);
 	}
 

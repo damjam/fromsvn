@@ -20,10 +20,12 @@ public class VerifyCodeServlet extends HttpServlet {
     }
 	private static final long serialVersionUID = 1L;
 	private static String strs = "234567890abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ";
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {

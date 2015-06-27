@@ -39,6 +39,7 @@ import flink.util.BooleanUtil;
 import flink.util.ExceptionUtils;
 import flink.util.IPrivilege;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -86,7 +87,8 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			node.setName(p.getName());
 			node.setIsMenu(BooleanUtil.booleanToString(p.isMenu()));
 			String parent = p.getParent();
-			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT : parent);
+			node.setParentCode(parent == null ? PrivilegeTreeNode.ROOT_PARENT
+					: parent);
 			result.add(node);
 		}
 		return result;
@@ -100,7 +102,8 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		UserInfo user = this.getSessionUser(request);
 
 		// 获取所有的可选的菜单
-		List<IPrivilege> allPriv = (List<IPrivilege>) WebUtils.getSessionAttribute(request, Constants.USER_PRIVILEGE);
+		List<IPrivilege> allPriv = (List<IPrivilege>) WebUtils
+				.getSessionAttribute(request, Constants.USER_PRIVILEGE);
 		List<IPrivilege> menuPri = new ArrayList<IPrivilege>();
 		/*
 		 * for(IPrivilege p:allPriv){ if(p.isMenu() ||
@@ -110,7 +113,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		List<PrivilegeTreeNode> avaibleList = this.generateTreeNode(menuPri);
 		request.setAttribute("avaibleList", avaibleList);
 
-		String msg = LogUtils.r("指定菜单查询成功");
+		String msg = MsgUtils.r("指定菜单查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return MENU_BIND;
 	}
@@ -152,7 +155,8 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 	 * @param request
 	 * @throws Exception
 	 */
-	private void init_assignRoleDate(String userId, HttpServletRequest request) throws Exception {
+	private void init_assignRoleDate(String userId, HttpServletRequest request)
+			throws Exception {
 
 		/*
 		 * UserInfo user = (UserInfo)this.userService.getUserInfo(userId);
@@ -184,7 +188,8 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		 * "branchTypes"); ParaManager.setDictInReq(request, new
 		 * SysDictType[]{SysDictType.BranchType});
 		 */
-		Map<String, String> map = ParaManager.getSysDict(SysDictType.UserType.getValue());
+		Map<String, String> map = ParaManager.getSysDict(SysDictType.UserType
+				.getValue());
 		Map<String, String> userTypes = new HashMap<String, String>();
 		if (map != null) {
 			userTypes.putAll(map);
@@ -212,19 +217,22 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 				model.setBranchNo(getSessionUser(request).getBranchNo());
 			}
 			if (this.userService.isExistLoginId(model.getLoginId())) {
-				setResult(false, ActionMessageConstant.OPER_FAIL_HAS_USER, request);
+				setResult(false, ActionMessageConstant.OPER_FAIL_HAS_USER,
+						request);
 			} else {
 
 				this.userService.saveUserInfo(model);
-				setResult(true, ActionMessageConstant.OPER_SUCCESS + ",初始密码为111111，请立即更改", request);
+				setResult(true, ActionMessageConstant.OPER_SUCCESS
+						+ ",初始密码为111111，请立即更改", request);
 			}
 
 			this.initSelect(request);
-			String msg = LogUtils.r("添加用户成功,更新内容为：{?}", FeildUtils.toString(model));
+			String msg = MsgUtils.r("添加用户成功,更新内容为：{?}",
+					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 			return ActionConstant.TO_ADD_PAGE;
 		} catch (Exception e) {
-			String msg = LogUtils.r("添加用户失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("添加用户失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			ExceptionUtils.logException(UserInfoAction.class, e.getMessage());
 			throw e;
@@ -239,23 +247,26 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 
 		model.setUserId(getSessionUser(request).getUserId());
 		// userInfo.setUserType(getSessionUser(request).getUserType());
-		Paginater paginater = this.userService.getUserInfoPageList(model, super.getPager(request));
+		Paginater paginater = this.userService.getUserInfoPageList(model,
+				super.getPager(request));
 		// List<SysDict> userTypes =
 		// sysDictService.getSysDictByDictType(SysDictType.UserType.getValue());
 		BoUtils.addProperty(paginater.getList(), "userType", "userTypeName",
-				ParaManager.getSysDict(SysDictType.UserType.getValue()), "key", "value");
+				ParaManager.getSysDict(SysDictType.UserType.getValue()), "key",
+				"value");
 		// BoUtils.addProperty(paginater.getList(), "branchNo", "branchName",
 		// ParaManager.getSysDict(SysDictType.BranchType.getValue()), "key",
 		// "value");
 		saveQueryResult(request, paginater);
-		String msg = LogUtils.r("查询用户信息成功");
+		String msg = MsgUtils.r("查询用户信息成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return ActionConstant.TO_LIST_PAGE;
 	}
 
 	public String queryPopUpUserInfo() throws Exception {
 
-		Paginater paginater = this.userService.getPopUpUserInfoPageList(model, getPager(request));
+		Paginater paginater = this.userService.getPopUpUserInfoPageList(model,
+				getPager(request));
 
 		request.setAttribute("userInfoList", paginater.getList());
 		request.setAttribute(Paginater.PAGINATER, paginater);
@@ -269,13 +280,13 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			this.userService.deleteUserInfo(model.getUserId());
 
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			String msg = LogUtils.r("删除用户信息成功,删除内容为：{?}", model.getUserId());
+			String msg = MsgUtils.r("删除用户信息成功,删除内容为：{?}", model.getUserId());
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			model.setUserId(null);
 
 			return this.listUserInfo();
 		} catch (Exception e) {
-			String msg = LogUtils.r("删除用户信息失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("删除用户信息失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logException(UserInfoAction.class, e.getMessage());
 			throw e;
@@ -295,16 +306,20 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 
 		try {
 			this.initSelect(request);
-			if (this.userService.isExistLoginIdExpellUserId(model.getLoginId(), model.getUserId())) {
-				setResult(false, ActionMessageConstant.OPER_FAIL_HAS_LOG_IN_ID, request);
+			if (this.userService.isExistLoginIdExpellUserId(model.getLoginId(),
+					model.getUserId())) {
+				setResult(false, ActionMessageConstant.OPER_FAIL_HAS_LOG_IN_ID,
+						request);
 				return ActionConstant.TO_UPDATE_PAGE;
 			} else {
-				UserInfo userInfo = this.userService.getUserInfo(model.getUserId());
+				UserInfo userInfo = this.userService.getUserInfo(model
+						.getUserId());
 				userInfo.setLoginId(model.getLoginId());
 				userInfo.setUserName(model.getUserName());
 				userInfo.setUserType(model.getUserType());
 				userInfo.setUpdateTime(new Date());
-				userInfo.setUpdateUser(super.getSessionUser(request).getUserId());
+				userInfo.setUpdateUser(super.getSessionUser(request)
+						.getUserId());
 				if (StringUtils.isEmpty(model.getBranchNo())) {
 					userInfo.setBranchNo(getSessionUser(request).getBranchNo());
 				} else {
@@ -312,12 +327,13 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 				}
 				this.userService.updateUserInfo(userInfo);
 				setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-				String msg = LogUtils.r("更新用户信息成功,更新内容为：{?}", FeildUtils.toString(userInfo));
+				String msg = MsgUtils.r("更新用户信息成功,更新内容为：{?}",
+						FeildUtils.toString(userInfo));
 				super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			}
 			return ActionConstant.TO_UPDATE_PAGE;
 		} catch (Exception e) {
-			String msg = LogUtils.r("更新用户信息失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("更新用户信息失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			ExceptionUtils.logException(UserInfoAction.class, e.getMessage());
 			throw e;
@@ -341,13 +357,14 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			setResult(true, sucMessage, request);
 			// logSuccess(request, sucMessage);
 			init_assignRoleDate(userId, request);
-			String msg = LogUtils.r("给用户分配角色成功,分配内容为：{?},角色为：{?}", sucMessage, roleIds);
+			String msg = MsgUtils.r("给用户分配角色成功,分配内容为：{?},角色为：{?}", sucMessage,
+					roleIds);
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
 		} catch (Exception e) {
 			String errInfo = "给用户" + userId + "分配角色失败！";
 			setResult(false, errInfo, request);
 			// logError(request, errInfo);
-			String msg = LogUtils.r(errInfo + ",失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r(errInfo + ",失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.OTHER.getValue(), msg);
 
 			logger.error(errInfo, e);
@@ -408,11 +425,12 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			user.setLoginPwd(loginPwd);
 			userService.updateUserInfo(user);
 			String sucMessage = "用户" + user.getLoginId() + "修改密码成功！";
-			String msg = LogUtils.r("用户修改密码成功,更新内容为：{?}", FeildUtils.toString(user));
+			String msg = MsgUtils.r("用户修改密码成功,更新内容为：{?}",
+					FeildUtils.toString(user));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 			setResult(true, sucMessage, request);
 		} catch (Exception e) {
-			String msg = LogUtils.r("用户修改密码失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("用户修改密码失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 			String errInfo = "用户修改密码失败！" + e.getMessage();
 			setResult(false, errInfo, request);
@@ -430,24 +448,27 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		try {
 			String userId = request.getParameter("userId");
 			UserInfo userInfo = userService.getUserInfo(userId);
-			Assert.notNull(userInfo, LogUtils.r("找不到用户{?}", userId));
+			Assert.notNull(userInfo, MsgUtils.r("找不到用户{?}", userId));
 			if (null != userInfo) {
-				if (StringUtils.equals(userInfo.getUserType(), UserType.SYS_ADMIN.getValue())) {
+				if (StringUtils.equals(userInfo.getUserType(),
+						UserType.SYS_ADMIN.getValue())) {
 					// 若不是客户,则把密码重置为登录号
 					String newPwd = MD5Util.MD5("111111");
 					userService.resetCustomPwd(userInfo.getUserId(), newPwd);
-					setResult(true, LogUtils.r("用户{?}密码已被重置为{?}", userInfo.getLoginId(), "111111"), request);
+					setResult(true, MsgUtils.r("用户{?}密码已被重置为{?}",
+							userInfo.getLoginId(), "111111"), request);
 				} else {
 					// 若是客户,则密码重置为手机号后六位
 				}
 			} else {
 				setResult(false, "密码重置失败", request);
 			}
-			String msg = LogUtils.r("用户密码重置成功,新内容为：{?}", FeildUtils.toString(userInfo));
+			String msg = MsgUtils.r("用户密码重置成功,新内容为：{?}",
+					FeildUtils.toString(userInfo));
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
 		} catch (Exception e) {
 			// e.printStackTrace();
-			String msg = LogUtils.r("用户密码重置失败,失败原因:{?}", e.getMessage());
+			String msg = MsgUtils.r("用户密码重置失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			setResult(false, "操作失败," + e.getMessage(), request);
 			// 保存日志
@@ -455,6 +476,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		return listUserInfo();
 	}
 
+	@Override
 	public UserInfo getModel() {
 		return model;
 	}

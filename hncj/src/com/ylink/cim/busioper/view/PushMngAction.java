@@ -26,7 +26,7 @@ import com.ylink.cim.common.util.ParaManager;
 
 import flink.etc.BizException;
 import flink.etc.Symbol;
-import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -51,16 +51,17 @@ public class PushMngAction extends BaseAction implements ModelDriven<PushPlan> {
 			PushPlan plan = new PushPlan();
 			BeanUtils.copyProperties(plan, model);
 			if (StringUtils.isEmpty(model.getBranchNo())
-					&& !BranchType.HQ_0000.getValue().equals(getSessionUser(request).getBranchNo())) {
+					&& !BranchType.HQ_0000.getValue().equals(
+							getSessionUser(request).getBranchNo())) {
 				plan.setBranchNo(getSessionUser(request).getBranchNo());
 			}
 			pushMngService.addPushPlan(plan);
 			String message = "添加推送计划成功";
-			LogUtils.r("{?}", 1);
+			MsgUtils.r("{?}", 1);
 			setResult(true, message, request);
 			setReturnUrl("/pushMngAction.do?action=list", request);
 			logSuccess(request, UserLogType.ADD.getValue(), message);
-			String msg = LogUtils.r("推送资讯管理添加成功,添加内容id为：{?}", plan.getId());
+			String msg = MsgUtils.r("推送资讯管理添加成功,添加内容id为：{?}", plan.getId());
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
 		} catch (BizException e) {
 			setResult(false, "添加推送计划失败,原因:" + e.getMessage(), request);
@@ -75,12 +76,14 @@ public class PushMngAction extends BaseAction implements ModelDriven<PushPlan> {
 		if (StringUtils.isEmpty(branchNo)) {
 			branchNo = BranchType.HQ_0000.getValue();
 		}
-		Map<String, String> map = ParaManager.getSysDict("BusiType" + branchNo.substring(2, 4));
+		Map<String, String> map = ParaManager.getSysDict("BusiType"
+				+ branchNo.substring(2, 4));
 		object.putAll(map);
 		respond(response, object.toString());
 		return null;
 	}
 
+	@Override
 	public PushPlan getModel() {
 		return model;
 	}
@@ -107,7 +110,7 @@ public class PushMngAction extends BaseAction implements ModelDriven<PushPlan> {
 		Paginater paginater = pushPlanDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 
-		String msg = LogUtils.r("推送资讯管理查询成功");
+		String msg = MsgUtils.r("推送资讯管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		// return forward("/pages/busioper/push/pushPlanList.jsp");
 		return "list";

@@ -34,12 +34,15 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.SpringContext;
+
 @Component("houseInfoService")
-public class HouseInfoServiceImpl implements HouseInfoService{
+public class HouseInfoServiceImpl implements HouseInfoService {
 	@Autowired
 	private HouseInfoDao houseInfoDao;
 	@Autowired
 	private OwnerInfoDao ownerInfoDao;
+
+	@Override
 	public void delete(String id, UserInfo userInfo) throws BizException {
 		HouseInfo houseInfo = houseInfoDao.findById(id);
 		if (houseInfo == null) {
@@ -52,20 +55,22 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		Assert.isEmpty(list, "该房屋关联有业主信息，无法删除!");
 		houseInfoDao.deleteById(id);
 	}
+
+	@Override
 	public void add(HouseInfo houseInfo, UserInfo userInfo) throws BizException {
 		StringBuffer houseSn = new StringBuffer();
 		houseSn.append(houseInfo.getBuildingNo());
 		houseSn.append("-");
-		//houseSn.append(houseInfo.getUnitNo());
-		//houseSn.append("-");
+		// houseSn.append(houseInfo.getUnitNo());
+		// houseSn.append("-");
 		houseSn.append(houseInfo.getPosition());
 		String position = houseInfo.getPosition();
-		String floor = position.substring(0, position.length()-2);
+		String floor = position.substring(0, position.length() - 2);
 		houseInfo.setFloor(floor);
 		String sn = houseSn.toString();
 		Assert.isNull(houseInfoDao.findById(sn), "房屋信息已存在!");
 		houseInfo.setHouseSn(sn);
-		
+
 		houseInfo.setCreateDate(DateUtil.getCurrent());
 		houseInfo.setCreateUser(userInfo.getUserName());
 		StringBuffer houseDesc = new StringBuffer();
@@ -79,21 +84,24 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 		houseInfo.setOrderSn(orderSn);
 		houseInfoDao.save(houseInfo);
 	}
-	
+
 	private void update() {
-		WaterBillDao waterBillDao = (WaterBillDao)SpringContext.getService("waterBillDao");
-		OwnerInfoDao ownerInfoDao = (OwnerInfoDao)SpringContext.getService("ownerInfoDao");
+		WaterBillDao waterBillDao = (WaterBillDao) SpringContext
+				.getService("waterBillDao");
+		OwnerInfoDao ownerInfoDao = (OwnerInfoDao) SpringContext
+				.getService("ownerInfoDao");
 		List list = waterBillDao.findErr();
 		for (int i = 0; i < list.size(); i++) {
-			Map map= (Map)list.get(i);
-			String id = (String)map.get("id");
+			Map map = (Map) list.get(i);
+			String id = (String) map.get("id");
 			WaterBill bill = waterBillDao.findById(id);
 			String sn = bill.getHouseSn();
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(sn);
-			Account account = waterBillDao.findById(Account.class, ownerInfo.getId());
+			Account account = waterBillDao.findById(Account.class,
+					ownerInfo.getId());
 			//
 			if (bill.getPaidAmt() > 0) {
-				account.setBalance(account.getBalance()+bill.getPaidAmt());
+				account.setBalance(account.getBalance() + bill.getPaidAmt());
 				ownerInfoDao.update(account);
 				AccountDetail ad = waterBillDao.getstDeta(account.getId());
 				ownerInfoDao.delete(ad);
@@ -101,54 +109,66 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			ownerInfoDao.delete(bill);
 		}
 	}
+
 	private void setRem() {
-		AccountJournalDao accountJournalDao = (AccountJournalDao)SpringContext.getService("accountJournalDao");;
-		WaterBillDao waterBillDao = (WaterBillDao)SpringContext.getService("waterBillDao");
+		AccountJournalDao accountJournalDao = (AccountJournalDao) SpringContext
+				.getService("accountJournalDao");
+		;
+		WaterBillDao waterBillDao = (WaterBillDao) SpringContext
+				.getService("waterBillDao");
 		List list = accountJournalDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
-			AccountJournal aj = (AccountJournal)list.get(i);
+			AccountJournal aj = (AccountJournal) list.get(i);
 			if (aj.getRemark() != null && aj.getRemark().indexOf("收业主") != -1) {
 				String id = aj.getBillId();
 				WaterBill wb = waterBillDao.findById(id);
-				
-				if (wb==null) {
+
+				if (wb == null) {
 					continue;
 				}
-				aj.setRemark(aj.getRemark().replace("收业主", "收"+wb.getHouseSn()+"业主"));
+				aj.setRemark(aj.getRemark().replace("收业主",
+						"收" + wb.getHouseSn() + "业主"));
 				accountJournalDao.update(aj);
 			}
 		}
-		
+
 	}
+
 	private void updat() {
-		WaterBillDao waterBillDao = (WaterBillDao)SpringContext.getService("waterBillDao");
-		
+		WaterBillDao waterBillDao = (WaterBillDao) SpringContext
+				.getService("waterBillDao");
+
 		List list = waterBillDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
-			WaterBill w= (WaterBill)list.get(i);
-			if ("03".equals(w.getState()) && w.getPaidAmt().equals(w.getAmount())) {
+			WaterBill w = (WaterBill) list.get(i);
+			if ("03".equals(w.getState())
+					&& w.getPaidAmt().equals(w.getAmount())) {
 				w.setState("01");
-				w.setRemark("水费从预存账户中扣除,当前余额"+MoneyUtil.getFormatStr2(0d)+"元");
+				w.setRemark("水费从预存账户中扣除,当前余额" + MoneyUtil.getFormatStr2(0d)
+						+ "元");
 				waterBillDao.update(w);
 			}
 		}
-		
+
 	}
-	private void addBi(UserInfo userInfo) throws BizException{
-		WaterRecordDao waterRecordDao = (WaterRecordDao)SpringContext.getService("waterRecordDao");
-		IdFactoryService idFactoryService = (IdFactoryService)SpringContext.getService("idFactoryService");
+
+	private void addBi(UserInfo userInfo) throws BizException {
+		WaterRecordDao waterRecordDao = (WaterRecordDao) SpringContext
+				.getService("waterRecordDao");
+		IdFactoryService idFactoryService = (IdFactoryService) SpringContext
+				.getService("idFactoryService");
 		List list = waterRecordDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
-			WaterRecord waterRecord = (WaterRecord)list.get(i);
+			WaterRecord waterRecord = (WaterRecord) list.get(i);
 			waterRecord.setState(RecordState.CHECKED.getValue());
 			waterRecord.setCheckDate(DateUtil.getCurrent());
 			waterRecord.setCheckUser(userInfo.getUserName());
 			waterRecordDao.save(waterRecord);
-			//填账单
+			// 填账单
 			WaterBill waterBill = new WaterBill();
 			String price = ParaManager.getWaterPrice();
-			Double amount = Double.parseDouble(price)*waterRecord.getNum();
-			//查询未缴费的账单
+			Double amount = Double.parseDouble(price) * waterRecord.getNum();
+			// 查询未缴费的账单
 			waterBill.setAmount(amount);
 			waterBill.setPreRecordDate(waterRecord.getPreRecordDate());
 			waterBill.setCurRecordDate(waterRecord.getCurRecordDate());
@@ -163,18 +183,21 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			waterBill.setAmount(amount);
 			waterBill.setRecordMonth(waterRecord.getRecordMonth());
 			waterBill.setPrice(Double.parseDouble(ParaManager.getWaterPrice()));
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(waterBill.getHouseSn());
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(waterBill
+					.getHouseSn());
 			waterBill.setOwnerName(ownerInfo.getOwnerName());
 			waterRecordDao.save(waterBill);
 		}
-		
+
 	}
+
 	private void addWR(UserInfo userInfo) {
-		WaterRecordDao waterRecordDao = (WaterRecordDao)SpringContext.getService("waterRecordDao");
+		WaterRecordDao waterRecordDao = (WaterRecordDao) SpringContext
+				.getService("waterRecordDao");
 		List list = waterRecordDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
-			WaterRecord r = (WaterRecord)list.get(i);
-			r.setNum(r.getCurnum()-r.getPrenum());
+			WaterRecord r = (WaterRecord) list.get(i);
+			r.setNum(r.getCurnum() - r.getPrenum());
 			r.setPreRecordDate("20140628");
 			r.setCurRecordDate("20140827");
 			r.setCreateUser(userInfo.getUserName());
@@ -182,22 +205,26 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			r.setState(RecordState.UNCHECK.getValue());
 		}
 	}
-	private void addownerInfo() throws BizException{
+
+	private void addownerInfo() throws BizException {
 		List list = ownerInfoDao.findAll();
-		IdFactoryService idFactoryService = (IdFactoryService)SpringContext.getService("idFactoryService");
+		IdFactoryService idFactoryService = (IdFactoryService) SpringContext
+				.getService("idFactoryService");
 		for (int i = 0; i < list.size(); i++) {
-			OwnerInfo inf = (OwnerInfo)list.get(i);
+			OwnerInfo inf = (OwnerInfo) list.get(i);
 			inf.setHasAcct("N");
 			inf.setCreateDate(DateUtil.getCurrent());
-			//inf.setCheckinDate(DateUtil.getDate(DateUtil.formatDate(inf.getCheckinDate(), "yyyy.M")));
+			// inf.setCheckinDate(DateUtil.getDate(DateUtil.formatDate(inf.getCheckinDate(),
+			// "yyyy.M")));
 			inf.setState("00");
 			ownerInfoDao.update(inf);
 		}
 	}
+
 	private void addhouseInfo(UserInfo userInfo) {
 		List list = houseInfoDao.findAll();
 		for (int i = 0; i < list.size(); i++) {
-			HouseInfo house = (HouseInfo)list.get(i);
+			HouseInfo house = (HouseInfo) list.get(i);
 			if (!StringUtils.isEmpty(house.getBuildingNo())) {
 				continue;
 			}
@@ -209,8 +236,8 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			house.setPosition(s);
 			if (s.length() == 3) {
 				house.setFloor(s.substring(0, 1));
-				
-			}else {
+
+			} else {
 				house.setFloor(s.substring(0, 2));
 			}
 			StringBuffer houseDesc = new StringBuffer();
@@ -227,8 +254,9 @@ public class HouseInfoServiceImpl implements HouseInfoService{
 			houseInfoDao.update(house);
 		}
 	}
+
 	public void test2() throws BizException {
-		
+
 	}
 
 }

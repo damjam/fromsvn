@@ -238,7 +238,8 @@ class BatchPage {
 
 		int nextPageNum = this.batchSize - list.size();
 		long remainPageNum = p.getMaxPage() - p.getCurrentPage();
-		long appendPageNum = nextPageNum < remainPageNum ? nextPageNum : remainPageNum;
+		long appendPageNum = nextPageNum < remainPageNum ? nextPageNum
+				: remainPageNum;
 
 		for (long i = 0; i < appendPageNum; i++) {
 			addOnePage(list, p.getCurrentPage() + (i + 1));
@@ -270,10 +271,12 @@ class BatchPage {
 
 		if (remainPageNum < this.batchSize / 2) {
 			appendPageNum = this.batchSize - remainPageNum - 1;
-			appendPageNum = appendPageNum < currentPage ? appendPageNum : (currentPage - 1);
+			appendPageNum = appendPageNum < currentPage ? appendPageNum
+					: (currentPage - 1);
 		} else {
 			long priorPageNum = this.batchSize / 2;
-			appendPageNum = priorPageNum < currentPage ? priorPageNum : (currentPage - 1);
+			appendPageNum = priorPageNum < currentPage ? priorPageNum
+					: (currentPage - 1);
 		}
 
 		for (long i = 0; i < appendPageNum; i++) {

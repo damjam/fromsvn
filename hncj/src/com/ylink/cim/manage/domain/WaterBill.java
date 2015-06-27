@@ -40,67 +40,50 @@ public class WaterBill implements java.io.Serializable {
 	private String endCreateDate;
 	private String buildingNo;
 	private String year;
-	//表单元素
-	
+
+	// 表单元素
+
 	public String getBuildingNo() {
 		return buildingNo;
 	}
-
-
 
 	public void setBuildingNo(String buildingNo) {
 		this.buildingNo = buildingNo;
 	}
 
-
-
 	public String getYear() {
 		return year;
 	}
-
-
 
 	public void setYear(String year) {
 		this.year = year;
 	}
 
-
-
 	public String getStartCreateDate() {
 		return startCreateDate;
 	}
-
-
 
 	public void setStartCreateDate(String startCreateDate) {
 		this.startCreateDate = startCreateDate;
 	}
 
-
-
 	public String getEndCreateDate() {
 		return endCreateDate;
 	}
-
-
 
 	public void setEndCreateDate(String endCreateDate) {
 		this.endCreateDate = endCreateDate;
 	}
 
-
-
 	/** default constructor */
 	public WaterBill() {
 	}
-
-
 
 	/** minimal constructor */
 	public WaterBill(String id) {
 		this.id = id;
 	}
-	
+
 	public Double getAmount() {
 		return this.amount;
 	}
@@ -163,7 +146,6 @@ public class WaterBill implements java.io.Serializable {
 		return paidAmt;
 	}
 
-
 	// Property accessors
 
 	public Long getPrenum() {
@@ -173,7 +155,6 @@ public class WaterBill implements java.io.Serializable {
 	public String getPreRecordDate() {
 		return preRecordDate;
 	}
-	
 
 	public Double getPrice() {
 		return price;
@@ -202,6 +183,7 @@ public class WaterBill implements java.io.Serializable {
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}
+
 	// Constructors
 
 	public void setChargeDate(Date chargeDate) {
@@ -271,6 +253,5 @@ public class WaterBill implements java.io.Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-
 
 }

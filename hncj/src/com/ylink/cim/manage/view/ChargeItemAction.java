@@ -32,7 +32,8 @@ import flink.web.BaseAction;
  */
 @Scope("prototype")
 @Component
-public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeItem> {
+public class ChargeItemAction extends BaseAction implements
+		ModelDriven<ChargeItem> {
 	/**
 	 * 
 	 */
@@ -69,7 +70,8 @@ public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeIt
 				Assert.isEmpty(list, "计费项名称已存在，请重新指定");
 				ChargeItem chargeItem = new ChargeItem();
 				BeanUtils.copyProperties(chargeItem, model);
-				chargeParamService.saveOrUpdateItem(chargeItem, getSessionUser(request));
+				chargeParamService.saveOrUpdateItem(chargeItem,
+						getSessionUser(request));
 			} else {
 				params.put("exceptId", model.getId());
 				List<ChargeItem> list = chargeItemDao.findBy(params);
@@ -80,7 +82,8 @@ public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeIt
 				BeanUtils.copyProperties(chargeItem, model);
 				chargeItem.setBranchNo(branchNo);
 				chargeItem.setCreateDate(createDate);
-				chargeParamService.saveOrUpdateItem(chargeItem, getSessionUser(request));
+				chargeParamService.saveOrUpdateItem(chargeItem,
+						getSessionUser(request));
 			}
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
@@ -101,7 +104,8 @@ public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeIt
 			params.put("branchNo", getSessionBranchNo(request));
 			ChargeItem chargeItem = new ChargeItem();
 			BeanUtils.copyProperties(chargeItem, model);
-			chargeParamService.saveOrUpdateItem(chargeItem, getSessionUser(request));
+			chargeParamService.saveOrUpdateItem(chargeItem,
+					getSessionUser(request));
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
@@ -150,7 +154,8 @@ public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeIt
 			Map<String, Object> params = getParaMap();
 			params.put("branchNo", getSessionBranchNo(request));
 			params.put("avai", true);
-			Paginater paginater = this.chargeItemDao.findPager(params, getPager(request));
+			Paginater paginater = this.chargeItemDao.findPager(params,
+					getPager(request));
 			saveQueryResult(request, paginater);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,6 +165,7 @@ public class ChargeItemAction extends BaseAction implements ModelDriven<ChargeIt
 		return "pop";
 	}
 
+	@Override
 	public ChargeItem getModel() {
 		return model;
 	}

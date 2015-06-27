@@ -27,8 +27,10 @@ public abstract class StringUtil {
 			return s;
 		}
 
-		String maskString = StringUtils.leftPad(StringUtils.EMPTY, endIndex - beginIndex, maskChar);
+		String maskString = StringUtils.leftPad(StringUtils.EMPTY, endIndex
+				- beginIndex, maskChar);
 
-		return new StringBuffer(s).replace(beginIndex, endIndex, maskString).toString();
+		return new StringBuffer(s).replace(beginIndex, endIndex, maskString)
+				.toString();
 	}
 }

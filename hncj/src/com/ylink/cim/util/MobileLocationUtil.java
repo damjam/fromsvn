@@ -19,7 +19,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class MobileLocationUtil {
-	//直辖市
+	// 直辖市
 	public static String[] MUNICIPALITIES = { "北京", "上海", "天津", "重庆" };
 
 	private static String getLocationByMobile(final String mobile)
@@ -101,7 +101,7 @@ public class MobileLocationUtil {
 						.item(0).getFirstChild().getNodeValue().trim();
 				String city = document.getElementsByTagName("city").item(0)
 						.getFirstChild().getNodeValue().trim();
-				//如果归属地为直辖市，不需要省份
+				// 如果归属地为直辖市，不需要省份
 				if (ArrayUtils.contains(MUNICIPALITIES, city)) {
 					province = "";
 				}
@@ -132,7 +132,8 @@ public class MobileLocationUtil {
 
 	public static void main(String[] args) {
 		try {
-			System.out.println(MobileLocationUtil.getMobileLocation("15010526510"));
+			System.out.println(MobileLocationUtil
+					.getMobileLocation("15010526510"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

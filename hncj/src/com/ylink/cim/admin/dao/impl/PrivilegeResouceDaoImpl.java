@@ -11,39 +11,47 @@ import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
-@Component("privilegeResourceDao")
-public class PrivilegeResouceDaoImpl extends BaseDaoImpl 
-	implements PrivilegeResourceDao {
 
-	
+@Component("privilegeResourceDao")
+public class PrivilegeResouceDaoImpl extends BaseDaoImpl implements
+		PrivilegeResourceDao {
+
+	@Override
 	protected Class getModelClass() {
-		
+
 		return PrivilegeResource.class;
 	}
 
+	@Override
 	public Paginater getPrivilegeResourceList(
-			PrivilegeResource privilegeResource,Pager pager) {
-		
-		QueryHelper helper=new QueryHelper();
+			PrivilegeResource privilegeResource, Pager pager) {
+
+		QueryHelper helper = new QueryHelper();
 		helper.append("from PrivilegeResource p ");
 		helper.append("where 1=1");
-		helper.append("and p.id=?",privilegeResource.getId());
-		helper.append("and p.limitId=?",privilegeResource.getLimitId());
-		helper.append("and p.url=?",privilegeResource.getUrl());
-		helper.append("and p.param=?",privilegeResource.getParam());
-		helper.append("and p.isEntry=?",privilegeResource.getIsEntry());
-		
+		helper.append("and p.id=?", privilegeResource.getId());
+		helper.append("and p.limitId=?", privilegeResource.getLimitId());
+		helper.append("and p.url=?", privilegeResource.getUrl());
+		helper.append("and p.param=?", privilegeResource.getParam());
+		helper.append("and p.isEntry=?", privilegeResource.getIsEntry());
+
 		return super.getPageData(helper, pager);
 	}
 
-	public Paginater findPrivRes(PrivilegeResource privilegeResource, Pager pager) {
+	@Override
+	public Paginater findPrivRes(PrivilegeResource privilegeResource,
+			Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from PrivilegeResource where 1=1");
 		helper.append("and limitId = ?", privilegeResource.getLimitId());
-		helper.append("and url like ?", privilegeResource.getUrl(), MatchMode.ANYWHERE);
-		helper.append("and param like ?", privilegeResource.getParam(), MatchMode.ANYWHERE);
+		helper.append("and url like ?", privilegeResource.getUrl(),
+				MatchMode.ANYWHERE);
+		helper.append("and param like ?", privilegeResource.getParam(),
+				MatchMode.ANYWHERE);
 		return super.getPageData(helper, pager);
 	}
+
+	@Override
 	public boolean existPriRes(String limitId, Long id) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from PrivilegeResource where limitId = ?", limitId);
@@ -52,6 +60,6 @@ public class PrivilegeResouceDaoImpl extends BaseDaoImpl
 		}
 		helper.append("and id <> ?", id);
 		helper.append("and isEntry = ?", Symbol.YES);
-		return super.getList(helper).size() > 0 ? true :false;
+		return super.getList(helper).size() > 0 ? true : false;
 	}
 }

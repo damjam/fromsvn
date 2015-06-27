@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class ShowDataGridTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 表格数据在request 中的名称.
 	 */
@@ -26,7 +26,7 @@ public class ShowDataGridTag extends TagSupport {
 	private String styleId;
 	private String styleClass;
 	private boolean showTopbar;
-	
+
 	public void setShowTopbar(boolean showTopbar) {
 		this.showTopbar = showTopbar;
 	}
@@ -55,6 +55,7 @@ public class ShowDataGridTag extends TagSupport {
 		this.msg = msg;
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			pageContext.getOut().write("</div>");
@@ -63,50 +64,50 @@ public class ShowDataGridTag extends TagSupport {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
-		HttpServletRequest request = (HttpServletRequest) this.pageContext.getRequest();
+		HttpServletRequest request = (HttpServletRequest) this.pageContext
+				.getRequest();
 		Collection data = (Collection) request.getAttribute(name);
 		boolean hasData = CollectionUtils.isNotEmpty(data);
-		
+
 		if (StringUtils.isEmpty(msg)) {
 			msg = "没有您需要的数据";
 		}
-		
+
 		StringBuffer divSb = new StringBuffer();
-		
+
 		if (showTopbar) {
 			divSb.append("<div class=\"separator-bar\"></div>");
 		}
-		
+
 		if (hasData) {
 			divSb.append("<div ");
-			
+
 			if (StringUtils.isNotEmpty(styleId)) {
 				divSb.append("id=\"" + styleId + "\" ");
 			}
-			
+
 			divSb.append("class=\"has-data");
-			
+
 			if (StringUtils.isNotEmpty(styleClass)) {
 				divSb.append(" " + styleClass + "\"");
-			}
-			else {
+			} else {
 				divSb.append("\"");
 			}
-			
+
 			divSb.append(">");
-		}
-		else {
+		} else {
 			divSb.append("<div class=\"no-data " + styleClass + " \">");
 			divSb.append(msg);
 		}
-		
+
 		try {
 			pageContext.getOut().write(divSb.toString());
 		} catch (IOException e) {
-			
+
 		}
-		
+
 		return hasData ? EVAL_BODY_INCLUDE : SKIP_BODY;
 	}
 }

@@ -11,7 +11,8 @@ public class SocketParams {
 
 	}
 
-	public SocketParams(String hostName, int portNum, int timeout, String charset) {
+	public SocketParams(String hostName, int portNum, int timeout,
+			String charset) {
 		this.hostName = hostName;
 		this.portNum = portNum;
 		this.timeout = timeout;
