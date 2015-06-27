@@ -90,7 +90,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="formlabel nes">״̬</td>
+							<td class="formlabel">״̬</td>
 						    <td>
 						    	<html:select property="state" styleId="state">
 						    		<html:option value="">---ȫ��---</html:option>

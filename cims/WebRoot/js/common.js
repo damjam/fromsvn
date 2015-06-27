@@ -257,7 +257,6 @@ FormUtils = {
 		//清除表单中的数据，可以传form的id,form对象,当前对象,也可什么都不传
 		var form;
 		if(!param){
-			alert('no');
 			 var event = window.event; // 事件     
         	 var target = event.target || event.srcElement; // 获得事件源 
        		 form = target.form;
