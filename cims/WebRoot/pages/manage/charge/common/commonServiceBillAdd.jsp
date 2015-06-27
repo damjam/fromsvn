@@ -289,7 +289,7 @@
 						    	<html:select property="checkinState" styleId="checkinState" onchange="check()">
 						    		<html:options collection="yesNos" property="value" labelProperty="name" />
 						    	</html:select>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr id="tr2">
@@ -299,7 +299,7 @@
 						    		<html:option value="N">否</html:option>
 						    		<html:option value="Y">是</html:option>
 						    	</html:select>
-						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
