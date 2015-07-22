@@ -86,7 +86,7 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, t.state as state) from WaterBill t where 1=1");
+		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, sum(t.paidAmt) as paidAmt, t.state as state) from WaterBill t where 1=1");
 		helper.append("and recordMonth >= ?", MapUtils.getString(params, "startRecordMonth"));
 		helper.append("and recordMonth <= ?", MapUtils.getString(params, "endRecordMonth"));
 		helper.append("and createDate >= ?", MapUtils.getString(params, "startCreateDate"));
@@ -112,6 +112,7 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 			String state = (String)map.get("state");
 			Long cnt = (Long)map.get("cnt");
 			Double sumAmt = (Double)map.get("sumAmt");
+			Double paidAmt1 = (Double)map.get("paidAmt");
 			if (cnt == null) {
 				cnt = 0L;
 			}
@@ -120,13 +121,13 @@ public class WaterBillDaoImpl extends BaseDaoHibernateImpl implements WaterBillD
 			}
 			if (BillState.PAID.getValue().equals(state)) {
 				paidCnt = cnt;
-				paidAmt = sumAmt;
+				paidAmt = paidAmt1;
 			}else if (BillState.PART_PAID.getValue().equals(state)) {
 				partPaidCnt = cnt;
-				partPaidAmt = sumAmt;
+				partPaidAmt = paidAmt;
 			}else if (BillState.UNPAY.getValue().equals(state)) {
 				unpayCnt = cnt;
-				unpayAmt = sumAmt;
+				unpayAmt = sumAmt;//Î´½É½ð¶î
 			}else if (BillState.REVERSE.getValue().equals(state)) {
 				continue;
 			}
