@@ -83,25 +83,25 @@ YToken = {
 	 * 在表单内部创建随机数token.
 	 */
 	create: function(jqueryForm) {
-		if (jqueryForm.find('input[name="YLINK-KEY"]').length == 0) {
-			jqueryForm.append('<input type="hidden" name="YLINK-KEY">');
+		if (jqueryForm.find('input[name="TOKEN-KEY"]').length == 0) {
+			jqueryForm.append('<input type="hidden" name="TOKEN-KEY">');
 		}
 		
-		jqueryForm.find('input[name="YLINK-KEY"]').val(YToken.callId());
+		jqueryForm.find('input[name="TOKEN-KEY"]').val(YToken.callId());
 	},
 	
 	/**
 	 * 获取表单内部随机数token.
 	 */
 	get: function(jqueryForm) {
-		return jqueryForm.find('input[name="YLINK-KEY"]').val();
+		return jqueryForm.find('input[name="TOKEN-KEY"]').val();
 	},
 	
 	/**
 	 * 清空表单内部随机数token.
 	 */
 	clear: function(jqueryForm) {
-		jqueryForm.find('input[name="YLINK-KEY"]').val('');
+		jqueryForm.find('input[name="TOKEN-KEY"]').val('');
 	}
 }
 

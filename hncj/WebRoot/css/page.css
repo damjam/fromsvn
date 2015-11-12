@@ -1,16 +1,4 @@
-/* -----------------------------------------------------------------------
 
-                Wucss 银联商务网上服务系统跨浏览器兼容CSS框架
- 
-   * Copyright 2010-Present. See Website For More Info.
-   * 文件名称：Wucss网站CSS样式框架
-   * 兼容浏览器：IE6\IE7\火狐3\遨游2\世界之窗2\谷歌浏览器2\opera9\Safari4
-   * 设计师：FangZhengWu
-   * 技术支持：4008-333-222  www.gnete.com 
-   * 广州银联网络支付有限公司 
-   * 主要功能：对银联网络多渠道资金归集处理系统界面进行统一的跨浏览器样式控制
-
------------------------------------------------------------------------ */
 
 /* 处理整体重置 */
 html, body, div, span, object, iframe, h1, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption, tbody, tfoot, thead,{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-family:inherit;vertical-align:baseline;}
@@ -125,7 +113,7 @@ caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:lef
 
 /* 表单提示信息样式 */
 .field_tipinfo, .error_tipinfo {width:250px; line-height:30px; font-size:12px; text-indent:2em; padding: 3px 5px 3px 20px;}
-.field_tipinfo {color:#666; border:0px solid #fff;}
+.field_tipinfo {color:#666; border:0px solid #fff; padding: 3px 5px 5px 20px;}
 .error_tipinfo {color:#333; background:#FFF2E9 url(../images/fault.gif) no-repeat 1px; border:1px solid #FF6600; display:none}
 .nes {background: url(../images/redstar.gif) no-repeat right;}
 .formlabel {text-align:right; padding-right:5px; width:100px}

@@ -207,7 +207,7 @@ SysStyle = {
 					showErrors: JError.showErrors, 
 					clearError: JError.clearError,
 					submitHandler: function(form) {
-						$(form).append("<input type='hidden' name='YLINK-KEY' value='"+ YToken.callId() +"' />");
+						$(form).append("<input type='hidden' name='TOKEN-KEY' value='"+ YToken.callId() +"' />");
 						$(form).find(":button, :submit, :reset").attr('disabled', true);
 					}
 				});

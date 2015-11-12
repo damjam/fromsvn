@@ -64,7 +64,7 @@ public abstract class BaseAction extends RootAction {
 	protected static final String GBK_TEXT_XML = "text/xml;charset=GBK";
 
 	/** 防止重复提交的令牌环 */
-	private static final String TOKEN_YLINK_KEY = "YLINK-KEY";
+	private static final String TOKEN_YLINK_KEY = "TOKEN-KEY";
 
 	private static final String TOKEN = "token";
 
