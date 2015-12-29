@@ -44,15 +44,6 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 	}
 
 	@Override
-	public Date getDbTime() {
-		QueryHelper sql = new QueryHelper();
-		sql.append("select current_timestamp as t from dual");
-		sql.appendScalar("t", Hibernate.TIMESTAMP);
-
-		return (Date) getUniqueResultBySql(sql);
-	}
-
-	@Override
 	protected Class getModelClass() {
 		return SysParm.class;
 	}
@@ -97,37 +88,6 @@ public class SysParmDaoImpl extends BaseDaoImpl implements SysParmDao {
 		beginTransaction.commit();
 	}
 
-	public String updateNextCapitalAllocMbsExportSeq() {
-		SysParm sysParm = (SysParm) this.findById("9007");
-		String paraVal = sysParm.getParvalue();
-
-		String date = paraVal.substring(0, 8);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-		String currentDate = simpleDateFormat.format(this.getDbTime());
-
-		String seq;
-		if (!currentDate.equals(currentDate)) {
-			date = currentDate;
-			seq = StringUtils.leftPad("1", 6, "0");
-		} else {
-			String str = paraVal.substring(8);
-			Long num = 1l;
-			if (!StringUtils.isEmpty(str)) {
-				num = Long.parseLong(str) + 1;
-			}
-			seq = String.valueOf(num);
-			seq = StringUtils.leftPad(seq, 6, "0");
-		}
-
-		StringBuffer sb = new StringBuffer();
-		sb.append(date).append(seq);
-
-		sysParm.setParvalue(sb.toString());
-		update(sysParm);
-
-		return sb.toString();
-
-	}
 
 	@Override
 	public void updateSysParm(SysParm sysParm) throws Exception {

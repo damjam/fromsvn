@@ -27,12 +27,6 @@ public interface SysParmDao extends BaseDao {
 	 */
 	public String generateFeeSettingIndex();
 
-	/**
-	 * 取数据库时间.
-	 * 
-	 * @return
-	 */
-	public Date getDbTime();
 
 
 	public Paginater getPageList(Pager pager, SysParm sysParm) throws Exception;

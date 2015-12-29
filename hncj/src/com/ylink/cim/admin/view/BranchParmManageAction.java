@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.admin.dao.BranchParmDao;
 import com.ylink.cim.admin.domain.BranchParm;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.BranchParmService;
@@ -24,7 +25,6 @@ import com.ylink.cim.common.util.ParaManager;
 import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.DateUtil;
-import flink.util.LogUtils;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -42,7 +42,8 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 
 	@Autowired
 	BranchParmService branchParmService;
-
+	@Autowired
+	BranchParmDao branchParmDao;
 	/**
 	 * Ò³ÃæÉ¾³ý
 	 * 
@@ -212,9 +213,8 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 	 * @throws Exception
 	 */
 	public String update() throws Exception {
-		BranchParm parm = branchParmService.findById(model.getCode());
+		BranchParm parm = branchParmDao.findById(model.getCode());
 		BeanUtils.copyProperties(model, parm);
-		// setModel(parm);
 		return "modify";
 	}
 

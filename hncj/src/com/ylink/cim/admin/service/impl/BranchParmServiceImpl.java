@@ -27,10 +27,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	public void delete(String id) throws BizException {
 
 		try {
-			if (!branchParmDao.hasParm(id)) {
-				throw new Exception("不存在要删除的记录!");
-			}
-			this.branchParmDao.deleteBranchParmById(id);
+			branchParmDao.deleteById(id);
 		} catch (Exception e) {
 			logger.debug(BranchParmServiceImpl.class.getClass() + "," + e.getMessage());
 			throw new BizException(e.getMessage());
@@ -63,18 +60,6 @@ public class BranchParmServiceImpl implements BranchParmService {
 	 * 
 	 * @throws BizException
 	 */
-	@Override
-	public BranchParm findById(String id) throws BizException {
-
-		BranchParm branchParm;
-		try {
-			branchParm = this.branchParmDao.findBranchParmById(id);
-			return branchParm;
-		} catch (Exception e) {
-			throw new BizException(e.getMessage());
-		}
-
-	}
 
 	@Override
 	public BranchParm findByIdWithLock(String code) throws BizException {
@@ -85,11 +70,10 @@ public class BranchParmServiceImpl implements BranchParmService {
 	@Override
 	public void save(BranchParm branchParm) throws BizException {
 		try {
-			if (branchParmDao.hasParm(branchParm.getCode())) {
+			if (branchParmDao.findById(branchParm.getCode()) != null) {
 				throw new Exception("该数据已经存在!" + branchParm.getCode());
 			}
-
-			this.branchParmDao.saveBranchParm(branchParm);
+			this.branchParmDao.save(branchParm);
 		} catch (Exception e) {
 			logger.debug(BranchParmServiceImpl.class.getClass() + "," + e.getMessage());
 			throw new BizException(e.getMessage());

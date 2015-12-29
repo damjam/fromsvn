@@ -17,8 +17,6 @@ public interface BranchParmService {
 
 	public Paginater findAll(Pager pager, BranchParm sysParm) throws BizException;
 
-	public BranchParm findById(String id) throws BizException;
-
 	/**
 	 * 锁定指定记录
 	 * 

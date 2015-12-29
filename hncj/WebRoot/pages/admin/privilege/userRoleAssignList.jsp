@@ -45,7 +45,7 @@
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td><input type="checkbox" onclick="FormUtils.selectAll(this, 'roleIds')" />全选</th></td>
-						    <td>角色编号1</td>
+						    <td>角色编号</td>
 						    <td>角色名称</td>
 						    <td>权限组编号</td>
 						    <td>权限组名称</td>

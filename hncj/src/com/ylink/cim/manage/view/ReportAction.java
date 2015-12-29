@@ -122,7 +122,7 @@ public class ReportAction extends BaseAction {
 				"yyyy-MM-dd");
 		map.put("period", startDate + "--" + endDate);
 		map.put("comName", comInfo.getName());
-		generateReportWithConn("adrentBill.jasper", map, request, response);
+		generateReportWithConn("waterBill.jasper", map, request, response);
 		return null;
 	}
 
