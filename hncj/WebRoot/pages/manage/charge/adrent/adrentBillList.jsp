@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%response.setHeader("Cache-Control", "no-cache");%>
 <%@ include file="/pages/common/taglibs.jsp" %>
-<html lang="zh-cn"> 
+<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+
+<%@ include file="/pages/common/meta.jsp"%>
+<%@ include file="/pages/common/sys.jsp"%>
+
+<html>
 	<head>
-		<%@ include file="/pages/common/meta.jsp"%>
-		<%@ include file="/pages/common/sys.jsp"%>
-		
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />
@@ -14,7 +15,7 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		<f:js src="/js/paginater.js" />
-		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>	
+		<f:js src="/js/datePicker/WdatePicker.js"/>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -26,30 +27,31 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/parkingBill.do?action=toAdd');
+					gotoUrl('/adrentBill.do?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('/parkingBill.do?action=charge&id='+id);
+					gotoUrl('/adrentBill.do?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
-				window.open(CONTEXT_PATH+'/reportAction.do?action=parkingBill&id='+id);
+				window.open(CONTEXT_PATH+'/reportAction.do?action=adrentBill&id='+id);
 			}
 			function delRecord(id){
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/parkingBill.do?action=deleteBill&id='+id);
+				gotoUrl('/adrentBill.do?action=delete&id='+id);
 			}
+			
 		</script> 
 	</head>
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<form action="parkingBill.do?action=list" id="queryForm">
+		<form action="adrentBill.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -58,28 +60,16 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								车位号
+								收款日期
 							</td>
 							<td>
-								<s:textfield name="parkingSn" id="parkingSn" maxlength="10"/>
+								<s:textfield name="startChargeDate" id="startChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endChargeDate" id="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
-							<td class="formlabel">
-								车牌号
-							</td>
-							<td>
-								<s:textfield name="carSn" id="carSn" maxlength="10"/>
-							</td>
-							<td class="formlabel">
-								房屋编号
-							</td>
-							<td>
-								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
-							</td>
-						</tr>
-						<tr>
+							
 							<td class="formlabel nes">状态</td>
 						    <td>
-						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
+						    <s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
 							<td class="formlabel">
 								账单号
@@ -87,13 +77,7 @@
 							<td>
 								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
-							<td class="formlabel">
-								年份
-							</td>
-							<td>
-								<s:textfield name="year" id="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
-							</td>
-						</tr>
+						</tr>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -106,8 +90,9 @@
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 			<!-- 汇总信息 -->
+			 
+			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
 					<caption>汇总信息</caption>
 					<thead>
@@ -117,10 +102,8 @@
 						</tr>
 					</thead>
 					<tr>
-						<td align="center">${sumInfo.cnt}</td>
-						<td align="center">
-							<fmt:formatNumber value="${sumInfo.amt}" pattern="##0.00"/>
-						</td>
+						<td align="center">${sumInfo.totalCnt}</td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.totalAmt}" pattern="##0.00"/></td>
 					</tr>
 				</table>
 			</div>
@@ -130,38 +113,41 @@
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td >账单号</td>
-						 	<td >车位号</td>
-						 	<td >车牌号</td>
-						    <td >车主姓名</td>
-						    <td >房屋编号</td>
-						    <td >计费起止日期</td>
-						 	<td >金额</td>
-						 	<td >缴费时间</td>
-						 	<td>收款人</td>
-						    <td>状态</td>
-						    <td>备注</td>
+						    <td >商家名称</td>
+						    <td >租用位置</td>
+						    <td >单价</td>
+						    <td >数量</td>
+						    <td >起止日期</td>
+						    <td >总额</td>
+						    <td >实收金额</td>
+						    <td >付款人</td>
+						    <td >付款时间</td>
+						    <td >收款人</td>
+						    <td >状态</td>
+						    <td >备注</td>
 						    <td>操作</td>
 						 </tr>
 					</thead>
-					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
 								<td>${element.id}</td>
-								<td>${element.parkingSn}</td>
-								<td>${element.carSn}</td>
-								<td>${element.ownerName}</td>
-								<td>${element.houseSn}</td>
-								<td>${element.beginDate}—${element.endDate}</td>
-								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
-								<td width="120">
-									<fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<td>${element.merchantName}</td>
+								<td>${element.position}</td>
+								<td><fmt:formatNumber value="${element.unitPrice}" pattern="##0.00"/></td>
+								<td>${element.num}</td>
+								<td>${element.beginDate}-${element.endDate}</td>
+								<td><fmt:formatNumber value="${element.totalAmt}" pattern="##0.00"/></td>
+								<td>
+										<fmt:formatNumber value="${element.paidAmt}" pattern="##0.00"/>
 								</td>
+								<td>${element.payerName}</td>
+								<td><fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.chargeUser}</td>
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>
-							    <td>${element.remark}</td>
+								<td>${element.remark}</td>
 								<td class="redlink">
 							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>

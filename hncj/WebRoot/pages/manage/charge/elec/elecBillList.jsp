@@ -13,10 +13,12 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		<f:js src="/js/paginater.js" />
+		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>	
 		<script type="text/javascript">
 			$(function(){
 				
 				$('#btnQry').click(function(){
+					alert($('#queryForm').attr('action'));
 					$('#queryForm').submit();
 				});
 				

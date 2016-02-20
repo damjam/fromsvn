@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%response.setHeader("Cache-Control", "no-cache");%>
 <%@ include file="/pages/common/taglibs.jsp" %>
-<html lang="zh-cn"> 
+<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<%@ include file="/pages/common/meta.jsp"%>
-		<%@ include file="/pages/common/sys.jsp"%>
+		<%@ include file="/pages/common/meta.jsp" %>
+		<%@ include file="/pages/common/sys.jsp" %>
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
@@ -17,7 +17,7 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
-		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
+		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>	
 		<style type="text/css">
 			html { overflow-y: scroll; }
 		</style>
@@ -27,11 +27,9 @@
 		 		var tradeType = $('#tradeType').val();
 		 		if(tradeType == '98'){
 		 			var remark = $('#remark').val();
-		 			if(remark == ''){
-		 				alert('请在备注中注明收款项目');
-			 			$('#remark').focus();
-			 			return;
-		 			}
+		 			alert('请在备注中注明收款项目');
+		 			$('#remark').focus();
+		 			return;
 		 		}
 		 		FormUtils.submitFirstTokenForm();
 		 	}
@@ -56,7 +54,33 @@
 		 	  	$("#txtNumLen").html(len);
 		 	}
 			
-			
+			function getOwnerName(){
+				var houseSn = $('#houseSn').val();
+				if(houseSn == ''){
+					return;
+				}
+				var params = $('#houseSn').serialize();
+				$.ajax({
+					 type:'POST',
+				     url:CONTEXT_PATH + '/parkingBill.do?action=getOwnerName',
+				     async:true,
+				     dataType: "json",
+				     data:params,
+				     contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					 success:function(data) {
+				    	 if(data.error){
+				    		 alert(data.error);
+				    		 $('#houseSn').val('');
+				    		 return;
+				    	 }
+				    	 var ownerName = data.ownerName;
+				    	 $('#payerName').val(ownerName);
+					 },
+					 error:function(data){   
+	                     alert("连接服务器失败");
+	                 }   
+				});
+			}
 			function count(){
 				var unitPrice = $('#unitPrice').val();
 				var num = $('#num').val();
@@ -91,7 +115,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<form action="generalBill.do?action=doAdd" id="dataForm" method="post" class="validate">
+	<form action="adrentBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -102,10 +126,34 @@
 					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">收费项目</td>
+						    <td class="formlabel nes">商家名称</td>
 						    <td>
-						    	<s:select name="tradeType" id="tradeType" list="#request.generalTradeTypes" listKey="value" listValue="name"></s:select>
-						    	<span class="field_tipinfo">如收费项目为其他，请在备注中说明</span>
+						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="25" readonly="true"/>
+						    	<s:hidden name="merchantNo" id="merchantNo"/>
+						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
+									alt="搜索" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">租用位置</td>
+						    <td>
+						    <s:textfield name="position"  id="position" class="{required:true}" maxlength="20"/>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">租用开始日期</td>
+						    <td>
+						    <s:textfield name="beginDate"  id="beginDate" class="{required:true}" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">租用结束日期</td>
+						    <td>
+						    <s:textfield name="endDate"  id="endDate" class="{required:true}" maxlength="8" onfocus="WdatePicker();" readonly="true"/>
+						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
@@ -153,7 +201,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/generalBill.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/adrentBill.do?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

@@ -13,6 +13,7 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		<f:js src="/js/paginater.js" />
+		<f:js src="/js/datePicker/WdatePicker.js"/>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -76,7 +77,7 @@
 							</td>
 							<td class="formlabel nes">状态</td>
 						    <td>
-						    	<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
+						    		<s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
 					    </tr>
 						<tr>
@@ -126,7 +127,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid" width="100%" border="0" cellspacing="3 cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td >账单号</td>

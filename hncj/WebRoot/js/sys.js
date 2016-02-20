@@ -5,9 +5,9 @@ String.prototype.trim = function() {
 };
 
 /**
- * ´ò¿ªÄ£Ì¬¶Ô»°¿ò.
- * @param isRefresh ÊÇ·ñË¢ÐÂ
- * @param refreshHandle Ë¢ÐÂ´¥·¢id
+ * ï¿½ï¿½Ä£Ì¬ï¿½Ô»ï¿½ï¿½ï¿½.
+ * @param isRefresh ï¿½Ç·ï¿½Ë¢ï¿½ï¿½
+ * @param refreshHandle Ë¢ï¿½Â´ï¿½ï¿½ï¿½id
  */
 function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	if (!width) {
@@ -19,9 +19,9 @@ function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	}
 	
 	var option = 'dialogWidth=' + width + 'px;dialogHeight=' + height + 'px;resizable=yes';
-	var rlt = window.showModalDialog(CONTEXT_PATH + url, null, option)
+	var rlt = window.showModalDialog(CONTEXT_PATH + url, null, option);
 	
-	// Ä¬ÈÏÉèÖÃË¢ÐÂ
+	// Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½
 	if (!isRefresh) {
 		isRefresh = false;
 	}
@@ -50,7 +50,7 @@ function stopevent(evt){
 }
 
 /**
- * ÉèÖÃÒ³ÃæÔªËØÑùÊ½.
+ * ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ê½.
  */
 $(function() {
 	SysStyle.setDataGridStyle();
@@ -65,11 +65,11 @@ $(function() {
 });
 
 /**
- * ÏµÍ³ÑùÊ½.
+ * ÏµÍ³ï¿½ï¿½Ê½.
  */
 SysStyle = {
 	/**
-	 * ÉèÖÃÊý¾Ý±í¸ñÍ·±³¾°, ÆæÅ¼ÐÐÑÕÉ«, Êó±êÒÆ¶¯ÑÕÉ«.
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Å¼ï¿½ï¿½ï¿½ï¿½É«, ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½É«.
 	 */
 	setDataGridStyle: function() {
 		$('table.data_grid').each(function() {
@@ -106,7 +106,7 @@ SysStyle = {
 						}
 					});
 					$tr.mouseover(function(){
-						$(this).attr("title", "Ë«»÷¿É¿ìËÙÑ¡¶¨");
+						$(this).attr("title", "Ë«ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½");
 					});
 				}
 				var removeSiblinsClass = function($self){
@@ -131,20 +131,20 @@ SysStyle = {
 
 	
 	/**
-	 * ÉèÖÃ±íµ¥±í¸ñÑùÊ½.
+	 * ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 	 */
 	setFormGridStyle: function() {
-		// ÉèÖÃ±íµ¥±í¸ñÑùÊ½.
+		// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 		/*
 		$('table.form_grid').find('td').each(function(i) {
-			// form±í¸ñÎªÁ½ÁÐ, µÚÒ»ÁÐÎª±êÇ©, µÚ¶þÁÐÎªÂ¼Èë¿ò.
+			// formï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Ò»ï¿½ï¿½Îªï¿½ï¿½Ç©, ï¿½Ú¶ï¿½ï¿½ï¿½ÎªÂ¼ï¿½ï¿½ï¿½.
 			if (i % 2 == 0) {
 				$(this).addClass('form-label-td');
 			}
 		});
 		*/
 		
-		// ÉèÖÃ±íµ¥ÊäÈë¿òÑùÊ½.
+		// ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 		$('table.form_grid :text, table.form_grid :password')
 			.addClass('userbox_bt')
 			.focus(function() {$(this).addClass('sffocus');})
@@ -152,7 +152,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ÉèÖÃÃ÷Ï¸ÐÅÏ¢±í¸ñÑùÊ½.
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 	 */
 	setDetailGridStyle: function() {
 		$('table.detail_grid td:even').addClass('headcell').attr('width', '100px');
@@ -160,7 +160,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ÉèÖÃ°´Å¥ÑùÊ½.
+	 * ï¿½ï¿½ï¿½Ã°ï¿½Å¥ï¿½ï¿½Ê½.
 	 */
 	setButtonStyle: function() {
 		$btn = $(':button, :submit, :reset')
@@ -171,7 +171,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ÉèÖÃ²éÑ¯±í¸ñÑùÊ½.
+	 * ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 	 */
 	setSearchGridStyle: function() {
 		$('table.search_grid :text').addClass('form-text');
@@ -179,14 +179,14 @@ SysStyle = {
 	},
 	
 	/**
-	 * ½ûÓÃÎÞÈ¨ÏÞÁ´½Ó.
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	 */
 	setNoPrivilegeStyle: function() {
 		$('span.no-privilege a').removeAttr('href').removeAttr('onclick');
 	},
 	
 	/**
-	 * ÉèÖÃ·ÖÒ³À¸ÑùÊ½.
+	 * ï¿½ï¿½ï¿½Ã·ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ê½.
 	 */
 	setPageNavStyle: function() {
 		$btn = $(':button.pagenavbtn')
@@ -197,7 +197,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * Ìí¼Ó±íµ¥ÑéÖ¤.
+	 * ï¿½ï¿½Ó±ï¿½ï¿½ï¿½Ö¤.
 	 */
 	addFormValidate: function() {
 		$('form').each(function() {
@@ -217,11 +217,11 @@ SysStyle = {
 };
 
 /**
- * ±íµ¥ÑéÖ¤´íÎóÌáÊ¾.
+ * ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾.
  */
 JError = {
 	/**
-	 * ÏÔÊ¾´íÎóÐÅÏ¢
+	 * ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @param {} errorMap
 	 * @param {} errorList
 	 */
@@ -231,18 +231,18 @@ JError = {
 			var tipObj = JError.getTipElement(error.element)
 			var errObj = JError.getErrElement(error.element)
 
-			// Ã»ÓÐÌáÊ¾ÐÅÏ¢, ÍË³ö.
+			// Ã»ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢, ï¿½Ë³ï¿½.
 			if (tipObj == null) {
 				return;
 			}
 
-			// ÓÐ´íÎóÐÅÏ¢, ÏÔÊ¾´íÎóÐÅÏ¢, Òþ²ØÌáÊ¾ÐÅÏ¢.
+			// ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢.
 			if (errObj != null) {
 				tipObj.hide();
 				errObj.show();
 			}
 			
-			// Ã»ÓÐ´íÎóÐÅÏ¢, ÔòÓÃ´íÎóÑùÊ½ÏÔÊ¾ÌáÊ¾ÐÅÏ¢.
+			// Ã»ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ê¾ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢.
 			else {
 				tipObj.addClass('error_tipinfo');
 				tipObj.show();
@@ -251,26 +251,26 @@ JError = {
 	},
 	
 	/**
-	 * Çå³ý´íÎóÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	clearError: function(element) {
 		var tipObj = JError.getTipElement(element);
 		var errObj = JError.getErrElement(element);
 		
-		// ÓÐ´íÎóÐÅÏ¢¶ÔÏó, ÔòÒþ²Ø´íÎóÐÅÏ¢, ÏÔÊ¾ÌáÊ¾ÐÅÏ¢.
+		// ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½Ê¾ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢.
 		if (errObj) {
 			errObj.hide();
 			tipObj.show();
 		}
 		
-		// È¥³ýÌáÊ¾ÐÅÏ¢µÄ´íÎóÑùÊ½.
+		// È¥ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Ê½.
 		if (tipObj != null) {
 			tipObj.removeClass('error_tipinfo');
 		}
 	},
 	
 	/**
-	 * È¡µÃÌáÊ¾ÐÅÏ¢¶ÔÏó
+	 * È¡ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 	 * @param {} element
 	 * @return {}
 	 */
@@ -285,13 +285,13 @@ JError = {
 			return obj;
 		}
 		
-		// ²éÕÒÏÂÒ»¸ö.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½.
 		obj = obj.next();
 		return obj.hasClass('field_tipinfo') ? obj : null;
 	},
 		
 	/**
-	 * È¡µÃ´íÎóÐÅÏ¢¶ÔÏó, Ò»°ãÎªÂ¼Èë¶ÔÏóºóµÄµÚ¶þ¸ö, text->infospan->errspan
+	 * È¡ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½, Ò»ï¿½ï¿½ÎªÂ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÚ¶ï¿½ï¿½ï¿½, text->infospan->errspan
 	 * @param {} element
 	 * @return {}
 	 */
@@ -306,7 +306,7 @@ JError = {
 	},
 
 	/**
-	 * ÏÔÊ¾´íÎóÐÅÏ¢
+	 * ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 */
 	showError: function(element) {
 		var tipe = getTipElement(element);
@@ -322,10 +322,10 @@ JError = {
 }
 
 /**
- * ¼ÓÔØÒ³Ãæ.
- * @param boxid ÈÝÆ÷id
- * @param url µØÖ· ²»º¬CONTEXT_PATH
- * @param param ²ÎÊýÁÐ±í,jsonÐÎÊ½.
+ * ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½.
+ * @param boxid ï¿½ï¿½ï¿½ï¿½id
+ * @param url ï¿½ï¿½Ö· ï¿½ï¿½ï¿½ï¿½CONTEXT_PATH
+ * @param param ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½,jsonï¿½ï¿½Ê½.
  */
 function $jload(boxid, url, param) {
 	var box = $('#' + boxid);
@@ -333,12 +333,12 @@ function $jload(boxid, url, param) {
 		return;
 	}
 	
-	// LOAD_IMAGE Î»ÓÚcommon.js ÖÐ.
+	// LOAD_IMAGE Î»ï¿½ï¿½common.js ï¿½ï¿½.
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {SysStyle.setDataGridStyle();});
 }
 
 /**
- * Ë«Ç©ÑéÖ¤
+ * Ë«Ç©ï¿½ï¿½Ö¤
  */
 function doubleCheck() {
 	var option = "dialogWidth=500px;dialogHeight=300px;resizable=no;scroll=no";
@@ -352,7 +352,7 @@ function doubleCheck() {
 }
 
 /**
- * È¡Ö÷Ò³Ãæ.
+ * È¡ï¿½ï¿½Ò³ï¿½ï¿½.
  */
 function getMainFrame() {
 	var page = window;
@@ -362,7 +362,7 @@ function getMainFrame() {
 		page = page.parent;
 		depth += 1;
 		
-		// ×î´óÖ»²éÕÒ5¼¶.
+		// ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½.
 		if (depth > 5) {
 			return null;
 		}
@@ -372,7 +372,7 @@ function getMainFrame() {
 }
 
 /**
- * ¹«¹²Çø´æÈ¡, main.js.
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡, main.js.
  */
 GlobalMem = {
 	set: function(key, value) {
@@ -389,7 +389,7 @@ GlobalMem = {
 }
 
 /**
- * ÇÐ»»divµÄÏÔÊ¾
+ * ï¿½Ð»ï¿½divï¿½ï¿½ï¿½ï¿½Ê¾
  */
 
 function togglediv(divobj)
@@ -400,7 +400,7 @@ function togglediv(divobj)
 		divobj.style.display='block';
 }		
 /**
- * Frame¼ÓÔØºóµÄ¶¯×÷
+ * Frameï¿½ï¿½ï¿½Øºï¿½Ä¶ï¿½ï¿½ï¿½
  */
 
 function FrameOnLoad(obj,frameobj)
@@ -424,7 +424,7 @@ function FrameOnLoad(obj,frameobj)
 	
 }	
 /**
- * µ¯³öÄ£Ì¬´°¿Ú,¿í¸ß²ÎÊý²»´«Ê±Ê¹ÓÃÄ¬ÈÏÖµ
+ * ï¿½ï¿½ï¿½ï¿½Ä£Ì¬ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ß²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê¹ï¿½ï¿½Ä¬ï¿½ï¿½Öµ
  * @param {Object} dialogId
  * @param {Object} url
  * @param {Object} title
@@ -456,7 +456,7 @@ function showDetail(dialogId, url, title, width, height, param){
 	if (box.length == 0) { 
 		return;
 	}
-	// LOAD_IMAGE Î»ÓÚcommon.js ÖÐ.
+	// LOAD_IMAGE Î»ï¿½ï¿½common.js ï¿½ï¿½.
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {
 		SysStyle.setDataGridStyle();
 		SysStyle.setFormGridStyle();
@@ -471,7 +471,7 @@ function showDetail(dialogId, url, title, width, height, param){
 	$('#' + dialogId).dialog('open');
 }
 /**
- * ¹Ø±Õµ¯³ö´°¿Ú²¢Çå³ýÄÚÈÝ
+ * ï¿½Ø±Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @param {Object} dialogId
  */
 function closeDetail(dialogId){
@@ -480,18 +480,18 @@ function closeDetail(dialogId){
 }
 
 /**
- * ÊÕÆðÊ÷
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @param {Object} link
  */
 function closeAll(link){
 	d.closeAll();
-	$("p:first").html('<a href="javascript:openAll(this)" style="color: red">Õ¹¿ª</a>');
+	$("p:first").html('<a href="javascript:openAll(this)" style="color: red">Õ¹ï¿½ï¿½</a>');
 }
 /**
- * Õ¹¿ªÊ÷
+ * Õ¹ï¿½ï¿½ï¿½ï¿½
  * @param {Object} link
  */
 function openAll(link){
 	d.openAll();
-	$("p:first").html('<a href="javascript:closeAll(this)" style="color: red">ÊÕÆð</a>');
+	$("p:first").html('<a href="javascript:closeAll(this)" style="color: red">ï¿½ï¿½ï¿½ï¿½</a>');
 }
