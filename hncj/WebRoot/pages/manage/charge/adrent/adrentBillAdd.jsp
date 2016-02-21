@@ -146,8 +146,6 @@
 						    <td>
 						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="25" readonly="true" onclick="popup1('merchantNo','merchantName');"/>
 						    	<s:hidden name="merchantNo" id="merchantNo"/>
-						    	<span> <img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="搜索" onclick="popup1('merchantNo','merchantName');" /></span>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
