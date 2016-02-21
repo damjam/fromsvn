@@ -81,7 +81,7 @@ $.extend($.fn, {
 							hidden.remove();
 						}
 //						return false;
-						// henry 2009-11-18 �޸�						
+						// henry 2009-11-18 修改						
 						return true;
 					}
 					return true;
@@ -277,7 +277,7 @@ $.extend($.validator, {
 		url: "Please enter a valid URL.",
 		date: "Please enter a valid date.",
 		dateISO: "Please enter a valid date (ISO).",
-		dateDE: "Bitte geben Sie ein g��ltiges Datum ein.",
+		dateDE: "Bitte geben Sie ein gültiges Datum ein.",
 		number: "Please enter a valid number.",
 		numberDE: "Bitte geben Sie eine Nummer ein.",
 		digits: "Please enter only digits",
@@ -290,17 +290,17 @@ $.extend($.validator, {
 		range: $.validator.format("Please enter a value between {0} and {1}."),
 		max: $.validator.format("Please enter a value less than or equal to {0}."),
 		min: $.validator.format("Please enter a value greater than or equal to {0}."),
-		mobile:"��ȷ��ʽ���ֻ��",
+		mobile:"正确格式的手机号",
 		// begin, add by henry 2009-11-17
-		letter: "ֻ��������ĸ.",
-		digitOrLetter: "ֻ��������ĸ������",
-		digit: "ֻ����������",
-		num: "ֻ����������",
+		letter: "只能输入字母.",
+		digitOrLetter: "只能输入字母或数字",
+		digit: "只能输入整数",
+		num: "只能输入数字",
 		// end.
 		// begin, add by luoejun 2013-05-06
-		idcard : "����ȷ����������֤����",
-		bankno : "��������ȷ�����п���",
-		passport : "��������ȷ�Ļ��ձ��"
+		idcard : "请正确输入您的身份证号码",
+		bankno : "请输入正确的银行卡号",
+		passport : "请输入正确的护照编号"
 		// end.
 	},
 	
@@ -930,8 +930,8 @@ $.extend($.validator, {
 				return "dependency-mismatch";
 			switch( element.nodeName.toLowerCase() ) {
 			case 'select':
-				var options = $("option:selected", element);
-				return options.length > 0 && ( element.type == "select-multiple" || ($.browser.msie && !(options[0].attributes['value'].specified) ? options[0].text : options[0].value).length > 0);
+				var val = $( element ).val();
+				return val && val.length > 0;
 			case 'input':
 				if ( this.checkable(element) )
 					return this.getLength(value, element) > 0;
@@ -968,9 +968,6 @@ $.extend($.validator, {
 			var regex = /^\d{16,19}$|^\d{6}[- ]\d{10,13}$|^\d{4}[- ]\d{4}[- ]\d{4}[- ]\d{4,7}$/;
 			return regex.test(str);
 		},
-		carnum : function(value, element){
-			return /^[\u4E00-\u9FA5][\da-zA-Z]{6}$/.test(value);
-		}, 
 		passport : function(value, element) {
 			return /^(P|p\d{7})|(G|g\d{8})$/.test(value);
 		},
@@ -1071,7 +1068,7 @@ $.extend($.validator, {
 		date: function(value, element) {
 //			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
 
-			/* �жϸ�ʽ */
+			/* 判断格式 */
 			if (!/^\d{4}([-]?\d{2}){2}|\d{4}([\/]?\d{2}){2}$/.test(value)) {
 				return false;
 			}
@@ -1079,7 +1076,7 @@ $.extend($.validator, {
 			var month = null;
 			var day = null;
 			
-			/* ��ȡ�����ղ��� */
+			/* 提取年月日部分 */
 			if (value.length == 8) {
 				year = value.substr(0, 4);
 				month = value.substr(4, 2);
@@ -1094,14 +1091,14 @@ $.extend($.validator, {
 				return false;
 			}
 	
-			/* �ж����ڷ�Χ */
+			/* 判断日期范围 */
 			if (year < 1000 
 				|| (month < 1 || month > 12) 
 				|| (day < 1 || day > 31)) {
 				return false;
 			}
 	
-			/* �ж��Ƿ�����ȷת��Ϊ���� */
+			/* 判断是否能正确转换为日期 */
 			var date = new Date(year, month - 1, day);
 	
 			if (date.getFullYear() != year
@@ -1238,11 +1235,12 @@ $.format = $.validator.format;
 	}, function( original, fix ){
 		$.event.special[fix] = {
 			setup:function() {
-				if ( $.browser.msie ) return false;
-				this.addEventListener( original, $.event.special[fix].handler, true );
+				if ( $.support.msie ) return false;
+				//this.addEventListener( original, $.event.special[fix].handler, true );
+				$(this).bind(original, $.event.special[fix].handler, true );
 			},
 			teardown:function() {
-				if ( $.browser.msie ) return false;
+				if ( $.support.msie ) return false;
 				this.removeEventListener( original,
 				$.event.special[fix].handler, true );
 			},
@@ -1267,3 +1265,69 @@ $.format = $.validator.format;
 		}
 	});
 })(jQuery);
+
+/*
+ * 以下是tip的显示
+ * add by henry 2010-07-23
+ */
+var ZZtips={
+	id:"ZZtips_id"
+};
+
+/**
+*绑定提示信息
+*@param targetId 目标对象id
+*@param msg 提示信息
+*/
+ZZtips.attachTip=function(targetId,msg){
+	ZZtips.createTipDiv(targetId);
+
+	var selfObj = document.getElementById(targetId);
+	//selfObj.onblur = ZZtips.hide;
+	var tipjQuery = document.getElementById("ZZtips_id");
+	tipjQuery.onmousemove = ZZtips.hide;
+	ZZtips.createTipDiv(targetId);
+	var targetPos = ZZtips.getAbsoluteLocation(selfObj);
+	$("#ZZtips_content").attr("innerHTML",msg);
+	$('#ZZtips_id').show().css('left', targetPos.absoluteLeft-20).css('top', targetPos.absoluteTop-tipjQuery.offsetHeight);
+	
+	selfObj.focus();
+}
+
+/**
+*隐藏当前提示信息
+*/
+ZZtips.hide=function(){
+	$('#ZZtips_id').css('display','none');
+};
+/**
+*取消绑定提示信息
+*@param targetId 目标对象id
+*/
+ZZtips.detach=function(targetId){
+	ZZtips.hide();
+	$("#"+targetId).unbind("mouseover");
+};
+
+ZZtips.createTipDiv=function(targetId){
+	var tipDiv = $("#"+ZZtips.id).get(0);
+	if(tipDiv==null){
+		$("<div id='ZZtips_id' style='display:none;' class='ZZtips'><div class='tipstyle'><div id='ZZtips_content' class='content'>提示信息</div></div><div class='tip_down'></div></div>").appendTo(document.body);
+	}
+}
+
+ZZtips.getAbsoluteLocation = function(element) {
+    if ( arguments.length != 1 || element == null ) {
+        return null;
+    }
+    var offsetTop = element.offsetTop;
+    var offsetLeft = element.offsetLeft;
+    var offsetWidth = element.offsetWidth;
+    var offsetHeight = element.offsetHeight;
+    while( element = element.offsetParent ) {
+        offsetTop += element.offsetTop;
+        offsetLeft += element.offsetLeft;
+    }
+    return { absoluteTop: offsetTop, absoluteLeft: offsetLeft,
+        offsetWidth: offsetWidth, offsetHeight: offsetHeight };
+}

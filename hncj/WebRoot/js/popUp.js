@@ -2,7 +2,7 @@
 popUp={
 	
 	
-	//µ¯³öÒµÎñÀàĞÍ¶Ô»°¿ò£¬busiNo£¬tempName ·µ»Ø¿Ø¼şµÄid£¬params urlºó¸úµÄ×Ö·û´«
+	//ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Í¶Ô»ï¿½ï¿½ï¿½busiNoï¿½ï¿½tempName ï¿½ï¿½ï¿½Ø¿Ø¼ï¿½ï¿½ï¿½idï¿½ï¿½params urlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	popUpTradeRouteTemplate:function(tempId,tempName,params){
 		var toUrl="/routeTemplate.do?action=queryPopUpTradeRouteTemplate";
 		if(params && params!=""){
@@ -64,17 +64,19 @@ popUp={
 			$('#'+goldTypeName).val(resultVal[1]);
 		}
 	},
-	popUpMerchantInfo:function(merchantNo, merchantName, params){
-		var toUrl="/merchantInfo.do?action=queryPopUpMerchantInfo";
+	popUpMerchantInfo:function(bindCode, bindName, params){
+		var toUrl=CONTEXT_PATH+'/merchantInfo.do?action=queryPopUpMerchantInfo&bindCode='+bindCode+'&bindName='+bindName;
 		if(params&&params!=null){
 			toUrl=toUrl+"&"+params;
 		}
-		retVal = openContextDialog(toUrl);
-		if(retVal){
-			resultVal=retVal.split("$");
-			$('#'+merchantNo).val(resultVal[0]);
-			$('#'+merchantName).val(resultVal[1]);
-		}
+		layer.open({
+			title:'å•†å®¶',
+		    type: 2,
+		    area: ['720px', '530px'],
+		    fix: false, //ä¸å›ºå®š
+		    maxmin: true,
+		    content: toUrl
+		});
 	},
 	popUpParkingInfo:function(parkingSn, params){
 		var toUrl="/parkingInfo.do?action=queryPopUpParkingInfo";
