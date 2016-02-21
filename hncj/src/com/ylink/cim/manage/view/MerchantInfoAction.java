@@ -98,6 +98,8 @@ public class MerchantInfoAction extends BaseAction implements
 		Paginater paginater = this.merchantInfoDao.findPager(params,
 				getPager(request));
 		saveQueryResult(request, paginater);
+		request.setAttribute("bindCode", request.getParameter("bindCode"));
+		request.setAttribute("bindName", request.getParameter("bindName"));
 		return "popUp";
 	}
 
