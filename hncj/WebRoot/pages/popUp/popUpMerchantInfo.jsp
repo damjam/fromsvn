@@ -7,7 +7,7 @@
 		<base  target="_self"/>
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
-
+		<f:js src="/js/common.js" />
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/paginater.js" />
@@ -20,35 +20,32 @@ body {
 </style>
 		<script type="text/javascript">
 	$(function() {
-		$('#selMerchantInfo').click(function() {
-			var i = 0;
-			var selValue = "";
-			$(':radio').each(function() {
-				if ($(this).attr('checked')) {
-					selValue = $(this).val();
-					i++;
-				}
-
-			});
-
-			if (i == 0 || i > 1) {
-				alert("请选择需要的部门，有且仅有一条");
-				return false;
+		$('#selInfo').click(function() {
+			if(!FormUtils.hasRadio('merchantInfo')){
+				layer.msg('请选择一条记录',{icon:0,shade:0.2,time:1000});
+				return;
 			}
-
-			window.returnValue = selValue;
-			window.close();
+			var selVal = FormUtils.getRadioedValue('merchantInfo');
+			var array = selVal.split('$');
+			var code = array[0];
+			var name = array[1];
+			var bindCodeId = $('#bindCode').val();
+			var bindNameId = $('#bindName').val();
+			parent.$('#'+bindCodeId).val(code);
+			parent.$('#'+bindNameId).val(name);
+			parent.layer.close(index);
 
 		});
-
-		$('#clearMerchantInfo').click(function() {
-			var selValue = "";
-			window.returnValue = "$";
-			window.close();
+		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+		$('#clearInfo').click(function() {
+			var bindCodeId = $('#bindCode').val();
+			var bindNameId = $('#bindName').val();
+			parent.$('#'+bindCodeId).val('');
+			parent.$('#'+bindNameId).val('');
 		});
 
-		$('#winClose').click(function() {
-			window.close();
+		$('#closeIframe').click(function() {
+			parent.layer.close(index);
 		});
 
 		$('#btnClear').click(function() {
@@ -66,7 +63,7 @@ body {
 					radio.attr("checked", true);
 				});
 				$tr.dblclick(function() {
-					$('#selMerchantInfo').click();
+					$('#selInfo').click();
 				});
 				$tr.mouseover(function() {
 					$(this).attr("title", "双击可快速选定");
@@ -88,6 +85,8 @@ body {
 		<form id="merchantInfo"
 			action="merchantInfo.do?action=queryPopUpMerchantInfo"
 			method="post">
+			<input type="hidden" id="bindCode" name="bindCode" value="${bindCode}">
+			<input type="hidden" id="bindName" name="bindName" value="${bindName}">
 			<div class="userbox">
 				<div>
 					<b class="b1"></b>
@@ -185,11 +184,11 @@ body {
 			<tr></tr>
 			<tr>
 				<td height="30" colspan="4" align="center">
-					<input type="button" value="确定" id="selMerchantInfo" />
+					<input type="button" value="确定" id="selInfo" />
 					<input style="margin-left: 30px;" type="submit" value="清除"
-						id="clearMerchantInfo" />
+						id="clearInfo" />
 					<input style="margin-left: 30px;" type="button" value="关闭"
-						id="winClose" />
+						id="closeIframe" />
 				</td>
 			</tr>
 		</table>
