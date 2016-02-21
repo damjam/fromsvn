@@ -16,12 +16,15 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
-		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>	
+		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>
+		<f:js src="/layer/layer.js"/>	
 		<style type="text/css">
 			html { overflow-y: scroll; }
 		</style>
 		<script type="text/javascript">
-			
+			layer.config({
+			    extend: 'extend/layer.ext.js'
+			}); 
 		 	function save(){
 		 		var tradeType = $('#tradeType').val();
 		 		if(tradeType == '98'){
@@ -109,6 +112,20 @@
 				$('#totalAmt').val(totalAmt);
 				$('#paidAmt').val(totalAmt);
 			}
+			function popup1(bindCode, bindName, params){
+				var toUrl=CONTEXT_PATH+'/merchantInfo.do?action=queryPopUpMerchantInfo&bindCode='+bindCode+'&bindName='+bindName;
+				if(params&&params!=null){
+					toUrl=toUrl+"&"+params;
+				}
+				layer.open({
+					title:'商家',
+				    type: 2,
+				    area: ['720px', '530px'],
+				    fix: false, //不固定
+				    maxmin: true,
+				    content: toUrl
+				});
+			}
 		</script>
 	</head>
 <body>
@@ -127,10 +144,10 @@
 					   <tr>
 						    <td class="formlabel nes">商家名称</td>
 						    <td>
-						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="25" readonly="true"/>
+						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="25" readonly="true" onclick="popup1('merchantNo','merchantName');"/>
 						    	<s:hidden name="merchantNo" id="merchantNo"/>
-						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="搜索" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
+						    	<span> <img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
+									alt="搜索" onclick="popup1('merchantNo','merchantName');" /></span>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
