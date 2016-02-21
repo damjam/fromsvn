@@ -111,7 +111,7 @@
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
-						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getOwnerName()"/>
+						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getOwnerName()"  class="{required:true}" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -132,7 +132,7 @@
 					   <tr>
 						    <td class="formlabel nes">用途</td>
 						    <td>
-						    <s:textfield name="purpose"  id="purpose" maxlength="25"/>
+						    <s:textfield name="purpose"  id="purpose" maxlength="25"  class="{required:true,num:true}"/>
 						    	<span class="field_tipinfo">请输入用途</span>
 						    </td>
 					   </tr>

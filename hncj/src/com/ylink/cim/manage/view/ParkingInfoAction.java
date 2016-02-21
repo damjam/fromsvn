@@ -105,14 +105,15 @@ public class ParkingInfoAction extends BaseAction implements
 	public String list() throws Exception {
 		ParkingState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-
+		map.put("sn", model.getSn());
 		map.put("carSn", model.getCarSn());
 		map.put("ownerName", model.getOwnerName());
 		map.put("ownerCel", model.getOwnerCel());
+		map.put("endUser", model.getOwnerName());
+		map.put("endUserCel", model.getOwnerCel());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = parkingInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		// return forward("/pages/manage/parking/parkingInfoList.jsp");
 		return "list";
 	}
 

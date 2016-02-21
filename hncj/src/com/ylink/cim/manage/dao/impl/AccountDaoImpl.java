@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.OwnerState;
@@ -32,7 +33,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Account t where 1=1");
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
+		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and ownerName = ?",
 				MapUtils.getString(params, "ownerName"));
 		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),

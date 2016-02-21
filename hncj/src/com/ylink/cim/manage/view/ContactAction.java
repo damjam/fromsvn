@@ -50,7 +50,6 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 			}
 			BeanUtils.copyProperties(model, contact);
 		}
-		// return forward("/pages/manage/contact/contact.jsp");
 		return "edit";
 	}
 
@@ -79,7 +78,6 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-
 		map.put("contactName", model.getContactName());
 		map.put("branchNo", getSessionBranchNo(request));
 		map.put("mobile", model.getMobile());
@@ -91,7 +89,6 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		BoUtils.addProperty(paginater.getList(), "merchantNo", "merchantName",
 				list, "id", "mrname");
 		saveQueryResult(request, paginater);
-		// return forward("/pages/manage/contact/contactList.jsp");
 		return "list";
 	}
 

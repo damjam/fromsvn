@@ -34,7 +34,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<form action="account.do?action=detail" id="queryForm">
+		<form action="account.do?action=detail" id="queryForm" method="post">
 			<s:hidden name="acctNo" id="acctNo"/>
 			<!-- 查询功能区 -->
 			<div class="userbox">

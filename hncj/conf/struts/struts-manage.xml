@@ -20,7 +20,7 @@
 			<result name="list">/pages/manage/owner/ownerInfoList.jsp</result>
 		</action>
 		<action name="houseInfo" class="houseInfoAction">
-			<result name="list">/pages/manage/house/houseInfoAdd.jsp</result>
+			<result name="list">/pages/manage/house/houseInfoList.jsp</result>
 			<result name="import">/pages/manage/owner/ownerInfoImport.jsp</result>
 			<result name="add">/pages/manage/house/houseInfoAdd.jsp</result>
 		</action>
@@ -65,7 +65,7 @@
 			<result name="add">/pages/manage/charge/adrent/adrentBillAdd.jsp</result>
 		</action>
 		<action name="contact" class="contactAction">
-			<result name="list">/pages/manage/charge/adrent/adrentBillList.jsp</result>
+			<result name="list">/pages/manage/contact/contactList.jsp</result>
 			<result name="edit">/pages/manage/contact/contact.jsp</result>
 		</action>
 		<action name="generalBill" class="generalBillAction">

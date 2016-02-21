@@ -98,7 +98,6 @@ public class MerchantInfoAction extends BaseAction implements
 		Paginater paginater = this.merchantInfoDao.findPager(params,
 				getPager(request));
 		saveQueryResult(request, paginater);
-		// return forward("/pages/popUp/popUpMerchantInfo.jsp");
 		return "popUp";
 	}
 
@@ -109,7 +108,6 @@ public class MerchantInfoAction extends BaseAction implements
 			MerchantInfo merchantInfo = merchantInfoDao.findById(id);
 			BeanUtils.copyProperties(model, merchantInfo);
 		}
-		// return forward("/pages/manage/merchant/merchantInfo.jsp");
-		return "merchantInfo";
+		return "edit";
 	}
 }

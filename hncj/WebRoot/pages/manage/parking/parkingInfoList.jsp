@@ -44,7 +44,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<form action="parkingInfo.do?action=list" id="queryForm">
+		<form action="parkingInfo.do?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -52,6 +52,12 @@
 					<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
 						<caption>${ACT.name}</caption>
 						<tr>
+							<td class="formlabel">
+								车位号
+							</td>
+							<td>
+								<s:textfield name="sn" id="sn" maxlength="10"/>
+							</td>
 							<td class="formlabel">
 								车位产权人
 							</td>
@@ -64,14 +70,14 @@
 							<td>
 								<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 							</td>
+						</tr>
+						<tr>	
 							<td class="formlabel">
 								车位使用人
 							</td>
 							<td>
 								<s:textfield name="endUser" id="endUser" maxlength="10"/>
 							</td>
-						</tr>
-						<tr>
 							<td class="formlabel">
 								使用人电话
 							</td>

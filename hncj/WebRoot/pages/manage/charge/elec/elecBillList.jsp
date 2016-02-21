@@ -16,9 +16,7 @@
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>	
 		<script type="text/javascript">
 			$(function(){
-				
 				$('#btnQry').click(function(){
-					alert($('#queryForm').attr('action'));
 					$('#queryForm').submit();
 				});
 				
@@ -72,7 +70,7 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<form action="elecBill.do?action=list" id="queryForm">
+		<form action="${CONTEXT_PATH }/elecBill.do?action=list" id="queryForm"  method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
