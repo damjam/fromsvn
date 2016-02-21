@@ -117,17 +117,9 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/qdox-1.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-all-1.6.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/rowset.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/saaj-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/serp-1.13.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-log4j12-1.5.11.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aop-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aspects-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-beans-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-context-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-core-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-orm-4.2.1.RELEASE.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-tx-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/stax-1.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/stax-api-1.0.1.jar"/>
@@ -147,6 +139,14 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-core-2.3.24.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/saaj-api.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aop-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aspects-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-beans-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-context-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-core-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-orm-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-tx-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-web-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
