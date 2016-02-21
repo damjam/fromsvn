@@ -7,7 +7,6 @@
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 		<title></title>
-		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
