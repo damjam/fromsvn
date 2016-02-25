@@ -170,7 +170,7 @@ public class LoginAction extends BaseAction implements ModelDriven<UserInfo> {
 					userInfo);// 将用户保存到session中
 			String tag = request.getParameter("tag");
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TAG, tag);
-
+			WebUtils.setSessionAttribute(request, Constants.BRANCH_NO, userInfo.getBranchNo());
 			CookieDealer.saveBranch(userInfo.getBranchNo(), response);
 			CPSHttpSessionListener.putSession(userInfo.getUserId(),
 					request.getSession());

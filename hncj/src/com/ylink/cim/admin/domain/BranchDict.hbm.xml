@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.BranchDict" table="branch_dict">
+        <composite-id name="id" class="com.ylink.cim.admin.domain.BranchDictId">
+        	<key-property name="dictType" column="dict_type"></key-property>
+        	<key-property name="dictValue" column="dict_value"></key-property>
+        </composite-id>
+        <property name="branchNo" column="branch_no"></property>
+        <property name="dictName" column="dict_name"></property>
+        <property name="display" column="display"></property>
+        <property name="remark" column="remark"></property>
+    </class>
+</hibernate-mapping>

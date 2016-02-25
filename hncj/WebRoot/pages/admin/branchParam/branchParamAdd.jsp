@@ -79,6 +79,13 @@
 							    </td>
 							  </tr>
 							  <tr>
+						     <td class="formlabel nes">机构</td>
+							     <td>
+									<s:select name="id.dictType" list="#request.branches" listKey="value" listValue="name"/>
+									<span class="field_tipinfo">不能为空</span>
+								</td>
+						   </tr>
+							  <tr>
 							    <td class="formlabel">备注</td>
 							    <td>
 							   		 <input name="remark" type="text"  value="${branchParm.remark}" maxlength="50"/>

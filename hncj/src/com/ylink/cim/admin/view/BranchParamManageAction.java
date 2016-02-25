@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.dao.BranchParmDao;
 import com.ylink.cim.admin.domain.BranchParm;
+import com.ylink.cim.admin.domain.SysDict;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.BranchParmService;
+import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
@@ -34,11 +36,11 @@ import flink.web.BaseAction;
  */
 @Scope("prototype")
 @Component 
-public class BranchParmManageAction extends BaseAction implements ModelDriven<BranchParm> {
+public class BranchParamManageAction extends BaseAction implements ModelDriven<BranchParm> {
 
 	private static final long serialVersionUID = 3419813256406264742L;
 
-	private static final Logger logger = Logger.getLogger(BranchParmManageAction.class);
+	private static final Logger logger = Logger.getLogger(BranchParamManageAction.class);
 
 	@Autowired
 	BranchParmService branchParmService;
@@ -91,11 +93,15 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 	public String query() throws Exception {
 
 		Paginater paginater = branchParmService.findAll(getPager(request), model);
+		for(int i=0; i<paginater.getList().size(); i++){
+			BranchParm branchParm = (BranchParm)paginater.getList().get(i);
+			branchParm.setBranchName(ParaManager.getSysDictName(SysDictType.BranchType.getValue(), branchParm.getBranchNo()));
+		}
 		saveQueryResult(request, paginater);
-		String msg = MsgUtils.r("系统参数查询成功");
+		String msg = MsgUtils.r("机构参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
+		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
 		return "list";
-		// "/pages/admin/sysRunManager/sysParmManager.jsp"
 	}
 
 	/**
@@ -126,7 +132,6 @@ public class BranchParmManageAction extends BaseAction implements ModelDriven<Br
 	 */
 	public String toAdd() throws Exception {
 		return "add";
-		// "/pages/admin/sysRunManager/sysParmAdd.jsp";
 	}
 
 	public String save() throws Exception {

@@ -18,21 +18,21 @@
 		<script type="text/javascript">
 			 $(function(){
 				$("#btnQry").click(function(){
-					$("#sysDictFrm").submit();
+					$("#branchDictFrm").submit();
 				});
 				
 				$("#btnClear").click(function(){
-					FormUtils.reset("#sysDictFrm");
+					FormUtils.reset("#branchDictFrm");
 				});
 				
 				$("#btnAdd").click(function(){
-					gotoUrl("/sysDictAction.do?action=toAddPage");
+					gotoUrl("/branchDictAction.do?action=toAddPage");
 				});
 				
 			 });
 			
-			 function deletesysDict(dictValue,dictType){
-				 var url="/sysDictAction.do?action=deleteSysDict&id.dictValue="+dictValue+"&id.dictType="+dictType;
+			 function del(dictValue,dictType){
+				 var url="/branchDictAction.do?action=delete&id.dictValue="+dictValue+"&id.dictType="+dictType;
 				 gotoUrl(url);
 			 }
 			 
@@ -43,7 +43,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg />
 
-		<form action="sysDictAction.do?action=listSysDict" id="sysDictFrm" method="post">
+		<form action="branchDictAction.do?action=listbranchDict" id="branchDictFrm" method="post">
 			<div class="userbox">
 				<b class="b1"></b>
 				<b class="b2"></b>
@@ -95,11 +95,11 @@
 							<tr align="center">
 								<td>${element.id.dictValue}</td>
 							    <td>${element.dictName}</td>
-							     <td><f:type className="SysDictType" value="${element.id.dictType}" /></td>
+							     <td><f:type className="branchDictType" value="${element.id.dictType}" /></td>
 							     <td>${element.remark}</td>
 							    <td align="center">
 							       <span class="redlink">
-							 	   		<a href="javascript:deletesysDict('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete"">删除</a>
+							 	   		<a href="javascript:del('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete"">删除</a>
 							 	   </span>
 							  </td>
 						    </tr>

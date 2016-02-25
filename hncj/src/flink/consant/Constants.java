@@ -26,6 +26,9 @@ public abstract class Constants {
 	public static final String BRANCH_TYPE = "BRANCH_TYPE";
 
 	public static final String BRANCH_TAG = "tag";
+	
+	public static final String BRANCH_NO = "BRANCH_NO";
+	
 	// ********************************************************************
 	public static final String OPER_INFO = "msg";
 	public static final String SAVE_SUCCESS = "±£´æ³É¹¦";

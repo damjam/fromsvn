@@ -7,8 +7,6 @@
       	<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
 
-		<link rel="stylesheet" type="text/css"
-			href="css/jquery-ui-1.7.2.custom.css" />
 		<f:css href="/css/jquery-ui-1.7.2.custom.css" />
 		<f:css href="/css/page.css" />
 		<f:js src="/js/paginater.js" />
@@ -18,13 +16,12 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		
-		<f:js src="/js/plugin/ui.core.js" />
-		<f:js src="/js/plugin/ui.tabs.js" />
+		<f:js src="/js/plugin/jquery-ui.js" />
 		
 		<script type="text/javascript">
 			$(function() {
 				$('#tabs').tabs();
-				
+				/*
 				//初始化
 				ifrm = document.getElementById('frame0');
 				if(!ifrm.src){
@@ -40,7 +37,7 @@
 				    	ifrm = document.getElementById('frame1');
 						ifrm.src=CONTEXT_PATH+"/chargeParam.do?action=list";
 	                }  
-				});  
+				});*/  
 		});
 			
 			function adjustHeight(height, num){
@@ -63,10 +60,10 @@
 				</li>
 			</ul>
 			<div id="tabs-0" >
-				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" onload="this.height=frame0.document.body.scrollHeight"></iframe>
+				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeItem.do?action=list"></iframe>
 			</div>
 			<div id="tabs-1">
-				<iframe id="frame1" scrolling="auto" frameborder="0" width="100%"  height="100%" onload="this.height=frame1.document.body.scrollHeight"></iframe>
+				<iframe id="frame1" scrolling="auto" frameborder="0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeParam.do?action=list"></iframe>
 			</div>
 		</div>
 		<!--版权区域-->
