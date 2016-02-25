@@ -45,6 +45,12 @@
 			<result name="modify">/pages/admin/sysRunManager/sysParmModify.jsp</result>
 			<result name="toMain" type="redirect">sysParmManage.do?action=query&amp;msg=${msg}&amp;result={result}</result>
 		</action>
+		<action name="branchParamManage" class="branchParamManageAction">
+			<result name="list">/pages/admin/branchParam/branchParamManager.jsp</result>
+			<result name="add">/pages/admin/branchParam/branchParamAdd.jsp</result>
+			<result name="modify">/pages/admin/branchParam/branchParamEdit.jsp</result>
+			<result name="toMain" type="redirect">branchParamManage.do?action=query&amp;msg=${msg}&amp;result={result}</result>
+		</action>
 		<action name="userLog" class="userLogAction">
 			<result name="success">/pages/admin/log/userLog.jsp</result>
 			<result name="detail">/pages/admin/log/userLogCurrentDetail.jsp</result>
