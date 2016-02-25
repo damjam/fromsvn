@@ -5,7 +5,7 @@ package com.ylink.cim.admin.domain;
  * 
  * 
  */
-public class BranchParm implements java.io.Serializable {
+public class BranchParam implements java.io.Serializable {
 
 	/**
 	 * 
@@ -52,7 +52,7 @@ public class BranchParm implements java.io.Serializable {
 	 */
 	private String remark;
 
-	public BranchParm() {
+	public BranchParam() {
 	}
 
 	/**

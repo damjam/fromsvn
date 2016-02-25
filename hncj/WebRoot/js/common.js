@@ -267,6 +267,8 @@ FormUtils = {
 			}else{
 				form = param.form;
 			}
+		}else if(typeof param == 'string'){
+			form = $('#'+param);
 		}
 		this.clearData($(form).find('input:text'), ignores);
 		this.clearData($(form).find('input:password'));

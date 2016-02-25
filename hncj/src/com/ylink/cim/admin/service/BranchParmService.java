@@ -1,6 +1,6 @@
 package com.ylink.cim.admin.service;
 
-import com.ylink.cim.admin.domain.BranchParm;
+import com.ylink.cim.admin.domain.BranchParam;
 
 import flink.etc.BizException;
 import flink.util.Pager;
@@ -15,7 +15,7 @@ public interface BranchParmService {
 
 	public void delete(String id) throws BizException;
 
-	public Paginater findAll(Pager pager, BranchParm sysParm) throws BizException;
+	public Paginater findAll(Pager pager, BranchParam sysParm) throws BizException;
 
 	/**
 	 * 锁定指定记录
@@ -24,10 +24,10 @@ public interface BranchParmService {
 	 * @return
 	 * @throws BizException
 	 */
-	public BranchParm findByIdWithLock(String code) throws BizException;
+	public BranchParam findByIdWithLock(String code) throws BizException;
 
-	public void save(BranchParm sysParm) throws BizException;
+	public void save(BranchParam sysParm) throws BizException;
 
-	public void update(BranchParm sysParm) throws BizException;
+	public void update(BranchParam sysParm) throws BizException;
 
 }

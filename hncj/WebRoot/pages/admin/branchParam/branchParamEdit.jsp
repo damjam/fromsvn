@@ -26,8 +26,7 @@
 				$('#ifmodify').val($('#hidIfmodify').val());
 				
 				$('#btnReturn').click(function(){
-					window.location.href=CONTEXT_PATH+"/branchParmManage.do?action=query";
-						 
+					window.location.href=CONTEXT_PATH+"/branchParamManage.do?action=query";
 				});
 					
 			});
@@ -36,7 +35,7 @@
 <body>
 
 	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
-	<form id="query" action="${CONTEXT_PATH}/branchParmManage.do?action=saveUpdate" method="post" class="validate">
+	<form id="query" action="${CONTEXT_PATH}/branchParamManage.do?action=saveUpdate" method="post" class="validate">
 		<!-- 用户资料修改区 -->
 			<div class="userbox">
 				<div>
@@ -50,36 +49,37 @@
 							  <tr>
 							    <td class="formlabel nes">参数编码</td>
 							    <td>
-							    	<input class="{required:true,maxlength:6} readonly" disabled="disabled"  name="code" type="text" value="${branchParm.code}"  />
+							    	<input class="{required:true,maxlength:6} readonly" disabled="disabled"  name="code" type="text" value="${code}"  />
 							    	<span class="field_tipinfo">1-6位字符，包括字母和数字</span>
-							    	<input type="hidden" name="code" value="${branchParm.code}">
+							    	<input type="hidden" name="code" value="${code}">
 							    </td>
 							    </tr>
 							   <tr>
 							    <td class="formlabel nes">参数名称</td>
 							    <td>
-							    	<input class="{required:true}" name="parname"  type="text" value="${branchParm.parname}" maxlength="100"/>
+							    	<input class="{required:true}" name="parname"  type="text" value="${parname}" maxlength="100"/>
 							    	<span class="field_tipinfo">不能为空</span>
 							    </td>
 							  </tr>
 							  <tr>
 							    <td class="formlabel nes">参数值</td>
 							    <td>
-							   		 <input class="{required:true}"  name="parvalue" type="text" value="${branchParm.parvalue}" maxlength="100"/>
+							   		 <input class="{required:true}"  name="parvalue" type="text" value="${parvalue}" maxlength="100"/>
 						    		 <span class="field_tipinfo">不能为空</span>
 							    </td>
 							  </tr>
-							  <tr>
-								     <td class="formlabel nes">机构</td>
-								     <td>
-										<s:select name="id.dictType" list="#request.branches" listKey="value" listValue="name"/>
-										<span class="field_tipinfo">不能为空</span>
+							  <c:if test="${sessionScope.branchNo eq '0000' || sessionScope.branchNo == null}">
+								<tr>
+									<td class="formlabel nes">机构</td>
+									<td><s:select list="#request.branches" name="branchNo"
+											listKey="key" listValue="value" /> <span class="field_tipinfo">不能为空</span>
 									</td>
-							   </tr>
+								</tr>
+							</c:if>
 							  <tr>
 							    <td class="formlabel">备注</td>
 							    <td>
-							   		 <input name="remark" type="text"  value="${branchParm.remark}" maxlength="50"/>
+							   		 <input name="remark" type="text"  value="${remark}" maxlength="50"/>
 							    </td>
 							    </tr>
 							  <tr>

@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,14 +14,14 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.dao.BranchParmDao;
-import com.ylink.cim.admin.domain.BranchParm;
-import com.ylink.cim.admin.domain.SysDict;
+import com.ylink.cim.admin.domain.BranchParam;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.BranchParmService;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.util.CopyPropertyUtil;
 
 import flink.consant.Constants;
 import flink.etc.BizException;
@@ -30,13 +29,14 @@ import flink.util.DateUtil;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONObject;
 
 /**
  * 系统参数管理action
  */
 @Scope("prototype")
 @Component 
-public class BranchParamManageAction extends BaseAction implements ModelDriven<BranchParm> {
+public class BranchParamManageAction extends BaseAction implements ModelDriven<BranchParam> {
 
 	private static final long serialVersionUID = 3419813256406264742L;
 
@@ -94,7 +94,7 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 
 		Paginater paginater = branchParmService.findAll(getPager(request), model);
 		for(int i=0; i<paginater.getList().size(); i++){
-			BranchParm branchParm = (BranchParm)paginater.getList().get(i);
+			BranchParam branchParm = (BranchParam)paginater.getList().get(i);
 			branchParm.setBranchName(ParaManager.getSysDictName(SysDictType.BranchType.getValue(), branchParm.getBranchNo()));
 		}
 		saveQueryResult(request, paginater);
@@ -131,9 +131,15 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	 * @throws Exception
 	 */
 	public String toAdd() throws Exception {
+		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
 		return "add";
 	}
-
+	public String toUpdate() throws Exception {
+		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
+		BranchParam branchParam = branchParmDao.findById(model.getCode());
+		BeanUtils.copyProperties(model, branchParam);
+		return "modify";
+	}
 	public String save() throws Exception {
 		String userCode = this.getSessionUserCode(request);
 		if (null == userCode) {
@@ -143,6 +149,9 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 		try {
 			if (!isValidToken()) {
 				return toAdd();
+			}
+			if (StringUtils.isEmpty(model.getBranchNo())) {
+				model.setBranchNo(getSessionBranchNo(request));
 			}
 			branchParmService.save(model);
 			this.saveUserLog(
@@ -170,9 +179,7 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 			setResult(false, e.getMessage(), request);
 			return toAdd();
 		}
-
 	}
-
 	
 	public String saveUpdate() throws Exception {
 		String userCode = this.getSessionUserCode(request);
@@ -181,7 +188,9 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 			userCode = "";
 		}
 		try {
-			branchParmService.update(model);
+			BranchParam branchParam = branchParmDao.findById(model.getCode());
+			CopyPropertyUtil.copyPropertiesIgnoreNull(model, branchParam);
+			branchParmService.update(branchParam);
 			this.saveUserLog(
 					request,
 					getCurPrivilegeCode(request),
@@ -194,10 +203,11 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 			setSucResult("操作成功", request);
 			return "toMain";
 		} catch (Exception e) {
+			e.printStackTrace();
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
 					+ ")修改系统参数 code=" + model.getCode() + "失败";
 			logger.debug(error + ",原因：" + e.getMessage());
-			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_S, Constants.LOG_SYS_ERROR,
+			this.saveSysLog(request, getCurPrivilegeCode(request), "", Constants.LOG_SYS_ERROR, Constants.LOG_SYS_S,
 					error + e.getMessage());
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_FAIL);
 			String msg = MsgUtils.r("更新系统参数失败,失败原因:{?}", e.getMessage());
@@ -218,7 +228,7 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	 * @throws Exception
 	 */
 	public String update() throws Exception {
-		BranchParm parm = branchParmDao.findById(model.getCode());
+		BranchParam parm = branchParmDao.findById(model.getCode());
 		BeanUtils.copyProperties(model, parm);
 		return "modify";
 	}
@@ -261,13 +271,13 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	}
 
 	@Override
-	public BranchParm getModel() {
+	public BranchParam getModel() {
 		return model;
 	}
 
-	private BranchParm model = new BranchParm();
+	private BranchParam model = new BranchParam();
 
-	public void setModel(BranchParm model) {
+	public void setModel(BranchParam model) {
 		this.model = model;
 	}
 

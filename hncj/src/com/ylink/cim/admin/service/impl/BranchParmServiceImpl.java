@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.BranchParmDao;
-import com.ylink.cim.admin.domain.BranchParm;
+import com.ylink.cim.admin.domain.BranchParam;
 import com.ylink.cim.admin.service.BranchParmService;
 
 import flink.etc.BizException;
@@ -42,7 +42,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	 * @throws Exception
 	 */
 	@Override
-	public Paginater findAll(Pager pager, BranchParm branchParm) throws BizException {
+	public Paginater findAll(Pager pager, BranchParam branchParm) throws BizException {
 
 		Paginater paginater = null;
 		try {
@@ -62,13 +62,13 @@ public class BranchParmServiceImpl implements BranchParmService {
 	 */
 
 	@Override
-	public BranchParm findByIdWithLock(String code) throws BizException {
+	public BranchParam findByIdWithLock(String code) throws BizException {
 
 		return this.branchParmDao.findByIdWithLock(code);
 	}
 
 	@Override
-	public void save(BranchParm branchParm) throws BizException {
+	public void save(BranchParam branchParm) throws BizException {
 		try {
 			if (branchParmDao.findById(branchParm.getCode()) != null) {
 				throw new Exception("该数据已经存在!" + branchParm.getCode());
@@ -81,7 +81,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	}
 
 	@Override
-	public void update(BranchParm branchParm) throws BizException {
+	public void update(BranchParam branchParm) throws BizException {
 
 		try {
 			this.branchParmDao.update(branchParm);
