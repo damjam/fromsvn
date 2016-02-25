@@ -7,7 +7,6 @@
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 		<title></title>
-		
 		<f:css href="/css/page.css"/>
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
@@ -92,7 +91,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<form action="chargeItem.do?action=doEdit" method="post" styleClass="validate">
+	<form action="chargeItem.do?action=doEdit" method="post" class="validate">
 		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
@@ -106,7 +105,7 @@
 					   <tr>
 						    <td class="formlabel nes">计费项名称</td>
 						    <td>
-						    	<s:textfield name="itemName" id="itemName" maxlength="10" styleClass="{required:true}"/>
+						    	<s:textfield name="itemName" id="itemName" maxlength="10" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -127,7 +126,7 @@
 					   <tr class="unit">
 						    <td class="formlabel nes">计费单价</td>
 						    <td>
-						    	<s:textfield name="unitPrice" id="unitPrice" maxlength="10" styleClass="{num:true}"/>
+						    	<s:textfield name="unitPrice" id="unitPrice" maxlength="10" class="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
@@ -141,21 +140,21 @@
 					   <tr class="step">
 						    <td class="formlabel nes">起步楼层</td>
 						    <td>
-						    	<s:textfield name="baseFloor" id="baseFloor" maxlength="10" styleClass="{digit:true}"/>
+						    	<s:textfield name="baseFloor" id="baseFloor" maxlength="10" class="{digit:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">递增价</td>
 						    <td>
-						    	<s:textfield name="stepPrice" id="stepPrice" maxlength="10" styleClass="{num:true}"/>
+						    	<s:textfield name="stepPrice" id="stepPrice" maxlength="10" class="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>
 					   <tr class="step">
 						    <td class="formlabel nes">封顶价</td>
 						    <td>
-						    	<s:textfield name="capPrice" id="capPrice" maxlength="10" styleClass="{num:true}"/>
+						    	<s:textfield name="capPrice" id="capPrice" maxlength="10" class="{num:true}"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>

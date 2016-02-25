@@ -68,8 +68,8 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 					sessionUser.getUserId() + "(" + sessionUser.getUserName() + "),删除系统参数" + "code=" + model.getCode()
 							+ "成功");
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			model.setCode(null);
-			return this.query();
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (Exception e) {
 			String error = "用户" + getSessionUserCode(request) + "(" + getSessionUser(request).getUserName()
 					+ ")删除系统参数 addrId=" + model.getCode() + "失败";
@@ -100,7 +100,7 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 		saveQueryResult(request, paginater);
 		String msg = MsgUtils.r("机构参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
+		request.setAttribute("branches", ParaManager.getBranches());
 		return "list";
 	}
 
@@ -131,11 +131,11 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	 * @throws Exception
 	 */
 	public String toAdd() throws Exception {
-		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
+		request.setAttribute("branches", ParaManager.getBranches());
 		return "add";
 	}
 	public String toUpdate() throws Exception {
-		request.setAttribute("branches", ParaManager.getSysDict(SysDictType.BranchType.getValue()));
+		request.setAttribute("branches", ParaManager.getBranches());
 		BranchParam branchParam = branchParmDao.findById(model.getCode());
 		BeanUtils.copyProperties(model, branchParam);
 		return "modify";
@@ -200,7 +200,8 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 			request.setAttribute(Constants.OPER_INFO, Constants.UPDATE_SUCCESS);
 			String msg = MsgUtils.r("更新系统参数成功,更新内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
-			setSucResult("操作成功", request);
+			//setSucResult("操作成功", request);
+			setResult(true, "操作成功", request);
 			return "toMain";
 		} catch (Exception e) {
 			e.printStackTrace();

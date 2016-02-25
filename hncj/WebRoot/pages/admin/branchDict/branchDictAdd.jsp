@@ -19,12 +19,9 @@
 		<f:js src="/js/popUp.js"/>
 		<script type="text/javascript">
 			$(function(){
-				$('#btnClear').click(function(){
-					FormUtils.reset("sysDictForm");
-				});
 				
 				$('#btnReturn').click(function(){
-					gotoUrl("/sysDictAction.do?action=listSysDict");
+					gotoUrl("/branchDict.do?action=list");
 				});
 				
 			});
@@ -34,7 +31,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg />
-	<form action="sysDictAction.do?action=addSysDict" id="sysDictForm" method="post" class="validate">
+	<form action="${CONTEXT_PATH }/branchDict.do?action=doAdd" id="branchDictForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -44,13 +41,15 @@
 				<div class="contentb">
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
-					  <tr>
-						    <td class="formlabel nes">值</td>
-						    <td>
-						    	<s:textfield name="id.dictValue"  id="dictId" class="{required:true,stringNum:true}" maxlength="20"/>
-						    	<span class="field_tipinfo">字母或数字</span>
-						    </td>
-					   </tr>
+					  <c:if test="${sessionScope.branchNo eq '0000' || sessionScope.branchNo == null}">
+						   <tr>
+							     <td class="formlabel nes">机构</td>
+							     <td>
+									<s:select name="branchNo" list="#request.branches" listKey="key" listValue="value"/>
+									<span class="field_tipinfo">不能为空</span>
+								</td>
+						   </tr>
+					   </c:if>
 					   <tr>
 						    <td class="formlabel nes">名称</td>
 						    <td>
@@ -59,16 +58,16 @@
 						    </td>
 					   </tr>
 					   <tr>
+						    <td class="formlabel nes">值</td>
+						    <td>
+						    	<s:textfield name="id.dictValue"  id="dictId" class="{required:true,stringNum:true}" maxlength="20"/>
+						    	<span class="field_tipinfo">字母或数字</span>
+						    </td>
+					   </tr>
+					   <tr>
 						     <td class="formlabel nes">类型</td>
 						     <td>
 								<s:select name="id.dictType" list="#request.dictTypes" listKey="value" listValue="name"/>
-								<span class="field_tipinfo">不能为空</span>
-							</td>
-					   </tr>
-					   <tr>
-						     <td class="formlabel nes">机构</td>
-						     <td>
-								<s:select name="id.dictType" list="#request.branches" listKey="value" listValue="name"/>
 								<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>
@@ -89,8 +88,7 @@
 					     <tr>
 						     
 						     <td colspan="2" align="center">
-								 <input type="submit" id="btnSumit" value="提交"/>
-								 <input type="button" id="btnClear" value="清除"/>
+								 <input type="submit" id="btnSumit" value="提交"/>&nbsp;
 								 <input type="button" id="btnReturn" value="返回"/>
 							</td>
 					   </tr>

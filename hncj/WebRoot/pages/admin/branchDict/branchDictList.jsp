@@ -18,22 +18,25 @@
 		<script type="text/javascript">
 			 $(function(){
 				$("#btnQry").click(function(){
-					$("#branchDictFrm").submit();
+					$("#branchDictForm").submit();
 				});
 				
 				$("#btnClear").click(function(){
-					FormUtils.reset("#branchDictFrm");
+					FormUtils.reset();
 				});
 				
 				$("#btnAdd").click(function(){
-					gotoUrl("/branchDictAction.do?action=toAddPage");
+					gotoUrl("/branchDict.do?action=toAdd");
 				});
 				
 			 });
 			
 			 function del(dictValue,dictType){
-				 var url="/branchDictAction.do?action=delete&id.dictValue="+dictValue+"&id.dictType="+dictType;
-				 gotoUrl(url);
+				 if(window.confirm('确认删除?')){
+					 var url="/branchDict.do?action=delete&id.dictValue="+dictValue+"&id.dictType="+dictType;
+					 gotoUrl(url);
+				 }
+				
 			 }
 			 
 		</script>
@@ -43,7 +46,7 @@
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg />
 
-		<form action="branchDictAction.do?action=listbranchDict" id="branchDictFrm" method="post">
+		<form action="${CONTEXT_PATH}/branchDict.do?action=list" id="branchDictForm" method="post">
 			<div class="userbox">
 				<b class="b1"></b>
 				<b class="b2"></b>
@@ -59,13 +62,25 @@
 							<td>
 								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
+							<c:if
+								test="${sessionScope.branchNo eq '0000' or sessionScope.branchNo == null}">
+								<td class="formlabel" align="left">机构</td>
+								<td><s:select list="#request.branches" name="branchNo"
+										listKey="key" listValue="value" headerKey=""
+										headerValue="---全部---" /></td>
+							</c:if>
+							<c:if
+								test="${sessionScope.branchNo != null && sessionScope.branchNo ne '0000' }">
+								<td class="formlabel" align="left">&nbsp;</td>
+								<td></td>
+							</c:if>
 						</tr>
 						<tr>
 							<td>
 							</td>	
 							<td>
 								<input type="button" value="查询"  id="btnQry"/>&nbsp;
-								<input type="button" value="清除"  id="btnClear"/>&nbsp;
+								<input type="button" value="重置"  id="btnClear"/>&nbsp;
 								<input type="button" value="新增"  id="btnAdd"/>&nbsp;
 							</td>
 						</tr>
@@ -82,8 +97,9 @@
 				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<td>机构</td>
+						 	<td>名称</td>
 						    <td>值</td>
-						    <td>名称</td>
 						    <td>类型</td>
 						    <td>备注</td>
 						    <td>操作</td>
@@ -93,9 +109,10 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<td>${element.branchName}</td>
+								<td>${element.dictName}</td>
 								<td>${element.id.dictValue}</td>
-							    <td>${element.dictName}</td>
-							     <td><f:type className="branchDictType" value="${element.id.dictType}" /></td>
+							     <td><f:type className="BranchDictType" value="${element.id.dictType}" /></td>
 							     <td>${element.remark}</td>
 							    <td align="center">
 							       <span class="redlink">

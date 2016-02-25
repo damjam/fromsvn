@@ -4,6 +4,8 @@
 <%@ include file="/pages/common/taglibs.jsp" %>
 <html lang="zh-cn">
 	<head>
+		<%@ include file="/pages/common/meta.jsp" %>
+		<%@ include file="/pages/common/sys.jsp" %>
 		<title></title>
 		<f:css href="/css/page.css" />
 		<f:js src="/js/jquery.js" />

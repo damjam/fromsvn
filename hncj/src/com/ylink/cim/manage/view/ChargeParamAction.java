@@ -189,7 +189,7 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 			setResult(false, e.getMessage(), request);
 		} catch (Exception e) {
 			e.printStackTrace();
-			setResult(false, "²Ù×÷Ê§°Ü", request);
+			setFailResult("²Ù×÷Ê§°Ü", request);
 		}
 		return list();
 	}

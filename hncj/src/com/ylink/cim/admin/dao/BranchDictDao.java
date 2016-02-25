@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ylink.cim.admin.domain.BranchDict;
+import com.ylink.cim.admin.domain.BranchDictId;
 
 import flink.hibernate.BaseDao;
 import flink.util.Pager;
@@ -16,4 +17,5 @@ public interface BranchDictDao extends BaseDao {
 	public List<BranchDict> getDictByDictType(String dictType);
 
 	public Paginater getDictPageList(BranchDict branchDict, Pager pager);
+
 }

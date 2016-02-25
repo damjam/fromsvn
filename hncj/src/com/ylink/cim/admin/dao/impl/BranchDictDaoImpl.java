@@ -31,7 +31,8 @@ public class BranchDictDaoImpl extends BaseDaoImpl implements BranchDictDao {
 		helper.append("and sd.id.dictValue=?", branchDict.getId().getDictValue());
 		helper.append("and sd.id.dictType=?", branchDict.getId().getDictType());
 		helper.append("and sd.dictName=?", branchDict.getDictName());
-		helper.append("order by sd.id.dictType, sd.id.dictValue");
+		helper.append("and branchNo = ?",branchDict.getBranchNo());
+		helper.append("order by branchNo, sd.id.dictType, sd.id.dictValue");
 		return super.getPageData(helper, pager);
 	}
 

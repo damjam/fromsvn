@@ -488,7 +488,17 @@ public abstract class BaseAction extends RootAction {
 		this.msg = s;
 		this.result = true;
 	}
-
+	protected void setFailResult(String message, HttpServletRequest request) {
+		String s = "";
+		try {
+			s = URLEncoder.encode(message, "UTF-8");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		request.setAttribute("msg", s);
+		this.msg = s;
+		this.result = false;
+	}
 	protected void setReturnUrl(String url, HttpServletRequest request) {
 		request.setAttribute("url", url);
 	}

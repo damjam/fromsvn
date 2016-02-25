@@ -6,7 +6,6 @@
 <head>
       	<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
-
 		<f:css href="/css/jquery-ui-1.7.2.custom.css" />
 		<f:css href="/css/page.css" />
 		<f:js src="/js/paginater.js" />

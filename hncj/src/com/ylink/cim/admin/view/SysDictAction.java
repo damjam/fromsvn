@@ -48,10 +48,10 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 	public String addSysDict() throws Exception {
 		try {
 			if (this.sysDictService.isExist(model.getId())) {
-				setResult(false, ActionMessageConstant.OPER_FAIL_EXIST, request);
+				setFailResult(ActionMessageConstant.OPER_FAIL_EXIST, request);
 			} else {
 				this.sysDictService.saveSysDict(model);
-				setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
+				setSucResult(ActionMessageConstant.OPER_SUCCESS, request);
 			}
 			String msg = MsgUtils.r("添加字典成功,添加内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);

@@ -20,6 +20,7 @@ import com.ylink.cim.admin.domain.SysDict;
 import com.ylink.cim.admin.domain.SysParm;
 import com.ylink.cim.common.type.SysDictType;
 
+import flink.consant.Constants;
 import flink.etc.Symbol;
 import flink.util.SpringContext;
 
@@ -92,7 +93,11 @@ public abstract class ParaManager {
 		}
 		return sysDictMap.get(dictType);
 	}
-
+	public static Map<String, String> getBranches() {
+		Map<String, String> branchMap = getSysDict(SysDictType.BranchType.getValue());
+		branchMap.remove("0000");
+		return branchMap;
+	}
 	public static String getSysDictName(String dictType, String value) {
 		if (sysDictMap.size() == 0) {
 			initSysDict();
