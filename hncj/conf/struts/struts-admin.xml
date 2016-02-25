@@ -43,7 +43,7 @@
 			<result name="list">/pages/admin/sysRunManager/sysParmManager.jsp</result>
 			<result name="add">/pages/admin/sysRunManager/sysParmAdd.jsp</result>
 			<result name="modify">/pages/admin/sysRunManager/sysParmModify.jsp</result>
-			<result name="toMain" type="redirect">sysParmManage.do?action=query&amp;msg=${msg}&amp;result={result}</result>
+			<result name="toMain" type="redirect">sysParamManage.do?action=query&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="branchParamManage" class="branchParamManageAction">
 			<result name="list">/pages/admin/branchParam/branchParamManager.jsp</result>
