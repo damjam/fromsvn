@@ -35,6 +35,9 @@
 				$('#btnImp').click(function(){
 					gotoUrl('/waterRecord.do?action=toImport');
 				});
+				$('#btnAdd').click(function(){
+					gotoUrl('/waterRecord.do?action=toAdd');
+				});
 			});
 			function check(id){
 				if(window.confirm("生成账单后记录将不可删除，确认操作?")){
@@ -81,6 +84,7 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="全部生成账单" id="btnCheck"/>&nbsp;
 								<input type="button" value="导入水表记录" id="btnImp"/>&nbsp;
+								<input type="button" value="新增水笔记录" id="btnAdd"/>&nbsp;
 							</td>
 						</tr>
 					</table>
