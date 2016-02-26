@@ -28,7 +28,6 @@
 		<f:msg />
 		<form action="privilegeResourceAction.do?action=listPrivRes" id="searchForm" method="post">
 		<s:hidden name="parent" id="parent"/>
-		<input type='button' onclick="goBack();" value='返回' />
 		<!-- 数据列表区 -->
 		<div class="tablebox">			
 			<table class="data_grid">
@@ -59,6 +58,9 @@
 				</f:showDataGrid>
 			</table>
 			<f:paginate/>
+		</div>
+		<div class="btn_box">
+			<input type='button' onclick="goBack();" value='返回' />
 		</div>
 		</form>
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

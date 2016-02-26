@@ -39,8 +39,7 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="data_table" width="80%" border="0" cellspacing="3"
-						cellpadding="0">
+					<table class="data_table">
 							<tr>
 								<td height="30" align="center" colspan="4">
 									<span

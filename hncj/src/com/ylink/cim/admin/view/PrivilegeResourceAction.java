@@ -35,7 +35,7 @@ public class PrivilegeResourceAction extends BaseAction implements
 	private PrivilegeResourceDao privilegeResourceDao;
 	private PrivilegeResource model = new PrivilegeResource();
 
-	public String addPrivilegeResource() throws Exception {
+	public String doAdd() throws Exception {
 
 		try {
 			// privilegeResource.setId(Long.valueOf(IdFactoryHelper.getId(IdFactoryConstant.PRIVILEG_ERESOURCE_ID.getValue())));
@@ -91,7 +91,7 @@ public class PrivilegeResourceAction extends BaseAction implements
 			super.logSuccess(request, UserLogType.UPDATE.getValue(), msg);
 		} catch (Exception e) {
 			setResult(false, "操作失败:" + e.getMessage(), request);
-			// e.printStackTrace();
+			e.printStackTrace();
 			String msg = MsgUtils.r("修改子权限失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.UPDATE.getValue(), msg);
 		}
@@ -111,9 +111,16 @@ public class PrivilegeResourceAction extends BaseAction implements
 		String msg = MsgUtils.r("权限资源查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "privResList";
-		// "/pages/admin/privilege/privResList.jsp"
 	}
-
+	public String toAdd() throws Exception {
+		Long id = model.getId();
+		if (id != null && id != 0) {
+			PrivilegeResource privilegeResource = privilegeResourceDao.findById(PrivilegeResource.class, id);
+			BeanUtils.copyProperties(model, privilegeResource);
+		}
+		return "privResAdd";
+		//"/pages/admin/privilege/privResEdit.jsp";
+	}
 	// 修改权限资源
 	public String toEdit() throws Exception {
 		Long id = model.getId();
@@ -123,6 +130,5 @@ public class PrivilegeResourceAction extends BaseAction implements
 			BeanUtils.copyProperties(model, privilegeResource);
 		}
 		return "privResEdit";
-		// "/pages/admin/privilege/privResEdit.jsp";
 	}
 }

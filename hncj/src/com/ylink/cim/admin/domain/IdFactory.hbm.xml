@@ -15,6 +15,7 @@
         <property name="dateLength" column="date_length"></property>
         <property name="direction" column="direction"></property>
         <property name="remark" column="remark"></property>
+        <property name="prefix" column="prefix"></property>
     </class>
     
 </hibernate-mapping>

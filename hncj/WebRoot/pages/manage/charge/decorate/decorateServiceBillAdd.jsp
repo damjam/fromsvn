@@ -119,7 +119,7 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>

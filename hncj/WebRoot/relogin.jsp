@@ -23,7 +23,7 @@
 		<div class="userbox">
 		<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 		<div class="contentb">		
-		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+		<table style="width: 100%;">
 			<tr>
 				<td width="200" rowspan="3" align="center" valign="middle"><img src="images/succes.jpg" width="158" height="141" /></td>
 				<td width="100" height="30"><span style="font-size:14px; font-weight:bold; padding-bottom:10px;">操作成功</span></td>

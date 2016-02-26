@@ -42,7 +42,7 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table width="100%" border="0" cellspacing="5" cellpadding="0">
+					<table style="width: 100%;">
 						<tr>
 							<td width=""></td>
 							<td width="120" rowspan="3" align="center" valign="middle">

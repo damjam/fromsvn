@@ -44,12 +44,12 @@
 	<body>
 		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 		<f:msg styleClass="msg" />
-		<form action="carInfo.do?action=list" styleId="queryForm">
+		<form action="carInfo.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
-					<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
+					<table class="form_grid">
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
@@ -73,7 +73,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td >房屋类型</td>

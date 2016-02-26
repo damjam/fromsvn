@@ -51,7 +51,7 @@
 					<b class="b4"></b>
 						<div class="contentb">
 						
-						<table  class="form_grid"  border="0" cellspacing="5" cellpadding="0">
+						<table class="form_grid">
 						  <tr>
 						    <td width="100" height="30" align="right">
 						    	<span style="font-size:14px; font-weight:bold; padding-bottom:10px;">新增定时计划</span>
@@ -81,7 +81,7 @@
 						   </td>
 						    <td height="30" align="right" nowrap="nowrap" class="formlabel nes">触发时间</td>
 						    <td height="30" nowrap="nowrap">
-						    	<input  id="triggertime" name="triggertime" type="text" value="${timer.triggertime}"" onclick="WdatePicker({dateFmt:'HHmmss'})"/>
+						    	<input  id="triggertime" name="triggertime" type="text" value="${timer.triggertime}" onclick="WdatePicker({dateFmt:'HHmmss'})"/>
 						    	<span style="color: red;">格式 hhmmss</span>
 						   	</td >
 						  </tr>

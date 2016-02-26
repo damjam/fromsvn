@@ -18,5 +18,5 @@
 	}	
 </script>
 <input name="gobackbutton"  type="button" value="返回" onclick="goback()"/>
-<input name="gobacklevel"  type="hidden" value=${gobacklevel} />
+<input name="gobacklevel"  type="hidden" value="${gobacklevel}"/>
 

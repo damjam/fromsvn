@@ -43,7 +43,7 @@
 					<b class="b3"></b>
 					<b class="b4"></b>
 						<div class="contentb">
-							<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+							<table class="form_grid">
 							  <caption>${ACT.name}修改</caption>	
 							  <tr>
 							    <td class="formlabel nes">参数编码</td>

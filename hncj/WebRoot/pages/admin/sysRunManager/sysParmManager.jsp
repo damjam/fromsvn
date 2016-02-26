@@ -22,7 +22,7 @@
 		
 		   function addSysParm(){
 			   gotoUrl('/sysParmManage.do?action=toAdd');
-		   		//window.location.href="pages/admin/sysRunManager/sysParmAdd.jsp";
+		   	   //window.location.href="pages/admin/sysRunManager/sysParmAdd.jsp";
 		   }
 		   
 		   function check(){
@@ -86,7 +86,7 @@
 		<b class="b3"></b>
 		<b class="b4"></b>
 		<div class="contentb">
-		<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+		<table class="form_grid">
 		  <caption>${ACT.name}</caption>	
 		  <tr>
 		    <td class="formlabel">参数代码</td>
@@ -115,7 +115,7 @@
 	
 		<!-- 数据列表区 -->
 		<div class="tablebox">
-			<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
+			<table class='data_grid'>
 				<thead>
 				  <tr>
 				    <th align="center" nowrap="nowrap" class="titlebg">参数代码</th>

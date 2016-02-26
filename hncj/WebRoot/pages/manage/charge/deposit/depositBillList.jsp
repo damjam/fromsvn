@@ -59,7 +59,7 @@
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 				<div class="contentb">
-					<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
+					<table class="form_grid">
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
@@ -115,7 +115,7 @@
 			</div>
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 			<!-- 汇总信息 -->
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 10px 0">
+				<table class="data_grid" style="margin:0 0 10px 0">
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
@@ -141,7 +141,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td >账单号</td>

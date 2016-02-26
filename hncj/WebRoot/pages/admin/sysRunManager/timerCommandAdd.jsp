@@ -51,7 +51,7 @@
 					<b class="b3"></b>
 					<b class="b4"></b>
 						<div class="contentb">
-							<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+							<table class="form_grid">
 							  <tr>
 							    <td width="100" height="30" align="right">
 							    	<span style="font-size:14px; font-weight:bold; padding-bottom:10px;">新增定时命令</span>

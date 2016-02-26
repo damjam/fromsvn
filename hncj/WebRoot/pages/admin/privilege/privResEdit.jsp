@@ -19,23 +19,16 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		<f:js src="/js/popUp.js" />
-
 		<style type="text/css">
-html {
-	overflow-y: scroll;
-}
 </style>
 	<script type="text/javascript">
 			<!--//--><![CDATA[//><!--
-			function submit(){
+			function submit() {
 				submitFirstTokenForm();
 			}
-			function goBack(){
-				history.go(-1);
-				/*
+			function goBack() {
 				var limitId = $('#limitId').val();
 				gotoUrl('/privilegeAction.do?action=listPrivs&limitId='+limitId);
-				*/
 			}
 		//--><!]]></script>
 	</head>
@@ -50,7 +43,6 @@ html {
 				<form action="privilegeResourceAction.do?action=doEdit"
 					id="inputForm" class="validate" method="post">
 					<s:hidden name="limitId" id="limitId"/>
-					<s:hidden name="id"/>
 					<table class="form_grid">
 						<caption>
 							${ACT.name}
@@ -66,7 +58,6 @@ html {
 								<span class="field_tipinfo"></span><span class="error_tipinfo">必填</span>
 							</td>
 						</tr>
-
 						<tr>
 							<td class="formlabel nes">
 								参数
@@ -75,6 +66,14 @@ html {
 								<s:textfield name="param"
 									class="userbox_bt {required:true}" maxlength="100" size="100" />
 								<span class="field_tipinfo"></span><span class="error_tipinfo">必填</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="formlabel nes">
+								是否入口
+							</td>
+							<td>
+								<s:select list="#{'Y':'是','N':'否'}" name="isEntry" listKey="key" listValue="value"></s:select>
 							</td>
 						</tr>
 					</table>

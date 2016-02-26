@@ -59,10 +59,10 @@
 				</li>
 			</ul>
 			<div id="tabs-0" >
-				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeItem.do?action=list"></iframe>
+				<iframe id="frame0" style="border: 0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeItem.do?action=list"></iframe>
 			</div>
 			<div id="tabs-1">
-				<iframe id="frame1" scrolling="auto" frameborder="0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeParam.do?action=list"></iframe>
+				<iframe id="frame1" style="border: 0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeParam.do?action=list"></iframe>
 			</div>
 		</div>
 		<!--版权区域-->

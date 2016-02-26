@@ -7,6 +7,8 @@ import com.ylink.cim.admin.dao.PrivilegeResourceDao;
 import com.ylink.cim.admin.domain.PrivilegeResource;
 import com.ylink.cim.admin.service.PrivilegeResourceService;
 
+import flink.IdFactoryHelper;
+import flink.consant.Constants;
 import flink.etc.BizException;
 import flink.util.Pager;
 import flink.util.Paginater;
@@ -35,9 +37,13 @@ public class PrivilegeResourceServiceImpl implements PrivilegeResourceService {
 
 	@Override
 	public void savePrivilegeResource(PrivilegeResource privilegeResource) throws BizException {
-
-		this.privilegeResourceDao.save(privilegeResource);
-
+		if (privilegeResource.getId() == null || privilegeResource.getId() == 0) {
+			String id = IdFactoryHelper.getId(Constants.PRIVILEGE_RESOURCE_ID);
+			privilegeResource.setId(Long.parseLong(id));
+			this.privilegeResourceDao.save(privilegeResource);
+		}else {
+			privilegeResourceDao.update(privilegeResource);
+		}
 	}
 
 	@Override

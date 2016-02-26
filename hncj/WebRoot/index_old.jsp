@@ -153,7 +153,7 @@
 				            <div class="formright"><label><input onfocus="this.blur()" name="remenber" type="checkbox" value="1" checked="checked" />在此电脑上记住用户名</label>
 				            	<a href="javascript:void(0)" onclick="javascript:toRegister()"><font style="text-decoration:underline"></font></a> 
 				            	<a href="javascript:void(0)" onclick="javascript:findPwd()"><font style="text-decoration:underline"></font></a>
-				            	</span></div>
+				            </div>
 				        		
 				        </div>
 				        <div class="formbox">

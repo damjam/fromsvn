@@ -37,7 +37,7 @@
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg/>
-	<form action="privilegeResourceAction.do?action=addPrivilegeResource" id="privilegeResourceForm" method="post" class="validate">
+	<form action="privilegeResourceAction.do?action=doAdd" id="privilegeResourceForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -45,7 +45,7 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="40%" border="0" cellspacing="3" cellpadding="0">
+					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
 					  <tr>
 						    <td align="right">权限名称</td>

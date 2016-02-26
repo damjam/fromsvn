@@ -36,7 +36,7 @@
 					<p align="left"
 						style="font-size: 16px; font-weight: bold; margin-top:55px;">
 						您还没有登录或操作超时，点<a href="" target="_top"
-							style="text-decoration: underline;color: red" id="link">这里</sapn></a>重新登录.
+							style="text-decoration: underline;color: red" id="link">这里</a>重新登录.
 					</p>
 				</div>
 			</div>

@@ -29,14 +29,17 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 	public String generateId(String seqIdName) throws BizException {
 
 		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName);
-		idFactoryDao.lock(idFactory, LockMode.UPGRADE);
-		idFactoryDao.refresh(idFactory);
 		if (null == idFactory) {
-			ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "不存在对的id: "
-					+ seqIdName);
+			//ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "不存在对的id: " + seqIdName);
+			idFactory = new IdFactory();
+			idFactory.setSeqIdName(seqIdName);
+			idFactory.setInitValue("1000");
+			idFactory.setDateLength("8");
+			idFactoryDao.save(idFactory);
 		}
+
 		if (StringUtils.isEmpty(idFactory.getInitValue())) {
-			idFactory.setInitValue("100000");
+			idFactory.setInitValue("1000");
 			// ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class,
 			// "未设置初始值");
 		}
@@ -76,27 +79,26 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 		// int maxLength=Integer.parseInt(idFactory.getMaxLength());
 		int maxLength = 8;
 		String retVal = "";
+		
 		if (currentValue.length() < maxLength) {
 			if (Constants.LEFT.equals(idFactory.getDirection())) {
 				retVal = dateVal + curVal;
-				retVal = StringUtils.leftPad(retVal, maxLength,
-						idFactory.getFillValue());
+				retVal = StringUtils.leftPad(retVal, maxLength, idFactory.getFillValue());
 			} else if (Constants.RIGHT.equals(idFactory.getDirection())) {
 				retVal = dateVal + curVal;
-				retVal = StringUtils.rightPad(retVal, maxLength,
-						idFactory.getFillValue());
+				retVal = StringUtils.rightPad(retVal, maxLength, idFactory.getFillValue());
 			} else {
 				if (Constants.CENTER.equals(idFactory.getDirection())) {
 					retVal = dateVal
-							+ StringUtils.leftPad(String.valueOf(curVal),
-									maxLength - dateLength,
+							+ StringUtils.leftPad(String.valueOf(curVal), maxLength - dateLength,
 									idFactory.getFillValue());
 				}
 			}
 		}
-
+		if (StringUtils.isNotEmpty(idFactory.getPrefix())) {
+			retVal = idFactory.getPrefix() + retVal;
+		}
 		this.idFactoryDao.update(idFactory);
-
 		return retVal;
 	}
 

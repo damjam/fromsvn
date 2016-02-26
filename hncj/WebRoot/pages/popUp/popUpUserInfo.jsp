@@ -71,8 +71,7 @@
 					<b class="b4"></b>
 					<div class="contentb">
 
-						<table class="form_grid" width="100%" border="0" cellspacing="3"
-							cellpadding="0">
+						<table class="form_grid">
 							<tr>
 								<td colspan="4" align="left">
 									<span style="font-size: 14px; font-weight: bold; padding-bottom: 10px;">用户选择</span>
@@ -114,7 +113,7 @@
 
 			<!-- 数据列表区 -->
 			<div class="tablebox">
-				<table class='data_grid' width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class='data_grid'>
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
@@ -161,7 +160,7 @@
 			</div>
 		</form>
 
-		<table  width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<table style="text-align: center;">
 			<tr></tr>
 			<tr></tr>
 			<tr></tr>

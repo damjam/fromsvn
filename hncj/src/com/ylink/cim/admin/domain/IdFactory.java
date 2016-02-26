@@ -29,6 +29,16 @@ public class IdFactory implements Serializable {
 
 	private String direction;
 
+	private String prefix;
+	
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
 	public String getSeqIdName() {
 		return seqIdName;
 	}

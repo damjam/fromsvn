@@ -27,7 +27,7 @@
 				<b class="b3"></b>
 				<b class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="100%" border="0" cellspacing="3" cellpadding="0">
+					<table class="form_grid">
 					  <caption>用户快捷菜单</caption>
 					  <tr>
 						    <td class="formlabel">登录名</td>

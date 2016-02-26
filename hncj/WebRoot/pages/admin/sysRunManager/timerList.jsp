@@ -17,9 +17,6 @@
 		<f:css href="/css/page.css" />
 		<f:css href="/css/jquery-ui-1.7.2.custom.css" />
 
-		
-</style>
-
 		<script type="text/javascript">
 	$(function() {
 		//定时计划增加
@@ -51,8 +48,7 @@
 			<b class="b3"></b>
 			<b class="b4"></b>
 			<div class="contentb">
-				<table class="form_grid" width="100%" border="0" cellspacing="3"
-					cellpadding="0">
+				<table class="form_grid">
 					<caption>
 						${ACT.name}
 					</caption>
@@ -88,8 +84,7 @@
 			<!-- 数据列表区 -->
 		</div>
 			<div class="tablebox">
-				<table class="data_grid" width="100%" border="0" cellspacing="0"
-					cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						<tr align="center" class="titlebg">
 							<th align="center" nowrap="nowrap" class="titlebg">

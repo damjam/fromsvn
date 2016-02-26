@@ -37,8 +37,7 @@
 			<b class="b3"></b>
 			<b class="b4"></b>
 			<div class="contentb">
-				<table class="form_grid" width="100%" border="0" cellspacing="3"
-					cellpadding="0">
+				<table class="form_grid">
 					<caption>
 						${ACT.name}
 					</caption>
@@ -74,8 +73,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">
-				<table class='data_grid' width="100%" border="0" cellspacing="0"
-					cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						<tr align="center" class="titlebg">
 							<td>

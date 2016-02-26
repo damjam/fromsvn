@@ -168,7 +168,7 @@ $().ready(function(){
 									<h2 onclick="javascript:ShowMenu(this,'${menu2.code}',2)"> + ${menu2.name}</h2>
 									<ul id="${menu2.code}" class="no">
 										<s:iterator id="menu3" value="children">
-											<a href="${CONTEXT_PATH}${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)"><li>${menu3.name}</li></a>
+											<a href="${CONTEXT_PATH}${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu3.name}</a>
 										</s:iterator>
 									</ul>
 								</s:if>
@@ -191,7 +191,7 @@ $().ready(function(){
 
 		<!--载入内容区-->
 		<div class="main">
-			<iframe name="main_area" frameborder="0" src="pageHome.jsp"></iframe>
+			<iframe name="main_area" src="pageHome.jsp" style="border: 0"></iframe>
 		</div>
 	</body>
 </html>

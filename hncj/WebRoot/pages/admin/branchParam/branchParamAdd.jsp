@@ -58,8 +58,7 @@ html {
 				<b class="b1"></b> <b class="b2"></b> <b class="b3"></b> <b
 					class="b4"></b>
 				<div class="contentb">
-					<table class="form_grid" width="100%" border="0" cellspacing="3"
-						cellpadding="0">
+					<table class="form_grid">
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">参数编码</td>

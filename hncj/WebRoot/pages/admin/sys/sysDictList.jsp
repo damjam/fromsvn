@@ -79,7 +79,7 @@
 			
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
 						    <td>值</td>
@@ -99,7 +99,7 @@
 							     <td>${element.remark}</td>
 							    <td align="center">
 							       <span class="redlink">
-							 	   		<a href="javascript:deletesysDict('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete"">删除</a>
+							 	   		<a href="javascript:deletesysDict('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete">删除</a>
 							 	   </span>
 							  </td>
 						    </tr>

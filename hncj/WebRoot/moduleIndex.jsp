@@ -18,7 +18,7 @@
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
 				<div style="height:30px; padding:15px 15px 25px 15px; overflow:hidden;">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<table style="width: 100%">
 						<tr>
 							<td width="52" align="center" valign="top">
 								<img src="images/icon14.gif" width="37" height="41" />

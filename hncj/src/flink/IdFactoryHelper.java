@@ -13,13 +13,13 @@ public class IdFactoryHelper {
 		return idFactoryHelper;
 	}
 
-	public static synchronized String getId(String seqIdName) throws Exception {
-		IdFactoryConstant constant = IdFactoryConstant.valueOf(seqIdName);
-		synchronized (constant) {
-			IdFactoryService idFactoryService = (IdFactoryService) SpringContext
-					.getService("idFactoryService");
-
+	public static synchronized String getId(String seqIdName) {
+		try {
+			IdFactoryService idFactoryService = (IdFactoryService) SpringContext.getService("idFactoryService");
 			return idFactoryService.generateId(seqIdName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

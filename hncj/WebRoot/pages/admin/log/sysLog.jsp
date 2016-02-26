@@ -27,7 +27,7 @@
 		<b class="b3"></b>
 		<b class="b4"></b>
 		<div class="contentb">
-		<table border="0" cellspacing="3" cellpadding="0" class="form_grid">
+		<table class="form_grid">
 		  <caption>系统日志查询</caption>
 		  <tr>
 		    <td class="formlabel">模块编号</td>

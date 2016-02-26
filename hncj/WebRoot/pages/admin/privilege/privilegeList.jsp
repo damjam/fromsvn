@@ -83,7 +83,7 @@
 			
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
 						    <td>权限ID</td>

@@ -41,10 +41,10 @@
 			
 			<!-- 数据列表区 -->
 			<div class="tablebox">	
-				<table class="data_grid" width="100%" border="0" cellspacing="0" cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td><input type="checkbox" onclick="FormUtils.selectAll(this, 'roleIds')" />全选</th></td>
+						 	<td><input type="checkbox" onclick="FormUtils.selectAll(this, 'roleIds')" />全选</td>
 						    <td>角色编号</td>
 						    <td>角色名称</td>
 						    <td>权限组编号</td>
@@ -81,8 +81,8 @@
 			</div> 
 			<s:hidden name="userId" id="userId"/>
 		</form>
-		<dir class="btn_box"><input type="button" value="提交" onclick="assignRole()"/>&nbsp;
+		<div class="btn_box"><input type="button" value="提交" onclick="assignRole()"/>&nbsp;
 			<input type="button" value="返回" id="btnReturn"/> 
-		</dir>
+		</div>
 	</body>
 </html>
