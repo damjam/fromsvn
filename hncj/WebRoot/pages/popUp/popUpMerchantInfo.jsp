@@ -95,8 +95,7 @@ body {
 					<b class="b4"></b>
 					<div class="contentb">
 
-						<table class="form_grid" width="100%" border="0" cellspacing="3"
-							cellpadding="0">
+						<table class="form_grid">
 							<tr>
 								<td colspan="4" align="left">
 									<span
@@ -134,8 +133,7 @@ body {
 
 			<!-- 数据列表区 -->
 			<div class="tablebox">
-				<table class='data_grid' width="100%" border="0" cellspacing="0"
-					cellpadding="0">
+				<table class="data_grid">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
@@ -177,23 +175,13 @@ body {
 			</div>
 		</form>
 
-		<table width="100%" border="0" cellspacing="0" cellpadding="0"
-			align="center">
-			<tr></tr>
-			<tr></tr>
-			<tr></tr>
-			<tr>
-				<td height="30" colspan="4" align="center">
-					<input type="button" value="确定" id="selInfo" />
-					<input style="margin-left: 30px;" type="submit" value="清除"
-						id="clearInfo" />
-					<input style="margin-left: 30px;" type="button" value="关闭"
-						id="closeIframe" />
-				</td>
-			</tr>
-		</table>
-		<br />
-		<br />
-		<br />
+		<div style="text-align: center;">
+			<input type="button" value="确定" id="selInfo" />
+			<input style="margin-left: 30px;" type="submit" value="清除"
+				id="clearInfo" />
+			<input style="margin-left: 30px;" type="button" value="关闭"
+				id="closeIframe" />
+		</div>
+		
 	</body>
 </html>
