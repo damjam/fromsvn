@@ -64,6 +64,11 @@
 			<result name="list">/pages/manage/charge/adrent/adrentBillList.jsp</result>
 			<result name="add">/pages/manage/charge/adrent/adrentBillAdd.jsp</result>
 		</action>
+		<action name="houseRentBill" class="houseRentBillAction">
+			<result name="list">/pages/manage/charge/houseRent/houseRentBillList.jsp</result>
+			<result name="add">/pages/manage/charge/houseRent/houseRentBillAdd.jsp</result>
+			<result name="toMain" type="redirect">houseRentBill.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
 		<action name="contact" class="contactAction">
 			<result name="list">/pages/manage/contact/contactList.jsp</result>
 			<result name="edit">/pages/manage/contact/contact.jsp</result>

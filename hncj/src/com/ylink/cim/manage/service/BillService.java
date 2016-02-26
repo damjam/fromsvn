@@ -6,6 +6,7 @@ import com.ylink.cim.manage.domain.CommonServiceBill;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.GeneralBill;
+import com.ylink.cim.manage.domain.HouseRentBill;
 import com.ylink.cim.manage.domain.IcDeposit;
 import com.ylink.cim.manage.domain.ParkingBill;
 
@@ -47,5 +48,9 @@ public interface BillService {
 
 	void saveServiceBill(CommonServiceBill commomServiceBill, UserInfo userInfo) throws BizException;
 
+	void saveHouseRentBill(HouseRentBill commomServiceBill, UserInfo userInfo) throws BizException;
+	
 	void chargeElecFee(String id, UserInfo userInfo) throws BizException;
+	
+	void chargeHouseRent(String id, UserInfo userInfo) throws BizException;
 }

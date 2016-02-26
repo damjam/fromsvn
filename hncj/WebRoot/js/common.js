@@ -359,7 +359,16 @@ function equalArray(array1, array2) {
 }
 
 function gotoUrl(url) {
-	window.location.href= CONTEXT_PATH + url;
+	if(url.indexOf(CONTEXT_PATH) != -1){
+		window.location.href= url;
+	}else{
+		var prefix = url.slice(0,1);
+		if(prefix != '/'){
+			window.location.href= CONTEXT_PATH +"/"+ url;
+		}else{
+			window.location.href= CONTEXT_PATH + url;
+		}
+	}
 }
 
 function isDisplay(domId) {

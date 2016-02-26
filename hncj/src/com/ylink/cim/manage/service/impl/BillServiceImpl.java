@@ -23,6 +23,7 @@ import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
 import com.ylink.cim.manage.dao.ElecBillDao;
 import com.ylink.cim.manage.dao.GeneralBillDao;
+import com.ylink.cim.manage.dao.HouseRentBillDao;
 import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.dao.ParkingBillDao;
@@ -34,6 +35,7 @@ import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.ElecBill;
 import com.ylink.cim.manage.domain.GeneralBill;
+import com.ylink.cim.manage.domain.HouseRentBill;
 import com.ylink.cim.manage.domain.IcDeposit;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.domain.ParkingBill;
@@ -80,7 +82,8 @@ public class BillServiceImpl implements BillService {
 	private BillTrackService trackBillService;
 	@Autowired
 	private ElecBillDao elecBillDao;
-
+	@Autowired
+	private HouseRentBillDao houseRentBillDao;
 	@Override
 	public void chargeAdRent(String id, UserInfo userInfo) throws BizException {
 		AdrentBill bill = adRentBillDao.findByIdWithLock(id);
@@ -400,5 +403,24 @@ public class BillServiceImpl implements BillService {
 		bill.setChargeUser(userInfo.getUserName());
 		bill.setChargeDate(DateUtil.getCurrent());
 		elecBillDao.update(bill);
+	}
+
+	@Override
+	public void saveHouseRentBill(HouseRentBill bill, UserInfo userInfo) throws BizException {
+		String id = idFactoryService.generateId(Constants.BILL_ID);
+		bill.setId(id);
+		bill.setCreateDate(DateUtil.getCurrent());
+		bill.setCreateUser(userInfo.getUserName());
+		bill.setState(BillState.UNPAY.getValue());
+		bill.setBranchNo(userInfo.getBranchNo());
+		houseRentBillDao.save(bill);
+	}
+	@Override
+	public void chargeHouseRent(String id, UserInfo userInfo) throws BizException {
+		HouseRentBill bill = houseRentBillDao.findByIdWithLock(id);
+		bill.setState(BillState.PAID.getValue());
+		bill.setChargeUser(userInfo.getUserName());
+		bill.setChargeDate(DateUtil.getCurrent());
+		houseRentBillDao.update(bill);
 	}
 }
