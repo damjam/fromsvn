@@ -168,7 +168,9 @@ $().ready(function(){
 									<h2 onclick="javascript:ShowMenu(this,'${menu2.code}',2)"> + ${menu2.name}</h2>
 									<ul id="${menu2.code}" class="no">
 										<s:iterator id="menu3" value="children">
-											<a href="${CONTEXT_PATH}${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu3.name}</a>
+											<li>
+												<a href="${CONTEXT_PATH}${menu3.entry}" onfocus="this.blur()" target="main_area" onclick="changeColor(this)">${menu3.name}</a>
+											</li>
 										</s:iterator>
 									</ul>
 								</s:if>
