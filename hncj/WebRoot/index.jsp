@@ -15,8 +15,5 @@
         <title></title>
 </head>
 
-<frameset>
-  <frame name=top src="index_old.jsp">
-</frameset>
-
+<iframe name="top" src="index_old.jsp" width="100%" height="100%" style="border: none;"></iframe>
 </html>
