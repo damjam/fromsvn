@@ -114,5 +114,16 @@
 			<result name="list">/pages/admin/chargeItem/chargeItemList.jsp</result>
 			<result name="pop">/pages/popUp/popUpChargeItem.jsp</result>
 		</action>
+		
+		<action name="repair" class="repairAction">
+			<result name="list">/pages/manage/repair/repairList.jsp</result>
+			<result name="edit">/pages/manage/repair/repairEdit.jsp</result>
+			<result name="trackAdd">/pages/manage/repair/trackAdd.jsp</result>
+			<result name="trackList">/pages/manage/repair/tracList.jsp</result>
+		</action>
+		<action name="employee" class="employeeAction">
+			<result name="list">/pages/manage/employee/employeeList.jsp</result>
+			<result name="edit">/pages/manage/employee/employeeEdit.jsp</result>
+		</action>
 	</package>
 </struts>
