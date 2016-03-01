@@ -3,6 +3,11 @@ package com.ylink.cim.manage.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.ylink.cim.common.type.SysDictType;
+import com.ylink.cim.common.util.ParaManager;
+
 public class Employee implements Serializable{
 
 	/**
@@ -12,9 +17,9 @@ public class Employee implements Serializable{
 	private String id;
 	private String name;
 	private String alias;
-	private String hiredate;
+	private String hireDate;
 	private String position;
-	private String idcard;
+	private String idCard;
 	private String birthday;
 	private String gender;
 	private String tel;
@@ -27,8 +32,49 @@ public class Employee implements Serializable{
 	private Date createDate;
 	private String createUser;
 	private String branchNo;
+	private String transfer;
+	private String state;
+	private Date updateDate;
+	private String email;
+	private String weibo;
+	private String qq;
+	private String school;
+	private String major;
+	private String hobby;
+	private String degree;
 	
-	
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
+	}
+	public String getDegree() {
+		return degree;
+	}
+	public void setDegree(String degree) {
+		this.degree = degree;
+	}
+	private String startCreateDate;
+	private String endCreateDate;
+	public String getPositionName() {
+		if (StringUtils.isNotEmpty(position)) {
+			return  ParaManager.getSysDict(SysDictType.PositionType.getValue()).get(position);
+		}
+		return null;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getName() {
 		return name;
 	}
@@ -41,11 +87,12 @@ public class Employee implements Serializable{
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
-	public String getHiredate() {
-		return hiredate;
+	
+	public String getHireDate() {
+		return hireDate;
 	}
-	public void setHiredate(String hiredate) {
-		this.hiredate = hiredate;
+	public void setHireDate(String hireDate) {
+		this.hireDate = hireDate;
 	}
 	public String getPosition() {
 		return position;
@@ -53,11 +100,12 @@ public class Employee implements Serializable{
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	public String getIdcard() {
-		return idcard;
+	
+	public String getIdCard() {
+		return idCard;
 	}
-	public void setIdcard(String idcard) {
-		this.idcard = idcard;
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
 	}
 	public String getBirthday() {
 		return birthday;
@@ -137,6 +185,55 @@ public class Employee implements Serializable{
 	}
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
+	}
+	
+	public String getTransfer() {
+		return transfer;
+	}
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getWeibo() {
+		return weibo;
+	}
+	public void setWeibo(String weibo) {
+		this.weibo = weibo;
+	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public String getMajor() {
+		return major;
+	}
+	public void setMajor(String major) {
+		this.major = major;
+	}
+	public String getHobby() {
+		return hobby;
+	}
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
+	public String getStartCreateDate() {
+		return startCreateDate;
+	}
+	public void setStartCreateDate(String startCreateDate) {
+		this.startCreateDate = startCreateDate;
+	}
+	public String getEndCreateDate() {
+		return endCreateDate;
+	}
+	public void setEndCreateDate(String endCreateDate) {
+		this.endCreateDate = endCreateDate;
 	}
 	
 }

@@ -93,9 +93,11 @@ public abstract class ParaManager {
 		}
 		return sysDictMap.get(dictType);
 	}
-	public static Map<String, String> getBranches() {
+	public static Map<String, String> getBranches(boolean containHQ) {
 		Map<String, String> branchMap = getSysDict(SysDictType.BranchType.getValue());
-		branchMap.remove("0000");
+		if (!containHQ) {
+			branchMap.remove("0000");
+		}
 		return branchMap;
 	}
 	public static String getSysDictName(String dictType, String value) {

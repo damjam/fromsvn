@@ -52,7 +52,7 @@ public class HouseRentBillAction extends BaseAction implements ModelDriven<House
 			HouseRentBill bill = (HouseRentBill)paginater.getList().get(i);
 			String branchNo = bill.getBranchNo();
 			if (StringUtils.isNotEmpty(branchNo)) {
-				String branchName = ParaManager.getBranches().get(branchNo);
+				String branchName = ParaManager.getBranches(true).get(branchNo);
 				bill.setBranchName(branchName);
 			}
 			String merchantNo = bill.getMerchantNo();

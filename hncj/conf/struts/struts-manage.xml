@@ -124,6 +124,11 @@
 		<action name="employee" class="employeeAction">
 			<result name="list">/pages/manage/employee/employeeList.jsp</result>
 			<result name="edit">/pages/manage/employee/employeeEdit.jsp</result>
+			<result name="add">/pages/manage/employee/employeeAdd.jsp</result>
+			<result name="transfer">/pages/manage/employee/empTransferAdd.jsp</result>
+			<result name="transferList">/pages/manage/employee/empTransferList.jsp</result>
+			<result name="detail">/pages/manage/employee/employeeDetail.jsp</result>
+			<result name="toMain" type="redirect">employee.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 	</package>
 </struts>

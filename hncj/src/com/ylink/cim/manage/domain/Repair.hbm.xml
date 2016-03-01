@@ -20,8 +20,8 @@
 		<property name="item" type="java.lang.String">
 			<column name="item" length="100" />
 		</property>
-		<property name="imp_index" type="java.lang.String">
-			<column name="impIndex" length="1" />
+		<property name="impIndex" type="java.lang.String">
+			<column name="imp_index" length="1" />
 		</property>
 		<property name="emgIndex" type="java.lang.String">
 			<column name="emg_index" length="1" />

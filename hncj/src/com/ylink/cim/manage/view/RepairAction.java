@@ -47,6 +47,18 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 	public String toAdd() throws Exception {
 		return "add";
 	}
+	public String toAddTrack() throws Exception {
+		return "track";
+	}
+	public String doAddTrack() throws Exception {
+		return "track";
+	}
+	public String showTrack() throws Exception {
+		return "trackList";
+	}
+	public String detail() throws Exception {
+		return "detail";
+	}
 	public String doAdd() throws Exception {
 		try {
 			repairService.save(model, getSessionUser(request));
@@ -75,5 +87,6 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 		}
 		return "toMain";
 	}
+	
 	
 }

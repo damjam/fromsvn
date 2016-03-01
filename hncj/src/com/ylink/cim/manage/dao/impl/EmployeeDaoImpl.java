@@ -6,7 +6,7 @@ import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.dao.EmployeeDao;
 import com.ylink.cim.manage.domain.Employee;
 
@@ -31,9 +31,13 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao {
 		helper.append("and name like ?", MapUtils.getString(map, "name"), MatchMode.ANYWHERE);
 		helper.append("and degree = ?", MapUtils.getString(map, "degree"));
 		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
-		helper.append("and tel like ?", MapUtils.getString(map, "tel"));
+		helper.append("and tel like ?", MapUtils.getString(map, "tel"), MatchMode.START);
 		helper.append("and gender = ?", MapUtils.getString(map, "gender"));
 		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
+		UserInfo userInfo = (UserInfo)map.get("userInfo");
+		if (!"0000".equals(userInfo.getBranchNo())) {
+			helper.append("and branchNo = ?", userInfo.getBranchNo());
+		}
 		return super.getPageData(helper, pager);
 	}
 

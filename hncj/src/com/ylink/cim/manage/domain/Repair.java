@@ -23,8 +23,16 @@ public class Repair implements Serializable{
 	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
+	private String feedback;
 	
 	
+	
+	public String getFeedback() {
+		return feedback;
+	}
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
 	public String getStartCreateDate() {
 		return startCreateDate;
 	}

@@ -100,7 +100,7 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 		saveQueryResult(request, paginater);
 		String msg = MsgUtils.r("机构参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
-		request.setAttribute("branches", ParaManager.getBranches());
+		request.setAttribute("branches", ParaManager.getBranches(false));
 		return "list";
 	}
 
@@ -131,11 +131,11 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	 * @throws Exception
 	 */
 	public String toAdd() throws Exception {
-		request.setAttribute("branches", ParaManager.getBranches());
+		request.setAttribute("branches", ParaManager.getBranches(false));
 		return "add";
 	}
 	public String toUpdate() throws Exception {
-		request.setAttribute("branches", ParaManager.getBranches());
+		request.setAttribute("branches", ParaManager.getBranches(false));
 		BranchParam branchParam = branchParmDao.findById(model.getCode());
 		BeanUtils.copyProperties(model, branchParam);
 		return "modify";

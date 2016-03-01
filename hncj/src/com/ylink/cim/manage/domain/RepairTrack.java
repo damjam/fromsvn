@@ -10,6 +10,7 @@ public class RepairTrack implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
+	private String repairId;
 	private String remark;
 	private Date createDate;
 	private String createUser;
@@ -18,6 +19,12 @@ public class RepairTrack implements Serializable{
 	private String feedback;
 	private Date feedbackDate;
 	
+	public String getRepairId() {
+		return repairId;
+	}
+	public void setRepairId(String repairId) {
+		this.repairId = repairId;
+	}
 	public Date getFeedbackDate() {
 		return feedbackDate;
 	}

@@ -41,7 +41,7 @@ public class BranchDictAction extends BaseAction implements ModelDriven<BranchDi
 			branchDict.setBranchName(ParaManager.getSysDictName(SysDictType.BranchType.getValue(), branchDict.getBranchNo()));
 		}
 		saveQueryResult(request, paginater);
-		request.setAttribute("branches", ParaManager.getBranches());
+		request.setAttribute("branches", ParaManager.getBranches(false));
 		BranchDictType.setInReq(request);
 		String msg = MsgUtils.r("字典管理查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
@@ -50,7 +50,7 @@ public class BranchDictAction extends BaseAction implements ModelDriven<BranchDi
 
 	public String toAdd() {
 		BranchDictType.setInReq(request);
-		request.setAttribute("branches", ParaManager.getBranches());
+		request.setAttribute("branches", ParaManager.getBranches(false));
 		return ActionConstant.TO_ADD_PAGE;
 	}
 
