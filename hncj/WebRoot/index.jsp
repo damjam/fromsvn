@@ -14,6 +14,7 @@
         <link rel="shortcut icon" href="images/favicon.ico" />
         <title></title>
 </head>
-
-<iframe name="top" src="index_old.jsp" width="100%" height="100%" style="border: none;"></iframe>
+<body style="margin:0px;">
+	<iframe name="top" src="index_old.jsp" width="100%" height="100%" style="border: none;"></iframe>
+</body>
 </html>
