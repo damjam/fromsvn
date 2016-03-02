@@ -11,7 +11,7 @@ public interface EmployeeService {
 
 	void changeState(String id, String state, UserInfo userInfo) throws BizException;
 
-	void addVocation(String id, String transferDetail, UserInfo userInfo) throws BizException;
+	void addVocation(Employee employee, UserInfo userInfo) throws BizException;
 
 	void transfer(Employee model, UserInfo sessionUser) throws BizException;
 

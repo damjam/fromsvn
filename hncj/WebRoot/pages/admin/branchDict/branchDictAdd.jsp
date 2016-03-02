@@ -41,7 +41,7 @@
 				<div class="contentb">
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
-					  <c:if test="${sessionScope.branchNo eq '0000' || sessionScope.branchNo == null}">
+					  <c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
 						   <tr>
 							     <td class="formlabel nes">机构</td>
 							     <td>

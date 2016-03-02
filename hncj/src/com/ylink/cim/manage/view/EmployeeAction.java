@@ -21,6 +21,7 @@ import com.ylink.cim.manage.service.EmployeeService;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 @Scope("prototype")
 @Component
@@ -103,15 +104,20 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		try {
 			String id = model.getId();
 			Employee employee = employeeDao.findById(id);
+			request.setAttribute("branchName", ParaManager.getBranches(true).get(employee.getBranchNo()));
+			request.setAttribute("positionName", ParaManager.getAllPositions().get(employee.getPosition()));
 			BeanUtils.copyProperties(model, employee);
 			List<EmpTransfer> list = empTransferDao.findByEmpId(model.getId());
-			saveQueryResult(request, list);
+			request.setAttribute("transferSize", list.size());
+			saveQueryResult(request, list, "transfers");
 		} catch (Exception e) {
-			setResult(false, "删除失败", request);
+			setFailResult("系统错误", request);
 			e.printStackTrace();
+			return "toMain";
 		}
 		return "detail";
 	}
+	
 	public String delete() throws Exception {
 		try {
 			String id = model.getId();
@@ -130,7 +136,7 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 			employeeService.changeState(id, state, getSessionUser(request));
 			setSucResult("操作成功", request);
 		} catch (Exception e) {
-			setResult(false, "删除失败", request);
+			setFailResult("操作失败", request);
 			e.printStackTrace();
 		}
 		return "toMain";
@@ -141,8 +147,17 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		return "transfer";
 	}
 	public String doTransfer() throws Exception {
-		employeeService.transfer(model, getSessionUser(request));
-		return "transfer";
+		try{
+			employeeService.transfer(model, getSessionUser(request));
+			return "transfer";
+		}catch(BizException e) {
+			e.printStackTrace();
+			setResult(false, e.getMessage(), request);
+		}catch (Exception e) {
+			e.printStackTrace();
+			setResult(false, "操作失败", request);
+		}
+		return toTransfer();
 	}
 	public String showTransfer() throws Exception {
 		List<EmpTransfer> list = empTransferDao.findByEmpId(model.getId());
@@ -151,25 +166,59 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 	}
 	private void initSelect() {
 		request.setAttribute("branches", ParaManager.getBranches(true));
-		request.setAttribute("positionTypes", ParaManager.getSysDict(SysDictType.PositionType.getValue()));
+		request.setAttribute("positionTypes", ParaManager.getSysDict(SysDictType.BranchPostType.getValue()));
 		SexType.setInReq(request);
 	}
+	public String toAddVocation() throws Exception {
+		
+		return "vocation";
+	}
 	public String addVocation() throws Exception {
-		JSONObject object = new JSONObject();
 		try {
-			String id = model.getId();
-			String transferDetail = request.getParameter("transferDetail");
-			employeeService.addVocation(id, transferDetail, getSessionUser(request));
+			EmpTransfer empTransfer = model.getEmpTransfer();
+			if (empTransfer.getEndDate().compareTo(empTransfer.getBeginDate()) <= 0) {
+				throw new BizException("结束日期必须在开始日期之后");
+			}
+			employeeService.addVocation(model, getSessionUser(request));
 			setSucResult("操作成功", request);
-		} catch (Exception e) {
-			setResult(false, "删除失败", request);
+		} catch(BizException e){
+			setResult(false, e.getMessage(), request);
 			e.printStackTrace();
+			return toAddVocation();
+		} catch (Exception e) {
+			setResult(false, "操作失败", request);
+			e.printStackTrace();
+			return toAddVocation();
 		}
-		respond(response, object.toString());
-		return null;
+		return "toMain";
 	}
 	public String export() throws Exception {
 		
+		return null;
+	}
+	public String loadPosts() throws Exception {
+		JSONObject object = new JSONObject();
+		try {
+			String branchNo = request.getParameter("branchNo");
+			JSONArray array = new JSONArray();
+			Map<String, String> positionMap = null;
+			if ("0000".equals(branchNo)) {
+				positionMap = ParaManager.getSysDict(SysDictType.CenterPostType.getValue());
+			}else {
+				positionMap = ParaManager.getSysDict(SysDictType.BranchPostType.getValue());
+			}
+			for (Map.Entry<String, String> entry : positionMap.entrySet()) {
+				JSONObject position = new JSONObject();
+				position.put("key", entry.getKey());
+				position.put("value", entry.getValue());
+				array.add(position);
+			}
+			object.put("positions", array);
+			object.put("status", "1");
+		} catch (Exception e) {
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
 		return null;
 	}
 }

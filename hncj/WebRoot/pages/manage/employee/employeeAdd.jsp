@@ -26,7 +26,29 @@
 		 	function save(){
 		 		FormUtils.submitFirstTokenForm();
 		 	}
-		 	
+		 	$().ready(function(){
+		 		$('#branchNo').change(function(){
+		 			var branchNo = $(this).val();
+	 				$.getJSON('${uri}?action=loadPosts&branchNo='+branchNo, function(data){
+	 					var status = data.status;
+	 					if(status == '1'){
+	 						var positions = data.positions;
+							var str = '';
+							for(var i=0; i<positions.length; i++) {
+								var position = positions[i];
+								str += '<option value="'+position.key+'">';
+								str += position.value;
+								str += '</option>';
+							}
+							$('#position').empty();
+							$('#position').html(str);
+	 					}else{
+	 						alert('系统异常,请与管理员联系');
+	 					}
+	 				});
+		 		});
+		 		
+		 	});
 		</script>
 	</head>
 <body>

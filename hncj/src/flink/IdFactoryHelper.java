@@ -4,6 +4,7 @@ import com.ylink.cim.admin.service.IdFactoryService;
 
 import flink.consant.IdFactoryConstant;
 import flink.util.SpringContext;
+import flink.util.StringUtil;
 
 public class IdFactoryHelper {
 
@@ -21,5 +22,9 @@ public class IdFactoryHelper {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public static String getId(Class clazz) {
+		String seqIdName =  StringUtil.class2Table(clazz.getName())+"_ID";
+		return getId(seqIdName);
 	}
 }

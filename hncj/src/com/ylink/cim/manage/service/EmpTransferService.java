@@ -4,5 +4,5 @@ import com.ylink.cim.admin.domain.UserInfo;
 
 public interface EmpTransferService {
 
-	void addEmpTransfer(String empId, String transferType, String transferDetail, UserInfo userInfo);
+	void addEmpTransfer(String empId, String transferType, String transferDetail, String transferDate, String reason, UserInfo userInfo);
 }

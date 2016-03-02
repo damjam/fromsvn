@@ -12,7 +12,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="empId" type="java.lang.String">
-			<column name="empId" length="50" />
+			<column name="emp_id" length="50" />
 		</property>
 		<property name="transferType" type="java.lang.String">
 			<column name="transfer_type" length="2" />
@@ -25,6 +25,12 @@
 		</property>
 		<property name="createDate" type="java.util.Date">
 			<column name="create_date" length="20" />
+		</property>
+		<property name="transferDate" type="java.lang.String">
+			<column name="transfer_date" length="20" />
+		</property>
+		<property name="reason" type="java.lang.String">
+			<column name="reason" length="50" />
 		</property>
 	</class>
 </hibernate-mapping>

@@ -63,14 +63,14 @@
 								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
 							<c:if
-								test="${sessionScope.branchNo eq '0000' or sessionScope.branchNo == null}">
+								test="${sessionScope.BRANCH_NO eq '0000' or sessionScope.BRANCH_NO == null}">
 								<td class="formlabel" align="left">机构</td>
 								<td><s:select list="#request.branches" name="branchNo"
 										listKey="key" listValue="value" headerKey=""
 										headerValue="---全部---" /></td>
 							</c:if>
 							<c:if
-								test="${sessionScope.branchNo != null && sessionScope.branchNo ne '0000' }">
+								test="${sessionScope.BRANCH_NO != null && sessionScope.BRANCH_NO ne '0000' }">
 								<td class="formlabel" align="left">&nbsp;</td>
 								<td></td>
 							</c:if>

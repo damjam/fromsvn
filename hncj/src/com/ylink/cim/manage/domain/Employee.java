@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 
 public class Employee implements Serializable{
@@ -43,6 +42,7 @@ public class Employee implements Serializable{
 	private String hobby;
 	private String degree;
 	
+	private EmpTransfer empTransfer = new EmpTransfer();
 	public String getSchool() {
 		return school;
 	}
@@ -59,7 +59,7 @@ public class Employee implements Serializable{
 	private String endCreateDate;
 	public String getPositionName() {
 		if (StringUtils.isNotEmpty(position)) {
-			return  ParaManager.getSysDict(SysDictType.PositionType.getValue()).get(position);
+			return ParaManager.getAllPositions().get(position);
 		}
 		return null;
 	}
@@ -234,6 +234,12 @@ public class Employee implements Serializable{
 	}
 	public void setEndCreateDate(String endCreateDate) {
 		this.endCreateDate = endCreateDate;
+	}
+	public EmpTransfer getEmpTransfer() {
+		return empTransfer;
+	}
+	public void setEmpTransfer(EmpTransfer empTransfer) {
+		this.empTransfer = empTransfer;
 	}
 	
 }

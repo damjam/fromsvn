@@ -26,14 +26,27 @@
 		 	function save(){
 		 		FormUtils.submitFirstTokenForm();
 		 	}
-		 	
+		 	$().ready(function(){
+		 		$('#transferType').change(function(){
+		 			var transferType = $('#transferType').val();
+		 			if(transferType == '01'){
+		 				$('#tr1').show();
+		 				$('#tr2').show();
+		 			}else if(transferType == '02'){//离职
+		 				$('#tr1').hide();
+		 				$('#tr2').hide();
+		 			}
+		 		});
+		 	});
 			
 		</script>
 	</head>
 <body>
 <jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
 <f:msg styleClass="msg"/>
-	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
+	<form action="${uri}?action=doTransfer" id="dataForm" method="post" class="validate">
+		<s:hidden name="id"/>
+		<input type="hidden" name="empTransfer.empId" value="${id}">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -44,24 +57,37 @@
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
 					  <tr>
+					  		<td class="formlabel nes">异动类型</td>
+					  		<td>
+					  			<s:select name="empTransfer.transferType" id="transferType" list="#{'岗位/部门调动':'01','离职':'02'}" listKey="value" listValue="key" style="166px;"></s:select>
+						    	<span class="field_tipinfo">不能为空</span>
+					  		</td>
+					  </tr>
+					  <tr id="tr1">
 						    <td class="formlabel nes">部门</td>
 						    <td>
-						    	<s:select name="branchNo" id="branchNo" list="#request.branches" listKey="value" listValue="key" style="166px;"></s:select>
+						    	<s:select name="empTransfer.transBranchNo" id="branchNo" list="#request.branches" listKey="key" listValue="value" style="166px;"></s:select>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					  <tr id="tr2">
+						    <td class="formlabel nes">职位</td>
+						    <td>
+						    	<s:select name="empTransfer.transPosition" id="position" list="#request.positionTypes" listKey="key" listValue="value" style="166px;"></s:select>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					  <tr>
-						    <td class="formlabel nes">职位</td>
+						    <td class="formlabel nes">异动日期</td>
 						    <td>
-						    	<s:select name="position" id="position" list="#request.positionTypes" listKey="value" listValue="key" style="166px;"></s:select>
+						    	<s:textfield name="empTransfer.transferDate" id="transferDate" maxlength="8" class="{required:true}" onfocus="WdatePicker();" readonly="true"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
-					  
 					   <tr>
-						    <td class="formlabel">备注</td>
+						    <td class="formlabel">原因</td>
 						    <td>
-						    	<s:textfield name="remark" id="remark" maxlength="25"/>
+						    	<s:textfield name="empTransfer.reason" id="reason" maxlength="25"/>
 						    </td>
 					   </tr>
 				  </table>

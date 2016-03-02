@@ -126,6 +126,7 @@
 			<result name="edit">/pages/manage/employee/employeeEdit.jsp</result>
 			<result name="add">/pages/manage/employee/employeeAdd.jsp</result>
 			<result name="transfer">/pages/manage/employee/empTransferAdd.jsp</result>
+			<result name="vocation">/pages/manage/employee/vocationAdd.jsp</result>
 			<result name="transferList">/pages/manage/employee/empTransferList.jsp</result>
 			<result name="detail">/pages/manage/employee/employeeDetail.jsp</result>
 			<result name="toMain" type="redirect">employee.do?action=list&amp;msg=${msg}&amp;result={result}</result>

@@ -1,5 +1,8 @@
 package flink.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 public abstract class StringUtil {
@@ -33,4 +36,29 @@ public abstract class StringUtil {
 		return new StringBuffer(s).replace(beginIndex, endIndex, maskString)
 				.toString();
 	}
+	
+	public static String class2Table(String className) {
+		if (className.indexOf(".") != -1) {
+			className = className.substring(className.lastIndexOf(".")+1, className.length());
+		}
+		List<String> array = new ArrayList<>();
+		for(int i=1; i<className.length(); i++){
+			char c = className.charAt(i);
+			if (c > 'A' && c < 'Z') {//
+				System.out.println(1);
+				array.add(className.substring(0, i));
+				className = className.substring(i, className.length());
+			}
+		}
+		array.add(className);
+		StringBuilder tableName = new StringBuilder();
+		for(int i=0; i<array.size(); i++){
+			if(i != 0){
+				tableName.append("_");
+			}
+			tableName.append(array.get(i));
+		}
+		return tableName.toString().toUpperCase();
+	}
+	
 }

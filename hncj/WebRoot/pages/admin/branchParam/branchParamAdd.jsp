@@ -79,7 +79,7 @@ html {
 								type="text" value="${branchParm.parvalue}" maxlength="25" /> <span
 								class="field_tipinfo">不能为空</span></td>
 						</tr>
-						<c:if test="${sessionScope.branchNo eq '0000' || sessionScope.branchNo == null}">
+						<c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
 							<tr>
 								<td class="formlabel nes">机构</td>
 								<td><s:select list="#request.branches" name="branchNo"
