@@ -14,11 +14,18 @@ public class RepairTrack implements Serializable{
 	private String remark;
 	private Date createDate;
 	private String createUser;
-	private String branchNo;
 	private String processor;
 	private String feedback;
 	private Date feedbackDate;
+	private String result;
 	
+	
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	public String getRepairId() {
 		return repairId;
 	}
@@ -67,12 +74,6 @@ public class RepairTrack implements Serializable{
 	}
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
-	}
-	public String getBranchNo() {
-		return branchNo;
-	}
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 	
 }

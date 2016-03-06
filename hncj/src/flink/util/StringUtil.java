@@ -60,5 +60,10 @@ public abstract class StringUtil {
 		}
 		return tableName.toString().toUpperCase();
 	}
-	
+	public static String class2Object(String className) {
+		if (className.indexOf(".") != -1) {
+			className = className.substring(className.lastIndexOf(".")+1, className.length());
+		}
+		return StringUtils.uncapitalize(className);
+	}
 }

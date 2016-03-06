@@ -52,10 +52,8 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		map.put("tel", model.getTel());
 		map.put("branchNo", model.getBranchNo());
 		map.put("userInfo", getSessionUser(request));
+		map.put("position", model.getPosition());
 		Paginater paginater = employeeDao.findPager(map, getPager(request));
-		for(int i=0; i<paginater.getList().size(); i++){
-			
-		}
 		saveQueryResult(request, paginater);
 		initSelect();
 		return "list";
@@ -121,7 +119,7 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 	public String delete() throws Exception {
 		try {
 			String id = model.getId();
-			employeeDao.deleteById(id);
+			employeeService.delete(id);
 			setSucResult("²Ù×÷³É¹¦", request);
 		} catch (Exception e) {
 			setResult(false, "É¾³ýÊ§°Ü", request);
@@ -220,5 +218,20 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		}
 		respond(response, object.toString());
 		return null;
+	}
+	public String queryPopup() throws Exception {
+		Map<String, Object> map = getParaMap();
+		map.put("state", model.getState());
+		map.put("tel", model.getTel());
+		map.put("branchNo", model.getBranchNo());
+		map.put("userInfo", getSessionUser(request));
+		map.put("name", model.getName());
+		map.put("position", model.getPosition());
+		Paginater paginater = employeeDao.findPager(map, getPager(request));
+		saveQueryResult(request, paginater);
+		initSelect();
+		request.setAttribute("bindCode", request.getParameter("bindCode"));
+		request.setAttribute("bindName", request.getParameter("bindName"));
+		return "popup";
 	}
 }

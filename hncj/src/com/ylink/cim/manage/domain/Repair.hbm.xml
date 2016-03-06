@@ -11,6 +11,9 @@
 			<column name="ID" length="12" />
 			<generator class="assigned" />
 		</id>
+		<property name="houseSn" type="java.lang.String">
+			<column name="house_sn" length="10" />
+		</property>
 		<property name="reporter" type="java.lang.String">
 			<column name="reporter" length="50" />
 		</property>
@@ -46,6 +49,15 @@
 		</property>
 		<property name="feedback" type="java.lang.String">
 			<column name="feedback" length="50" />
+		</property>
+		<property name="reporterTel" type="java.lang.String">
+			<column name="reporter_tel" length="20" />
+		</property>
+		<property name="rate" type="java.lang.String">
+			<column name="rate" length="1" />
+		</property>
+		<property name="feedbackDate" type="java.util.Date">
+			<column name="feedback_date" length="50" />
 		</property>
 	</class>
 </hibernate-mapping>

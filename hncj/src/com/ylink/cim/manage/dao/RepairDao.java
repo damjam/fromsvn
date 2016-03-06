@@ -9,4 +9,5 @@ import flink.util.Paginater;
 public interface RepairDao extends BaseDao {
 
 	public Paginater findPager(Map<String, Object> map, Pager pager);
+
 }

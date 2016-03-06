@@ -32,6 +32,9 @@
 		<property name="spareTel" type="java.lang.String">
 			<column name="spare_tel" length="20" />
 		</property>
+		<property name="instancyPerson" type="java.lang.String">
+			<column name="instancy_person" length="20" />
+		</property>
 		<property name="instancyTel" type="java.lang.String">
 			<column name="instancy_tel" length="20" />
 		</property>
@@ -85,6 +88,9 @@
 		</property>
 		<property name="weibo" type="java.lang.String">
 			<column name="weibo" length="100" />
+		</property>
+		<property name="weixin" type="java.lang.String">
+			<column name="weixin" length="100" />
 		</property>
 		<property name="hobby" type="java.lang.String">
 			<column name="hobby" length="100" />

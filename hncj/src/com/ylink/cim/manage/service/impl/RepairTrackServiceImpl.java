@@ -9,5 +9,6 @@ import com.ylink.cim.manage.service.RepairTrackService;
 public class RepairTrackServiceImpl implements RepairTrackService {
 	@Autowired
 	private RepairTrackDao repairTrackDao;
+
 	
 }

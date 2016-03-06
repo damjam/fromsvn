@@ -10,6 +10,7 @@ public class Repair implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
+	private String houseSn;
 	private String reporter;
 	private String reporterType;
 	private String item;
@@ -24,9 +25,43 @@ public class Repair implements Serializable{
 	private String startCreateDate;
 	private String endCreateDate;
 	private String feedback;
+	private Date feedbackDate;
+	private String reporterTel;
+	private String rate;
+	
+	public String getRate() {
+		return rate;
+	}
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+	private RepairTrack track = new RepairTrack();
 	
 	
-	
+	public String getHouseSn() {
+		return houseSn;
+	}
+	public void setHouseSn(String houseSn) {
+		this.houseSn = houseSn;
+	}
+	public String getReporterTel() {
+		return reporterTel;
+	}
+	public void setReporterTel(String reporterTel) {
+		this.reporterTel = reporterTel;
+	}
+	public RepairTrack getTrack() {
+		return track;
+	}
+	public void setTrack(RepairTrack track) {
+		this.track = track;
+	}
+	public Date getFeedbackDate() {
+		return feedbackDate;
+	}
+	public void setFeedbackDate(Date feedbackDate) {
+		this.feedbackDate = feedbackDate;
+	}
 	public String getFeedback() {
 		return feedback;
 	}

@@ -10,4 +10,6 @@ public interface EmpTransferDao extends BaseDao {
 
 	List<EmpTransfer> findByEmpId(String id);
 
+	void deleteByEmpId(String empId);
+
 }

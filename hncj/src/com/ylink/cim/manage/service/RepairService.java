@@ -11,4 +11,8 @@ public interface RepairService {
 
 	void delete(String id) throws BizException;
 
+	void cancel(String id, UserInfo userInfo) throws BizException;
+
+	void addTrack(Repair model, UserInfo sessionUser) throws BizException;
+
 }

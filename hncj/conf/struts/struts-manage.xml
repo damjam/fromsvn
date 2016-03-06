@@ -57,7 +57,7 @@
 		</action>
 		<action name="merchantInfo" class="merchantInfoAction">
 			<result name="list">/pages/manage/merchant/merchantList.jsp</result>
-			<result name="popUp">/pages/popUp/popUpMerchantInfo.jsp</result>
+			<result name="popUp">/pages/popUp/popupMerchantInfo.jsp</result>
 			<result name="edit">/pages/manage/merchant/merchantInfoEdit.jsp</result>
 		</action>
 		<action name="adrentBill" class="adrentBillAction">
@@ -129,7 +129,16 @@
 			<result name="vocation">/pages/manage/employee/vocationAdd.jsp</result>
 			<result name="transferList">/pages/manage/employee/empTransferList.jsp</result>
 			<result name="detail">/pages/manage/employee/employeeDetail.jsp</result>
+			<result name="popup">/pages/popUp/popupEmployee.jsp</result>
 			<result name="toMain" type="redirect">employee.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="repair" class="repairAction">
+			<result name="list">/pages/manage/repair/repairList.jsp</result>
+			<result name="edit">/pages/manage/repair/repairEdit.jsp</result>
+			<result name="add">/pages/manage/repair/repairAdd.jsp</result>
+			<result name="repairTrackList">/pages/manage/repair/repairTrackList.jsp</result>
+			<result name="repairTrackAdd">/pages/manage/repair/repairTrackAdd.jsp</result>
+			<result name="toMain" type="redirect">repair.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 	</package>
 </struts>

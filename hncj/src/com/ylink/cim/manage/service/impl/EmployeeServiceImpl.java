@@ -10,6 +10,7 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.EmployeeState;
 import com.ylink.cim.common.type.TransferType;
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.manage.dao.EmpTransferDao;
 import com.ylink.cim.manage.dao.EmployeeDao;
 import com.ylink.cim.manage.domain.EmpTransfer;
 import com.ylink.cim.manage.domain.Employee;
@@ -27,6 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private EmpTransferService empTransferService;
+	@Autowired
+	private EmpTransferDao empTransferDao;
 	@Override
 	public void save(Employee model, UserInfo sessionUser) throws BizException{
 		model.setCreateDate(DateUtil.getCurrent());
@@ -96,5 +99,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		CopyPropertyUtil.copyPropertiesIgnoreNull(model, employee);
 		employee.setUpdateDate(DateUtil.getCurrent());
 		employeeDao.update(employee);
+	}
+
+	@Override
+	public void delete(String id) throws BizException {
+		employeeDao.deleteById(id);
+		empTransferDao.deleteByEmpId(id);
 	}
 }

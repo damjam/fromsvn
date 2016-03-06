@@ -10,7 +10,7 @@ import com.ylink.cim.manage.domain.EmpTransfer;
 import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 @Component("empTransferDao")
-public class EmpTranferDaoImpl extends BaseDaoImpl implements EmpTransferDao {
+public class EmpTransferDaoImpl extends BaseDaoImpl implements EmpTransferDao {
 
 	@Override
 	protected Class getModelClass() {
@@ -23,6 +23,12 @@ public class EmpTranferDaoImpl extends BaseDaoImpl implements EmpTransferDao {
 		helper.append("from EmpTransfer where 1=1");
 		helper.append("and empId = ?", id);
 		return super.getList(helper);
+	}
+
+	@Override
+	public void deleteByEmpId(String empId) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("delete EmpTransfer where empId = ?", empId);
 	}
 
 	

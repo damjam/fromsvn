@@ -22,7 +22,7 @@ body {
 	$(function() {
 		$('#selInfo').click(function() {
 			if(!FormUtils.hasRadio('merchantInfo')){
-				layer.msg('请选择一条记录',{icon:0,shade:0.2,time:1000});
+				parent.layer.msg('请选择一条记录',{icon:0,shade:0.2,time:1000});
 				return;
 			}
 			var selVal = FormUtils.getRadioedValue('merchantInfo');
@@ -107,7 +107,7 @@ body {
 									商户名称
 								</td>
 								<td height="30">
-									<input type="text" name="mrname" id="mrname" style="width: 260px;" value="${merchantInfoActionForm.mrname}"/>
+									<s:textfield name="mrname" id="mrname" maxlength="10"/>
 								</td>
 							</tr>
 							<tr></tr>

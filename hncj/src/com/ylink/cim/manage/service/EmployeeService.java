@@ -17,4 +17,6 @@ public interface EmployeeService {
 
 	void update(Employee model, UserInfo sessionUser) throws BizException;
 
+	void delete(String id) throws BizException;
+
 }

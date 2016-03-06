@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.manage.dao.RepairDao;
 import com.ylink.cim.manage.domain.Repair;
+import com.ylink.cim.manage.domain.RepairTrack;
 
 import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;

@@ -174,6 +174,13 @@
 						    </td>
 					   </tr>
 					   <tr>
+						    <td class="formlabel">微信号</td>
+						    <td>
+						    <s:textfield name="weixin" id="weixin" maxlength="25"/>
+						    	<span class="field_tipinfo"></span>
+						    </td>
+					   </tr>
+					   <tr>
 						    <td class="formlabel">兴趣爱好</td>
 						    <td>
 						    <s:textfield name="hobby"  id="hobby" maxlength="25"/>

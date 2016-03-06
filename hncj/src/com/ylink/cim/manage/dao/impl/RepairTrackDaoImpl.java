@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -33,6 +34,27 @@ public class RepairTrackDaoImpl extends BaseDaoImpl implements RepairTrackDao {
 		QueryHelper helper = new QueryHelper();
 		helper.append("delete RepairTrack where repairId = ?", id);
 		super.execute(helper);
+	}
+
+	@Override
+	public RepairTrack findLast(String id) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from RepairTrack where 1=1");
+		helper.append("and repairId = ?", id);
+		helper.append("order by id desc");
+		List<RepairTrack> list = super.getList(helper);
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<RepairTrack> findList(String repairId) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from RepairTrack where 1=1");
+		helper.append("and repairId = ?", repairId);
+		return super.getList(helper);
 	}
 
 }

@@ -15,21 +15,7 @@
 		<f:js src="/js/paginater.js" />
 		<f:js src="/layer/layer.js"/>
 		<script type="text/javascript">
-			function showBigImag(){
-				layer.open({
-				    type: 1,
-				    title: false,
-				    closeBtn: false,
-				    area: ['auto','auto'],
-//				    border: [0],
-				    skin: 'layui-layer-nobg', //没有背景色
-				    shadeClose: true,
-				    move:'#img1',
-				    moveOut:true,
-				    closeBtn:1,
-				    content: $('#img1')
-				});
-			}
+			
 		</script> 
 	</head>
 	<body>

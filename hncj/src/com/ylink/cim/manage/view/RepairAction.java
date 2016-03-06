@@ -1,14 +1,24 @@
 package com.ylink.cim.manage.view;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.RepairState;
+import com.ylink.cim.common.type.EmgIndexType;
+import com.ylink.cim.common.type.ImpIndexType;
+import com.ylink.cim.common.type.RateType;
+import com.ylink.cim.common.type.ReporterType;
+import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.RepairDao;
+import com.ylink.cim.manage.dao.RepairTrackDao;
 import com.ylink.cim.manage.domain.Repair;
+import com.ylink.cim.manage.domain.RepairTrack;
 import com.ylink.cim.manage.service.RepairService;
 
 import flink.etc.BizException;
@@ -26,7 +36,9 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 	private RepairService repairService;
 	@Autowired
 	private RepairDao repairDao;
-	
+	@Autowired
+	private RepairTrackDao repairTrackDao;
+	@Autowired
 	@Override
 	public Repair getModel() {
 		return model;
@@ -34,29 +46,57 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 	private Repair model = new Repair();
 
 	public String list() throws Exception {
+		initSelect();
 		Map<String, Object> map = getParaMap();
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("state", model.getState());
 		Paginater paginater = repairDao.findPager(map, getPager(request));
-		for(int i=0; i<paginater.getList().size(); i++){
-			
-		}
+		saveQueryResult(request, paginater);
+		
 		return "list";
 	}
+	private void initSelect() {
+		RepairState.setInReq(request);
+		ReporterType.setInReq(request);
+		ImpIndexType.setInReq(request);
+		EmgIndexType.setInReq(request);
+		RateType.setInReq(request);
+		request.setAttribute("branches", ParaManager.getBranches(true));
+	}
 	public String toAdd() throws Exception {
+		initSelect();
 		return "add";
 	}
 	public String toAddTrack() throws Exception {
-		return "track";
+		initSelect();
+		return "repairTrackAdd";
 	}
 	public String doAddTrack() throws Exception {
-		return "track";
+		try{
+			repairService.addTrack(model, getSessionUser(request));
+			setSucResult("操作成功", request);
+		} catch (BizException e) {
+			e.printStackTrace();
+			setResult(false, e.getMessage(), request);
+			return toAddTrack();
+		} catch (Exception e) {
+			e.printStackTrace();
+			setResult(false, "保存失败", request);
+			return toAddTrack();
+		}
+		return "toMain";
 	}
 	public String showTrack() throws Exception {
-		return "trackList";
+		List<RepairTrack> list = repairTrackDao.findList(model.getId());
+		saveQueryResult(request, list);
+		return "repairTrackList";
 	}
 	public String detail() throws Exception {
+		Repair repair = repairDao.findById(model.getId());
+		BeanUtils.copyProperties(model, repair);
+		List<RepairTrack> list = repairTrackDao.findList(model.getId());
+		saveQueryResult(request, list);
 		return "detail";
 	}
 	public String doAdd() throws Exception {
@@ -87,6 +127,17 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 		}
 		return "toMain";
 	}
-	
+	public String cancel() throws Exception {
+		try {
+			String id = request.getParameter("id");
+			repairService.cancel(id, getSessionUser(request));
+			setSucResult("操作成功", request);
+		} catch (Exception e) {
+			setResult(false, "删除失败", request);
+			e.printStackTrace();
+			return list();
+		}
+		return "toMain";
+	}
 	
 }

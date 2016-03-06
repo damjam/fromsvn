@@ -25,6 +25,7 @@ public class Employee implements Serializable{
 	private String nativePlace;
 	private String livePlace;
 	private String spareTel;
+	private String instancyPerson;
 	private String instancyTel;
 	private String recruitWay;
 	private String review;
@@ -41,8 +42,22 @@ public class Employee implements Serializable{
 	private String major;
 	private String hobby;
 	private String degree;
-	
+	private String weixin;
 	private EmpTransfer empTransfer = new EmpTransfer();
+	
+	
+	public String getInstancyPerson() {
+		return instancyPerson;
+	}
+	public void setInstancyPerson(String instancyPerson) {
+		this.instancyPerson = instancyPerson;
+	}
+	public String getWeixin() {
+		return weixin;
+	}
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
+	}
 	public String getSchool() {
 		return school;
 	}

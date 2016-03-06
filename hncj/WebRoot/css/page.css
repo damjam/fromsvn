@@ -124,7 +124,7 @@ caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:lef
 .btnbox input {margin-right:20px}
 
 /* 明细信息表格 */
-.detail_grid {border-color:#B6B6C0; background-color:#f2f2f7; border-collapse:collapse;}
+.detail_grid {border-color:#B6B6C0; background-color:#f2f2f7; border-collapse:collapse;width: 100%;}
 .detail_grid td {font-size:12px; vertical-align:middle;}
 .headcell {text-align:left; padding-left:3px; height:25px;}
 .valuecell {text-align:left; padding-left:3px; height:25px; background-color:#FFF;}
