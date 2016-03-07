@@ -79,7 +79,7 @@ html {
 
 <body>
 
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<f:msg />
 	<!-- 查询功能区 -->
 	<form id="query"

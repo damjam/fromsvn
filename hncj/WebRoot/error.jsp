@@ -28,12 +28,6 @@
 	</head>
 
 	<body class="fullwidth">
-		<div class="location">
-			您当前所在位置：
-			<span class="redlink"><a href="javascript: return;">首页</a>
-			</span> > 系统提示 > 操作失败
-		</div>
-
 		<!-- 操作结果提示区 -->
 		<div class="userbox">
 			<div>

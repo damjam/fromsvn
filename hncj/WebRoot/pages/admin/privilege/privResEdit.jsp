@@ -34,7 +34,7 @@
 	</head>
 
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 
 		<div class="userbox">

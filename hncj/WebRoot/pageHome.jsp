@@ -50,10 +50,6 @@
 	</head>
 
 	<body>
-		<div class="location">
-			您当前所在位置：<span class="redlink"><a href="javascript: void(0);">首页</a></span>
-		</div>
-		
 		<!-- 登录成功提示区 -->
 		<div class="okbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>

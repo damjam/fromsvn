@@ -53,7 +53,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg styleClass="msg" />
 		<form action="elecRecord.do?action=list" id="queryForm">
 			<!-- 查询功能区 -->

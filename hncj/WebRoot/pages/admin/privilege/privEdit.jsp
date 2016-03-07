@@ -32,17 +32,15 @@ html {
 				submitFirstTokenForm();
 			}
 			function goBack(){
-				history.go(-1);
-				/*
+				//history.go(-1);
 				var parent = $('#parent').val();
-				gotoUrl('/privilegeAction.do?action=listPrivs&parent='+parent);
-				*/
+				gotoUrl('${uri}?action=listPrivs&parent='+parent);
 			}
 		//--><!]]></script>
 	</head>
 
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 
 		<div class="userbox">
@@ -80,7 +78,7 @@ html {
 								是否菜单
 							</td>
 							<td>
-								<s:select list="#{'Y':'是','N':否 }" name="isMenu" listKey="key" listValue="value"></s:select>
+								<s:select list="#{'Y':'是','N':'否' }" name="isMenu" listKey="key" listValue="value"></s:select>
 							</td>
 						</tr>
 					</table>

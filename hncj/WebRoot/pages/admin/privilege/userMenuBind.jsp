@@ -17,7 +17,7 @@
 		<f:js src="/js/common.js"/>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="/userInfoAction.do?action=menuBind" id="userInfoForm" class="validate">
 		<div class="userbox">

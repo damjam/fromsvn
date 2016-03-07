@@ -18,7 +18,7 @@
 </head>
 
 <body>
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<!-- 查询功能区 -->
 	<form action="sysLog.do?action=querySysLog" method="post">
 		<div class="userbox">

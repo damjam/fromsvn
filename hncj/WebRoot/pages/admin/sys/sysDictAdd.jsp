@@ -32,7 +32,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="sysDictAction.do?action=addSysDict" id="sysDictForm" method="post" class="validate">
 		<div class="userbox">

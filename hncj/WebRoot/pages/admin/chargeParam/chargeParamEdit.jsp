@@ -73,7 +73,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="chargeParam.do?action=doEdit" id="chargeParamActionForm" method="post" class="validate">
 		<s:hidden name="id" />

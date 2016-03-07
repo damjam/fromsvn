@@ -47,7 +47,7 @@
 	</head>
 	<body>
 
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 		<br />
 		<div id="tabs" style="width: 98%;">
 			<ul>

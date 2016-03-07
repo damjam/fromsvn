@@ -30,7 +30,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="userInfoAction.do?action=updateUserInfo" id="userInfoForm" method="post" class="validate">
 		<div class="userbox">

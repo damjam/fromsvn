@@ -56,7 +56,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg  />
 		<form action="userInfoAction.do?action=listUserInfo" id="userInfoForm" method="post">
 			<!-- 查询功能区 -->

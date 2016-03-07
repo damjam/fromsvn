@@ -9,6 +9,7 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -68,7 +69,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAddTrack" id="dataForm" method="post" class="validate">
 		<s:hidden name="id"/>
@@ -92,6 +93,7 @@
 					   		<td class="formlabel nes">责任人</td>
 						    <td>
 						    	<s:textfield name="track.processor" id="processor" maxlength="10" class="{required:true}"/>
+						    	<a><i class="fa fa-institution"></i></a>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

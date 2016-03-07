@@ -53,7 +53,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="accountJournal.do?action=reverse" id="accountActionForm" method="post" class="validate">
 		<div class="userbox">

@@ -51,7 +51,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg  />
 		<form action="roleInfoAction.do?action=listRoleInfo" id="roleInfoForm" method="post">
 			<!-- 查询功能区 -->

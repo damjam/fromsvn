@@ -29,7 +29,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="${CONTEXT_PATH }/branchDict.do?action=doAdd" id="branchDictForm" method="post" class="validate">
 		<div class="userbox">

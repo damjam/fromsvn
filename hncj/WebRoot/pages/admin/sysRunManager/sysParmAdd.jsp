@@ -45,7 +45,7 @@
 	</head>
 <body>
 
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<f:msg/>
 	<form id="query" action="sysParmManage.do?action=save" method="post" class="validate">
 		<s:token/>

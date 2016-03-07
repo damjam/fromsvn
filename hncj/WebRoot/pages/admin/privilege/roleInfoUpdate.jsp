@@ -47,7 +47,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="roleInfoAction.do?action=updateRoleInfo" id="roleInfoForm" method="post" class="validate">
 		<s:hidden name="roleId"/>

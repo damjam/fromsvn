@@ -46,7 +46,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg styleClass="msg" />
 		<form action="${CONTEXT_PATH}/chargeItem.do?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->

@@ -92,7 +92,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="elecRecord.do?action=doAdd" id="elecRecordActionForm" method="post" class="validate">
 		<div class="userbox">

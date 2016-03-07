@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<!-- 查询功能区 -->
 	<form id="query" action="userLog.do?action=queryUserLog" method="post" >
 		<div class="userbox">

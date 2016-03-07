@@ -21,7 +21,7 @@
 	</head>
     
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 		<form action="privilegeAction.do?action=listPrivs" id="searchForm" method="post">
 		<div class="userbox">

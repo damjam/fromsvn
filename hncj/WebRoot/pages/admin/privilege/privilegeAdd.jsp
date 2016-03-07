@@ -37,7 +37,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="/privilegeAction.do?action=addPrivilege" id="privilegeForm" method="post" class="validate">
 		<div class="userbox">
@@ -76,7 +76,7 @@
 					    <tr>
 						     <td class="formlabel nes">菜单(?)</td>
 						     <td>
-								<s:select list="#{'Y':'是','N':否 }" name="isMenu" listKey="key" listValue="value"></s:select>
+								<s:select list="#{'Y':'是','N':'否' }" name="isMenu" listKey="key" listValue="value"></s:select>
 								<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>

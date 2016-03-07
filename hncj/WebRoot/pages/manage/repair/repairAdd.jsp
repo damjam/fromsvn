@@ -9,6 +9,7 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -51,9 +52,9 @@
 						});
 		 			}
 		 		});
-		 		$('#processor').click(function(){
+		 		$(".popup-search").click(function(){
 		 			var bindCode = '';
-		 			var bindName = 'processor';
+		 			var bindName = $(this).attr('data-search-for');
 	 				var toUrl=CONTEXT_PATH+'/employee.do?action=queryPopup&bindCode='+bindCode+'&bindName='+bindName;
 					layer.open({
 						title:'员工',
@@ -96,7 +97,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
@@ -159,6 +160,7 @@
 						    <td class="formlabel">指定责任人</td>
 						    <td>
 						    	<s:textfield id="processor" name="processor" maxlength="10"/>
+						    	<a href="javascript:void(0)" data-search-for="processor" class="popup-search"><i class="fa fa-search"></i></a>
 						    </td>
 					   </tr>
 					   <tr>

@@ -28,7 +28,7 @@
 	</head>
 
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg/>
 		<form id="timerDo" action="timerDo.do?action=list" method="post">
 		   	<div class="userbox">

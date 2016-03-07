@@ -38,7 +38,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="limitGroupInfoAction.do?action=addLimitGroupInfo" id="limitGroupInfoForm" method="post" class="validate">
 		<div class="userbox">

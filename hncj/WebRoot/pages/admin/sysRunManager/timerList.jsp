@@ -39,7 +39,7 @@
 	</head>
 
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg/>
 		<form id="timer" action="timer.do?action=query" method="post">
 		<div class="userbox">

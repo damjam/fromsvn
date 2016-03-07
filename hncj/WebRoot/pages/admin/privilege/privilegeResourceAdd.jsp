@@ -35,7 +35,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg/>
 	<form action="privilegeResourceAction.do?action=doAdd" id="privilegeResourceForm" method="post" class="validate">
 		<div class="userbox">

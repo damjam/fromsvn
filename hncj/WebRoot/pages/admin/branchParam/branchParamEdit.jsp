@@ -34,7 +34,7 @@
 	</head>
 <body>
 
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<form id="query" action="${CONTEXT_PATH}/branchParamManage.do?action=saveUpdate" method="post" class="validate">
 		<!-- 用户资料修改区 -->
 			<div class="userbox">

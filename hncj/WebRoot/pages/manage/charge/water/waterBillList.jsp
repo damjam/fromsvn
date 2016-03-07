@@ -69,7 +69,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg styleClass="msg" />
 		<form action="waterBill.do?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->

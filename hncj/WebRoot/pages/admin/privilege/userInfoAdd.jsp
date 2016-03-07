@@ -35,7 +35,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg />
 	<form action="userInfoAction.do?action=addUserInfo" id="userInfoForm" method="post" class="validate">
 		<s:token/>

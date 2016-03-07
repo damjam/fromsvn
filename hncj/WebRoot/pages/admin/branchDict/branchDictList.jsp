@@ -43,7 +43,7 @@
 	</head>
     
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 
 		<form action="${CONTEXT_PATH}/branchDict.do?action=list" id="branchDictForm" method="post">

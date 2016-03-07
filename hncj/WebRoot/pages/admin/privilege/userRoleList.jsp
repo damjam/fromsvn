@@ -52,7 +52,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg  />
 		<form action="/userRoleAction.do?action=listUserRole" id="userInfoForm">
 			<!-- 查询功能区 -->

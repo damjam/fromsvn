@@ -140,5 +140,13 @@
 			<result name="repairTrackAdd">/pages/manage/repair/repairTrackAdd.jsp</result>
 			<result name="toMain" type="redirect">repair.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
+		<action name="material" class="materialAction">
+			<result name="list">/pages/manage/material/materialList.jsp</result>
+			<result name="edit">/pages/manage/material/materialEdit.jsp</result>
+			<result name="add">/pages/manage/material/materialAdd.jsp</result>
+			<result name="detail">/pages/manage/material/materialDetail.jsp</result>
+			<result name="import">/pages/manage/material/materialImport.jsp</result>
+			<result name="toMain" type="redirect">material.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
 	</package>
 </struts>

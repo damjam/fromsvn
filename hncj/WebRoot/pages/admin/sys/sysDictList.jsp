@@ -40,7 +40,7 @@
 	</head>
     
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 
 		<form action="sysDictAction.do?action=listSysDict" id="sysDictFrm" method="post">

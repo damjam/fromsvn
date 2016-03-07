@@ -36,7 +36,7 @@
 </script>
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg/>
 		<form action="timer.do?action=doEdit" method="post" class="validate">
 		<s:hidden name="id" />

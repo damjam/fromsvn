@@ -50,7 +50,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg styleClass="msg" />
 			<!-- 查询功能区 -->
 			<div class="userbox">

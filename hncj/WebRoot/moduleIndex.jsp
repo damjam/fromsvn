@@ -11,7 +11,7 @@
 	</head>
 
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		
 		<!-- 登录成功提示区 -->
 		<div class="okbox">

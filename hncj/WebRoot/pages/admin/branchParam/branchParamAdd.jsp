@@ -47,7 +47,7 @@ html {
 </head>
 <body>
 
-	<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+	
 	<f:msg />
 	<form id="query"
 		action="${CONTEXT_PATH}/branchParamManage.do?action=save" method="post"

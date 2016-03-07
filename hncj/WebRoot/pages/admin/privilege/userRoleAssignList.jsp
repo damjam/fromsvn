@@ -34,7 +34,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg  />
 		<form action="userRoleAction.do?action=assignRole" id="userRoleForm" method="post">
 			<!-- 查询功能区 -->

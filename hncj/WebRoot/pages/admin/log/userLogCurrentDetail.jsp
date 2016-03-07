@@ -31,7 +31,7 @@
 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>

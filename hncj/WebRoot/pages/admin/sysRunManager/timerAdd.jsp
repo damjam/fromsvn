@@ -40,7 +40,7 @@
 </head>
 
 <body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>	
+			
 		<form id="timer" action="${CONTEXT_PATH}/timer.do?action=save" method="post" class="validate" >
 			<!-- 用户资料修改区 -->
 			<div class="userbox">

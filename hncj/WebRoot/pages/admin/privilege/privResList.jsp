@@ -24,7 +24,7 @@
 	</head>
     
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 		<form action="privilegeResourceAction.do?action=listPrivRes" id="searchForm" method="post">
 		<s:hidden name="parent" id="parent"/>

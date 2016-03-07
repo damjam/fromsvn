@@ -50,7 +50,7 @@
 		</script> 
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg  />
 		<form action="limitGroupInfoAction.do?action=listLimitGroupInfo" id="limitGroupInfoForm" method="post">
 			<!-- 查询功能区 -->

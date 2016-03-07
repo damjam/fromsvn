@@ -83,7 +83,7 @@
 		</script>
 	</head>
 	<body>
-		<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+		
 		<f:msg />
 		<form action="userInfoAction.do?action=changePassword" id="userInfoForm" class="validate" method="post">
 		<div class="userbox">

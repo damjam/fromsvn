@@ -197,7 +197,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="commonServiceBill.do?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">

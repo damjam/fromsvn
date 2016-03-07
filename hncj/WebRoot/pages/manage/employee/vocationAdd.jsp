@@ -30,7 +30,7 @@
 		</script>
 	</head>
 <body>
-<jsp:include flush="true" page="/pages/layout/location.jsp"></jsp:include>
+
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=addVocation" id="dataForm" method="post" class="validate">
 		<s:hidden name="id"/>
