@@ -39,7 +39,6 @@ import flink.util.BoUtils;
 import flink.util.BooleanUtil;
 import flink.util.ExceptionUtils;
 import flink.util.IPrivilege;
-import flink.util.LogUtils;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -256,6 +255,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		BoUtils.addProperty(paginater.getList(), "userType", "userTypeName",
 				ParaManager.getSysDict(SysDictType.UserType.getValue()), "key",
 				"value");
+		BoUtils.addProperty(paginater.getList(), "branchNo", "branchName", ParaManager.getBranches(true), "key", "value");
 		// BoUtils.addProperty(paginater.getList(), "branchNo", "branchName",
 		// ParaManager.getSysDict(SysDictType.BranchType.getValue()), "key",
 		// "value");

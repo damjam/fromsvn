@@ -111,7 +111,7 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 			}
 
 			this.roleInfoService.saveRoleAndLimits(model);
-			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
+			setSucResult(ActionMessageConstant.OPER_SUCCESS, request);
 			String msg = MsgUtils.r("添加角色成功,添加内容为：{?}",
 					FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
