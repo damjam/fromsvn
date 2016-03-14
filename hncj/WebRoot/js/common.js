@@ -192,9 +192,10 @@ FormUtils = {
 	 * 全选全清复选框
 	 */
 	selectAll: function(target, checkboxName) {
-		$("input[type='checkbox'][name='"+checkboxName+"']:checked").each(function() {
-			$(this).attr('checked', target.checked);
-		});
+		var roleIds = document.getElementsByName(checkboxName);
+		for(var i=0; i<roleIds.length; i++){
+			roleIds[i].checked = target.checked;
+		}
 	},
 	
 	/**
