@@ -11,5 +11,6 @@
         <property name="dictName" column="dict_name"></property>
         <property name="display" column="display"></property>
         <property name="remark" column="remark"></property>
+        <property name="sort" column="sort"></property>
     </class>
 </hibernate-mapping>

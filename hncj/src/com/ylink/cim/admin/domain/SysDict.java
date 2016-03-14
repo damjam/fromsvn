@@ -9,6 +9,17 @@ public class SysDict {
 	private String remark;
 
 	private String display;
+	
+	private Integer sort;
+	
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
 
 	public SysDictId getId() {
 		return id;

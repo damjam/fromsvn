@@ -55,7 +55,7 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 			}
 			String msg = MsgUtils.r("添加字典成功,添加内容为：{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.ADD.getValue(), msg);
-			return this.toAddPage();
+			return "toMain";
 		} catch (Exception e) {
 			ExceptionUtils.logBizException(SysDictAction.class, e.getMessage());
 			// setResult(false, ActionMessageConstant.OPER_FAIL, request);
@@ -63,6 +63,7 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 			String msg = MsgUtils.r("添加字典失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 			throw e;
+		} finally {
 		}
 	}
 

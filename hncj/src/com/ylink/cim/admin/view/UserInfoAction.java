@@ -27,6 +27,7 @@ import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.type.UserType;
 import com.ylink.cim.common.util.FeildUtils;
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.util.CopyPropertyUtil;
 
 import flink.MD5Util;
 import flink.consant.ActionConstant;
@@ -197,6 +198,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		// userTypes.remove(UserType.SUPER_ADMIN.getValue());
 		// userTypes.remove(UserType.CUSTOM.getValue());
 		request.setAttribute("userTypes", userTypes);
+		request.setAttribute("branches", ParaManager.getBranches(true));
 	}
 
 	/**
@@ -314,9 +316,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			} else {
 				UserInfo userInfo = this.userService.getUserInfo(model
 						.getUserId());
-				userInfo.setLoginId(model.getLoginId());
-				userInfo.setUserName(model.getUserName());
-				userInfo.setUserType(model.getUserType());
+				CopyPropertyUtil.copyPropertiesIgnoreNull(model, userInfo);
 				userInfo.setUpdateTime(new Date());
 				userInfo.setUpdateUser(super.getSessionUser(request)
 						.getUserId());

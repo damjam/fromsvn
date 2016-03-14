@@ -31,6 +31,9 @@
 		<property name="state" type="java.lang.String">
 			<column name="STATE" length="8" />
 		</property>
+		<property name="decorateState" type="java.lang.String">
+			<column name="DECORATE_STATE" length="8" />
+		</property>
 		<property name="createUser" type="java.lang.String">
 			<column name="create_user" length="20" />
 		</property>

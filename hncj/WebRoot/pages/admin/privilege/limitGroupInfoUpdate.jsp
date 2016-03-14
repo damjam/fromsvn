@@ -38,7 +38,6 @@
 		</script>
 	</head>
 <body>
-
 <f:msg />
 	<form action="limitGroupInfoAction.do?action=updateLimitGroupInfo" id="limitGroupInfoForm" method="post" class="validate">
 		<s:hidden name="limitGroupId"/>

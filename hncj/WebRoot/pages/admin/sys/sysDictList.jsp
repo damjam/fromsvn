@@ -57,7 +57,7 @@
 							<td><s:textfield name="dictName"></s:textfield></td>
 							<td class="formlabel">类型</td>
 							<td>
-								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
+								<s:select name="id.dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
 						</tr>
 						<tr>
@@ -65,7 +65,7 @@
 							</td>	
 							<td>
 								<input type="button" value="查询"  id="btnQry"/>&nbsp;
-								<input type="button" value="清除"  id="btnClear"/>&nbsp;
+								<input type="button" value="重置"  id="btnClear"/>&nbsp;
 								<input type="button" value="新增"  id="btnAdd"/>&nbsp;
 							</td>
 						</tr>

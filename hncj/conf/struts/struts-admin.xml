@@ -19,12 +19,14 @@
 			<result name="toListPage">/pages/admin/privilege/limitGroupInfoList.jsp</result>
 			<result name="toAddPage">/pages/admin/privilege/limitGroupInfoAdd.jsp</result>
 			<result name="toUpdatePage">/pages/admin/privilege/limitGroupInfoUpdate.jsp</result>
+			<result name="toMain" type="redirect">limitGroupInfoAction.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="roleInfoAction" class="roleInfoAction">
 			<result name="toListPage">/pages/admin/privilege/roleInfoList.jsp</result>
 			<result name="toAddPage">/pages/admin/privilege/roleInfoAdd.jsp</result>
 			<result name="toUpdatePage">/pages/admin/privilege/roleInfoUpdate.jsp</result>
 			<result name="loadTree">/pages/admin/privilege/roleTree.jsp</result>
+			<result name="toMain" type="redirect">roleInfoAction.do?action=listRoleInfo&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="privilegeAction" class="privilegeAction">
 			<result name="toListPage">/pages/admin/privilege/privList.jsp</result>

@@ -38,7 +38,7 @@ public class BranchDictAction extends BaseAction implements ModelDriven<BranchDi
 		Paginater paginater = this.branchDictDao.getDictPageList(model, super.getPager(request));
 		for(int i=0; i<paginater.getList().size(); i++){
 			BranchDict branchDict = (BranchDict)paginater.getList().get(i);
-			branchDict.setBranchName(ParaManager.getSysDictName(SysDictType.BranchType.getValue(), branchDict.getBranchNo()));
+			branchDict.setBranchName(ParaManager.getSysDictName(SysDictType.BranchType.getValue(), branchDict.getId().getBranchNo()));
 		}
 		saveQueryResult(request, paginater);
 		request.setAttribute("branches", ParaManager.getBranches(false));

@@ -10,6 +10,10 @@ public class HouseInfo implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String houseSn;
 	private Double area;
 	private String buildingNo;
@@ -24,6 +28,15 @@ public class HouseInfo implements java.io.Serializable {
 	private String remark;
 	private String branchNo;
 	private String orderSn;
+	private String decorateState;
+	
+	public String getDecorateState() {
+		return decorateState;
+	}
+
+	public void setDecorateState(String decorateState) {
+		this.decorateState = decorateState;
+	}
 
 	/** default constructor */
 	public HouseInfo() {

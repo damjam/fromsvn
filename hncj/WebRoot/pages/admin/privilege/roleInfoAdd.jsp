@@ -60,12 +60,19 @@
 				return this.optional(element) || (length >= param);
 				}, $.validator.format("长度不能小于{0}!"));
 			 }
+		 	$().ready(function(){
+		 		var limitGroupId = $('#limitGroupId').val();
+				if(limitGroupId == ''||limitGroupId==null){return;}
+				$('#limitTree').show().html(LOAD_IMAGE).load(CONTEXT_PATH + '/roleInfoAction.do?action=loadTree&limitGroupId='+limitGroupId, function() {
+					SysStyle.setDataGridStyle();
+				});
+		 	});
 		</script>
 	</head>
 <body>
 
 <f:msg />
-	<form action="roleInfoAction.do?action=addRoleInfo" id="roleInfoForm" method="post" class="validate">
+	<form action="${uri}?action=addRoleInfo" id="roleInfoForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -78,7 +85,7 @@
 					   <tr>
 						    <td class="formlabel nes">角色名称</td>
 						    <td>
-						    	<s:textfield name="roleName"  class="{required:true}" maxlength="40" style="roleName"/>
+						    	<s:textfield name="roleName"  class="{required:true}" maxlength="40"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -92,7 +99,7 @@
 					   <tr>
 						     <td class="formlabel nes">权限组</td>
 						     <td>
-						     	<s:select name="limitGroupId" id="limitGroupId" class="{required:true}" list="limitGroupInfoCollections" listKey="limitGroupId" listValue="limitGroupName"/>
+						     	<s:select name="limitGroupId" id="limitGroupId" class="{required:true}" list="#request.limitGroupInfoCollections" listKey="limitGroupId" listValue="limitGroupName"/>
 						     	<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>

@@ -124,11 +124,7 @@ public class RoleInfoAction extends BaseAction implements ModelDriven<RoleInfo> 
 			String msg = MsgUtils.r("添加角色失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
 		}
-		model.setLimitGroupId(null);
-		model.setRoleName("");
-		model.setLimitGroupName("");
-		// return this.toAddPage();
-		return listRoleInfo();
+		return "toMain";
 	}
 
 	public String toUpdatePage() throws Exception {

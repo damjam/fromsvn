@@ -10,11 +10,19 @@ public class BranchDict {
 
 	private String display;
 
-	private String branchNo;
-	
 	private String branchName;
 	
+	private Integer sort;
 	
+	
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
 	public String getBranchName() {
 		return branchName;
 	}
@@ -23,14 +31,7 @@ public class BranchDict {
 		this.branchName = branchName;
 	}
 
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-
+	
 	public BranchDictId getId() {
 		return id;
 	}
@@ -62,5 +63,5 @@ public class BranchDict {
 	public void setDisplay(String display) {
 		this.display = display;
 	}
-
+	
 }

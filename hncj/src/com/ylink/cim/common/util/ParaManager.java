@@ -1,7 +1,6 @@
 package com.ylink.cim.common.util;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,10 +13,15 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ylink.cim.admin.dao.BranchDictDao;
+import com.ylink.cim.admin.dao.BranchParmDao;
 import com.ylink.cim.admin.dao.SysDictDao;
 import com.ylink.cim.admin.dao.SysParmDao;
+import com.ylink.cim.admin.domain.BranchDict;
+import com.ylink.cim.admin.domain.BranchParam;
 import com.ylink.cim.admin.domain.SysDict;
 import com.ylink.cim.admin.domain.SysParm;
+import com.ylink.cim.common.type.BranchDictType;
 import com.ylink.cim.common.type.SysDictType;
 
 import flink.etc.Symbol;
@@ -28,15 +32,22 @@ public abstract class ParaManager {
 
 	private static SysParmDao sysParmDao = (SysParmDao) SpringContext
 			.getService("sysParmDao");
-
+	private static BranchParmDao branchParmDao = (BranchParmDao) SpringContext
+			.getService("branchParmDao");
 	private static SysDictDao sysDictDao = (SysDictDao) SpringContext
 			.getService("sysDictDao");
 
+	private static BranchDictDao branchDictDao = (BranchDictDao)SpringContext
+			.getService("branchDictDao");
 	// 系统参数.
 	private static Map<String, String> paraMap = new ConcurrentHashMap<String, String>();
+	
+	private static Map<String, String> branchParaMap = new ConcurrentHashMap<String, String>();
 
 	private static Map<String, Map<String, String>> sysDictMap = new ConcurrentHashMap<String, Map<String, String>>();
-
+	//
+	private static Map<String, Map<String, String>> branchDictMap = new ConcurrentHashMap<String, Map<String, String>>();
+	
 	// 刷新间隔时间
 	private static long sleepTime = 10 * 60 * 1000;
 
@@ -51,7 +62,12 @@ public abstract class ParaManager {
 
 		return paraMap.get(key);
 	}
-
+	private static String getBranchPara(final String branchNo, final String key) {
+		if (branchParaMap.size() == 0) {
+			init();
+		}
+		return branchParaMap.get(branchNo+key);
+	}
 	/**
 	 * @return 密码过期时限（以天计）
 	 */
@@ -69,9 +85,33 @@ public abstract class ParaManager {
 	public static void init() {
 		log.debug("刷新系统参数");
 		initSysParm();
+		initBranchParm();
 		initSysDict();
+		initBranchDict();
 	}
 
+	private static void initBranchDict() {
+		branchDictMap.clear();
+		List<BranchDict> list = branchDictDao.findByParam(MapUtils.EMPTY_MAP);
+		for (int i = 0; i < list.size(); i++) {
+			BranchDict branchDict = list.get(i);
+			if (branchDictMap.get(branchDict.getId().getDictType()) == null) {
+				Map<String, String> map = new HashMap<String, String>();
+				branchDictMap.put(branchDict.getId().getDictType(), map);
+			}
+			String branchNo = branchDict.getId().getBranchNo();
+			String dictType = branchDict.getId().getDictType();
+			String dictValue = branchDict.getId().getDictValue();
+			branchDictMap.get(branchNo+dictType).put(dictValue, branchDict.getDictName());
+		}
+	}
+
+	public static Map<String, String> getBranchDict(String branchNo, String dictType) {
+		if (branchDictMap.size() == 0) {
+			initBranchDict();
+		}
+		return branchDictMap.get(branchNo+dictType);
+	}
 	private static void initSysDict() {
 		sysDictMap.clear();
 		List<SysDict> list = sysDictDao.findByParam(MapUtils.EMPTY_MAP);
@@ -85,7 +125,6 @@ public abstract class ParaManager {
 					sysDict.getId().getDictValue(), sysDict.getDictName());
 		}
 	}
-
 	public static Map<String, String> getSysDict(String dictType) {
 		if (sysDictMap.size() == 0) {
 			initSysDict();
@@ -141,10 +180,10 @@ public abstract class ParaManager {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private static void initSysParm() {
-		for (Iterator i = sysParmDao.findAll().iterator(); i.hasNext();) {
-			SysParm parm = (SysParm) i.next();
+		List<SysParm> list = sysParmDao.findAll();
+		for(int i=0,size=list.size(); i<size; i++){
+			SysParm parm = (SysParm) list.get(i);
 			String parmvalue = parm.getParvalue();
 			if (parm.getParvalue() == null) {
 				parmvalue = "";
@@ -152,7 +191,17 @@ public abstract class ParaManager {
 			paraMap.put(parm.getCode(), parmvalue);
 		}
 	}
-
+	private static void initBranchParm() {
+		List<BranchParam> list = branchParmDao.findAll();
+		for(int i=0,size=list.size(); i<size; i++){
+			BranchParam parm = (BranchParam) list.get(i);
+			String parmvalue = parm.getParvalue();
+			if (parm.getParvalue() == null) {
+				parmvalue = "";
+			}
+			branchParaMap.put(parm.getBranchNo()+parm.getCode(), parmvalue);
+		}
+	}
 	public static void refresh() {
 		while (true) {
 			try {
@@ -272,4 +321,5 @@ public abstract class ParaManager {
 	public static String getBillPrice() {
 		return getPara("1101");
 	}
+
 }

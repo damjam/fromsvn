@@ -192,7 +192,7 @@ FormUtils = {
 	 * 全选全清复选框
 	 */
 	selectAll: function(target, checkboxName) {
-		$(':checkbox[name="' + checkboxName + '"]').each(function() {
+		$("input[type='checkbox'][name='"+checkboxName+"']:checked").each(function() {
 			$(this).attr('checked', target.checked);
 		});
 	},
@@ -201,7 +201,7 @@ FormUtils = {
 	 * 获取复选框选中的值. 以","分隔.
 	 */
 	getCheckedValues: function(checkboxName) {
-		return $(':checkbox[name="' + checkboxName + '"][checked]').map(function(){
+		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").map(function(){
 	  		return $(this).val();
 		}).get().join(",");
 	},
@@ -210,7 +210,7 @@ FormUtils = {
 	 * 获取复选框选中的值. 数组形式.
 	 */
 	getCheckedArrayValues: function(checkboxName) {
-		return $(':checkbox[name="' + checkboxName + '"][checked]').map(function(){
+		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").map(function(){
 	  		return $(this).val();
 		}).get();
 	},
@@ -219,14 +219,14 @@ FormUtils = {
 	 * 是否有选中复选框
 	 */
 	hasSelected: function(checkboxName) {
-		return $(':checkbox[name="' + checkboxName + '"][checked]').length > 0;
+		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").length > 0;
 	},
 	
 	/**
 	 * 选中复选框的个数.
 	 */
 	getSelectedCount: function(checkboxName) {
-		return $(':checkbox[name="' + checkboxName + '"][checked]').length;
+		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").length;
 	},
 	
 	/**
@@ -240,14 +240,14 @@ FormUtils = {
 	 * 是否有选中单选框
 	 */
 	hasRadio: function(radioboxName) {
-		return $(':radio[name="' + radioboxName + '"][checked]').length > 0;
+		return $('input[name="' + radioboxName + '"]:checked').length > 0;
 	},
 	
 	/**
 	 * 是否有选中单选框
 	 */
 	getRadioedValue: function(radioboxName) {
-		return $(':radio[name="' + radioboxName + '"][checked]').val();
+		return $('input[name="' + radioboxName + '"]:checked').val();
 	},
 	
 	/**

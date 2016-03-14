@@ -1,6 +1,9 @@
 package com.ylink.cim.manage.view;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +19,10 @@ import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.service.HouseInfoService;
+import com.ylink.cim.util.ExportExcelUtil;
 
 import flink.etc.BizException;
+import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 @Scope("prototype")
@@ -87,7 +92,54 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		}
 		return list();
 	}
-
+	public String export() throws Exception {
+		Map<String, Object> map = getParaMap();
+		map.put("houseSn", model.getHouseSn());
+		map.put("buildingNo", model.getBuildingNo());
+		map.put("unitNo", model.getUnitNo());
+		map.put("floor", model.getFloor());
+		map.put("branchNo", getSessionBranchNo(request));
+		Paginater paginater = houseInfoDao.findPager(map, null);//不再分页
+		List<List<Object[]>> dataList = new ArrayList<>();
+		Map<String, List<Object[]>> dataMap = new HashMap<>();
+		List<String> buildingList = new ArrayList<>();
+		for (int i = 0, size = paginater.getList().size(); i < size; i++) {
+			HouseInfo houseInfo = (HouseInfo)paginater.getList().get(i);
+			List<Object[]> tmpList = dataMap.get(houseInfo.getBuildingNo());
+			if (tmpList == null) {
+				tmpList = new ArrayList<>();
+				dataMap.put(houseInfo.getBuildingNo(), tmpList);
+			}
+			Object[] obj = new Object[6];
+			obj[0] = houseInfo.getHouseSn();
+			obj[1] = houseInfo.getArea();
+			obj[2] = houseInfo.getBuildingNo();
+			obj[3] = houseInfo.getUnitNo();
+			obj[4] = houseInfo.getFloor();
+			obj[5] = houseInfo.getState();
+			tmpList.add(obj);
+ 		}
+		for (Map.Entry<String, List<Object[]>> entry : dataMap.entrySet()) {
+			dataList.add(entry.getValue());
+			buildingList.add(entry.getKey());
+		}
+		String fileName = "房屋信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String title = "";
+		/*Map<String, String> houseMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.HouseType.getValue());
+		Map<String, String> flatMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.FlatType.getValue());
+		List<String> buildingNos = new ArrayList<>();
+		for (Map.Entry<String, String> entry : houseMap.entrySet()) {
+			buildingNos.add(entry.getValue());
+		}
+		for (Map.Entry<String, String> entry : flatMap.entrySet()) {
+			buildingNos.add(entry.getValue());
+		}*/
+		
+		String[] rowName = {"房屋编号","面积","楼号","单元","楼层","交房状态","装修状态"};
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rowName, dataList, response);
+		exportExcelUtil.exportSheets();
+		return null;
+	}
 	public void initSelect(HttpServletRequest request) throws Exception {
 		Map<String, String> buildingNos = new LinkedHashMap<String, String>();
 		Map<String, String> unitsNos = new LinkedHashMap<String, String>();
@@ -114,4 +166,12 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		return model;
 	}
 	private HouseInfo model = new HouseInfo();
+	public String toImport() {
+		
+		return "import";
+	}
+	public String doImport() {
+		
+		return "toMain";
+	}
 }

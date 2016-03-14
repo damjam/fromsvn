@@ -16,4 +16,3 @@
 		</c:forEach>
 		document.getElementById('systree').innerHTML = d;
 	</script>
-<s:hidden id="limitGroupId" value="<s:property value='limitGroupId'/>" name="limitGroupId"></s:hidden>

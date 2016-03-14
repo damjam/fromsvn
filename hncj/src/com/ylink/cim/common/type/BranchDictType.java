@@ -15,6 +15,7 @@ public class BranchDictType extends AbstractType {
 	
 	public static final BranchDictType HouseType = new BranchDictType("住宅区楼号", "HouseType");
 	public static final BranchDictType FlatType = new BranchDictType("公寓区楼号", "FlatType");
+	public static final BranchDictType CommType = new BranchDictType("商业区楼号", "CommType");
 	
 	protected BranchDictType(String name, String value) {
 		super(name, value);

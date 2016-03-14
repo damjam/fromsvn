@@ -23,6 +23,7 @@
 			<result name="list">/pages/manage/house/houseInfoList.jsp</result>
 			<result name="import">/pages/manage/owner/ownerInfoImport.jsp</result>
 			<result name="add">/pages/manage/house/houseInfoAdd.jsp</result>
+			<result name="import">/pages/manage/house/houseInfoImport.jsp</result>
 		</action>
 		
 		<action name="commonServiceBill" class="commonServiceBillAction">

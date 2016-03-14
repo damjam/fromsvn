@@ -12,6 +12,8 @@ public class BranchDictId implements Serializable{
 	private String dictValue;
 	
 	private String dictType;
+	
+	private String branchNo;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -31,6 +33,11 @@ public class BranchDictId implements Serializable{
 			if (other.dictValue != null)
 				return false;
 		} else if (!dictValue.equals(other.dictValue))
+			return false;
+		if (branchNo == null) {
+			if (other.branchNo != null)
+				return false;
+		} else if (!branchNo.equals(other.branchNo))
 			return false;
 		return true;
 	}
@@ -63,7 +70,14 @@ public class BranchDictId implements Serializable{
 	public void setDictValue(String dictValue) {
 		this.dictValue = dictValue;
 	}
-	
+
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
 	
 	
 }

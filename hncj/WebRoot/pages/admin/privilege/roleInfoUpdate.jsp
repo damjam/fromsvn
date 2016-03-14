@@ -41,9 +41,7 @@
 					});
 				});
 			});
-		 	$(document).ready(function(){
-						 		
-		 	});
+		 	
 		</script>
 	</head>
 <body>
@@ -64,7 +62,7 @@
 					   <tr>
 						    <td class="formlabel nes" align="right">角色名称</td>
 						    <td>
-						    	<s:textfield name="roleName"  class="{required:true}" maxlength="40"/>
+						    	<s:textfield name="roleName" class="{required:true}" maxlength="40"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -125,7 +123,6 @@
 						     
 						     <td colspan="2" align="center">
 								 <input type="button" id="btnSubmit" value="提交"/>&nbsp;
-								 <input type="button" id="btnClear" value="清除"/>&nbsp;
 								 <input type="button" id="btnReturn" value="返回"/>&nbsp;
 							</td>
 					   </tr>

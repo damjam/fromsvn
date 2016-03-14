@@ -31,8 +31,8 @@ public class BranchDictDaoImpl extends BaseDaoImpl implements BranchDictDao {
 		helper.append("and sd.id.dictValue=?", branchDict.getId().getDictValue());
 		helper.append("and sd.id.dictType=?", branchDict.getId().getDictType());
 		helper.append("and sd.dictName=?", branchDict.getDictName());
-		helper.append("and branchNo = ?",branchDict.getBranchNo());
-		helper.append("order by branchNo, sd.id.dictType, sd.id.dictValue");
+		helper.append("and sd.id.branchNo = ?",branchDict.getId().getBranchNo());
+		helper.append("order by sd.id.branchNo, sd.id.dictType, sd.sort");
 		return super.getPageData(helper, pager);
 	}
 
@@ -43,7 +43,7 @@ public class BranchDictDaoImpl extends BaseDaoImpl implements BranchDictDao {
 		helper.append("from BranchDict sd");
 		helper.append("where 1=1");
 		helper.append("and sd.id.dictType=?", dictType);
-
+		helper.append("order sd.sort");
 		return super.getList(helper);
 	}
 
@@ -54,7 +54,7 @@ public class BranchDictDaoImpl extends BaseDaoImpl implements BranchDictDao {
 		helper.append("and t.id.dictType = ?", map.get("dictType"));
 		helper.append("and t.id.dictValue = ?", map.get("dictValue"));
 		helper.append("and t.remark = ?", map.get("remark"));
-		helper.append("order by t.id.dictType, t.id.dictValue");
+		helper.append("order by t.id.dictType, t.sort");
 		return super.getList(helper);
 	}
 

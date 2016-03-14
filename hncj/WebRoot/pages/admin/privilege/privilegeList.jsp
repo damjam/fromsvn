@@ -69,7 +69,7 @@
 							<td></td>
 							<td colspan="3">
 								<input type="button" value="查询"  id="btnQry"/>&nbsp;
-								<input type="button" value="清除"  id="btnClear"/>&nbsp;
+								<input type="button" value="重置"  id="btnClear"/>&nbsp;
 								<input type="button" value="新增"  id="btnAdd"/>
 							</td>
 						</tr>

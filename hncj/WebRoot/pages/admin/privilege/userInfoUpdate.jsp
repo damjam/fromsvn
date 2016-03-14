@@ -33,6 +33,8 @@
 
 <f:msg />
 	<form action="userInfoAction.do?action=updateUserInfo" id="userInfoForm" method="post" class="validate">
+		<s:hidden name="userId" />
+		<s:hidden name="userType"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -46,7 +48,6 @@
 						    <td class="formlabel nes">登录名</td>
 						    <td nowrap="nowrap">
 						    	<s:textfield name="loginId"  id="loginId" class="{required:true,stringNum:true}" maxlength="20"/>
-						    	<s:hidden name="userId" />
 						    	<span class="field_tipinfo">字母或数字</span>
 						    </td>
 					   </tr>

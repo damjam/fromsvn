@@ -70,6 +70,13 @@
 								<span class="field_tipinfo">不能为空</span>
 							</td>
 					   </tr>
+					   <tr>
+					    	<td class="formlabel nes">机构</td>
+						     <td>
+								<s:select id="branchNo" name="branchNo" list="#request.branches" listKey="key" listValue="value" cssClass="{required:true}"></s:select>
+								<span class="field_tipinfo">不能为空</span>
+							</td>
+					   </tr>
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="提交" onclick="save()"/>
