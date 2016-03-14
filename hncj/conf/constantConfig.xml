@@ -75,7 +75,7 @@
 			<value>漯河市昌建物业信息管理系统</value>
 		</property>
 		<property name="tip">
-			<value>建议使用IE8.0版本以上浏览器+1024分辨率获得最佳操作体验</value>
+			<value>请使用最新版chrome浏览器获得最佳操作体验</value>
 		</property>
 	</bean>
 </beans>
