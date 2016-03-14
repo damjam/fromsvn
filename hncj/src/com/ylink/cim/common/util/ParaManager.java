@@ -21,7 +21,6 @@ import com.ylink.cim.admin.domain.BranchDict;
 import com.ylink.cim.admin.domain.BranchParam;
 import com.ylink.cim.admin.domain.SysDict;
 import com.ylink.cim.admin.domain.SysParm;
-import com.ylink.cim.common.type.BranchDictType;
 import com.ylink.cim.common.type.SysDictType;
 
 import flink.etc.Symbol;
@@ -95,13 +94,14 @@ public abstract class ParaManager {
 		List<BranchDict> list = branchDictDao.findByParam(MapUtils.EMPTY_MAP);
 		for (int i = 0; i < list.size(); i++) {
 			BranchDict branchDict = list.get(i);
-			if (branchDictMap.get(branchDict.getId().getDictType()) == null) {
-				Map<String, String> map = new HashMap<String, String>();
-				branchDictMap.put(branchDict.getId().getDictType(), map);
-			}
+			
 			String branchNo = branchDict.getId().getBranchNo();
 			String dictType = branchDict.getId().getDictType();
 			String dictValue = branchDict.getId().getDictValue();
+			if (branchDictMap.get(branchNo+dictType) == null) {
+				Map<String, String> map = new HashMap<String, String>();
+				branchDictMap.put(branchNo+dictType, map);
+			}
 			branchDictMap.get(branchNo+dictType).put(dictValue, branchDict.getDictName());
 		}
 	}

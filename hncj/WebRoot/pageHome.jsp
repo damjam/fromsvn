@@ -187,6 +187,5 @@
 		</div>
  -->
 		<!--版权区域-->
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>
