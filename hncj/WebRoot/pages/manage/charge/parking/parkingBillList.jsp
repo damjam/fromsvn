@@ -26,13 +26,13 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/parkingBill.do?action=toAdd');
+					gotoUrl('${uri}?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('/parkingBill.do?action=charge&id='+id);
+					gotoUrl('${uri}?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
@@ -42,14 +42,14 @@
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/parkingBill.do?action=deleteBill&id='+id);
+				gotoUrl('${uri}?action=deleteBill&id='+id);
 			}
 		</script> 
 	</head>
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="parkingBill.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -95,7 +95,7 @@
 							</td>
 						</tr>
 						<tr>
-							<c:if test="${sessionScope.branchNo eq '0000'}">
+							<c:if test="${sessionScope.isHQ == true}">
 								<td class="formlabel">机构</td>
 								<td>
 									<s:select list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
@@ -137,7 +137,7 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<c:if test="${sessionScope.branchNo eq '0000'}">
+						 	<c:if test="${sessionScope.isHQ == true}">
 						 		<td>机构</td>
 						 	</c:if>
 						 	<td >账单号</td>

@@ -18,9 +18,6 @@
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -90,7 +87,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="depositBill.do?action=doAdd" id="dataForm" method="post" class="validate">
+	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -146,7 +143,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/depositBill.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

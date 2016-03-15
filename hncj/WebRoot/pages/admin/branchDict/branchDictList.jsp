@@ -26,14 +26,14 @@
 				});
 				
 				$("#btnAdd").click(function(){
-					gotoUrl("/branchDict.do?action=toAdd");
+					gotoUrl("${uri}?action=toAdd");
 				});
 				
 			 });
 			
 			 function del(dictValue,dictType){
 				 if(window.confirm('确认删除?')){
-					 var url="/branchDict.do?action=delete&id.dictValue="+dictValue+"&id.dictType="+dictType;
+					 var url="${uri}?action=delete&id.dictValue="+dictValue+"&id.dictType="+dictType;
 					 gotoUrl(url);
 				 }
 				
@@ -46,7 +46,7 @@
 		
 		<f:msg />
 
-		<form action="${CONTEXT_PATH}/branchDict.do?action=list" id="branchDictForm" method="post">
+		<form action="${uri}?action=list" id="branchDictForm" method="post">
 			<div class="userbox">
 				<b class="b1"></b>
 				<b class="b2"></b>
@@ -62,18 +62,14 @@
 							<td>
 								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
-							<c:if
-								test="${sessionScope.BRANCH_NO eq '0000' or sessionScope.BRANCH_NO == null}">
+							<s:if test="${sessionScope.isHQ == true}">
 								<td class="formlabel" align="left">机构</td>
-								<td><s:select list="#request.branches" name="branchNo"
-										listKey="key" listValue="value" headerKey=""
-										headerValue="---全部---" /></td>
-							</c:if>
-							<c:if
-								test="${sessionScope.BRANCH_NO != null && sessionScope.BRANCH_NO ne '0000' }">
+								<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+							</s:if>
+							<s:else>
 								<td class="formlabel" align="left">&nbsp;</td>
 								<td></td>
-							</c:if>
+							</s:else>
 						</tr>
 						<tr>
 							<td>
@@ -116,7 +112,7 @@
 							     <td>${element.remark}</td>
 							    <td align="center">
 							       <span class="redlink">
-							 	   		<a href="javascript:del('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete"">删除</a>
+							 	   		<a href="javascript:del('${element.id.dictValue}','${element.id.dictType}')" id="hrefDelete">删除</a>
 							 	   </span>
 							  </td>
 						    </tr>

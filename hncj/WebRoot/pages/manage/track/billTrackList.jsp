@@ -25,19 +25,19 @@
 				});
 				
 				$('#btnAdd').click(function(){
-					var url="/billTrack.do?action=toAdd";
+					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
 			});
 			
 			function delInfo(id){
 				if(window.confirm("确认删除?")){
-					gotoUrl('/billTrack.do?action=delete&id='+id);
+					gotoUrl('${uri}?action=delete&id='+id);
 				}
 			}
 			function discard(id){
 				if(window.confirm("确认不再显示该记录?")){
-					var url="/billTrack.do?action=discard&id="+id;
+					var url="${uri}?action=discard&id="+id;
 					gotoUrl(url);
 				}
 			}
@@ -47,7 +47,7 @@
 					//return;
 				}
 				if(window.confirm("将发送短信至"+cel+"，确认操作?")){
-					var url="/billTrack.do?action=sendNotice&id="+id;
+					var url="${uri}?action=sendNotice&id="+id;
 					gotoUrl(url);  
 				}
 			}
@@ -56,7 +56,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="billTrack.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>

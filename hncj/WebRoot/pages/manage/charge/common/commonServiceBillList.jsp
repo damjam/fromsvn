@@ -24,13 +24,13 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/commonServiceBill.do?action=toAdd');
+					gotoUrl('${uri}.do?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('/commonServiceBill.do?action=charge&id='+id);
+					gotoUrl('${uri}.do?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
@@ -40,14 +40,14 @@
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/commonServiceBill.do?action=deleteBill&id='+id);
+				gotoUrl('${uri}.do?action=deleteBill&id='+id);
 			}
 		</script> 
 	</head>
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="commonServiceBill.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -87,6 +87,12 @@
 							<td>
 								<s:textfield name="year" id="year" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</c:if>	
 						</tr>
 						<tr>
 						    <td></td>
@@ -131,6 +137,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>${element.branchName}</td>
+						 	</c:if>
 						 	<td >账单号</td>
 						 	<td>业主姓名</td>
 						 	<td>房屋编号</td>
@@ -149,8 +158,10 @@
 					
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
-						
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.id}</td>
 								<td>${element.ownerName}</td>
 								<td>${element.houseSn}</td>

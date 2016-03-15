@@ -24,18 +24,18 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/merchantInfo.do?action=toEdit');
+					gotoUrl('${uri}?action=toEdit');
 				});
 			});
 			function update(id){
-				gotoUrl('/merchantInfo.do?action=toEdit&id='+id);
+				gotoUrl('${uri}?action=toEdit&id='+id);
 			}
 			
 			function delRecord(id){
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/merchantInfo.do?action=del&id='+id);
+				gotoUrl('${uri}?action=del&id='+id);
 			}
 			
 		</script> 
@@ -43,7 +43,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="merchantInfo.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -57,6 +57,12 @@
 							<td>
 								<s:textfield name="mrname" id="mrname" maxlength="20"/>
 							</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</c:if>
 					    </tr>
 						<tr>
 						    <td></td>
@@ -75,6 +81,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td>商户名称</td>
 						    <td>行业类别</td>
 						    <td>经营范围</td>
@@ -91,6 +100,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.mrname}</td>
 								<td>${element.industry} </td>
 								<td>${element.busiScope}</td>

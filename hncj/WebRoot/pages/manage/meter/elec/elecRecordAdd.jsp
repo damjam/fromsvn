@@ -18,9 +18,6 @@
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -55,7 +52,7 @@
 				if(houseSn == ''){
 					return;
 				}
-				$.post(CONTEXT_PATH + '/elecRecord.do?action=getPreRecord&houseSn='+houseSn, function(data) {
+				$.post(CONTEXT_PATH + '/${uri}?action=getPreRecord&houseSn='+houseSn, function(data) {
 					if (data != null) {
 						var jsonObj = eval('(' + data + ')');
 						$('#prenum').val(jsonObj.prenum);
@@ -75,7 +72,7 @@
 				if(recordMonth == '') {
 					return;
 				}
-				$.post(CONTEXT_PATH + '/elecRecord.do?action=getRecordDate&recordMonth='+recordMonth, function(data) {
+				$.post(CONTEXT_PATH + '/${uri}?action=getRecordDate&recordMonth='+recordMonth, function(data) {
 					if (data != null) {
 						var jsonObj = eval('(' + data + ')');
 						var preRecordDate = jsonObj.preRecordDate;
@@ -94,7 +91,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="elecRecord.do?action=doAdd" id="elecRecordActionForm" method="post" class="validate">
+	<form action="${uri}?action=doAdd" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -157,7 +154,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/elecRecord.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				  </div>
 				</div>
 				<b class="b4"></b>

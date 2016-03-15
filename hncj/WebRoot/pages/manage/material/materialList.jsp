@@ -82,8 +82,12 @@
 							<td>
 								<s:select list="#request.materialStates" headerKey="" headerValue="---请选择---" listKey="value" listValue="name" name="state"/>
 							</td>
-							<td></td>
-							<td></td>
+							<s:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</s:if>
 						</tr>
 						<tr>
 						    <td></td>
@@ -103,6 +107,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >物料名称</td>
 						 	<td >品牌</td>
 						 	<td >型号</td>
@@ -122,6 +129,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.item}</td>
 								<td>${element.brand}</td>
 								<td>${element.modal}</td>

@@ -24,40 +24,39 @@
 				});
 				
 				$('#btnAdd').click(function(){
-					var url="/ownerInfo.do?action=toAdd";
+					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
 				$('#btnImport').click(function(){
-					var url="/ownerInfo.do?action=toImport";
+					var url="${uri}?action=toImport";
 					gotoUrl(url);   
 				});
 			});
 			function updateInfo(id){
-				gotoUrl('/ownerInfo.do?action=toUpdate&id='+id);
+				gotoUrl('${uri}?action=toUpdate&id='+id);
 			}
 			function delInfo(id){
 				if(window.confirm("确认删除?")){
-					gotoUrl('/ownerInfo.do?action=delete&id='+id);
+					gotoUrl('${uri}?action=delete&id='+id);
 				}
 			}
 			function canceInfo(id){
 				if(window.confirm("确认销户?")){
-					gotoUrl('/ownerInfo.do?action=cancel&id='+id);
+					gotoUrl('${uri}?action=cancel&id='+id);
 				}
 			}
 			function openAcct(id){
 				if(window.confirm("确认开户?")){
-					$('#queryForm').attr('action', CONTEXT_PATH+'/ownerInfo.do?action=openAcct&id='+id);
+					$('#queryForm').attr('action', CONTEXT_PATH+'${uri}?action=openAcct&id='+id);
 					$('#queryForm').submit();
-					$('#queryForm').attr('action', CONTEXT_PATH+'/ownerInfo.do?action=list');
+					$('#queryForm').attr('action', CONTEXT_PATH+'${uri}?action=list');
 				}
 			}
 		</script> 
 	</head>
 	<body>
-		
 		<f:msg styleClass="msg" />
-		<form action="ownerInfo.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
@@ -77,6 +76,12 @@
 							<td>
 								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</c:if>
 						</tr>
 						<tr>
 						    <td></td>
@@ -96,6 +101,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >业主姓名</td>
 						 	<td >性别</td>
 						    <td >证件号码</td>
@@ -115,6 +123,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.ownerName}</td>
 								<td><f:type className="SexType" value="${element.gender}"/> </td>
 								<td>${element.idCard}</td>

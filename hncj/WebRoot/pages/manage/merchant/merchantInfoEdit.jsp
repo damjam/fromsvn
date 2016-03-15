@@ -115,7 +115,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="merchantInfo.do?action=doEdit" id="dataForm" method="post" class="validate">
+	<form action="${uri}?action=doEdit" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -185,7 +185,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/merchantInfo.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

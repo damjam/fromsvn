@@ -25,7 +25,7 @@
 				});
 				
 				$('#btnAdd').click(function(){
-					var url="/chargeParam.do?action=toAdd";
+					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
 			});
@@ -34,7 +34,7 @@
 		 		FormUtils.submitFirstTokenForm();
 		 	}
 			function updateInfo(id){
-				var url="/chargeParam.do?action=toEdit&id="+id;
+				var url="${uri}?action=toEdit&id="+id;
 				gotoUrl(url);  
 			}
 		</script> 
@@ -42,7 +42,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="/chargeParam.do?action=doAddItem" id="queryForm">
+		<form action="${uri}?action=doAddItem" id="queryForm">
 			<s:hidden name="id"/>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
@@ -78,7 +78,7 @@
 				<f:paginate/>
 				<div class="btnbox clear">
 					<input type="button" id="" onclick="save()" value="保存"/>
-					<input type="button" id="" onclick="gotoUrl('/chargeParam.do?action=list')" value="返回"/>
+					<input type="button" id="" onclick="gotoUrl('${uri}?action=list')" value="返回"/>
 				</div>		
 			</div> 
 		</form>

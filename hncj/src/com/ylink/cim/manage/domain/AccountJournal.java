@@ -7,7 +7,7 @@ import java.util.Date;
  * AccountJournal domain. @author MyEclipse Persistence Tools
  */
 
-public class AccountJournal implements java.io.Serializable {
+public class AccountJournal extends BranchField implements java.io.Serializable {
 
 	// Fields
 

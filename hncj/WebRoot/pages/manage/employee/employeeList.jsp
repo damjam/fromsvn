@@ -82,9 +82,11 @@
 							<td>
 								<s:textfield name="tel" id="tel" maxlength="10"/>
 							</td>
-							<c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
-								<td class="formlabel">机构</td>	
-								<td><s:select list="#request.branches" headerKey="" headerValue="---请选择---" listKey="key" listValue="value" name="branchNo"/></td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
 							</c:if>
 						</tr>
 						<tr>
@@ -106,6 +108,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >姓名</td>
 						 	<td >性别</td>
 						 	<td >职位</td>
@@ -120,6 +125,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.name}</td>
 								<td><f:type className="SexType" value="${element.gender}"/> </td>
 								<td>${element.positionName}</td>

@@ -65,6 +65,12 @@
 							<td>
 								<s:textfield name="houseSn" id="houseSn" maxlength="10"/>
 							</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</c:if>
 						</tr>
 						<tr>
 						    <td></td>
@@ -82,6 +88,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >房屋编号</td>
 						 	<td >业主姓名</td>
 						 	<td >账户余额</td>
@@ -96,6 +105,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.houseSn}</td>
 								<td>${element.ownerName}</td>
 								<td><fmt:formatNumber value="${element.balance}" pattern="##0.00"/></td>

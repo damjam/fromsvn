@@ -50,7 +50,7 @@ html {
 	
 	<f:msg />
 	<form id="query"
-		action="${CONTEXT_PATH}/branchParamManage.do?action=save" method="post"
+		action="${uri}?action=save" method="post"
 		class="validate">
 		<!-- 用户资料修改区 -->
 		<div class="userbox">
@@ -79,7 +79,7 @@ html {
 								type="text" value="${branchParm.parvalue}" maxlength="25" /> <span
 								class="field_tipinfo">不能为空</span></td>
 						</tr>
-						<c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
+						<c:if test="${sessionScope.isHQ == true}">
 							<tr>
 								<td class="formlabel nes">机构</td>
 								<td><s:select list="#request.branches" name="branchNo"

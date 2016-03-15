@@ -16,10 +16,6 @@
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 			$(document).ready(function(){
 				//window.parent.unblock();

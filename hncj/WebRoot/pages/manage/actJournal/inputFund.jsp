@@ -55,7 +55,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="accountJournal.do?action=deposit" id="accountActionForm" method="post" class="validate">
+	<form action="${uri}?action=deposit" id="accountActionForm" method="post" class="validate">
 		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
@@ -89,7 +89,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/accountJournal.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

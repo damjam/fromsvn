@@ -16,10 +16,6 @@
 		<f:js src="/js/common.js"/>
 		<f:css href="/css/page.css" />
 		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
-		
 		<script type="text/javascript">
 		
 			$(function(){
@@ -35,7 +31,7 @@
 <body>
 
 	
-	<form id="query" action="${CONTEXT_PATH}/branchParamManage.do?action=saveUpdate" method="post" class="validate">
+	<form id="query" action="${uri}?action=saveUpdate" method="post" class="validate">
 		<!-- 用户资料修改区 -->
 			<div class="userbox">
 				<div>
@@ -68,7 +64,7 @@
 						    		 <span class="field_tipinfo">不能为空</span>
 							    </td>
 							  </tr>
-							  <c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
+							  <c:if test="${sessionScope.isHQ == true}">
 								<tr>
 									<td class="formlabel nes">机构</td>
 									<td><s:select list="#request.branches" name="branchNo"

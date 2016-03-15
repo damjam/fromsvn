@@ -31,7 +31,7 @@
 <body>
 
 <f:msg />
-	<form action="${CONTEXT_PATH }/branchDict.do?action=doAdd" id="branchDictForm" method="post" class="validate">
+	<form action="${uri}?action=doAdd" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
@@ -41,7 +41,7 @@
 				<div class="contentb">
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
-					  <c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
+					  <c:if test="${sessionScope.isHQ == true}">
 						   <tr>
 							     <td class="formlabel nes">机构</td>
 							     <td>

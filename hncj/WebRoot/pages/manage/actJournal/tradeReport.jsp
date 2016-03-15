@@ -29,13 +29,13 @@
 				window.open(CONTEXT_PATH+'/reportAction.do?action=depositDetailBill&id='+id);
 			}
 			function addDeposit(){
-				gotoUrl('/accountJournal.do?action=toDeposit');
+				gotoUrl('${uri}?action=toDeposit');
 			}
 			function addWithdraw(){
-				gotoUrl('/accountJournal.do?action=toWithdraw');
+				gotoUrl('${uri}?action=toWithdraw');
 			}
 			function addReverse(){
-				gotoUrl('/accountJournal.do?action=toReverse');
+				gotoUrl('${uri}?action=toReverse');
 			}
 			
 			function query(){
@@ -79,7 +79,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox" style="height:100%">			
-				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" ></iframe>
+				<iframe id="frame0" width="100%"  height="100%" ></iframe>
 			</div> 
 	</body>
 </html>

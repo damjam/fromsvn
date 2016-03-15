@@ -25,13 +25,13 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/icDeposit.do?action=toAdd');
+					gotoUrl('${uri}?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('/icDeposit.do?action=charge&id='+id);
+					gotoUrl('${uri}?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
@@ -41,7 +41,7 @@
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('/icDeposit.do?action=deleteIcDeposit&id='+id);
+				gotoUrl('${uri}?action=deleteIcDeposit&id='+id);
 			}
 			
 		</script> 
@@ -49,7 +49,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="icDeposit.do?action=list" id="queryForm"  method="post">
+		<form action="${uri}?action=list" id="queryForm"  method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>

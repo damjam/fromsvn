@@ -71,6 +71,14 @@
 								<s:select name="tradeType" list="#request.tradeTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
 						</tr>
+						<c:if test="${sessionScope.isHQ == true}">
+							<tr>
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</tr>
+						</c:if>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -121,6 +129,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >流水号</td>
 						 	<td >收支类型</td>
 						 	<td >交易类型</td>
@@ -135,6 +146,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.id}</td>
 								<td><f:type className="InoutType" value="${element.inoutType}"/></td>
 								<td><f:type className="TradeType" value="${element.tradeType}"/></td>

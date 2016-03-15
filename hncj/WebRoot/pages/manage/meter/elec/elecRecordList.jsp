@@ -28,25 +28,25 @@
 					
 					if(window.confirm("生成账单后记录将不可删除，确认操作?")){
 						$(':button').attr('disabled', true);
-						gotoUrl('/elecRecord.do?action=checkAll');
+						gotoUrl('${uri}?action=checkAll');
 						
 					}
 				});
 				$('#btnImp').click(function(){
-					gotoUrl('/elecRecord.do?action=toImport');
+					gotoUrl('${uri}?action=toImport');
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('/elecRecord.do?action=toAdd');
+					gotoUrl('${uri}?action=toAdd');
 				});
 			});
 			function check(id){
 				if(window.confirm("生成账单后记录将不可删除，确认操作?")){
-					gotoUrl('/elecRecord.do?action=check&id='+id);
+					gotoUrl('${uri}?action=check&id='+id);
 				}
 			}
 			function delRecord(id){
 				if(window.confirm("确认删除?")){
-					gotoUrl('/elecRecord.do?action=delete&id='+id);
+					gotoUrl('${uri}?action=delete&id='+id);
 				}
 			}
 			
@@ -55,7 +55,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="elecRecord.do?action=list" id="queryForm">
+		<form action="${uri}?action=list" id="queryForm">
 			<!-- 查询功能区 -->
 			<div class="userbox">
 				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>

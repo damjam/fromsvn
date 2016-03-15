@@ -101,6 +101,12 @@
 								<input type="text" name="gatherPeriod" id="gatherPeriodM" onclick="WdatePicker({dateFmt:'yyyyMM'})"/>
 								<input type="text" name="gatherPeriod" id="gatherPeriodY" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</c:if>	
 						</tr>
 						<tr>
 						    <td></td>
@@ -114,7 +120,7 @@
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox" style="height:100%">			
-				<iframe id="frame0" scrolling="auto" frameborder="0" width="100%"  height="100%" ></iframe>
+				<iframe id="frame0" width="100%"  height="100%" ></iframe>
 			</div> 
 	</body>
 </html>

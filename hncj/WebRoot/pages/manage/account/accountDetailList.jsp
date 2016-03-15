@@ -34,7 +34,7 @@
 	<body>
 		
 		<f:msg styleClass="msg" />
-		<form action="account.do?action=detail" id="queryForm" method="post">
+		<form action="${uri}?action=detail" id="queryForm" method="post">
 			<s:hidden name="acctNo" id="acctNo"/>
 			<!-- 查询功能区 -->
 			<div class="userbox">

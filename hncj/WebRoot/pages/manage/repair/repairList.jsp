@@ -93,7 +93,7 @@
 							<td>
 								<s:select list="#request.repairStates" headerKey="" headerValue="---请选择---" listKey="value" listValue="name" name="state"/>
 							</td>
-							<c:if test="${sessionScope.BRANCH_NO eq '0000' || sessionScope.BRANCH_NO == null}">
+							<c:if test="${sessionScope.isHQ == true}">
 								<td class="formlabel">机构</td>	
 								<td><s:select list="#request.branches" headerKey="" headerValue="---请选择---" listKey="key" listValue="value" name="branchNo"/></td>
 							</c:if>

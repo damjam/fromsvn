@@ -24,6 +24,7 @@ import com.ylink.cim.admin.domain.PrivilegeResource;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.PrivilegeHelper;
 import com.ylink.cim.admin.service.UserService;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.UserLogType;
 
 import flink.consant.ActionConstant;
@@ -172,6 +173,7 @@ public class LoginAction extends BaseAction implements ModelDriven<UserInfo> {
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TAG, tag);
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_NO, userInfo.getBranchNo());
 			WebUtils.setSessionAttribute(request, "branchNo", userInfo.getBranchNo());
+			WebUtils.setSessionAttribute(request, "isHQ", BranchType.HQ_0000.getValue().equals(userInfo.getBranchNo()));
 			CookieDealer.saveBranch(userInfo.getBranchNo(), response);
 			CPSHttpSessionListener.putSession(userInfo.getUserId(),
 					request.getSession());

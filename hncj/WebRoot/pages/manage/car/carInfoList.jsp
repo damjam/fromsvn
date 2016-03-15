@@ -90,7 +90,15 @@
 							<td>
 								<s:textfield name="model" id="model" maxlength="10"/>
 							</td>
-						</tr>	
+						</tr>
+						<c:if test="${sessionScope.isHQ == true}">
+							<tr>
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---" name="branchNo"></s:select>
+								</td>
+							</tr>
+						</c:if>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -108,6 +116,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >车牌号</td>
 						    <td >品牌型号</td>
 						    <td >车主姓名</td>
@@ -122,6 +133,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.carSn}</td>
 								<td>${element.brand}${element.model}</td>
 								<td>${element.ownerName}</td>

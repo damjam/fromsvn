@@ -55,7 +55,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="ownerInfo.do?action=doUpdate" id="ownerInfoActionForm" method="post" class="validate">
+	<form action="${uri}?action=doUpdate" id="ownerInfoActionForm" method="post" class="validate">
 		<s:hidden name="id" id="id"/>
 		<div class="userbox">
 			<div>
@@ -135,7 +135,7 @@
 				  </table>
 				  <div class="btnbox">
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('/ownerInfo.do?action=list')"/>
+					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
 				</div>
 				<b class="b4"></b>

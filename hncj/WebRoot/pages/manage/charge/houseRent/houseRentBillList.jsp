@@ -77,7 +77,15 @@
 							<td>
 								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
-						</tr>	
+						</tr>
+						<c:if test="${sessionScope.isHQ == true}">
+							<tr>
+								<td class="formlabel">机构</td>
+								<td>
+									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
+							</tr>
+						</c:if>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -112,6 +120,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >账单号</td>
 						    <td >房屋编号</td>
 						    <td >起止日期</td>
@@ -129,6 +140,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.id}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.startDate}-${element.endDate}</td>
