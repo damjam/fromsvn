@@ -52,7 +52,7 @@ public interface PrivilegeDao extends BaseDao {
 	 * @paramÈ¨ÏŞ×éID
 	 * @return List(PrivilegeRoleTree)
 	 */
-	public List getRoleTree();
+	public List<PrivilegeTreeNode> getRoleTree();
 
 	/**
 	 * 

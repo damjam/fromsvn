@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.WebUtils;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.admin.dao.UserRoleDao;
@@ -57,16 +56,8 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 	@Autowired
 	private UserService userService;
 
-	// private final SysDictService
-	// sysDictService=(SysDictService)getService("sysDictService");
 	@Autowired
 	private UserRoleDao userRoleDao;
-
-	/**
-	 * 角色服务类
-	 */
-	// private final RoleInfoService roleInfoService = (RoleInfoService)
-	// getService("roleInfoService");
 
 	/**
 	 * 菜单绑定页面
@@ -99,11 +90,11 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 	 */
 	public String toMenuBind() throws BizException {
 		// 设置用户信息
-		UserInfo user = this.getSessionUser(request);
+		//UserInfo user = this.getSessionUser(request);
 
 		// 获取所有的可选的菜单
-		List<IPrivilege> allPriv = (List<IPrivilege>) WebUtils
-				.getSessionAttribute(request, Constants.USER_PRIVILEGE);
+		//List<IPrivilege> allPriv = (List<IPrivilege>) WebUtils
+		//		.getSessionAttribute(request, Constants.USER_PRIVILEGE);
 		List<IPrivilege> menuPri = new ArrayList<IPrivilege>();
 		/*
 		 * for(IPrivilege p:allPriv){ if(p.isMenu() ||
@@ -284,9 +275,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
 			String msg = MsgUtils.r("删除用户信息成功,删除内容为：{?}", model.getUserId());
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			model.setUserId(null);
-
-			return this.listUserInfo();
+			return "toMain";
 		} catch (Exception e) {
 			String msg = MsgUtils.r("删除用户信息失败,失败原因:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);

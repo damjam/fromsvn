@@ -70,7 +70,7 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 	}
 	public String toAddTrack() throws Exception {
 		initSelect();
-		return "repairTrackAdd";
+		return "trackAdd";
 	}
 	public String doAddTrack() throws Exception {
 		try{
@@ -90,7 +90,7 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 	public String showTrack() throws Exception {
 		List<RepairTrack> list = repairTrackDao.findList(model.getId());
 		saveQueryResult(request, list);
-		return "repairTrackList";
+		return "trackList";
 	}
 	public String detail() throws Exception {
 		Repair repair = repairDao.findById(model.getId());

@@ -105,7 +105,6 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 				chargeParamService.updateParam(chargeParam, getSessionUser(request));
 			}
 			setResult(true, "²Ù×÷³É¹¦", request);
-			// clearForm(model);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return list();
@@ -114,7 +113,6 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 			e.printStackTrace();
 			return list();
 		}
-
 		return list();
 	}
 

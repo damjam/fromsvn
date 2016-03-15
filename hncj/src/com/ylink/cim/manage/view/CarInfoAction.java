@@ -18,6 +18,7 @@ import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
 import com.ylink.cim.manage.service.CarInfoService;
+import com.ylink.cim.util.CopyPropertyUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
@@ -37,14 +38,6 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 
 	private CarInfo model = new CarInfo();
 	
-	private void clearForm() {
-		model.setOwnerName("");
-		model.setCarSn("");
-		model.setOwnerCel("");
-		model.setHouseSn("");
-		model.setBrand("");
-		model.setModel("");
-	}
 	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -71,8 +64,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 			CarInfo carInfo = new CarInfo();
 			BeanUtils.copyProperties(carInfo, model);
 			carInfoService.save(carInfo, getSessionUser(request));
-			setResult(true, "操作成功", request);
-			clearForm();
+			setSucResult(request);
 		}catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toAdd();
@@ -82,23 +74,15 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 			return toAdd();
 		}
 		
-		return list();
+		return "toMain";
 	}
 
 	public String doEdit() throws Exception {
 		try {
-			
 			CarInfo carInfo = carInfoDao.findById(model.getId());
-			String createUser = carInfo.getCreateUser();
-			Date createDate = carInfo.getCreateDate();
-			String ownerId = carInfo.getOwnerId();
-			BeanUtils.copyProperties(carInfo, model);
-			carInfo.setCreateDate(createDate);
-			carInfo.setCreateUser(createUser);
-			carInfo.setOwnerId(ownerId);
+			CopyPropertyUtil.copyPropertiesIgnoreNull(model, carInfo);
 			carInfoService.update(carInfo, getSessionUser(request));
-			clearForm();
-			setResult(true, "修改成功", request);
+			setSucResult("修改成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toEdit();
@@ -107,7 +91,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 			e.printStackTrace();
 			return toEdit();
 		}
-		return list();
+		return "toMain";
 	}
 
 	@Override
@@ -149,7 +133,6 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		Paginater paginater = carInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		//return forward("/pages/manage/car/carInfoList.jsp");
 		return "list";
 	}
 

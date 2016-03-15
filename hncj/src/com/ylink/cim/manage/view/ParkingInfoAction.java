@@ -56,7 +56,6 @@ public class ParkingInfoAction extends BaseAction implements
 			ParkingInfo parkingInfo = new ParkingInfo();
 			BeanUtils.copyProperties(parkingInfo, model);
 			parkingInfoService.save(parkingInfo, getSessionUser(request));
-			clearForm();
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toAdd();
@@ -66,15 +65,7 @@ public class ParkingInfoAction extends BaseAction implements
 			return toAdd();
 		}
 
-		return list();
-	}
-
-	private void clearForm() {
-		model.setOwnerName("");
-		model.setOwnerCel("");
-		model.setEndUser("");
-		model.setEndUserCel("");
-		model.setState("");
+		return "toMain";
 	}
 
 	public String doEdit() throws Exception {
@@ -89,8 +80,7 @@ public class ParkingInfoAction extends BaseAction implements
 			parkingInfo.setCreateUser(createUser);
 			parkingInfo.setBranchNo(branchNo);
 			parkingInfoService.update(parkingInfo, getSessionUser(request));
-			setResult(true, "添加成功", request);
-			clearForm();
+			setSucResult("添加成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toEdit();

@@ -77,10 +77,8 @@ public class TimerAction extends BaseAction implements ModelDriven<Timer> {
 				timer.setCreateUser(createUser);
 				timerService.update(timer, getSessionUser(request));
 			}
-			setResult(true, "操作成功", request);
-			model.setBeanName("");
-			model.setBeanNameCh("");
-			return query();
+			setSucResult("操作成功", request);
+			return "toMain";
 		} catch (Exception e) {
 			setResult(false, "操作失败", request);
 			e.printStackTrace();

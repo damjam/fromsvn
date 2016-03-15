@@ -10,16 +10,18 @@
 			<result name="toUpdatePage">/pages/admin/privilege/userInfoUpdate.jsp</result>
 			<result name="toChangePassword">/pages/admin/privilege/changePassword.jsp</result>
 			<result name="success">/success.jsp</result>
+			<result name="toMain" type="redirect">userInfoAction.do?action=listUserInfo&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="userRoleAction" class="userRoleAction">
 			<result name="toListPage">/pages/admin/privilege/userRoleList.jsp</result>
 			<result name="toAssignRolePage">/pages/admin/privilege/userRoleAssignList.jsp</result>
+			<result name="toMain" type="redirect">userRoleAction.do?action=listUserRole&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="limitGroupInfoAction" class="limitGroupInfoAction">
 			<result name="toListPage">/pages/admin/privilege/limitGroupInfoList.jsp</result>
 			<result name="toAddPage">/pages/admin/privilege/limitGroupInfoAdd.jsp</result>
 			<result name="toUpdatePage">/pages/admin/privilege/limitGroupInfoUpdate.jsp</result>
-			<result name="toMain" type="redirect">limitGroupInfoAction.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+			<result name="toMain" type="redirect">limitGroupInfoAction.do?action=listLimitGroupInfo&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="roleInfoAction" class="roleInfoAction">
 			<result name="toListPage">/pages/admin/privilege/roleInfoList.jsp</result>
@@ -32,6 +34,7 @@
 			<result name="toListPage">/pages/admin/privilege/privList.jsp</result>
 			<result name="toAddPage">/pages/admin/privilege/privEdit.jsp</result>
 			<result name="popUpPage">/pages/popUp/popUpPrivilege.jsp</result>
+			<result name="toMain" type="redirect">roleInfoAction.do?action=listRoleInfo&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="privilegeResourceAction" class="privilegeResourceAction">
 			<result name="privResEdit">/pages/admin/privilege/privResEdit.jsp</result>
@@ -71,6 +74,7 @@
 			<result name="timerManager">/pages/admin/sysRunManager/sysTimerManager.jsp</result>
 			<result name="list">/pages/admin/sysRunManager/timerList.jsp</result>
 			<result name="edit">/pages/admin/sysRunManager/timerEdit.jsp</result>
+			<result name="toMain" type="redirect">timer.do?action=query&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="timerDo" class="timerDoAction">
 			<result name="list">/pages/admin/sysRunManager/timerDoList.jsp</result>

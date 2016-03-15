@@ -63,11 +63,6 @@ public class OwnerInfoAction extends BaseAction implements
 		return list();
 	}
 
-	private void clearForm() {
-		model.setOwnerName(null);
-		model.setHouseSn(null);
-	}
-
 	public String delete() throws Exception {
 		try {
 			String id = request.getParameter("id");
@@ -86,8 +81,7 @@ public class OwnerInfoAction extends BaseAction implements
 			OwnerInfo ownerInfo = new OwnerInfo();
 			BeanUtils.copyProperties(ownerInfo, model);
 			ownerInfoService.add(ownerInfo, getSessionUser(request));
-			setResult(true, "添加成功", request);
-			clearForm();
+			setSucResult("添加成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			e.printStackTrace();
@@ -97,12 +91,12 @@ public class OwnerInfoAction extends BaseAction implements
 			e.printStackTrace();
 			return toAdd();
 		}
-		return list();
+		return "toMain";
 	}
 
 	public String doImport() throws Exception {
+		InputStream is = new FileInputStream(model.getFile());
 		try {
-			InputStream is = new FileInputStream(model.getFile());
 			Workbook book = null;
 			String fileName = model.getFileName();
 			if (fileName.toLowerCase().endsWith(".xls")) {
@@ -183,6 +177,8 @@ public class OwnerInfoAction extends BaseAction implements
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResult(false, "操作失败:" + e.getMessage(), request);
+		}finally {
+			IOUtils.closeQuietly(is);
 		}
 		// return forward("/pages/manage/owner/ownerInfoImport.jsp");
 		return "import";

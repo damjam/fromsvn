@@ -103,7 +103,6 @@ public class SysParmManageAction extends BaseAction implements
 		String msg = MsgUtils.r("系统参数查询成功");
 		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "list";
-		// "/pages/admin/sysRunManager/sysParmManager.jsp"
 	}
 
 	/**

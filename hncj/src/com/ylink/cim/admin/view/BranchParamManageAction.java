@@ -91,7 +91,6 @@ public class BranchParamManageAction extends BaseAction implements ModelDriven<B
 	 * @throws Exception
 	 */
 	public String query() throws Exception {
-
 		Paginater paginater = branchParmService.findAll(getPager(request), model);
 		for(int i=0; i<paginater.getList().size(); i++){
 			BranchParam branchParm = (BranchParam)paginater.getList().get(i);

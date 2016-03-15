@@ -74,7 +74,7 @@ public class BranchDictAction extends BaseAction implements ModelDriven<BranchDi
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			String msg = MsgUtils.r("Ìí¼Ó×ÖµäÊ§°Ü,Ê§°ÜÔ­Òò:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-			throw e;
+			return toAdd();
 		}
 	}
 

@@ -14,7 +14,6 @@ import com.ylink.cim.common.util.FeildUtils;
 import flink.consant.ActionConstant;
 import flink.consant.ActionMessageConstant;
 import flink.util.ExceptionUtils;
-import flink.util.LogUtils;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -48,7 +47,8 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 	public String addSysDict() throws Exception {
 		try {
 			if (this.sysDictService.isExist(model.getId())) {
-				setFailResult(ActionMessageConstant.OPER_FAIL_EXIST, request);
+				setResult(false, ActionMessageConstant.OPER_FAIL_EXIST, request);
+				return toAddPage();
 			} else {
 				this.sysDictService.saveSysDict(model);
 				setSucResult(ActionMessageConstant.OPER_SUCCESS, request);
@@ -62,30 +62,24 @@ public class SysDictAction extends BaseAction implements ModelDriven<SysDict> {
 			setResult(false, ActionMessageConstant.OPER_FAIL, request);
 			String msg = MsgUtils.r("Ìí¼Ó×ÖµäÊ§°Ü,Ê§°ÜÔ­Òò:{?}", e.getMessage());
 			super.logError(request, UserLogType.ADD.getValue(), msg);
-			throw e;
-		} finally {
-		}
+			return toAddPage();
+		} 
 	}
 
 	public String deleteSysDict() throws Exception {
 
 		try {
 			this.sysDictService.deleteSysDict(model);
-
-			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
-			model.getId().setDictValue(null);
-			model.setDictName(null);
+			setSucResult(ActionMessageConstant.OPER_SUCCESS, request);
 			String msg = MsgUtils.r("É¾³ý×Öµä³É¹¦,É¾³ýÄÚÈÝÎª£º{?}", FeildUtils.toString(model));
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
-			return this.listSysDict();
 		} catch (Exception e) {
 			String msg = MsgUtils.r("É¾³ý×ÖµäÊ§°Ü,Ê§°ÜÔ­Òò:{?}", e.getMessage());
 			super.logError(request, UserLogType.DELETE.getValue(), msg);
 			ExceptionUtils.logBizException(this.getClass(), e.getMessage());
-			setResult(false, ActionMessageConstant.OPER_FAIL, request);
-			throw e;
-
+			setFailResult(ActionMessageConstant.OPER_FAIL, request);
 		}
+		return "toMain";
 	}
 
 	@Override

@@ -138,7 +138,7 @@ public class PrivilegeDaoImpl extends BaseDaoImpl implements PrivilegeDao {
 	 * @see gnete.dsf.biz.dao.PrivilegeDao#getRoleTree(java.util.List)
 	 */
 	@Override
-	public List getRoleTree() {
+	public List<PrivilegeTreeNode> getRoleTree() {
 		List<PrivilegeTreeNode> treeList = new ArrayList<PrivilegeTreeNode>();
 		List<Privilege> prList = getLimitGroupPrivilege();
 		for (int i = 0; i < prList.size(); i++) {
