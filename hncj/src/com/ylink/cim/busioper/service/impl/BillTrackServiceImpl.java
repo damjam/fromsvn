@@ -46,7 +46,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 		Date now = DateUtil.getCurrent();
 		for (int i = 0; i < list.size(); i++) {
 			BillTrack track = list.get(i);
-			billTrackDao.lock(track, LockMode.OPTIMISTIC);
+			billTrackDao.lock(track, LockMode.PESSIMISTIC_WRITE);
 			String expireDate = track.getExpireDate();
 			if (StringUtils.isEmpty(expireDate)) {
 				continue;

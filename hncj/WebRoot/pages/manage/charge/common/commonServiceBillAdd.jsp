@@ -54,7 +54,7 @@
 				var params = $('#houseSn').serialize();
 				$.ajax({
 					 type:'POST',
-				     url:CONTEXT_PATH + '/${uri}?action=getHouseInfo',
+				     url:CONTEXT_PATH + '/commonServiceBill.do?action=getHouseInfo',
 				     async:true,
 				     dataType: "json",
 				     data:params,
@@ -119,7 +119,7 @@
 				var checkinState = $('#checkinState').val();
 				$.ajax({
 					 type:'POST',
-				     url:CONTEXT_PATH + '/${uri}?action=getAcctInfo&checkinState='+checkinState,
+				     url:'${uri}?action=getAcctInfo&checkinState='+checkinState,
 				     async:true,
 				     dataType: "json",
 				     data:params,

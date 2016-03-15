@@ -81,7 +81,7 @@
 							<tr>
 								<td class="formlabel">机构</td>
 								<td>
-									<s:select list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+									<s:select list="branches" name="branchNo" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
 								</td>
 							</tr>
 						</c:if>

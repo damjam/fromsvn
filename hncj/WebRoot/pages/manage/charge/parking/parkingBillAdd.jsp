@@ -58,7 +58,7 @@
 				var params = $('#houseSn').serialize();
 				$.ajax({
 					 type:'POST',
-				     url:CONTEXT_PATH + '/${uri}?action=getOwnerName',
+				     url:'${uri}?action=getOwnerName',
 				     async:true,
 				     dataType: "json",
 				     data:params,
@@ -99,7 +99,7 @@
 				var params = $('#dataForm input').serialize();
 				$.ajax({
 					 type:'POST',
-				     url:CONTEXT_PATH + '/${uri}?action=getAcctInfo',
+				     url:'${uri}?action=getAcctInfo',
 				     async:true,
 				     dataType: "json",
 				     data:params,

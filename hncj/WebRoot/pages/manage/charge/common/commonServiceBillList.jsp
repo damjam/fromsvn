@@ -24,13 +24,13 @@
 					FormUtils.reset("queryForm");
 				});
 				$('#btnAdd').click(function(){
-					gotoUrl('${uri}.do?action=toAdd');
+					gotoUrl('${uri}?action=toAdd');
 				});
 				
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
-					gotoUrl('${uri}.do?action=charge&id='+id);
+					gotoUrl('${uri}?action=charge&id='+id);
 				}
 			}
 			function openReport(id){
@@ -40,7 +40,7 @@
 				if(!window.confirm("确认删除?")){
 					return;
 				}
-				gotoUrl('${uri}.do?action=deleteBill&id='+id);
+				gotoUrl('${uri}?action=deleteBill&id='+id);
 			}
 		</script> 
 	</head>

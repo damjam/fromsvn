@@ -18,9 +18,6 @@
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -57,7 +54,7 @@
 				var params = $('#houseSn').serialize();
 				$.ajax({
 					 type:'POST',
-				     url:CONTEXT_PATH + '/${uri}?action=getHouseInfo',
+				     url:'${uri}?action=getHouseInfo',
 				     async:true,
 				     dataType: "json",
 				     data:params,

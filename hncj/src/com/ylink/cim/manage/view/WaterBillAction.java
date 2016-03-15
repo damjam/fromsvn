@@ -61,8 +61,6 @@ public class WaterBillAction extends BaseAction implements
 		}else {//»ú¹¹
 			map.put("branchNo", getSessionBranchNo(request));
 		}
-		map.put("sessionbranchNo", getSessionBranchNo(request));
-		map.put("branchNo", model.getBranchNo());
 		Paginater paginater = waterBillDao.findWaterBillPager(map,
 				getPager(request));
 		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),

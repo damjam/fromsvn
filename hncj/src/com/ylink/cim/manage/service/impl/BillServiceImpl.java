@@ -159,10 +159,10 @@ public class BillServiceImpl implements BillService {
 	@Override
 	public void chargeDepositFee(String id, UserInfo userInfo)
 			throws BizException {
-		IcDeposit bill = icDepositDao.findByIdWithLock(id);
+		DepositBill bill = depositBillDao.findByIdWithLock(id);
 		Assert.equals(BillState.UNPAY.getValue(), bill.getState(), "×´Ì¬ÒÑ±ä¸ü");
-		bill.setChargeDate(DateUtil.getCurrent());
-		bill.setChargeUser(userInfo.getUserName());
+		bill.setDepositDate(DateUtil.getCurrent());
+		bill.setDepositUser(userInfo.getUserName());
 		bill.setState(BillState.PAID.getValue());
 		depositBillDao.update(bill);
 		accountJournalService.add(InputTradeType.SECURITY.getValue(),
