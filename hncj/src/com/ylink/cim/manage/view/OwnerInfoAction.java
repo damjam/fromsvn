@@ -206,10 +206,13 @@ public class OwnerInfoAction extends BaseAction implements
 
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-
 		map.put("ownerName", model.getOwnerName());
 		map.put("houseSn", model.getHouseSn());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/owner/ownerInfoList.jsp");

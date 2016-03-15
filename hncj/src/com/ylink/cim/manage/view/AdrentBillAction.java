@@ -31,7 +31,6 @@ public class AdrentBillAction extends BaseAction implements
 	private BillService billService;
 
 	public String toAdd() throws Exception {
-		// return forward("/pages/manage/charge/adrent/adrentBillAdd.jsp");
 		return "add";
 	}
 
@@ -51,7 +50,6 @@ public class AdrentBillAction extends BaseAction implements
 
 	public String doAdd() throws Exception {
 		try {
-
 			AdrentBill adRent = new AdrentBill();
 			BeanUtils.copyProperties(adRent, model);
 			billService.saveAdRentBill(adRent, getSessionUser(request));
@@ -69,8 +67,11 @@ public class AdrentBillAction extends BaseAction implements
 
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		map.put("branchNo", getSessionBranchNo(request));
-
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		map.put("id", model.getId());
 		map.put("state", model.getState());
 		map.put("startChargeDate", model.getStartChargeDate());

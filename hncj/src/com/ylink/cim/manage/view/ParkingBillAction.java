@@ -43,7 +43,6 @@ public class ParkingBillAction extends BaseAction implements
 
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
-		// return forward("/pages/manage/charge/parking/parkingBillAdd.jsp");
 		return "add";
 	}
 
@@ -76,7 +75,11 @@ public class ParkingBillAction extends BaseAction implements
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
 		map.put("branchNo", model.getBranchNo());
-		map.put("sessionBranchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);

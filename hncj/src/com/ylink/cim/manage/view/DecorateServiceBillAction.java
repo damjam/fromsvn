@@ -38,8 +38,6 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
-		// return
-		// forward("/pages/manage/charge/decorate/decorateServiceBillAdd.jsp");
 		return "add";
 	}
 
@@ -75,13 +73,15 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 		map.put("state", model.getState());
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = decorateServiceBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = decorateServiceBillDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		// return
-		// forward("/pages/manage/charge/decorate/decorateServiceBillList.jsp");
 		return "list";
 	}
 

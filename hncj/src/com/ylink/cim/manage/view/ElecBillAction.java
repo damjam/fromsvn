@@ -55,7 +55,6 @@ public class ElecBillAction extends BaseAction implements ModelDriven<ElecBill> 
 	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("startChargeDate", model.getStartChargeDate());
@@ -65,7 +64,11 @@ public class ElecBillAction extends BaseAction implements ModelDriven<ElecBill> 
 		map.put("id", model.getId());
 		map.put("buildingNo", model.getBuildingNo());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = elecBillDao.findBillPager(map, getPager(request));
 		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),
 		// "houseSn");

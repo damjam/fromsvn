@@ -56,7 +56,13 @@ public class WaterBillAction extends BaseAction implements
 		map.put("id", model.getId());
 		map.put("buildingNo", model.getBuildingNo());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
+		map.put("sessionbranchNo", getSessionBranchNo(request));
+		map.put("branchNo", model.getBranchNo());
 		Paginater paginater = waterBillDao.findWaterBillPager(map,
 				getPager(request));
 		// List<String> houseSns = BoUtils.getProperties(paginater.getList(),

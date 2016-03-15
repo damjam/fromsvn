@@ -363,6 +363,9 @@ public abstract class BaseAction extends RootAction {
 				Constants.SESSION_USER);
 	}
 
+	protected boolean isHQ(){
+		return "0000".equals(getSessionBranchNo(request));
+	}
 	/**
 	 * 获取当前用户编号.
 	 * 

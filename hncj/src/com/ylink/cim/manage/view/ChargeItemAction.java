@@ -45,18 +45,15 @@ public class ChargeItemAction extends BaseAction implements
 
 	public String toEdit() throws Exception {
 		initSelect(request);
-
 		if (!StringUtils.isEmpty(model.getId())) {
 			ChargeItem chargeItem = chargeItemDao.findById(model.getId());
 			BeanUtils.copyProperties(model, chargeItem);
 		}
-		// return forward("/pages/admin/chargeItem/chargeItemEdit.jsp");
 		return "edit";
 	}
 
 	public String toAdd() throws Exception {
 		initSelect(request);
-		// return forward("/pages/admin/chargeItem/chargeItemEdit.jsp");
 		return "edit";
 	}
 
@@ -121,11 +118,14 @@ public class ChargeItemAction extends BaseAction implements
 
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = chargeItemDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		// return forward("/pages/admin/chargeItem/chargeItemList.jsp");
 		return "list";
 	}
 
@@ -160,8 +160,6 @@ public class ChargeItemAction extends BaseAction implements
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// return forward("/pages/popUp/popUpChargeItem.jsp");
 		return "pop";
 	}
 

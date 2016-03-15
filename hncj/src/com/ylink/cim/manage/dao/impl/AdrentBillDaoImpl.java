@@ -6,7 +6,6 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.domain.AdrentBill;
 
@@ -31,11 +30,7 @@ public class AdrentBillDaoImpl extends BaseDaoImpl implements AdrentBillDao {
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and merchantName like ?",
 				MapUtils.getString(params, "merchantName"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		if (StringUtils.isNotEmpty(MapUtils
 				.getString(params, "startChargeDate"))) {
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils
@@ -58,11 +53,7 @@ public class AdrentBillDaoImpl extends BaseDaoImpl implements AdrentBillDao {
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and merchantName like ?",
 				MapUtils.getString(params, "merchantName"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		if (StringUtils.isNotEmpty(MapUtils
 				.getString(params, "startChargeDate"))) {
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils

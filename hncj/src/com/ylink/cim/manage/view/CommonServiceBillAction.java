@@ -49,14 +49,11 @@ public class CommonServiceBillAction extends BaseAction implements
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
 		CheckinState.setInReq(request);
-		// return
-		// forward("/pages/manage/charge/common/commonServiceBillAdd.jsp");
 		return "add";
 	}
 
 	public String doAdd() throws Exception {
 		try {
-
 			CommonServiceBill bill = new CommonServiceBill();
 			BeanUtils.copyProperties(bill, model);
 			billService.saveServiceBill(bill, getSessionUser(request));
@@ -82,7 +79,11 @@ public class CommonServiceBillAction extends BaseAction implements
 		map.put("state", model.getState());
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = commonServiceBillDao.findPager(map,
 				getPager(request));
 		saveQueryResult(request, paginater);

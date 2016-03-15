@@ -215,7 +215,11 @@ public class ElecRecordAction extends BaseAction implements
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("houseSn", model.getHouseSn());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = elecRecordDao.findRecordPager(map,
 				getPager(request));
 		saveQueryResult(request, paginater);

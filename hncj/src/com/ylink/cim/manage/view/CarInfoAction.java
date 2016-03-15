@@ -54,7 +54,6 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 	
 	public String doAdd() throws Exception {
 		try {
-			
 			Map<String, Object> params = getParaMap();
 			params.put("carSn", model.getCarSn());
 			params.put("branchNo", model.getBranchNo());
@@ -128,7 +127,11 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		map.put("model", model.getModel());
 		map.put("ownerName", model.getOwnerName());
 		map.put("ownerCel", model.getOwnerCel());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = carInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);

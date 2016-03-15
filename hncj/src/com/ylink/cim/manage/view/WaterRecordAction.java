@@ -58,7 +58,6 @@ public class WaterRecordAction extends BaseAction implements
 			e.printStackTrace();
 		}
 		return list();
-
 	}
 
 	public String checkAll() throws Exception {
@@ -102,7 +101,6 @@ public class WaterRecordAction extends BaseAction implements
 		} catch (Exception e) {
 			setResult(false, "保存失败" + e.getMessage(), request);
 		}
-		// return forward("/pages/manage/meter/water/waterRecordAdd.jsp");
 		return "add";
 	}
 
@@ -214,7 +212,11 @@ public class WaterRecordAction extends BaseAction implements
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("houseSn", model.getHouseSn());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = waterRecordDao.findWaterRecordPager(map,
 				getPager(request));
 		saveQueryResult(request, paginater);

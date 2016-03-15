@@ -28,11 +28,7 @@ public class ChargeItemDaoImpl extends BaseDaoImpl implements ChargeItemDao {
 		helper.append("and itemName = ?",
 				MapUtils.getString(params, "itemName"));
 		helper.append("and id <> ?", MapUtils.getString(params, "exceptId"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 
@@ -51,17 +47,12 @@ public class ChargeItemDaoImpl extends BaseDaoImpl implements ChargeItemDao {
 		helper.append("from ChargeItem where 1=1");
 		helper.append("and way = ?", MapUtils.getString(params, "way"));
 		helper.append("and item = ?", MapUtils.getString(params, "item"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getPageData(helper, pager);
 	}
 
 	@Override
 	protected Class getModelClass() {
-		// TODO Auto-generated method stub
 		return ChargeItem.class;
 	}
 

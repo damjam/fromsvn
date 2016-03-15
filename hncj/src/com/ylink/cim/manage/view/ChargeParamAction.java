@@ -51,24 +51,19 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 	private ChargeItemDao chargeItemDao;
 
 	public String toChargeParamMng() throws Exception {
-
-		// return forward("/pages/admin/chargeParam/chargeParamManager.jsp");
 		return "manager";
 	}
 
 	public String toEdit() throws Exception {
-
 		String id = model.getId();
 		ChargeParam chargeParam = chargeParamDao.findById(id);
 		BeanUtils.copyProperties(model, chargeParam);
 		initSelect(request);
-		// return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
 		return "edit";
 	}
 
 	public String toAdd() throws Exception {
 		initSelect(request);
-		// return forward("/pages/admin/chargeParam/chargeParamEdit.jsp");
 		return "edit";
 	}
 
@@ -80,7 +75,6 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 
 	public String doEdit() throws Exception {
 		try {
-
 			// Map<String, Object> params = getParaMap();
 			// params.put("branchNo", getSessionBranchNo(request));
 			// Assert.isEmpty(chargeParamDao.findBy(params), "计费参数已存在，请重新指定");
@@ -150,9 +144,12 @@ public class ChargeParamAction extends BaseAction implements ModelDriven<ChargeP
 	}
 
 	public String list() throws Exception {
-
 		Map<String, Object> map = getParaMap();
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		map.put("rangeCode", model.getRangeCode());
 		Paginater paginater = chargeParamDao.findPager(map, getPager(request));
 		for (int i = 0; i < paginater.getList().size(); i++) {

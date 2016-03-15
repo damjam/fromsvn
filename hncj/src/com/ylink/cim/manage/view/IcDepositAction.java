@@ -39,7 +39,6 @@ public class IcDepositAction extends BaseAction implements
 
 	public String toAdd() throws Exception {
 		IcCardType.setInReq(request);
-		// return forward("/pages/manage/charge/prestore/icDepositAdd.jsp");
 		return "add";
 	}
 
@@ -71,12 +70,15 @@ public class IcDepositAction extends BaseAction implements
 		map.put("endChargeDate", model.getEndChargeDate());
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = icDepositDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = icDepositDao.findSumInfo(map);
 		request.setAttribute("sumInfo", sumInfo);
-		// return forward("/pages/manage/charge/prestore/icDepositList.jsp");
 		return "list";
 	}
 
@@ -85,7 +87,6 @@ public class IcDepositAction extends BaseAction implements
 			String id = request.getParameter("id");
 			billService.chargeDepositFee(id, getSessionUser(request));
 			setResult(true, "操作成功", request);
-			model.setId("");
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);

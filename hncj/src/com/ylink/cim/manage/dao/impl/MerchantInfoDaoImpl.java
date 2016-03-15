@@ -30,11 +30,7 @@ public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao 
 		helper.append("from MerchantInfo where 1=1");
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and mrname like ?", MapUtils.getString(params, "mrname"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}

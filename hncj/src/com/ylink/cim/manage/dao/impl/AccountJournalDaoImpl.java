@@ -36,11 +36,7 @@ public class AccountJournalDaoImpl extends BaseDaoImpl implements
 				MapUtils.getString(params, "inoutType"));
 		helper.append("and t.tradeType <> ?",
 				TradeType.INNER_WITHDRAW.getValue());
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		String gatherWay = MapUtils.getString(params, "gatherWay");
 		String gatherPeriod = MapUtils.getString(params, "gatherPeriod");
 		if (!StringUtils.isBlank(gatherPeriod)) {

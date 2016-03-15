@@ -39,13 +39,11 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 
 	public String toAdd() throws Exception {
 		initSelect(request);
-		//return forward("/pages/manage/house/houseInfoAdd.jsp");
 		return "add";
 	}
 
 	public String doAdd() throws Exception {
 		try {
-			
 			HouseInfo houseInfo = new HouseInfo();
 			BeanUtils.copyProperties(houseInfo, model);
 			houseInfoService.add(houseInfo, getSessionUser(request));
@@ -70,11 +68,14 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		map.put("buildingNo", model.getBuildingNo());
 		map.put("unitNo", model.getUnitNo());
 		map.put("floor", model.getFloor());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = houseInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		//return forward("/pages/manage/house/houseInfoList.jsp");
 		return "list";
 	}
 

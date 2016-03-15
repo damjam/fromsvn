@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
 
@@ -43,11 +41,7 @@ public class CarInfoDaoImpl extends BaseDaoImpl implements CarInfoDao {
 				MapUtils.getString(params, "ownerCel"));
 		helper.append("and brand = ?", MapUtils.getString(params, "brand"));
 		helper.append("and model = ?", MapUtils.getString(params, "model"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by createDate desc");
 		return super.getPageData(helper, pager);
 	}

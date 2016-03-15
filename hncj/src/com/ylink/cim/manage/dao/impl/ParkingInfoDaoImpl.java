@@ -38,11 +38,7 @@ public class ParkingInfoDaoImpl extends BaseDaoImpl implements ParkingInfoDao {
 		helper.append("and endUserCel = ?",
 				MapUtils.getString(params, "endUserCel"));
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		if (MapUtils.getBooleanValue(params, "avai")) {
 			helper.append("and sn not in (select parkingSn from CarInfo)");
 		}

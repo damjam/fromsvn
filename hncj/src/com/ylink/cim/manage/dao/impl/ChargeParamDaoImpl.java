@@ -47,17 +47,12 @@ public class ChargeParamDaoImpl extends BaseDaoImpl implements ChargeParamDao {
 				MapUtils.getString(params, "rangeCode"));
 		helper.append("and paramName like ?",
 				MapUtils.getString(params, "paramName"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getPageData(helper, pager);
 	}
 
 	@Override
 	protected Class getModelClass() {
-		// TODO Auto-generated method stub
 		return ChargeParam.class;
 	}
 

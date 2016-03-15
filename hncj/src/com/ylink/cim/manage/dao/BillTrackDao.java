@@ -1,4 +1,4 @@
-package com.ylink.cim.busioper.dao;
+package com.ylink.cim.manage.dao;
 
 import java.util.List;
 import java.util.Map;

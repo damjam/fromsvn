@@ -1,4 +1,4 @@
-package com.ylink.cim.busioper.dao.impl;
+package com.ylink.cim.manage.dao.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -6,9 +6,9 @@ import java.util.Map;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.busioper.dao.BillTrackDao;
 import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.common.type.BranchType;
+import com.ylink.cim.manage.dao.BillTrackDao;
 import com.ylink.cim.manage.domain.BillTrack;
 
 import flink.hibernate.BaseDaoImpl;
@@ -32,9 +32,7 @@ public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 			helper.append("and t.createTime <= ?",
 					DateUtil.string2Date(MapUtils.getString(map, "endCreateDate"), "yyyyMMdd"));
 		}
-		if (!BranchType.HQ_0000.getValue().equals(map.get("branchNo"))) {
-			helper.append("and t.branchNo = ?", map.get("branchNo"));
-		}
+		helper.append("and branchNo = ?", map.get("branchNo"));
 		helper.append("and houseSn = ?", MapUtils.getString(map, "houseSn"));
 		helper.append("and ownerCel = ?", MapUtils.getString(map, "ownerCel"));
 		helper.append("and ownerName = ?", MapUtils.getString(map, "ownerName"));
@@ -59,9 +57,7 @@ public class BillTrackDaoImpl extends BaseDaoImpl implements BillTrackDao {
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and billType = ?", MapUtils.getString(params, "billType"));
-		if (!BranchType.HQ_0000.getValue().equals(params.get("branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 

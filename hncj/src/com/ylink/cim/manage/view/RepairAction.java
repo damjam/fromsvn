@@ -48,9 +48,13 @@ public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 		map.put("startCreateDate", model.getStartCreateDate());
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("state", model.getState());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = repairDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
-		
 		return "list";
 	}
 	private void initSelect() {

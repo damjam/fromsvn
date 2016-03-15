@@ -37,13 +37,11 @@ public class ParkingInfoAction extends BaseAction implements
 		ParkingInfo parkingInfo = parkingInfoDao.findById(id);
 		BeanUtils.copyProperties(model, parkingInfo);
 		ParkingState.setInReq(request);
-		// return forward("/pages/manage/parking/parkingInfoEdit.jsp");
 		return "edit";
 	}
 
 	public String toAdd() throws Exception {
 		ParkingState.setInReq(request);
-		// return forward("/pages/manage/parking/parkingInfoAdd.jsp");
 		return "add";
 	}
 
@@ -101,7 +99,11 @@ public class ParkingInfoAction extends BaseAction implements
 		map.put("ownerCel", model.getOwnerCel());
 		map.put("endUser", model.getOwnerName());
 		map.put("endUserCel", model.getOwnerCel());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = parkingInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		return "list";

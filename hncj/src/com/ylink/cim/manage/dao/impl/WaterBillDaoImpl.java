@@ -40,11 +40,7 @@ public class WaterBillDaoImpl extends BaseDaoImpl implements WaterBillDao {
 		helper.append("from WaterBill where 1=1");
 		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
 		helper.append("and state in ?", (String[]) params.get("states"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id");
 		return super.getList(helper);
 	}
@@ -71,7 +67,6 @@ public class WaterBillDaoImpl extends BaseDaoImpl implements WaterBillDao {
 		addYearFilter(helper, MapUtils.getString(params, "year"));
 		helper.append("and houseSn like ?",
 				MapUtils.getString(params, "houseSn"), MatchMode.START);
-		// helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		helper.append("and branchNo = ?",
 				MapUtils.getString(params, "branchNo"));

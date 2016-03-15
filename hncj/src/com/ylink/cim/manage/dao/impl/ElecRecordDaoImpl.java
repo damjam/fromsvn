@@ -48,18 +48,14 @@ public class ElecRecordDaoImpl extends BaseDaoImpl implements ElecRecordDao {
 		helper.append("from ElecRecord where 1=1");
 		helper.append("and houseSn = ?", params.get("houseSn"));
 		helper.append("and recordMonth = ?", params.get("recordMonth"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 
 	@Override
 	public Paginater findRecordPager(Map<String, Object> params, Pager pager) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("from ElecRecord t where 1=1");
+		helper.append("from ElecRecord where 1=1");
 		if (StringUtils.isNotEmpty(MapUtils
 				.getString(params, "startCreateDate"))) {
 			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils
@@ -76,12 +72,8 @@ public class ElecRecordDaoImpl extends BaseDaoImpl implements ElecRecordDao {
 				MapUtils.getString(params, "endRecordDate"));
 		helper.append("and houseSn like ?",
 				MapUtils.getString(params, "houseSn"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
-		helper.append("order by t.createDate desc");
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("order by createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {
 			HouseInfoDao houseInfoDao = (HouseInfoDao) SpringContext

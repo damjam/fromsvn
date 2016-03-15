@@ -6,7 +6,6 @@ import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.dao.MaterialDao;
 import com.ylink.cim.manage.domain.Material;
 
@@ -23,15 +22,12 @@ public class MaterialDaoImpl extends BaseDaoImpl implements MaterialDao {
 	}
 
 	@Override
-	public Paginater findPaginater(Map<String, Object> map, UserInfo userInfo, Pager pager) {
+	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from Material where 1=1");
 		helper.append("and item like ?", MapUtils.getString(map, "item"), MatchMode.ANYWHERE);
 		helper.append("and state = ?", MapUtils.getString(map, "state"));
 		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
-		if (userInfo != null) {
-			helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
-		}
 		helper.append("and manager like ?", MapUtils.getString(map, "manager"), MatchMode.ANYWHERE);
 		return super.getPageData(helper, pager);
 	}

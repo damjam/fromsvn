@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.dao.WaterRecordDao;
 import com.ylink.cim.manage.domain.HouseInfo;
@@ -23,10 +22,6 @@ import flink.util.Paginater;
 import flink.util.SpringContext;
 @Repository("waterRecordDao")
 public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
-	protected static List getOrderedList(List list) {
-		
-		return list;
-	}
 	@Override
 	public WaterRecord findPreRecord(String houseSn) {
 		QueryHelper helper = new QueryHelper();
@@ -46,9 +41,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		helper.append("from WaterRecord where 1=1");
 		helper.append("and houseSn = ?", params.get("houseSn"));
 		helper.append("and recordMonth = ?", params.get("recordMonth"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 
@@ -57,9 +50,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		QueryHelper helper = new QueryHelper();
 		helper.append("from WaterRecord where 1=1");
 		helper.append("and state = ?", params.get("state"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		return super.getList(helper);
 	}
 
@@ -77,9 +68,7 @@ public class WaterRecordDaoImpl extends BaseDaoImpl implements WaterRecordDao{
 		helper.append("and curRecordDate >= ?", MapUtils.getString(params, "startRecordDate"));
 		helper.append("and curRecordDate <= ?", MapUtils.getString(params, "endRecordDate"));
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		Collections.sort(paginater.getList(), new java.util.Comparator() {

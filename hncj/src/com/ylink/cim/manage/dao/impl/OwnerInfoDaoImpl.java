@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.OwnerState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.domain.OwnerInfo;
 
@@ -29,11 +27,7 @@ public class OwnerInfoDaoImpl extends BaseDaoImpl implements OwnerInfoDao {
 				MapUtils.getString(params, "ownerName"), MatchMode.START);
 		helper.append("and t.houseSn like ?",
 				MapUtils.getString(params, "houseSn"), MatchMode.START);
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and t.branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.createDate desc");
 		return super.getPageData(helper, pager);
 	}

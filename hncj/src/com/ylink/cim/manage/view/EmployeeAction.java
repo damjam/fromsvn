@@ -50,8 +50,11 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("state", model.getState());
 		map.put("tel", model.getTel());
-		map.put("branchNo", model.getBranchNo());
-		map.put("userInfo", getSessionUser(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		map.put("position", model.getPosition());
 		Paginater paginater = employeeDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
@@ -197,10 +200,9 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 	public String loadPosts() throws Exception {
 		JSONObject object = new JSONObject();
 		try {
-			String branchNo = request.getParameter("branchNo");
 			JSONArray array = new JSONArray();
 			Map<String, String> positionMap = null;
-			if ("0000".equals(branchNo)) {
+			if (isHQ()) {
 				positionMap = ParaManager.getSysDict(SysDictType.CenterPostType.getValue());
 			}else {
 				positionMap = ParaManager.getSysDict(SysDictType.BranchPostType.getValue());

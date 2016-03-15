@@ -92,7 +92,11 @@ public class DepositBillAction extends BaseAction implements ModelDriven<Deposit
 		map.put("endRefundDate", model.getEndRefundDate());
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = depositBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = depositBillDao.findSumInfo(map);

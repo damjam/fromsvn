@@ -83,7 +83,11 @@ public class MerchantInfoAction extends BaseAction implements
 	public String list() throws Exception {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = merchantInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/merchant/merchantList.jsp");

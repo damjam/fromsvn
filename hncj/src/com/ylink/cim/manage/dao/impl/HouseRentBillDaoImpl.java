@@ -6,7 +6,6 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.HouseRentBillDao;
 import com.ylink.cim.manage.domain.HouseRentBill;
 
@@ -52,9 +51,7 @@ public class HouseRentBillDaoImpl extends BaseDaoImpl implements HouseRentBillDa
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
 			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endChargeDate")));
 		}
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
 		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);

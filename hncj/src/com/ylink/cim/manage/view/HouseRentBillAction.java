@@ -46,6 +46,11 @@ public class HouseRentBillAction extends BaseAction implements ModelDriven<House
 		map.put("endChargeDate", model.getEndChargeDate());
 		map.put("state", model.getState());
 		map.put("id", model.getId());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = houseRentBillDao.findPager(map, getPager(request));
 		for(int i=0; i<paginater.getList().size(); i++){
 			HouseRentBill bill = (HouseRentBill)paginater.getList().get(i);

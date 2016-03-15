@@ -6,12 +6,10 @@ import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.OwnerState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.domain.Account;
 
@@ -36,11 +34,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and ownerName = ?",
 				MapUtils.getString(params, "ownerName"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}

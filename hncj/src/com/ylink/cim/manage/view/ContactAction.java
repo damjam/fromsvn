@@ -79,7 +79,11 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		BillState.setInReq(request);
 		Map<String, Object> map = getParaMap();
 		map.put("contactName", model.getContactName());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		map.put("mobile", model.getMobile());
 		map.put("remark", model.getRemark());
 		Paginater paginater = contactDao.findPager(map, getPager(request));

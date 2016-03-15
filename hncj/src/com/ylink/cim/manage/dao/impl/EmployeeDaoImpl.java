@@ -4,10 +4,8 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
-import org.hibernate.type.OrderedSetType;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.dao.EmployeeDao;
 import com.ylink.cim.manage.domain.Employee;
 
@@ -36,10 +34,6 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao {
 		helper.append("and gender = ?", MapUtils.getString(map, "gender"));
 		helper.append("and position = ?", MapUtils.getString(map, "position"));
 		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
-		UserInfo userInfo = (UserInfo)map.get("userInfo");
-		if (!"0000".equals(userInfo.getBranchNo())) {
-			helper.append("and branchNo = ?", userInfo.getBranchNo());
-		}
 		helper.orderBy("id", "desc");
 		return super.getPageData(helper, pager);
 	}

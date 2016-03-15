@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.dao.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -23,7 +22,7 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 	@Override
 	public Paginater findBillPager(Map<String, Object> params, Pager pager){
 		QueryHelper helper = new QueryHelper();
-		helper.append("from GeneralBill t where 1=1");
+		helper.append("from GeneralBill where 1=1");
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startCreateDate"))) {
 			helper.append("and createDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startCreateDate")));
 		}
@@ -36,10 +35,8 @@ public class GeneralBillDaoImpl extends BaseDaoImpl implements GeneralBillDao{
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "endChargeDate"))) {
 			helper.append("and chargeDate <= ?", DateUtil.getDayEndByYYYMMDD(MapUtils.getString(params, "endCreateDate")));
 		}
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
-		helper.append("order by t.createDate desc");
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		helper.append("order by createDate desc");
 		Paginater paginater = super.getPageData(helper, pager);
 		return paginater;
 	}

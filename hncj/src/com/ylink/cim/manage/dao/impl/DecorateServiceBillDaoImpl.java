@@ -8,7 +8,6 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.domain.DecorateServiceBill;
 
@@ -33,9 +32,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by t.id desc");
 		return super.getPageData(helper, pager);
 	}
@@ -59,9 +56,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 		helper.append("and houseSn like ?", MapUtils.getString(params, "houseSn"), MatchMode.START);
 		helper.append("and state = ?", BillState.PAID.getValue());
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(), MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
 		if (sumInfo.get("sumAmt") == null) {
 			sumInfo.put("sumAmt", 0d);

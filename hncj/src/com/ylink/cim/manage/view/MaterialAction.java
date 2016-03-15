@@ -39,8 +39,7 @@ public class MaterialAction extends CRUDAction implements ModelDriven<Material> 
 	@Override
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		map.put("userInfo", getSessionUser(request));
-		Paginater paginater = materialDao.findPaginater(map, getSessionUser(request), getPager(request));
+		Paginater paginater = materialDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect();
 		return LIST;

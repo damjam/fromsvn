@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.ylink.cim.busioper.dao.BillTrackDao;
 import com.ylink.cim.busioper.service.BillTrackService;
 import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.common.type.BillType;
@@ -20,10 +19,10 @@ import com.ylink.cim.common.type.RemainDays;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.manage.dao.BillTrackDao;
 import com.ylink.cim.manage.domain.BillTrack;
 
 import flink.etc.BizException;
-import flink.util.LogUtils;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
@@ -43,7 +42,6 @@ public class BillTrackAction extends BaseAction implements
 
 	public String toAdd() throws Exception {
 		initSelect(request);
-		// return forward("/pages/manage/track/trackInfoAdd.jsp");
 		return "add";
 	}
 
@@ -68,21 +66,23 @@ public class BillTrackAction extends BaseAction implements
 
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-
 		map.put("houseSn", model.getHouseSn());
 		map.put("billId", model.getBillId());
 		map.put("ownerName", model.getOwnerName());
 		map.put("ownerCel", model.getOwnerCel());
 		map.put("billType", model.getBillType());
 		map.put("leftDays", model.getLeftDays());
-		map.put("branchNo", getSessionBranchNo(request));
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		map.put("billType", model.getBillType());
 		map.put("state", BillTrackState.VALID.getValue());
 		Paginater paginater = billTrackDao
 				.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect(request);
-		// return forward("/pages/manage/track/billTrackList.jsp");
 		return "list";
 	}
 
