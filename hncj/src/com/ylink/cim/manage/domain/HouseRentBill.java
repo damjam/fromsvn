@@ -1,6 +1,6 @@
 package com.ylink.cim.manage.domain;
 
-// default package
+
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import java.util.Date;
  * CommomServiceBillId domain. @author MyEclipse Persistence Tools
  */
 
-public class HouseRentBill implements java.io.Serializable {
+public class HouseRentBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -29,7 +29,6 @@ public class HouseRentBill implements java.io.Serializable {
 	private Date chargeDate;
 	private String chargeUser;
 	private String remark;
-	private String branchNo;
 	private String startChargeDate;
 	private String endChargeDate;
 	private String checkUser;
@@ -38,16 +37,7 @@ public class HouseRentBill implements java.io.Serializable {
 	private String tel;
 	private String merchantNo;
 	private String merchantName;
-	private String branchName;
 	
-	
-	public String getBranchName() {
-		return branchName;
-	}
-
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
 
 	public String getMerchantName() {
 		return merchantName;
@@ -137,14 +127,6 @@ public class HouseRentBill implements java.io.Serializable {
 
 	public void setEndChargeDate(String endChargeDate) {
 		this.endChargeDate = endChargeDate;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Property accessors

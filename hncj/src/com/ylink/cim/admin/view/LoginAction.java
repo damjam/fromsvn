@@ -171,6 +171,7 @@ public class LoginAction extends BaseAction implements ModelDriven<UserInfo> {
 			String tag = request.getParameter("tag");
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_TAG, tag);
 			WebUtils.setSessionAttribute(request, Constants.BRANCH_NO, userInfo.getBranchNo());
+			WebUtils.setSessionAttribute(request, "branchNo", userInfo.getBranchNo());
 			CookieDealer.saveBranch(userInfo.getBranchNo(), response);
 			CPSHttpSessionListener.putSession(userInfo.getUserId(),
 					request.getSession());

@@ -1,15 +1,18 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
 /**
- * CommomServiceBillId domain. @author MyEclipse Persistence Tools
+ * CommomServiceBill domain. @author MyEclipse Persistence Tools
  */
 
-public class CommonServiceBill implements java.io.Serializable {
+public class CommonServiceBill extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -31,7 +34,6 @@ public class CommonServiceBill implements java.io.Serializable {
 	private Date chargeDate;
 	private String chargeUser;
 	private String remark;
-	private String branchNo;
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
@@ -58,14 +60,6 @@ public class CommonServiceBill implements java.io.Serializable {
 
 	public void setEndChargeDate(String endChargeDate) {
 		this.endChargeDate = endChargeDate;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Property accessors

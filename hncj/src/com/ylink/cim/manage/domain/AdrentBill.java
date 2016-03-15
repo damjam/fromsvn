@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 

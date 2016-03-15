@@ -7,7 +7,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.ylink.cim.common.util.ParaManager;
 
-public class Employee implements Serializable{
+public class Employee extends BranchField implements Serializable{
 
 	/**
 	 * 
@@ -31,7 +31,6 @@ public class Employee implements Serializable{
 	private String review;
 	private Date createDate;
 	private String createUser;
-	private String branchNo;
 	private String transfer;
 	private String state;
 	private Date updateDate;
@@ -194,12 +193,6 @@ public class Employee implements Serializable{
 	}
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
-	}
-	public String getBranchNo() {
-		return branchNo;
-	}
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 	
 	public String getTransfer() {

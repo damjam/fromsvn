@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -8,7 +7,7 @@ import java.util.Date;
  * DepositBillId domain. @author MyEclipse Persistence Tools
  */
 
-public class DepositBill implements java.io.Serializable {
+public class DepositBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -29,7 +28,6 @@ public class DepositBill implements java.io.Serializable {
 	private String purpose;
 	private String payerName;
 	private String remark;
-	private String branchNo;
 	private String startDepositDate;
 	private String endDepositDate;
 	private String startRefundDate;
@@ -83,14 +81,6 @@ public class DepositBill implements java.io.Serializable {
 
 	public void setYear(String year) {
 		this.year = year;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Constructors

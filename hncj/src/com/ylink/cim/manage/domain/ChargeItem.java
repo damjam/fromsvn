@@ -1,5 +1,5 @@
 package com.ylink.cim.manage.domain;
-// default package
+
 
 import java.util.Date;
 
@@ -7,8 +7,12 @@ import java.util.Date;
  * ChargeItem entity. @author MyEclipse Persistence Tools
  */
 
-public class ChargeItem implements java.io.Serializable {
+public class ChargeItem extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -23,7 +27,6 @@ public class ChargeItem implements java.io.Serializable {
 	private Date createDate;
 	private Date updateDate;
 	private String updateUser;
-	private String branchNo;
 	private String remark;
 	private String ruleDesc;
 	private String itemName;
@@ -158,14 +161,6 @@ public class ChargeItem implements java.io.Serializable {
 
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
-	}
-
-	public String getBranchNo() {
-		return this.branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public String getRemark() {

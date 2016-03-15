@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Repair implements Serializable{
+public class Repair extends BranchField implements Serializable{
 
 	/**
 	 * 
@@ -21,7 +21,6 @@ public class Repair implements Serializable{
 	private String remark;
 	private Date createDate;
 	private String createUser;
-	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
 	private String feedback;
@@ -145,12 +144,6 @@ public class Repair implements Serializable{
 	}
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
-	}
-	public String getBranchNo() {
-		return branchNo;
-	}
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 	
 }

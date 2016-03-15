@@ -75,7 +75,8 @@ public class ParkingBillAction extends BaseAction implements
 		map.put("parkingSn", model.getParkingSn());
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
-		map.put("branchNo", getSessionBranchNo(request));
+		map.put("branchNo", model.getBranchNo());
+		map.put("sessionBranchNo", getSessionBranchNo(request));
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		Map<String, Object> sumInfo = parkingBillDao.findSumInfo(map);

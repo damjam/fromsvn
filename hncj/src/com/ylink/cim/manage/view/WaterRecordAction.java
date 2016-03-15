@@ -111,15 +111,16 @@ public class WaterRecordAction extends BaseAction implements
 			String recordMonth = model.getRecordMonth();
 			String preRecordDate = model.getPreRecordDate();
 			String curRecordDate = model.getCurRecordDate();
+			String fileName = model.getFileName();
+			if (!fileName.toLowerCase().endsWith(".xls") && !fileName.toLowerCase().endsWith(".xlsx")) {
+				throw new Exception("文件格式不正确");
+			}
 			InputStream is = new FileInputStream(model.getFileName());
 			Workbook book = null;
-			String fileName = model.getFileName();
 			if (fileName.toLowerCase().endsWith(".xls")) {
 				book = WorkbookFactory.create(is);
 			} else if (fileName.toLowerCase().endsWith(".xlsx")) {
 				book = new XSSFWorkbook(is);
-			} else {
-				throw new Exception("文件格式不正确");
 			}
 			// book = WorkbookFactory.create(is);
 			// book = new XSSFWorkbook(is);
@@ -143,8 +144,6 @@ public class WaterRecordAction extends BaseAction implements
 						if (StringUtils.isEmpty(houseSn)) {
 							throw new Exception("房屋编号为空");
 						}
-						houseSn = StringUtils.trimToEmpty(houseSn.replace(
-								"盛世浩苑", ""));
 						HouseInfo houseInfo = houseInfoDao.findById(
 								HouseInfo.class, houseSn);
 						Assert.notNull(houseInfo, "房屋编号" + houseSn + "不存在");

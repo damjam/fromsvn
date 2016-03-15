@@ -117,6 +117,12 @@
 								<s:textfield name="year" id="year" onclick="WdatePicker({dateFmt:'yyyy'})"/>
 							</td>
 						</tr>
+						<c:if test="${sessionScope.branchNo eq '0000'}">
+							<td class="formlabel">机构</td>
+							<td>
+								<s:select list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+							</td>
+						</c:if>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -162,6 +168,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.branchNo eq '0000'}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >账单号</td>
 						 	<td >房屋编号</td>
 						 	<td >业主姓名</td>
@@ -182,6 +191,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.branchNo eq '0000'}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.id}</td>
 								<td>${element.houseSn}</td>
 								<td>${element.ownerName}</td>

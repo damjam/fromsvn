@@ -6,8 +6,12 @@ import java.util.Date;
  * GeneralBill domain. @author MyEclipse Persistence Tools
  */
 
-public class GeneralBill implements java.io.Serializable {
+public class GeneralBill extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -23,17 +27,12 @@ public class GeneralBill implements java.io.Serializable {
 	private String state;
 	private String remark;
 	private String payerName;
-	private String branchNo;
 	private String startChargeDate;
 	private String endChargeDate;
 	private String keyword;
 
 	/** default constructor */
 	public GeneralBill() {
-	}
-
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public Date getChargeDate() {
@@ -102,11 +101,6 @@ public class GeneralBill implements java.io.Serializable {
 		return this.unitPrice;
 	}
 
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-
-	// Constructors
 
 	public void setChargeDate(Date chargeDate) {
 		this.chargeDate = chargeDate;

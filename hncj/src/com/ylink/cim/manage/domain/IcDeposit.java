@@ -2,16 +2,20 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-// default package
+
 
 /**
  * ElecPrestore domain. @author MyEclipse Persistence Tools
  */
 
-public class IcDeposit implements java.io.Serializable {
+public class IcDeposit extends BranchField implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private Double amount;
 	private String houseSn;
@@ -24,7 +28,6 @@ public class IcDeposit implements java.io.Serializable {
 	private String payType;
 	private String state;
 	private String cardType;
-	private String branchNo;
 	private String remark;
 	//
 	private String startChargeDate;
@@ -71,11 +74,6 @@ public class IcDeposit implements java.io.Serializable {
 		return this.amount;
 	}
 
-	// Constructors
-
-	public String getBranchNo() {
-		return branchNo;
-	}
 
 	public String getCardType() {
 		return cardType;
@@ -121,10 +119,6 @@ public class IcDeposit implements java.io.Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public void setCardType(String cardType) {

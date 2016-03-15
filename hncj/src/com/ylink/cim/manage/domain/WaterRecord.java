@@ -1,5 +1,5 @@
 package com.ylink.cim.manage.domain;
-// default package
+
 
 import java.util.Date;
 
@@ -7,8 +7,12 @@ import java.util.Date;
  * WaterRecordId domain. @author MyEclipse Persistence Tools
  */
 
-public class WaterRecord implements java.io.Serializable {
+public class WaterRecord extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -66,19 +70,6 @@ public class WaterRecord implements java.io.Serializable {
 	public void setEndCreateDate(String endCreateDate) {
 		this.endCreateDate = endCreateDate;
 	}
-
-	private String branchNo;
-	
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-	/** default constructor */
 	public WaterRecord() {
 	}
 
@@ -87,7 +78,6 @@ public class WaterRecord implements java.io.Serializable {
 	public String getRemark() {
 		return remark;
 	}
-
 
 
 	public void setRemark(String remark) {
@@ -101,11 +91,9 @@ public class WaterRecord implements java.io.Serializable {
 	}
 
 
-
 	public void setRecordMonth(String recordMonth) {
 		this.recordMonth = recordMonth;
 	}
-
 
 
 	/** minimal constructor */

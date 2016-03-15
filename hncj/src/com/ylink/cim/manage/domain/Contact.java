@@ -2,13 +2,12 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-// default package
 
 /**
  * Contact domain. @author MyEclipse Persistence Tools
  */
 
-public class Contact implements java.io.Serializable {
+public class Contact extends BranchField implements java.io.Serializable {
 
 	/**
 	 * 
@@ -25,7 +24,6 @@ public class Contact implements java.io.Serializable {
 	private String remark;
 	private String sex;
 	private String idCard;
-	private String branchNo;
 	private String industry;
 	private String merchantName;
 	private String keyword;
@@ -53,16 +51,6 @@ public class Contact implements java.io.Serializable {
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-
-	// Constructors
 
 	/** default constructor */
 	public Contact() {

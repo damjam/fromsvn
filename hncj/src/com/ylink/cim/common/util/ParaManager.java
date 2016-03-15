@@ -61,7 +61,7 @@ public abstract class ParaManager {
 
 		return paraMap.get(key);
 	}
-	private static String getBranchPara(final String branchNo, final String key) {
+	public static String getBranchPara(final String branchNo, final String key) {
 		if (branchParaMap.size() == 0) {
 			init();
 		}

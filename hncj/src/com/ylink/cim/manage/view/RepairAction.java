@@ -28,9 +28,6 @@ import flink.web.BaseAction;
 @Component
 public class RepairAction extends BaseAction implements ModelDriven<Repair> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private RepairService repairService;

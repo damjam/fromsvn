@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseRentBillDao;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.domain.HouseRentBill;
@@ -50,11 +49,6 @@ public class HouseRentBillAction extends BaseAction implements ModelDriven<House
 		Paginater paginater = houseRentBillDao.findPager(map, getPager(request));
 		for(int i=0; i<paginater.getList().size(); i++){
 			HouseRentBill bill = (HouseRentBill)paginater.getList().get(i);
-			String branchNo = bill.getBranchNo();
-			if (StringUtils.isNotEmpty(branchNo)) {
-				String branchName = ParaManager.getBranches(true).get(branchNo);
-				bill.setBranchName(branchName);
-			}
 			String merchantNo = bill.getMerchantNo();
 			if (StringUtils.isNotEmpty(merchantNo)) {
 				MerchantInfo merchantInfo = merchantInfoDao.findById(merchantNo);

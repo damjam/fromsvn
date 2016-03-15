@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -12,6 +11,10 @@ public class AccountDetail implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String type;
 	private String acctNo;

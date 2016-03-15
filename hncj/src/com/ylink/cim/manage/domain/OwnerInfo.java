@@ -7,8 +7,12 @@ import java.util.Date;
  * OwnerInfoId domain. @author MyEclipse Persistence Tools
  */
 
-public class OwnerInfo implements java.io.Serializable {
+public class OwnerInfo extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;

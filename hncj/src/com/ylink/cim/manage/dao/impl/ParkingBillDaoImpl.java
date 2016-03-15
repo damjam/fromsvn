@@ -44,10 +44,11 @@ public class ParkingBillDaoImpl extends BaseDaoImpl implements ParkingBillDao {
 		helper.append("and carSn = ?", MapUtils.getString(params, "carSn"));
 		helper.append("and state = ?", MapUtils.getString(params, "state"));
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
+		if (StringUtils.equals(BranchType.HQ_0000.getValue(),
+				MapUtils.getString(params, "sessionBranchNo"))) {//总部
+			helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		}else {
+			helper.append("and branchNo = ?", MapUtils.getString(params, "sessionBranchNo"));//session取值
 		}
 		helper.append("order by t.createDate desc");
 		return super.getPageData(helper, pager);

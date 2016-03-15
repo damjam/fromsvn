@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -8,9 +7,14 @@ import java.util.Date;
  * AccountId domain. @author MyEclipse Persistence Tools
  */
 
-public class InnerAcct implements java.io.Serializable {
+public class InnerAcct extends BranchField implements java.io.Serializable {
 
 	// Fields
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 
@@ -21,15 +25,6 @@ public class InnerAcct implements java.io.Serializable {
 	private Long inTimes;
 	private Long outTimes;
 	private Long times;
-	private String branchNo;
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
 
 	public Long getInTimes() {
 		return inTimes;

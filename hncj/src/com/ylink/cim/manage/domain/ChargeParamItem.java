@@ -1,12 +1,12 @@
 package com.ylink.cim.manage.domain;
 
-// default package
+import java.io.Serializable;
 
 /**
  * ChargeParamItem entity. @author MyEclipse Persistence Tools
  */
 
-public class ChargeParamItem {
+public class ChargeParamItem implements Serializable {
 
 	/**
 	 * 

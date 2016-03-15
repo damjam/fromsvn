@@ -2,14 +2,17 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-// default package
 
 /**
  * MerchantInfo domain. @author MyEclipse Persistence Tools
  */
 
-public class MerchantInfo implements java.io.Serializable {
+public class MerchantInfo extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;

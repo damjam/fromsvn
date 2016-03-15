@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -8,8 +7,12 @@ import java.util.Date;
  * DecorateServiceBillId domain. @author MyEclipse Persistence Tools
  */
 
-public class DecorateServiceBill implements java.io.Serializable {
+public class DecorateServiceBill extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -28,7 +31,6 @@ public class DecorateServiceBill implements java.io.Serializable {
 	private String ownerName;
 	private Double supFee;
 	private String csBillId;
-	private String branchNo;
 
 	private String startChargeDate;
 	private String endChargeDate;
@@ -56,14 +58,6 @@ public class DecorateServiceBill implements java.io.Serializable {
 
 	public void setEndChargeDate(String endChargeDate) {
 		this.endChargeDate = endChargeDate;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Constructors

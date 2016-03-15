@@ -67,7 +67,7 @@
 								<s:textfield name="endChargeDate" id="endChargeDate" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 							
-							<td class="formlabel nes">状态</td>
+							<td class="formlabel">状态</td>
 						    <td>
 						    <s:select name="state" id="state" list="#request.billStates" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 						    </td>
@@ -77,7 +77,13 @@
 							<td>
 								<s:textfield name="id" id="id" maxlength="20"/>
 							</td>
-						</tr>	
+						</tr>
+						<c:if test="${sessionScope.branchNo eq '0000'}">
+							<td class="formlabel">机构</td>
+							<td>
+								<s:select list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+							</td>
+						</c:if>	
 						<tr>
 						    <td></td>
 							<td colspan="5">
@@ -112,6 +118,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<c:if test="${sessionScope.branchNo eq '0000'}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td >账单号</td>
 						    <td >商家名称</td>
 						    <td >租用位置</td>
@@ -131,6 +140,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<c:if test="${sessionScope.branchNo eq '0000'}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.id}</td>
 								<td>${element.merchantName}</td>
 								<td>${element.position}</td>
@@ -147,7 +159,7 @@
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>
-								<td>${element.remark}${element.branchName}</td>
+								<td>${element.remark}</td>
 								<td class="redlink">
 							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>

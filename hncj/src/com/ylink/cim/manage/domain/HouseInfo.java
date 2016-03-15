@@ -6,7 +6,7 @@ import java.util.Date;
  * HouseInfo domain. @author MyEclipse Persistence Tools
  */
 
-public class HouseInfo implements java.io.Serializable {
+public class HouseInfo extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -26,7 +26,6 @@ public class HouseInfo implements java.io.Serializable {
 	private Date createDate;
 	private String houseDesc;
 	private String remark;
-	private String branchNo;
 	private String orderSn;
 	private String decorateState;
 	
@@ -44,10 +43,6 @@ public class HouseInfo implements java.io.Serializable {
 
 	public Double getArea() {
 		return area;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public String getBuildingNo() {
@@ -102,10 +97,6 @@ public class HouseInfo implements java.io.Serializable {
 
 	public void setArea(Double area) {
 		this.area = area;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Constructors

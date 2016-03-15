@@ -5,14 +5,10 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.IOUtils;
@@ -31,6 +27,7 @@ import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.SysLogService;
 import com.ylink.cim.admin.service.UserLogService;
+import com.ylink.cim.common.util.ParaManager;
 
 import flink.consant.ActionConstant;
 import flink.consant.Constants;
@@ -41,6 +38,8 @@ import flink.util.Pager;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 import flink.util.WebResource;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public abstract class BaseAction extends RootAction {
 
@@ -565,7 +564,6 @@ public abstract class BaseAction extends RootAction {
 	 * null) { map = new HashMap<String, ActionForm>(); } map.put("formName",
 	 * form); }
 	 */
-	@SuppressWarnings("unchecked")
 	protected void setBackUrl(HttpServletRequest request) {
 		String url = request.getRequestURI();
 		url = url.substring(request.getContextPath().length());
@@ -573,11 +571,9 @@ public abstract class BaseAction extends RootAction {
 			return;
 		}
 		request.getSession().setAttribute("backUrl", url);
-		Map paraMap = request.getParameterMap();
+		Map<String, String[]> paraMap = request.getParameterMap();
 		JSONObject json = new JSONObject();
-		for (Iterator iterator = paraMap.entrySet().iterator(); iterator
-				.hasNext();) {
-			Map.Entry entry = (Map.Entry) iterator.next();
+		for (Map.Entry<String, String[]> entry : paraMap.entrySet()) {
 			String key = (String) entry.getKey();
 			if (StringUtils.isEmpty(key) || "updateSymbol".equals(key)
 					|| "msg".equals(key)) {
@@ -622,5 +618,10 @@ public abstract class BaseAction extends RootAction {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
+	public Map<String, String> getBranches(){
+		return ParaManager.getBranches(false);
+	}
+	public Map<String, String> getAllBranches(){
+		return ParaManager.getBranches(true);
+	}
 }

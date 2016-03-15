@@ -2,13 +2,13 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
-// default package
+
 
 /**
  * WaterBillId domain. @author MyEclipse Persistence Tools
  */
 
-public class WaterBill implements java.io.Serializable {
+public class WaterBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -35,7 +35,6 @@ public class WaterBill implements java.io.Serializable {
 	private String remark;
 	private Double balance;
 	private Double paidAmt;
-	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
 	private String buildingNo;
@@ -93,10 +92,6 @@ public class WaterBill implements java.io.Serializable {
 			balance = 0d;
 		}
 		return balance;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public Date getChargeDate() {
@@ -179,12 +174,6 @@ public class WaterBill implements java.io.Serializable {
 	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
-
-	// Constructors
 
 	public void setChargeDate(Date chargeDate) {
 		this.chargeDate = chargeDate;

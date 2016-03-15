@@ -1,6 +1,6 @@
 package com.ylink.cim.manage.domain;
 
-// default package
+
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import java.util.Date;
  * ParkingBillId domain. @author MyEclipse Persistence Tools
  */
 
-public class ParkingBill implements java.io.Serializable {
+public class ParkingBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -42,16 +42,6 @@ public class ParkingBill implements java.io.Serializable {
 
 	public void setYear(String year) {
 		this.year = year;
-	}
-
-	private String branchNo;
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public String getRemark() {

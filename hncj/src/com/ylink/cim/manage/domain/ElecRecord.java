@@ -7,7 +7,7 @@ import java.util.Date;
  * ElecRecord domain. @author MyEclipse Persistence Tools
  */
 
-public class ElecRecord implements java.io.Serializable {
+public class ElecRecord extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -29,7 +29,6 @@ public class ElecRecord implements java.io.Serializable {
 	private String checkUser;
 	private String recordMonth;
 	private String remark;
-	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
 	private String fileName;
@@ -45,9 +44,6 @@ public class ElecRecord implements java.io.Serializable {
 
 	/** default constructor */
 	public ElecRecord() {
-	}
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public Date getCheckDate() {
@@ -120,10 +116,6 @@ public class ElecRecord implements java.io.Serializable {
 
 	public String getState() {
 		return this.state;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public void setCheckDate(Date checkDate) {

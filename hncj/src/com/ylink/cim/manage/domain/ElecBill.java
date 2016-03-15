@@ -6,7 +6,7 @@ import java.util.Date;
  * ElecBill domain. @author MyEclipse Persistence Tools
  */
 
-public class ElecBill implements java.io.Serializable {
+public class ElecBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
@@ -32,7 +32,6 @@ public class ElecBill implements java.io.Serializable {
 	private Double price;
 	private String remark;
 	private String ownerName;
-	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
 	private String startChargeDate;
@@ -44,35 +43,9 @@ public class ElecBill implements java.io.Serializable {
 	public ElecBill() {
 	}
 
-	/** full constructor */
-	public ElecBill(String id, String houseSn, Integer prenum, Integer curnum,
-			Integer num, Double amount, Double paidAmt, String state,
-			String preRecordDate, String curRecordDate, String createUser,
-			Date createDate, Date chargeDate, String chargeUser,
-			String recordMonth) {
-		this.id = id;
-		this.houseSn = houseSn;
-		this.prenum = prenum;
-		this.curnum = curnum;
-		this.num = num;
-		this.amount = amount;
-		this.paidAmt = paidAmt;
-		this.state = state;
-		this.preRecordDate = preRecordDate;
-		this.curRecordDate = curRecordDate;
-		this.createUser = createUser;
-		this.createDate = createDate;
-		this.chargeDate = chargeDate;
-		this.chargeUser = chargeUser;
-		this.recordMonth = recordMonth;
-	}
 
 	public Double getAmount() {
 		return this.amount;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public String getBuildingNo() {
@@ -171,10 +144,6 @@ public class ElecBill implements java.io.Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	// Constructors

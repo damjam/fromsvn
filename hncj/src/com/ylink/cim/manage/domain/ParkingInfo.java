@@ -1,6 +1,6 @@
 package com.ylink.cim.manage.domain;
 
-// default package
+
 
 import java.util.Date;
 
@@ -8,10 +8,14 @@ import java.util.Date;
  * ParkingInfo domain. @author MyEclipse Persistence Tools
  */
 
-public class ParkingInfo implements java.io.Serializable {
+public class ParkingInfo extends BranchField implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String sn;
 	private String state;
@@ -25,7 +29,6 @@ public class ParkingInfo implements java.io.Serializable {
 	private String ownerCel;
 	private String endUser;
 	private String endUserCel;
-	private String branchNo;
 	private String houseSn;
 
 	// Constructors
@@ -34,9 +37,6 @@ public class ParkingInfo implements java.io.Serializable {
 	public ParkingInfo() {
 	}
 
-	public String getBranchNo() {
-		return branchNo;
-	}
 
 	public String getCarSn() {
 		return this.carSn;
@@ -96,9 +96,6 @@ public class ParkingInfo implements java.io.Serializable {
 		return this.updateUser;
 	}
 
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
 
 	public void setCarSn(String carSn) {
 		this.carSn = carSn;

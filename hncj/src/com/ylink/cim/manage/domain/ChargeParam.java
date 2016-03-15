@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -8,13 +7,16 @@ import java.util.Date;
  * ChargeParam entity. @author MyEclipse Persistence Tools
  */
 
-public class ChargeParam implements java.io.Serializable {
+public class ChargeParam extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
 	private String remark;
-	private String branchNo;
 	private String rangeCode;
 	private String chargeObj;
 	private String paramName;
@@ -74,14 +76,6 @@ public class ChargeParam implements java.io.Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public String getBranchNo() {
-		return this.branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public String getRangeCode() {

@@ -102,17 +102,15 @@ public class ElecRecordAction extends BaseAction implements
 		} catch (Exception e) {
 			setResult(false, "±£´æÊ§°Ü" + e.getMessage(), request);
 		}
-		// return forward("/pages/manage/meter/elec/elecRecordAdd.jsp");
 		return "add";
 	}
 
 	public String doImport() throws Exception {
+		InputStream is = new FileInputStream(model.getFile());
 		try {
-
 			String recordMonth = model.getRecordMonth();
 			String preRecordDate = model.getPreRecordDate();
 			String curRecordDate = model.getCurRecordDate();
-			InputStream is = new FileInputStream(model.getFile());
 			Workbook book = null;
 			String fileName = model.getFileName();
 			if (fileName.toLowerCase().endsWith(".xls")) {
@@ -183,6 +181,8 @@ public class ElecRecordAction extends BaseAction implements
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResult(false, "²Ù×÷Ê§°Ü:" + e.getMessage(), request);
+		}finally {
+			IOUtils.closeQuietly(is);
 		}
 		// return forward("/pages/manage/meter/elec/elecRecordImport.jsp");
 		return "import";
