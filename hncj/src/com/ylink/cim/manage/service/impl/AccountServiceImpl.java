@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
 		Account account = accountDao.findByIdWithLock(no);
 		for (int i = 0; i < bills.size(); i++) {
 			WaterBill bill = bills.get(i);
-			waterBillDao.lock(bill, LockMode.UPGRADE);
+			waterBillDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Double debtAmt = bill.getAmount() - bill.getPaidAmt();
 			if (account.getBalance() >= debtAmt) {
 				bill.setState(BillState.PAID.getValue());

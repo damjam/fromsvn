@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Material implements Serializable{
+public class Material extends BranchField implements Serializable{
 
 	/**
 	 * 
@@ -17,7 +17,6 @@ public class Material implements Serializable{
 	private String remark;
 	private String manager;
 	private String state;
-	private String branchNo;
 	private String createUser;
 	private Date createDate;
 	private String buyDate;
@@ -82,12 +81,7 @@ public class Material implements Serializable{
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getBranchNo() {
-		return branchNo;
-	}
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
+	
 	public String getCreateUser() {
 		return createUser;
 	}

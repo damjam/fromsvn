@@ -8,10 +8,14 @@ import java.util.Date;
  * AdRent domain. @author MyEclipse Persistence Tools
  */
 
-public class AdrentBill implements java.io.Serializable {
+public class AdrentBill extends BranchField implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String beginDate;
 	private String endDate;
@@ -25,7 +29,6 @@ public class AdrentBill implements java.io.Serializable {
 	private Double paidAmt;
 	private String state;
 	private String merchantName;
-	private String branchNo;
 	private String payerName;
 	private String remark;
 	private Double unitPrice;
@@ -40,9 +43,6 @@ public class AdrentBill implements java.io.Serializable {
 		return this.beginDate;
 	}
 
-	public String getBranchNo() {
-		return branchNo;
-	}
 
 	public Date getChargeDate() {
 		return chargeDate;
@@ -118,10 +118,6 @@ public class AdrentBill implements java.io.Serializable {
 
 	public void setBeginDate(String beginDate) {
 		this.beginDate = beginDate;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public void setChargeDate(Date chargeDate) {

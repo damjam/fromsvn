@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-// default package
 
 import java.util.Date;
 
@@ -8,8 +7,12 @@ import java.util.Date;
  * AccountId domain. @author MyEclipse Persistence Tools
  */
 
-public class Account implements java.io.Serializable {
+public class Account extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 	private String id;
 	private String ownerName;
@@ -21,7 +24,6 @@ public class Account implements java.io.Serializable {
 	private Date createDate;
 	private String state;
 	private String houseSn;
-	private String branchNo;
 	private String startCreateDate;
 	private String endCreateDate;
 	private String acctNo;
@@ -43,10 +45,6 @@ public class Account implements java.io.Serializable {
 
 	public Double getBalance() {
 		return this.balance;
-	}
-
-	public String getBranchNo() {
-		return branchNo;
 	}
 
 	public Date getCreateDate() {
@@ -113,10 +111,6 @@ public class Account implements java.io.Serializable {
 
 	public void setBalance(Double balance) {
 		this.balance = balance;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
 	}
 
 	public void setCreateDate(Date createDate) {

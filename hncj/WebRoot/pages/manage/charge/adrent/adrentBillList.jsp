@@ -139,7 +139,7 @@
 								<td>${element.beginDate}-${element.endDate}</td>
 								<td><fmt:formatNumber value="${element.totalAmt}" pattern="##0.00"/></td>
 								<td>
-										<fmt:formatNumber value="${element.paidAmt}" pattern="##0.00"/>
+									<fmt:formatNumber value="${element.paidAmt}" pattern="##0.00"/>
 								</td>
 								<td>${element.payerName}</td>
 								<td><fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
@@ -147,7 +147,7 @@
 								<td>
 							    	<f:state className="BillState" value="${element.state}" />
 							    </td>
-								<td>${element.remark}</td>
+								<td>${element.remark}${element.branchName}</td>
 								<td class="redlink">
 							    	<c:if test="${element.state eq '00'}">
 							    		<a href="javascript:charge('${element.id}')">收费</a>

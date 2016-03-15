@@ -61,8 +61,8 @@ public class WaterRecordServiceImpl implements WaterRecordService {
 		waterRecord.setCreateDate(DateUtil.getCurrent());
 		waterRecord.setCreateUser(userInfo.getUserName());
 		waterRecord.setState(RecordState.UNCHECK.getValue());
+		waterRecord.setBranchNo(userInfo.getBranchNo());
 		waterRecordDao.save(waterRecord);
-
 	}
 
 	@Override

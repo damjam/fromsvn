@@ -46,7 +46,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 		Date now = DateUtil.getCurrent();
 		for (int i = 0; i < list.size(); i++) {
 			BillTrack track = list.get(i);
-			billTrackDao.lock(track, LockMode.UPGRADE);
+			billTrackDao.lock(track, LockMode.OPTIMISTIC);
 			String expireDate = track.getExpireDate();
 			if (StringUtils.isEmpty(expireDate)) {
 				continue;
@@ -120,7 +120,7 @@ public class BillTrackServiceImpl implements BillTrackService {
 	public void sendNotice(String id) throws BizException {
 		// ·¢ËÍ¶ÌÐÅ
 		BillTrack track = billTrackDao.findById(id);
-		billTrackDao.lock(track, LockMode.UPGRADE);
+		billTrackDao.lock(track, LockMode.PESSIMISTIC_WRITE);
 		String cel = track.getOwnerCel();
 		String content = MsgUtils.r(Constants.SERVICE_BILL_DUE_MSG,
 				track.getExpireDate());

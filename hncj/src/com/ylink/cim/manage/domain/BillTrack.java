@@ -8,8 +8,12 @@ import java.util.Date;
  * BillTrack entity. @author MyEclipse Persistence Tools
  */
 
-public class BillTrack implements java.io.Serializable {
+public class BillTrack extends BranchField implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Fields
 
 	private String id;
@@ -26,17 +30,7 @@ public class BillTrack implements java.io.Serializable {
 	private Integer overDays;
 	private String houseSn;
 	private String billId;
-	private String branchNo;
 
-	// Constructors
-
-	public String getBranchNo() {
-		return branchNo;
-	}
-
-	public void setBranchNo(String branchNo) {
-		this.branchNo = branchNo;
-	}
 
 	public String getBillId() {
 		return billId;

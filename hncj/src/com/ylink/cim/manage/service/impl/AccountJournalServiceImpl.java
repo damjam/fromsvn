@@ -39,7 +39,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			String remark, UserInfo userInfo) throws BizException {
 		InnerAcct innerAcct = accountJournalDao.findById(InnerAcct.class,
 				Constants.INNER_ACCTID);
-		accountJournalDao.lock(innerAcct, LockMode.UPGRADE);
+		accountJournalDao.lock(innerAcct, LockMode.PESSIMISTIC_WRITE);
 		Double prebalance = innerAcct.getBalance();
 		innerAcct.setUpdateDate(DateUtil.getCurrent());
 		innerAcct.setBalance(AmountUtils.add(innerAcct.getBalance(), amount));
@@ -55,7 +55,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			String remark, UserInfo userInfo) throws BizException {
 		InnerAcct innerAcct = accountJournalDao.findById(InnerAcct.class,
 				Constants.INNER_ACCTID);
-		accountJournalDao.lock(innerAcct, LockMode.UPGRADE);
+		accountJournalDao.lock(innerAcct, LockMode.PESSIMISTIC_WRITE);
 		Double prebalance = innerAcct.getBalance();
 		if (prebalance < amount) {
 			throw new BizException("余额不足");
@@ -96,7 +96,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			DecorateServiceBill bill = accountJournalDao.findById(
 					DecorateServiceBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.UPGRADE);
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
 					"只有已缴状态的账单才能冲正!");
 			amount = bill.getAmount();
@@ -106,7 +106,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			CommonServiceBill bill = accountJournalDao.findById(
 					CommonServiceBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.UPGRADE);
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
 					"只有已缴状态的账单才能冲正!");
 			amount = bill.getTotalAmount();
@@ -116,7 +116,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			ParkingBill bill = accountJournalDao.findById(ParkingBill.class,
 					billId);
 			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.UPGRADE);
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
 					"只有已缴状态的账单才能冲正!");
 			amount = bill.getAmount();
@@ -126,7 +126,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			DepositBill bill = accountJournalDao.findById(DepositBill.class,
 					billId);
 			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.UPGRADE);
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
 					"只有已缴状态的账单才能冲正!");
 			amount = bill.getAmount();
@@ -136,7 +136,7 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 			WaterBill bill = accountJournalDao
 					.findById(WaterBill.class, billId);
 			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.UPGRADE);
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
 			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
 					"只有已缴状态的账单才能冲正!");
 			amount = bill.getAmount();

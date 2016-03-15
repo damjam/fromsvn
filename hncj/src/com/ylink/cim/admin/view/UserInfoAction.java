@@ -185,8 +185,6 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		if (map != null) {
 			userTypes.putAll(map);
 		}
-		// userTypes.remove(UserType.SUPER_ADMIN.getValue());
-		// userTypes.remove(UserType.CUSTOM.getValue());
 		request.setAttribute("userTypes", userTypes);
 		request.setAttribute("branches", ParaManager.getBranches(true));
 	}

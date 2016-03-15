@@ -35,12 +35,14 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 * «Â¿Ìsession.
 	 */
 	public void clear() {
+		this.currentSession().clear();
+		/*
 		this.getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException {
 				session.clear();
 				return null;
 			}
-		});
+		});*/
 	}
 	
 	public void flush() {
@@ -153,7 +155,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 			return null;
 		}
 		
-		LockMode mode = wait ? LockMode.UPGRADE : LockMode.UPGRADE_NOWAIT;
+		LockMode mode = wait ? LockMode.PESSIMISTIC_WRITE : LockMode.UPGRADE_NOWAIT;
 		
 		return (E) getHibernateTemplate().get(model, id, mode);
 	}
