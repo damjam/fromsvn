@@ -15,10 +15,6 @@
 		<f:js src="/js/plugin/jquery.validate.js"/>		
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
-
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -130,6 +126,5 @@
 				正在处理，请稍候...
 			</div>
 		</div>
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

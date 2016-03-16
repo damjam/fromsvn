@@ -21,11 +21,6 @@
 		<f:js src="/js/common.js" />
 		<f:js src="/js/popUp.js" />
 
-		<style type="text/css">
-html {
-	overflow-y: scroll;
-}
-</style>
 	<script type="text/javascript">
 			<!--//--><![CDATA[//><!--
 			function submit(){
@@ -91,7 +86,5 @@ html {
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
-
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

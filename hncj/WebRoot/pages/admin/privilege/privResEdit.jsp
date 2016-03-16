@@ -86,7 +86,5 @@
 			</div>
 			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
-
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
 	</body>
 </html>

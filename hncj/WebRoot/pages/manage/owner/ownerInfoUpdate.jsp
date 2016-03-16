@@ -18,9 +18,6 @@
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -145,9 +142,5 @@
 			</div>
 		</div>	
 	</form>	
-	<!--版权区域-->
-	<div class="bottom">
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
-	</div>
 </body>
 </html>

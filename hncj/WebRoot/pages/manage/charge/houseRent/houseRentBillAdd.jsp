@@ -18,9 +18,6 @@
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>
 		<f:js src="/layer/layer.js"/>	
-		<style type="text/css">
-			html { overflow-y: scroll; }
-		</style>
 		<script type="text/javascript">
 			layer.config({
 			    extend: 'extend/layer.ext.js'

@@ -89,9 +89,5 @@
 		</div>
 	</form>
 	
-	<!--版权区域-->
-	<div class="bottom">
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
-	</div>
 </body>
 </html>

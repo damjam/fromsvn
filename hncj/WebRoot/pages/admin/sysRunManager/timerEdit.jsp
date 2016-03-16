@@ -17,9 +17,6 @@
 		<f:js src="/js/common.js" />
 		<f:css href="/css/page.css" />
 
-		<style type="text/css">
-</style>
-
 		<script type="text/javascript">
 	$(function() {
 		$('#btnReturn').click(function() {

@@ -5,9 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%response.setHeader("Cache-Control", "no-cache");%>
 
-
-<%@ taglib uri="/WEB-INF/flink.tld" prefix="f"%>
-
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
         <%@ include file="/pages/common/meta.jsp" %>
@@ -37,8 +34,6 @@
 				 
 			});
 		});
-		
-		
 		
 		//--><!]]></script>
 		
@@ -102,10 +97,5 @@
 			</div>
 		</div>
 	</form>
-	
-	<!--版权区域-->
-	<div class="bottom">
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
-	</div>
 </body>
 </html>

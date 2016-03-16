@@ -29,7 +29,6 @@
 		</script>
 	</head>
 <body>
-
 	
 	<form id="query" action="${uri}?action=saveUpdate" method="post" class="validate">
 		<!-- 用户资料修改区 -->
@@ -95,9 +94,5 @@
 		</div>
 	</form>
 	
-	<!--版权区域-->
-	<div class="bottom">
-		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
-	</div>
 </body>
 </html>
