@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding='GB2312'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.UserRole" table="USER_ROLE">
+        <composite-id name="id" class="com.ylink.cim.admin.domain.UserRoleId">
+            <key-property name="roleId" column="ROLE_ID" type="string"/>
+            <key-property name="userId" column="USER_ID" type="string"/>
+        </composite-id>
+    </class>
+</hibernate-mapping>

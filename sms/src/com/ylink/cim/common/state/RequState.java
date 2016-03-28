@@ -1,0 +1,40 @@
+package com.ylink.cim.common.state;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import flink.util.AbstractState;
+import flink.util.ExceptionUtils;
+
+/**
+ * 
+ * …Í«Î◊¥Ã¨
+ *
+ */
+public class RequState extends AbstractState {
+
+	public static Map<String, RequState> ALL = new LinkedHashMap<String, RequState>();
+	public static final RequState NEW = new RequState("–¬…Í«Î", "1");
+
+	public static final RequState MODIFY = new RequState("–ﬁ∏ƒ…Í«Î", "2");
+	public static final RequState REVOKED = new RequState("…Í«Î≥∑œ˙", "3");
+
+	public static void setInReq(HttpServletRequest request) {
+		request.setAttribute("applyStates", RequState.ALL.values());
+	}
+
+	public static RequState valueOf(String value) throws Exception {
+		RequState state = ALL.get(value);
+		if (null == state) {
+			ExceptionUtils.logException(RequState.class, "◊¥Ã¨¥ÌŒÛ");
+		}
+		return state;
+	}
+
+	protected RequState(String name, String value) {
+		super(name, value);
+		ALL.put(value, this);
+	}
+}
