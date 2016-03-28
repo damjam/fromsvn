@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="mailServerConfig" class="com.flink.mail.MailConfig">
+		<property name="sendhost">
+			<value>smtp.exmail.qq.com</value>
+		</property>
+		<property name="sendPort">
+			<value>25</value>
+		</property>
+		<property name="sendUserName">
+			<value>test@szgold.com.cn</value>
+		</property>
+		<property name="sendPassword">
+			<value>Gold1234</value>
+		</property>
+	</bean>
+	<bean id="mobileMsgConfig" class="com.ylink.cim.common.util.MobileMsgConfig">
+		<property name="postUrl">
+			<value>http://119.145.36.52:8011/Com/smsinterface/DXBZJK.cfm</value>
+		</property>
+		<property name="account">
+			<value>oayy</value>
+		</property>
+		<property name="password">
+			<value>oayy</value>
+		</property>
+	</bean>
+	
+	<bean id="socketParams" class="com.ylink.cim.common.msg.SocketParams">
+		<property name="hostName">
+			<value>168.33.120.25</value>
+		</property>
+		<property name="portNum">
+			<value>13000</value>
+		</property>
+		<property name="timeout">
+			<value>4</value>
+		</property>
+		<property name="charset">
+			<value>GBK</value>
+		</property>
+	</bean>
+	<bean id="comInfo" class="com.ylink.cim.common.util.ComInfo">
+		<property name="name">
+			<value>漯河市昌建物业管理有限公司</value>
+		</property>
+		<property name="hqName">
+			<value>昌建地产集团</value>
+		</property>
+		<property name="groupWeb">
+			<value>http://www.hncj.com.cn/</value>
+		</property>
+		<property name="tel">
+			<value>0395-3939222</value>
+		</property>
+		<property name="cel">
+			<value></value>
+		</property>
+		<property name="email">
+			<value>cjwy0001@qq.com</value>
+		</property>
+		<property name="add">
+			<value>河南省漯河市郾城区金山路双汇国际花园</value>
+		</property>
+		<property name="sp">
+			<value>漯河市昌建物业信息管理系统</value>
+		</property>
+		<property name="tip">
+			<value>请使用最新版chrome浏览器获得最佳操作体验</value>
+		</property>
+	</bean>
+</beans>
