@@ -18,9 +18,16 @@ public class CarModel implements Serializable {
 	
 	private String firstLetters;
 	
+	private String carType;
 	
 	
-	
+	public String getCarType() {
+		return carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
 
 	public String getFirstLetters() {
 		return firstLetters;

@@ -19,5 +19,8 @@
 		<property name="firstLetters" type="java.lang.String">
 			<column name="first_letters" length="20" />
 		</property>
+		<property name="carType" type="java.lang.String">
+			<column name="car_type" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

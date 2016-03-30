@@ -21,6 +21,8 @@ public class SysDictType extends AbstractType {
 	public static final SysDictType BranchPostType = new SysDictType("机构职位类型", "BranchPostType");
 	public static final SysDictType CenterPostType = new SysDictType("总部职位类型", "CenterPostType");
 	public static final SysDictType ProductType = new SysDictType("产品", "ProductType");
+	public static final SysDictType CoutryType = new SysDictType("国家", "CountryType");
+	public static final SysDictType CarType = new SysDictType("汽车类型", "CarType");
 	protected SysDictType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

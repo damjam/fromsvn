@@ -9,4 +9,6 @@ import flink.util.Paginater;
 public interface OrderDetailDao extends BaseDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager);
+
+	public void deleteByOrderId(String id);
 }

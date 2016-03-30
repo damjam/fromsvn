@@ -2,6 +2,9 @@ package com.ylink.cim.manage.domain;
 
 import java.io.Serializable;
 
+import com.ylink.cim.common.type.SysDictType;
+import com.ylink.cim.common.util.ParaManager;
+
 public class CarBrand implements Serializable {
 
 	/**
@@ -17,7 +20,6 @@ public class CarBrand implements Serializable {
 	
 	private String country;
 
-	
 
 	public String getId() {
 		return id;
@@ -50,9 +52,13 @@ public class CarBrand implements Serializable {
 		return country;
 	}
 
+	public String getCountryName() {
+		return ParaManager.getSysDictName(SysDictType.CoutryType.getValue(), country);
+	}
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
 	
 	
 }

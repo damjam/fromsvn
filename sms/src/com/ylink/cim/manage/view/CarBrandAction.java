@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.type.SysDictType;
+import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarBrandDao;
 import com.ylink.cim.manage.domain.CarBrand;
 import com.ylink.cim.manage.service.CarBrandService;
@@ -37,11 +39,18 @@ public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> 
 		Map<String, Object> map = getParaMap();
 		Paginater paginater = carBrandDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
+		initSelect();
 		return LIST;
+	}
+
+	private void initSelect() {
+		request.setAttribute("countryTypes", ParaManager.getSysDict(SysDictType.CoutryType.getValue()));
+		
 	}
 
 	@Override
 	public String toAdd() throws Exception {
+		initSelect();
 		return ADD;
 	}
 
@@ -49,8 +58,9 @@ public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> 
 	public String doAdd() throws Exception {
 		try{
 			carBrandService.save(model);
+			setSucResult(request);
 		}catch(Exception e){
-			
+			setFailResult("²Ù×÷Ê§°Ü", request);
 		}
 		return "toMain";
 	}

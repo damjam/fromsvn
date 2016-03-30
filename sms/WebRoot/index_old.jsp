@@ -116,8 +116,9 @@
 	    <div class="middle">
 	        <div class="middlebox">
 		    	<div class="mainleft">
+		    	<!-- 
 			        <div class="logo" style="padding-top: 30px;"><img title="${comInfo.sp}" src="images/0318.gif" /></div>
-					
+					 -->
 			        <div class="gonggao">
 			        </div>
 		        </div>
