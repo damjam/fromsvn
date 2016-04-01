@@ -82,6 +82,7 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
+						 	<td >订单号</td>
 						 	<td >客户姓名</td>
 						    <td >联系电话</td>
 						    <td >送货地址</td>
@@ -94,6 +95,7 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
+								<td>${element.id}</td>
 								<td>${element.clientName}</td>
 								<td>${element.clientTel}</td>
 								<td>${element.address}</td>

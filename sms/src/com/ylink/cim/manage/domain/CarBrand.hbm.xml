@@ -19,5 +19,8 @@
 		<property name="country" type="java.lang.String">
 			<column name="country" length="20" />
 		</property>
+		<property name="pinyin" type="java.lang.String">
+			<column name="pinyin" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

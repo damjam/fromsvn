@@ -17,13 +17,14 @@
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
+		
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
 		<script type="text/javascript">
 			
 		 	function save(){
 		 		FormUtils.submitFirstTokenForm();
 		 	}
-			
+		 	
 		</script>
 	</head>
 <body>
@@ -39,18 +40,18 @@
 				<div class="contentb">
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
-					 
 					   <tr>
-						    <td class="formlabel nes">品牌(EN)</td>
+						    <td class="formlabel nes">品牌(en)</td>
 						    <td>
 						    	<s:textfield name="id" id="id" maxlength="10" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">品牌(ZH)</td>
+						    <td class="formlabel nes">品牌(zh)</td>
 						    <td>
 						    	<s:textfield name="brand" id="brand" maxlength="10" class="{required:true}"/>
+						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
 					   <tr>

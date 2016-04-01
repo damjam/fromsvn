@@ -16,12 +16,14 @@ public class CarBrandServiceImpl implements CarBrandService {
 	@Override
 	public void save(CarBrand model) {
 		model.setFirstLetters(Cn2PinYinHelper.cn2FirstSpell(model.getBrand()));
+		model.setPinyin(Cn2PinYinHelper.cn2Spell(model.getBrand()));
 		carBrandDao.save(model);
 	}
 
 	@Override
 	public void update(CarBrand model) {
 		model.setFirstLetters(Cn2PinYinHelper.cn2FirstSpell(model.getBrand()));
+		model.setPinyin(Cn2PinYinHelper.cn2Spell(model.getBrand()));
 		carBrandDao.update(model);
 	}
 	

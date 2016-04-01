@@ -8,7 +8,9 @@
 		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
+		<f:css href="/js/plugin/jquery-ui.min.css" />
 		<f:js src="/js/jquery.js" />
+		<f:js src="/js/plugin/jquery-ui.js" />
 		<f:js src="/js/validate.js" />
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
@@ -28,6 +30,34 @@
 					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
+				$("#brand").autocomplete({
+					delay : 500,
+					minLength: 0,
+					 source: function(request, response) {
+						var keyword = $('#brand').val();
+						//var word = $('#search-content').val();
+						//word = encodeURI(word, "utf-8");
+						//alert(keyword);
+	                    $.ajax({
+	                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	                        type:"post",  
+	                        url: CONTEXT_PATH+"/carBrand.do?action=loadByKeyword&keyword="+keyword,
+	                        dataType: "json",
+	                        data: {
+	                            top: 10,
+	                            key: request.term
+	                        } ,
+	                        success: function(data) {
+	                             response($.each(data.list, function(item) {
+				                    return item;
+				                }));
+	                        } 
+	                    });
+	                },
+	                select: function (event, ui) {
+						//$('#brand').val(ui.item);
+				    }
+				});
 			});
 			
 			function delInfo(id){
@@ -39,6 +69,9 @@
 				var url="${uri}?action=toEdit&id="+id;
 				gotoUrl(url);  
 			}
+			$(function() {
+			 	
+		 	});
 		</script> 
 	</head>
 	<body>
@@ -84,7 +117,8 @@
 						 <tr align="center" class="titlebg">
 						 	<td >型号</td>
 						    <td >品牌</td>
-						    <td >车型</td>
+						    <!-- 
+						    <td >车型</td> -->
 						    <td >操作</td>
 						 </tr>
 					</thead>
@@ -94,9 +128,10 @@
 							<tr align="center">
 								<td>${element.name}</td>
 								<td>${element.brand}</td>
-								<td>${element.carType}</td>
 							    <td class="redlink">
+							    	<!-- 
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
+							    	 -->
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>

@@ -13,8 +13,12 @@ import com.ylink.cim.manage.dao.CarBrandDao;
 import com.ylink.cim.manage.domain.CarBrand;
 import com.ylink.cim.manage.service.CarBrandService;
 
+import flink.etc.Assert;
+import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 @Scope("prototype")
 @Component
 public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> {
@@ -57,10 +61,17 @@ public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> 
 	@Override
 	public String doAdd() throws Exception {
 		try{
+			boolean exist = carBrandDao.isExist(model.getId(), model.getBrand());
+			Assert.isTrue(!exist, "数据已存在");
 			carBrandService.save(model);
 			setSucResult(request);
 		}catch(Exception e){
-			setFailResult("操作失败", request);
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败", request);
+			}
+			return toAdd();
 		}
 		return "toMain";
 	}
@@ -86,7 +97,26 @@ public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> 
 		}
 		return "toMain";
 	}
-
+	public String loadByKeyword() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			JSONArray array = new JSONArray();
+			String keyword = request.getParameter("keyword");
+			Paginater paginater = carBrandDao.findByKeyword(keyword, getPager(request));
+			for(int i=0, size = paginater.getList().size(); i<size; i++){
+				CarBrand carBrand = (CarBrand)paginater.getList().get(i);
+				array.add(carBrand.getBrand());
+			}
+			object.put("status", "1");
+			object.put("list", array);
+			respond(response, object.toString());
+		}catch (Exception e) {
+			e.printStackTrace();
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
 	@Override
 	public String detail() throws Exception {
 		// TODO Auto-generated method stub

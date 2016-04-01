@@ -20,7 +20,26 @@ public class CarModel implements Serializable {
 	
 	private String carType;
 	
+	private String modelEn;
 	
+	private String pinyin;
+	
+	public String getPinyin() {
+		return pinyin;
+	}
+
+	public void setPinyin(String pinyin) {
+		this.pinyin = pinyin;
+	}
+
+	public String getModelEn() {
+		return modelEn;
+	}
+
+	public void setModelEn(String modelEn) {
+		this.modelEn = modelEn;
+	}
+
 	public String getCarType() {
 		return carType;
 	}

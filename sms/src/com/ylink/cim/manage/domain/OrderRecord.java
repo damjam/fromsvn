@@ -11,20 +11,90 @@ public class OrderRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String id;
-	
+
 	private String clientName;
-	
+
 	private String clientTel;
-	
+
 	private String orderDate;
-	
+
 	private String address;
-	
+
 	private Double amount;
-	
+
 	private Date createDate;
-	
+
 	private String createUser;
+
+	private String[] carModels;
+
+	private String[] productNames;
+
+	private String[] materials;
+
+	private String[] colors;
+	private Double[] prices;
+	private Integer[] nums;
+	private Double[] amounts;
+	private String[] deliTypes;
+	
+	public String[] getCarModels() {
+		return carModels;
+	}
+
+	public void setCarModels(String[] carModels) {
+		this.carModels = carModels;
+	}
+
+	public String[] getProductNames() {
+		return productNames;
+	}
+
+	public void setProductNames(String[] productNames) {
+		this.productNames = productNames;
+	}
+
+	public String[] getMaterials() {
+		return materials;
+	}
+
+	public void setMaterials(String[] materials) {
+		this.materials = materials;
+	}
+
+	public String[] getColors() {
+		return colors;
+	}
+
+	public void setColors(String[] colors) {
+		this.colors = colors;
+	}
+
+	public Double[] getPrices() {
+		return prices;
+	}
+
+	public void setPrices(Double[] prices) {
+		this.prices = prices;
+	}
+
+	public Integer[] getNums() {
+		return nums;
+	}
+
+	public void setNums(Integer[] nums) {
+		this.nums = nums;
+	}
+
+	
+
+	public String[] getDeliTypes() {
+		return deliTypes;
+	}
+
+	public void setDeliTypes(String[] deliTypes) {
+		this.deliTypes = deliTypes;
+	}
 
 	public String getId() {
 		return id;
@@ -89,6 +159,14 @@ public class OrderRecord implements Serializable {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	
+
+	public Double[] getAmounts() {
+		return amounts;
+	}
+
+	public void setAmounts(Double[] amounts) {
+		this.amounts = amounts;
+	}
+
 	
 }

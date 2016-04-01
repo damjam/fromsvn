@@ -3,7 +3,6 @@ package com.ylink.cim.manage.domain;
 import java.io.Serializable;
 
 public class OrderDetail implements Serializable {
-
 	/**
 	 * 
 	 */
@@ -26,11 +25,21 @@ public class OrderDetail implements Serializable {
 	
 	private String deliType;
 	
+	private String deliState;
+	
 	private Double amount;
 	
 	private String orderId;
 	
 	private String remark;
+	
+	public String getDeliState() {
+		return deliState;
+	}
+
+	public void setDeliState(String deliState) {
+		this.deliState = deliState;
+	}
 
 	public Integer getId() {
 		return id;

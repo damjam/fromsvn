@@ -45,54 +45,20 @@
 		
 		<f:msg styleClass="msg" />
 		<form action="${uri}?action=list" id="queryForm" method="post">
-			<!-- 查询功能区 -->
-			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
-						<tr>
-							<td class="formlabel">
-								品牌(en)
-							</td>
-							<td>
-								<s:textfield name="id" id="id" maxlength="10"/>
-							</td>
-							<td class="formlabel">
-								品牌(zh)
-							</td>
-							<td>
-								<s:textfield name="brand" id="brand" maxlength="10"/>
-							</td>
-							<td class="formlabel">
-								国家
-							</td>
-							<td>
-								<s:select list="#request.countryTypes" headerKey="" headerValue="---请选择---" listKey="key" listValue="value" name="country"/>
-							</td>
-						</tr>
-						
-						<tr>
-						    <td></td>
-							<td colspan="5">
-								<input type="button" value="查询" id="btnQry"/>&nbsp;
-								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
-							</td>
-						</tr>
-					</table>
-				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
-			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	
-						 	<td >品牌(en)</td>
-						    <td >品牌(zh)</td>
-						    <td >国家</td>
+						 	<td >汽车品牌-型号</td>
+						 	<td >产品名称</td>
+						    <td >材质</td>
+						    <td >颜色</td>
+						    <td >单价</td>
+						    <td >数量</td>
+						    <td >订单金额</td>
+						    <td >派送方式</td>
+						    <td >物流状态</td>
 						    <td >操作</td>
 						 </tr>
 					</thead>
@@ -100,13 +66,17 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								<td>${element.id}</td>
-								<td>${element.brand}</td>
-								<td>${element.countryName}</td>
+								<td>${element.carModel}</td>
+								<td>${element.productName}</td>
+								<td>${element.material}</td>
+								<td>${element.color}</td>
+								<td><fmt:formatNumber value="${element.price}" pattern="##0.00"/></td>
+								<td>${element.num}</td>
+								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
+							    <td>${element.deliType}</td>
+							    <td>${element.deliState}</td>
 							    <td class="redlink">
-							    	<!-- 
-							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
-							    	 -->
+							    	<a href="javascript:updateInfo('${element.id}')" >变更物流状态</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>
 						    </tr>

@@ -22,5 +22,11 @@
 		<property name="carType" type="java.lang.String">
 			<column name="car_type" length="20" />
 		</property>
+		<property name="modelEn" type="java.lang.String">
+			<column name="model_en" length="20" />
+		</property>
+		<property name="pinyin" type="java.lang.String">
+			<column name="pinyin" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

@@ -9,4 +9,8 @@ import flink.util.Paginater;
 public interface CarBrandDao extends BaseDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager);
+	
+	public Paginater findByKeyword(String keyword, Pager pager);
+	
+	public boolean isExist(String id, String brand);
 }

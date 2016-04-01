@@ -3,6 +3,7 @@ package com.ylink.cim.manage.dao.impl;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.manage.dao.CarBrandDao;
@@ -28,6 +29,24 @@ public class CarBrandDaoImpl extends BaseDaoImpl implements CarBrandDao {
 		helper.append("and country = ?",MapUtils.getString(map, "country"));
 		helper.append("and firstLetters like ?", MapUtils.getString(map, "firstLetters"));
 		return super.getPageData(helper, pager);
+	}
+	public Paginater findByKeyword(String keyword, Pager pager) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from CarBrand where 1=1");
+		helper.append("and (brand like ?", keyword.toLowerCase(), MatchMode.START);
+		helper.append("or firstLetters like ?", keyword.toLowerCase(), MatchMode.START);
+		helper.append("or pinyin like ?", keyword.toLowerCase(), MatchMode.START);
+		helper.append("or id like ?)", keyword.toLowerCase(), MatchMode.START);
+		return super.getPageData(helper, pager);
+	}
+
+	@Override
+	public boolean isExist(String id, String brand) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from CarBrand where 1=1");
+		helper.append("and (id = ?", id);
+		helper.append("or brand = ?)", brand);
+		return super.getList(helper).size() > 0;
 	}
 
 }

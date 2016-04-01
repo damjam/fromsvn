@@ -10,11 +10,16 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarModelDao;
+import com.ylink.cim.manage.domain.CarBrand;
 import com.ylink.cim.manage.domain.CarModel;
 import com.ylink.cim.manage.service.CarModelService;
 
+import flink.etc.Assert;
+import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 @Scope("prototype")
 @Component
 public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> {
@@ -28,6 +33,8 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 	@Override
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
+		map.put("name", model.getName());
+		map.put("brand", model.getBrand());
 		Paginater paginater = carModelDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect();
@@ -47,10 +54,17 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 	@Override
 	public String doAdd() throws Exception {
 		try{
+			boolean exist = carModelDao.isExist(model.getName(), model.getBrand());
+			Assert.isTrue(!exist, "数据已存在");
 			carModelService.save(model);
 			setSucResult(request);
 		}catch(Exception e){
-			setFailResult("操作失败", request);
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败", request);
+			}
+			return toAdd();
 		}
 		return "toMain";
 	}
@@ -63,8 +77,13 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 
 	@Override
 	public String doEdit() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			carModelService.update(model);
+			setSucResult(request);
+		}catch(Exception e){
+			setFailResult("操作失败", request);
+		}
+		return "toMain";
 	}
 
 	@Override
@@ -84,6 +103,26 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 		return null;
 	}
 
+	public String loadByKeyword() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			JSONArray array = new JSONArray();
+			String keyword = request.getParameter("keyword");
+			String brand = request.getParameter("brand");
+			Paginater paginater = carModelDao.findByKeyword(keyword, getPager(request));
+			for(int i=0, size = paginater.getList().size(); i<size; i++){
+				CarModel carModel = (CarModel)paginater.getList().get(i);
+				array.add(carModel.getBrand()+"-"+carModel.getName());
+			}
+			object.put("status", "1");
+			object.put("list", array);
+			respond(response, object.toString());
+		}catch (Exception e) {
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
 	@Override
 	public CarModel getModel() {
 		return model;

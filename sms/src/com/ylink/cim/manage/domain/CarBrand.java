@@ -20,6 +20,17 @@ public class CarBrand implements Serializable {
 	
 	private String country;
 
+	private String pinyin;
+	
+	
+
+	public String getPinyin() {
+		return pinyin;
+	}
+
+	public void setPinyin(String pinyin) {
+		this.pinyin = pinyin;
+	}
 
 	public String getId() {
 		return id;
