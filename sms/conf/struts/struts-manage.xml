@@ -177,15 +177,15 @@
 			<result name="toMain" type="redirect">carModel.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="orderRecord" class="orderRecordAction">
-			<result name="list">/pages/manage/orderRecord/carModelList.jsp</result>
-			<result name="edit">/pages/manage/orderRecord/carModelEdit.jsp</result>
-			<result name="add">/pages/manage/orderRecord/carModelAdd.jsp</result>
+			<result name="list">/pages/manage/order/orderRecordList.jsp</result>
+			<result name="edit">/pages/manage/order/orderRecordEdit.jsp</result>
+			<result name="add">/pages/manage/order/orderRecordAdd.jsp</result>
 			<result name="toMain" type="redirect">orderRecord.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="orderDetail" class="orderDetailAction">
-			<result name="list">/pages/manage/orderDetail/carModelList.jsp</result>
-			<result name="edit">/pages/manage/orderDetail/carModelEdit.jsp</result>
-			<result name="add">/pages/manage/orderDetail/carModelAdd.jsp</result>
+			<result name="list">/pages/manage/order/orderDetailList.jsp</result>
+			<result name="edit">/pages/manage/order/orderDetailEdit.jsp</result>
+			<result name="add">/pages/manage/order/orderDetailAdd.jsp</result>
 			<result name="toMain" type="redirect">orderDetail.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 	</package>
