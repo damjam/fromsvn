@@ -66,4 +66,25 @@ public abstract class StringUtil {
 		}
 		return StringUtils.uncapitalize(className);
 	}
+	public static String subStringByByte(String str, int len) {
+		String result = null;
+		if (str != null) {
+			byte[] a = str.getBytes();
+			if (a.length <= len) {
+				result = str;
+			} else if (len > 0) {
+				result = new String(a, 0, len);
+				System.out.println(result);
+				int length = result.length();
+				if (str.charAt(length - 1) != result.charAt(length - 1)) {
+					if (length < 2) {
+						result = null;
+					} else {
+						result = result.substring(0, length - 1);
+					}
+				}
+			}
+		}
+		return result;
+	}
 }
