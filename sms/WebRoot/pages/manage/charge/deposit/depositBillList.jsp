@@ -127,10 +127,10 @@
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
-							<td align="center">已缴已退款笔数</td>
-							<td align="center">已缴已退款金额（元）</td>
-							<td align="center">已缴未退款笔数</td>
-							<td align="center">已缴未退款金额（元）</td>
+							<td align="center">已退款笔数</td>
+							<td align="center">已退款金额（元）</td>
+							<td align="center">未退款笔数</td>
+							<td align="center">未退款金额（元）</td>
 							<td align="center">总笔数</td>
 							<td align="center">总金额（元）</td>
 						</tr>
