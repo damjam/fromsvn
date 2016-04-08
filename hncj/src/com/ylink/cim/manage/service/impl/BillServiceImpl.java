@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
-import com.ylink.cim.busioper.service.BillTrackService;
+import com.ylink.cim.manage.service.BillTrackService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
 import com.ylink.cim.common.type.BillType;
@@ -277,9 +277,9 @@ public class BillServiceImpl implements BillService {
 	@Override
 	public void deleteBill(Class clazz, String id, UserInfo userInfo)
 			throws BizException {
-		Object object = waterBillDao.findById(clazz, id);
+		Object object = generalBillDao.findById(clazz, id);
 		if (object != null) {
-			waterBillDao.delete(object);
+			generalBillDao.delete(object);
 		}
 	}
 

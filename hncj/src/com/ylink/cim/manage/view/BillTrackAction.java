@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.ylink.cim.busioper.service.BillTrackService;
+import com.ylink.cim.manage.service.BillTrackService;
 import com.ylink.cim.common.state.BillTrackState;
 import com.ylink.cim.common.type.BillType;
 import com.ylink.cim.common.type.RemainDays;
