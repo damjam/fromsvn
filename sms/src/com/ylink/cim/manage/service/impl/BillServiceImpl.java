@@ -11,7 +11,6 @@ import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.dao.GeneralBillDao;
 import com.ylink.cim.manage.domain.GeneralBill;
 import com.ylink.cim.manage.service.AccountJournalService;
-import com.ylink.cim.manage.service.AccountService;
 import com.ylink.cim.manage.service.BillService;
 
 import flink.consant.Constants;
@@ -22,8 +21,6 @@ import flink.util.DateUtil;
 public class BillServiceImpl implements BillService {
 	@Autowired
 	private IdFactoryService idFactoryService;
-	@Autowired
-	private AccountService accountService;
 	@Autowired
 	private AccountDao accountDao;
 	@Autowired

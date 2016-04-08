@@ -12,13 +12,10 @@ import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.type.AccountChangeType;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.YesNoType;
-import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.dao.AccountDetailDao;
 import com.ylink.cim.manage.domain.Account;
-import com.ylink.cim.manage.service.AccountService;
 
-import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
 
@@ -33,8 +30,6 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 	private AccountDetailDao accountDetailDao;
 	@Autowired
 	private AccountDao accountDao;
-	@Autowired
-	private AccountService accountService;
 
 	public String toDeposit() throws Exception {
 		YesNoType.setInReq(request);
@@ -45,29 +40,6 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 		return "deposit";
 	}
 
-	public String deposit() throws Exception {
-		try {
-			Double balance = accountService.deposit(model.getId(),
-					model.getAmount(), getSessionUser(request));
-			String tip = "操作成功";
-			if (balance < model.getAmount()) {
-				tip += "，已扣除待缴水费"
-						+ MoneyUtil.getFormatStr2(model.getAmount() - balance)
-						+ "元";
-			}
-			tip += "，当前账户余额" + MoneyUtil.getFormatStr2(balance) + "元";
-			setResult(true, tip, request);
-		} catch (BizException e) {
-			e.printStackTrace();
-			setResult(false, e.getMessage(), request);
-			return toDeposit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			setResult(false, "操作失败" + e.getMessage(), request);
-			return toDeposit();
-		}
-		return list();
-	}
 
 	public String list() throws Exception {
 		BillState.setInReq(request);
@@ -96,22 +68,6 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 		return "withdraw";
 	}
 
-	public String withdraw() throws Exception {
-		try {
-
-			accountService.withdraw(model.getId(), model.getAmount(),
-					getSessionUser(request));
-			setResult(true, "操作成功", request);
-		} catch (BizException e) {
-			setResult(false, e.getMessage(), request);
-			return toWithdraw();
-		} catch (Exception e) {
-			setResult(false, "操作失败", request);
-			e.printStackTrace();
-			return toWithdraw();
-		}
-		return list();
-	}
 
 	public String detail() throws Exception {
 		AccountChangeType.setInReq(request);
