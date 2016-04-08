@@ -12,8 +12,6 @@ import flink.util.WebResource;
 
 public interface UserService {
 
-	public void assignUserRole(String[] roles, String userId) throws BizException;
-
 	public void updateUserInfo(UserInfo userInfo) throws BizException;
 
 	public UserInfo getUserInfo(String userId);

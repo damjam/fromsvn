@@ -68,22 +68,26 @@ public abstract class StringUtil {
 	}
 	public static String subStringByByte(String str, int len) {
 		String result = null;
-		if (str != null) {
-			byte[] a = str.getBytes();
-			if (a.length <= len) {
-				result = str;
-			} else if (len > 0) {
-				result = new String(a, 0, len);
-				System.out.println(result);
-				int length = result.length();
-				if (str.charAt(length - 1) != result.charAt(length - 1)) {
-					if (length < 2) {
-						result = null;
-					} else {
-						result = result.substring(0, length - 1);
+		try {
+			if (str != null) {
+				byte[] a = str.getBytes("gbk");
+				if (a.length <= len) {
+					result = str;
+				} else if (len > 0) {
+					result = new String(a, 0, len, "gbk");
+					System.out.println(result);
+					int length = result.length();
+					if (str.charAt(length - 1) != result.charAt(length - 1)) {
+						if (length < 2) {
+							result = null;
+						} else {
+							result = result.substring(0, length - 1);
+						}
 					}
 				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return result;
 	}

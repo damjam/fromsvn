@@ -14,9 +14,8 @@ public class UserType extends AbstractType {
 
 	public static final UserType SUPER_ADMIN = new UserType("超级管理员", "superUser");
 	public static final UserType SYS_ADMIN = new UserType("系统管理员", "adminUser");
-	public static final UserType BSUI_OPER = new UserType("业务管理员", "busiUser");
-	public static final UserType CUSTOM = new UserType("客户", "customUser");
-	public static final UserType BRANCH_ADMIN_USER = new UserType("代理机构系统管理员", "branchAdminUser");
+	public static final UserType BSUI_OPER = new UserType("业务经理", "busiUser");
+	public static final UserType MANAGER = new UserType("总经理", "manager");
 
 	protected UserType(String name, String value) {
 		super(name, value);
