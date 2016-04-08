@@ -12,12 +12,8 @@ import com.ylink.cim.common.type.InputTradeType;
 import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.manage.dao.AccountJournalDao;
 import com.ylink.cim.manage.domain.AccountJournal;
-import com.ylink.cim.manage.domain.CommonServiceBill;
-import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.InnerAcct;
-import com.ylink.cim.manage.domain.ParkingBill;
-import com.ylink.cim.manage.domain.WaterBill;
 import com.ylink.cim.manage.service.AccountJournalService;
 
 import flink.consant.Constants;
@@ -88,64 +84,5 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		accountJournalDao.save(accountJournal);
 	}
 
-	@Override
-	public void reverse(String tradeType, String billId, String remark,
-			UserInfo userInfo) throws BizException {
-		Double amount = 0d;
-		if (InputTradeType.DECORATE.getValue().equals(tradeType)) {
-			DecorateServiceBill bill = accountJournalDao.findById(
-					DecorateServiceBill.class, billId);
-			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
-			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
-					"只有已缴状态的账单才能冲正!");
-			amount = bill.getAmount();
-			bill.setState(BillState.REVERSE.getValue());
-			accountJournalDao.update(bill);
-		} else if (InputTradeType.SERVICE.getValue().equals(tradeType)) {
-			CommonServiceBill bill = accountJournalDao.findById(
-					CommonServiceBill.class, billId);
-			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
-			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
-					"只有已缴状态的账单才能冲正!");
-			amount = bill.getTotalAmount();
-			bill.setState(BillState.REVERSE.getValue());
-			accountJournalDao.update(bill);
-		} else if (InputTradeType.PARKING.getValue().equals(tradeType)) {
-			ParkingBill bill = accountJournalDao.findById(ParkingBill.class,
-					billId);
-			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
-			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
-					"只有已缴状态的账单才能冲正!");
-			amount = bill.getAmount();
-			bill.setState(BillState.REVERSE.getValue());
-			accountJournalDao.update(bill);
-		} else if (InputTradeType.SECURITY.getValue().equals(tradeType)) {
-			DepositBill bill = accountJournalDao.findById(DepositBill.class,
-					billId);
-			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
-			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
-					"只有已缴状态的账单才能冲正!");
-			amount = bill.getAmount();
-			bill.setState(BillState.REVERSE.getValue());
-			accountJournalDao.update(bill);
-		} else if (InputTradeType.WATER.getValue().equals(tradeType)) {
-			WaterBill bill = accountJournalDao
-					.findById(WaterBill.class, billId);
-			Assert.notNull(bill, "找不到账单");
-			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
-			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
-					"只有已缴状态的账单才能冲正!");
-			amount = bill.getAmount();
-			bill.setState(BillState.REVERSE.getValue());
-			accountJournalDao.update(bill);
-		} else {
-			throw new BizException("无法对当前交易进行冲正!");
-		}
-		deduct(TradeType.IN_REVERSE.getValue(), amount, billId, remark,
-				userInfo);
-	}
+	
 }

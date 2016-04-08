@@ -102,24 +102,7 @@ public class AccountJournalAction extends BaseAction implements
 		return "trade_report";
 	}
 
-	public String reverse() throws Exception {
-		try {
-
-			accountJournalService.reverse(model.getTradeType(),
-					model.getBillId(), model.getRemark(),
-					getSessionUser(request));
-			model.setTradeType("");
-			setResult(true, "操作成功", request);
-		} catch (BizException e) {
-			setResult(false, e.getMessage(), request);
-			return toReverse();
-		} catch (Exception e) {
-			setResult(false, "操作失败", request);
-			e.printStackTrace();
-			return toReverse();
-		}
-		return this.list();
-	}
+	
 
 	public String withdraw() throws Exception {
 		try {

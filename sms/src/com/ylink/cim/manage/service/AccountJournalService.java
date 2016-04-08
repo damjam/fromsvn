@@ -12,6 +12,4 @@ public interface AccountJournalService {
 	void deduct(String tradeType, Double amount, String billId, String remark,
 			UserInfo userInfo) throws BizException;
 
-	void reverse(String tradeType, String billId, String remark,
-			UserInfo userInfo) throws BizException;
 }
