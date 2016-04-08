@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.dao.UserInfoDao;
+import com.ylink.cim.admin.dao.UserRoleDao;
 import com.ylink.cim.admin.dao.impl.UserInfoDaoImpl;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.UserService;
@@ -26,24 +27,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserInfoDao userInfoDao;
 
-	@Override
-	public void assignUserRole(String[] roles, String userId)
-			throws BizException {
-		/*
-		 * if(roles == null){roles = new String[0];} List<UserRole> oldRoles =
-		 * userRoleDao.getUserRoleByUser(userId); List<String> oldRoleIds = new
-		 * ArrayList<String>(); for (UserRole role : oldRoles) {
-		 * oldRoleIds.add(role.getRoleId()); } List<String> delRoleIds = new
-		 * ArrayList<String>();// 要删除的角色id List<String> addRoleIds = new
-		 * ArrayList<String>();// 要新增的角色id
-		 * DistinguishDelToAdd.distinguish(oldRoleIds,
-		 * DistinguishDelToAdd.StringToList(roles), delRoleIds, addRoleIds);
-		 * 
-		 * // 处理用户的角色绑定 this.dealUserRole(delRoleIds, addRoleIds, userId);
-		 * 
-		 * // 处理用户快捷菜单 this.autoQuickMenu(roles, userId);
-		 */
-	}
+	@Autowired
+	private UserRoleDao userRoleDao;
+	
 
 	@Override
 	public UserInfo getUserInfo(String userId) {
@@ -148,8 +134,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUserInfo(String userId) throws BizException {
-
 		this.userInfoDao.deleteById(userId);
+		//删除对应的角色绑定
+		userRoleDao.delRoleByUser(userId);
 	}
 
 	@Override

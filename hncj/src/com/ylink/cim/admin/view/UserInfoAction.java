@@ -327,38 +327,6 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 		}
 	}
 
-	public String assignRole() throws Exception {
-		String[] roleIds = request.getParameterValues("ids");// 选中的角色
-		String userId = request.getParameter("userId");
-		if (userId == null || userId.trim().equals("")) {
-			String errInfo = "没有选中用户！";
-			setResult(false, errInfo, request);
-			// logError(request, errInfo);
-			return "assignRole";
-		}
-
-		try {
-			this.userService.assignUserRole(roleIds, userId);
-
-			String sucMessage = "给用户" + userId + "分配角色成功！";
-			setResult(true, sucMessage, request);
-			// logSuccess(request, sucMessage);
-			init_assignRoleDate(userId, request);
-			String msg = MsgUtils.r("给用户分配角色成功,分配内容为：{?},角色为：{?}", sucMessage,
-					roleIds);
-			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
-		} catch (Exception e) {
-			String errInfo = "给用户" + userId + "分配角色失败！";
-			setResult(false, errInfo, request);
-			// logError(request, errInfo);
-			String msg = MsgUtils.r(errInfo + ",失败原因:{?}", e.getMessage());
-			super.logError(request, UserLogType.OTHER.getValue(), msg);
-
-			logger.error(errInfo, e);
-		}
-
-		return "assignRole";
-	}
 
 	/**
 	 * 导向至修改密码页面
