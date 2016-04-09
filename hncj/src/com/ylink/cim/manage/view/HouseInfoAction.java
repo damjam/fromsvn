@@ -1,5 +1,8 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -19,11 +22,13 @@ import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.service.HouseInfoService;
+import com.ylink.cim.util.ExcelReadUtil;
 import com.ylink.cim.util.ExportExcelUtil;
 
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
+import flink.util.SpringContext;
 import flink.web.BaseAction;
 @Scope("prototype")
 @Component
@@ -171,8 +176,39 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		
 		return "import";
 	}
+	
 	public String doImport() {
-		
+		try{
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//À©Õ¹Ãû
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoRule");
+			ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			setSucResult(request);
+		}catch (Exception e){
+			setResult(false, "²Ù×÷Ê§°Ü", request);
+			return toImport();
+		}
 		return "toMain";
 	}
+	
+	private File file;
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+	private String fileFileName;
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+	
 }

@@ -24,7 +24,7 @@
 					FormUtils.reset("queryForm");
 				});
 				
-				$('#btnAImport').click(function(){
+				$('#btnImport').click(function(){
 					var url="${uri}?action=toImport";
 					gotoUrl(url);   
 				});
@@ -92,7 +92,7 @@
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>&nbsp;
-								<input type="button" value="导如" id="btnImport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 								<input type="button" value="导出" id="btnExport"/>&nbsp;
 							</td>
 						</tr>
