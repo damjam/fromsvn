@@ -12,6 +12,5 @@
         <property name="display" column="display"></property>
         <property name="remark" column="remark"></property>
         <property name="sort" column="sort"></property>
-        <property name="firstLetters" column="frist_letters"></property>
     </class>
 </hibernate-mapping>
