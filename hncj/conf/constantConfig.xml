@@ -84,31 +84,31 @@
 			<list>
 				<!-- 房屋编号 -->
 				<map>
-					<entry key="field" value="houseSn"></entry>
+					<entry key="fieldName" value="houseSn"></entry>
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="Y"></entry>
 				</map>
 				<!-- 面积 -->
 				<map>
-					<entry key="field" value="area"></entry>
+					<entry key="fieldName" value="area"></entry>
 					<entry key="cellType" value="Double"></entry>
 					<entry key="notNull" value="Y"></entry>
 				</map>
 				<!-- 交房日期 -->
 				<map>
-					<entry key="field" value="deliveryDate"></entry>
+					<entry key="fieldName" value="deliveryDate"></entry>
 					<entry key="cellType" value="Date"></entry>
 					<entry key="notNull" value="N"></entry>
 				</map>
 				<!-- 装修状态 -->
 				<map>
-					<entry key="field" value="decorateState"></entry>
+					<entry key="fieldName" value="decorateState"></entry>
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="Y"></entry>
 				</map>
 				<!-- 备注 -->
 				<map>
-					<entry key="field" value="remark"></entry>
+					<entry key="fieldName" value="remark"></entry>
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="N"></entry>
 				</map>

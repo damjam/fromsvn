@@ -3,6 +3,7 @@ package com.ylink.cim.util;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import flink.etc.Symbol;
 
 public class ExcelReadUtil {
 
-	public static List<List<Object[]>> read(FileInputStream fis, String suffix, List<Map<String, String>> rules) throws Exception {
+	public static List<List<Map<String, Object>>> read(FileInputStream fis, String suffix, List<Map<String, String>> rules) throws Exception {
 		int i=0,j=1,k =0;
 		String sheetName = null;
 		try {
@@ -30,9 +31,9 @@ public class ExcelReadUtil {
 				wb = WorkbookFactory.create(fis);
 			}
 			int sheetSize = wb.getNumberOfSheets();
-			List<List<Object[]>> workBookData = new ArrayList<>();
+			List<List<Map<String, Object>>> workBookData = new ArrayList<>();
 			for (i = 0; i < sheetSize; i++) {
-				List<Object[]> sheetData = new ArrayList<>();
+				List<Map<String, Object>> sheetData = new ArrayList<>();
 				Sheet sheet = wb.getSheetAt(i);
 				sheetName = sheet.getSheetName();
 				int rowNum = sheet.getPhysicalNumberOfRows();
@@ -41,11 +42,12 @@ public class ExcelReadUtil {
 				int colNum = firstRow.getLastCellNum();
 				for (j = 1; j < rowNum; j++) {//第一行为表头
 					Row row = sheet.getRow(j);
-					Object[] rowValues = new Object[colNum];
+					Map<String, Object> rowValues = new HashMap<>();
 					for (k = 0; k < colNum; k++) {
 						Map<String, String> rule = rules.get(k);
 						String cellType = rule.get("cellType");
 						String notNull = rule.get("notNull");
+						String fieldName = rule.get("fieldName");
 						Cell cell = row.getCell(k);
 						
 						Object cellValue = null;
@@ -69,7 +71,7 @@ public class ExcelReadUtil {
 							Date date = DateUtil.getJavaDate(cellDateValue);
 							cellValue = flink.util.DateUtil.getDateYYYYMMDD(date);
 						}
-						rowValues[k] = cellValue;
+						rowValues.put(fieldName, cellValue);
 					}
 					sheetData.add(rowValues);
 				}

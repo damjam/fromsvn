@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -271,20 +272,20 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 	}
 
 	@Override
-	public void addFromExcel(List<List<Object[]>> list, UserInfo userInfo) throws BizException {
+	public void addFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException {
 		
 		for (int i = 0; i < list.size(); i++) {
-			List<Object[]> rows = list.get(i);
+			List<Map<String, Object>> rows = list.get(i);
 			for (int j = 0; j < rows.size(); j++) {
-				Object[] colums = rows.get(j);
+				Map<String, Object> map = rows.get(j);
 				HouseInfo houseInfo = new HouseInfo();
-				String houseSn = (String)colums[0];
+				String houseSn = MapUtils.getString(map, "houseSn");
 				Assert.isNull(houseInfoDao.findById(houseSn), "已存在房屋编号为"+houseSn+"的信息");
 				houseInfo.setHouseSn(houseSn);
-				houseInfo.setArea((Double)colums[1]);
-				String deliveryDate = (String)colums[2];
+				houseInfo.setArea(MapUtils.getDouble(map, "area"));
+				String deliveryDate = MapUtils.getString(map, "deliverDate");
 				houseInfo.setDeliveryDate(deliveryDate);
-				String decorateStateName = (String)colums[3];
+				String decorateStateName = MapUtils.getString(map, "decorateState");
 				String decorateState = DecorateState.STATE_02.getValue();//默认已装修
 				if (DecorateState.STATE_00.getName().equals(decorateStateName)) {
 					decorateState = DecorateState.STATE_00.getValue();
@@ -294,7 +295,7 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 					decorateState = DecorateState.STATE_02.getValue();
 				}
 				houseInfo.setDecorateState(decorateState);
-				String remark = (String)colums[4];
+				String remark = MapUtils.getString(map, "remark");
 				houseInfo.setRemark(remark);
 				houseInfo.setCreateDate(DateUtil.getCurrent());
 				houseInfo.setCreateUser(userInfo.getUserName());

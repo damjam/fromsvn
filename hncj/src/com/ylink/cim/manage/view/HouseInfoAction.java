@@ -182,7 +182,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//À©Õ¹Ãû
 			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoRule");
-			List<List<Object[]>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			List<List<Map<String, Object>>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
 			houseInfoService.addFromExcel(list, getSessionUser(request));
 			setSucResult(request);
 		}catch (Exception e){
