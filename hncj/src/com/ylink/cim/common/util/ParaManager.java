@@ -322,4 +322,8 @@ public abstract class ParaManager {
 		return getPara("1101");
 	}
 
+	public static String getHouseSnFormat(String branchNo){
+		return getBranchPara(branchNo, "houseSnFmt");
+	}
+	
 }

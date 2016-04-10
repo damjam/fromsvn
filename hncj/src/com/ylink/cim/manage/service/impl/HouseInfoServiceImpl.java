@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.state.DecorateState;
 import com.ylink.cim.common.state.RecordState;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.common.util.ParaManager;
@@ -70,21 +71,22 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 		String sn = houseSn.toString();
 		Assert.isNull(houseInfoDao.findById(sn), "房屋信息已存在!");
 		houseInfo.setHouseSn(sn);
-
 		houseInfo.setCreateDate(DateUtil.getCurrent());
 		houseInfo.setCreateUser(userInfo.getUserName());
+		houseInfo.setHouseDesc(getHouseDesc(houseInfo));
+		String orderSn = OrderSnGenerator.getOrderSn(houseInfo);
+		houseInfo.setOrderSn(orderSn);
+		houseInfoDao.save(houseInfo);
+	}
+	private static String getHouseDesc(HouseInfo houseInfo){
 		StringBuffer houseDesc = new StringBuffer();
 		houseDesc.append(houseInfo.getBuildingNo());
 		houseDesc.append("号楼");
 		houseDesc.append(houseInfo.getUnitNo());
 		houseDesc.append("单元");
 		houseDesc.append(houseInfo.getPosition());
-		houseInfo.setHouseDesc(houseDesc.toString());
-		String orderSn = OrderSnGenerator.getOrderSn(houseInfo);
-		houseInfo.setOrderSn(orderSn);
-		houseInfoDao.save(houseInfo);
+		return houseDesc.toString();
 	}
-
 	private void update() {
 		WaterBillDao waterBillDao = (WaterBillDao) SpringContext
 				.getService("waterBillDao");
@@ -254,9 +256,76 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 			houseInfoDao.update(house);
 		}
 	}
+	private String getFloor(String position){
+		String floor = "";
+		if (position.length() == 3) {
+			floor = position.substring(0, 1);
 
+		} else {
+			floor = position.substring(0, 2);
+		}
+		return floor;
+	}
 	public void test2() throws BizException {
 
+	}
+
+	@Override
+	public void addFromExcel(List<List<Object[]>> list, UserInfo userInfo) throws BizException {
+		
+		for (int i = 0; i < list.size(); i++) {
+			List<Object[]> rows = list.get(i);
+			for (int j = 0; j < rows.size(); j++) {
+				Object[] colums = rows.get(j);
+				HouseInfo houseInfo = new HouseInfo();
+				String houseSn = (String)colums[0];
+				Assert.isNull(houseInfoDao.findById(houseSn), "已存在房屋编号为"+houseSn+"的信息");
+				houseInfo.setHouseSn(houseSn);
+				houseInfo.setArea((Double)colums[1]);
+				String deliveryDate = (String)colums[2];
+				houseInfo.setDeliveryDate(deliveryDate);
+				String decorateStateName = (String)colums[3];
+				String decorateState = DecorateState.STATE_02.getValue();//默认已装修
+				if (DecorateState.STATE_00.getName().equals(decorateStateName)) {
+					decorateState = DecorateState.STATE_00.getValue();
+				}else if (DecorateState.STATE_01.getName().equals(decorateStateName)) {
+					decorateState = DecorateState.STATE_01.getValue();
+				}else if (DecorateState.STATE_02.getName().equals(decorateStateName)) {
+					decorateState = DecorateState.STATE_02.getValue();
+				}
+				houseInfo.setDecorateState(decorateState);
+				String remark = (String)colums[4];
+				houseInfo.setRemark(remark);
+				houseInfo.setCreateDate(DateUtil.getCurrent());
+				houseInfo.setCreateUser(userInfo.getUserName());
+				houseInfo.setBranchNo(userInfo.getBranchNo());
+				String[] sns = houseSn.split("-");
+				String buildingNo = sns[0];
+				String unit = "";
+				String floor = "";
+				String position = "";
+				if (sns.length == 2) {
+					position = sns[1];
+					floor = getFloor(position);
+					String houseNo = position.substring(position.length()-2, position.length()-1);
+					if(Integer.parseInt(houseNo) <= 4){
+						unit = "1";
+					}else {
+						unit = "2";
+					}
+				}else if (sns.length == 3) {
+					unit = sns[1];
+					position = sns[2];
+					floor = getFloor(position);
+				}
+				houseInfo.setBuildingNo(buildingNo);
+				houseInfo.setUnitNo(unit);
+				houseInfo.setFloor(floor);
+				houseInfo.setPosition(position);
+				houseInfo.setHouseDesc(getHouseDesc(houseInfo));
+				houseInfoDao.save(houseInfo);
+			}
+		}
 	}
 
 }

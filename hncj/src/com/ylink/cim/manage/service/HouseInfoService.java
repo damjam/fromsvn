@@ -1,5 +1,7 @@
 package com.ylink.cim.manage.service;
 
+import java.util.List;
+
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.domain.HouseInfo;
 
@@ -10,5 +12,7 @@ public interface HouseInfoService {
 	void delete(String id, UserInfo userInfo) throws BizException;
 
 	void add(HouseInfo houseInfo, UserInfo sessionUser) throws BizException;
+
+	void addFromExcel(List<List<Object[]>> list, UserInfo userInfo) throws BizException;
 
 }

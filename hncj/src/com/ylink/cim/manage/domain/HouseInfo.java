@@ -149,4 +149,5 @@ public class HouseInfo extends BranchField implements java.io.Serializable {
 		this.unitNo = unitNo;
 	}
 
+	
 }

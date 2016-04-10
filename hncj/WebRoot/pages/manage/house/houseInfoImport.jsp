@@ -19,6 +19,7 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				//window.parent.unblock();
+				//alert(getFileExt("/hncj/template/房屋信息导入模板.xlsx"));
 			});
 			function submitUpload() {
 				
@@ -54,6 +55,20 @@
 				}  
 				return false;  
 			}
+			function changeFileFormat(){
+				var suffix = $('#suffix').val();
+				var href = $('#linkHref').attr('href');
+				if(suffix == 'xls'){
+					$('#linkHref').attr('href', href.replace('xlsx','xls'));
+				} else if(suffix == 'xlsx'){
+					$('#linkHref').attr('href', href.replace('xls','xlsx'));
+				}
+			}
+			function getFileExt(str) { 
+				//var d=/\.[^\.]+$/.exec(str); 
+				var d=/[^\.]+$/.exec(str); 
+				return d; 
+			}
 		</script>
 	</head>
 	<body>
@@ -68,7 +83,7 @@
 						<tr>
 							<td class="formlabel nes">文件格式</td>
 							<td>
-							<s:select list="#{'xls','xlsx'}" ></s:select>
+							<s:select list="#{'xlsx':'xlsx','xls':'xls'}" name="suffix" id="suffix" onchange="changeFileFormat()" listKey="key" listValue="value"></s:select>
 							</td>
 						</tr>
 						<tr>
@@ -76,7 +91,7 @@
 							<td>
 								<s:file id="file" name="file" class="userbox_bt {required:true}"></s:file>
 								<span class="field_tipinfo">请选择文件</span>
-								<span><a href="${CONTEXT_PATH}/template/房屋信息导入模板.xlsx">下载模板</a></span>
+								<span><a href="${CONTEXT_PATH}/template/房屋信息导入模板.xlsx" id="linkHref">下载模板</a></span>
 							</td>
 						</tr>
 					</table>

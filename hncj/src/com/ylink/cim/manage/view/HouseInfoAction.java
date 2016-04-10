@@ -2,7 +2,6 @@ package com.ylink.cim.manage.view;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -183,10 +182,16 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//À©Õ¹Ãû
 			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoRule");
-			ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			List<List<Object[]>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			houseInfoService.addFromExcel(list, getSessionUser(request));
 			setSucResult(request);
 		}catch (Exception e){
-			setResult(false, "²Ù×÷Ê§°Ü", request);
+			e.printStackTrace();
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "²Ù×÷Ê§°Ü", request);
+			}
 			return toImport();
 		}
 		return "toMain";
@@ -209,6 +214,15 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 
 	public void setFileFileName(String fileFileName) {
 		this.fileFileName = fileFileName;
+	}
+	private String suffix;
+
+	public String getSuffix() {
+		return suffix;
+	}
+
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
 	}
 	
 }

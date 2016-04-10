@@ -23,7 +23,10 @@
 				$('#btnClear').click(function(){
 					FormUtils.reset("queryForm");
 				});
-				
+				$('#btnAdd').click(function(){
+					var url="${uri}?action=toAdd";
+					gotoUrl(url);   
+				});
 				$('#btnImport').click(function(){
 					var url="${uri}?action=toImport";
 					gotoUrl(url);   

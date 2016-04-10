@@ -7,7 +7,7 @@
 <hibernate-mapping>
     <class name="com.ylink.cim.admin.domain.SysParm" table="SYS_PARM" >
         <id name="code" type="java.lang.String">
-            <column name="CODE" length="6" />
+            <column name="CODE" length="20" />
             <generator class="assigned" />
         </id>
         <property name="parname" type="java.lang.String">

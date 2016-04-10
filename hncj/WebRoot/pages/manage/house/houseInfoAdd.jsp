@@ -60,14 +60,14 @@
 						    	<s:select name="buildingNo" id="buildingNo" list="#request.buildingNos" listKey="key" listValue="value" headerKey="" headerValue="---全部---" style="width:166px;"></s:select>
 						    </td>
 					   </tr>
-					   <!-- 
+					   
 					   <tr>
 						    <td class="formlabel nes">单元</td>
 						    <td>
 						    	<s:select name="unitNo" id="unitNo" list="#request.unitNos" listKey="key" listValue="value" style="width:166px;"></s:select>
 						    </td>
 					   </tr>
-					     -->
+					    
 					   <tr>
 						    <td class="formlabel nes">房间</td>
 						    <td>
