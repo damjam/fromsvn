@@ -16,6 +16,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.DecorateState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseInfoDao;
@@ -115,20 +117,24 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 				tmpList = new ArrayList<>();
 				dataMap.put(houseInfo.getBuildingNo(), tmpList);
 			}
-			Object[] obj = new Object[6];
+			Object[] obj = new Object[5];
 			obj[0] = houseInfo.getHouseSn();
 			obj[1] = houseInfo.getArea();
-			obj[2] = houseInfo.getBuildingNo();
-			obj[3] = houseInfo.getUnitNo();
-			obj[4] = houseInfo.getFloor();
-			obj[5] = houseInfo.getState();
+			obj[2] = houseInfo.getDeliveryDate();
+			obj[3] = DecorateState.valueOf(houseInfo.getDecorateState()).getName();
+			obj[4] = houseInfo.getRemark();
 			tmpList.add(obj);
  		}
 		for (Map.Entry<String, List<Object[]>> entry : dataMap.entrySet()) {
 			dataList.add(entry.getValue());
 			buildingList.add(entry.getKey());
 		}
-		String fileName = "房屋信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String branchName = "";
+		if(!super.isHQ()){
+			String branchNo = getSessionBranchNo(request);
+			branchName = BranchType.valueOf(branchNo).getName();
+		}
+		String fileName = branchName+"房屋信息-"+DateUtil.getCurrentDate()+".xlsx";
 		String title = "";
 		/*Map<String, String> houseMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.HouseType.getValue());
 		Map<String, String> flatMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.FlatType.getValue());
@@ -140,8 +146,9 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			buildingNos.add(entry.getValue());
 		}*/
 		
-		String[] rowName = {"房屋编号","面积","楼号","单元","楼层","交房状态","装修状态"};
-		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rowName, dataList, response);
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService("houseInfoExportRule");
+		String excelType = ParaManager.getExcelType(getSessionBranchNo(request));
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
 		exportExcelUtil.exportSheets();
 		return null;
 	}
@@ -181,7 +188,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			File file = this.getFile();
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
-			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoRule");
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoImportRule");
 			List<List<Map<String, Object>>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
 			houseInfoService.addFromExcel(list, getSessionUser(request));
 			setSucResult(request);

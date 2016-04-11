@@ -323,7 +323,17 @@ public abstract class ParaManager {
 	}
 
 	public static String getHouseSnFormat(String branchNo){
-		return getBranchPara(branchNo, "houseSnFmt");
+		String value =  getBranchPara(branchNo, "houseSnFmt");
+		if (StringUtils.isEmpty(value)) {
+			value = getPara("houseSnFmt");
+		}
+		return value;
 	}
-	
+	public static String getExcelType(String branchNo){
+		String value =  getBranchPara(branchNo, "excelType");
+		if (StringUtils.isEmpty(value)) {
+			value = getPara("excelType");
+		}
+		return value;
+	}
 }
