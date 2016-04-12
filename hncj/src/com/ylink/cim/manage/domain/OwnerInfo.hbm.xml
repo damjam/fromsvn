@@ -82,5 +82,14 @@
 		<property name="branchNo" type="java.lang.String">
 			<column name="BRANCH_NO" length="20" />
 		</property>
+		<property name="instancyPerson" type="java.lang.String">
+			<column name="INSTANCY_PERSON" length="20" />
+		</property>
+		<property name="instancyTel" type="java.lang.String">
+			<column name="INSTANCY_TEL" length="20" />
+		</property>
+		<property name="createType" type="java.lang.String">
+			<column name="CREATE_TYPE" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

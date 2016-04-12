@@ -79,7 +79,7 @@ public class ExcelReadUtil {
 			}
 			return workBookData;
 		} catch (Exception e) {
-			String msg = "工作簿" + sheetName + "第" + (j + 1) + "行" + "第" + (k + 1) +e.getMessage();
+			String msg = "工作簿" + sheetName + "第" + (j + 1) + "行" + "第" + (k + 1) +"列:"+e.getMessage();
 			e.printStackTrace();
 			throw new Exception(msg);
 		}

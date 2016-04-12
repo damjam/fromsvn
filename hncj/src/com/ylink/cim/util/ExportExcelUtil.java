@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * 导出Excel公共方法
@@ -40,9 +41,9 @@ public class ExportExcelUtil {
 	
 	private String[] sheetNames;
 
-	private List<Object[]> dataList = new ArrayList<Object[]>();
+	private List<List<Object>> dataList = new ArrayList<List<Object>>();
 	
-	private List<List<Object[]>> sheetList = new ArrayList<List<Object[]>>();
+	private List<List<List<Object>>> sheetList = new ArrayList<List<List<Object>>>();
 	
 	HttpServletResponse response;
 	
@@ -50,7 +51,7 @@ public class ExportExcelUtil {
 	
 
 	// 构造方法，传入要导出的数据
-	public ExportExcelUtil(String fileName, String title, String sheetName, List<Map<String, String>> rowRules, List<Object[]> dataList,String excelType,
+	public ExportExcelUtil(String fileName, String title, String sheetName, List<Map<String, String>> rowRules, List<List<Object>> dataList,String excelType,
 			HttpServletResponse response) {
 		this.dataList = dataList;
 		this.rowRules = rowRules;
@@ -59,7 +60,7 @@ public class ExportExcelUtil {
 		this.fileName = fileName;
 		this.excelType = excelType;
 	}
-	public ExportExcelUtil(String fileName, String title, String[] sheetNames, List<Map<String, String>> rowRules, List<List<Object[]>> sheetList,String excelType,
+	public ExportExcelUtil(String fileName, String title, String[] sheetNames, List<Map<String, String>> rowRules, List<List<List<Object>>> sheetList,String excelType,
 			HttpServletResponse response) {
 		this.sheetList = sheetList;
 		this.rowRules = rowRules;
@@ -73,8 +74,12 @@ public class ExportExcelUtil {
 	 */
 	public void exportSheet() throws Exception {
 		try {
-			
-			Workbook workbook = new HSSFWorkbook(); // 创建工作簿对象
+			Workbook workbook = null;
+			if("xls".equals(excelType)){
+				workbook = new HSSFWorkbook(); // 创建工作簿对象
+			}else {
+				workbook = new XSSFWorkbook(); // 创建工作簿对象
+			}
 			
 			createSheet(workbook, sheetName, dataList);
 			if (workbook != null) {
@@ -95,7 +100,12 @@ public class ExportExcelUtil {
 	}
 	public void exportSheets() throws Exception {
 		try {
-			HSSFWorkbook workbook = new HSSFWorkbook(); // 创建工作簿对象
+			Workbook workbook = null;
+			if("xls".equals(excelType)){
+				workbook = new HSSFWorkbook(); // 创建工作簿对象
+			}else {
+				workbook = new XSSFWorkbook(); // 创建工作簿对象
+			}
 			for(int i=0; i<sheetNames.length; i++) {
 				createSheet(workbook, sheetNames[i], sheetList.get(i));
 			}
@@ -204,7 +214,7 @@ public class ExportExcelUtil {
 
 	}
 	
-	private void createSheet(Workbook workbook, String sheetName, List<Object[]> dataList){
+	private void createSheet(Workbook workbook, String sheetName, List<List<Object>> dataList){
 		Sheet sheet = workbook.createSheet(sheetName); // 创建工作表
 		
 		// 产生表格标题行
@@ -228,16 +238,16 @@ public class ExportExcelUtil {
 			Cell cellRowName = rowRowName.createCell(n); // 创建列头对应个数的单元格
 			cellRowName.setCellType(Cell.CELL_TYPE_STRING); // 设置列头单元格的数据类型
 			Map<String, String> rule = rowRules.get(n);
-			cellRowName.setCellValue(rule.get("columName")); // 设置列头单元格的值
+			cellRowName.setCellValue(rule.get("fieldName")); // 设置列头单元格的值
 			cellRowName.setCellStyle(columnTopStyle); // 设置列头单元格样式
 		}
 
 		// 将查询出的数据设置到sheet对应的单元格中
 		for (int i = 0; i < dataList.size(); i++) {
 
-			Object[] obj = dataList.get(i);// 遍历每个对象
+			List<Object> obj = dataList.get(i);// 遍历每个对象
 			Row row = sheet.createRow(i + 1);// 创建所需的行数
-			for (int j = 0; j < obj.length; j++) {
+			for (int j = 0; j < obj.size(); j++) {
 				Cell cell = null; // 设置单元格的数据类型
 				Map<String, String> rowRule = rowRules.get(j);
 				/*if (j == 0) {
@@ -247,25 +257,25 @@ public class ExportExcelUtil {
 					String cellType = rowRule.get("cellType");
 					if("String".equals(cellType)){
 						cell = row.createCell(j, Cell.CELL_TYPE_STRING);
-						if (obj[j] != null) {
-							cell.setCellValue(obj[j].toString());
+						if (obj.get(j) != null) {
+							cell.setCellValue(obj.get(j).toString());
 						}
 					}else if("Date".equals(cellType)){
 						cell = row.createCell(j, Cell.CELL_TYPE_STRING);
-						if (obj[j] != null) {
-							cell.setCellValue(obj[j].toString());
+						if (obj.get(j) != null) {
+							cell.setCellValue(obj.get(j).toString());
 						}else {
 							cell.setCellValue("");
 						}
 					}else if ("Double".equals(cellType)) {
 						cell = row.createCell(j, Cell.CELL_TYPE_NUMERIC);
-						if (obj[j] != null) {
-							cell.setCellValue((Double)obj[j]);
+						if (obj.get(j) != null) {
+							cell.setCellValue((Double)obj.get(j));
 						}
 					}else if ("Integer".equals(cellType)) {
 						cell = row.createCell(j, Cell.CELL_TYPE_NUMERIC);
-						if (obj[j] != null) {
-							cell.setCellValue((Integer)obj[j]);
+						if (obj.get(j) != null) {
+							cell.setCellValue((Integer)obj.get(j));
 						}
 					}
 					
@@ -280,7 +290,7 @@ public class ExportExcelUtil {
 			}
 		}
 		// 让列宽随着导出的列长自动适应
-		/*
+		
 		for (int colNum = 0; colNum < columnNum; colNum++) {
 			int columnWidth = sheet.getColumnWidth(colNum) / 256;
 			for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
@@ -306,6 +316,6 @@ public class ExportExcelUtil {
 			} else {
 				sheet.setColumnWidth(colNum, (columnWidth + 4) * 256);
 			}
-		}*/
+		}
 	}
 }

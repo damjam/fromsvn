@@ -90,6 +90,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 			logger.error(e);
 			e.printStackTrace();
 			//this.addActionError(this.getText("error.msg"));
+			request.setAttribute("msg", e.getMessage());
 			return RESULT_ERROR;
 		}
 	}

@@ -18,6 +18,7 @@
 		</action>
 		<action name="ownerInfo" class="ownerInfoAction">
 			<result name="add">/pages/manage/owner/ownerInfoAdd.jsp</result>
+			<result name="edit">/pages/manage/owner/ownerInfoUpdate.jsp</result>
 			<result name="import">/pages/manage/owner/ownerInfoImport.jsp</result>
 			<result name="list">/pages/manage/owner/ownerInfoList.jsp</result>
 			<result name="toMain" type="redirect">ownerInfo.do?action=list&amp;msg=${msg}&amp;result={result}</result>

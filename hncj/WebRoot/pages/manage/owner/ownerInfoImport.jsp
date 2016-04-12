@@ -32,9 +32,10 @@
 					alert('文件格式扩展名必须是xlsx或xls。');
 					return;
 				}
+				/*
 				if (!confirm('确定提交文件?')) {
 					return;
-				}
+				}*/
 				FormUtils.submitFirstTokenForm();
 				showWaiter();
 			}
@@ -65,16 +66,15 @@
 		<div class="userbox">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
-				<form action="${uri}?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
+				<form action="${uri}?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate" method="post">
 					<table class="form_grid">
 						<caption>${ACT.name}</caption>
-						
 						<tr>
 							<td class="formlabel nes">请选择导入的文件</td>
 							<td>
 								<s:file id="file" name="file" class="userbox_bt {required:true}"></s:file>
 								<span class="field_tipinfo">请选择文件</span>
-								<span><a href="${CONTEXT_PATH}/">下载模板</a> </span>
+								<span><a href="${CONTEXT_PATH}/template/${templateName}">下载模板</a> </span>
 							</td>
 						</tr>
 					</table>

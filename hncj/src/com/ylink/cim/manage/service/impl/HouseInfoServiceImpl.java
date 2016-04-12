@@ -261,7 +261,6 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 		String floor = "";
 		if (position.length() == 3) {
 			floor = position.substring(0, 1);
-
 		} else {
 			floor = position.substring(0, 2);
 		}

@@ -80,7 +80,7 @@
 					   <tr>
 						    <td class="formlabel nes">性别</td>
 						    <td>
-						    	<s:select name="gender" id="gender" list="#request.sexTypes" listKey="value" listValue="name" style="width:166px"></s:select>
+						    	<s:select name="gender" id="gender" list="#{'男':'男','女':'女'}" listKey="key" listValue="value" style="width:166px"></s:select>
 						    </td>
 					   </tr>
 					   <tr>

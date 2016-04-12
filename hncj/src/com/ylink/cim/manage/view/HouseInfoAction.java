@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -107,25 +108,29 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		map.put("floor", model.getFloor());
 		map.put("branchNo", getSessionBranchNo(request));
 		Paginater paginater = houseInfoDao.findPager(map, null);//²»ÔÙ·ÖÒ³
-		List<List<Object[]>> dataList = new ArrayList<>();
-		Map<String, List<Object[]>> dataMap = new HashMap<>();
+		List<List<List<Object>>> dataList = new ArrayList<>();
+		Map<String, List<List<Object>>> dataMap = new HashMap<>();
 		List<String> buildingList = new ArrayList<>();
 		for (int i = 0, size = paginater.getList().size(); i < size; i++) {
 			HouseInfo houseInfo = (HouseInfo)paginater.getList().get(i);
-			List<Object[]> tmpList = dataMap.get(houseInfo.getBuildingNo());
+			List<List<Object>> tmpList = dataMap.get(houseInfo.getBuildingNo());
 			if (tmpList == null) {
 				tmpList = new ArrayList<>();
 				dataMap.put(houseInfo.getBuildingNo(), tmpList);
 			}
-			Object[] obj = new Object[5];
-			obj[0] = houseInfo.getHouseSn();
-			obj[1] = houseInfo.getArea();
-			obj[2] = houseInfo.getDeliveryDate();
-			obj[3] = DecorateState.valueOf(houseInfo.getDecorateState()).getName();
-			obj[4] = houseInfo.getRemark();
+			List<Object> obj = new ArrayList<>();
+			obj.add(houseInfo.getHouseSn());
+			obj.add(houseInfo.getArea());
+			obj.add(houseInfo.getDeliveryDate());
+			if(StringUtils.isNotBlank(houseInfo.getDecorateState())){
+				obj.add(DecorateState.valueOf(houseInfo.getDecorateState()).getName());
+			}else {
+				obj.add("");
+			}
+			obj.add(houseInfo.getRemark());
 			tmpList.add(obj);
  		}
-		for (Map.Entry<String, List<Object[]>> entry : dataMap.entrySet()) {
+		for (Map.Entry<String, List<List<Object>>> entry : dataMap.entrySet()) {
 			dataList.add(entry.getValue());
 			buildingList.add(entry.getKey());
 		}

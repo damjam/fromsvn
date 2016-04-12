@@ -1,6 +1,5 @@
 package com.ylink.cim.manage.domain;
 
-import java.io.File;
 import java.util.Date;
 
 /**
@@ -41,23 +40,32 @@ public class OwnerInfo extends BranchField implements java.io.Serializable {
 	private String hasAcct;
 	private Double area;
 	private String branchNo;
-	private String fileName;
-	private File file;
-
-	public File getFile() {
-		return file;
+	private String instancyPerson;
+	private String instancyTel;
+	private String createType;
+	
+	public String getCreateType() {
+		return createType;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
+	public void setCreateType(String createType) {
+		this.createType = createType;
 	}
 
-	public String getFileName() {
-		return fileName;
+	public String getInstancyPerson() {
+		return instancyPerson;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setInstancyPerson(String instancyPerson) {
+		this.instancyPerson = instancyPerson;
+	}
+
+	public String getInstancyTel() {
+		return instancyTel;
+	}
+
+	public void setInstancyTel(String instancyTel) {
+		this.instancyTel = instancyTel;
 	}
 
 	public String getBranchNo() {

@@ -129,7 +129,7 @@
 							 		<td>${element.branchName}</td>
 							 	</c:if>
 								<td>${element.name}</td>
-								<td><f:type className="SexType" value="${element.gender}"/> </td>
+								<td>${element.gender}</td>
 								<td>${element.positionName}</td>
 								<td>${element.tel}</td>
 								<td>${element.livePlace}</td>

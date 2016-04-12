@@ -31,6 +31,10 @@
 					var url="${uri}?action=toImport";
 					gotoUrl(url);   
 				});
+				$('#btnExport').click(function(){
+					var url="${uri}?action=export";
+					gotoUrl(url);
+				});
 			});
 			function updateInfo(id){
 				gotoUrl('${uri}?action=toUpdate&id='+id);
@@ -90,6 +94,7 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>&nbsp;
 								<input type="button" value="导入" id="btnImport"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -127,7 +132,7 @@
 							 		<td>${element.branchName}</td>
 							 	</c:if>
 								<td>${element.ownerName}</td>
-								<td><f:type className="SexType" value="${element.gender}"/> </td>
+								<td>${element.gender}</td>
 								<td>${element.idCard}</td>
 								<td>${element.mobile}</td>
 								<td>${element.email}</td>

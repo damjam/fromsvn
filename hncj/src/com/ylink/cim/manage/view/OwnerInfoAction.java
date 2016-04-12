@@ -1,8 +1,10 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,26 +12,28 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.OwnerGrade;
 import com.ylink.cim.common.type.SexType;
-import com.ylink.cim.manage.dao.HouseInfoDao;
+import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.AccountService;
 import com.ylink.cim.manage.service.OwnerInfoService;
+import com.ylink.cim.util.ExcelReadUtil;
+import com.ylink.cim.util.ExportExcelUtil;
 
-import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.DateUtil;
+import flink.util.LogUtils;
 import flink.util.Paginater;
+import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
 
 @Scope("prototype")
@@ -41,13 +45,11 @@ public class OwnerInfoAction extends BaseAction implements
 	 */
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	private OwnerInfoDao OwnerInfoDao;
+	private OwnerInfoDao ownerInfoDao;
 	@Autowired
 	private OwnerInfoService ownerInfoService;
 	@Autowired
 	private AccountService accountService;
-	@Autowired
-	private HouseInfoDao houseInfoDao;
 
 	public String cancel() throws Exception {
 		try {
@@ -95,8 +97,16 @@ public class OwnerInfoAction extends BaseAction implements
 	}
 
 	public String doImport() throws Exception {
-		InputStream is = new FileInputStream(model.getFile());
+		InputStream is = new FileInputStream(this.getFile());
 		try {
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
+			String importRule = StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule";
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService(importRule);
+			List<List<Map<String, Object>>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			Integer totalCnt = ownerInfoService.addFromExcel(list, getSessionUser(request));
+			/*
 			Workbook book = null;
 			String fileName = model.getFileName();
 			if (fileName.toLowerCase().endsWith(".xls")) {
@@ -171,9 +181,9 @@ public class OwnerInfoAction extends BaseAction implements
 				}
 			}
 			ownerInfoService.importOwnerInfo(list, getSessionUser(request));
-			StringBuilder message = new StringBuilder();
-			message.append("操作完成，共导入").append(list.size()).append("条记录");
-			setResult(true, message.toString(), request);
+			*/
+			String msg = LogUtils.r("操作完成，共导入{?}条记录", totalCnt);
+			setResult(true, msg, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			setResult(false, "操作失败:" + e.getMessage(), request);
@@ -184,9 +194,59 @@ public class OwnerInfoAction extends BaseAction implements
 		return "import";
 	}
 
+	public String export() throws Exception {
+		Map<String, Object> map = getParaMap();
+		map.put("ownerName", model.getOwnerName());
+		map.put("houseSn", model.getHouseSn());
+		Paginater paginater = ownerInfoDao.findPager(map, null);//不再分页
+		List<List<List<Object>>> dataList = new ArrayList<>();
+		Map<String, List<List<Object>>> dataMap = new HashMap<>();
+		List<String> buildingList = new ArrayList<>();
+		for (int i = 0, size = paginater.getList().size(); i < size; i++) {
+			OwnerInfo ownerInfo = (OwnerInfo)paginater.getList().get(i);
+			String houseSn = ownerInfo.getHouseSn();
+			String buildingNo = houseSn.split("-")[0];
+			//HouseInfo houseInfo = houseInfoDao.findById(ownerInfo.getHouseSn());
+			List<List<Object>> tmpList = dataMap.get(buildingNo);//
+			if (tmpList == null) {
+				tmpList = new ArrayList<>();
+				dataMap.put(buildingNo, tmpList);
+			}
+			List<Object> obj = new ArrayList<>();
+			obj.add(ownerInfo.getHouseSn());
+			//obj.add(houseInfo.getArea());
+			obj.add(ownerInfo.getOwnerName());
+			obj.add(ownerInfo.getGender());
+			obj.add(ownerInfo.getMobile());
+			obj.add(ownerInfo.getIdCard());
+			obj.add(ownerInfo.getInstancyPerson());
+			obj.add(ownerInfo.getInstancyTel());
+			obj.add(ownerInfo.getCarNum());
+			obj.add(ownerInfo.getRemark());
+			tmpList.add(obj);
+ 		}
+		for (Map.Entry<String, List<List<Object>>> entry : dataMap.entrySet()) {
+			dataList.add(entry.getValue());
+			buildingList.add(entry.getKey());
+		}
+		String branchName = "";
+		if(!super.isHQ()){
+			String branchNo = getSessionBranchNo(request);
+			branchName = BranchType.valueOf(branchNo).getName();
+		}
+		String fileName = branchName+"业主信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String title = "";
+		String exportRule = StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule";
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(exportRule);
+		String excelType = ParaManager.getExcelType(getSessionBranchNo(request));
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
+		exportExcelUtil.exportSheets();
+		return null;
+	}
+	
 	public String doUpdate() throws Exception {
 		try {
-			OwnerInfo ownerInfo = OwnerInfoDao.findById(model.getId());
+			OwnerInfo ownerInfo = ownerInfoDao.findById(model.getId());
 			OwnerInfo owner = (OwnerInfo) BeanUtils.cloneBean(ownerInfo);
 			BeanUtils.copyProperties(ownerInfo, model);
 			ownerInfo.setCreateDate(owner.getCreateDate());
@@ -213,7 +273,7 @@ public class OwnerInfoAction extends BaseAction implements
 		}else {//机构
 			map.put("branchNo", getSessionBranchNo(request));
 		}
-		Paginater paginater = OwnerInfoDao.findPager(map, getPager(request));
+		Paginater paginater = ownerInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/owner/ownerInfoList.jsp");
 		return "list";
@@ -238,19 +298,19 @@ public class OwnerInfoAction extends BaseAction implements
 	}
 
 	public String toImport() throws Exception {
-
 		// return forward("/pages/manage/owner/ownerInfoImport.jsp");
+		request.setAttribute("templateName", "业主信息导入模板"+"."+ParaManager.getExcelType(getSessionBranchNo(request)));
 		return "import";
 	}
 
 	public String toUpdate() throws Exception {
 		initSelect(request);
 		String id = request.getParameter("id");
-		OwnerInfo ownerInfo = OwnerInfoDao.findById(id);
+		OwnerInfo ownerInfo = ownerInfoDao.findById(id);
 
 		BeanUtils.copyProperties(model, ownerInfo);
 		// return forward("/pages/manage/owner/ownerInfoUpdate.jsp");
-		return "update";
+		return "edit";
 	}
 
 	@Override
@@ -259,4 +319,24 @@ public class OwnerInfoAction extends BaseAction implements
 	}
 
 	private OwnerInfo model = new OwnerInfo();
+	
+	private String fileFileName;
+	private File file;
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+	
 }
