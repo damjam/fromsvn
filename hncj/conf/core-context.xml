@@ -34,9 +34,10 @@
 		<property name="url" value="${url}"/>
 		<property name="username" value="${username}"/>
 		<property name="password" value="${password}"/>
-		<property name="validationQuery" value="select 1"/>
+		<property name="validationQuery" value="select 1 from dual"/>
 		<property name="initialSize" value="2"/>
 		<property name="maxActive" value="100"/>
+		<property name="testOnBorrow" value="true"/>
 	</bean>
 
 	<bean id="sessionFactory"
@@ -118,6 +119,7 @@
 
 	<import resource="biz-context-dao.xml" />
 	<import resource="constantConfig.xml" />
+	<import resource="excelConfig.xml" />
 <!--	<import resource="biz-context-beans.xml" />-->
 
 </beans>
