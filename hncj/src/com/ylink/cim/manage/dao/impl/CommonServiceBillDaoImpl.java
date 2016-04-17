@@ -135,4 +135,15 @@ public class CommonServiceBillDaoImpl extends BaseDaoImpl implements
 		}
 	}
 
+	@Override
+	public List<CommonServiceBill> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from CommonServiceBill where 1=1");
+		helper.append("and startDate = ?", MapUtils.getString(params, "startDate"));
+		helper.append("and endDate = ?", MapUtils.getString(params, "endDate"));
+		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		return super.getList(helper);
+	}
+
 }

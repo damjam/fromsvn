@@ -1,6 +1,10 @@
 package com.ylink.cim.manage.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +14,7 @@ import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.manage.service.BillTrackService;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.CheckinState;
+import com.ylink.cim.common.state.DecorateState;
 import com.ylink.cim.common.type.BillType;
 import com.ylink.cim.common.type.IcCardType;
 import com.ylink.cim.common.type.InputTradeType;
@@ -35,6 +40,7 @@ import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.ElecBill;
 import com.ylink.cim.manage.domain.GeneralBill;
+import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.HouseRentBill;
 import com.ylink.cim.manage.domain.IcDeposit;
 import com.ylink.cim.manage.domain.OwnerInfo;
@@ -423,4 +429,5 @@ public class BillServiceImpl implements BillService {
 		bill.setChargeDate(DateUtil.getCurrent());
 		houseRentBillDao.update(bill);
 	}
+
 }

@@ -94,6 +94,7 @@
 					$('#checkinState').attr('disabled', true);
 					if(totalAmt > 0){
 						$('#totalAmount').val(totalAmt);
+						$('#paidAmount').val(totalAmt);
 					}
 				}
 			}
@@ -138,10 +139,13 @@
 				    	 if(checkinState == '0'){
 				    		 serviceAmount = serviceAmount*0.8;
 					    	 $('#lightAmount').val(0);
-					    	 $('#totalAmount').val(parseFloat(serviceAmount).toFixed(2));
+					    	 var totalAmount = parseFloat(serviceAmount).toFixed(2);
+					    	 $('#totalAmount').val(totalAmount);
+					    	 $('#paidAmount').val(totalAmount);
 				    	 }else{
 					    	 $('#lightAmount').val(lightAmount);
 					    	 $('#totalAmount').val(totalAmount);
+					    	 $('#paidAmount').val(totalAmount);
 				    	 }
 					 },
 					 error:function(data){   
@@ -158,6 +162,7 @@
 					$('#tr2').show();
 					if(totalAmt > 0){
 						$('#totalAmount').val(totalAmt);
+						$('#paidAmount').val(totalAmt);
 						$('#lightPrice').val(lightPri);
 						$('#lightAmount').val(lightAmt);
 						$('#serviceAmount').val(serviceAmt);
@@ -172,6 +177,7 @@
 						var adAmt = serviceAmt*0.8;
 						adAmt = adAmt.toFixed(2);
 						$('#totalAmount').val(adAmt);
+						$('#paidAmount').val(adAmt);
 						$('#remark').val('业主未入住，物业费收80%');
 					}
 					$('#suPayState').val('N');
@@ -183,11 +189,14 @@
 					var suServiceAmt = serviceAmt*0.2;
 					suServiceAmt = suServiceAmt.toFixed(2);
 					$('#serviceAmount').val(suServiceAmt);
-					$('#totalAmount').val((parseFloat(suServiceAmt)+parseFloat(lightAmt)).toFixed(2));
+					var totalAmount = (parseFloat(suServiceAmt)+parseFloat(lightAmt)).toFixed(2);
+					$('#totalAmount').val(totalAmount);
+					$('#paidAmount').val(totalAmount);
 					$('#remark').val('补缴20%物业费及公共照明费');
 				}else{
 					$('#serviceAmount').val(serviceAmt);
 					$('#totalAmount').val(totalAmt);
+					$('#paidAmount').val(totalAmt);
 					$('#remark').val('');
 				}
 			}
@@ -294,6 +303,13 @@
 						    <td class="formlabel nes">合计金额</td>
 						    <td>
 						    <s:textfield name="totalAmount"  id="totalAmount" class="{required:true,num:true}" maxlength="8"/>
+						    	<span class="field_tipinfo">请输入正确的数字</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">实收金额</td>
+						    <td>
+						    <s:textfield name="paidAmount"  id="paidAmount" class="{required:true,num:true}" maxlength="8"/>
 						    	<span class="field_tipinfo">请输入正确的数字</span>
 						    </td>
 					   </tr>

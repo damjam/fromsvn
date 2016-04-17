@@ -24,7 +24,7 @@ import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.service.HouseInfoService;
-import com.ylink.cim.util.ExcelReadUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 import com.ylink.cim.util.ExportExcelUtil;
 
 import flink.etc.BizException;
@@ -194,7 +194,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//À©Õ¹Ãû
 			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoImportRule");
-			List<List<Map<String, Object>>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, houseInfoRule);
 			houseInfoService.addFromExcel(list, getSessionUser(request));
 			setSucResult(request);
 		}catch (Exception e){

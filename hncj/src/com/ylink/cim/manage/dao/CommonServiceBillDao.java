@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.ylink.cim.manage.domain.CommonServiceBill;
@@ -15,4 +16,6 @@ public interface CommonServiceBillDao extends BaseDao {
 	public Map<String, Object> findSumInfo(Map<String, Object> map);
 
 	public CommonServiceBill getLastBill(Map<String, Object> map);
+
+	public List<CommonServiceBill> findList(Map<String, Object> params);
 }

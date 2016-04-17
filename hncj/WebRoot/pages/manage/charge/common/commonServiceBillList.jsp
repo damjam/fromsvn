@@ -26,7 +26,12 @@
 				$('#btnAdd').click(function(){
 					gotoUrl('${uri}?action=toAdd');
 				});
-				
+				$('#btnImport').click(function(){
+					gotoUrl('${uri}?action=toImport');
+				});
+				$('#btnExport').click(function(){
+					gotoUrl('${uri}?action=export');
+				});
 			});
 			function charge(id){
 				if(window.confirm("确认收费?")){
@@ -99,7 +104,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="新增" id="btnAdd"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>
 							</td>
 						</tr>
 					</table>
@@ -141,13 +148,14 @@
 						 		<td>${element.branchName}</td>
 						 	</c:if>
 						 	<td >账单号</td>
-						 	<td>业主姓名</td>
 						 	<td>房屋编号</td>
 						 	<td>房屋面积</td>
+						 	<td>业主姓名</td>
 						    <td>计费起止日期</td>
 						    <td>物业费单价</td>
 						    <td>公共能源费单价</td>
 						    <td>合计金额</td>
+						    <td>实收金额</td>
 						    <td>缴费时间</td>
 						    <td>收款人</td>
 						    <td>状态</td>
@@ -163,13 +171,14 @@
 							 		<td>${element.branchName}</td>
 							 	</c:if>
 								<td>${element.id}</td>
-								<td>${element.ownerName}</td>
 								<td>${element.houseSn}</td>
 								<td><fmt:formatNumber value="${element.area }" pattern="##0.00"/></td>
+								<td>${element.ownerName}</td>
 								<td>${element.startDate}—${element.endDate}</td>
 								<td><fmt:formatNumber value="${element.servicePrice}" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.lightPrice}" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.totalAmount}" pattern="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.paidAmount}" pattern="##0.00"/></td>
 								<td><fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.chargeUser}</td>
 								<td>

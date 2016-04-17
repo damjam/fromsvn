@@ -202,4 +202,174 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	<!-- 物业费导入格式 -->           
+	<bean id="csbImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 账单号 -->
+				<map>
+					<entry key="fieldName" value="id"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 面积 -->
+				<map>
+					<entry key="fieldName" value="area"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 业主姓名-->
+				<map>
+					<entry key="fieldName" value="ownerName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 开始日期-->
+				<map>
+					<entry key="fieldName" value="startDate"></entry>
+					<entry key="cellType" value="Date"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 结束日期-->
+				<map>
+					<entry key="fieldName" value="endDate"></entry>
+					<entry key="cellType" value="Date"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 物业费单价 -->
+				<map>
+					<entry key="fieldName" value="servicePrice"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 公共能源费单价 -->
+				<map>
+					<entry key="fieldName" value="lightPrice"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 合计金额-->
+				<map>
+					<entry key="fieldName" value="totalAmount"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 实收金额-->
+				<map>
+					<entry key="fieldName" value="paidAmount"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 缴费时间-->
+				<map>
+					<entry key="fieldName" value="chargeDate"></entry>
+					<entry key="cellType" value="DateTime"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 收款人-->
+				<map>
+					<entry key="fieldName" value="chargeUser"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 状态-->
+				<map>
+					<entry key="fieldName" value="state"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>	
+		<!-- 物业费导出格式 -->           
+	<bean id="csbExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 账单号 -->
+				<map>
+					<entry key="fieldName" value="账单号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 面积 -->
+				<map>
+					<entry key="fieldName" value="面积"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 业主姓名-->
+				<map>
+					<entry key="fieldName" value="业主姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 开始日期-->
+				<map>
+					<entry key="fieldName" value="开始日期"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 结束日期-->
+				<map>
+					<entry key="fieldName" value="结束日期"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 物业费单价 -->
+				<map>
+					<entry key="fieldName" value="物业费单价(元/月.㎡)"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 公共能源费单价 -->
+				<map>
+					<entry key="fieldName" value="能源费单价(元/月)"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 合计金额-->
+				<map>
+					<entry key="fieldName" value="合计金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="dataFormat" value="0.00"></entry>
+				</map>
+				<!-- 实收金额-->
+				<map>
+					<entry key="fieldName" value="实收金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="dataFormat" value="0.00"></entry>
+				</map>
+				<!-- 缴费时间-->
+				<map>
+					<entry key="fieldName" value="缴费时间"></entry>
+					<entry key="cellType" value="DateTime"></entry>
+				</map>
+				<!-- 收款人-->
+				<map>
+					<entry key="fieldName" value="收款人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 状态-->
+				<map>
+					<entry key="fieldName" value="收款状态"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
 </beans>

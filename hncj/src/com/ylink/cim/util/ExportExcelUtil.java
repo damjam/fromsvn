@@ -3,22 +3,27 @@ package com.ylink.cim.util;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import flink.util.DateUtil;
 
 /**
  * 导出Excel公共方法
@@ -267,6 +272,13 @@ public class ExportExcelUtil {
 						}else {
 							cell.setCellValue("");
 						}
+					}else if("DateTime".equals(cellType)){
+						cell = row.createCell(j, Cell.CELL_TYPE_NUMERIC);
+						//style.setDataFormat(HSSFDataFormat.getBuiltinFormat("yyyy-MM-dd HH:mm:ss"));
+						if (obj.get(j) != null) {
+							//cell.setCellValue((Date)obj.get(j));
+							cell.setCellValue(DateUtil.getPrettyDateTime((Date)obj.get(j)));
+						}
 					}else if ("Double".equals(cellType)) {
 						cell = row.createCell(j, Cell.CELL_TYPE_NUMERIC);
 						if (obj.get(j) != null) {
@@ -285,6 +297,10 @@ public class ExportExcelUtil {
 					style.setAlignment(CellStyle.ALIGN_LEFT);
 				}else if ("right".equals(textAlign)) {
 					style.setAlignment(CellStyle.ALIGN_RIGHT);
+				}
+				String dataFormat = rowRule.get("dataFormat");
+				if("0.00".equals(dataFormat)){
+					style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00"));
 				}
 				cell.setCellStyle(style); // 设置单元格样式
 			}
@@ -311,11 +327,12 @@ public class ExportExcelUtil {
 					}
 				}
 			}
-			if (colNum == 0) {
+			sheet.setColumnWidth(colNum, (columnWidth + 4) * 256);
+			/*if (colNum == 0) {
 				sheet.setColumnWidth(colNum, (columnWidth - 2) * 256);
 			} else {
 				sheet.setColumnWidth(colNum, (columnWidth + 4) * 256);
-			}
+			}*/
 		}
 	}
 }

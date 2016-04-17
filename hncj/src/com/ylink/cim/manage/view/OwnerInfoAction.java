@@ -25,7 +25,7 @@ import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.AccountService;
 import com.ylink.cim.manage.service.OwnerInfoService;
-import com.ylink.cim.util.ExcelReadUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 import com.ylink.cim.util.ExportExcelUtil;
 
 import flink.etc.BizException;
@@ -104,7 +104,7 @@ public class OwnerInfoAction extends BaseAction implements
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//À©Õ¹Ãû
 			String importRule = StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule";
 			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService(importRule);
-			List<List<Map<String, Object>>> list = ExcelReadUtil.read(fis, suffix, houseInfoRule);
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, houseInfoRule);
 			Integer totalCnt = ownerInfoService.addFromExcel(list, getSessionUser(request));
 			/*
 			Workbook book = null;

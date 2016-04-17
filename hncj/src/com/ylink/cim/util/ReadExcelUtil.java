@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import flink.etc.BizException;
 import flink.etc.Symbol;
 
-public class ExcelReadUtil {
+public class ReadExcelUtil {
 
 	public static List<List<Map<String, Object>>> read(FileInputStream fis, String suffix, List<Map<String, String>> rules) throws Exception {
 		int i=0,j=1,k =0;
@@ -49,7 +49,6 @@ public class ExcelReadUtil {
 						String notNull = rule.get("notNull");
 						String fieldName = rule.get("fieldName");
 						Cell cell = row.getCell(k);
-						
 						Object cellValue = null;
 						if (cell == null) {
 							if (Symbol.YES.equals(notNull)) {
@@ -59,17 +58,27 @@ public class ExcelReadUtil {
 							}
 						}
 						if ("String".equals(cellType)) {
-							cellValue = cell.getStringCellValue();
-
+							if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+								cellValue = String.valueOf(cell.getNumericCellValue());
+							}else {
+								cellValue = cell.getStringCellValue();
+							}
 						} else if ("Double".equals(cellType)) {
 							cellValue = cell.getNumericCellValue();
-
 						} else if ("Integer".equals(cellType)) {
 							cellValue = (int) cell.getNumericCellValue();
 						} else if ("Date".equals(cellType)) {
 							Double cellDateValue = cell.getNumericCellValue();
 							Date date = DateUtil.getJavaDate(cellDateValue);
 							cellValue = flink.util.DateUtil.getDateYYYYMMDD(date);
+						} else if ("Time".equals(cellType)) {
+							Double cellDateValue = cell.getNumericCellValue();
+							Date date = DateUtil.getJavaDate(cellDateValue);
+							cellValue = date;
+						}else if ("DateTime".equals(cellType)) {
+							Double cellDateValue = cell.getNumericCellValue();
+							Date date = DateUtil.getJavaDate(cellDateValue);
+							cellValue = date;
 						}
 						rowValues.put(fieldName, cellValue);
 					}

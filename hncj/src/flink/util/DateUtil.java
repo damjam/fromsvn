@@ -93,7 +93,6 @@ public abstract class DateUtil {
 	public static String formatDate(String pattern, Date date) {
 		return new SimpleDateFormat(pattern).format(date);
 	}
-	
 	public static Date getCurrent() {
     	return new Date();
     }
@@ -121,6 +120,9 @@ public abstract class DateUtil {
 	public static String getCurrentPrettyDateTime()
 	{
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+	public static String getPrettyDateTime(Date date) {
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 	}
 
 	/**

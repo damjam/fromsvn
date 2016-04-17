@@ -4,6 +4,9 @@
 <struts>
 
 	<package name="manage" extends="default" namespace="/">
+		<global-results>
+			<result name="import">/pages/manage/common/commonImport.jsp</result>
+		</global-results>
 		<action name="waterRecord" class="waterRecordAction">
 			<result name="list">/pages/manage/meter/water/waterRecordList.jsp</result>
 			<result name="add">/pages/manage/meter/water/waterRecordAdd.jsp</result>
@@ -19,15 +22,12 @@
 		<action name="ownerInfo" class="ownerInfoAction">
 			<result name="add">/pages/manage/owner/ownerInfoAdd.jsp</result>
 			<result name="edit">/pages/manage/owner/ownerInfoUpdate.jsp</result>
-			<result name="import">/pages/manage/owner/ownerInfoImport.jsp</result>
 			<result name="list">/pages/manage/owner/ownerInfoList.jsp</result>
 			<result name="toMain" type="redirect">ownerInfo.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="houseInfo" class="houseInfoAction">
 			<result name="list">/pages/manage/house/houseInfoList.jsp</result>
-			<result name="import">/pages/manage/owner/ownerInfoImport.jsp</result>
 			<result name="add">/pages/manage/house/houseInfoAdd.jsp</result>
-			<result name="import">/pages/manage/house/houseInfoImport.jsp</result>
 			<result name="toMain" type="redirect">houseInfo.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		

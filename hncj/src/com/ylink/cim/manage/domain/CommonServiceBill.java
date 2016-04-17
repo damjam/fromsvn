@@ -37,6 +37,26 @@ public class CommonServiceBill extends BranchField implements java.io.Serializab
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
+	private Double paidAmount;
+	private String createType;
+	
+	
+	public String getCreateType() {
+		return createType;
+	}
+
+	public void setCreateType(String createType) {
+		this.createType = createType;
+	}
+	
+
+	public Double getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(Double paidAmount) {
+		this.paidAmount = paidAmount;
+	}
 
 	public String getYear() {
 		return year;

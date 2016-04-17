@@ -271,8 +271,8 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 	}
 
 	@Override
-	public void addFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException {
-		
+	public Integer addFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException {
+		Integer totalCnt = 0;
 		for (int i = 0; i < list.size(); i++) {
 			List<Map<String, Object>> rows = list.get(i);
 			for (int j = 0; j < rows.size(); j++) {
@@ -324,8 +324,10 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 				houseInfo.setPosition(position);
 				houseInfo.setHouseDesc(getHouseDesc(houseInfo));
 				houseInfoDao.save(houseInfo);
+				totalCnt++;
 			}
 		}
+		return totalCnt;
 	}
 
 }

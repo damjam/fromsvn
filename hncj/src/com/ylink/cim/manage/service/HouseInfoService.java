@@ -14,6 +14,6 @@ public interface HouseInfoService {
 
 	void add(HouseInfo houseInfo, UserInfo sessionUser) throws BizException;
 
-	void addFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException;
+	Integer addFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException;
 
 }
