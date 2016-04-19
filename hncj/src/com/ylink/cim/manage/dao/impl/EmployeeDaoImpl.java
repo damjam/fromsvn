@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -36,6 +37,15 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao {
 		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
 		helper.orderBy("id", "desc");
 		return super.getPageData(helper, pager);
+	}
+
+	@Override
+	public List<Employee> findExist(Map<String, Object> map) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from Employee where 1=1");
+		helper.append("and name = ?", MapUtils.getString(map, "name"));
+		helper.append("and tel = ?", MapUtils.getString(map, "tel"));
+		return super.getList(helper);
 	}
 
 }

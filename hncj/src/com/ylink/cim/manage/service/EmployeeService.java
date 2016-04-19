@@ -1,5 +1,8 @@
 package com.ylink.cim.manage.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.domain.Employee;
 
@@ -18,5 +21,7 @@ public interface EmployeeService {
 	void update(Employee model, UserInfo sessionUser) throws BizException;
 
 	void delete(String id) throws BizException;
+	
+	Integer addFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws BizException;
 
 }

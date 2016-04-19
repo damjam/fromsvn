@@ -98,5 +98,8 @@
 		<property name="major" type="java.lang.String">
 			<column name="major" length="100" />
 		</property>
+		<property name="createType" type="java.lang.String">
+			<column name="CREATE_TYPE" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

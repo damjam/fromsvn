@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- 业主导入格式 -->           
+	<bean id="ownerInfoImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 面积 -->
+				<map>
+					<entry key="fieldName" value="area"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 业主姓名-->
+				<map>
+					<entry key="fieldName" value="ownerName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 性别-->
+				<map>
+					<entry key="fieldName" value="gender"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 业主电话 -->
+				<map>
+					<entry key="fieldName" value="mobile"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 证件号码 -->
+				<map>
+					<entry key="fieldName" value="idCard"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 紧急联系人-->
+				<map>
+					<entry key="fieldName" value="instancyPerson"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 紧急联系人电话-->
+				<map>
+					<entry key="fieldName" value="instancyTel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- 业主导出格式 -->           
+	<bean id="ownerInfoExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 面积 -->
+				<!-- 
+				<map>
+					<entry key="fieldName" value="面积"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map> -->
+				<!-- 业主姓名-->
+				<map>
+					<entry key="fieldName" value="姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 性别-->
+				<map>
+					<entry key="fieldName" value="性别"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 业主电话 -->
+				<map>
+					<entry key="fieldName" value="电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 证件号码 -->
+				<map>
+					<entry key="fieldName" value="证件号码"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 紧急联系人-->
+				<map>
+					<entry key="fieldName" value="紧急联系人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 紧急联系人电话-->
+				<map>
+					<entry key="fieldName" value="紧急联系人电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车辆数-->
+				<map>
+					<entry key="fieldName" value="车辆数"></entry>
+					<entry key="cellType" value="Integer"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>	

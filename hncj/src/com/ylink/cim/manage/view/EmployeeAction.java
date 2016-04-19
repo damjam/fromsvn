@@ -1,5 +1,9 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.EmployeeState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.SexType;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
@@ -17,9 +23,14 @@ import com.ylink.cim.manage.dao.EmployeeDao;
 import com.ylink.cim.manage.domain.EmpTransfer;
 import com.ylink.cim.manage.domain.Employee;
 import com.ylink.cim.manage.service.EmployeeService;
+import com.ylink.cim.manage.service.ImportService;
+import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.BizException;
+import flink.util.DateUtil;
 import flink.util.Paginater;
+import flink.util.SpringContext;
 import flink.web.BaseAction;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -37,6 +48,8 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 	private EmployeeDao employeeDao;
 	@Autowired
 	private EmpTransferDao empTransferDao;
+	@Autowired
+	private ImportService importService;
 	
 	@Override
 	public Employee getModel() {
@@ -50,6 +63,8 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		map.put("endCreateDate", model.getEndCreateDate());
 		map.put("state", model.getState());
 		map.put("tel", model.getTel());
+		map.put("name", model.getName());
+		
 		if (isHQ()) {//总部
 			map.put("branchNo", model.getBranchNo());
 		}else {//机构
@@ -194,8 +209,88 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		return "toMain";
 	}
 	public String export() throws Exception {
-		
+		Map<String, Object> map = getParaMap();
+		map.put("state", model.getState());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
+		Paginater paginater = employeeDao.findPager(map, null);
+		List<Employee> list = paginater.getList();
+		List<List<List<Object>>> dataList = new ArrayList<>();
+		Map<String, List<List<Object>>> dataMap = new HashMap<>();
+		List<String> sheetNameList = new ArrayList<>();
+		for (int i = 0, size = list.size(); i < size; i++) {
+			Employee employee = (Employee)list.get(i);
+			String branchNo = employee.getBranchNo();
+			String branchName = ParaManager.getBranches(true).get(branchNo);
+			List<List<Object>> tmpList = dataMap.get(branchName);
+			if (tmpList == null) {
+				tmpList = new ArrayList<>();
+				dataMap.put(branchName, tmpList);
+			}
+			List<Object> obj = new ArrayList<>();
+			obj.add(employee.getName());
+			obj.add(employee.getGender());
+			obj.add(employee.getPositionName());
+			obj.add(employee.getTel());
+			obj.add(employee.getSpareTel());//备用电话
+			obj.add(employee.getLivePlace());
+			obj.add(employee.getHireDate());
+			obj.add(employee.getState());
+			//
+			obj.add(employee.getIdCard());
+			obj.add(employee.getBirthday());
+			obj.add(employee.getNativePlace());//户籍地址
+			obj.add(employee.getDegree());
+			obj.add(employee.getMajor());
+			obj.add(employee.getSchool());
+			obj.add(employee.getInstancyPerson());
+			obj.add(employee.getInstancyTel());
+			obj.add(employee.getEmail());
+			obj.add(employee.getWeixin());
+			obj.add(employee.getWeibo());
+			obj.add(employee.getQq());
+			obj.add(employee.getHobby());
+			obj.add(employee.getReview());
+			tmpList.add(obj);
+ 		}
+		for (Map.Entry<String, List<List<Object>>> entry : dataMap.entrySet()) {
+			dataList.add(entry.getValue());
+			sheetNameList.add(entry.getKey());
+		}
+		String fileName = "员工信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
+		String title = "";
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService("employeeExportRule");
+		String excelType = ParaManager.getExcelType(getSessionBranchNo(request));
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, sheetNameList.toArray(new String[sheetNameList.size()]), rules, dataList, excelType, response);
+		exportExcelUtil.exportSheets();
 		return null;
+	}
+	public String toImport() {
+		request.setAttribute("templateName", "员工信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
+		return "import";
+	}
+	public String doImport() {
+		try{
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
+			List<Map<String, String>> rule = (List<Map<String, String>>)SpringContext.getService("employeeImportRule");
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, rule);
+			Integer totalCnt = employeeService.addFromExcel(list, getSessionUser(request));
+			setSucResult("共导入"+totalCnt+"条记录",request);
+		}catch (Exception e){
+			e.printStackTrace();
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败"+e.getMessage(), request);
+			}
+			return toImport();
+		}
+		return "toMain";
 	}
 	public String loadPosts() throws Exception {
 		JSONObject object = new JSONObject();
@@ -235,5 +330,23 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		request.setAttribute("bindCode", request.getParameter("bindCode"));
 		request.setAttribute("bindName", request.getParameter("bindName"));
 		return "popup";
+	}
+	private File file;
+	private String fileFileName;
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 }

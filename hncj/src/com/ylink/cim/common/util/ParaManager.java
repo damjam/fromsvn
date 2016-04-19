@@ -334,6 +334,9 @@ public abstract class ParaManager {
 		if (StringUtils.isEmpty(value)) {
 			value = getPara("excelType");
 		}
+		if (StringUtils.isEmpty(value)) {
+			value = "xlsx";
+		}
 		return value;
 	}
 }

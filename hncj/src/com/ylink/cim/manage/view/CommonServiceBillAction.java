@@ -37,6 +37,7 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
 import net.sf.json.JSONObject;
 
@@ -222,7 +223,7 @@ public class CommonServiceBillAction extends BaseAction implements
 	}
 
 	public String toImport() {
-		
+		request.setAttribute("templateName", "物业费信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
 		return "import";
 	}
 	public String doImport() {
@@ -230,7 +231,7 @@ public class CommonServiceBillAction extends BaseAction implements
 			File file = this.getFile();
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
-			List<Map<String, String>> csbRule = (List<Map<String, String>>)SpringContext.getService("csbImportRule");
+			List<Map<String, String>> csbRule = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule");
 			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, csbRule);
 			Integer totalCnt = importService.addCSBFromExcel(list, getSessionUser(request));
 			setSucResult("共导入"+totalCnt+"条记录",request);
@@ -291,9 +292,9 @@ public class CommonServiceBillAction extends BaseAction implements
 			buildingList.add(entry.getKey());
 		}
 		String branchName = BranchType.valueOf(branchNo).getName();
-		String fileName = branchName+"物业费缴费信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String fileName = branchName+"物业费缴费信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
 		String title = "";
-		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService("csbExportRule");
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
 		String excelType = ParaManager.getExcelType(branchName);
 		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
 		exportExcelUtil.exportSheets();

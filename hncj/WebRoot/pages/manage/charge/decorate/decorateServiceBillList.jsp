@@ -26,6 +26,14 @@
 				$('#btnAdd').click(function(){
 					gotoUrl('${uri}?action=toAdd');
 				});
+				$('#btnImport').click(function(){
+					var url="${uri}?action=toImport";
+					gotoUrl(url);   
+				});
+				$('#btnExport').click(function(){
+					var url="${uri}?action=export";
+					gotoUrl(url);   
+				});
 				
 			});
 			function charge(id){
@@ -42,6 +50,7 @@
 				}
 				gotoUrl('${uri}?action=deleteBill&id='+id);
 			}
+			
 		</script> 
 	</head>
 	<body>
@@ -98,7 +107,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="新增" id="btnAdd"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 							</td>
 						</tr>
 					</table>

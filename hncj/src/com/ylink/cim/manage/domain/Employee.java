@@ -42,6 +42,7 @@ public class Employee extends BranchField implements Serializable{
 	private String hobby;
 	private String degree;
 	private String weixin;
+	private String createType;
 	private EmpTransfer empTransfer = new EmpTransfer();
 	
 	
@@ -248,6 +249,12 @@ public class Employee extends BranchField implements Serializable{
 	}
 	public void setEmpTransfer(EmpTransfer empTransfer) {
 		this.empTransfer = empTransfer;
+	}
+	public String getCreateType() {
+		return createType;
+	}
+	public void setCreateType(String createType) {
+		this.createType = createType;
 	}
 	
 }

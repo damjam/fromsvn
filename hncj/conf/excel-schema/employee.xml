@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- 员工信息导入格式 -->           
+	<bean id="employeeImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 姓名 -->
+				<map>
+					<entry key="fieldName" value="name"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 性别 -->
+				<map>
+					<entry key="fieldName" value="gender"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 职位 -->
+				<map>
+					<entry key="fieldName" value="position"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 电话-->
+				<map>
+					<entry key="fieldName" value="tel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 备用电话-->
+				<map>
+					<entry key="fieldName" value="spareTel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 居住地址-->
+				<map>
+					<entry key="fieldName" value="livePlace"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 入职日期-->
+				<map>
+					<entry key="fieldName" value="hireDate"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 当前状态 -->
+				<map>
+					<entry key="fieldName" value="state"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 身份证号 -->
+				<map>
+					<entry key="fieldName" value="idcard"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 出生日期-->
+				<map>
+					<entry key="fieldName" value="birthday"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 籍贯地址-->
+				<map>
+					<entry key="fieldName" value="nativePlace"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 学历-->
+				<map>
+					<entry key="fieldName" value="degree"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 专业-->
+				<map>
+					<entry key="fieldName" value="major"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 毕业院校-->
+				<map>
+					<entry key="fieldName" value="school"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 紧急联系人 -->
+				<map>
+					<entry key="fieldName" value="instancyPerson"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 紧急联系人 电话-->
+				<map>
+					<entry key="fieldName" value="instancyTel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				
+				<map>
+					<entry key="fieldName" value="email"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="weixiin"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="weibo"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="QQ"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="hobby"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="review"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<!-- 员工信息导出格式 -->           
+	<bean id="employeeExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 姓名 -->
+				<map>
+					<entry key="fieldName" value="姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 性别 -->
+				<map>
+					<entry key="fieldName" value="性别"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 职位 -->
+				<map>
+					<entry key="fieldName" value="职位"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 电话-->
+				<map>
+					<entry key="fieldName" value="电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备用电话-->
+				<map>
+					<entry key="fieldName" value="备用电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 居住地址-->
+				<map>
+					<entry key="fieldName" value="居住地址"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 入职日期-->
+				<map>
+					<entry key="fieldName" value="入职日期"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 当前状态 -->
+				<map>
+					<entry key="fieldName" value="状态"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 身份证号 -->
+				<map>
+					<entry key="fieldName" value="身份证号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 出生日期-->
+				<map>
+					<entry key="fieldName" value="出生日期"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 籍贯地址-->
+				<map>
+					<entry key="fieldName" value="籍贯地址"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 学历-->
+				<map>
+					<entry key="fieldName" value="学历"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 专业-->
+				<map>
+					<entry key="fieldName" value="专业"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 毕业院校-->
+				<map>
+					<entry key="fieldName" value="毕业院校"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 紧急联系人 -->
+				<map>
+					<entry key="fieldName" value="紧急联系人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 紧急联系人 电话-->
+				<map>
+					<entry key="fieldName" value="紧急联系人电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				
+				<map>
+					<entry key="fieldName" value="邮箱"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="微信"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="微博"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="QQ"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="兴趣爱好"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<map>
+					<entry key="fieldName" value="个人简介"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>	

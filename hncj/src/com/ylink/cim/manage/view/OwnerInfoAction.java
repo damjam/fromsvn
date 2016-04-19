@@ -234,7 +234,7 @@ public class OwnerInfoAction extends BaseAction implements
 			String branchNo = getSessionBranchNo(request);
 			branchName = BranchType.valueOf(branchNo).getName();
 		}
-		String fileName = branchName+"业主信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String fileName = branchName+"业主信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
 		String title = "";
 		String exportRule = StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule";
 		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(exportRule);
@@ -298,8 +298,7 @@ public class OwnerInfoAction extends BaseAction implements
 	}
 
 	public String toImport() throws Exception {
-		// return forward("/pages/manage/owner/ownerInfoImport.jsp");
-		request.setAttribute("templateName", "业主信息导入模板"+"."+ParaManager.getExcelType(getSessionBranchNo(request)));
+		request.setAttribute("templateName", "业主信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
 		return "import";
 	}
 

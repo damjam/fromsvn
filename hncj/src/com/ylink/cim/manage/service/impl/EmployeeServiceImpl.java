@@ -1,7 +1,11 @@
 package com.ylink.cim.manage.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -105,5 +109,45 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void delete(String id) throws BizException {
 		employeeDao.deleteById(id);
 		empTransferDao.deleteByEmpId(id);
+	}
+	@Override
+	public Integer addFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws BizException {
+		Integer totalCnt = 0;
+		for (int i = 0; i < list.size(); i++) {
+			List<Map<String, Object>> rows = list.get(i);
+			for (int j = 0; j < rows.size(); j++) {
+				Map<String, Object> map = rows.get(j);
+				Employee obj = new Employee();
+				String name = MapUtils.getString(map, "name");
+				String tel = MapUtils.getString(map, "tel");
+				String idCard = MapUtils.getString(map, "idCard");
+				Map<String, Object> params = new HashMap<>();
+				params.put("name", name);
+				params.put("tel", tel);
+				params.put("idCard", idCard);
+				List<Employee> existEmps = employeeDao.findExist(params);
+				Assert.isEmpty(existEmps, "员工姓名为"+name+"的记录已存在");
+				try {
+					BeanUtils.populate(obj, map);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new BizException("程序出现异常");
+				}
+				String state = MapUtils.getString(map, "state");
+				if (StringUtils.isEmpty(state)) {
+					state = EmployeeState.NORMAL.getName();
+				}
+				
+				obj.setCreateType("表格导入");
+				//obj.setId(IdFactoryHelper.getId(Constants.BILL_ID));
+				obj.setCreateDate(DateUtil.getCurrent());
+				obj.setCreateUser(sessionUser.getUserName());
+				obj.setBranchNo(sessionUser.getBranchNo());
+				obj.setId(IdFactoryHelper.getId(Employee.class));
+				employeeDao.save(obj);
+				totalCnt++;
+			}
+		}
+		return totalCnt;
 	}
 }

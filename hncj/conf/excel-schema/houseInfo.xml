@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="houseInfoImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 面积 -->
+				<map>
+					<entry key="fieldName" value="area"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 交房状态-->
+				<map>
+					<entry key="fieldName" value="state"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 交房日期 -->
+				<map>
+					<entry key="fieldName" value="deliveryDate"></entry>
+					<entry key="cellType" value="Date"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 装修状态 -->
+				<map>
+					<entry key="fieldName" value="decorateState"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="houseInfoExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 面积 -->
+				<map>
+					<entry key="fieldName" value="面积"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="textAlign" value="right"></entry>
+				</map>
+				<!-- 交房日期 -->
+				<map>
+					<entry key="fieldName" value="交房日期"></entry>
+					<entry key="cellType" value="Date"></entry>
+				</map>
+				<!-- 装修状态 -->
+				<map>
+					<entry key="fieldName" value="装修状态"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	
+	
+</beans>

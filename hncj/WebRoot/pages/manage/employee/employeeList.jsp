@@ -95,7 +95,10 @@
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>&nbsp;
-								<input type="button" value="导入" id="btnImport"/>&nbsp;
+								<c:if test="${sessionScope.isHQ == false}">
+									<!-- 分公司才可导入 -->
+									<input type="button" value="导入" id="btnImport"/>&nbsp;
+								</c:if>
 								<input type="button" value="导出" id="btnExport"/>&nbsp;
 							</td>
 						</tr>
@@ -130,7 +133,7 @@
 							 	</c:if>
 								<td>${element.name}</td>
 								<td>${element.gender}</td>
-								<td>${element.positionName}</td>
+								<td>${element.position}</td>
 								<td>${element.tel}</td>
 								<td>${element.livePlace}</td>
 								<td>${element.hireDate}</td>
@@ -141,11 +144,11 @@
 						    		<c:if test="${sessionScope.BRANCH_NO eq '0000'}">
 						    			<a href="javascript:toTransfer('${element.id}')">异动</a>
 						    		</c:if>
-						    		<c:if test="${element.state eq '00' }">
+						    		<c:if test="${element.state eq '在职' }">
 						    			<a href="javascript:toApplyVoc('${element.id}')" >休假</a>
 						    		</c:if>
-						    		<c:if test="${element.state eq '01' }">
-						    			<a href="javascript:changeState('${element.id}', '00')" >复职</a>
+						    		<c:if test="${element.state eq '休假' }">
+						    			<a href="javascript:changeState('${element.id}', '在职')" >复职</a>
 						    		</c:if>
 						    		<a href="${uri}?action=detail&id=${element.id}">详情</a>
 							    </td>

@@ -11,9 +11,9 @@ import flink.util.ExceptionUtils;
 public class EmployeeState extends AbstractState {
 	public static Map<String, EmployeeState> ALL = new LinkedHashMap<String, EmployeeState>();
 
-	public static final EmployeeState NORMAL = new EmployeeState("在职", "00");
-	public static final EmployeeState LEAVE = new EmployeeState("休假", "01");
-	public static final EmployeeState QUIT = new EmployeeState("离职", "02");//
+	public static final EmployeeState NORMAL = new EmployeeState("在职", "在职");
+	public static final EmployeeState LEAVE = new EmployeeState("休假", "在职");
+	public static final EmployeeState QUIT = new EmployeeState("离职", "离职");//
 	
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("employeeStates", EmployeeState.ALL.values());

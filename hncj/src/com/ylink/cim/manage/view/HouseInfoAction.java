@@ -31,6 +31,7 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
 @Scope("prototype")
 @Component
@@ -139,7 +140,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			String branchNo = getSessionBranchNo(request);
 			branchName = BranchType.valueOf(branchNo).getName();
 		}
-		String fileName = branchName+"房屋信息-"+DateUtil.getCurrentDate()+".xlsx";
+		String fileName = branchName+"房屋信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
 		String title = "";
 		/*Map<String, String> houseMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.HouseType.getValue());
 		Map<String, String> flatMap = ParaManager.getBranchDict(getSessionBranchNo(request), BranchDictType.FlatType.getValue());
@@ -151,7 +152,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			buildingNos.add(entry.getValue());
 		}*/
 		
-		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService("houseInfoExportRule");
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
 		String excelType = ParaManager.getExcelType(getSessionBranchNo(request));
 		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
 		exportExcelUtil.exportSheets();
@@ -184,7 +185,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 	}
 	private HouseInfo model = new HouseInfo();
 	public String toImport() {
-		
+		request.setAttribute("templateName", "房屋信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
 		return "import";
 	}
 	
@@ -193,7 +194,7 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 			File file = this.getFile();
 			FileInputStream fis = new FileInputStream(file);
 			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
-			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService("houseInfoImportRule");
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule");
 			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, houseInfoRule);
 			houseInfoService.addFromExcel(list, getSessionUser(request));
 			setSucResult(request);

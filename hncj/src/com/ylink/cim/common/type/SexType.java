@@ -12,8 +12,8 @@ public class SexType extends AbstractType {
 
 	public static Map<String, SexType> ALL = new LinkedHashMap<String, SexType>();
 
-	public static final SexType SEX_M = new SexType("ÄÐ", "M");
-	public static final SexType SEX_F = new SexType("Å®", "F");
+	public static final SexType SEX_M = new SexType("ÄÐ", "ÄÐ");
+	public static final SexType SEX_F = new SexType("Å®", "Å®");
 
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("sexTypes", SexType.ALL.values());
