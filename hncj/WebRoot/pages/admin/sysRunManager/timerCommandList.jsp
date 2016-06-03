@@ -14,13 +14,6 @@
 		<f:js src="/js/common.js" />
 		<f:css href="/css/page.css" />
 
-
-		<style type="text/css">
-			html {
-				overflow-y: scroll;
-			}
-		</style>
-
 	<script type="text/javascript">
 		  $(function(){
 		  		//定时命令清除
@@ -38,44 +31,37 @@
 	    </script>
 	</head>
 
-<body >
+<body>
+	<div class="userbox">
 	<form id="timerCommand" action="${CONTEXT_PATH}/timerCommand.do?action=queryTimerCommand" method="post" >
-		<b class="b1"></b>
-		<b class="b2"></b>
-		<b class="b3"></b>
-		<b class="b4"></b>
-		<div class="contentb">
-		
-		<table class="form_grid">
-		  <tr>
-		    <td colspan="4"  align="left"><span style="font-size:14px; font-weight:bold; padding-bottom:10px;"> 定时命令查询</span></td>
-		  </tr>
-		  <tr>
-		    <td width="100" height="30" align="right">类名</td>
-		    <td width="270" height="30">
-		   		 <input type="text" class="userbox_bt"  name="timerClassName" value="${timerCommand.timerClassName}"  />
-		    </td>
-		    <td width="100" height="30" align="right">类中文</td>
-		    <td height="30">
-		    	<input type="text" class="userbox_bt"  name="classNameCh"  value="${timerCommand.classNameCh}" />
-		    </td>
-		  </tr>
-		  <tr></tr>
-		  <tr></tr>
-		  <tr>
-		    <td width="100" height="30" align="right">&nbsp;</td>
-		    <td height="30" colspan="3">
-		      <input type="submit" value="查询" id="input_btn2"   />
-		      <input  id="btnTimerCommandClear" style="margin-left:30px;"  type="button" value="重置"  />
-		   	  <input  id="btnTimerCommandAdd" style="margin-left:30px;"  type="button" value="增加"   />
-		    </td>
-		    </tr>
-		  </table>
-		</div>
-		<b class="b4"></b>
-		<b class="b3"></b>
-		<b class="b2"></b>
-		<b class="b1"></b>	
+		<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
+			  <tr>
+			    <td colspan="4"  align="left"><span style="font-size:14px; font-weight:bold; padding-bottom:10px;"> 定时命令查询</span></td>
+			  </tr>
+			  <tr>
+			    <td width="100" height="30" align="right">类名</td>
+			    <td width="270" height="30">
+			   		 <input type="text" class="userbox_bt"  name="timerClassName" value="${timerCommand.timerClassName}"  />
+			    </td>
+			    <td width="100" height="30" align="right">类中文</td>
+			    <td height="30">
+			    	<input type="text" class="userbox_bt"  name="classNameCh"  value="${timerCommand.classNameCh}" />
+			    </td>
+			  </tr>
+			  <tr></tr>
+			  <tr></tr>
+			  <tr>
+			    <td width="100" height="30" align="right">&nbsp;</td>
+			    <td height="30" colspan="3">
+			      <input type="submit" value="查询" id="input_btn2"   />
+			      <input  id="btnTimerCommandClear" style="margin-left:30px;"  type="button" value="重置"  />
+			   	  <input  id="btnTimerCommandAdd" style="margin-left:30px;"  type="button" value="增加"   />
+			    </td>
+			    </tr>
+			  </table>
+			</div>
 	</form>
 		<!-- 数据列表区 -->
 	<div class="tablebox">
@@ -112,6 +98,6 @@
 				<f:paginate />	
 			</div>
 		</div>
-	
+	</div>
 </body>
 </html>

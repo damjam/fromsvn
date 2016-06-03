@@ -40,6 +40,7 @@
 				<value>/error.jsp</value>
 				<value>/success.jsp</value>
 				<value>/pageHome.jsp</value>
+				<value>/pageHome_new.jsp</value>
 				<value>/moduleIndex.jsp</value>
 				<value>/login.do?action=loadUserPrivilegeTopButton</value>
 				<value>/pages/user/doubleCheck.jsp</value>

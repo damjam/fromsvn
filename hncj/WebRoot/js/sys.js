@@ -4,11 +4,7 @@ String.prototype.trim = function() {
 		return this.replace(/(^\s*)|(\s*$)/g, "");
 };
 
-/**
- * ��ģ̬�Ի���.
- * @param isRefresh �Ƿ�ˢ��
- * @param refreshHandle ˢ�´���id
- */
+
 function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	if (!width) {
 		width = 780;
@@ -21,7 +17,6 @@ function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	var option = 'dialogWidth=' + width + 'px;dialogHeight=' + height + 'px;resizable=yes';
 	var rlt = window.showModalDialog(CONTEXT_PATH + url, null, option);
 	
-	// Ĭ������ˢ��
 	if (!isRefresh) {
 		isRefresh = false;
 	}
@@ -49,9 +44,7 @@ function stopevent(evt){
 	}
 }
 
-/**
- * ����ҳ��Ԫ����ʽ.
- */
+
 $(function() {
 	SysStyle.setDataGridStyle();
 	SysStyle.setFormGridStyle();
@@ -68,9 +61,7 @@ $(function() {
  * ϵͳ��ʽ.
  */
 SysStyle = {
-	/**
-	 * �������ݱ��ͷ����, ��ż����ɫ, ����ƶ���ɫ.
-	 */
+	
 	setDataGridStyle: function() {
 		$('table.data_grid').each(function() {
 			var $t = $(this);
@@ -130,64 +121,51 @@ SysStyle = {
 	
 
 	
-	/**
-	 * ���ñ������ʽ.
-	 */
+	
 	setFormGridStyle: function() {
-		// ���ñ������ʽ.
-		/*
-		$('table.form_grid').find('td').each(function(i) {
-			// form���Ϊ����, ��һ��Ϊ��ǩ, �ڶ���Ϊ¼���.
-			if (i % 2 == 0) {
-				$(this).addClass('form-label-td');
-			}
-		});
-		*/
 		
-		// ���ñ��������ʽ.
 		$('table.form_grid :text, table.form_grid :password')
 			.addClass('userbox_bt')
 			.focus(function() {$(this).addClass('sffocus');})
 			.blur(function() {$(this).removeClass('sffocus');});
 	},
 	
-	/**
-	 * ������ϸ��Ϣ�����ʽ.
-	 */
+	
 	setDetailGridStyle: function() {
 		$('table.detail_grid td:even').addClass('headcell').attr('width', '100px');
 		$('table.detail_grid td:odd').addClass('valuecell');
 	},
 	
-	/**
-	 * ���ð�ť��ʽ.
-	 */
+	
 	setButtonStyle: function() {
-		$btn = $(':button, :submit, :reset')
-		$btn.addClass('inp_L3');
-		
-		$btn.mouseover(function() {$(this).addClass('inp_L4'); $(this).removeClass('inp_L3')});
-		$btn.mouseout(function() {$(this).addClass('inp_L3'); $(this).removeClass('inp_L4')});
+		$btns = $(':button, :submit, :reset');
+		$btns.each(function(i, btn){
+			var $btn = $(btn);
+			var btnClass = '';
+			var overBtnClass = '';
+			if($btn.val().length <= 3){
+				btnClass = 'inp_L1';
+				overBtnClass = 'inp_L2';
+			}else{
+				btnClass = 'inp_L3';
+				overBtnClass = 'inp_L4';
+			}
+			$btn.addClass(btnClass);
+			$btn.mouseover(function() {$(this).addClass(overBtnClass); $(this).removeClass(btnClass)});
+			$btn.mouseout(function() {$(this).addClass(btnClass); $(this).removeClass(overBtnClass)});
+		});
 	},
 	
-	/**
-	 * ���ò�ѯ�����ʽ.
-	 */
 	setSearchGridStyle: function() {
 		$('table.search_grid :text').addClass('form-text');
 		$('table.search_grid :password').addClass('form-text');
 	},
 	
-	/**
-	 * ������Ȩ������.
-	 */
+	
 	setNoPrivilegeStyle: function() {
 		$('span.no-privilege a').removeAttr('href').removeAttr('onclick');
 	},
 	
-	/**
-	 * ���÷�ҳ����ʽ.
-	 */
 	setPageNavStyle: function() {
 		$btn = $(':button.pagenavbtn')
 		$btn.addClass('inp_L1');
@@ -196,9 +174,6 @@ SysStyle = {
 		$btn.mouseout(function() {$(this).addClass('inp_L1'); $(this).removeClass('inp_L2')});
 	},
 	
-	/**
-	 * ��ӱ���֤.
-	 */
 	addFormValidate: function() {
 		$('form').each(function() {
 			var f = $(this);
@@ -216,33 +191,24 @@ SysStyle = {
 	}
 };
 
-/**
- * ����֤������ʾ.
- */
+
 JError = {
-	/**
-	 * ��ʾ������Ϣ
-	 * @param {} errorMap
-	 * @param {} errorList
-	 */
+	
 	showErrors: function(errorMap, errorList) {
 		for ( var i = 0; errorList[i]; i++ ) {
 			var error = errorList[i];
 			var tipObj = JError.getTipElement(error.element)
 			var errObj = JError.getErrElement(error.element)
 
-			// û����ʾ��Ϣ, �˳�.
 			if (tipObj == null) {
 				return;
 			}
 
-			// �д�����Ϣ, ��ʾ������Ϣ, ������ʾ��Ϣ.
 			if (errObj != null) {
 				tipObj.hide();
 				errObj.show();
 			}
 			
-			// û�д�����Ϣ, ���ô�����ʽ��ʾ��ʾ��Ϣ.
 			else {
 				tipObj.addClass('error_tipinfo');
 				tipObj.show();
@@ -250,30 +216,20 @@ JError = {
 		}
 	},
 	
-	/**
-	 * ���������Ϣ
-	 */
 	clearError: function(element) {
 		var tipObj = JError.getTipElement(element);
 		var errObj = JError.getErrElement(element);
 		
-		// �д�����Ϣ����, �����ش�����Ϣ, ��ʾ��ʾ��Ϣ.
 		if (errObj) {
 			errObj.hide();
 			tipObj.show();
 		}
 		
-		// ȥ����ʾ��Ϣ�Ĵ�����ʽ.
 		if (tipObj != null) {
 			tipObj.removeClass('error_tipinfo');
 		}
 	},
 	
-	/**
-	 * ȡ����ʾ��Ϣ����
-	 * @param {} element
-	 * @return {}
-	 */
 	getTipElement: function(element) {
 		var obj = $(element).next();
 		
@@ -285,16 +241,11 @@ JError = {
 			return obj;
 		}
 		
-		// ������һ��.
 		obj = obj.next();
 		return obj.hasClass('field_tipinfo') ? obj : null;
 	},
 		
-	/**
-	 * ȡ�ô�����Ϣ����, һ��Ϊ¼������ĵڶ���, text->infospan->errspan
-	 * @param {} element
-	 * @return {}
-	 */
+	
 	getErrElement: function(element) {
 		var tipObj = JError.getTipElement(element);
 		if (tipObj == null) {
@@ -305,9 +256,7 @@ JError = {
 		return errObj.hasClass('error_tipinfo') ? errObj : null;
 	},
 
-	/**
-	 * ��ʾ������Ϣ
-	 */
+	
 	showError: function(element) {
 		var tipe = getTipElement(element);
 		
@@ -321,12 +270,7 @@ JError = {
 	}
 }
 
-/**
- * ����ҳ��.
- * @param boxid ����id
- * @param url ��ַ ����CONTEXT_PATH
- * @param param �����б�,json��ʽ.
- */
+
 function $jload(boxid, url, param) {
 	var box = $('#' + boxid);
 	if (box.length == 0) { 
@@ -337,9 +281,7 @@ function $jload(boxid, url, param) {
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {SysStyle.setDataGridStyle();});
 }
 
-/**
- * ˫ǩ��֤
- */
+
 function doubleCheck() {
 	var option = "dialogWidth=500px;dialogHeight=300px;resizable=no;scroll=no";
 	var rst = window.showModalDialog(CONTEXT_PATH + '/pages/user/doubleCheck.jsp', null, option);
@@ -351,9 +293,7 @@ function doubleCheck() {
 	return rst;
 }
 
-/**
- * ȡ��ҳ��.
- */
+
 function getMainFrame() {
 	var page = window;
 	var depth = 0;
@@ -362,7 +302,6 @@ function getMainFrame() {
 		page = page.parent;
 		depth += 1;
 		
-		// ���ֻ����5��.
 		if (depth > 5) {
 			return null;
 		}
@@ -371,9 +310,6 @@ function getMainFrame() {
 	return page;
 }
 
-/**
- * ��������ȡ, main.js.
- */
 GlobalMem = {
 	set: function(key, value) {
 		getMainFrame().GLOBAL_MEM[key] = value;
@@ -388,9 +324,6 @@ GlobalMem = {
 	}
 }
 
-/**
- * �л�div����ʾ
- */
 
 function togglediv(divobj)
 {
@@ -399,9 +332,6 @@ function togglediv(divobj)
 	else
 		divobj.style.display='block';
 }		
-/**
- * Frame���غ�Ķ���
- */
 
 function FrameOnLoad(obj,frameobj)
 {
@@ -423,16 +353,7 @@ function FrameOnLoad(obj,frameobj)
 	}
 	
 }	
-/**
- * ����ģ̬����,��߲�������ʱʹ��Ĭ��ֵ
- * @param {Object} dialogId
- * @param {Object} url
- * @param {Object} title
- * @param {Object} width
- * @param {Object} height
- * @param {Object} param
- * @return {TypeName} 
- */
+
 function showDetail(dialogId, url, title, width, height, param){
 	
 	if(!width){
@@ -456,7 +377,6 @@ function showDetail(dialogId, url, title, width, height, param){
 	if (box.length == 0) { 
 		return;
 	}
-	// LOAD_IMAGE λ��common.js ��.
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {
 		SysStyle.setDataGridStyle();
 		SysStyle.setFormGridStyle();
@@ -470,27 +390,17 @@ function showDetail(dialogId, url, title, width, height, param){
 	});
 	$('#' + dialogId).dialog('open');
 }
-/**
- * �رյ������ڲ��������
- * @param {Object} dialogId
- */
+
 function closeDetail(dialogId){
 	$('#'+dialogId).html('');
 	$('#' + dialogId).dialog('close');
 }
 
-/**
- * ������
- * @param {Object} link
- */
+
 function closeAll(link){
 	d.closeAll();
 	$("p:first").html('<a href="javascript:openAll(this)" style="color: red">չ��</a>');
 }
-/**
- * չ����
- * @param {Object} link
- */
 function openAll(link){
 	d.openAll();
 	$("p:first").html('<a href="javascript:closeAll(this)" style="color: red">����</a>');

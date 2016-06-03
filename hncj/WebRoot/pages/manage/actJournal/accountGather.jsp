@@ -78,10 +78,9 @@
 		<f:msg styleClass="msg" />
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								汇总周期
@@ -116,11 +115,10 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<!-- 数据列表区 -->
-			<div class="tablebox" style="height:100%">			
-				<iframe id="frame0" width="100%"  height="100%" ></iframe>
+			<div class="tablebox" style="height:1200px">			
+				<iframe id="frame0" width="100%" style="border: 0;height: 100%"></iframe>
 			</div> 
 	</body>
 </html>

@@ -20,8 +20,9 @@
 		<script type="text/javascript">
 			$(function() {
 				$('#tabs').tabs();
-				/*
+				
 				//初始化
+				/*
 				ifrm = document.getElementById('frame0');
 				if(!ifrm.src){
 		    		ifrm.src=CONTEXT_PATH+"/chargeItem.do?action=list";
@@ -36,20 +37,21 @@
 				    	ifrm = document.getElementById('frame1');
 						ifrm.src=CONTEXT_PATH+"/chargeParam.do?action=list";
 	                }  
-				});*/  
+				});*/ 
 		});
 			
 			function adjustHeight(height, num){
+				if(height > 800){
+					height = 800;
+				}
 				$('#frame'+num).height(height);
-				$('#tabs'+num).height(height+30);
+				$('#tabs-'+num).height(height);
 			}
 		</script>
 	</head>
 	<body>
-
-	
 		<br />
-		<div id="tabs" style="width: 98%;">
+		<div id="tabs" style="width: 98%;margin: auto;">
 			<ul>
 				<li>
 					<a id="t0" href="#tabs-0">计费项管理</a>
@@ -59,10 +61,11 @@
 				</li>
 			</ul>
 			<div id="tabs-0" >
-				<iframe id="frame0" style="border: 0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeItem.do?action=list"></iframe>
+			<!--  -->
+				<iframe id="frame0" style="border: 0" width="100%" height="100%" src="${CONTEXT_PATH}/chargeItem.do?action=list"></iframe>
 			</div>
 			<div id="tabs-1">
-				<iframe id="frame1" style="border: 0" width="100%"  height="100%" src="${CONTEXT_PATH}/chargeParam.do?action=list"></iframe>
+				<iframe id="frame1" style="border: 0" width="100%" height="100%" src="${CONTEXT_PATH}/chargeParam.do?action=list"></iframe>
 			</div>
 		</div>
 		<!--版权区域-->

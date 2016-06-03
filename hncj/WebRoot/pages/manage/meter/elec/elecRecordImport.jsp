@@ -77,11 +77,10 @@
 		
 		<f:msg />
 		<div class="userbox">
-			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-			<div class="contentb">
-				<form action="elecRecord.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+			<form action="elecRecord.do?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate">
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">用电月份</td>
 							<td>
@@ -111,12 +110,12 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				
 				<div class="btnbox">
 					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 				 </div>
 			</div>
-			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+			</form>
 		</div>
 		<div class="msg" style="position:absolute;top:100px;left:300px;display: none;"  id="loadingBarDiv">
 			<div style="float: left; width: 40%; text-align: right;">

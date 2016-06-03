@@ -9,9 +9,7 @@
 		<link rel="stylesheet" href="css/page.css" type="text/css"
 			media="screen, projection" />
 		<f:css href="/css/page.css"/>
-		<f:js src="/js/common.js" />
 		<f:js src="/js/jquery.js" />
-		
 		<f:js src="/js/common.js"/>
 		<script type="text/javascript">
 			function seeUserMsgInfo(){
@@ -51,7 +49,7 @@
 
 	<body>
 		<!-- 登录成功提示区 -->
-		<div class="okbox">
+		<div class="okbox" style="margin: auto;">
 			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
 			<div class="contentb">
 				<div style="height:30px; padding:15px 15px 25px 15px; overflow:hidden;">

@@ -14,12 +14,6 @@
 <f:js src="/js/paginater.js" />
 <f:js src="/js/common.js" />
 
-<style type="text/css">
-html {
-	overflow-y: scroll;
-}
-</style>
-
 <script type="text/javascript">
 	function clearData() {
 		FormUtils.reset("query");
@@ -86,12 +80,9 @@ html {
 		action="${CONTEXT_PATH}/branchParamManage.do?action=query"
 		method="post">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b> <b class="b2"></b> <b class="b3"></b> <b
-					class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">参数代码</td>
 							<td><input type="text" name="code" id="code" value="${code}"/></td>
@@ -121,9 +112,6 @@ html {
 			  <input onclick="backup1();"  type="button" value="备份数据库"   /> --></td>
 						</tr>
 					</table>
-				</div>
-				<b class="b4"></b> <b class="b3"></b> <b class="b2"></b> <b
-					class="b1"></b>
 			</div>
 		</div>
 

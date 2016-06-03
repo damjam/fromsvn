@@ -49,5 +49,8 @@
 		<property name="branchNo" type="java.lang.String">
 			<column name="BRANCH_NO" length="20" />
 		</property>
+		<property name="createType" type="java.lang.String">
+			<column name="CREATE_TYPE" length="20" />
+		</property>
 	</class>
 </hibernate-mapping>

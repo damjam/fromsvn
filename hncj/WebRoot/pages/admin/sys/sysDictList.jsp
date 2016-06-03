@@ -45,13 +45,9 @@
 
 		<form action="sysDictAction.do?action=listSysDict" id="sysDictFrm" method="post">
 			<div class="userbox">
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid" >
-						 <caption>${ACT.name}</caption>
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">名称</td>
 							<td><s:textfield name="dictName"></s:textfield></td>
@@ -71,10 +67,6 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>
 			</div>
 			
 			<!-- 数据列表区 -->

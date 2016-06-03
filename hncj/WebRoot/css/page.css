@@ -6,9 +6,9 @@ a img {border:none;}
 img {vertical-align:text-bottom;}
 
 * { margin:0; padding:0;list-style:none;}
-html,body { height:100%;}
+html,body { height:auto;}
 
-body {font-size:12px;color:#222;background:#fff; font-family:Tahoma, Geneva, sans-serif;}
+body {font-size:12px;color:#222;background:#f7f7f7; font-family:Tahoma, Geneva, sans-serif;}
 h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
 li ul, li ol {margin:0px;}
 ul, ol {margin:0 0 0 1.5em;}
@@ -30,15 +30,15 @@ body.fullwidth {min-width:960px;}
 .processtitletx{float:left; height:41px; line-height:41px; vertical-align:middle; font-size:14px; font-weight:bold; overflow:hidden;}
 .processbz{padding:10px 0px 0px 33px; display:inline-block; overflow:hidden;}
 
-.userbox{float:left; width:99%; padding-top:30px;padding-bottom:30px;font-family:Tahoma, Geneva, sans-serif;}
+.userbox{width:99%;margin:auto; /*padding-top:10px;padding-bottom:10px;*/font-family:Tahoma, Geneva, sans-serif;}
 .userbox_bt{background:url(../images/inputbg_text.gif) repeat-x;width:158px;height:21px;border:1px solid #c3c3c3;overflow:hidden; padding:2px 0px 0px 5px; *padding:2px 0px 0px 5px; _padding:2px 0px 0px 5px; line-height:21px; vertical-align:middle;font-family:Tahoma, Geneva, sans-serif;}
 
 input:focus, input.sffocus {background: #cfc;border:1px solid #090;font-family:Tahoma, Geneva, sans-serif;}
 
 .userbt{ border:0px; background:url(../images/btbg.gif) no-repeat; width:96px; height:24px; line-height:24px; vertical-align:middle; overflow:hidden; cursor:pointer;}
 
-.tablebox{float:left; width:99%; padding-bottom:30px; margin-top:10px}
-.tablebox .titlebg{ background:url(../images/tabletitle.gif) repeat-x; height:34px; line-height:34px;  font-weight:bold;}
+.tablebox{width:99%; padding-bottom:30px; margin:auto;}
+.tablebox .titlebg{ background:url(../macadmin/img/cream.png) repeat-x; height:34px; line-height:34px;  font-weight:bold;}
 
 .tablebox table{ border-collapse:collapse; }
 .tablebox th{ border:#ccc solid 1px; hite-space:nowrap;word-break:keep-all;}
@@ -46,7 +46,7 @@ input:focus, input.sffocus {background: #cfc;border:1px solid #090;font-family:T
 .tablebox .eee{ background:#fff;}
 .tablebox .ddd{ background:#f7f7f7;}
 .tablebox .on{ background:#d3ffaf}
-.tablebox .click{ background:#007a8a;color:#fff;}
+.tablebox .click{ background:#2dc3e8;color:#fff;}
 .table_navi{float:left; width:99%; overflow:hidden; padding-top:20px; text-align:right;}
 
 /* 通用圆角矩形 */
@@ -59,7 +59,7 @@ input:focus, input.sffocus {background: #cfc;border:1px solid #090;font-family:T
 .contentb div{ padding:3px;}
 
 /* 通用按钮定义 */
-.inp_L1,.inp_L2,.inp_L3,.inp_L4{background:url(../images/bt_bg.gif) no-repeat; cursor:pointer; margin:0px; font-size:12px;}
+.inp_L1,.inp_L2,.inp_L3,.inp_L4{background:url(../images/bt_bg.gif) no-repeat; cursor:pointer; margin-right:5px; font-size:12px;}
 .inp_L1{ width:67px; height:23px; background-position:-4px -4px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
 .inp_L2{ width:67px; height:23px; background-position:-4px -30px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
 .inp_L3{ width:96px; height:24px; background-position:-4px -55px; border:0; color:#464646; line-height:24px; vertical-align:middle;}
@@ -93,9 +93,9 @@ a:focus{ outline:0;}
 
 /* 表格相关 */
 caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:left;}
-.form_grid {width:100%;}
+.form_grid {width:100%;padding: 10px 0;}
 .form_grid td {height:30px;}
-.form_grid select{width:166px;}
+.form_grid select{width:166px;height: 24px;}
 .data_grid {border-collapse: collapse;width: 100%;}
 .data_grid th {background:url(../images/tabletitle.gif) repeat-x; height:34px; line-height:34px;  font-weight:bold;};
 .data_grid_text {text-align:left};
@@ -104,7 +104,7 @@ caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:lef
 .break {word-break: break-all; word-wrap: break-word;}
 
 /* 分页 */
-.pageinputtext {text-align:center; width:40px;}
+.pageinputtext {text-align:center; width:25px;}
 .pagenavbtn {margin-left:5px}
 .pageNavigation {float:left; width:99%; overflow:hidden; padding:10px 0 3px 0; text-align:right;}
 
@@ -115,12 +115,12 @@ caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:lef
 /* 表单提示信息样式 */
 .field_tipinfo, .error_tipinfo {width:250px; line-height:30px; font-size:12px; text-indent:2em; padding: 3px 5px 3px 20px;}
 .field_tipinfo {color:#666; border:0px solid #fff; padding: 3px 5px 5px 20px;}
-.error_tipinfo {color:#333; background:#FFF2E9 url(../images/fault.gif) no-repeat 1px; border:1px solid #FF6600; display:none}
+.error_tipinfo {color:#333; background:#FFF2E9 url(../images/fault.gif) no-repeat 1px; border:1px solid #FF6600; padding: 3px 5px 5px 20px; display:none}
 .nes {background: url(../images/redstar.gif) no-repeat right;}
-.formlabel {text-align:right; padding-right:5px; width:100px}
-.msg {background:#FDFFCE none repeat scroll 0%; border:1px solid #FFBA43; margin-top:5px; padding:10px; width:350px;}
+.formlabel {text-align:right; padding-right:10px; width:100px}
+.msg {background:#FDFFCE none repeat scroll 0%; border:1px solid #FFBA43; margin-top:5px;margin-left:5px; padding:10px; width:350px;}
 .readonly {color:#666666}
-.btnbox {height:30px; margin-top:5px;margin-left: 55px;}
+.btnbox {height:30px; margin-top:5px;margin-bottom:5px;margin-left: 110px;}
 .btnbox input {margin-right:20px}
 
 /* 明细信息表格 */
@@ -131,3 +131,29 @@ caption {font-size:14px; font-weight:bold; padding:0 0 10px 10px; text-align:lef
 td.tdnum {text-align: right; padding-right: 5px;}
 /*用于包装分页列表的div*/
 .list_table_wrap{width:100%;overflow-x:auto;overflow-y:hidden;padding-bottom: 18px;min-height: 100px;}
+
+.widget {
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: #fafafa;
+		}
+.widget .widget-head, .modal-header {
+    background-color: #f8f8f8;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f2f2f2));
+    background: -webkit-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -moz-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -ms-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: -o-linear-gradient(top, #f8f8f8, #f2f2f2);
+    background: linear-gradient(top, #f8f8f8, #f2f2f2);
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    text-shadow: 0px 1px #fff;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    color: #666;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 15px;
+}

@@ -34,6 +34,24 @@ public class DepositBill extends BranchField implements java.io.Serializable {
 	private String endRefundDate;
 	private String isInternal;
 	private String year;
+	private String createType;
+	private Date createDate;
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getCreateType() {
+		return createType;
+	}
+
+	public void setCreateType(String createType) {
+		this.createType = createType;
+	}
 
 	public String getStartDepositDate() {
 		return startDepositDate;

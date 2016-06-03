@@ -8,6 +8,7 @@
 		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
 		<f:css href="/css/page.css" />
+		<f:css href="/css/widget.css"/>
 		<f:js src="/js/jquery.js" />
 		<f:js src="/js/validate.js" />
 		<f:js src="/js/sys.js" />
@@ -59,10 +60,12 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
+				  <div class="widget">
+					<div class="widget-head">
+                  <div class="pull-left">${ACT.name}</div>
+                </div>
+				<div class="form_grid_wrap">
 					<table class="form_grid">
-						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								房屋编号
@@ -100,7 +103,7 @@
 						<tr>
 						    <td></td>
 							<td colspan="5">
-								<input type="button" value="查询" id="btnQry"/>&nbsp;
+								<input type="button" class="inp_L1" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<!-- 
 								<input type="button" value="新增" id="btnAdd"/> -->
@@ -108,7 +111,7 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+				</div>
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			

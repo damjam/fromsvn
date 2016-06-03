@@ -9,10 +9,12 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
-		<f:js src="/dtree/wtree.js"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:js src="/js/jquery.js"/>
+		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
-		<f:js src="/js/plugin/jquery.validate.js"/>		
+		<f:js src="/js/plugin/jquery.validate.js"/>
+		<f:js src="/layer/layer.js"/>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
@@ -65,22 +67,31 @@
 	                 }   
 				});
 			}
+			$().ready(function(){
+		 		$(".popup-search-parking").click(function(){
+		 			var bindCode = '';
+		 			var bindName = $(this).attr('data-search-for');
+	 				var toUrl=CONTEXT_PATH+'/parkingInfo.do?action=queryPopup&bindCode='+bindCode+'&bindName='+bindName;
+					layer.open({
+						title:'车位',
+					    type: 2,
+					    area: ['720px', '530px'],
+					    fix: false, //不固定
+					    maxmin: true,
+					    content: toUrl
+					});
+		 		});
+		 	});
 		</script>
 	</head>
 <body>
 
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" id="carInfoActionForm" method="post" class="validate">
-		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
-					 
+	 <div class="userbox">	
+		<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes">车牌号</td>
 						    <td>
@@ -125,20 +136,19 @@
 						    <td class="formlabel">车位编号</td>
 						    <td>
 						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10" readonly="true"/>
-						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="搜索" onclick="popUp.popUpParkingInfo('parkingSn');" />
+								<a href="javascript:void(0)" class="popup-search-parking">
+									<i class="fa fa-search"></i>
+								</a>	
 						    </td>
 					   </tr>
+					   <tr>
+					   		<td></td>
+					   		<td>
+					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+					 			<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+					   		</td>
+					   </tr>
 				  </table>
-				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>	

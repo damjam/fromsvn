@@ -75,11 +75,10 @@
 		
 		<f:msg />
 		<div class="userbox">
-			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-			<div class="contentb">
-				<form action="${uri}?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate" method="post">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+		<form action="${uri}?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate" method="post">
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">文件格式</td>
 							<td>
@@ -95,13 +94,12 @@
 							</td>
 						</tr>
 					</table>
-				</form>
+				</div>
 				<div class="btnbox">
 					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
 					<input type="button" value="返回" class="inp_L3" style="margin-left:30px;" onclick="gotoUrl('${uri}?action=list');"/>
 				 </div>
-			</div>
-			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+			</form>
 		</div>
 		<div class="msg" style="position:absolute;top:100px;left:300px;display: none;"  id="loadingBarDiv">
 			<div style="float: left; width: 40%; text-align: right;">

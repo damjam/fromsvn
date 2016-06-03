@@ -65,14 +65,9 @@
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel">商家名称</td>
 						    <td>
@@ -124,7 +119,7 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">联系电话</td>
+						    <td class="formlabel nes">联系电话</td>
 						    <td>
 						    	<s:textfield name="tel" id="tel" maxlength="20" />
 						    	<span class="field_tipinfo">不能为空</span>
@@ -142,11 +137,6 @@
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
 					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>

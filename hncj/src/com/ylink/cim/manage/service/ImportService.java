@@ -9,4 +9,5 @@ public interface ImportService {
 
 	Integer addCSBFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws Exception;
 
+	Integer addDepositBillFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws Exception;
 }

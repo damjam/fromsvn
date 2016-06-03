@@ -9,10 +9,12 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
 		<f:js src="/js/plugin/jquery.validate.js"/>		
+		<f:js src="/layer/layer.js"/>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/popUp.js"/>
@@ -115,14 +117,9 @@
 	<form action="${uri}?action=doEdit" id="dataForm" method="post" class="validate">
 		<s:hidden name="merchantNo" id="merchantNo"/>
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes">姓名</td>
 						    <td>
@@ -140,8 +137,9 @@
 						    <td class="formlabel nes">商户</td>
 						    <td>
 						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="20" readonly="readonly"/>
-						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="搜索" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');" />
+						    	<a href="javascript:void(0);" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');">
+						    		<i class="fa fa-search" aria-hidden="true"></i>
+						    	</a>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -173,16 +171,14 @@
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
+					   <tr>
+					   		<td></td>
+					   		<td>
+					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+					 			<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+					   		</td>
+					   </tr>
 				  </table>
-				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>

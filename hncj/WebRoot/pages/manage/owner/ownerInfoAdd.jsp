@@ -54,14 +54,9 @@
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" id="ownerInfoActionForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					  <tr>
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
@@ -119,7 +114,7 @@
 					   <tr>
 						    <td class="formlabel nes">车辆数</td>
 						    <td>
-						    	<s:select list="#{'0','1','2','3','4'}" name="carNum" style="width:166px;" />
+						    	<s:select list="#{'0':'0','1':'1','2':'2','3':'3','4':'4'}" name="carNum" style="width:166px;" />
 						    </td>
 					   </tr>
 					   <tr>
@@ -128,16 +123,14 @@
 						    	<s:textfield name="remark" id="remark" maxlength="25"/>
 						    </td>
 					   </tr>
+					   <tr>
+					   		<td></td>
+					   		<td>
+					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+					 			<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+					   		</td>
+					   </tr>
 				  </table>
-				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>	

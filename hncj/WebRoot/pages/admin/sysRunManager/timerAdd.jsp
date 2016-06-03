@@ -44,14 +44,9 @@
 		<form id="timer" action="${CONTEXT_PATH}/timer.do?action=save" method="post" class="validate" >
 			<!-- 用户资料修改区 -->
 			<div class="userbox">
-				<div>
-					<b class="b1"></b>
-					<b class="b2"></b>
-					<b class="b3"></b>
-					<b class="b4"></b>
-						<div class="contentb">
-						
-						<table class="form_grid">
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						  <tr>
 						    <td width="100" height="30" align="right">
 						    	<span style="font-size:14px; font-weight:bold; padding-bottom:10px;">新增定时计划</span>
@@ -102,11 +97,6 @@
 						  </tr>
 						  </table>
 					</div>
-					<b class="b4"></b>
-					<b class="b3"></b>
-					<b class="b2"></b>
-					<b class="b1"></b>	
-				</div>
 			</div>
 		</form>
 </body>

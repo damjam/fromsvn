@@ -2,26 +2,6 @@
 popUp={
 	
 	
-	//����ҵ�����ͶԻ���busiNo��tempName ���ؿؼ���id��params url������ַ���
-	popUpTradeRouteTemplate:function(tempId,tempName,params){
-		var toUrl="/routeTemplate.do?action=queryPopUpTradeRouteTemplate";
-		if(params && params!=""){
-			toUrl+="&"+params;
-		}
-		var retval=openContextDialog(toUrl);
-		if(retval){
-			var ss=retval.split("$");
-	
-			if(null!=tempId && ""!=tempId){
-				$('#'+tempId).val(ss[0]);
-			}
-			
-			if(null!=tempName && ""!=tempName){
-				$('#'+tempName).val(ss[1]);
-			}
-		}
-	},
-	
 	popUpPrivilege:function(limitId,limitName,params){
 		var toUrl="/privilegeAction.do?action=queryPopUpPrivilege";
 		if(params&&params!=null){

@@ -29,6 +29,7 @@ import com.ylink.cim.admin.service.SysLogService;
 import com.ylink.cim.admin.service.UserLogService;
 import com.ylink.cim.common.util.ParaManager;
 
+import flink.IdFactoryHelper;
 import flink.consant.ActionConstant;
 import flink.consant.Constants;
 import flink.etc.Assert;
@@ -234,7 +235,8 @@ public abstract class BaseAction extends RootAction {
 
 		String ip = request.getRemoteAddr();
 		UserLog userLog = new UserLog();
-		userLog.setId(idFactoryService.generateId(Constants.USER_LOG_ID));
+		//userLog.setId(idFactoryService.generateId(Constants.USER_LOG_ID));
+		userLog.setId(IdFactoryHelper.getId(Constants.USER_LOG_ID));
 		// 数据检查
 		// Assert.notNull(sessionUser.getBranchNo(), "所属机构不能为空");
 		// Assert.notNull(limitId, "模块编号不能为空");

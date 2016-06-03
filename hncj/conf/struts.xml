@@ -50,8 +50,9 @@
 		<action name="login" class="loginAction">
 			<result name="changePwd">/pages/admin/changePassword.jsp</result>
 			<result name="index">/index.jsp</result>
-			<result name="toLoginPage">/index_old.jsp</result>
+			<result name="toLoginPage">/index_new.jsp</result>
 			<result name="toMainPage">/main.jsp</result>
+			<result name="toMainPage_new">/main_new.jsp</result>
 			<result name="topbutton">/pages/layout/topbutton.jsp</result>
 		</action>
 		

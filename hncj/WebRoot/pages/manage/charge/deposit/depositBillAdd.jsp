@@ -28,8 +28,10 @@
 				var isInternal = $('#isInternal').val();
 				if(isInternal == '1'){
 					$("tr[class='houseSn']").show();
+					$("#houseSn").attr('disabled', false);
 				}else{
 					$("tr[class='houseSn']").hide();
+					$("#houseSn").attr('disabled', true);
 				}
 			}
 			function inputTextNum()
@@ -89,22 +91,16 @@
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
-					   <!-- 
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes">是否小区业主</td>
 						    <td>
 						    	<s:select list="#request.yesNos" name="isInternal" onchange="change()" id="isInternal" listKey="value" listValue="name"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
-					   </tr> -->
+					   </tr>
 					   <tr class="houseSn">
 						    <td class="formlabel nes">房屋编号</td>
 						    <td>
@@ -129,7 +125,7 @@
 					   <tr>
 						    <td class="formlabel nes">用途</td>
 						    <td>
-						    <s:textfield name="purpose"  id="purpose" maxlength="25"  class="{required:true,num:true}"/>
+						    <s:textfield name="purpose"  id="purpose" maxlength="25"  class="{required:true}"/>
 						    	<span class="field_tipinfo">请输入用途</span>
 						    </td>
 					   </tr>
@@ -145,11 +141,6 @@
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
 					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>

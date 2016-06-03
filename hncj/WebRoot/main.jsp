@@ -193,7 +193,7 @@ $().ready(function(){
 
 		<!--载入内容区-->
 		<div class="main">
-			<iframe name="main_area" src="pageHome.jsp" style="border: 0"></iframe>
+			<iframe name="main_area" src="pageHome.jsp" style="border: 0;"></iframe>
 		</div>
 	</body>
 </html>

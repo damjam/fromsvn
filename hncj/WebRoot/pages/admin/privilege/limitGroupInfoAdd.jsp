@@ -41,14 +41,9 @@
 <f:msg />
 	<form action="limitGroupInfoAction.do?action=addLimitGroupInfo" id="limitGroupInfoForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid"	>
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes">权限组名称</td>
 						    <td>
@@ -88,11 +83,6 @@
 					   </tr>
 				  </table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
-			</div>
 		</div>	
 	</form>	
 </body>

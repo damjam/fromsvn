@@ -64,27 +64,30 @@
 		
 		<f:msg />
 		<div class="userbox">
-			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-			<div class="contentb">
+			<div class="widget">
+				<div class="widget-head">
+                    <div class="pull-left">${ACT.name}</div>
+                </div>
 				<form action="${uri}?action=doImport" id="dataForm" enctype="multipart/form-data" class="validate" method="post">
 					<table class="form_grid">
-						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">请选择导入的文件</td>
 							<td>
 								<s:file id="file" name="file" class="userbox_bt {required:true}"></s:file>
 								<span class="field_tipinfo">请选择文件</span>
-								<span><a href="${CONTEXT_PATH}/template/${templateName}">下载模板</a> </span>
+								<span class="redlink"><a href="${CONTEXT_PATH}/template/${templateName}">下载模板</a> </span>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="button" value="提交" id="input_btn2" name="ok" onclick="submitUpload()" />
+								<input type="button" value="返回" onclick="gotoUrl('${uri}?action=list');"/>
 							</td>
 						</tr>
 					</table>
 				</form>
-				<div class="btnbox">
-					<input type="button" value="提交" id="input_btn2" class="inp_L3" name="ok" onclick="submitUpload()" />
-					<input type="button" value="返回" class="inp_L3" style="margin-left:30px;" onclick="gotoUrl('${uri}?action=list');"/>
-				 </div>
 			</div>
-			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
 		<div class="msg" style="position:absolute;top:100px;left:300px;display: none;"  id="loadingBarDiv">
 			<div style="float: left; width: 40%; text-align: right;">

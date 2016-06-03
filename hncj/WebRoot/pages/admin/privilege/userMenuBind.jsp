@@ -21,14 +21,9 @@
 <f:msg />
 	<form action="/userInfoAction.do?action=menuBind" id="userInfoForm" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>用户快捷菜单</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					  <tr>
 						    <td class="formlabel">登录名</td>
 						    <td>${SESSION_USER.loginId}</td>
@@ -83,11 +78,6 @@
 						</tr>
 				  </table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
-			</div>
 		</div>	
 	</form>	
 </body>

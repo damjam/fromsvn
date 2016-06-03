@@ -15,6 +15,7 @@
 		</action>
 		<action name="waterBill" class="waterBillAction">
 			<result name="list">/pages/manage/charge/water/waterBillList.jsp</result>
+			<result name="list_new">/pages/manage/charge/water/waterBillList_new.jsp</result>
 			<result name="toMain" type="redirect">waterBill.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="reportAction" class="reportAction">

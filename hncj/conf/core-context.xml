@@ -119,7 +119,8 @@
 
 	<import resource="biz-context-dao.xml" />
 	<import resource="constantConfig.xml" />
-	<import resource="excelConfig.xml" />
+	<import resource="classpath*:/excel-schema/*.xml" />
+	
 <!--	<import resource="biz-context-beans.xml" />-->
 
 </beans>

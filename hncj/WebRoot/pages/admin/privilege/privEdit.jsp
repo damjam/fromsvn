@@ -39,8 +39,7 @@
 		<f:msg />
 
 		<div class="userbox">
-			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-			<div class="contentb">
+			<div class="widget">
 				<form action="privilegeAction.do?action=editPrivilege"
 					id="inputForm" class="validate" method="post">
 					<s:hidden name="parent" id="parent"/>
@@ -84,7 +83,6 @@
 					</div>
 				</form>
 			</div>
-			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
 	</body>
 </html>

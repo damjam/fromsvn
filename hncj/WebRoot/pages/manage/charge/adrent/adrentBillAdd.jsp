@@ -125,19 +125,17 @@
 			}
 		</script>
 	</head>
+	
 <body>
 
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" method="post" class="validate">
-		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
+		<div class="userbox" style="padding-top: 10px;padding-bottom: 10px;">
+			<div class="widget">
+					<div class="widget-head">
+                  <div class="pull-left" style="line-height: 20px">${ACT.name}</div>
+                </div>
 					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes">商家名称</td>
 						    <td>
@@ -215,12 +213,7 @@
 					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
-		</div>	
 	</form>
 </body>
 </html>

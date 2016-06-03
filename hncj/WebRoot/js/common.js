@@ -842,3 +842,15 @@ function backToList(url, strParam, updateSymbol){
 	$('body').append(formStr);
 	$("form:last").submit(); 
 }
+$(document).ready(function(){
+	if($('#main_area',parent.document).length > 0){
+		var height = $(document.body).height();
+		//alert('common.js,'+height);
+		if(height < 600){
+			height = 600;
+		}else{
+			height += 50;
+		}
+		$('#main_area',parent.document).height(height);
+	}
+});

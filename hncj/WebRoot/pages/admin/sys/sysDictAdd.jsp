@@ -36,14 +36,9 @@
 <f:msg />
 	<form action="sysDictAction.do?action=addSysDict" id="sysDictForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					  <tr>
 						    <td class="formlabel nes">值</td>
 						    <td>
@@ -79,9 +74,9 @@
 								<span class="field_tipinfo"></span>
 							</td>
 					   </tr>
-					     <tr>
-						     
-						     <td colspan="2" align="center">
+					    <tr>
+						     <td></td>
+						     <td>
 								 <input type="submit" id="btnSumit" value="提交"/>
 								 <input type="button" id="btnClear" value="清除"/>
 								 <input type="button" id="btnReturn" value="返回"/>
@@ -89,11 +84,6 @@
 					   </tr>
 				  </table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
-			</div>
 		</div>	
 	</form>	
 </body>

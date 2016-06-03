@@ -14,28 +14,14 @@
 		<f:js src="/js/paginater.js" />
 		<f:css href="/css/page.css" />
 
-		<style type="text/css">
-		html {
-			overflow-y: scroll;
-		}
-		
-	</style>
-
-		<script type="text/javascript"><!--//--><![CDATA[//><!--
-		//--><!]]></script>
-
 	</head>
 	<body>
 
 		
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
+			<div class="widget">
 					<table class="data_table" style="width: 100%">
+						<caption class="widget-head">${ACT.name}</caption>
 						<c:forEach items="${sysLogList}" var="sysLog" >
 							<tr>
 								<td height="30" align="center" colspan="4">
@@ -173,10 +159,6 @@
 						</c:forEach>
 					</table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>
 			</div>
 		</div>
 

@@ -76,10 +76,9 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+				<div class="widget">
+			<table class="form_grid">
+				<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								房屋编号
@@ -110,7 +109,6 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			

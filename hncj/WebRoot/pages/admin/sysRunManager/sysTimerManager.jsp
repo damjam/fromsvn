@@ -17,13 +17,7 @@
 		<f:js src="/js/common.js" />
 		
 		<f:js src="/js/plugin/jquery-ui.js" />
-		<style type="text/css">
 		
-		<style type="text/css">
-		<!--
-			html { overflow-y: auto; }
-		-->
-		</style>
 		<script type="text/javascript">
 			$(function() {
 				$('#tabs').tabs();

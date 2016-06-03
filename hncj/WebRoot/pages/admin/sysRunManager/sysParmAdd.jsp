@@ -45,55 +45,45 @@
 	<form id="query" action="sysParmManage.do?action=save" method="post" class="validate">
 		<s:token/>
 		<!-- 用户资料修改区 -->
-			<div class="userbox">
-				<div>
-					<b class="b1"></b>
-					<b class="b2"></b>
-					<b class="b3"></b>
-					<b class="b4"></b>
-						<div class="contentb">
-							<table class="form_grid">
-							  <caption>${ACT.name}</caption>	
-							  <tr>
-							    <td class="formlabel nes">参数编码</td>
-							    <td>
-							    	<s:textfield class="{required:true,maxlength:6,stringNum:true}"  name="code"  maxlength="6"/>
-							    	<span class="field_tipinfo">1-6位字符，包括字母和数字</span>
-							    </td>
-							    </tr>
-							   <tr>
-							    <td class="formlabel nes">参数名称</td>
-							    <td>
-							    	<s:textfield class="{required:true}" name="parname"  maxlength="50"/>
-							    	<span class="field_tipinfo">不能为空</span>
-							    </td>
-							  </tr>
-							  <tr>
-							    <td class="formlabel nes">参数值</td>
-							    <td>
-							   		 <s:textfield class="{required:true}"  name="parvalue" maxlength="25"/>
-						    		 <span class="field_tipinfo">不能为空</span>
-							    </td>
-							  </tr>
-							  <tr>
-							    <td class="formlabel">备注</td>
-							    <td>
-							   		 <s:textfield name="remark" maxlength="50"/>
-							    </td>
-							    </tr>
-							  <tr>
-							  	<td></td>
-							    <td colspan="3">
-								    <input type="submit"  id="input_btn2"   value="确定"  />
-								    <input style="margin-left:30px;" type="button"  value="返回" id="btnReturn" />
-							    </td>
-							  </tr>
-						  </table>
-						</div>
-					<b class="b4"></b>
-					<b class="b3"></b>
-					<b class="b2"></b>
-					<b class="b1"></b>	
+		<div class="userbox">
+			<div class="widget">
+			<table class="form_grid">
+				<caption class="widget-head">${ACT.name}</caption>	
+				  <tr>
+				    <td class="formlabel nes">参数编码</td>
+				    <td>
+				    	<s:textfield class="{required:true,maxlength:6,stringNum:true}"  name="code"  maxlength="6"/>
+				    	<span class="field_tipinfo">1-20位字符，包括字母和数字</span>
+				    </td>
+				    </tr>
+				   <tr>
+				    <td class="formlabel nes">参数名称</td>
+				    <td>
+				    	<s:textfield class="{required:true}" name="parname"  maxlength="50"/>
+				    	<span class="field_tipinfo">不能为空</span>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td class="formlabel nes">参数值</td>
+				    <td>
+				   		 <s:textfield class="{required:true}"  name="parvalue" maxlength="25"/>
+			    		 <span class="field_tipinfo">不能为空</span>
+				    </td>
+				  </tr>
+				  <tr>
+				    <td class="formlabel">备注</td>
+				    <td>
+				   		 <s:textfield name="remark" maxlength="50"/>
+				    </td>
+				    </tr>
+				  <tr>
+				  	<td></td>
+				    <td colspan="3">
+					    <input type="submit"  id="input_btn2"   value="确定"  />
+					    <input type="button"  value="返回" id="btnReturn" />
+				    </td>
+				  </tr>
+			  </table>
 			</div>
 		</div>
 	</form>

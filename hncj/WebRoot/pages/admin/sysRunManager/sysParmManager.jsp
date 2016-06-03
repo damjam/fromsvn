@@ -81,38 +81,29 @@
 <!-- 查询功能区 -->
 	<form id="query" action="sysParmManage.do?action=query" method="post" >
 		<div class="userbox">
-		<b class="b1"></b>
-		<b class="b2"></b>
-		<b class="b3"></b>
-		<b class="b4"></b>
-		<div class="contentb">
-		<table class="form_grid">
-		  <caption>${ACT.name}</caption>	
-		  <tr>
-		    <td class="formlabel">参数代码</td>
-		    <td><s:textfield name="code" id="code"  /></td>
-		    <td class="formlabel">参数名称</td>
-		    <td><s:textfield name="parname" id="parname" /></td>
-		    <td class="formlabel" align="left">&nbsp;</td>
-		    <td></td>
-		  </tr>
-		  <tr>
-		    <td>&nbsp;</td>
-		    <td colspan="5">
-		      <input type="button" value="查询" id="input_btn2"   onclick="query1(this.form);"/>&nbsp;&nbsp;
-		      <input onclick="clearData();"   type="button" value="重置"  />&nbsp;&nbsp;
-		   	  <input onclick="addSysParm();"  type="button" value="新增"   />&nbsp;&nbsp;
-			  <input onclick="reloadSysParm();"  type="button" value="重新加载"   />&nbsp;&nbsp;
-		    </td>
-		  </tr>
-		  </table>
-		</div>
-		<b class="b4"></b>
-		<b class="b3"></b>
-		<b class="b2"></b>
-		<b class="b1"></b>	
-		</div>
-	
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
+				  <tr>
+				    <td class="formlabel">参数代码</td>
+				    <td><s:textfield name="code" id="code"  /></td>
+				    <td class="formlabel">参数名称</td>
+				    <td><s:textfield name="parname" id="parname" /></td>
+				    <td class="formlabel" align="left">&nbsp;</td>
+				    <td></td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td colspan="5">
+				      <input type="button" value="查询" id="input_btn2"   onclick="query1(this.form);"/>&nbsp;&nbsp;
+				      <input onclick="clearData();"   type="button" value="重置"  />&nbsp;&nbsp;
+				   	  <input onclick="addSysParm();"  type="button" value="新增"   />&nbsp;&nbsp;
+					  <input onclick="reloadSysParm();"  type="button" value="重新加载"   />&nbsp;&nbsp;
+				    </td>
+				  </tr>
+				  </table>
+				</div>
+			</div>
 		<!-- 数据列表区 -->
 		<div class="tablebox">
 			<table class='data_grid'>
@@ -149,5 +140,6 @@
 	
 	<!--版权区域-->
  	<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>
+ 	
 </body>
 </html>

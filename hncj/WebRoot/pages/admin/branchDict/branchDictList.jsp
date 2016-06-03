@@ -48,13 +48,9 @@
 
 		<form action="${uri}?action=list" id="branchDictForm" method="post">
 			<div class="userbox">
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid" >
-						 <caption>${ACT.name}</caption>
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">名称</td>
 							<td><s:textfield name="dictName"></s:textfield></td>
@@ -62,9 +58,10 @@
 							<td>
 								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
-							<s:if test="${sessionScope.isHQ == true}">
+							<s:if test="#session.isHQ == true">
 								<td class="formlabel" align="left">机构</td>
-								<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								<td><s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
+								</td>
 							</s:if>
 							<s:else>
 								<td class="formlabel" align="left">&nbsp;</td>
@@ -81,11 +78,7 @@
 							</td>
 						</tr>
 					</table>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>
+				</div>	
 			</div>
 			
 			<!-- 数据列表区 -->

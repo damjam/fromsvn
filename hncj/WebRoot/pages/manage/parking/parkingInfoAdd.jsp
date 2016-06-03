@@ -9,13 +9,11 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
-		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
 		<f:js src="/js/plugin/jquery.validate.js"/>		
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
-		<f:js src="/js/popUp.js"/>
 		<f:js src="/js/custom.validate.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>		
 		<script type="text/javascript">
@@ -44,19 +42,15 @@
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
+			<div class="widget">
+					<div class="widget-head">
+	                    <div class="pull-left">${ACT.name}</div>
+	                </div>
 					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
-					 
 					   <tr>
 						    <td class="formlabel nes">车位编号</td>
 						    <td>
-						    	<s:textfield name="sn" id="sn" maxlength="10"/>
+						    	<s:textfield name="sn" id="sn" maxlength="10" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -94,16 +88,14 @@
 						    	<s:select name="state" id="state" list="#request.parkingStates" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
+					   <tr>
+					   		<td></td>
+					   		<td>
+					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+					 			<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+					   		</td>
+					   </tr>
 				  </table>
-				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>	

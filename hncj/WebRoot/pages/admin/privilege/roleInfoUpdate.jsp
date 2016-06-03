@@ -51,14 +51,9 @@
 		<s:hidden name="roleId"/>
 		<s:hidden name="limitGroupId"/>
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					   <tr>
 						    <td class="formlabel nes" align="right">角色名称</td>
 						    <td>
@@ -128,11 +123,6 @@
 					   </tr>
 				  </table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
-			</div>
 		</div>	
 	</form>	
 </body>

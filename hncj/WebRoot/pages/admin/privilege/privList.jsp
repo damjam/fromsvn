@@ -25,13 +25,9 @@
 		<f:msg />
 		<form action="privilegeAction.do?action=listPrivs" id="searchForm" method="post">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid" style="line-height:30px">
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel" align="left">权限ID</td>
 							<td><s:textfield name="limitId" maxlength="50"/></td>
@@ -61,11 +57,6 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>
-			</div>
 		</div>
 		<!-- 数据列表区 -->
 		<div class="tablebox">

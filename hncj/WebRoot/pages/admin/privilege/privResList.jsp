@@ -29,6 +29,7 @@
 		<form action="privilegeResourceAction.do?action=listPrivRes" id="searchForm" method="post">
 		<s:hidden name="parent" id="parent"/>
 		<!-- 数据列表区 -->
+		<div class="userbox">
 		<div class="tablebox">			
 			<table class="data_grid">
 				<thead>
@@ -61,6 +62,7 @@
 		</div>
 		<div class="btn_box">
 			<input type='button' onclick="goBack();" value='返回' />
+		</div>
 		</div>
 		</form>
 		<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

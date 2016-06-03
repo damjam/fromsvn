@@ -87,9 +87,9 @@
 		<f:msg />
 		<form action="userInfoAction.do?action=changePassword" id="userInfoForm" class="validate" method="post">
 		<div class="userbox">
-			<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-			<div class="contentb">
-			<table class="form_grid">
+			<div class="widget">
+				<table class="form_grid">
+				<caption class="widget-head">${ACT.name}</caption>
 				<tr>
 					<td class="formlabel nes">旧密码</td>
 					<td><s:password name="oldLoginPwd" class="userbox_bt {required:true,minlength:6}" id="oldLoginPwd"/>
@@ -115,12 +115,10 @@
 				    <td></td>
 					<td align="left">
 					<input type="button" onclick="changePassword()" value="提交"/>&emsp;
-					<input type="button" onclick="toHomePage();" value="取消"/>&emsp;
 					</td>
 				</tr>
 			</table>
 			</div>
-			<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 		</div>
 		</form>
 	</body>

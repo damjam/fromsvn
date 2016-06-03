@@ -51,10 +51,10 @@
 	</bean>
 	<bean id="comInfo" class="com.ylink.cim.common.util.ComInfo">
 		<property name="name">
-			<value>漯河市昌建物业管理有限公司</value>
+			<value>漯河市xx物业管理有限公司</value>
 		</property>
 		<property name="hqName">
-			<value>昌建地产集团</value>
+			<value>xx地产集团</value>
 		</property>
 		<property name="groupWeb">
 			<value>http://www.hncj.com.cn/</value>
@@ -69,10 +69,10 @@
 			<value>cjwy0001@qq.com</value>
 		</property>
 		<property name="add">
-			<value>河南省漯河市郾城区金山路双汇国际花园</value>
+			<value>河南省漯河市xx区xx路xxxx</value>
 		</property>
 		<property name="sp">
-			<value>漯河市昌建物业信息管理系统</value>
+			<value>漯河市xx物业信息管理系统</value>
 		</property>
 		<property name="tip">
 			<value>请使用最新版chrome浏览器获得最佳操作体验</value>

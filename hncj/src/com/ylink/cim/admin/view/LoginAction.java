@@ -118,8 +118,8 @@ public class LoginAction extends BaseAction implements ModelDriven<UserInfo> {
 		String randomCode = (String) request.getSession().getAttribute(
 				"randomCode");
 		if (!StringUtils.equalsIgnoreCase(verifyCode, randomCode)) {
-			setResult(false, "验证码不正确", request);
-			return ActionConstant.TO_LOGIN_PAGE;
+			//setResult(false, "验证码不正确", request);
+			//return ActionConstant.TO_LOGIN_PAGE;
 		}
 		String loginId = request.getParameter("code");
 		String password = request.getParameter("password");
@@ -182,7 +182,8 @@ public class LoginAction extends BaseAction implements ModelDriven<UserInfo> {
 			loadPrivilege(userInfo, request);
 			String msg = MsgUtils.r("用户：" + loginId + " 登录成功");
 			super.logSuccess(request, UserLogType.OTHER.getValue(), msg);
-			return ActionConstant.TO_MAIN_PAGE;
+			//return ActionConstant.TO_MAIN_PAGE;
+			return "toMainPage_new";
 		} catch (Throwable e) {
 			e.printStackTrace();
 			String err = "登录异常：" + e.getMessage();

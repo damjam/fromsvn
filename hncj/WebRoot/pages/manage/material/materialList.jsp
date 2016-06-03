@@ -65,10 +65,9 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
+				<div class="widget">
 					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+						<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								物料名称
@@ -82,12 +81,12 @@
 							<td>
 								<s:select list="#request.materialStates" headerKey="" headerValue="---请选择---" listKey="value" listValue="name" name="state"/>
 							</td>
-							<s:if test="${sessionScope.isHQ == true}">
+							<c:if test="${sessionScope.isHQ == true}">
 								<td class="formlabel">机构</td>
 								<td>
 									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
 								</td>
-							</s:if>
+							</c:if>
 						</tr>
 						<tr>
 						    <td></td>
@@ -100,7 +99,6 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			

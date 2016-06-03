@@ -26,32 +26,30 @@
 				
 			});
 			function deposit(id){
-				gotoUrl('/account.do?action=toDeposit&id='+id);
+				gotoUrl('${uri}?action=toDeposit&id='+id);
 			}
 			function withdraw(id){
-				gotoUrl('/account.do?action=toWithdraw&id='+id);
+				gotoUrl('${uri}?action=toWithdraw&id='+id);
 			}
 			function cancelAcct(id){
 				if(window.confirm("确认销户?")){
-					gotoUrl('/account.do?action=cancel&id='+id);
+					gotoUrl('${uri}?action=cancel&id='+id);
 				}
 				
 			}
 			function detail(id){
-				window.open(CONTEXT_PATH+'/account.do?action=detail&acctNo='+id);
+				window.open('${uri}?action=detail&acctNo='+id);
 			}
 		</script> 
 	</head>
 	<body>
-		
 		<f:msg styleClass="msg" />
-		<form action="account.do?action=list" id="queryForm" method="post">
+		<form action="${uri}?action=list" id="queryForm" method="post">
+		<div class="userbox">
 			<!-- 查询功能区 -->
-			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								业主姓名
@@ -81,8 +79,7 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
-			</div>
+			</div>	
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid">

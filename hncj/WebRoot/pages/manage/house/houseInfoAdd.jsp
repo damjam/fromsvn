@@ -45,14 +45,9 @@
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doAdd" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					 
 					  <tr>
 						    <td class="formlabel nes">楼号</td>
@@ -88,16 +83,14 @@
 						    	<s:textfield name="deliveryDate" id="deliveryDate" maxlength="8" readonly="true" onfocus="WdatePicker();"/>
 						    </td>
 					   </tr>
+					   <tr>
+					   		<td></td>
+					   		<td>
+					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+					 			<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+					   		</td>
+					   </tr>
 				  </table>
-				  <div class="btnbox">
-					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
-					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-				</div>
-				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
 			</div>
 		</div>	
 	</form>	

@@ -224,6 +224,7 @@ public class PrivilegeFilter extends HttpServlet implements Filter {
 			"/",
 			"/index.jsp",
 			"/index_old.jsp",
+			"/index_new.jsp",
 			"/navi.jsp",
 			"/index_navi.jsp",
 			"/login.do?action=login",

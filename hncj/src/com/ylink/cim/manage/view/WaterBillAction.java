@@ -80,7 +80,7 @@ public class WaterBillAction extends BaseAction implements
 		buildingNos.putAll(rent);
 		request.setAttribute("buildingNos", buildingNos);
 		// return forward("/pages/manage/charge/water/waterBillList.jsp");
-		return "list";
+		return "list_new";
 	}
 
 	@Override

@@ -36,14 +36,9 @@
 <f:msg/>
 	<form action="privilegeResourceAction.do?action=doAdd" id="privilegeResourceForm" method="post" class="validate">
 		<div class="userbox">
-			<div>
-				<b class="b1"></b>
-				<b class="b2"></b>
-				<b class="b3"></b>
-				<b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+			<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 					  <tr>
 						    <td align="right">权限名称</td>
 						    <td>
@@ -82,11 +77,6 @@
 					   </tr>
 				  </table>
 				</div>
-				<b class="b4"></b>
-				<b class="b3"></b>
-				<b class="b2"></b>
-				<b class="b1"></b>	
-			</div>
 		</div>	
 	</form>	
 </body>

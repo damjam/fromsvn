@@ -139,4 +139,15 @@ public class DepositBillDaoImpl extends BaseDaoImpl implements DepositBillDao {
 		return sumInfo;
 	}
 
+	@Override
+	public List<DepositBill> findList(Map<String, Object> map) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from DepositBill t where 1=1");
+		helper.append("and houseSn = ?", MapUtils.getString(map, "houseSn"));
+		helper.append("and branchNo = ?", MapUtils.getString(map, "branchNo"));
+		helper.append("and amount = ?", MapUtils.getDouble(map, "amount"));
+		helper.append("and state = ?", MapUtils.getDouble(map, "state"));
+		return super.getList(helper);
+	}
+
 }

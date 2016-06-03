@@ -59,10 +59,11 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
+				<div class="widget">
+					<div class="widget-head">
+	                    <div class="pull-left">${ACT.name}</div>
+	                </div>
 					<table class="form_grid">
-						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								房屋编号
@@ -114,11 +115,10 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
+			<div class="tablebox" id="listDiv">
 			<!-- 汇总信息 -->
-				<table class="data_grid" style="margin:0 0 10px 0">
+				<table class="data_grid">
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">

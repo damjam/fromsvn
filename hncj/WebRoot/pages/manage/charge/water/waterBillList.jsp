@@ -66,6 +66,7 @@
 			function openReport(id){
 				window.open(CONTEXT_PATH+'/reportAction.do?action=waterBill&id='+id);
 			}
+			
 		</script> 
 	</head>
 	<body>
@@ -74,10 +75,9 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid" style="margin: 0;padding: 0;">
-						<caption>${ACT.name}</caption>
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								创建日期
@@ -134,8 +134,7 @@
 							</td>
 						</tr>
 					</table>
-				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+				</div>	
 			</div>
 			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
 			<!-- 汇总信息 -->

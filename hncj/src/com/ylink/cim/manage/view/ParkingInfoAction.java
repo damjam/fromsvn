@@ -124,7 +124,7 @@ public class ParkingInfoAction extends BaseAction implements
 		return list();
 	}
 
-	public String queryPopUpParkingInfo() throws Exception {
+	public String queryPopup() throws Exception {
 		try {
 			Map<String, Object> params = getParaMap();
 			params.put("branchNo", getSessionBranchNo(request));

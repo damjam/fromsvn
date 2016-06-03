@@ -50,8 +50,10 @@
 				gotoUrl(url);
 			}
 			function resetPwd(userId){
-				var url = '/userInfoAction.do?action=resetPwd&userId='+userId;
-				gotoUrl(url);
+				if(window.confirm('确定重置密码?')){
+					var url = '/userInfoAction.do?action=resetPwd&userId='+userId;
+					gotoUrl(url);
+				}
 			}
 		</script> 
 	</head>
@@ -61,10 +63,9 @@
 		<form action="userInfoAction.do?action=listUserInfo" id="userInfoForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
-					<table class="form_grid">
-						<caption>${ACT.name}</caption>
+				<div class="widget">
+				<table class="form_grid">
+					<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
 								登录名
@@ -89,7 +90,6 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			

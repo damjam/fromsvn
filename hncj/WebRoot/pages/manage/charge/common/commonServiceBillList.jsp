@@ -55,12 +55,12 @@
 		<form action="${uri}?action=list" id="queryForm" method="post">
 			<!-- 查询功能区 -->
 			<div class="userbox">
-				<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>
-				<div class="contentb">
+				<div class="widget">
+					<div class="widget-head">
+	                    <div class="pull-left">${ACT.name}</div>
+	                </div>
 					<table class="form_grid">
-						<caption>${ACT.name}</caption>
 						<tr>
-							
 							<td class="formlabel">
 								房屋编号
 							</td>
@@ -112,11 +112,10 @@
 						</tr>
 					</table>
 				</div>
-				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
 			</div>
-			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
+			<div class="tablebox" id="listDiv">
 			<!-- 汇总信息 -->
-				<table class="data_grid" style="margin:0 0 10px 0">
+				<table class="data_grid">
 					<caption>汇总信息</caption>
 					<thead>
 						<tr class="titlebg">
@@ -145,14 +144,14 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<c:if test="${sessionScope.isHQ == true}">
-						 		<td>${element.branchName}</td>
-						 	</c:if>
-						 	<td >账单号</td>
-						 	<td>房屋编号</td>
-						 	<td>房屋面积</td>
-						 	<td>业主姓名</td>
-						    <td>计费起止日期</td>
+							<c:if test="${sessionScope.isHQ == true}">
+								<td>机构</td>
+							</c:if>	
+						 	<td>账单号</td>
+						 	<td>编号</td>
+						 	<td>面积</td>
+						 	<td>姓名</td>
+						    <td>起止日期</td>
 						    <td>物业费单价</td>
 						    <td>公共能源费单价</td>
 						    <td>合计金额</td>
@@ -175,7 +174,7 @@
 								<td>${element.houseSn}</td>
 								<td><fmt:formatNumber value="${element.area }" pattern="##0.00"/></td>
 								<td>${element.ownerName}</td>
-								<td>${element.startDate}—${element.endDate}</td>
+								<td>${element.startDate}-${element.endDate}</td>
 								<td><fmt:formatNumber value="${element.servicePrice}" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.lightPrice}" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.totalAmount}" pattern="##0.00"/></td>
