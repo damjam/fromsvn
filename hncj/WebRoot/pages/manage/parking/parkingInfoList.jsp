@@ -137,7 +137,7 @@
 								<td>${element.ownerCel}</td>
 								<td>${element.endUser}</td>
 								<td>${element.endUserCel}</td>
-								<td>${element.state}</td> 
+								<td><f:state className="ParkingState" value="${element.state}"/></td> 
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
