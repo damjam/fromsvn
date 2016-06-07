@@ -80,8 +80,7 @@ public class ParkingInfoAction extends BaseAction implements
 
 	public String doEdit() throws Exception {
 		try {
-
-			ParkingInfo parkingInfo = parkingInfoDao.findById(model.getCarSn());
+			ParkingInfo parkingInfo = parkingInfoDao.findById(model.getId());
 			String createUser = parkingInfo.getCreateUser();
 			Date createDate = parkingInfo.getCreateDate();
 			String branchNo = parkingInfo.getBranchNo();
@@ -99,7 +98,7 @@ public class ParkingInfoAction extends BaseAction implements
 			e.printStackTrace();
 			return toEdit();
 		}
-		return list();
+		return "toMain";
 	}
 
 	public String list() throws Exception {
