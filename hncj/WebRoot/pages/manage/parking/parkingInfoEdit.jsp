@@ -42,11 +42,10 @@
 	</head>
 <body>
 
-<f:msg styleClass="msg"/>
-	<form action="${uri}?action=doAdd" method="post" class="validate">
+	<f:msg/>
+	<form action="${uri}?action=doEdit" method="post" class="validate">
 		<s:hidden name="id" />
 		<div class="userbox">
-			<div class="msg">操作成功</div>
 			<div class="widget">
 				<table class="form_grid">
 					<caption class="widget-head">${ACT.name}</caption>
@@ -67,7 +66,7 @@
 					   <tr>
 						    <td class="formlabel">归属人电话</td>
 						    <td>
-						    	<s:textfield name="ownerCell" id="ownerCell" maxlength="10"/>
+						    	<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -81,7 +80,7 @@
 					   <tr>
 						    <td class="formlabel">使用人电话</td>
 						    <td>
-						    	<s:textfield name="endUserCell" id="endUserCell" maxlength="10"/>
+						    	<s:textfield name="endUserCel" id="endUserCel" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
