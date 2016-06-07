@@ -24,6 +24,7 @@ import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.DateUtil;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.util.SpringContext;
@@ -136,7 +137,7 @@ public class ParkingInfoAction extends BaseAction implements
 	}
 	
 	public String toImport() throws Exception {
-		
+		request.setAttribute("templateName", "车位信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
 		return "import";
 	}
 	public String doImport() throws Exception{
@@ -185,14 +186,14 @@ public class ParkingInfoAction extends BaseAction implements
 			obj.add(info.getOwnerCel());
 			obj.add(info.getEndUser());
 			obj.add(info.getEndUserCel());
-			obj.add(ParkingState.valueOf(info.getState()).getValue());
+			obj.add(ParkingState.valueOf(info.getState()).getName());
 			//obj.add(info.getCreateDate());
 			obj.add(info.getRemark());
 			dataList.add(obj);
  		}
 		
 		String branchName = BranchType.valueOf(branchNo).getName();
-		String fileName = branchName+"车位信息."+ParaManager.getExcelType(getSessionBranchNo(request));
+		String fileName = branchName+"车位信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
 		String title = "";
 		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
 		String excelType = ParaManager.getExcelType(branchName);

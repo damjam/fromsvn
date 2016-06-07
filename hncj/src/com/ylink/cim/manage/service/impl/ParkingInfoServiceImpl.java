@@ -15,6 +15,7 @@ import com.ylink.cim.manage.dao.ParkingInfoDao;
 import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.ParkingInfoService;
 
+import flink.IdFactoryHelper;
 import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
@@ -71,7 +72,7 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 				Map<String, Object> params = new HashMap<>();
 				params.put("sn", sn);
 				params.put("branchNo", sessionUser.getBranchNo());
-				Assert.isNull(parkingInfoDao.findBy(params), "已存在编号为"+sn+"的车位信息");
+				Assert.isEmpty(parkingInfoDao.findBy(params), "已存在编号为"+sn+"的车位信息");
 				try{
 					BeanUtils.populate(info, map);
 				}catch (Exception e){
@@ -82,6 +83,7 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 				info.setCreateDate(DateUtil.getCurrent());
 				info.setCreateUser(sessionUser.getUserName());
 				info.setBranchNo(sessionUser.getBranchNo());
+				info.setId(IdFactoryHelper.getId(ParkingInfo.class));
 				parkingInfoDao.save(info);
 				totalCnt++;
 			}

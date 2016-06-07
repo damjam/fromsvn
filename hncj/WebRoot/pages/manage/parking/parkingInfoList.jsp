@@ -33,7 +33,7 @@
 					gotoUrl(url);   
 				});
 				$('#btnImport').click(function(){
-					var url="${uri}?action=import";
+					var url="${uri}?action=toImport";
 					gotoUrl(url);   
 				});
 			});

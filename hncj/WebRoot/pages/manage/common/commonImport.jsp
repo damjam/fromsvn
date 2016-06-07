@@ -90,10 +90,10 @@
 			</div>
 		</div>
 		<div class="msg" style="position:absolute;top:100px;left:300px;display: none;"  id="loadingBarDiv">
-			<div style="float: left; width: 40%; text-align: right;">
+			<div style="float: left; width: 30%; text-align: right;">
 				<img src="${CONTEXT_PATH}/images/ajax_loader.gif" align="middle" />
 			</div>
-			<div style="width: 55%;height:30px;text-align: left;line-height:30px; vertical-align: middle;padding-left: 10px;" id="processMsg">
+			<div style="width: 65%;height:30px;text-align: left;line-height:30px; vertical-align: middle;padding-left: 10px;" id="processMsg">
 				正在处理，请稍候...
 			</div>
 		</div>
