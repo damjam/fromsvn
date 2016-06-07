@@ -65,7 +65,11 @@ public abstract class ParaManager {
 		if (branchParaMap.size() == 0) {
 			init();
 		}
-		return branchParaMap.get(branchNo+key);
+		String value = branchParaMap.get(branchNo+key);
+		if (StringUtils.isEmpty(value)) {
+			value = getPara(key);
+		}
+		return value;
 	}
 	/**
 	 * @return 密码过期时限（以天计）
@@ -303,9 +307,19 @@ public abstract class ParaManager {
 	}
 
 	public static String getCleanPrice() {
-		return getPara("1400");
+		return getPara("cleanPrice");
 	}
-
+	public static String getCleanPrice(String branchNo) {
+		if(StringUtils.isEmpty(branchNo)){
+			return getCleanPrice();
+		}else {
+			String value = getBranchPara(branchNo, "cleanPrice");
+			if (StringUtils.isEmpty(value)) {
+				value = getCleanPrice();
+			}
+			return value;
+		}
+	}
 	public static String getLiftBasePrice() {
 		return getPara("1500");
 	}

@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -45,7 +46,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 	@Override
 	public Map<String, Object> findSumInfo(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, sum(t.liftFee) as liftAmt, sum(t.cleanAmount) as cleanAmt) from DecorateServiceBill t where 1=1");
+		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, sum(t.paidAmount) as sumPaidAmt, sum(t.liftFee) as liftAmt, sum(t.cleanAmount) as cleanAmt) from DecorateServiceBill t where 1=1");
 		if (StringUtils.isNotEmpty(MapUtils.getString(params, "startChargeDate"))) {
 			helper.append("and chargeDate >= ?", DateUtil.formatDate(MapUtils.getString(params, "startChargeDate")));
 		}
@@ -60,6 +61,9 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
 		if (sumInfo.get("sumAmt") == null) {
 			sumInfo.put("sumAmt", 0d);
+		}
+		if (sumInfo.get("sumPaidAmt") == null) {
+			sumInfo.put("sumPaidAmt", 0d);
 		}
 		if (sumInfo.get("liftAmt") == null) {
 			sumInfo.put("liftAmt", 0d);
@@ -76,5 +80,14 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 			Integer yearInt = Integer.parseInt(year);
 			helper.append("and chargeDate <= ?", String.valueOf(yearInt+1));
 		}
+	}
+
+	public List<DecorateServiceBill> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from DecorateServiceBill where 1=1");
+		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
+		helper.append("and amount = ?", MapUtils.getDouble(params, "amount"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		return super.getList(helper);
 	}
 }

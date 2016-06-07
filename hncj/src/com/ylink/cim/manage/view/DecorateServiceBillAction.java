@@ -1,15 +1,20 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.YesNoType;
 import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.common.util.ParaManager;
@@ -19,11 +24,18 @@ import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.BillService;
+import com.ylink.cim.manage.service.ImportService;
+import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.DateUtil;
 import flink.util.Paginater;
+import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
+import net.sf.json.JSONObject;
 
 @Scope("prototype")
 @Component
@@ -32,10 +44,14 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private DecorateServiceBillDao decorateServiceBillDao = (DecorateServiceBillDao) getService("decorateServiceBillDao");
-	private BillService billService = (BillService) getService("billService");
-	private OwnerInfoDao ownerInfoDao = (OwnerInfoDao) getService("ownerInfoDao");
-
+	@Autowired
+	private DecorateServiceBillDao decorateServiceBillDao;
+	@Autowired
+	private BillService billService;
+	@Autowired
+	private OwnerInfoDao ownerInfoDao;
+	@Autowired
+	private ImportService importService;
 	public String toAdd() throws Exception {
 		YesNoType.setInReq(request);
 		return "add";
@@ -177,4 +193,101 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 
 	private DecorateServiceBill model = new DecorateServiceBill();
 
+	public String toImport() {
+		return "import";
+	}
+	
+	public String doImport() {
+		try{
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
+			List<Map<String, String>> rule = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule");
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, rule);
+			importService.addDSBFromExcel(list, getSessionUser(request));
+			setSucResult(request);
+		}catch (Exception e) {
+			e.printStackTrace();
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败", request);
+			}
+			return toImport();
+		}
+		return "toMain";
+	}
+	public String export() throws Exception {
+		Map<String, Object> map = getParaMap();
+		map.put("houseSn", model.getHouseSn());
+		map.put("startChargeDate", model.getStartChargeDate());
+		map.put("endChargeDate", model.getEndChargeDate());
+		map.put("state", model.getState());
+		map.put("id", model.getId());
+		map.put("year", model.getYear());
+		map.put("branchNo", getSessionBranchNo(request));
+		Paginater paginater = decorateServiceBillDao.findPager(map, null);
+		List<DecorateServiceBill> list = paginater.getList();
+		String branchNo = super.getSessionBranchNo(request);
+		List<List<List<Object>>> dataList = new ArrayList<>();
+		Map<String, List<List<Object>>> dataMap = new HashMap<>();
+		List<String> buildingList = new ArrayList<>();
+		for (int i = 0, size = list.size(); i < size; i++) {
+			DecorateServiceBill bill = (DecorateServiceBill)list.get(i);
+			String houseSn = bill.getHouseSn();
+			String buildingNo = houseSn.split("-")[0];
+			List<List<Object>> tmpList = dataMap.get(buildingNo);
+			if (tmpList == null) {
+				tmpList = new ArrayList<>();
+				dataMap.put(buildingNo, tmpList);
+			}
+			List<Object> obj = new ArrayList<>();
+			obj.add(bill.getId());
+			obj.add(bill.getHouseSn());
+			obj.add(bill.getOwnerName());
+			obj.add(bill.getArea());
+			obj.add(bill.getLiftFee());
+			obj.add(bill.getCleanPrice());
+			obj.add(bill.getCleanAmount());
+			obj.add(bill.getAmount());//合计金额
+			obj.add(bill.getPaidAmount());//实收金额
+			obj.add(bill.getChargeDate());
+			obj.add(bill.getChargeUser());
+			obj.add(BillState.valueOf(bill.getState()).getName());
+			obj.add(bill.getRemark());
+			tmpList.add(obj);
+ 		}
+		for (Map.Entry<String, List<List<Object>>> entry : dataMap.entrySet()) {
+			dataList.add(entry.getValue());
+			buildingList.add(entry.getKey());
+		}
+		String branchName = BranchType.valueOf(branchNo).getName();
+		String fileName = branchName+"装修服务费缴费信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
+		String title = "";
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
+		String excelType = ParaManager.getExcelType(branchName);
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
+		exportExcelUtil.exportSheets();
+		return null;
+	}
+	private File file;
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+	private String fileFileName;
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+	
+	
 }

@@ -110,7 +110,9 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>&nbsp;
 								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<!-- 
 								<input type="button" value="导入" id="btnImport"/>&nbsp;
+								 -->
 							</td>
 						</tr>
 					</table>
@@ -125,7 +127,8 @@
 							<td align="center">总笔数</td>
 							<td align="center">电梯上料费（元）</td>
 							<td align="center">装修垃圾清运费（元）</td>
-							<td align="center">总金额（元）</td>
+							<td align="center">合计总额（元）</td>
+							<td align="center">实收总额（元）</td>
 						</tr>
 					</thead>
 					<tr>
@@ -138,6 +141,9 @@
 						</td>
 						<td align="center">
 							<fmt:formatNumber value="${sumInfo.sumAmt}" pattern="##0.00"/>
+						</td>
+						<td align="center">
+							<fmt:formatNumber value="${sumInfo.sumPaidAmt}" pattern="##0.00"/>
 						</td>
 					</tr>
 				</table>
@@ -158,6 +164,7 @@
 						    <td>垃圾清运费单价</td>
 						    <td>垃圾清运费</td>
 						    <td>合计金额</td>
+						    <td>实收金额</td>
 						    <td>缴费时间</td>
 						    <td>收款人</td>
 						    <td>状态</td>
@@ -181,6 +188,7 @@
 								<td><fmt:formatNumber value="${element.cleanPrice }" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.cleanAmount }" pattern="##0.00"/></td>
 								<td><fmt:formatNumber value="${element.amount }" pattern="##0.00"/></td>
+								<td><fmt:formatNumber value="${element.paidAmount }" pattern="##0.00"/></td>
 								<td width="120"><fmt:formatDate value="${element.chargeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.chargeUser}</td>
 								<td>

@@ -270,7 +270,7 @@ public class UserInfoAction extends BaseAction implements ModelDriven<UserInfo> 
 
 			this.userService.deleteUserInfo(model.getUserId());
 
-			setResult(true, ActionMessageConstant.OPER_SUCCESS, request);
+			setSucResult(ActionMessageConstant.OPER_SUCCESS, request);
 			String msg = MsgUtils.r("删除用户信息成功,删除内容为：{?}", model.getUserId());
 			super.logSuccess(request, UserLogType.DELETE.getValue(), msg);
 			return "toMain";

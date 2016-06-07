@@ -117,7 +117,9 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="新增" id="btnAdd"/>&nbsp;
 								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<!-- 
 								<input type="button" value="导入" id="btnImport"/>&nbsp;
+								 -->
 							</td>
 						</tr>
 					</table>

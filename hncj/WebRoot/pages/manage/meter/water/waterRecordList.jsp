@@ -83,7 +83,7 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="全部生成账单" id="btnCheck"/>&nbsp;
 								<input type="button" value="导入水表记录" id="btnImp"/>&nbsp;
-								<input type="button" value="新增水笔记录" id="btnAdd"/>&nbsp;
+								<input type="button" value="新增水表记录" id="btnAdd"/>&nbsp;
 							</td>
 						</tr>
 					</table>

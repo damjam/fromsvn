@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="parkingInfoImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 车位编号 -->
+				<map>
+					<entry key="fieldName" value="sn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 车位归属人 -->
+				<map>
+					<entry key="fieldName" value="ownerName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 归属人电话-->
+				<map>
+					<entry key="fieldName" value="ownerCel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车位使用人 -->
+				<map>
+					<entry key="fieldName" value="endUser"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 使用人电话-->
+				<map>
+					<entry key="fieldName" value="endUserCell"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车位状态 -->
+				<map>
+					<entry key="fieldName" value="state"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="parkingInfoExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 车位号 -->
+				<map>
+					<entry key="fieldName" value="车位号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				
+				<!-- 归属人-->
+				<map>
+					<entry key="fieldName" value="车位归属人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 归属人电话 -->
+				<map>
+					<entry key="fieldName" value="归属人电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 使用人-->
+				<map>
+					<entry key="fieldName" value="车位使用人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 使用人电话 -->
+				<map>
+					<entry key="fieldName" value="使用人电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车位状态 -->
+				<map>
+					<entry key="fieldName" value="车位状态"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

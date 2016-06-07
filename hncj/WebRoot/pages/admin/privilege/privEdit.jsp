@@ -44,9 +44,7 @@
 					id="inputForm" class="validate" method="post">
 					<s:hidden name="parent" id="parent"/>
 					<table class="form_grid">
-						<caption>
-							${ACT.name}
-						</caption>
+						<caption class="widget-head">${ACT.name}</caption>
 						<tr>
 							<td class="formlabel nes">
 								权限ID
@@ -75,12 +73,15 @@
 								<s:select list="#{'Y':'是','N':'否' }" name="isMenu" listKey="key" listValue="value"></s:select>
 							</td>
 						</tr>
-					</table>
-					<div class="btnbox" align="center">
-						<input type='submit' value='提交' />
+						<tr>
+							<td></td>
+							<td>
+								<input type='submit' value='提交' />
 						<input type='button' onclick="goBack();"
 							value='返回' />
-					</div>
+							</td>
+						</tr>
+					</table>
 				</form>
 			</div>
 		</div>

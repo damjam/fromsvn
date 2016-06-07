@@ -55,14 +55,14 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">车位产权人</td>
+						    <td class="formlabel">车位归属人</td>
 						    <td>
 						    	<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel">产权人电话</td>
+						    <td class="formlabel">归属人电话</td>
 						    <td>
 						    	<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>

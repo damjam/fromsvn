@@ -16,7 +16,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -61,6 +60,7 @@ public class ExportExcelUtil {
 		this.dataList = dataList;
 		this.rowRules = rowRules;
 		this.title = title;
+		this.sheetName = sheetName;
 		this.response = response;
 		this.fileName = fileName;
 		this.excelType = excelType;
@@ -89,6 +89,7 @@ public class ExportExcelUtil {
 			createSheet(workbook, sheetName, dataList);
 			if (workbook != null) {
 				try {
+					fileName = new String(fileName.getBytes("utf-8"), "ISO-8859-1");
 					String headStr = "attachment; filename=\"" + fileName + "\"";
 					response.setContentType("APPLICATION/OCTET-STREAM");
 					response.setHeader("Content-Disposition", headStr);

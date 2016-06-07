@@ -11,15 +11,17 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.BillState;
+import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CommonServiceBillDao;
+import com.ylink.cim.manage.dao.DecorateServiceBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
 import com.ylink.cim.manage.dao.HouseInfoDao;
 import com.ylink.cim.manage.domain.CommonServiceBill;
+import com.ylink.cim.manage.domain.DecorateServiceBill;
 import com.ylink.cim.manage.domain.DepositBill;
+import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.service.ImportService;
 
-import flink.IdFactoryHelper;
-import flink.consant.Constants;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
@@ -27,11 +29,13 @@ import flink.util.DateUtil;
 public class ImportServiceImpl implements ImportService {
 
 	@Autowired
-	private HouseInfoDao houseInfoDao;
-	@Autowired
 	private CommonServiceBillDao commonServiceBillDao;
 	@Autowired
 	private DepositBillDao depositBillDao;
+	@Autowired
+	private DecorateServiceBillDao decorateServiceBillDao;
+	@Autowired
+	private HouseInfoDao houseInfoDao;
 	@Override
 	public Integer addCSBFromExcel(List<List<Map<String, Object>>> list, UserInfo userInfo) throws BizException{
 		Integer totalCnt = 0;
@@ -126,5 +130,53 @@ public class ImportServiceImpl implements ImportService {
 			state = BillState.VERIFIED.getValue();
 		}
 		return state;
+	}
+	/**
+	 * 导入装修服务费账单
+	 */
+	@Override
+	public Integer addDSBFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws BizException {
+		Integer totalCnt = 0;
+		String branchNo = sessionUser.getBranchNo();
+		String cleanPriceStr = ParaManager.getCleanPrice(branchNo);
+		Double clenaPrice = Double.parseDouble(cleanPriceStr);
+		for (int i = 0; i < list.size(); i++) {
+			List<Map<String, Object>> rows = list.get(i);
+			for (int j = 0; j < rows.size(); j++) {
+				Map<String, Object> map = rows.get(j);
+				String id = MapUtils.getString(map, "id");
+				Assert.isNull(decorateServiceBillDao.findById(id), "账单"+id+"已存在");
+				String state = getStateByName(MapUtils.getString(map, "state"));
+				String houseSn = MapUtils.getString(map, "houseSn");
+				/*Map<String, Object> params = new HashMap<String, Object>();
+				
+				params.put("houseSn", houseSn);
+				params.put("branchNo", sessionUser.getBranchNo());
+				params.put("amount", MapUtils.getDouble(map, "amount"));
+				params.put("state", state);
+				//查询记录是否已存在
+				List<DecorateServiceBill> exitBills = decorateServiceBillDao.findList(params);
+				Assert.isEmpty(exitBills, "房屋编号为"+houseSn+"的记录已存在");*/
+				DecorateServiceBill bill = new DecorateServiceBill();
+				try {
+					BeanUtils.populate(bill, map);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new BizException("程序出现异常");
+				}
+				HouseInfo houseInfo = houseInfoDao.findById(houseSn);
+				bill.setArea(houseInfo.getArea());
+				bill.setCleanPrice(clenaPrice);
+				bill.setState(state);
+				bill.setCreateType("表格导入");
+				//bill.setAmount(amount);
+				//账单编号由表格提供
+				//bill.setId(IdFactoryHelper.getId(Constants.BILL_ID));
+				bill.setCreateDate(DateUtil.getCurrent());
+				decorateServiceBillDao.save(bill);
+				totalCnt++;
+			}
+		}
+		return totalCnt;
 	}
 }

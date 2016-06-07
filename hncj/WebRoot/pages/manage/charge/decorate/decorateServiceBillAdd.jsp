@@ -82,6 +82,7 @@
 				    	 $('#floor').val(floor);
 				    	 $('#liftFee').val(liftFee);
 				    	 $('#amount').val(amount);
+				    	 $('#paidAmount').val(amount);
 				    	 if(supPay != ''){
 				    		 if(window.confirm("业主上次按80%收取的物业费未到期，是否补缴已减免的20%?")){
 				    			 $('#tr1').show();
@@ -111,92 +112,95 @@
 		<s:hidden name="csBillId" id="csBillId"/>
 		<div class="userbox">
 			<div class="widget">
-					<div class="widget-head">
-	                    <div class="pull-left">${ACT.name}</div>
-	                </div>
-					<table class="form_grid">
-					   <tr class="houseSn">
-						    <td class="formlabel nes">房屋编号</td>
-						    <td>
-						    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getHouseInfo()" class="{required:true}"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">业主姓名</td>
-						    <td>
-						    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">房屋面积</td>
-						    <td>
-						    	<s:textfield name="area" id="area" class="{required:true}" maxlength="6" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">楼层</td>
-						    <td>
-						    	<s:textfield name="floor" id="floor" class="{required:true}" maxlength="6" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">垃圾清运费单价</td>
-						    <td>
-						    <s:textfield name="cleanPrice"  id="cleanPrice" class="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">垃圾清运费</td>
-						    <td>
-						    <s:textfield name="cleanAmount"  id="cleanAmount" class="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">电梯上料使用费</td>
-						    <td>
-						    <s:textfield name="liftFee"  id="liftFee" class="{required:true}" maxlength="8" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel nes">合计金额</td>
-						    <td>
-						    <s:textfield name="amount"  id="amount" class="{required:true,num:true}" maxlength="8"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr id="tr1" style="display: none;">
-						    <td class="formlabel nes">补缴物业费</td>
-						    <td>
-						    <s:textfield name="supFee"  id="supFee" class="{num:true}" maxlength="10" readonly="true"/>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
-						    <td class="formlabel">备注</td>
-						    <td>
-						    <s:textfield name="remark"  id="remark" maxlength="25"/>
-						    	<span class="field_tipinfo"></span>
-						    </td>
-					   </tr>
-					   <tr>
-					   		<td></td>
-					   		<td>
-					   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
-							 	<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
-							 </td>
-					   </tr>
-				  </table>
-				  <div class="btnbox">
-					 
-				</div>
-				</div>
+				<div class="widget-head">
+                    <div class="pull-left">${ACT.name}</div>
+                </div>
+				<table class="form_grid">
+				   <tr class="houseSn">
+					    <td class="formlabel nes">房屋编号</td>
+					    <td>
+					    	<s:textfield name="houseSn" id="houseSn" maxlength="10" onblur="getHouseInfo()" class="{required:true}"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">业主姓名</td>
+					    <td>
+					    	<s:textfield name="ownerName" id="ownerName" class="{required:true}" maxlength="10" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">房屋面积</td>
+					    <td>
+					    	<s:textfield name="area" id="area" class="{required:true}" maxlength="6" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">楼层</td>
+					    <td>
+					    	<s:textfield name="floor" id="floor" class="{required:true}" maxlength="6" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">垃圾清运费单价</td>
+					    <td>
+					    <s:textfield name="cleanPrice"  id="cleanPrice" class="{required:true}" maxlength="8" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">垃圾清运费</td>
+					    <td>
+					    <s:textfield name="cleanAmount"  id="cleanAmount" class="{required:true}" maxlength="8" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">电梯上料使用费</td>
+					    <td>
+					    <s:textfield name="liftFee"  id="liftFee" class="{required:true}" maxlength="8" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr id="tr1" style="display: none;">
+					    <td class="formlabel nes">补缴物业费</td>
+					    <td>
+					    <s:textfield name="supFee"  id="supFee" class="{num:true}" maxlength="10" readonly="true"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel nes">合计金额</td>
+					    <td>
+					    <s:textfield name="amount"  id="amount" class="{required:true,num:true}" maxlength="8"/>
+					    	<span class="field_tipinfo">不能为空</span>
+					    </td>
+				   </tr>
+				   <tr>
+				   		<td class="formlabel nes">实收金额</td>
+				   		<td>
+				   			 <s:textfield name="paidAmount"  id="paidAmount" class="{required:true,num:true}" maxlength="8"/>
+					    	 <span class="field_tipinfo">不能为空</span>
+				   		</td>
+				   </tr>
+				   <tr>
+					    <td class="formlabel">备注</td>
+					    <td>
+					    <s:textfield name="remark"  id="remark" maxlength="25"/>
+					    	<span class="field_tipinfo"></span>
+					    </td>
+				   </tr>
+				   <tr>
+				   		<td></td>
+				   		<td>
+				   			<input type="button" id="btnSumit" value="保存" onclick="save()"/>
+						 	<input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
+						 </td>
+				   </tr>
+			  </table>
 			</div>
 		</div>	
 	</form>

@@ -1,6 +1,10 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -10,13 +14,20 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.ParkingState;
+import com.ylink.cim.common.type.BranchType;
+import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.ParkingInfoDao;
 import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.ParkingInfoService;
+import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
+import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
 
 @Scope("prototype")
@@ -122,6 +133,94 @@ public class ParkingInfoAction extends BaseAction implements
 			setResult(false, "操作失败", request);
 		}
 		return list();
+	}
+	
+	public String toImport() throws Exception {
+		
+		return "import";
+	}
+	public String doImport() throws Exception{
+		try{
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule");
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, houseInfoRule);
+			int cnt = parkingInfoService.addFromExcel(list, getSessionUser(request));
+			setSucResult(MsgUtils.r("共导入{?}条记录", cnt), request);
+		}catch (Exception e){
+			e.printStackTrace();
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败", request);
+			}
+			return toImport();
+		}
+		return "toMain";
+	}
+	public String export() throws Exception {
+		ParkingState.setInReq(request);
+		Map<String, Object> map = getParaMap();
+		map.put("sn", model.getSn());
+		map.put("carSn", model.getCarSn());
+		map.put("ownerName", model.getOwnerName());
+		map.put("ownerCel", model.getOwnerCel());
+		map.put("endUser", model.getOwnerName());
+		map.put("endUserCel", model.getOwnerCel());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
+		Paginater paginater = parkingInfoDao.findPager(map, getPager(request));
+		List<ParkingInfo> list = paginater.getList();
+		String branchNo = super.getSessionBranchNo(request);
+		List<List<Object>> dataList = new ArrayList<>();
+		for (int i = 0, size = list.size(); i < size; i++) {
+			ParkingInfo info = (ParkingInfo)list.get(i);
+			List<Object> obj = new ArrayList<>();
+			obj.add(info.getSn());
+			obj.add(info.getOwnerName());
+			obj.add(info.getOwnerCel());
+			obj.add(info.getEndUser());
+			obj.add(info.getEndUserCel());
+			obj.add(ParkingState.valueOf(info.getState()).getValue());
+			//obj.add(info.getCreateDate());
+			obj.add(info.getRemark());
+			dataList.add(obj);
+ 		}
+		
+		String branchName = BranchType.valueOf(branchNo).getName();
+		String fileName = branchName+"车位信息."+ParaManager.getExcelType(getSessionBranchNo(request));
+		String title = "";
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
+		String excelType = ParaManager.getExcelType(branchName);
+		//ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, "车位信息", rules, dataList, excelType, response);
+		exportExcelUtil.exportSheet();
+		return null;
+	}
+	
+	private File file;
+	private String fileFileName;
+	
+	
+	
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 
 	public String queryPopup() throws Exception {

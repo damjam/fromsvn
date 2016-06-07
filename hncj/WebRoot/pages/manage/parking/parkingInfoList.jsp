@@ -28,6 +28,14 @@
 					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
+				$('#btnExport').click(function(){
+					var url="${uri}?action=export";
+					gotoUrl(url);   
+				});
+				$('#btnImport').click(function(){
+					var url="${uri}?action=import";
+					gotoUrl(url);   
+				});
 			});
 			
 			function delInfo(id){
@@ -60,13 +68,13 @@
 								<s:textfield name="sn" id="sn" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								车位产权人
+								车位归属人
 							</td>
 							<td>
 								<s:textfield name="ownerName" id="ownerName" maxlength="10"/>
 							</td>
 							<td class="formlabel">
-								产权人电话
+								归属人电话
 							</td>
 							<td>
 								<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
@@ -97,7 +105,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="新增" id="btnAdd"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -109,8 +119,8 @@
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td>车位号</td>
-						    <td>车位产权人</td>
-						    <td>产权人电话</td>
+						    <td>车位归属人</td>
+						    <td>归属人电话</td>
 						    <td>车位使用人</td>
 						    <td>使用人电话</td>
 						    <td>车位状态</td>
@@ -127,7 +137,7 @@
 								<td>${element.ownerCel}</td>
 								<td>${element.endUser}</td>
 								<td>${element.endUserCel}</td>
-								<td><f:state className="ParkingState" value="${element.state }" /></td> 
+								<td>${element.state}</td> 
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							    <td class="redlink">
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>

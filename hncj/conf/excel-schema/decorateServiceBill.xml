@@ -25,53 +25,17 @@
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="Y"></entry>
 				</map>
-				<!-- 付款人 -->
-				<map>
-					<entry key="fieldName" value="payerName"></entry>
-					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="N"></entry>
-				</map>
 				<!-- 付款金额-->
 				<map>
-					<entry key="fieldName" value="amount"></entry>
+					<entry key="fieldName" value="paidAmount"></entry>
 					<entry key="cellType" value="Double"></entry>
 					<entry key="notNull" value="Y"></entry>
-				</map>
-				<!-- 用途-->
-				<map>
-					<entry key="fieldName" value="purpose"></entry>
-					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="N"></entry>
 				</map>
 				<!-- 收款人-->
 				<map>
-					<entry key="fieldName" value="depositUser"></entry>
+					<entry key="fieldName" value="chargeUser"></entry>
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="N"></entry>
-				</map>
-				<!-- 退款时间-->
-				<map>
-					<entry key="fieldName" value="refundDate"></entry>
-					<entry key="cellType" value="Date"></entry>
-					<entry key="notNull" value="N"></entry>
-				</map>
-				<!-- 退款人-->
-				<map>
-					<entry key="fieldName" value="refundUser"></entry>
-					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="N"></entry>
-				</map>
-				<!-- 退款金额-->
-				<map>
-					<entry key="fieldName" value="refundAmount"></entry>
-					<entry key="cellType" value="Double"></entry>
-					<entry key="notNull" value="N"></entry>
-				</map>
-				<!-- 状态-->
-				<map>
-					<entry key="fieldName" value="state"></entry>
-					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="Y"></entry>
 				</map>
 				<!-- 备注 -->
 				<map>
@@ -96,39 +60,49 @@
 					<entry key="fieldName" value="房屋编号"></entry>
 					<entry key="cellType" value="String"></entry>
 				</map>
-				<!-- 付款人 -->
+				<!-- 业主姓名 -->
 				<map>
-					<entry key="fieldName" value="付款人"></entry>
+					<entry key="fieldName" value="业主姓名"></entry>
 					<entry key="cellType" value="String"></entry>
 				</map>
-				<!-- 付款金额-->
+				<!-- 房屋面积-->
 				<map>
-					<entry key="fieldName" value="金额"></entry>
+					<entry key="fieldName" value="房屋面积"></entry>
 					<entry key="cellType" value="Double"></entry>
 				</map>
-				<!-- 用途-->
+				<!-- 上料费-->
 				<map>
-					<entry key="fieldName" value="用途"></entry>
-					<entry key="cellType" value="String"></entry>
+					<entry key="fieldName" value="电梯上料费"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 垃圾清运费单价-->
+				<map>
+					<entry key="fieldName" value="垃圾清运费单价"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 垃圾清运费-->
+				<map>
+					<entry key="fieldName" value="垃圾清运费"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 合计金额-->
+				<map>
+					<entry key="fieldName" value="合计金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 实收金额-->
+				<map>
+					<entry key="fieldName" value="实收金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 缴费时间-->
+				<map>
+					<entry key="fieldName" value="缴费时间"></entry>
+					<entry key="cellType" value="DateTime"></entry>
 				</map>
 				<!-- 收款人-->
 				<map>
 					<entry key="fieldName" value="收款人"></entry>
-					<entry key="cellType" value="String"></entry>
-				</map>
-				<!-- 退款时间-->
-				<map>
-					<entry key="fieldName" value="退款时间"></entry>
-					<entry key="cellType" value="Date"></entry>
-				</map>
-				<!-- 退款人-->
-				<map>
-					<entry key="fieldName" value="退款人"></entry>
-					<entry key="cellType" value="String"></entry>
-				</map>
-				<!-- 退款金额-->
-				<map>
-					<entry key="fieldName" value="退款金额"></entry>
 					<entry key="cellType" value="String"></entry>
 				</map>
 				<!-- 状态-->

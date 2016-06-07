@@ -195,7 +195,7 @@
 				        <div class="form-group">
 	                      <label class="control-label col-lg-3" for="code">用户名</label>
 	                      <div class="col-lg-9">
-	                        <input type="text" class="form-control" style="width:80%" id="code" name="code" value="super" placeholder="用户名">
+	                        <input type="text" class="form-control" style="width:80%" id="code" name="code" placeholder="用户名">
 	                      </div>
 	                    </div>
 						<div class="form-group">

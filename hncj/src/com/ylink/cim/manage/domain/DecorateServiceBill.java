@@ -22,6 +22,7 @@ public class DecorateServiceBill extends BranchField implements java.io.Serializ
 	private Double cleanAmount;
 	private Double liftFee;
 	private Double amount;
+	private Double paidAmount;
 	private Date createDate;
 	private String chargeUser;
 	private Date chargeDate;
@@ -35,6 +36,15 @@ public class DecorateServiceBill extends BranchField implements java.io.Serializ
 	private String startChargeDate;
 	private String endChargeDate;
 	private String year;
+	private String createType;
+	
+	public String getCreateType() {
+		return createType;
+	}
+
+	public void setCreateType(String createType) {
+		this.createType = createType;
+	}
 
 	public String getYear() {
 		return year;
@@ -183,6 +193,14 @@ public class DecorateServiceBill extends BranchField implements java.io.Serializ
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+	
+	public Double getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(Double paidAmount) {
+		this.paidAmount = paidAmount;
 	}
 
 	public Date getCreateDate() {
