@@ -45,7 +45,7 @@ public class CarInfoDaoImpl extends BaseDaoImpl implements CarInfoDao {
 		helper.append("order by createDate desc");
 		return super.getPageData(helper, pager);
 	}
-
+	
 	@Override
 	protected Class getModelClass() {
 		return CarInfo.class;

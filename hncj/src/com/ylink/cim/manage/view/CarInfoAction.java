@@ -1,5 +1,8 @@
 package com.ylink.cim.manage.view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,16 +15,25 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.ParkingState;
+import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
+import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.CarInfoService;
 import com.ylink.cim.util.CopyPropertyUtil;
+import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.DateUtil;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
+import flink.util.SpringContext;
+import flink.util.StringUtil;
 import flink.web.BaseAction;
 @Scope("prototype")
 @Component
@@ -120,7 +132,6 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		
 		map.put("houseSn", model.getHouseSn());
 		map.put("carSn", model.getCarSn());
 		map.put("brand", model.getBrand());
@@ -152,4 +163,88 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		//return forward("/pages/manage/car/carInfoEdit.jsp");
 		return "edit";
 	}
+	public String export() throws Exception {
+		Map<String, Object> map = getParaMap();
+		map.put("houseSn", model.getHouseSn());
+		map.put("carSn", model.getCarSn());
+		map.put("brand", model.getBrand());
+		map.put("model", model.getModel());
+		map.put("ownerName", model.getOwnerName());
+		map.put("ownerCel", model.getOwnerCel());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
+		Paginater paginater = carInfoDao.findPager(map, getPager(request));
+		List<CarInfo> list = paginater.getList();
+		String branchNo = super.getSessionBranchNo(request);
+		List<List<Object>> dataList = new ArrayList<>();
+		for (int i = 0, size = list.size(); i < size; i++) {
+			CarInfo info = (CarInfo)list.get(i);
+			List<Object> obj = new ArrayList<>();
+			obj.add(info.getCarSn());
+			obj.add(info.getBrand()+info.getModel());
+			obj.add(info.getOwnerName());
+			obj.add(info.getOwnerCel());
+			obj.add(info.getHouseSn());
+			obj.add(info.getParkingSn());
+			obj.add(info.getCreateDate());
+			obj.add(info.getRemark());
+			dataList.add(obj);
+ 		}
+		
+		String branchName = BranchType.valueOf(branchNo).getName();
+		String fileName = branchName+"车辆信息-"+DateUtil.getCurrentDate()+"."+ParaManager.getExcelType(getSessionBranchNo(request));
+		String title = "";
+		List<Map<String, String>> rules = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ExportRule");
+		String excelType = ParaManager.getExcelType(branchName);
+		//ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
+		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, "车辆信息", rules, dataList, excelType, response);
+		exportExcelUtil.exportSheet();
+		return null;
+	}
+	public String toImport() throws Exception {
+		request.setAttribute("templateName", "车辆信息导入模板."+ParaManager.getExcelType(getSessionBranchNo(request)));
+		return "import";
+	}
+	public String doImport() throws Exception {
+		try{
+			File file = this.getFile();
+			FileInputStream fis = new FileInputStream(file);
+			String suffix = fileFileName.substring(fileFileName.lastIndexOf(".")+1);//扩展名
+			List<Map<String, String>> houseInfoRule = (List<Map<String, String>>)SpringContext.getService(StringUtil.class2Object(this.getModel().getClass().getName())+"ImportRule");
+			List<List<Map<String, Object>>> list = ReadExcelUtil.read(fis, suffix, houseInfoRule);
+			int cnt = carInfoService.addFromExcel(list, getSessionUser(request));
+			setSucResult(MsgUtils.r("共导入{?}条记录", cnt), request);
+		}catch (Exception e){
+			e.printStackTrace();
+			if (e instanceof BizException) {
+				setResult(false, e.getMessage(), request);
+			}else {
+				setResult(false, "操作失败:"+e.getMessage(), request);
+			}
+			return toImport();
+		}
+		return "toMain";
+	}
+	private File file;
+	private String fileFileName;
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
+	}
+	
 }

@@ -160,7 +160,6 @@ public class ParkingInfoAction extends BaseAction implements
 		return "toMain";
 	}
 	public String export() throws Exception {
-		ParkingState.setInReq(request);
 		Map<String, Object> map = getParaMap();
 		map.put("sn", model.getSn());
 		map.put("carSn", model.getCarSn());

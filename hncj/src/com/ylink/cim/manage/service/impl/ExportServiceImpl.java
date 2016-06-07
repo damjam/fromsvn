@@ -7,16 +7,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.state.DecorateState;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.domain.CommonServiceBill;
-import com.ylink.cim.manage.domain.HouseInfo;
 import com.ylink.cim.manage.service.ExportService;
 import com.ylink.cim.util.ExportExcelUtil;
 
@@ -68,7 +64,6 @@ public class ExportServiceImpl implements ExportService {
 		String excelType = ParaManager.getExcelType(branchName);
 		ExportExcelUtil exportExcelUtil = new ExportExcelUtil(fileName, title, buildingList.toArray(new String[buildingList.size()]), rules, dataList, excelType, response);
 		exportExcelUtil.exportSheets();
-		
 	}
 
 }

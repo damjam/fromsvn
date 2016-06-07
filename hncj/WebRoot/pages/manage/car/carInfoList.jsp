@@ -28,6 +28,14 @@
 					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
+				$('#btnExport').click(function(){
+					var url="${uri}?action=export";
+					gotoUrl(url);   
+				});
+				$('#btnImport').click(function(){
+					var url="${uri}?action=toImport";
+					gotoUrl(url);   
+				});
 			});
 			
 			function delInfo(id){
@@ -105,7 +113,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="新增" id="btnAdd"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 							</td>
 						</tr>
 					</table>
