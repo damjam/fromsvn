@@ -54,9 +54,6 @@ public class ParkingInfo extends BranchField implements java.io.Serializable {
 		return endUser;
 	}
 
-	public String getEndUserCel() {
-		return endUserCel;
-	}
 
 	public String getHouseSn() {
 		return houseSn;
@@ -64,10 +61,6 @@ public class ParkingInfo extends BranchField implements java.io.Serializable {
 
 	public String getId() {
 		return this.id;
-	}
-
-	public String getOwnerCel() {
-		return ownerCel;
 	}
 
 	public String getOwnerName() {
@@ -113,20 +106,12 @@ public class ParkingInfo extends BranchField implements java.io.Serializable {
 		this.endUser = endUser;
 	}
 
-	public void setEndUserCel(String endUserCel) {
-		this.endUserCel = endUserCel;
-	}
-
 	public void setHouseSn(String houseSn) {
 		this.houseSn = houseSn;
 	}
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public void setOwnerCel(String ownerCel) {
-		this.ownerCel = ownerCel;
 	}
 
 	public void setOwnerName(String ownerName) {
@@ -153,4 +138,25 @@ public class ParkingInfo extends BranchField implements java.io.Serializable {
 		this.updateUser = updateUser;
 	}
 
+
+	public String getOwnerCel() {
+		return ownerCel;
+	}
+
+
+	public void setOwnerCel(String ownerCel) {
+		this.ownerCel = ownerCel;
+	}
+
+
+	public String getEndUserCel() {
+		return endUserCel;
+	}
+
+
+	public void setEndUserCel(String endUserCel) {
+		this.endUserCel = endUserCel;
+	}
+
+	
 }

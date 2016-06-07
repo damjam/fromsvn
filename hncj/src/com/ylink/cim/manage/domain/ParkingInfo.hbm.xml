@@ -38,13 +38,13 @@
 			<column name="OWNER_NAME" length="20" />
 		</property>
 		<property name="ownerCel" type="java.lang.String">
-			<column name="OWNER_CEL" length="15" />
+			<column name="OWNER_Cel" length="15" />
 		</property>
 		<property name="endUser" type="java.lang.String">
 			<column name="END_USER" length="20" />
 		</property>
 		<property name="endUserCel" type="java.lang.String">
-			<column name="END_USER_CEL" length="15" />
+			<column name="END_USER_Cel" length="15" />
 		</property>
 		<property name="branchNo" type="java.lang.String">
 			<column name="BRANCH_NO" length="15" />

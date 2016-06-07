@@ -67,7 +67,7 @@
 					   <tr>
 						    <td class="formlabel">归属人电话</td>
 						    <td>
-						    	<s:textfield name="ownerCel" id="ownerCel" maxlength="10"/>
+						    	<s:textfield name="ownerCell" id="ownerCell" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
@@ -81,7 +81,7 @@
 					   <tr>
 						    <td class="formlabel">使用人电话</td>
 						    <td>
-						    	<s:textfield name="endUserCel" id="endUserCel" maxlength="10"/>
+						    	<s:textfield name="endUserCell" id="endUserCell" maxlength="10"/>
 						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>

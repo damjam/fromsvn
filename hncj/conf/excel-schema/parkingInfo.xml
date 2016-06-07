@@ -38,7 +38,7 @@
 				</map>
 				<!-- 使用人电话-->
 				<map>
-					<entry key="fieldName" value="endUserCell"></entry>
+					<entry key="fieldName" value="endUserCel"></entry>
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="N"></entry>
 				</map>
