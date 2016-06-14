@@ -176,7 +176,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		}else {//»ú¹¹
 			map.put("branchNo", getSessionBranchNo(request));
 		}
-		Paginater paginater = carInfoDao.findPager(map, getPager(request));
+		Paginater paginater = carInfoDao.findPager(map, null);
 		List<CarInfo> list = paginater.getList();
 		String branchNo = super.getSessionBranchNo(request);
 		List<List<Object>> dataList = new ArrayList<>();

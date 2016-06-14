@@ -20,12 +20,11 @@ public class Contact extends BranchField implements java.io.Serializable {
 	private String contactName;
 	private String mobile;
 	private Date createDate;
-	private String merchantNo;
+	private String workUnit;
 	private String remark;
 	private String sex;
 	private String idCard;
 	private String industry;
-	private String merchantName;
 	private String keyword;
 
 	public String getKeyword() {
@@ -34,14 +33,6 @@ public class Contact extends BranchField implements java.io.Serializable {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
-	}
-
-	public String getMerchantName() {
-		return merchantName;
-	}
-
-	public void setMerchantName(String merchantName) {
-		this.merchantName = merchantName;
 	}
 
 	public String getIndustry() {
@@ -89,13 +80,14 @@ public class Contact extends BranchField implements java.io.Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
 
-	public String getMerchantNo() {
-		return this.merchantNo;
+	public String getWorkUnit() {
+		return workUnit;
 	}
 
-	public void setMerchantNo(String merchantNo) {
-		this.merchantNo = merchantNo;
+	public void setWorkUnit(String workUnit) {
+		this.workUnit = workUnit;
 	}
 
 	public String getRemark() {

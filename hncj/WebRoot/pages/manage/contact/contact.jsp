@@ -115,7 +115,7 @@
 
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doEdit" id="dataForm" method="post" class="validate">
-		<s:hidden name="merchantNo" id="merchantNo"/>
+		<s:hidden name="id"/>
 		<div class="userbox">
 			<div class="widget">
 				<table class="form_grid">
@@ -134,16 +134,6 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">商户</td>
-						    <td>
-						    	<s:textfield name="merchantName"  id="merchantName" class="{required:true}" maxlength="20" readonly="readonly"/>
-						    	<a href="javascript:void(0);" onclick="popUp.popUpMerchantInfo('merchantNo','merchantName');">
-						    		<i class="fa fa-search" aria-hidden="true"></i>
-						    	</a>
-						    	<span class="field_tipinfo">不能为空</span>
-						    </td>
-					   </tr>
-					   <tr>
 						    <td class="formlabel nes">所属行业</td>
 						    <td>
 						    <s:textfield name="industry"  id="industry" class="{required:true}" maxlength="10"/>
@@ -154,6 +144,13 @@
 						    <td class="formlabel nes">职位</td>
 						    <td>
 						    <s:textfield name="position"  id="position" class="{required:true}" maxlength="10"/>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">工作单位</td>
+						    <td>
+						    	<s:textfield name="workUnit"  id="workUnit" class="{required:true}" maxlength="20"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

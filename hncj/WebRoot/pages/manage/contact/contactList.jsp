@@ -16,7 +16,6 @@
 		<f:js src="/js/paginater.js" />
 		<script type="text/javascript">
 			$(function(){
-				
 				$('#btnQry').click(function(){
 					$('#queryForm').submit();
 				});
@@ -26,6 +25,12 @@
 				});
 				$('#btnAdd').click(function(){
 					gotoUrl('${uri}?action=toEdit');
+				});
+				$('#btnExport').click(function(){
+					gotoUrl('${uri}?action=export');
+				});
+				$('#btnImport').click(function() {
+					gotoUrl('${uri}?action=toImport');
 				});
 				
 			});
@@ -89,7 +94,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="新增" id="btnAdd"/>&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 							</td>
 						</tr>
 					</table>
@@ -122,11 +129,11 @@
 							 		<td>${element.branchName}</td>
 							 	</c:if>
 								<td>${element.contactName}</td>
-								<td><f:type className="SexType" value="${element.sex}" /> </td>
+								<td>${element.sex}</td>
 								<td>${element.industry}</td>
 								<td>${element.position}</td>
 								<td>${element.mobile}</td>
-								<td>${element.merchantName}</td>
+								<td>${element.workUnit}</td>
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.remark}</td>
 								<td class="redlink">

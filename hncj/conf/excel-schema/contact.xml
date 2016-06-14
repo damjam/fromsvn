@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="contactImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 姓名 -->
+				<map>
+					<entry key="fieldName" value="contactName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 性别 -->
+				<map>
+					<entry key="fieldName" value="sex"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 行业 -->
+				<map>
+					<entry key="fieldName" value="industry"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 职位 -->
+				<map>
+					<entry key="fieldName" value="position"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 工作单位 -->
+				<map>
+					<entry key="fieldName" value="workUnit"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 电话-->
+				<map>
+					<entry key="fieldName" value="mobile"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 备注-->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="contactExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 姓名-->
+				<map>
+					<entry key="fieldName" value="姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!--性别-->
+				<map>
+					<entry key="fieldName" value="性别"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 行业-->
+				<map>
+					<entry key="fieldName" value="行业"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 职位-->
+				<map>
+					<entry key="fieldName" value="职位"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 工作单位-->
+				<map>
+					<entry key="fieldName" value="工作单位"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!--电话-->
+				<map>
+					<entry key="fieldName" value="电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

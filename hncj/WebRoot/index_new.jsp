@@ -201,7 +201,7 @@
 						<div class="form-group">
 	                      <label class="control-label col-lg-3" for="password">密码</label>
 	                      <div class="col-lg-9">
-	                        <input type="password" class="form-control" style="width:80%" id="password" name="password" value="111111" placeholder="密码">
+	                        <input type="password" class="form-control" style="width:80%" id="password" name="password" autocomplete="off" value="111111" placeholder="密码">
 	                      </div>
 	                    </div>
 						<div class="form-group">

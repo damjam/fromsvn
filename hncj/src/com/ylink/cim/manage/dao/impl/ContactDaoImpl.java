@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -31,6 +32,15 @@ public class ContactDaoImpl extends BaseDaoImpl implements ContactDao {
 	@Override
 	protected Class getModelClass() {
 		return Contact.class;
+	}
+
+	@Override
+	public List<Contact> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from Contact t where 1=1");
+		helper.append("and mobile = ?", MapUtils.getString(params, "mobile"));
+		helper.append("and id <> ?", MapUtils.getString(params, "excludeId"));
+		return super.getList(helper);
 	}
 
 	

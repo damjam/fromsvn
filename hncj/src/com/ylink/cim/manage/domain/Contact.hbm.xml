@@ -22,8 +22,8 @@
         <property name="createDate" type="java.sql.Timestamp">
             <column name="CREATE_DATE" length="19" not-null="true" />
         </property>
-        <property name="merchantNo" type="java.lang.String">
-            <column name="MERCHANT_NO" length="100" />
+        <property name="workUnit" type="java.lang.String">
+            <column name="WORK_UNIT" length="100" />
         </property>
         <property name="industry" type="java.lang.String">
             <column name="INDUSTRY" length="25" />
@@ -32,7 +32,7 @@
             <column name="REMARK" length="100" />
         </property>
         <property name="sex" type="java.lang.String">
-            <column name="SEX" length="1" not-null="true" />
+            <column name="SEX" length="2"/>
         </property>
         <property name="idCard" type="java.lang.String">
             <column name="ID_CARD" length="20" />
