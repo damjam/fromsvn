@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
-import com.ylink.cim.common.state.AccountState;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.OwnerState;
 import com.ylink.cim.common.type.AccountChangeType;
@@ -209,7 +208,7 @@ public class AccountServiceImpl implements AccountService {
 				info.setId(ownerInfo.getId());
 				info.setFreezeAmt(0d);
 				info.setCreditAmt(0d);
-				info.setState(AccountState.NORMAL.getValue());
+				info.setState(OwnerState.NORMAL.getValue());
 				accountDao.save(info);
 				totalCnt++;
 			}

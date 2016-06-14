@@ -105,7 +105,9 @@
 						    <!-- 
 						    <td >欠费次数</td>
 						    <td >累计欠费天数</td> -->
-						    <td >创建时间</td>
+						    <td >最后交易时间</td>
+						    <td >最后交易类型</td>
+						    <td >最后交易金额</td>
 						    <td >状态</td>
 						    <td >操作</td>
 						 </tr>
@@ -119,7 +121,9 @@
 								<td>${element.houseSn}</td>
 								<td>${element.ownerName}</td>
 								<td><fmt:formatNumber value="${element.balance}" pattern="##0.00"/></td>
-								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><fmt:formatDate value="${element.lastChangeDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+								<td><f:type className="AccountChangeType" value="${element.lastTradeType}"/> </td>
+								<td><fmt:formatNumber value="${element.lastTradeAmt}" pattern="##0.00"/> </td>
 								<td><f:state className="OwnerState" value="${element.state}"/> </td>
 							    <td class="redlink">
 							    	<c:if test="${element.state eq '00'}">
