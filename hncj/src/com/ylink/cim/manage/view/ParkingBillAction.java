@@ -122,7 +122,7 @@ public class ParkingBillAction extends BaseAction implements
 			String houseSn = request.getParameter("houseSn");
 			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
 					"编号为" + houseSn + "的房屋信息不存在!");
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
 				mobile = ownerInfo.getMobile();
@@ -149,7 +149,7 @@ public class ParkingBillAction extends BaseAction implements
 			String houseSn = request.getParameter("houseSn");
 			// Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
 			// "编号为" + houseSn + "的房屋信息不存在!");
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
 				mobile = ownerInfo.getMobile();

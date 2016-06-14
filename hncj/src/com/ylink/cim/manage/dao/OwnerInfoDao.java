@@ -15,5 +15,5 @@ public interface OwnerInfoDao extends BaseDao {
 
 	public Paginater findPager(Map<String, Object> params, Pager pager);
 
-	OwnerInfo getNormalOwner(String houseSn);
+	OwnerInfo getNormalOwner(String houseSn, String branchNo);
 }

@@ -111,7 +111,7 @@ public class BillServiceImpl implements BillService {
 		accountJournalService.add(InputTradeType.SERVICE.getValue(),
 				bill.getTotalAmount(), id, "收" + bill.getHouseSn() + "业主"
 						+ bill.getOwnerName() + "物业费(含公共照明费)", userInfo);
-		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn());
+		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn(), userInfo.getBranchNo());
 		if (bill.getTotalAmount() == bill.getServiceAmount()
 				+ bill.getLightAmount()) {
 			// houseInfo = parkingBillDao.findById(bill.getHouseSn());
@@ -146,7 +146,7 @@ public class BillServiceImpl implements BillService {
 		parkingBillDao.update(decorateServiceBill);
 		// 添加
 		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(decorateServiceBill
-				.getHouseSn());
+				.getHouseSn(), userInfo.getBranchNo());
 		ownerInfo.setCheckinState(CheckinState.CHECKEDIN.getValue());
 		if (StringUtils.isEmpty(ownerInfo.getCheckinDate())) {
 			ownerInfo.setCheckinDate(DateUtil.getCurrentDate());
@@ -242,7 +242,7 @@ public class BillServiceImpl implements BillService {
 	public void chargeWaterFee(String id, UserInfo userInfo)
 			throws BizException {
 		WaterBill bill = waterBillDao.findByIdWithLock(id);
-		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn());
+		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(bill.getHouseSn(), bill.getBranchNo());
 		String remark = "";
 		Double acctPayAmt = 0d;
 		boolean flag = false;

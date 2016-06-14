@@ -99,7 +99,7 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 			String id = (String) map.get("id");
 			WaterBill bill = waterBillDao.findById(id);
 			String sn = bill.getHouseSn();
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(sn);
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(sn, bill.getBranchNo());
 			Account account = waterBillDao.findById(Account.class,
 					ownerInfo.getId());
 			//
@@ -187,7 +187,7 @@ public class HouseInfoServiceImpl implements HouseInfoService {
 			waterBill.setRecordMonth(waterRecord.getRecordMonth());
 			waterBill.setPrice(Double.parseDouble(ParaManager.getWaterPrice()));
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(waterBill
-					.getHouseSn());
+					.getHouseSn(), userInfo.getBranchNo());
 			waterBill.setOwnerName(ownerInfo.getOwnerName());
 			waterRecordDao.save(waterBill);
 		}

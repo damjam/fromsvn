@@ -57,6 +57,7 @@
 			<result name="withdraw">/pages/manage/account/withdraw.jsp</result>
 			<result name="deposit">/pages/manage/account/deposit.jsp</result>
 			<result name="detail_list">/pages/manage/account/accountDetailList.jsp</result>
+			<result name="openAcct">/pages/manage/account/openAcct.jsp</result>
 			<result name="toMain" type="redirect">account.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="accountJournal" class="accountJournalAction">

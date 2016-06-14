@@ -9,6 +9,7 @@ import org.apache.commons.collections.MapUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 import com.ylink.cim.common.state.OwnerState;
 import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.domain.Account;
@@ -50,6 +51,15 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		hql.append("and houseSn in ?", houseSns.toArray(new String[0]));
 
 		return getList(hql);
+	}
+
+	@Override
+	public List<Account> findList(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from Account t where 1=1");
+		helper.append("and houseSn = ?", MapUtils.getString(params, "houseSn"));
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
+		return super.getList(helper);
 	}
 
 }

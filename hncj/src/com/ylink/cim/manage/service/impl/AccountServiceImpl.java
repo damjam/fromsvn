@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.MapUtils;
 import org.hibernate.LockMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
+import com.ylink.cim.common.state.AccountState;
 import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.common.state.OwnerState;
 import com.ylink.cim.common.type.AccountChangeType;
@@ -33,6 +36,7 @@ import flink.etc.BizException;
 import flink.etc.Symbol;
 import flink.util.AmountUtils;
 import flink.util.DateUtil;
+import flink.util.LogUtils;
 
 @Component("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -138,6 +142,9 @@ public class AccountServiceImpl implements AccountService {
 	public Double deposit(String no, Double amount, UserInfo userInfo) throws BizException {
 		Account account = accountDao.findByIdWithLock(no);
 		account.setBalance(AmountUtils.add(account.getBalance(), amount));
+		account.setLastChangeDate(DateUtil.getCurrent());
+		account.setLastTradeType(AccountChangeType.DEPOSIT.getValue());
+		account.setLastTradeAmt(amount);
 		accountDao.update(account);
 		String billId = addAccountDetail(account, amount, AccountChangeType.DEPOSIT.getValue(), InoutType.TYPE_IN.getValue(), "", "", userInfo);
 		OwnerInfo ownerInfo = ownerInfoDao.findById(no);
@@ -152,6 +159,9 @@ public class AccountServiceImpl implements AccountService {
 		Account account = accountDao.findByIdWithLock(no);
 		Double balance = AmountUtils.subtract(account.getBalance(), amount);
 		account.setBalance(balance);
+		account.setLastChangeDate(DateUtil.getCurrent());
+		account.setLastTradeType(AccountChangeType.WATER_FEE.getValue());
+		account.setLastTradeAmt(amount);
 		accountDao.update(account);
 		addAccountDetail(account, amount, AccountChangeType.WATER_FEE.getValue(), InoutType.TYPE_OUT.getValue(), billId, remark, userInfo);
 		
@@ -163,11 +173,74 @@ public class AccountServiceImpl implements AccountService {
 		Double balance = AmountUtils.subtract(account.getBalance(), amount);
 		Assert.isTrue(balance >= 0, "提现金额不能大于余额");
 		account.setBalance(balance);
+		account.setLastChangeDate(DateUtil.getCurrent());
+		account.setLastTradeType(AccountChangeType.WITHDRAW.getValue());
+		account.setLastTradeAmt(amount);
 		accountDao.update(account);
 		String billId = addAccountDetail(account, amount, AccountChangeType.WITHDRAW.getValue(), InoutType.TYPE_OUT.getValue(), "", "", userInfo);
 		OwnerInfo ownerInfo = ownerInfoDao.findById(account.getId());
 		accountJournalService.deduct(OutputTradeType.WITHDRAW.getValue(), amount, billId, "退"+ownerInfo.getHouseSn()+"业主"+ownerInfo.getOwnerName()+"预存水费", userInfo);
 	}
-	
-	
+
+	@Override
+	public int addFromExcel(List<List<Map<String, Object>>> list, UserInfo sessionUser) throws BizException{
+		Integer totalCnt = 0;
+		for (int i = 0; i < list.size(); i++) {
+			List<Map<String, Object>> rows = list.get(i);
+			for (int j = 0; j < rows.size(); j++) {
+				Map<String, Object> map = rows.get(j);
+				Account info = new Account();
+				String houseSn = MapUtils.getString(map, "houseSn");
+				Map<String, Object> params = new HashMap<>();
+				params.put("houseSn", houseSn);
+				params.put("branchNo", sessionUser.getBranchNo());
+				OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, sessionUser.getBranchNo());
+				Assert.notNull(ownerInfo, LogUtils.r("房屋编号为{?}的业主信息不存在", houseSn));
+				Assert.isEmpty(accountDao.findList(params), "房屋编号为"+houseSn+"的账户信息已存在");
+				try{
+					BeanUtils.populate(info, map);
+				}catch (Exception e){
+					throw new BizException("程序出现异常:"+e.getMessage());
+				}
+				info.setOwnerName(ownerInfo.getOwnerName());
+				info.setOwnerId(ownerInfo.getId());
+				info.setCreateDate(DateUtil.getCurrent());
+				info.setBranchNo(sessionUser.getBranchNo());
+				info.setId(ownerInfo.getId());
+				info.setFreezeAmt(0d);
+				info.setCreditAmt(0d);
+				info.setState(AccountState.NORMAL.getValue());
+				accountDao.save(info);
+				totalCnt++;
+			}
+		}
+		return totalCnt;
+	}
+
+	@Override
+	public void openAcct(String houseSn, Double amount, UserInfo userInfo) throws BizException {
+		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, userInfo.getBranchNo());
+		Assert.notNull(ownerInfo, LogUtils.r("找不到房屋编号为{?}的业主信息", houseSn));
+		Assert.isNull(accountDao.findById(ownerInfo.getId()), LogUtils.r("房屋编号为{?}的业主已开通账户,不可重新开户", houseSn));
+		Account account = new Account();
+		account.setId(ownerInfo.getId());
+		account.setOwnerName(ownerInfo.getOwnerName());
+		account.setCreditAmt(0d);
+		account.setFreezeAmt(0d);
+		account.setBalance(amount);
+		account.setCreateDate(DateUtil.getCurrent());
+		account.setCreateUser(userInfo.getUserName());
+		account.setHouseSn(ownerInfo.getHouseSn());
+		account.setState(OwnerState.NORMAL.getValue());
+		account.setBranchNo(userInfo.getBranchNo());
+		
+		account.setLastChangeDate(DateUtil.getCurrent());
+		account.setLastTradeType(AccountChangeType.DEPOSIT.getValue());
+		account.setLastTradeAmt(amount);
+		accountDao.save(account);
+		ownerInfo.setHasAcct(Symbol.YES);
+		ownerInfoDao.update(ownerInfo);
+		String billId = addAccountDetail(account, amount, AccountChangeType.DEPOSIT.getValue(), InoutType.TYPE_IN.getValue(), "", "", userInfo);
+		accountJournalService.add(InputTradeType.DEPOSIT.getValue(), amount, billId,houseSn+"业主"+ownerInfo.getOwnerName()+"充值", userInfo);
+	}
 }

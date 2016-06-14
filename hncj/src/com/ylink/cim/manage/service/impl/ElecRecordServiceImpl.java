@@ -95,7 +95,7 @@ public class ElecRecordServiceImpl implements ElecRecordService {
 		elecBill.setRecordMonth(elecRecord.getRecordMonth());
 		elecBill.setPrice(Double.parseDouble(ParaManager.getWaterPrice()));
 		OwnerInfo ownerInfo = ownerInfoDao
-				.getNormalOwner(elecBill.getHouseSn());
+				.getNormalOwner(elecBill.getHouseSn(), elecBill.getBranchNo());
 		Assert.notNull(ownerInfo, "找不到房屋编号" + elecBill.getHouseSn() + "对应的业主信息");
 		elecBill.setOwnerName(ownerInfo.getOwnerName());
 		if (Symbol.YES.equals(ownerInfo.getHasAcct())) {

@@ -139,7 +139,7 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 		String csBillId = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
 				// ownerInfo.getCheckinState();

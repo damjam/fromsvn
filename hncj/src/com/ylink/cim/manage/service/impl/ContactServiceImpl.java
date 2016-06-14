@@ -13,7 +13,6 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.manage.dao.ContactDao;
 import com.ylink.cim.manage.domain.Contact;
-import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.ContactService;
 
 import flink.IdFactoryHelper;
@@ -66,7 +65,7 @@ public class ContactServiceImpl implements ContactService {
 				info.setRemark(remark);
 				info.setCreateDate(DateUtil.getCurrent());
 				info.setBranchNo(sessionUser.getBranchNo());
-				info.setId(IdFactoryHelper.getId(ParkingInfo.class));
+				info.setId(IdFactoryHelper.getId(Contact.class));
 				contactDao.save(info);
 				totalCnt++;
 			}

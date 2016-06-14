@@ -52,7 +52,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService {
 		Assert.notNull(houseInfo, "不存在房屋编号" + houseSn);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("houseSn", houseInfo.getHouseSn());
-		Assert.isNull(ownerInfoDao.getNormalOwner(houseSn), "房屋" + houseSn
+		Assert.isNull(ownerInfoDao.getNormalOwner(houseSn, userInfo.getBranchNo()), "房屋" + houseSn
 				+ "已关联业主信息");
 		ownerInfo.setCreateDate(DateUtil.getCurrent());
 		ownerInfo.setCreateUser(userInfo.getUserName());
@@ -150,7 +150,7 @@ public class OwnerInfoServiceImpl implements OwnerInfoService {
 				if (StringUtils.isEmpty(houseSn)) {
 					throw new BizException("房屋编号不能为空");
 				}
-				if (ownerInfoDao.getNormalOwner(houseSn) != null) {
+				if (ownerInfoDao.getNormalOwner(houseSn, userInfo.getBranchNo()) != null) {
 					throw new BizException("房屋编号为" + houseSn + "的业主信息已存在或记录重复");
 				}
 				String ownerName = MapUtils.getString(map, "ownerName");

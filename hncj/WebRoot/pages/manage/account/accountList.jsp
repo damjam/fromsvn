@@ -23,6 +23,15 @@
 				$('#btnClear').click(function(){
 					FormUtils.reset("queryForm");
 				});
+				$('#btnExport').click(function(){
+					gotoUrl('${uri}?action=export');
+				});
+				$('#btnOpen').click(function(){
+					gotoUrl('${uri}?action=toOpen');
+				});
+				$('#btnImport').click(function() {
+					gotoUrl('${uri}?action=toImport');
+				});
 				
 			});
 			function deposit(id){
@@ -35,7 +44,6 @@
 				if(window.confirm("确认销户?")){
 					gotoUrl('${uri}?action=cancel&id='+id);
 				}
-				
 			}
 			function detail(id){
 				window.open('${uri}?action=detail&acctNo='+id);
@@ -75,6 +83,9 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
+								<input type="button" value="开户并充值" id="btnOpen" />&nbsp;
+								<input type="button" value="导出" id="btnExport"/>&nbsp;
+								<input type="button" value="导入" id="btnImport"/>&nbsp;
 							</td>
 						</tr>
 					</table>

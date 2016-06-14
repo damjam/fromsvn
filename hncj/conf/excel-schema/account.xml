@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="accountImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 账户余额 -->
+				<map>
+					<entry key="fieldName" value="blance"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="accountExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 房屋编号-->
+				<map>
+					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!--业主姓名-->
+				<map>
+					<entry key="fieldName" value="业主姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 账户余额-->
+				<map>
+					<entry key="fieldName" value="账户余额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 最后变动时间-->
+				<map>
+					<entry key="fieldName" value="最后变动时间"></entry>
+					<entry key="cellType" value="DateTime"></entry>
+				</map>
+				<!-- 最后交易类型-->
+				<map>
+					<entry key="fieldName" value="最后交易类型"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!--最后交易金额-->
+				<map>
+					<entry key="fieldName" value="最后交易金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

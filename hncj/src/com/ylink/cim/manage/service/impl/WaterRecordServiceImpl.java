@@ -96,7 +96,7 @@ public class WaterRecordServiceImpl implements WaterRecordService {
 		waterBill.setRecordMonth(waterRecord.getRecordMonth());
 		waterBill.setPrice(Double.parseDouble(ParaManager.getWaterPrice()));
 		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(waterBill
-				.getHouseSn());
+				.getHouseSn(), waterBill.getBranchNo());
 		Assert.notNull(ownerInfo, "找不到房屋编号" + waterBill.getHouseSn()
 				+ "对应的业主信息");
 		waterBill.setOwnerName(ownerInfo.getOwnerName());

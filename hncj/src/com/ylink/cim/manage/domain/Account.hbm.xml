@@ -40,5 +40,14 @@
 			<property name="branchNo" type="java.lang.String">
 				<column name="BRANCH_NO" length="20" />
 			</property>
+			<property name="lastChangeDate" type="java.util.Date">
+                <column name="LAST_CHANGE_DATE" length="10" />
+            </property>
+            <property name="lastTradeType" type="java.lang.String">
+                <column name="LAST_TRADE_TYPE" length="2" />
+            </property>
+            <property name="lastTradeAmt" type="java.lang.Double">
+                <column name="LAST_TRADE_AMT"/>
+            </property>
     </class>
 </hibernate-mapping>

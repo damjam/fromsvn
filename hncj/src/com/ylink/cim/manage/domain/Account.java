@@ -30,6 +30,34 @@ public class Account extends BranchField implements java.io.Serializable {
 	private String year;
 	private String type;
 	private Double amount;
+	private Date lastChangeDate;
+	private String lastTradeType;
+	private Double lastTradeAmt;
+	
+	
+	public String getLastTradeType() {
+		return lastTradeType;
+	}
+
+	public void setLastTradeType(String lastTradeType) {
+		this.lastTradeType = lastTradeType;
+	}
+
+	public Double getLastTradeAmt() {
+		return lastTradeAmt;
+	}
+
+	public void setLastTradeAmt(Double lastTradeAmt) {
+		this.lastTradeAmt = lastTradeAmt;
+	}
+
+	public Date getLastChangeDate() {
+		return lastChangeDate;
+	}
+
+	public void setLastChangeDate(Date lastChangeDate) {
+		this.lastChangeDate = lastChangeDate;
+	}
 
 	/** default constructor */
 	public Account() {

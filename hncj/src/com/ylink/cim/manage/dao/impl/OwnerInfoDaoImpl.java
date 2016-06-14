@@ -47,10 +47,11 @@ public class OwnerInfoDaoImpl extends BaseDaoImpl implements OwnerInfoDao {
 	}
 
 	@Override
-	public OwnerInfo getNormalOwner(String houseSn) {
+	public OwnerInfo getNormalOwner(String houseSn, String branchNo) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("houseSn", houseSn);
 		params.put("state", OwnerState.NORMAL.getValue());
+		params.put("branchNo", branchNo);
 		return (OwnerInfo) getUniqueResult(OwnerInfo.class, params);
 	}
 

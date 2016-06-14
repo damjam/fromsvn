@@ -144,7 +144,7 @@ public class CommonServiceBillAction extends BaseAction implements
 		String checkinState = "";
 		try {
 			String houseSn = request.getParameter("houseSn");
-			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn);
+			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
 				checkinState = ownerInfo.getCheckinState();
