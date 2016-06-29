@@ -15,13 +15,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.ylink.cim.common.state.ParkingState;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
-import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.CarInfoService;
 import com.ylink.cim.util.CopyPropertyUtil;
 import com.ylink.cim.util.ExportExcelUtil;

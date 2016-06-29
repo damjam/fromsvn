@@ -135,10 +135,11 @@
 					   <tr>
 						    <td class="formlabel">车位编号</td>
 						    <td>
-						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10" readonly="true"/>
+						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10" />
+						    	<!-- 
 								<a href="javascript:void(0)" class="popup-search-parking">
 									<i class="fa fa-search"></i>
-								</a>	
+								</a> -->	
 						    </td>
 					   </tr>
 					   <tr>

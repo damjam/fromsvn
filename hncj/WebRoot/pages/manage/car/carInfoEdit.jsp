@@ -9,6 +9,7 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/jquery.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
@@ -65,6 +66,21 @@
 	                 }   
 				});
 			}
+			$().ready(function(){
+		 		$(".popup-search-parking").click(function(){
+		 			var bindCode = '';
+		 			var bindName = $(this).attr('data-search-for');
+	 				var toUrl=CONTEXT_PATH+'/parkingInfo.do?action=queryPopup&bindCode='+bindCode+'&bindName='+bindName;
+					layer.open({
+						title:'车位',
+					    type: 2,
+					    area: ['720px', '530px'],
+					    fix: false, //不固定
+					    maxmin: true,
+					    content: toUrl
+					});
+		 		});
+		 	});
 		</script>
 	</head>
 <body>
@@ -73,7 +89,6 @@
 	<form action="${uri}?action=doEdit" id="carInfoActionForm" method="post" class="validate">
 		<s:hidden name="id" />
 		<div class="userbox">
-			<div class="userbox">
 				<div class="widget">
 					<div class="widget-head">
                   <div class="pull-left">${ACT.name}</div>
@@ -125,9 +140,11 @@
 					   <tr>
 						    <td class="formlabel">车位编号</td>
 						    <td>
-						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10" readonly="true"/>
-						    	<img align="left" src="<%=request.getContextPath()+"/images/search.jpeg" %>"  
-									alt="搜索" onclick="popUp.popUpParkingInfo('parkingSn');" />
+						    	<s:textfield name="parkingSn" id="parkingSn" maxlength="10"/>
+						    	<!-- 
+						    	<a href="javascript:void(0)" class="popup-search-parking">
+									<i class="fa fa-search"></i>
+								</a> -->	
 						    </td>
 					   </tr>
 				  </table>
@@ -135,7 +152,6 @@
 					 <input type="button" id="btnSumit" value="保存" onclick="save()"/>
 					 <input type="button" id="btnReturn" value="取消" onclick="gotoUrl('${uri}?action=list')"/>
 				</div>
-			</div>
 			</div>
 		</div>	
 	</form>	
