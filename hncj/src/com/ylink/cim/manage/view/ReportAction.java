@@ -97,6 +97,7 @@ public class ReportAction extends BaseAction {
 	public String waterBill() throws Exception {
 		String waterBillId = request.getParameter("id");
 		WaterBill bill = waterBillDao.findById(WaterBill.class, waterBillId);
+		Assert.notNull(bill, "单号错误，无法打印");
 		Assert.isTrue(
 				canPrint(bill.getBranchNo(), getSessionBranchNo(request)),
 				"单号错误，无法打印");
