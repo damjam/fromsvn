@@ -90,6 +90,9 @@
 					gotoUrl(url);
 				});
 			}
+			$(window).close(function(){
+				parent.query();
+			});
 		</script> 
 	</head>
 	<body>

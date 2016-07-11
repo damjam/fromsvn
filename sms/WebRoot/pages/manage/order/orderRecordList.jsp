@@ -30,7 +30,9 @@
 					gotoUrl(url);   
 				});
 			});
-			
+			function query(){
+				$('#queryForm').submit();
+			}
 			function delInfo(id){
 				if(window.confirm("确认删除?")){
 					gotoUrl('${uri}?action=delete&id='+id);
@@ -146,11 +148,14 @@
 							    		<a href="javascript:changeState('${element.id}','01')" >确认收货</a>
 							    		<a href="javascript:changeState('${element.id}','04')" >退货</a>
 							    	</c:if> -->
-							    	<c:if test="${element.payState eq '00'}">
+							    	<c:if test="${element.payState eq '00' && element.state eq '02'}">
 							    		<a href="javascript:pay('${element.id}')" >收款确认</a>
 							    	</c:if>
-							    	<a href="javascript:detail('${element.id}')" >查看明细</a>
-							    	<a href="javascript:openReport('${element.id}')">打印</a>
+							    	<c:if test="${element.state ne '09'}">
+							    		<a href="javascript:detail('${element.id}')" >查看明细</a>
+							    		<a href="javascript:openReport('${element.id}')">打印</a>
+							    	</c:if>
+							    	
 							    	<c:if test="${element.state eq '09' }">
 							    		<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    	</c:if>
