@@ -83,6 +83,11 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 		// TODO Auto-generated method stub
 		return null;
 	}
+	//发货
+	public String sendOut() throws Exception {
+		orderDetailService.sendOut(model.getId());
+		return null;
+	}
 	public String refund() throws Exception {
 		
 		return null;
@@ -99,11 +104,11 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	//取消订单库存不变
 	public String cancel() throws Exception {
 		try{
-			orderDetailDao.deleteById(model.getId());
+			orderDetailService.cancel(model.getId(), model.getRefundAmt());
 		}catch (Exception e) {
 			
 		}
-		return "toMain";
+		return "details";
 	}
 	//退货,退货后库存增加
 	public String returnGoods() throws Exception {
@@ -122,5 +127,16 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	public String detail() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public String detailList() throws Exception {
+		try{
+			Map<String, Object> map = getParaMap();
+			map.put("orderId", request.getParameter("id"));
+			List<OrderDetail> list = orderDetailDao.findList(map);
+			saveQueryResult(request, list);
+		}catch(Exception e){
+			setFailResult("操作失败", request);
+		}
+		return "detailList";
 	}
 }

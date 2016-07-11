@@ -108,7 +108,18 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		}
 		return "toMain";
 	}
-
+	//收款确认
+	public String pay() throws Exception {
+		try{
+			orderRecordService.pay(model.getId(), getSessionUser(request));
+			setSucResult(request);
+		}catch(Exception e){
+			e.printStackTrace();
+			setResult(false, "操作失败", request);
+			return toAdd();
+		}
+		return "toMain";
+	}
 	public String changeState() throws Exception {
 		try{
 			String state = model.getState();
@@ -133,17 +144,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		return "toMain";
 	}
 
-	public String showDetail() throws Exception {
-		try{
-			Map<String, Object> map = getParaMap();
-			map.put("orderId", request.getParameter("id"));
-			List<OrderDetail> list = orderDetailDao.findList(map);
-			saveQueryResult(request, list);
-		}catch(Exception e){
-			setFailResult("操作失败", request);
-		}
-		return "detailList";
-	}
+	
 	@Override
 	public String detail() throws Exception {
 		return null;

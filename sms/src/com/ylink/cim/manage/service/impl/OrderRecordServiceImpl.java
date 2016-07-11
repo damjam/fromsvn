@@ -7,10 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.mchange.v1.identicator.IdHashMap;
 import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
+import com.ylink.cim.common.state.PayState;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.OrderDetail;
@@ -37,6 +37,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		model.setCreateDate(DateUtil.getCurrent());
 		model.setCreateUser(userInfo.getUserName());
 		model.setState(OrderState.INIT.getValue());
+		model.setPayState(PayState.UNPAY.getValue());
 		orderRecordDao.save(model);
 		saveOrderDetails(model);
 	}
@@ -97,5 +98,12 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void pay(String id, UserInfo sessionUser) throws BizException {
+		OrderRecord orderRecord = orderRecordDao.findByIdWithLock(id);
+		orderRecord.setPayState(PayState.PAID.getValue());
+		orderRecordDao.update(orderRecord);
 	}
 }

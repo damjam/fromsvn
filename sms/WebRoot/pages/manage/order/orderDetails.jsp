@@ -31,7 +31,7 @@
 				});
 			});
 			
-			function delInfo(id){
+			function delInfo(id) {
 				if(window.confirm("确认删除?")){
 					gotoUrl('${uri}?action=delete&id='+id);
 				}
@@ -44,16 +44,27 @@
 				var url="${uri}?action=updateState&id="+id+"&state="+state;
 				gotoUrl(url);  
 			}
-			function refund(id,state) {
-				var url="${uri}?action=refund&id="+id;
-				gotoUrl(url);  
-			}
+			
 			function cancelDetail(id) {
-				var url="${uri}?action=cancel&id="+id;
-				gotoUrl(url);  
+				layer.prompt({
+					  title: '请输入退款金额',
+					  formType: 0 //prompt风格，支持0-2
+				}, function(text){
+					if(isNaN(text) || text == 0){
+						alert('必须为大于零的数字');
+						return;
+					}
+					var url = CONTEXT_PATH+'/orderDetail.do?action=cancel&id='+id+'&refundAmt='+text;
+					gotoUrl(url);
+				}); 
 			}
 			function openReport(id){
 				window.open(CONTEXT_PATH+'/reportAction.do?action=orderDetail&id='+id);
+			}
+			//发货
+			function sendOut(id){
+				var url="${uri}?action=sendOut&id="+id;
+				gotoUrl(url);
 			}
 			function returnGoods(id){
 				//输入退款金额
@@ -61,10 +72,12 @@
 				  title: '请输入退款金额',
 				  formType: 0 //prompt风格，支持0-2
 				}, function(text){
-					
+					if(isNaN(text) || text == 0){
+						alert('必须为大于零的数字');
+						return;
+					}
 					var url = CONTEXT_PATH+'/orderDetail.do?action=returnGoods&id='+id+'&refundAmt='+text;
 					gotoUrl(url);
-				    
 				});
 			}
 		</script> 
@@ -104,14 +117,14 @@
 							    <td>${element.deliType}</td>
 							    <td>${element.deliState}</td>
 							    <td class="redlink">
-							    	<c:if test="${element.state eq '00' }">
-							    		<a href="javascript:updateState('${element.id}','01')">发货</a>
+							    	<c:if test="${element.deliState eq '00' }">
+							    		<a href="javascript:sendOut('${element.id}','01')">发货</a>
 							    		<a href="javascript:cancelDetail('${element.id}')">取消</a>
 							    	</c:if>
-							    	<c:if test="${element.state eq '01' }">
+							    	<c:if test="${element.deliState eq '01' }">
 							    		<a href="javascript:updateState('${element.id}','02')">收货</a>
 							    	</c:if>
-							    	<c:if test="${element.state eq '01' or element.state eq '02'}">
+							    	<c:if test="${element.deliState eq '01' or element.deliState eq '02'}">
 							    		<a href="javascript:returnGoods('${element.id}','03')">退货</a>
 							    	</c:if>
 							    	<!-- 

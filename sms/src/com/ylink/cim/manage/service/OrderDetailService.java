@@ -10,4 +10,7 @@ public interface OrderDetailService {
 
 	void returnGoods(String id, Double refundAmt) throws BizException;
 
+	void sendOut(String id) throws BizException;
+
+	void cancel(String id, Double refundAmt) throws BizException;
 }

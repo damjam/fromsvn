@@ -17,4 +17,6 @@ public interface OrderRecordService {
 
 	boolean canEdit(String id) throws BizException;
 
+	void pay(String id, UserInfo sessionUser) throws BizException;
+
 }

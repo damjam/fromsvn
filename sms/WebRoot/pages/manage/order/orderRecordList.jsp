@@ -41,7 +41,7 @@
 				gotoUrl(url);  
 			}
 			function detail(id){
-				var url = '${uri}?action=showDetail&id='+id;
+				var url = 'orderDetail?action=detailList&id='+id;
 				layer.open({
 					title:'订单明细',
 				    type: 2,
@@ -53,6 +53,12 @@
 			}
 			function openReport(id){
 				window.open(CONTEXT_PATH+'/reportAction.do?action=orderRecord&id='+id);
+			}
+			function pay(id){
+				var url="${uri}?action=pay&id="+id;
+				if(confirm('确认操作?')){
+					gotoUrl(url);  
+				}
 			}
 		</script> 
 	</head>
@@ -104,6 +110,7 @@
 						    <td >订货日期</td>
 						    <td >订单金额</td>
 						    <td >订单状态</td>
+						    <td >付款状态</td>
 						    <td >操作</td>
 						 </tr>
 					</thead>
@@ -118,14 +125,20 @@
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
 							    <td ondblclick="edit()"><f:state className="OrderState" value="${element.state}"/> </td>
+							    <td><f:state className="PayState" value="${element.payState}"/> </td>
 							    <td class="redlink">
 							    	<c:if test="${element.state eq '00' }">
+							    	<!-- 
 							    		<a href="javascript:changeState('${element.id}','01')" >发货</a>
+							    		 -->
 							    		<a href="javascript:changeState('${element.id}','03')" >取消</a>
 							    	</c:if>
 							    	<c:if test="${element.state eq '01' }">
 							    		<a href="javascript:changeState('${element.id}','01')" >确认收货</a>
 							    		<a href="javascript:changeState('${element.id}','04')" >退货</a>
+							    	</c:if>
+							    	<c:if test="${element.payState eq '00'}">
+							    		<a href="javascript:pay('${element.id}')" >收款确认</a>
 							    	</c:if>
 							    	<a href="javascript:detail('${element.id}')" >查看明细</a>
 							    	<a href="javascript:openReport('${element.id}')" >打印</a>

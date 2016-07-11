@@ -32,8 +32,19 @@ public class OrderRecord implements Serializable {
 	
 	private Double payAmt;
 	
+	private Double refundAmt;
 	
 	
+	
+	
+	public Double getRefundAmt() {
+		return refundAmt;
+	}
+
+	public void setRefundAmt(Double refundAmt) {
+		this.refundAmt = refundAmt;
+	}
+
 	public Double getPayAmt() {
 		return payAmt;
 	}

@@ -85,7 +85,6 @@
 			<result name="list">/pages/manage/order/orderRecordList.jsp</result>
 			<result name="edit">/pages/manage/order/orderRecordEdit.jsp</result>
 			<result name="add">/pages/manage/order/orderRecordAdd.jsp</result>
-			<result name="detailList">/pages/manage/order/orderDetails.jsp</result>
 			<result name="toMain" type="redirect">orderRecord.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="orderDetail" class="orderDetailAction">
@@ -93,7 +92,7 @@
 			<result name="edit">/pages/manage/order/orderDetailEdit.jsp</result>
 			<result name="add">/pages/manage/order/orderDetailAdd.jsp</result>
 			<result name="toMain" type="redirect">orderDetail.do?action=list&amp;msg=${msg}&amp;result={result}</result>
-			<result name="details" type="redirect">orderRecord.do?action=showDetail&amp;msg=${msg}&amp;orderId=${orderId}</result>
+			<result name="detailList">/pages/manage/order/orderDetails.jsp</result>
 		</action>
 	</package>
 </struts>
