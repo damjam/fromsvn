@@ -33,7 +33,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	
 	
 	
-	protected HttpServletRequest ;
+	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 	protected Map<String, Object> session;
 	protected String action;
