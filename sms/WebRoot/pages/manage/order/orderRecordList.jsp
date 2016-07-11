@@ -118,6 +118,7 @@
 						    <td >送货地址</td>
 						    <td >订货日期</td>
 						    <td >订单金额</td>
+						    <td >实付金额</td>
 						    <td >订单状态</td>
 						    <td >付款状态</td>
 						    <td >操作</td>
@@ -133,6 +134,7 @@
 								<td>${element.address}</td>
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
+							    <td><fmt:formatNumber value="${element.payAmt}" pattern="##0.00"/></td>
 							    <td ondblclick="edit()"><f:state className="OrderState" value="${element.state}"/> </td>
 							    <td><f:state className="PayState" value="${element.payState}"/> </td>
 							    <td class="redlink">
