@@ -143,7 +143,15 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		}
 		return "toMain";
 	}
-
+	public String cancel() throws Exception {
+		try{
+			orderRecordService.cancel(model.getId());
+			setSucResult(request);
+		}catch(Exception e){
+			setFailResult("²Ù×÷Ê§°Ü", request);
+		}
+		return "toMain";
+	}
 	
 	@Override
 	public String detail() throws Exception {

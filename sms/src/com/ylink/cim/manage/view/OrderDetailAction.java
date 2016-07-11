@@ -105,10 +105,11 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	public String cancel() throws Exception {
 		try{
 			orderDetailService.cancel(model.getId(), model.getRefundAmt());
+			setResult(true, "操作成功", request);
 		}catch (Exception e) {
-			
+			setResult(false, e.getMessage(), request);
 		}
-		return "details";
+		return detailList();
 	}
 	//退货,退货后库存增加
 	public String returnGoods() throws Exception {
@@ -118,10 +119,19 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 		}catch (Exception e) {
 			
 		}
-		return "details";
+		return detailList();
 	}
 	
-	
+	//退货,退货后库存增加
+	public String receive() throws Exception {
+		try{
+			orderDetailService.receive(model.getId());
+			
+		}catch (Exception e) {
+			
+		}
+		return detailList();
+	}
 	
 	@Override
 	public String detail() throws Exception {
@@ -131,7 +141,7 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	public String detailList() throws Exception {
 		try{
 			Map<String, Object> map = getParaMap();
-			map.put("orderId", request.getParameter("id"));
+			map.put("orderId", model.getOrderId());
 			List<OrderDetail> list = orderDetailDao.findList(map);
 			saveQueryResult(request, list);
 		}catch(Exception e){

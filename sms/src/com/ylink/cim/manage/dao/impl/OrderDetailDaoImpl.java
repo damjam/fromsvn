@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.domain.OrderDetail;
 
@@ -43,6 +44,16 @@ public class OrderDetailDaoImpl extends BaseDaoImpl implements OrderDetailDao {
 		helper.append("and orderId = ?", MapUtils.getString(map, "orderId"));
 		helper.append("and state = ?", MapUtils.getString(map, "state"));
 		helper.append("and state <> ?", MapUtils.getString(map, "excludeState"));
+		return super.getList(helper);
+	}
+
+	@Override
+	public List<OrderDetail> findUndelis(String orderId) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from OrderDetail where 1=1");
+		helper.append("and orderId = ?", orderId);
+		helper.append("and (state = ?", DeliveryState.INIT.getValue());
+		helper.append("or state = ?)", DeliveryState.SENT.getValue());
 		return super.getList(helper);
 	}
 

@@ -1,5 +1,7 @@
 package com.ylink.cim.manage.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -92,6 +94,27 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			
 		}
 		orderRecordDao.update(orderRecord);
+		checkRecordState(orderDetail.getOrderId());
+	}
+
+	@Override
+	public void receive(String id) throws BizException {
+		OrderDetail orderDetail = orderDetailDao.findByIdWithLock(id);
+		Assert.equals(DeliveryState.SENT.getValue(), orderDetail.getDeliState(), "状态已变更，不可操作");
+		orderDetail.setDeliState(DeliveryState.RECEIVED.getValue());
+		checkRecordState(orderDetail.getOrderId());
+	}
+
+	private void checkRecordState(String orderId) {
+		OrderRecord record = orderRecordDao.findByIdWithLock(orderId);
+		if (OrderState.FINISHED.getValue().equals(record.getState())) {
+			return;
+		}
+		List<OrderDetail> list = orderDetailDao.findUndelis(orderId);
+		if (list.size() == 0) {
+			record.setState(OrderState.FINISHED.getValue());
+			orderRecordDao.update(record);
+		}
 	}
 
 }

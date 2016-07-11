@@ -16,4 +16,6 @@ public interface OrderDetailDao extends BaseDao {
 	public void deleteByOrderId(String id);
 
 	public List<OrderDetail> findList(Map<String, Object> map);
+
+	public List<OrderDetail> findUndelis(String orderId);
 }

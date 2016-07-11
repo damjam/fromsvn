@@ -19,4 +19,6 @@ public interface OrderRecordService {
 
 	void pay(String id, UserInfo sessionUser) throws BizException;
 
+	void cancel(String id) throws BizException;
+
 }

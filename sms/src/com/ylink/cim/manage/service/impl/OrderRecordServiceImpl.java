@@ -19,6 +19,7 @@ import com.ylink.cim.manage.service.OrderRecordService;
 import com.ylink.cim.util.CopyPropertyUtil;
 
 import flink.IdFactoryHelper;
+import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 
@@ -61,6 +62,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			detail.setAmount(model.getAmounts()[i]);
 			//detail.setDeliType(model.getDeliTypes()[i]);
 			detail.setId(IdFactoryHelper.getId(OrderDetail.class));
+			detail.setDeliState(DeliveryState.INIT.getValue());
 			orderRecordDao.save(detail);
 		}
 	}
@@ -104,6 +106,14 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 	public void pay(String id, UserInfo sessionUser) throws BizException {
 		OrderRecord orderRecord = orderRecordDao.findByIdWithLock(id);
 		orderRecord.setPayState(PayState.PAID.getValue());
+		orderRecordDao.update(orderRecord);
+	}
+
+	@Override
+	public void cancel(String id) throws BizException {
+		OrderRecord orderRecord = orderRecordDao.findByIdWithLock(id);
+		Assert.equals(OrderState.INIT.getValue(), orderRecord.getState(), "订单状态已变更，不可取消");
+		orderRecord.setState(OrderState.CANCELED.getValue());
 		orderRecordDao.update(orderRecord);
 	}
 }

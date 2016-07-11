@@ -13,4 +13,6 @@ public interface OrderDetailService {
 	void sendOut(String id) throws BizException;
 
 	void cancel(String id, Double refundAmt) throws BizException;
+
+	void receive(String id) throws BizException;
 }

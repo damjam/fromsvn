@@ -15,6 +15,9 @@
 		<f:js src="/js/paginater.js" />
 		<f:js src="/layer/layer.js"/>
 		<script type="text/javascript">
+		layer.config({
+		    extend: 'extend/layer.ext.js'
+		});
 			$(function(){
 				
 				$('#btnQry').click(function(){
@@ -54,7 +57,8 @@
 						alert('必须为大于零的数字');
 						return;
 					}
-					var url = CONTEXT_PATH+'/orderDetail.do?action=cancel&id='+id+'&refundAmt='+text;
+					var orderId = $('#orderId').val();
+					var url = CONTEXT_PATH+'/orderDetail.do?action=cancel&id='+id+'&refundAmt='+text+'&orderId='+orderId;
 					gotoUrl(url);
 				}); 
 			}
@@ -63,7 +67,8 @@
 			}
 			//发货
 			function sendOut(id){
-				var url="${uri}?action=sendOut&id="+id;
+				var orderId = $('#orderId').val();
+				var url="${uri}?action=sendOut&id="+id+'&orderId='+orderId;;
 				gotoUrl(url);
 			}
 			function returnGoods(id){
@@ -76,7 +81,8 @@
 						alert('必须为大于零的数字');
 						return;
 					}
-					var url = CONTEXT_PATH+'/orderDetail.do?action=returnGoods&id='+id+'&refundAmt='+text;
+					var orderId = $('#orderId').val();
+					var url = CONTEXT_PATH+'/orderDetail.do?action=returnGoods&id='+id+'&refundAmt='+text+'&orderId='+orderId;
 					gotoUrl(url);
 				});
 			}
@@ -86,6 +92,7 @@
 		
 		<f:msg styleClass="msg" />
 		<form action="${uri}?action=list" id="queryForm" method="post">
+			<s:hidden name="orderId" id="orderId"/>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid">
@@ -98,7 +105,8 @@
 						    <td >单价</td>
 						    <td >数量</td>
 						    <td >订单金额</td>
-						    <td >派送方式</td>
+						    <!-- 
+						    <td >派送方式</td> -->
 						    <td >物流状态</td>
 						    <td >操作</td>
 						 </tr>
@@ -114,18 +122,19 @@
 								<td><fmt:formatNumber value="${element.price}" pattern="##0.00"/></td>
 								<td>${element.num}</td>
 								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
-							    <td>${element.deliType}</td>
-							    <td>${element.deliState}</td>
+							    <!-- 
+							    <td>${element.deliType}</td> -->
+							    <td><f:state className="DeliveryState" value="${element.deliState}"/> </td>
 							    <td class="redlink">
 							    	<c:if test="${element.deliState eq '00' }">
-							    		<a href="javascript:sendOut('${element.id}','01')">发货</a>
-							    		<a href="javascript:cancelDetail('${element.id}')">取消</a>
+							    		<a href="javascript:sendOut('${element.id}','${element.orderId }')">发货</a>
+							    		<a href="javascript:cancelDetail('${element.id}','${element.orderId}')">取消</a>
 							    	</c:if>
 							    	<c:if test="${element.deliState eq '01' }">
-							    		<a href="javascript:updateState('${element.id}','02')">收货</a>
+							    		<a href="javascript:updateState('${element.id}','${element.orderId }')">收货</a>
 							    	</c:if>
 							    	<c:if test="${element.deliState eq '01' or element.deliState eq '02'}">
-							    		<a href="javascript:returnGoods('${element.id}','03')">退货</a>
+							    		<a href="javascript:returnGoods('${element.id}','${element.orderId }')">退货</a>
 							    	</c:if>
 							    	<!-- 
 							    	<a href="javascript:openReport('${element.id}')" >打印</a>

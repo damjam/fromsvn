@@ -40,8 +40,12 @@
 				var url="${uri}?action=toEdit&id="+id;
 				gotoUrl(url);  
 			}
+			function cancel(id){
+				var url="${uri}?action=cancel&id="+id;
+				gotoUrl(url);  
+			}
 			function detail(id){
-				var url = 'orderDetail?action=detailList&id='+id;
+				var url = CONTEXT_PATH+'/orderDetail.do?action=detailList&orderId='+id;
 				layer.open({
 					title:'订单明细',
 				    type: 2,
@@ -60,6 +64,7 @@
 					gotoUrl(url);  
 				}
 			}
+			
 		</script> 
 	</head>
 	<body>
@@ -133,17 +138,20 @@
 							    		 -->
 							    		<a href="javascript:changeState('${element.id}','03')" >取消</a>
 							    	</c:if>
+							    	<!-- 
 							    	<c:if test="${element.state eq '01' }">
 							    		<a href="javascript:changeState('${element.id}','01')" >确认收货</a>
 							    		<a href="javascript:changeState('${element.id}','04')" >退货</a>
-							    	</c:if>
+							    	</c:if> -->
 							    	<c:if test="${element.payState eq '00'}">
 							    		<a href="javascript:pay('${element.id}')" >收款确认</a>
 							    	</c:if>
 							    	<a href="javascript:detail('${element.id}')" >查看明细</a>
 							    	<a href="javascript:openReport('${element.id}')" >打印</a>
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
-							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
+							    	<c:if test="${element.state eq '09' }">
+							    		<a href="javascript:delInfo('${element.id}')" >删除</a>
+							    	</c:if>
 							    </td>
 						    </tr>
 						</c:forEach>

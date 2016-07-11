@@ -34,6 +34,9 @@
         <property name="deliType" type="java.lang.String">
             <column name="deli_type" length="10"/>
         </property>
+        <property name="deliState" type="java.lang.String">
+            <column name="deli_state" length="10"/>
+        </property>
         <property name="remark" type="java.lang.String">
             <column name="remark" length="25"/>
         </property>
