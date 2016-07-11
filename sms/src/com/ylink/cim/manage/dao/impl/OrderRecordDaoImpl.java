@@ -29,6 +29,7 @@ public class OrderRecordDaoImpl extends BaseDaoImpl implements OrderRecordDao {
 		helper.append("and clientTel like ?",MapUtils.getString(map, "clientTel"), MatchMode.START);
 		helper.append("and orderDate >= ?", MapUtils.getString(map, "beginOrderDate"));
 		helper.append("and orderDate <= ?", MapUtils.getString(map, "endOrderDate"));
+		helper.append("and payState = ?", MapUtils.getString(map, "payState"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}

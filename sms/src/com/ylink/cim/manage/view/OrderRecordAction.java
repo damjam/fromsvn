@@ -48,6 +48,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		Map<String, Object> map = getParaMap();
 		map.put("clientName", model.getClientName());
 		map.put("clientTel", model.getClientTel());
+		map.put("payState", model.getPayState());
 		Paginater paginater = orderRecordDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect();
