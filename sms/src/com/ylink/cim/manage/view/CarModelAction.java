@@ -2,6 +2,7 @@ package com.ylink.cim.manage.view;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import com.ylink.cim.manage.service.CarModelService;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
+import flink.util.StringUtil;
 import flink.web.CRUDAction;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -33,7 +35,14 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 	@Override
 	public String list() throws Exception {
 		Map<String, Object> map = getParaMap();
-		map.put("name", model.getName());
+		String keyword = model.getName();
+		if(StringUtils.isNotEmpty(keyword)){
+			String[] keyArray = keyword.split("-");
+			if(keyArray.length == 2){
+				keyword = keyArray[1];
+			}
+		}
+		map.put("name", keyword);
 		map.put("brand", model.getBrand());
 		Paginater paginater = carModelDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
