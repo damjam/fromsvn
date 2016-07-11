@@ -90,7 +90,7 @@
 					gotoUrl(url);
 				});
 			}
-			$(window).close(function(){
+			$(window).onunload(function(){
 				parent.query();
 			});
 		</script> 
