@@ -47,7 +47,11 @@
 				var url="${uri}?action=updateState&id="+id+"&state="+state;
 				gotoUrl(url);  
 			}
-			
+			function receive(id){
+				var orderId = $('#orderId').val();
+				var url="${uri}?action=receive&id="+id+"&orderId="+orderId;
+				gotoUrl(url);  
+			}
 			function cancelDetail(id) {
 				layer.prompt({
 					  title: '请输入退款金额',
@@ -92,7 +96,7 @@
 		
 		<f:msg styleClass="msg" />
 		<form action="${uri}?action=list" id="queryForm" method="post">
-			<s:hidden name="orderId" id="orderId"/>
+			<input type="hidden" id="orderId" value="${orderId}">
 			<!-- 数据列表区 -->
 			<div class="tablebox">			
 				<table class="data_grid">
@@ -131,7 +135,7 @@
 							    		<a href="javascript:cancelDetail('${element.id}','${element.orderId}')">取消</a>
 							    	</c:if>
 							    	<c:if test="${element.deliState eq '01' }">
-							    		<a href="javascript:updateState('${element.id}','${element.orderId }')">收货</a>
+							    		<a href="javascript:receive('${element.id}')">收货</a>
 							    	</c:if>
 							    	<c:if test="${element.deliState eq '01' or element.deliState eq '02'}">
 							    		<a href="javascript:returnGoods('${element.id}','${element.orderId }')">退货</a>

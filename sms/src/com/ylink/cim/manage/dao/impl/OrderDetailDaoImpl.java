@@ -52,8 +52,8 @@ public class OrderDetailDaoImpl extends BaseDaoImpl implements OrderDetailDao {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from OrderDetail where 1=1");
 		helper.append("and orderId = ?", orderId);
-		helper.append("and (state = ?", DeliveryState.INIT.getValue());
-		helper.append("or state = ?)", DeliveryState.SENT.getValue());
+		helper.append("and (deliState = ?", DeliveryState.INIT.getValue());
+		helper.append("or deliState = ?)", DeliveryState.SENT.getValue());
 		return super.getList(helper);
 	}
 

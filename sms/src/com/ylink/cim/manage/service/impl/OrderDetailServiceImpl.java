@@ -102,6 +102,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 		OrderDetail orderDetail = orderDetailDao.findByIdWithLock(id);
 		Assert.equals(DeliveryState.SENT.getValue(), orderDetail.getDeliState(), "状态已变更，不可操作");
 		orderDetail.setDeliState(DeliveryState.RECEIVED.getValue());
+		orderDetailDao.update(orderDetail);
 		checkRecordState(orderDetail.getOrderId());
 	}
 

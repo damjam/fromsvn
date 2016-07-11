@@ -161,6 +161,7 @@
 		 			totalAmt += parseFloat(amount);
 		 		});
 		 		$('#amount').val(totalAmt);
+		 		$('#payAmt').val(totalAmt);
 		 	}
 		</script>
 	</head>
@@ -202,6 +203,13 @@
 						    <td class="formlabel nes">订单金额</td>
 						    <td>
 						    	<s:textfield name="amount" id="amount" maxlength="20" class="{required:true}" readonly="true"/>
+						    	<span class="field_tipinfo">不能为空</span>
+						    </td>
+					   </tr>
+					   <tr>
+						    <td class="formlabel nes">实收金额</td>
+						    <td>
+						    	<s:textfield name="payAmt" id="payAmt" maxlength="20" class="{required:true,num:true}" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

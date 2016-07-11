@@ -85,8 +85,13 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	}
 	//发货
 	public String sendOut() throws Exception {
-		orderDetailService.sendOut(model.getId());
-		return null;
+		try {
+			orderDetailService.sendOut(model.getId());
+			setResult(true, "操作成功", request);
+		} catch (Exception e) {
+			setResult(false, e.getMessage(), request);
+		}
+		return detailList();
 	}
 	public String refund() throws Exception {
 		
@@ -117,7 +122,8 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 			orderDetailService.returnGoods(model.getId(), model.getRefundAmt());
 			
 		}catch (Exception e) {
-			
+			e.printStackTrace();
+			setResult(false, e.getMessage(), request);
 		}
 		return detailList();
 	}
@@ -126,7 +132,6 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	public String receive() throws Exception {
 		try{
 			orderDetailService.receive(model.getId());
-			
 		}catch (Exception e) {
 			
 		}

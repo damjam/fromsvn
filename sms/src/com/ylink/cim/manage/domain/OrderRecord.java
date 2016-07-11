@@ -46,6 +46,9 @@ public class OrderRecord implements Serializable {
 	}
 
 	public Double getPayAmt() {
+		if (payAmt == null || payAmt == 0) {
+			payAmt = amount;
+		}
 		return payAmt;
 	}
 
