@@ -112,15 +112,12 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ognl-3.0.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ojdbc14_g.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/persistence.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.6-20091214.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.6-20091214.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/portlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/qdox-1.5.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/quartz-all-1.6.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/rowset.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/saaj-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/serp-1.13.1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-log4j12-1.5.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aop-4.2.1.RELEASE.jar"/>
@@ -150,5 +147,10 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-expression-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-context-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
