@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.OrderDetailDao;
@@ -17,6 +18,7 @@ import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
 import com.ylink.cim.manage.service.OrderRecordService;
 
+import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
@@ -79,11 +81,8 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	@Override
 	public String toEdit() throws Exception {
 		try{
-			boolean flag = orderRecordService.canEdit(model.getId());
-			if (!flag) {
-				throw new BizException("存在已发货的商品明细，订单不可更改");
-			}
 			OrderRecord orderRecord = orderRecordDao.findById(model.getId());
+			Assert.equals(orderRecord.getState(), OrderState.INIT.getValue(), "不可修改状态为处理中的订单");
 			BeanUtils.copyProperties(model, orderRecord);
 			Map<String, Object> map = getParaMap();
 			map.put("orderId", orderRecord.getId());

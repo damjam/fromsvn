@@ -41,8 +41,10 @@
 				gotoUrl(url);  
 			}
 			function cancel(id){
-				var url="${uri}?action=cancel&id="+id;
-				gotoUrl(url);  
+				if(confirm('确认取消订单?')){
+					var url="${uri}?action=cancel&id="+id;
+					gotoUrl(url);  
+				}
 			}
 			function detail(id){
 				var url = CONTEXT_PATH+'/orderDetail.do?action=detailList&orderId='+id;
@@ -136,7 +138,8 @@
 							    	<!-- 
 							    		<a href="javascript:changeState('${element.id}','01')" >发货</a>
 							    		 -->
-							    		<a href="javascript:changeState('${element.id}','03')" >取消</a>
+							    		<a href="javascript:cancel('${element.id}')" >取消</a>
+							    		<a href="javascript:updateInfo('${element.id}')">修改</a>
 							    	</c:if>
 							    	<!-- 
 							    	<c:if test="${element.state eq '01' }">
@@ -147,8 +150,7 @@
 							    		<a href="javascript:pay('${element.id}')" >收款确认</a>
 							    	</c:if>
 							    	<a href="javascript:detail('${element.id}')" >查看明细</a>
-							    	<a href="javascript:openReport('${element.id}')" >打印</a>
-							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
+							    	<a href="javascript:openReport('${element.id}')">打印</a>
 							    	<c:if test="${element.state eq '09' }">
 							    		<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    	</c:if>
