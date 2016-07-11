@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.view;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.ylink.cim.manage.service.OrderDetailService;
 
 import flink.util.Paginater;
 import flink.web.CRUDAction;
+import net.sf.json.JSONObject;
 @Scope("prototype")
 @Component
 public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDetail> {
@@ -77,6 +79,14 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 		return null;
 	}
 
+	public String changeState() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public String refund() throws Exception {
+		
+		return null;
+	}
 	@Override
 	public String delete() throws Exception {
 		try{
@@ -86,7 +96,28 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 		}
 		return "toMain";
 	}
-
+	//取消订单库存不变
+	public String cancel() throws Exception {
+		try{
+			orderDetailDao.deleteById(model.getId());
+		}catch (Exception e) {
+			
+		}
+		return "toMain";
+	}
+	//退货,退货后库存增加
+	public String returnGoods() throws Exception {
+		try{
+			orderDetailService.returnGoods(model.getId(), model.getRefundAmt());
+			
+		}catch (Exception e) {
+			
+		}
+		return "details";
+	}
+	
+	
+	
 	@Override
 	public String detail() throws Exception {
 		// TODO Auto-generated method stub

@@ -1,5 +1,4 @@
 package com.ylink.cim.admin.domain;
-
 import java.io.Serializable;
 
 import flink.util.WebResource;

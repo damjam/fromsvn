@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sun.java.swing.plaf.motif.resources.motif;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.InoutType;
 import com.ylink.cim.common.type.TradeType;
@@ -31,7 +32,11 @@ import com.ylink.cim.manage.dao.AccountJournalDao;
 import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
 import com.ylink.cim.manage.dao.GeneralBillDao;
+import com.ylink.cim.manage.dao.OrderDetailDao;
+import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.GeneralBill;
+import com.ylink.cim.manage.domain.OrderDetail;
+import com.ylink.cim.manage.domain.OrderRecord;
 
 import flink.etc.Assert;
 import flink.util.AmountUtils;
@@ -71,8 +76,10 @@ public class ReportAction extends BaseAction {
 	private AccountDao accountDao;
 	@Autowired
 	private AccountJournalDao accountJournalDao;
-
-
+	@Autowired
+	private OrderDetailDao orderDetailDao;
+	@Autowired
+	private OrderRecordDao orderRecordDao;
 	public String waterBillDetail() throws Exception {
 		String buildingNo = request.getParameter("buildingNo");
 		String startCreateDate = request.getParameter("startCreateDate");
@@ -87,7 +94,51 @@ public class ReportAction extends BaseAction {
 		return null;
 	}
 
+	public String orderRecord() throws Exception {
+		String id = request.getParameter("id");
+		OrderRecord record = orderRecordDao.findById(id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("createDate", DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", record.getCreateDate()));
+		
+		map.put("clientName", record.getClientName());
+		map.put("clientTel", record.getClientTel());//客户电话
+		map.put("address", record.getAddress());//送货地址
+		map.put("orderDate", record.getOrderDate());//订货日期
+		map.put("orderId", record.getId());//订货日期
+		map.put("comName", comInfo.getName());
+		map.put("comTel", comInfo.getTel());
+		map.put("orderId", id);
+		map.put("amountStr", MoneyUtil.getFormatStr2(record.getAmount()));
+		generateReportWithConn("orderRecord.jasper", map, request, response);
+		return null;
+	}
 
+	public String orderDetail() throws Exception {
+		String id = request.getParameter("id");
+		OrderDetail orderDetail = orderDetailDao.findById(id);
+		OrderRecord record = orderRecordDao.findById(orderDetail.getOrderId());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("carModel", orderDetail.getCarModel());
+		map.put("productName", orderDetail.getProductName());
+		map.put("num", orderDetail.getNum());
+		map.put("material", orderDetail.getMaterial());
+		map.put("price", MoneyUtil.getFormatStr(orderDetail.getPrice()));
+		map.put("amount", orderDetail.getAmount());
+		map.put("color", orderDetail.getColor());
+		map.put("amount", MoneyUtil.getFormatStr(orderDetail.getAmount()));
+		map.put("createDate", DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", record.getCreateDate()));
+		map.put("detailSn", orderDetail.getId());//明细单号
+		
+		map.put("clientName", record.getClientName());
+		map.put("clientTel", record.getClientTel());//客户电话
+		map.put("address", record.getAddress());//送货地址
+		map.put("orderDate", record.getOrderDate());//订货日期
+		
+		map.put("comName", comInfo.getName());
+		map.put("comTel", comInfo.getTel());
+		generateReportWithConn("orderRecord.jasper", map, request, response);
+		return null;
+	}
 
 	public String tradeReport() throws Exception {
 		String tradeDate = request.getParameter("tradeDate");

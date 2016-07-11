@@ -9,9 +9,7 @@
 		<link rel="stylesheet" href="css/page.css" type="text/css"
 			media="screen, projection" />
 		<f:css href="/css/page.css"/>
-		<f:js src="/js/common.js" />
 		<f:js src="/js/jquery.js" />
-		
 		<f:js src="/js/common.js"/>
 		<script type="text/javascript">
 			function seeUserMsgInfo(){

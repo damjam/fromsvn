@@ -25,7 +25,7 @@ public class OrderRecordDaoImpl extends BaseDaoImpl implements OrderRecordDao {
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from OrderRecord where 1=1");
-		helper.append("and clientName like ?", MapUtils.getString(map, "clientName"));
+		helper.append("and clientName like ?", MapUtils.getString(map, "clientName"), MatchMode.ANYWHERE);
 		helper.append("and clientTel like ?",MapUtils.getString(map, "clientTel"), MatchMode.START);
 		helper.append("and orderDate >= ?", MapUtils.getString(map, "beginOrderDate"));
 		helper.append("and orderDate <= ?", MapUtils.getString(map, "endOrderDate"));

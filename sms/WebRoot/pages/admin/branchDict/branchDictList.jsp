@@ -62,7 +62,7 @@
 							<td>
 								<s:select name="dictType" headerKey="" headerValue="---全部---" list="#request.dictTypes" listKey="value" listValue="name"/>
 							</td>
-							<s:if test="${sessionScope.isHQ == true}">
+							<s:if test="#session.isHQ == true">
 								<td class="formlabel" align="left">机构</td>
 								<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
 							</s:if>

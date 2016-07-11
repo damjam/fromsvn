@@ -26,6 +26,30 @@ public class OrderRecord implements Serializable {
 
 	private String createUser;
 
+	private String state;
+	
+	private String payState;
+	
+	private Double payAmt;
+	
+	
+	
+	public Double getPayAmt() {
+		return payAmt;
+	}
+
+	public void setPayAmt(Double payAmt) {
+		this.payAmt = payAmt;
+	}
+
+	public String getPayState() {
+		return payState;
+	}
+
+	public void setPayState(String payState) {
+		this.payState = payState;
+	}
+
 	private String[] carModels;
 
 	private String[] productNames;
@@ -168,5 +192,12 @@ public class OrderRecord implements Serializable {
 		this.amounts = amounts;
 	}
 
-	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 }

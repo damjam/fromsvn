@@ -9,7 +9,7 @@ public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
-	private Integer id;
+	private String id;
 	
 	private String carModel;
 	
@@ -29,10 +29,22 @@ public class OrderDetail implements Serializable {
 	
 	private Double amount;
 	
+	private Double refundAmt;
+	
 	private String orderId;
 	
 	private String remark;
 	
+	
+	
+	public Double getRefundAmt() {
+		return refundAmt;
+	}
+
+	public void setRefundAmt(Double refundAmt) {
+		this.refundAmt = refundAmt;
+	}
+
 	public String getDeliState() {
 		return deliState;
 	}
@@ -40,12 +52,13 @@ public class OrderDetail implements Serializable {
 	public void setDeliState(String deliState) {
 		this.deliState = deliState;
 	}
+	
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

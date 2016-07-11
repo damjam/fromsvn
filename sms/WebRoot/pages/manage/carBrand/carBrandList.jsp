@@ -53,13 +53,7 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								品牌(en)
-							</td>
-							<td>
-								<s:textfield name="id" id="id" maxlength="10"/>
-							</td>
-							<td class="formlabel">
-								品牌(zh)
+								品牌
 							</td>
 							<td>
 								<s:textfield name="brand" id="brand" maxlength="10"/>

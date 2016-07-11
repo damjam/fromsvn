@@ -71,7 +71,7 @@
 		 		//setAmount();
 		 	});
 		 	function modelAuto(){
-		 		$('input[name=models]').each(function(i,e){
+		 		$('input[name=carModels]').each(function(i,e){
 		 			$(e).autocomplete({
 						delay : 500,
 						minLength: 0,
@@ -118,9 +118,9 @@
 		 		}
 		 		var rowHtml = '<tr class="product">';
 		 		rowHtml += '<td align="center"><input type="text" name="carModels" style="width: 120px;" autocomplete="off"/>&nbsp;</td>';
-		 		rowHtml += '<td align="center"><input type="text" name="productNames" style="width: 120px;"/>&nbsp;</td>';
+		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="后备箱垫">后备箱垫</option></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="materials" style="width: 120px;"/>&nbsp;</td>';
-		 		rowHtml += '<td align="center"><select name="colors" style="width: 40px;"><option value="">红</option><option value="">绿</option><option value="">蓝</option></select> </td>';
+		 		rowHtml += '<td align="center"><input type="text" name="colors" style="width: 60px;"></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="prices" style="width: 50px;" onblur="setAmount(this)"/>&nbsp;</td>';
 		 		rowHtml += '<td align="center"><input type="text" name="nums" style="width:30px;" maxlength="4" value="1" onblur="setAmount(this)"/></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="amounts" style="width:50px;" maxlength="8" readonly="readonly" class="amount"/></td>';
@@ -138,7 +138,7 @@
 		 	function setAmount(e){
  				var price = $(e).parent().parent().find('input[name^="prices"]');
 		 		var priceVal = price.val();
-		 		if(isNaN(priceVal)){
+		 		if(isNaN(priceVal) || priceVal == ''){
 		 			return;
 		 		}
 		 		var num = $(e).parent().parent().find('input[name^="nums"]');
@@ -231,17 +231,17 @@
 							  	    <input type="text" name="carModels" class="model" style="width: 120px;" autocomplete="off"/>&nbsp;
 							   </td>   
 							   <td align="center">
-							  	    <input type="text" name="productNames" style="width: 120px;"/>&nbsp;
+							   		<select name="productNames" style="width: 60px;">
+										<option value="脚垫">脚垫</option>
+										<option value="座垫">座垫</option>
+										<option value="后备箱垫">后备箱垫</option>
+									</select>	
 							   </td>
 							   <td align="center">
 							  	    <input type="text" name="materials" style="width: 120px;"/>&nbsp;
 							   </td>
 							   <td align="center">
-									<select name="colors" style="width: 40px;">
-										<option value="">红</option>
-										<option value="">绿</option>
-										<option value="">蓝</option>
-									</select>							  	    
+									<input type="text" name="colors" style="width: 60px;"/>&nbsp;						  	    
 							   </td>
 							   <td align="center">
 							  	    <input type="text" name="prices" style="width: 50px;" class="num" onblur="setAmount(this)"/>&nbsp;

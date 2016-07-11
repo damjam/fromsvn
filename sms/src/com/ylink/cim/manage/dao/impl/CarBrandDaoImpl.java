@@ -3,6 +3,7 @@ package com.ylink.cim.manage.dao.impl;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import flink.hibernate.BaseDaoImpl;
 import flink.hibernate.QueryHelper;
 import flink.util.Pager;
 import flink.util.Paginater;
+import flink.util.StringUtil;
 @Component("carBrandDao")
 public class CarBrandDaoImpl extends BaseDaoImpl implements CarBrandDao {
 
@@ -33,10 +35,12 @@ public class CarBrandDaoImpl extends BaseDaoImpl implements CarBrandDao {
 	public Paginater findByKeyword(String keyword, Pager pager) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from CarBrand where 1=1");
-		helper.append("and (brand like ?", keyword.toLowerCase(), MatchMode.START);
-		helper.append("or firstLetters like ?", keyword.toLowerCase(), MatchMode.START);
-		helper.append("or pinyin like ?", keyword.toLowerCase(), MatchMode.START);
-		helper.append("or id like ?)", keyword.toLowerCase(), MatchMode.START);
+		keyword = StringUtils.lowerCase(keyword);
+		helper.append("and (brand like ?", keyword, MatchMode.START);
+		helper.append("or firstLetters like ?", keyword, MatchMode.START);
+		helper.append("or pinyin like ?", keyword, MatchMode.START);
+		helper.append("or id like ?)", keyword, MatchMode.START);
+		//helper.append("and country = ?", );
 		return super.getPageData(helper, pager);
 	}
 

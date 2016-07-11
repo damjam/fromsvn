@@ -58,6 +58,34 @@
 						//$('#brand').val(ui.item);
 				    }
 				});
+				$(".model").autocomplete({
+					delay : 500,
+					minLength: 0,
+					 source: function(request, response) {
+						var keyword = $('.model').val();
+						//var word = $('#search-content').val();
+						//word = encodeURI(word, "utf-8");
+						//alert(keyword);
+	                    $.ajax({
+	                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+	                        type:"post",  
+	                        url: CONTEXT_PATH+"/carModel.do?action=loadByKeyword&keyword="+keyword,
+	                        dataType: "json",
+	                        data: {
+	                            top: 10,
+	                            key: request.term
+	                        } ,
+	                        success: function(data) {
+	                             response($.each(data.list, function(item) {
+				                    return item;
+				                }));
+	                        } 
+	                    });
+	                },
+	                select: function (event, ui) {
+						//$('#brand').val(ui.item);
+				    }
+				});
 			});
 			
 			function delInfo(id){
@@ -86,16 +114,16 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								型号
-							</td>
-							<td>
-								<s:textfield name="name" id="name" maxlength="10"/>
-							</td>
-							<td class="formlabel">
 								品牌
 							</td>
 							<td>
 								<s:textfield name="brand" id="brand" maxlength="10"/>
+							</td>
+							<td class="formlabel">
+								型号
+							</td>
+							<td>
+								<s:textfield name="name" id="name" class="model" maxlength="10"/>
 							</td>
 						</tr>
 						<tr>

@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -33,6 +34,16 @@ public class OrderDetailDaoImpl extends BaseDaoImpl implements OrderDetailDao {
 		HqlHelper helper = new HqlHelper();
 		helper.append("delete OrderDetail where orderId = ?",id);
 		super.execute(helper);
+	}
+
+	@Override
+	public List<OrderDetail> findList(Map<String, Object> map) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from OrderDetail where 1=1");
+		helper.append("and orderId = ?", MapUtils.getString(map, "orderId"));
+		helper.append("and state = ?", MapUtils.getString(map, "state"));
+		helper.append("and state <> ?", MapUtils.getString(map, "excludeState"));
+		return super.getList(helper);
 	}
 
 }

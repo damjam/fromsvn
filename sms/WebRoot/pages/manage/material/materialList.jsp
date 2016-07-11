@@ -82,7 +82,7 @@
 							<td>
 								<s:select list="#request.materialStates" headerKey="" headerValue="---请选择---" listKey="value" listValue="name" name="state"/>
 							</td>
-							<s:if test="${sessionScope.isHQ == true}">
+							<s:if test="#session.isHQ == true">
 								<td class="formlabel">机构</td>
 								<td>
 									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>

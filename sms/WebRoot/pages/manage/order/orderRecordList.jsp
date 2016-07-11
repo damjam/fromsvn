@@ -13,6 +13,7 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		<f:js src="/js/paginater.js" />
+		<f:js src="/layer/layer.js"/>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -38,6 +39,20 @@
 			function updateInfo(id){
 				var url="${uri}?action=toEdit&id="+id;
 				gotoUrl(url);  
+			}
+			function detail(id){
+				var url = '${uri}?action=showDetail&id='+id;
+				layer.open({
+					title:'订单明细',
+				    type: 2,
+				    area: ['800px', '360px'],
+				    fix: false, //不固定
+				    maxmin: true,
+				    content: url
+				}); 
+			}
+			function openReport(id){
+				window.open(CONTEXT_PATH+'/reportAction.do?action=orderRecord&id='+id);
 			}
 		</script> 
 	</head>
@@ -88,6 +103,7 @@
 						    <td >送货地址</td>
 						    <td >订货日期</td>
 						    <td >订单金额</td>
+						    <td >订单状态</td>
 						    <td >操作</td>
 						 </tr>
 					</thead>
@@ -99,8 +115,20 @@
 								<td>${element.clientName}</td>
 								<td>${element.clientTel}</td>
 								<td>${element.address}</td>
+								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
+							    <td ondblclick="edit()"><f:state className="OrderState" value="${element.state}"/> </td>
 							    <td class="redlink">
+							    	<c:if test="${element.state eq '00' }">
+							    		<a href="javascript:changeState('${element.id}','01')" >发货</a>
+							    		<a href="javascript:changeState('${element.id}','03')" >取消</a>
+							    	</c:if>
+							    	<c:if test="${element.state eq '01' }">
+							    		<a href="javascript:changeState('${element.id}','01')" >确认收货</a>
+							    		<a href="javascript:changeState('${element.id}','04')" >退货</a>
+							    	</c:if>
+							    	<a href="javascript:detail('${element.id}')" >查看明细</a>
+							    	<a href="javascript:openReport('${element.id}')" >打印</a>
 							    	<a href="javascript:updateInfo('${element.id}')" >修改</a>
 							    	<a href="javascript:delInfo('${element.id}')" >删除</a>
 							    </td>

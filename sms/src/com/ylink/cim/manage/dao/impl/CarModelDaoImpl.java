@@ -24,10 +24,13 @@ public class CarModelDaoImpl extends BaseDaoImpl implements CarModelDao {
 	@Override
 	public Paginater findPaginater(Map<String, Object> map, Pager pager) {
 		QueryHelper helper = new QueryHelper();
+		String name = MapUtils.getString(map, "name");
 		helper.append("from CarModel where 1=1");
-		helper.append("and brandId = ?", MapUtils.getString(map, "brandId"));
-		helper.append("and name like ?",MapUtils.getString(map, "name"));
-		helper.append("and firstLetters like ?", MapUtils.getString(map, "firstLetters"));
+		helper.append("and brand = ?", MapUtils.getString(map, "brand"));
+		helper.append("and (name like ?", name, MatchMode.START);
+		helper.append("or firstLetters like ?", name, MatchMode.START);
+		helper.append("or pinyin like ?", name, MatchMode.START);
+		helper.append("or modelEn like ?)", name, MatchMode.START);
 		return super.getPageData(helper, pager);
 	}
 	public Paginater findByKeyword(String keyword, Pager pager) {

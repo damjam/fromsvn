@@ -40,8 +40,9 @@ public class CarBrandAction extends CRUDAction implements ModelDriven<CarBrand> 
 
 	@Override
 	public String list() throws Exception {
-		Map<String, Object> map = getParaMap();
-		Paginater paginater = carBrandDao.findPaginater(map, getPager(request));
+		//Map<String, Object> map = getParaMap();
+		String brand = model.getBrand();
+		Paginater paginater = carBrandDao.findByKeyword(brand, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect();
 		return LIST;

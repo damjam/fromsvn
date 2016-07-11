@@ -22,8 +22,17 @@
         <property name="address" type="java.lang.String">
             <column name="address" length="25"/>
         </property>
+        <property name="state" type="java.lang.String">
+            <column name="state" length="2"/>
+        </property>
+        <property name="payState" type="java.lang.String">
+            <column name="pay_state" length="2"/>
+        </property>
         <property name="amount" type="java.lang.Double">
             <column name="amount"/>
+        </property>
+        <property name="payAmt" type="java.lang.Double">
+            <column name="pay_amt"/>
         </property>
         <property name="createUser" type="java.lang.String">
             <column name="CREATE_USER" length="50" not-null="true" />

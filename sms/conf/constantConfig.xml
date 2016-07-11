@@ -51,7 +51,7 @@
 	</bean>
 	<bean id="comInfo" class="com.ylink.cim.common.util.ComInfo">
 		<property name="name">
-			<value></value>
+			<value>漯河市众成汽车脚垫有限公司</value>
 		</property>
 		<property name="hqName">
 			<value></value>
@@ -72,7 +72,7 @@
 			<value>河南省漯河市</value>
 		</property>
 		<property name="sp">
-			<value>漯河市xx汽车配件销售管理系统</value>
+			<value>漯河市众成汽车配件销售管理系统</value>
 		</property>
 		<property name="tip">
 			<value>请使用最新版chrome浏览器获得最佳操作体验</value>
