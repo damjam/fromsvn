@@ -14,6 +14,7 @@ import com.ylink.cim.common.state.BillState;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.domain.MerchantInfo;
 import com.ylink.cim.manage.service.MerchantInfoService;
+import com.ylink.cim.util.CopyPropertyUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
@@ -62,7 +63,7 @@ public class MerchantInfoAction extends BaseAction implements
 			if (merchantInfoDao.findList(params).size() >= 1) {
 				throw new BizException("商户名已存在，请重新指定");
 			}
-			BeanUtils.copyProperties(merchantInfo, model);
+			CopyPropertyUtil.copyPropertiesIgnoreNull(model, merchantInfo);
 			merchantInfoService.saveOrUpdate(merchantInfo,
 					getSessionUser(request));
 			model.setMrname("");
