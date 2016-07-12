@@ -93,6 +93,8 @@ public class MerchantInfoAction extends BaseAction implements
 		}else {//»ú¹¹
 			map.put("branchNo", getSessionBranchNo(request));
 		}
+		map.put("mrname", model.getMrname());
+		map.put("mobile", model.getMobile());
 		Paginater paginater = merchantInfoDao.findPager(map, getPager(request));
 		saveQueryResult(request, paginater);
 		// return forward("/pages/manage/merchant/merchantList.jsp");

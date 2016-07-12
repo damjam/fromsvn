@@ -30,7 +30,8 @@ public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao 
 		QueryHelper helper = new QueryHelper();
 		helper.append("from MerchantInfo where 1=1");
 		helper.append("and id = ?", MapUtils.getString(params, "id"));
-		helper.append("and mrname like ?", MapUtils.getString(params, "mrname"));
+		helper.append("and mrname like ?", MapUtils.getString(params, "mrname"), MatchMode.ANYWHERE);
+		helper.append("and mobile like ?", MapUtils.getString(params, "mobile"), MatchMode.START);
 		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);

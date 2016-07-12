@@ -57,12 +57,19 @@
 							<td>
 								<s:textfield name="mrname" id="mrname" maxlength="20"/>
 							</td>
+							<td class="formlabel">
+								联系电话
+							</td>
+							<td>
+								<s:textfield name="mobile" id="mobile" maxlength="20"/>
+							</td>
+							<!-- 
 							<c:if test="${sessionScope.isHQ == true}">
 								<td class="formlabel">机构</td>
 								<td>
 									<s:select name="branchNo" list="branches" listKey="key" listValue="value" headerKey="" headerValue="---全部---"></s:select>
 								</td>
-							</c:if>
+							</c:if> -->
 					    </tr>
 						<tr>
 						    <td></td>
