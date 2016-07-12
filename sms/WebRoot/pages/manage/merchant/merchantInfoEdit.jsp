@@ -114,6 +114,7 @@
 
 <f:msg styleClass="msg"/>
 	<form action="${uri}?action=doEdit" id="dataForm" method="post" class="validate">
+		<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>
