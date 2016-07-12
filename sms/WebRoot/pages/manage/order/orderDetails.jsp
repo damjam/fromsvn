@@ -32,6 +32,12 @@
 					var url="${uri}?action=toAdd";
 					gotoUrl(url);   
 				});
+				//关闭iframe
+				$('#closeIframe').click(function(){
+					//var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+				    //parent.layer.close(index);
+				    parent.query();
+				});
 			});
 			
 			function delInfo(id) {
@@ -90,9 +96,7 @@
 					gotoUrl(url);
 				});
 			}
-			$(window).onunload(function(){
-				parent.query();
-			});
+			
 		</script> 
 	</head>
 	<body>
@@ -151,6 +155,9 @@
 						</c:forEach>
 					</f:showDataGrid>
 				</table>
+				<p style="text-align: center;margin-top: 30px;">
+					<input type="button" value="关闭" id="closeIframe"/>
+				</p>
 			</div> 
 		</form>
 	</body>
