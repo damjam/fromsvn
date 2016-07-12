@@ -99,7 +99,7 @@ public class ReportAction extends BaseAction {
 		OrderRecord record = orderRecordDao.findById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("createDate", DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", record.getCreateDate()));
-		
+		map.put("orderDate", record.getOrderDate());
 		map.put("clientName", record.getClientName());
 		map.put("clientTel", record.getClientTel());//客户电话
 		map.put("address", record.getAddress());//送货地址

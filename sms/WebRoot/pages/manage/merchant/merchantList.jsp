@@ -81,16 +81,16 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<c:if test="${sessionScope.isHQ == true}">
-						 		<td>机构</td>
-						 	</c:if>
+						 	
 						 	<td>商户名称</td>
+						 	<!-- 
 						    <td>行业类别</td>
-						    <td>经营范围</td>
-						    <td>地址</td>
+						    <td>经营范围</td> -->
+						    <td>送货地址</td>
 						    <td>联系人</td>
-						    <td>固话</td>
-						    <td>手机</td>
+						    <!-- 
+						    <td>固话</td> -->
+						    <td>电话</td>
 						    <td>创建时间</td>
 						    <td>备注</td>
 						    <td>操作</td>
@@ -100,15 +100,16 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								<c:if test="${sessionScope.isHQ == true}">
-							 		<td>${element.branchName}</td>
-							 	</c:if>
+								
 								<td>${element.mrname}</td>
+								<!-- 
 								<td>${element.industry} </td>
-								<td>${element.busiScope}</td>
+								<td>${element.busiScope}</td> -->
 								<td>${element.addr}</td>
+								
 								<td>${element.manager}</td>
-								<td>${element.tel}</td>
+								<!-- 
+								<td>${element.tel}</td> -->
 								<td>${element.mobile}</td>
 								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 								<td>${element.remark}</td>

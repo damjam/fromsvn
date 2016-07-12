@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.view;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -14,9 +15,12 @@ import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.domain.MerchantInfo;
 import com.ylink.cim.manage.service.MerchantInfoService;
 
+import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Scope("prototype")
 @Component
@@ -115,5 +119,46 @@ public class MerchantInfoAction extends BaseAction implements
 			BeanUtils.copyProperties(model, merchantInfo);
 		}
 		return "edit";
+	}
+	
+	public String getMerchantInfo() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			Map<String, Object> map = getParaMap();
+			Assert.notEmpty(model.getMrname(), "不能为空");
+			map.put("mrname", model.getMrname());
+			List<MerchantInfo> list = merchantInfoDao.findList(map);
+			if (list.size() > 0) {
+				MerchantInfo merchantInfo = list.get(0);
+				object.put("status", "1");
+				object.put("mobile", merchantInfo.getMobile());
+				object.put("addr", merchantInfo.getAddr());
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
+	public String loadByKeyword() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			String keyword = request.getParameter("keyword");
+			Assert.notEmpty(keyword, "不能为空");
+			List<MerchantInfo> list = merchantInfoDao.findByKeyword(keyword);
+			JSONArray array = new JSONArray();
+			for(int i=0; i<list.size(); i++){
+				MerchantInfo merchantInfo = list.get(i);
+				array.add(merchantInfo.getMrname());
+			}
+			object.put("list", array);
+			object.put("status", "1");
+		}catch(Exception e){
+			e.printStackTrace();
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
 	}
 }

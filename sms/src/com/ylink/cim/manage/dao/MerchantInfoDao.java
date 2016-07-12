@@ -14,4 +14,6 @@ public interface MerchantInfoDao extends BaseDao {
 	public Paginater findPager(Map<String, Object> params, Pager pager);
 
 	public List<MerchantInfo> findList(Map<String, Object> params);
+
+	public List<MerchantInfo> findByKeyword(String keyword);
 }

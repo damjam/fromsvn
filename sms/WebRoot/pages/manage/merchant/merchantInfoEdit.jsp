@@ -130,6 +130,7 @@
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
+					   <!-- 
 					   <tr>
 						    <td class="formlabel nes">所属行业</td>
 						    <td>
@@ -144,6 +145,7 @@
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
+					    -->
 					   <tr>
 						    <td class="formlabel nes">地址</td>
 						    <td>
@@ -153,21 +155,22 @@
 					   </tr>
 					   
 					   <tr>
-						    <td class="formlabel nes">联系人</td>
+						    <td class="formlabel">联系人</td>
 						    <td>
-						    <s:textfield name="manager"  id="manager" class="{required:true}" maxlength="12"/>
+						    <s:textfield name="manager"  id="manager" class="{}" maxlength="12"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
+					   <!-- 
 					   <tr>
 						    <td class="formlabel nes">固话</td>
 						    <td>
 						    	<s:textfield name="tel" id="tel" maxlength="15" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
-					   </tr>
+					   </tr> -->
 					   <tr>
-						    <td class="formlabel nes">手机</td>
+						    <td class="formlabel nes">电话</td>
 						    <td>
 						    	<s:textfield name="mobile" id="mobile" maxlength="15" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>

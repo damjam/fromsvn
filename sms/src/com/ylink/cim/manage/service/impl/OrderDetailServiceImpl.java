@@ -78,16 +78,15 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public void cancel(String id, Double refundAmt) throws BizException {
 		OrderDetail orderDetail = orderDetailDao.findByIdWithLock(id);
 		Assert.equals(DeliveryState.INIT.getValue(), orderDetail.getDeliState(), "商品物流状态已变更，无法取消");
-		orderDetail.setDeliState(DeliveryState.CANCELED.getValue());
-		orderDetailDao.update(orderDetail);
+		orderDetailDao.deleteById(id);//删除
 		OrderRecord orderRecord = orderRecordDao.findById(orderDetail.getOrderId());
 		String payState = orderRecord.getPayState();
 		Double totalAmt = orderRecord.getAmount();
 		Double payAmt = orderRecord.getPayAmt();
-		Double amount = orderRecord.getAmount();
+		Double cancelAmt = orderDetail.getAmount();
 		if(PayState.UNPAY.getValue().equals(payState)){//未付款
 			//直接修改总金额
-			orderRecord.setAmount(totalAmt-amount);
+			orderRecord.setAmount(totalAmt-cancelAmt);
 			orderRecord.setPayAmt(payAmt-refundAmt);
 		}else if (PayState.PAID.getValue().equals(payState)) {
 			//添加退款交易

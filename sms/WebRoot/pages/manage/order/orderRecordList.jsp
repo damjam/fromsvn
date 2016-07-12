@@ -83,7 +83,7 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								客户姓名
+								客户名称
 							</td>
 							<td>
 								<s:textfield name="clientName" id="clientName" maxlength="10"/>
@@ -132,7 +132,7 @@
 								<td>${element.clientName}</td>
 								<td>${element.clientTel}</td>
 								<td>${element.address}</td>
-								<td><fmt:formatDate value="${element.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+								<td>${element.orderDate }</td>
 								<td><fmt:formatNumber value="${element.amount}" pattern="##0.00"/></td>
 							    <td><fmt:formatNumber value="${element.payAmt}" pattern="##0.00"/></td>
 							    <td ondblclick="edit()"><f:state className="OrderState" value="${element.state}"/> </td>

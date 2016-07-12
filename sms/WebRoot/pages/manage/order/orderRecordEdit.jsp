@@ -65,11 +65,67 @@
 				    }
 				});
 		 	}
+		 	function setClientInfo(){
+				var clientName = $('#clientName').val();
+				if(clientName == ''){
+					return;
+				}
+				$.post(CONTEXT_PATH + '/merchantInfo.do?action=getMerchantInfo&mrname='+clientName, function(data) {
+					if (data != null) {
+						var jsonObj = eval('(' + data + ')');
+						var status = jsonObj.status;
+						if(status == '1'){
+							var clientTel = jsonObj.mobile;
+							var address = jsonObj.addr;
+							$('#clientTel').val(clientTel);
+							$('#address').val(address);
+						}else{
+							
+						}
+					}
+				});
+			}
 		 	$().ready(function(){
 		 		//setBrandAutoComplete($('#brand'));
 		 		modelAuto();
 		 		//setAmount();
+		 		$('.clientName').blur(function(){
+					setClientInfo();
+				});
+				
+				$("#clientName").autocomplete({
+					delay : 500,
+					minLength: 0,
+					 source: function(request, response) {
+						var keyword = $('#clientName').val();
+						//var word = $('#search-content').val();
+						//word = encodeURI(word, "utf-8");
+						//alert(keyword);
+						if(keyword == ''){
+							return;
+						}
+		                $.ajax({
+		                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		                    type:"post",  
+		                    url: CONTEXT_PATH+"/merchantInfo.do?action=loadByKeyword&keyword="+keyword,
+		                    dataType: "json",
+		                    data: {
+		                        top: 10,
+		                        key: request.term
+		                    } ,
+		                    success: function(data) {
+		                         response($.each(data.list, function(item) {
+				                    return item;
+				                }));
+		                    } 
+		                });
+		            },
+		            select: function (event, ui) {
+						
+				    }
+				});
 		 	});
+		 	
 		 	function modelAuto(){
 		 		$('input[name=carModels]').each(function(i,e){
 		 			$(e).autocomplete({
@@ -118,7 +174,7 @@
 		 		}
 		 		var rowHtml = '<tr class="product">';
 		 		rowHtml += '<td align="center"><input type="text" name="carModels" style="width: 120px;" autocomplete="off"/>&nbsp;</td>';
-		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="后备箱垫">后备箱垫</option></td>';
+		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="materials" style="width: 120px;"/>&nbsp;</td>';
 		 		rowHtml += '<td align="center"><input type="text" name="colors" style="width: 60px;"/></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="prices" style="width: 50px;" onblur="setAmount(this)"/>&nbsp;</td>';
@@ -180,9 +236,9 @@
 					<table class="form_grid">
 					  <caption>${ACT.name}</caption>
 					   <tr>
-						    <td class="formlabel nes">客户姓名</td>
+						    <td class="formlabel nes">客户名称</td>
 						    <td>
-						    	<s:textfield name="clientName" id="clientName" maxlength="10" class="{required:true}"/>
+						    	<s:textfield name="clientName" id="clientName" maxlength="10" class="{required:true} clientName"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

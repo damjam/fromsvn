@@ -28,6 +28,25 @@ public class MerchantInfo extends BranchField implements java.io.Serializable {
 	private Date updateDate;
 	private String branchNo;
 	private String remark;
+	private String pinyin;
+	private String firstLetters;
+	
+	
+	public String getPinyin() {
+		return pinyin;
+	}
+
+	public void setPinyin(String pinyin) {
+		this.pinyin = pinyin;
+	}
+
+	public String getFirstLetters() {
+		return firstLetters;
+	}
+
+	public void setFirstLetters(String firstLetters) {
+		this.firstLetters = firstLetters;
+	}
 
 	public String getRemark() {
 		return remark;

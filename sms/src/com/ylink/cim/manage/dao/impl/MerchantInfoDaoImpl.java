@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.type.BranchType;
@@ -48,6 +49,16 @@ public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao 
 					MapUtils.getString(params, "branchNo"));
 		}
 		helper.append("order by id desc");
+		return super.getList(helper);
+	}
+
+	@Override
+	public List<MerchantInfo> findByKeyword(String keyword) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("from MerchantInfo t where 1=1");
+		helper.append("and (mrname like ?", keyword, MatchMode.START);
+		helper.append("or pinyin like ?", keyword, MatchMode.START);
+		helper.append("or firstLetters like ?)", keyword, MatchMode.START);
 		return super.getList(helper);
 	}
 }

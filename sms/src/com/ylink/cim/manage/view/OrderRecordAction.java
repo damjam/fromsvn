@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
@@ -87,6 +88,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 			BeanUtils.copyProperties(model, orderRecord);
 			Map<String, Object> map = getParaMap();
 			map.put("orderId", orderRecord.getId());
+			map.put("excludeState", DeliveryState.CANCELED.getValue());
 			List<OrderDetail> details = orderDetailDao.findList(map);
 			saveQueryResult(request, details);
 		} catch(Exception e){

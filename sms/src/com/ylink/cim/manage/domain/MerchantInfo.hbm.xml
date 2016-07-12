@@ -11,16 +11,16 @@
             <generator class="assigned" />
         </id>
         <property name="mrname" type="java.lang.String">
-            <column name="MRNAME" length="100" not-null="true" />
+            <column name="MRNAME" length="100"  />
         </property>
         <property name="addr" type="java.lang.String">
-            <column name="ADDR" length="100" not-null="true" />
+            <column name="ADDR" length="100"  />
         </property>
         <property name="tel" type="java.lang.String">
-            <column name="TEL" length="100" not-null="true" />
+            <column name="TEL" length="100"  />
         </property>
         <property name="mobile" type="java.lang.String">
-            <column name="MOBILE" length="100" not-null="true" />
+            <column name="MOBILE" length="100"  />
         </property>
         <property name="manager" type="java.lang.String">
             <column name="MANAGER" length="100" />
@@ -32,7 +32,7 @@
             <column name="INDUSTRY" length="25" />
         </property>
         <property name="createDate" type="java.util.Date">
-            <column name="CREATE_DATE" length="19" not-null="true" />
+            <column name="CREATE_DATE" length="19"  />
         </property>
         <property name="updateDate" type="java.util.Date">
             <column name="UPDATE_DATE" length="19" />
@@ -42,6 +42,12 @@
 		</property>
 		<property name="busiScope" type="java.lang.String">
 			<column name="BUSI_SCOPE" length="20" />
+		</property>
+		<property name="pinyin" type="java.lang.String">
+			<column name="pinyin" length="200" />
+		</property>
+		<property name="firstLetters" type="java.lang.String">
+			<column name="FIRST_LETTERS" length="50" />
 		</property>
 		<property name="remark" type="java.lang.String">
 			<column name="REMARK" length="50" />
