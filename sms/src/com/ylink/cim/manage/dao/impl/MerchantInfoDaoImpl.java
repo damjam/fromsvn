@@ -56,9 +56,9 @@ public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao 
 	public List<MerchantInfo> findByKeyword(String keyword) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from MerchantInfo t where 1=1");
-		helper.append("and (mrname like ?", keyword, MatchMode.START);
-		helper.append("or pinyin like ?", keyword, MatchMode.START);
-		helper.append("or firstLetters like ?)", keyword, MatchMode.START);
+		helper.append("and (mrname like ?", keyword, MatchMode.ANYWHERE);
+		helper.append("or pinyin like ?", keyword, MatchMode.ANYWHERE);
+		helper.append("or firstLetters like ?)", keyword, MatchMode.ANYWHERE);
 		return super.getList(helper);
 	}
 }
