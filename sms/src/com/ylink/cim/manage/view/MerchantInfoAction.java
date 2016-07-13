@@ -66,7 +66,7 @@ public class MerchantInfoAction extends BaseAction implements
 			CopyPropertyUtil.copyPropertiesIgnoreNull(model, merchantInfo);
 			merchantInfoService.saveOrUpdate(merchantInfo,
 					getSessionUser(request));
-			setResult(true, "操作成功", request);
+			setSucResult("操作成功", request);
 		} catch (BizException e) {
 			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
