@@ -46,7 +46,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		orderRecordDao.save(model);
 		saveOrderDetails(model);
 		//
-		//saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress());
+		saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress());
 	}
 
 	private void saveClientInfo(String clientName, String clientTel, String address) {
@@ -54,8 +54,14 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		map.put("mrname", clientName);
 		map.put("mobile", clientTel);
 		List<MerchantInfo> list = merchantInfoDao.findList(map);
-		if(list.size() == 0){
-			
+		if(list.size() == 0) {
+			MerchantInfo merchantInfo = new MerchantInfo();
+			merchantInfo.setMrname(clientName);
+			merchantInfo.setMobile(clientTel);
+			merchantInfo.setAddr(address);
+			merchantInfo.setCreateDate(DateUtil.getCurrent());
+			merchantInfo.setId(IdFactoryHelper.getId(MerchantInfo.class));
+			merchantInfoDao.save(merchantInfo);
 		}
 	}
 
