@@ -34,9 +34,16 @@ public class OrderRecord implements Serializable {
 	
 	private Double refundAmt;
 	
+	private String contact;
 	
-	
-	
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
 	public Double getRefundAmt() {
 		return refundAmt;
 	}

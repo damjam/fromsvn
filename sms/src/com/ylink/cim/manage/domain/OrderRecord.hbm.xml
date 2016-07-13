@@ -13,6 +13,9 @@
         <property name="clientName" type="java.lang.String">
             <column name="client_name" length="50"/>
         </property>
+        <property name="contact" type="java.lang.String">
+            <column name="contact" length="50"/>
+        </property>
         <property name="clientTel" type="java.lang.String">
             <column name="client_tel" length="50"/>
         </property>

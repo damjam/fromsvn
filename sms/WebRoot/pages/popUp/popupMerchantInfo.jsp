@@ -12,6 +12,8 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/paginater.js" />
 		<f:css href="/css/page.css" />
+		<f:css href="/js/plugin/jquery-ui.min.css" />
+		<f:js src="/js/plugin/jquery-ui.js" />
 		<style type="text/css">
 body {
 	width: 96%;
@@ -33,8 +35,9 @@ body {
 			var bindNameId = $('#bindName').val();
 			parent.$('#'+bindCodeId).val(code);
 			parent.$('#'+bindNameId).val(name);
+			parent.callback();
 			parent.layer.close(index);
-
+			
 		});
 		var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 		$('#clearInfo').click(function() {
@@ -77,6 +80,38 @@ body {
 				$tr.removeClass("on");
 			});
 		};
+		
+		$("#mrname").autocomplete({
+			delay : 500,
+			minLength: 0,
+			 source: function(request, response) {
+				var keyword = $('#mrname').val();
+				//var word = $('#search-content').val();
+				//word = encodeURI(word, "utf-8");
+				//alert(keyword);
+				if(keyword == ''){
+					return;
+				}
+                $.ajax({
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    type:"post",  
+                    url: CONTEXT_PATH+"/merchantInfo.do?action=loadByKeyword&keyword="+keyword,
+                    dataType: "json",
+                    data: {
+                        top: 10,
+                        key: request.term
+                    } ,
+                    success: function(data) {
+                         response($.each(data.list, function(item) {
+		                    return item;
+		                }));
+                    } 
+                });
+            },
+            select: function (event, ui) {
+				
+		    }
+		});
 	});
 </script>
 	</head>
@@ -104,10 +139,16 @@ body {
 							</tr>
 							<tr>
 								<td height="30" align="right" nowrap="nowrap">
-									商户名称
+									客户名称
 								</td>
 								<td height="30">
 									<s:textfield name="mrname" id="mrname" maxlength="10"/>
+								</td>
+								<td height="30" align="right" nowrap="nowrap">
+									联系电话
+								</td>
+								<td height="30">
+									<s:textfield name="mobile" id="mobile" maxlength="10"/>
 								</td>
 							</tr>
 							<tr></tr>
@@ -133,7 +174,7 @@ body {
 
 			<!-- 数据列表区 -->
 			<div class="tablebox">
-				<table class="data_grid">
+				<table class="data_grid" style="width: 100%">
 					<thead>
 						<tr>
 							<th align="center" nowrap="nowrap" class="titlebg">
@@ -143,10 +184,13 @@ body {
 								商户名称
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								行业类别
+								联系人
 							</th>
 							<th align="center" nowrap="nowrap" class="titlebg">
-								经营范围
+								联系电话
+							</th>
+							<th align="center" nowrap="nowrap" class="titlebg">
+								送货地址
 							</th>
 						</tr>
 					</thead>
@@ -156,16 +200,19 @@ body {
 							<tr class="shortcut">
 								<td align="center" nowrap="nowrap" width="30">
 									<input name="merchantInfo" type="radio" 
-										value="${element.id}$${element.mrname}" />
+										value="${element.mrname}$${element.mrname}" />
 								</td>
 								<td align="center" nowrap="nowrap">
 									${element.mrname}
 								</td>
 								<td align="center" nowrap="nowrap">
-									${element.industry}
+									${element.manager}
 								</td>
 								<td align="center" nowrap="nowrap">
-									${element.busiScope}
+									${element.mobile}
+								</td>
+								<td align="center" nowrap="nowrap">
+									${element.addr}
 								</td>
 							</tr>
 						</c:forEach>
@@ -177,8 +224,9 @@ body {
 
 		<div style="text-align: center;">
 			<input type="button" value="确定" id="selInfo" />
+			<!-- 
 			<input style="margin-left: 30px;" type="submit" value="清除"
-				id="clearInfo" />
+				id="clearInfo" /> -->
 			<input style="margin-left: 30px;" type="button" value="关闭"
 				id="closeIframe" />
 		</div>

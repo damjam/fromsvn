@@ -10,13 +10,14 @@
 		
 		<f:css href="/css/page.css"/>
 		<f:css href="/js/plugin/jquery-ui.min.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:js src="/js/jquery.min.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>
 		<f:js src="/js/plugin/jquery-ui.js"/>	
-			
+		<f:js src="/layer/layer.js"/>
 		<script type="text/javascript">
 			
 		 	function save(){
@@ -75,8 +76,10 @@
 						var jsonObj = eval('(' + data + ')');
 						var status = jsonObj.status;
 						if(status == '1'){
+							var contact = jsonObj.manager;
 							var clientTel = jsonObj.mobile;
 							var address = jsonObj.addr;
+							$('#contact').val(contact);
 							$('#clientTel').val(clientTel);
 							$('#address').val(address);
 						}else{
@@ -84,6 +87,9 @@
 						}
 					}
 				});
+			}
+		 	function callback(){
+				setClientInfo();
 			}
 		 	$().ready(function(){
 		 		//setBrandAutoComplete($('#brand'));
@@ -123,6 +129,23 @@
 		            select: function (event, ui) {
 						
 				    }
+				});
+				
+				$('.popup-search').click(function(){
+					var bindCode = 'clientName';
+					var bindName = 'clientName';
+					var toUrl = CONTEXT_PATH
+							+ '/merchantInfo.do?action=queryPopUpMerchantInfo&bindCode='
+							+ bindCode + '&bindName=' + bindName;
+					
+					layer.open({
+						title : '客户信息',
+						type : 2,
+						area : [ '960px', '640px' ],
+						fix : false, //不固定
+						maxmin : true,
+						content : toUrl
+					});
 				});
 		 	});
 		 	
@@ -239,9 +262,18 @@
 						    <td class="formlabel nes">客户名称</td>
 						    <td>
 						    	<s:textfield name="clientName" id="clientName" maxlength="10" class="{required:true} clientName"/>
+						    	<a href="javascript:void(0)" class="popup-search" style="text-decoration: none;">
+									<i class="fa fa-search"></i>
+								</a>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
+					   <tr>
+							<td class="formlabel">联系人</td>
+							<td><s:textfield name="contact" id="contact"
+									maxlength="25" class="{}" /> <span
+								class="field_tipinfo">不能为空</span></td>
+						</tr>
 					   <tr>
 						    <td class="formlabel nes">联系电话</td>
 						    <td>
@@ -252,7 +284,7 @@
 					   <tr>
 						    <td class="formlabel nes">收货地址</td>
 						    <td>
-						    	<s:textfield name="address" id="address" maxlength="20" class="{required:true}"/>
+						    	<s:textfield name="address" id="address" maxlength="50" style="width:360px;" class="{required:true}" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

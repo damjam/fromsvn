@@ -101,6 +101,7 @@ public class ReportAction extends BaseAction {
 		map.put("createDate", DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", record.getCreateDate()));
 		map.put("orderDate", record.getOrderDate());
 		map.put("clientName", record.getClientName());
+		map.put("contact", record.getContact());
 		map.put("clientTel", record.getClientTel());//客户电话
 		map.put("address", record.getAddress());//送货地址
 		map.put("orderDate", record.getOrderDate());//订货日期

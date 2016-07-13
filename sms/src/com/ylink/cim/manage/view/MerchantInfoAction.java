@@ -103,10 +103,11 @@ public class MerchantInfoAction extends BaseAction implements
 	public String queryPopUpMerchantInfo() throws Exception {
 
 		Map<String, Object> params = getParaMap();
-		params.put("branchNo", getSessionBranchNo(request));
+		//params.put("branchNo", getSessionBranchNo(request));
 		params.put("mrname", request.getParameter("mrname"));
+		params.put("mobile", request.getParameter("mobile"));
 		Paginater paginater = this.merchantInfoDao.findPager(params,
-				getPager(request));
+				getPager(request,10));
 		saveQueryResult(request, paginater);
 		request.setAttribute("bindCode", request.getParameter("bindCode"));
 		request.setAttribute("bindName", request.getParameter("bindName"));
@@ -134,6 +135,7 @@ public class MerchantInfoAction extends BaseAction implements
 				MerchantInfo merchantInfo = list.get(0);
 				object.put("status", "1");
 				object.put("mobile", merchantInfo.getMobile());
+				object.put("manager", merchantInfo.getManager());
 				object.put("addr", merchantInfo.getAddr());
 			}
 		}catch(Exception e){

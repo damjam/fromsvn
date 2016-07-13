@@ -5,9 +5,9 @@ String.prototype.trim = function() {
 };
 
 /**
- * ��ģ̬�Ի���.
- * @param isRefresh �Ƿ�ˢ��
- * @param refreshHandle ˢ�´���id
+ * 锟斤拷模态锟皆伙拷锟斤拷.
+ * @param isRefresh 锟角凤拷刷锟斤拷
+ * @param refreshHandle 刷锟铰达拷锟斤拷id
  */
 function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	if (!width) {
@@ -21,7 +21,7 @@ function openContextDialog(url, isRefresh, refreshHandle, width, height) {
 	var option = 'dialogWidth=' + width + 'px;dialogHeight=' + height + 'px;resizable=yes';
 	var rlt = window.showModalDialog(CONTEXT_PATH + url, null, option);
 	
-	// Ĭ������ˢ��
+	// 默锟斤拷锟斤拷锟斤拷刷锟斤拷
 	if (!isRefresh) {
 		isRefresh = false;
 	}
@@ -50,7 +50,7 @@ function stopevent(evt){
 }
 
 /**
- * ����ҳ��Ԫ����ʽ.
+ * 锟斤拷锟斤拷页锟斤拷元锟斤拷锟斤拷式.
  */
 $(function() {
 	SysStyle.setDataGridStyle();
@@ -65,11 +65,11 @@ $(function() {
 });
 
 /**
- * ϵͳ��ʽ.
+ * 系统锟斤拷式.
  */
 SysStyle = {
 	/**
-	 * �������ݱ��ͷ����, ��ż����ɫ, ����ƶ���ɫ.
+	 * 锟斤拷锟斤拷锟斤拷锟捷憋拷锟酵凤拷锟斤拷锟�, 锟斤拷偶锟斤拷锟斤拷色, 锟斤拷锟斤拷贫锟斤拷锟缴�.
 	 */
 	setDataGridStyle: function() {
 		$('table.data_grid').each(function() {
@@ -101,12 +101,12 @@ SysStyle = {
 				$tr = $(this);
 				if(trClass && trClass.indexOf('shortcut') != -1){
 					$tr.dblclick(function(){
-						if($("#[id^='sel']")[0]){
-							$("#[id^='sel']")[0].click();
-						}
+						//if($("#[id^='sel']")[0]){
+							$("#selInfo")[0].click();
+						//}
 					});
 					$tr.mouseover(function(){
-						$(this).attr("title", "˫���ɿ���ѡ��");
+						$(this).attr("title", "双锟斤拷锟缴匡拷锟斤拷选锟斤拷");
 					});
 				}
 				var removeSiblinsClass = function($self){
@@ -131,20 +131,20 @@ SysStyle = {
 
 	
 	/**
-	 * ���ñ������ʽ.
+	 * 锟斤拷锟矫憋拷锟斤拷锟斤拷锟绞�.
 	 */
 	setFormGridStyle: function() {
-		// ���ñ������ʽ.
+		// 锟斤拷锟矫憋拷锟斤拷锟斤拷锟绞�.
 		/*
 		$('table.form_grid').find('td').each(function(i) {
-			// form���Ϊ����, ��һ��Ϊ��ǩ, �ڶ���Ϊ¼���.
+			// form锟斤拷锟轿拷锟斤拷锟�, 锟斤拷一锟斤拷为锟斤拷签, 锟节讹拷锟斤拷为录锟斤拷锟�.
 			if (i % 2 == 0) {
 				$(this).addClass('form-label-td');
 			}
 		});
 		*/
 		
-		// ���ñ��������ʽ.
+		// 锟斤拷锟矫憋拷锟斤拷锟斤拷锟斤拷锟绞�.
 		$('table.form_grid :text, table.form_grid :password')
 			.addClass('userbox_bt')
 			.focus(function() {$(this).addClass('sffocus');})
@@ -152,7 +152,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ������ϸ��Ϣ�����ʽ.
+	 * 锟斤拷锟斤拷锟斤拷细锟斤拷息锟斤拷锟斤拷锟绞�.
 	 */
 	setDetailGridStyle: function() {
 		$('table.detail_grid td:even').addClass('headcell').attr('width', '100px');
@@ -160,7 +160,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ���ð�ť��ʽ.
+	 * 锟斤拷锟矫帮拷钮锟斤拷式.
 	 */
 	setButtonStyle: function() {
 		$btn = $(':button, :submit, :reset')
@@ -171,7 +171,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ���ò�ѯ�����ʽ.
+	 * 锟斤拷锟矫诧拷询锟斤拷锟斤拷锟绞�.
 	 */
 	setSearchGridStyle: function() {
 		$('table.search_grid :text').addClass('form-text');
@@ -179,14 +179,14 @@ SysStyle = {
 	},
 	
 	/**
-	 * ������Ȩ������.
+	 * 锟斤拷锟斤拷锟斤拷权锟斤拷锟斤拷锟斤拷.
 	 */
 	setNoPrivilegeStyle: function() {
 		$('span.no-privilege a').removeAttr('href').removeAttr('onclick');
 	},
 	
 	/**
-	 * ���÷�ҳ����ʽ.
+	 * 锟斤拷锟矫凤拷页锟斤拷锟斤拷式.
 	 */
 	setPageNavStyle: function() {
 		$btn = $(':button.pagenavbtn')
@@ -197,7 +197,7 @@ SysStyle = {
 	},
 	
 	/**
-	 * ��ӱ���֤.
+	 * 锟斤拷颖锟斤拷锟街�.
 	 */
 	addFormValidate: function() {
 		$('form').each(function() {
@@ -217,11 +217,11 @@ SysStyle = {
 };
 
 /**
- * ����֤������ʾ.
+ * 锟斤拷锟斤拷证锟斤拷锟斤拷锟斤拷示.
  */
 JError = {
 	/**
-	 * ��ʾ������Ϣ
+	 * 锟斤拷示锟斤拷锟斤拷锟斤拷息
 	 * @param {} errorMap
 	 * @param {} errorList
 	 */
@@ -231,18 +231,18 @@ JError = {
 			var tipObj = JError.getTipElement(error.element)
 			var errObj = JError.getErrElement(error.element)
 
-			// û����ʾ��Ϣ, �˳�.
+			// 没锟斤拷锟斤拷示锟斤拷息, 锟剿筹拷.
 			if (tipObj == null) {
 				return;
 			}
 
-			// �д�����Ϣ, ��ʾ������Ϣ, ������ʾ��Ϣ.
+			// 锟叫达拷锟斤拷锟斤拷息, 锟斤拷示锟斤拷锟斤拷锟斤拷息, 锟斤拷锟斤拷锟斤拷示锟斤拷息.
 			if (errObj != null) {
 				tipObj.hide();
 				errObj.show();
 			}
 			
-			// û�д�����Ϣ, ���ô�����ʽ��ʾ��ʾ��Ϣ.
+			// 没锟叫达拷锟斤拷锟斤拷息, 锟斤拷锟矫达拷锟斤拷锟斤拷式锟斤拷示锟斤拷示锟斤拷息.
 			else {
 				tipObj.addClass('error_tipinfo');
 				tipObj.show();
@@ -251,26 +251,26 @@ JError = {
 	},
 	
 	/**
-	 * ���������Ϣ
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟较�
 	 */
 	clearError: function(element) {
 		var tipObj = JError.getTipElement(element);
 		var errObj = JError.getErrElement(element);
 		
-		// �д�����Ϣ����, �����ش�����Ϣ, ��ʾ��ʾ��Ϣ.
+		// 锟叫达拷锟斤拷锟斤拷息锟斤拷锟斤拷, 锟斤拷锟斤拷锟截达拷锟斤拷锟斤拷息, 锟斤拷示锟斤拷示锟斤拷息.
 		if (errObj) {
 			errObj.hide();
 			tipObj.show();
 		}
 		
-		// ȥ����ʾ��Ϣ�Ĵ�����ʽ.
+		// 去锟斤拷锟斤拷示锟斤拷息锟侥达拷锟斤拷锟斤拷式.
 		if (tipObj != null) {
 			tipObj.removeClass('error_tipinfo');
 		}
 	},
 	
 	/**
-	 * ȡ����ʾ��Ϣ����
+	 * 取锟斤拷锟斤拷示锟斤拷息锟斤拷锟斤拷
 	 * @param {} element
 	 * @return {}
 	 */
@@ -285,13 +285,13 @@ JError = {
 			return obj;
 		}
 		
-		// ������һ��.
+		// 锟斤拷锟斤拷锟斤拷一锟斤拷.
 		obj = obj.next();
 		return obj.hasClass('field_tipinfo') ? obj : null;
 	},
 		
 	/**
-	 * ȡ�ô�����Ϣ����, һ��Ϊ¼������ĵڶ���, text->infospan->errspan
+	 * 取锟矫达拷锟斤拷锟斤拷息锟斤拷锟斤拷, 一锟斤拷为录锟斤拷锟斤拷锟斤拷牡诙锟斤拷锟�, text->infospan->errspan
 	 * @param {} element
 	 * @return {}
 	 */
@@ -306,7 +306,7 @@ JError = {
 	},
 
 	/**
-	 * ��ʾ������Ϣ
+	 * 锟斤拷示锟斤拷锟斤拷锟斤拷息
 	 */
 	showError: function(element) {
 		var tipe = getTipElement(element);
@@ -322,10 +322,10 @@ JError = {
 }
 
 /**
- * ����ҳ��.
- * @param boxid ����id
- * @param url ��ַ ����CONTEXT_PATH
- * @param param �����б�,json��ʽ.
+ * 锟斤拷锟斤拷页锟斤拷.
+ * @param boxid 锟斤拷锟斤拷id
+ * @param url 锟斤拷址 锟斤拷锟斤拷CONTEXT_PATH
+ * @param param 锟斤拷锟斤拷锟叫憋拷,json锟斤拷式.
  */
 function $jload(boxid, url, param) {
 	var box = $('#' + boxid);
@@ -333,12 +333,12 @@ function $jload(boxid, url, param) {
 		return;
 	}
 	
-	// LOAD_IMAGE λ��common.js ��.
+	// LOAD_IMAGE 位锟斤拷common.js 锟斤拷.
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {SysStyle.setDataGridStyle();});
 }
 
 /**
- * ˫ǩ��֤
+ * 双签锟斤拷证
  */
 function doubleCheck() {
 	var option = "dialogWidth=500px;dialogHeight=300px;resizable=no;scroll=no";
@@ -352,7 +352,7 @@ function doubleCheck() {
 }
 
 /**
- * ȡ��ҳ��.
+ * 取锟斤拷页锟斤拷.
  */
 function getMainFrame() {
 	var page = window;
@@ -362,7 +362,7 @@ function getMainFrame() {
 		page = page.parent;
 		depth += 1;
 		
-		// ���ֻ����5��.
+		// 锟斤拷锟街伙拷锟斤拷锟�5锟斤拷.
 		if (depth > 5) {
 			return null;
 		}
@@ -372,7 +372,7 @@ function getMainFrame() {
 }
 
 /**
- * ��������ȡ, main.js.
+ * 锟斤拷锟斤拷锟斤拷锟斤拷取, main.js.
  */
 GlobalMem = {
 	set: function(key, value) {
@@ -389,7 +389,7 @@ GlobalMem = {
 }
 
 /**
- * �л�div����ʾ
+ * 锟叫伙拷div锟斤拷锟斤拷示
  */
 
 function togglediv(divobj)
@@ -400,7 +400,7 @@ function togglediv(divobj)
 		divobj.style.display='block';
 }		
 /**
- * Frame���غ�Ķ���
+ * Frame锟斤拷锟截猴拷亩锟斤拷锟�
  */
 
 function FrameOnLoad(obj,frameobj)
@@ -424,7 +424,7 @@ function FrameOnLoad(obj,frameobj)
 	
 }	
 /**
- * ����ģ̬����,��߲�������ʱʹ��Ĭ��ֵ
+ * 锟斤拷锟斤拷模态锟斤拷锟斤拷,锟斤拷卟锟斤拷锟斤拷锟斤拷锟绞笔癸拷锟侥拷锟街�
  * @param {Object} dialogId
  * @param {Object} url
  * @param {Object} title
@@ -456,7 +456,7 @@ function showDetail(dialogId, url, title, width, height, param){
 	if (box.length == 0) { 
 		return;
 	}
-	// LOAD_IMAGE λ��common.js ��.
+	// LOAD_IMAGE 位锟斤拷common.js 锟斤拷.
 	box.show().html(LOAD_IMAGE).load(CONTEXT_PATH + url, param, function() {
 		SysStyle.setDataGridStyle();
 		SysStyle.setFormGridStyle();
@@ -471,7 +471,7 @@ function showDetail(dialogId, url, title, width, height, param){
 	$('#' + dialogId).dialog('open');
 }
 /**
- * �رյ������ڲ��������
+ * 锟截闭碉拷锟斤拷锟斤拷锟节诧拷锟斤拷锟斤拷锟斤拷锟�
  * @param {Object} dialogId
  */
 function closeDetail(dialogId){
@@ -480,18 +480,18 @@ function closeDetail(dialogId){
 }
 
 /**
- * ������
+ * 锟斤拷锟斤拷锟斤拷
  * @param {Object} link
  */
 function closeAll(link){
 	d.closeAll();
-	$("p:first").html('<a href="javascript:openAll(this)" style="color: red">չ��</a>');
+	$("p:first").html('<a href="javascript:openAll(this)" style="color: red">展锟斤拷</a>');
 }
 /**
- * չ����
+ * 展锟斤拷锟斤拷
  * @param {Object} link
  */
 function openAll(link){
 	d.openAll();
-	$("p:first").html('<a href="javascript:closeAll(this)" style="color: red">����</a>');
+	$("p:first").html('<a href="javascript:closeAll(this)" style="color: red">锟斤拷锟斤拷</a>');
 }

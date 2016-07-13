@@ -113,7 +113,8 @@
 					<thead>
 						 <tr align="center" class="titlebg">
 						 	<td >订单号</td>
-						 	<td >客户姓名</td>
+						 	<td >客户名称</td>
+						 	<td >联系人</td>
 						    <td >联系电话</td>
 						    <td >送货地址</td>
 						    <td >订货日期</td>
@@ -130,6 +131,7 @@
 							<tr align="center">
 								<td>${element.id}</td>
 								<td>${element.clientName}</td>
+								<td>${element.contact}</td>
 								<td>${element.clientTel}</td>
 								<td>${element.address}</td>
 								<td>${element.orderDate }</td>
