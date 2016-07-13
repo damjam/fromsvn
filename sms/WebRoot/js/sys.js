@@ -102,7 +102,7 @@ SysStyle = {
 				if(trClass && trClass.indexOf('shortcut') != -1){
 					$tr.dblclick(function(){
 						//if($("#[id^='sel']")[0]){
-							$("#selInfo")[0].click();
+							$("#selInfo").click();
 						//}
 					});
 					$tr.mouseover(function(){
