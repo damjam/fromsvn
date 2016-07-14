@@ -302,6 +302,12 @@
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
+					   <tr>
+							<td class="formlabel">备注</td>
+							<td><s:textfield name="remark" id="remark"
+									maxlength="50" class="{required}"/> 
+								<span class="field_tipinfo">不能为空</span></td>
+						</tr>
 				  </table>
 				  </div>
 				  <div  class="contentb" style="margin: auto;text-align: center;" >

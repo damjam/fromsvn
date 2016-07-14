@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orderRecord" pageWidth="623" pageHeight="257" whenNoDataType="AllSectionsNoDetail" columnWidth="577" leftMargin="36" rightMargin="10" topMargin="16" bottomMargin="12" whenResourceMissingType="Empty">
 	<property name="ireport.zoom" value="1.610510000000002"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="372"/>
+	<property name="ireport.y" value="48"/>
 	<parameter name="today" class="java.lang.String"/>
 	<parameter name="houseDesc" class="java.lang.String"/>
 	<parameter name="ownerName" class="java.lang.String"/>
@@ -52,10 +52,10 @@
 	</field>
 	<field name="MATERIAL" class="java.lang.String"/>
 	<title>
-		<band height="96" splitType="Stretch">
+		<band height="114" splitType="Stretch">
 			<staticText>
-				<reportElement x="189" y="0" width="198" height="24"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="189" y="0" width="198" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="黑体" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
 				</textElement>
 				<text><![CDATA[漯河众成汽车脚垫厂商品订货单]]></text>
@@ -226,6 +226,31 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{contact}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="96" width="79" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[备注]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="79" y="96" width="498" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{remark}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
@@ -234,7 +259,7 @@
 	<columnHeader>
 		<band height="19">
 			<staticText>
-				<reportElement mode="Transparent" x="376" y="1" width="44" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="399" y="1" width="44" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -246,7 +271,7 @@
 				<text><![CDATA[单价]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="241" y="1" width="73" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="200" y="1" width="73" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -258,7 +283,7 @@
 				<text><![CDATA[颜色]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="314" y="1" width="62" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="273" y="1" width="126" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -270,7 +295,7 @@
 				<text><![CDATA[材质]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="419" y="1" width="51" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="442" y="1" width="51" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -282,7 +307,7 @@
 				<text><![CDATA[数量]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="79" y="1" width="162" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="100" y="1" width="100" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -294,7 +319,7 @@
 				<text><![CDATA[产品名称]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="1" width="79" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="1" width="100" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -307,7 +332,7 @@
 				<text><![CDATA[汽车型号]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="470" y="1" width="107" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="493" y="1" width="84" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -321,9 +346,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="19">
+		<band height="18">
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="241" y="0" width="73" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="200" y="0" width="73" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -335,7 +360,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{COLOR}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="376" y="0" width="44" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="399" y="0" width="44" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -346,7 +371,7 @@
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{PRICE}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="419" y="0" width="51" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="442" y="0" width="51" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -357,7 +382,7 @@
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{NUM}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement key="textField" x="0" y="0" width="79" height="18"/>
+				<reportElement key="textField" x="0" y="0" width="100" height="18"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -370,7 +395,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{CAR_MODEL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="470" y="0" width="107" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="493" y="0" width="84" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 					<rightPen lineWidth="1.0"/>
@@ -381,7 +406,7 @@
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{AMOUNT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="79" y="0" width="162" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="100" y="0" width="100" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -393,7 +418,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{PRODUCT_NAME}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement key="textField" mode="Transparent" x="314" y="0" width="62" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" mode="Transparent" x="273" y="0" width="126" height="18" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<bottomPen lineWidth="1.0"/>
@@ -407,9 +432,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="43">
+		<band height="76">
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="14" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="40" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -422,7 +447,7 @@
 				<text><![CDATA[专业批发：手工拼接全包围脚垫、全包围后箱垫、平板后箱垫、高中低档座垫]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="31" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="57" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -435,7 +460,7 @@
 				<text><![CDATA[地址：漯河市青山路(西华路口)转盘往北200米]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="394" y="31" width="183" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="394" y="57" width="183" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>

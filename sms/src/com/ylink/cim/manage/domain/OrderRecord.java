@@ -36,6 +36,17 @@ public class OrderRecord implements Serializable {
 	
 	private String contact;
 	
+	private String remark;
+	
+	
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public String getContact() {
 		return contact;
 	}

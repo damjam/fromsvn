@@ -110,6 +110,7 @@ public class ReportAction extends BaseAction {
 		map.put("comTel", comInfo.getTel());
 		map.put("orderId", id);
 		map.put("amountStr", MoneyUtil.getFormatStr2(record.getPayAmt()));
+		map.put("remark", record.getRemark());
 		generateReportWithConn("orderRecord.jasper", map, request, response);
 		return null;
 	}
