@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:js src="/js/jquery.min.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
+		<f:js src="/js/plugin/jquery.validate.js"/>	
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>
@@ -22,7 +23,7 @@
 			
 		 	function save(){
 		 		var flag = true;
-		 		$('input[type="text"]').each(function(){
+		 		$('.product input[type="text"]').each(function(){
 		 			var val = this.value;
 		 			if($.trim(val) == ''){
 		 				flag = false;
@@ -197,7 +198,7 @@
 		 		}
 		 		var rowHtml = '<tr class="product">';
 		 		rowHtml += '<td align="center"><input type="text" name="carModels" style="width: 120px;" autocomplete="off"/>&nbsp;</td>';
-		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option></td>';
+		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option><option value="丝圈">丝圈</option></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="materials" style="width: 120px;"/>&nbsp;</td>';
 		 		rowHtml += '<td align="center"><input type="text" name="colors" style="width: 60px;"/></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="prices" style="width: 50px;" onblur="setAmount(this)"/>&nbsp;</td>';
@@ -247,7 +248,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="${uri}?action=doEdit" id="dataForm" method="post">
+	<form action="${uri}?action=doEdit" id="dataForm" method="post" class="validate">
 	<s:hidden name="id"/>
 		<div class="userbox">
 			<div>
@@ -271,7 +272,7 @@
 					   <tr>
 							<td class="formlabel">联系人</td>
 							<td><s:textfield name="contact" id="contact"
-									maxlength="25" class="{}" /> <span
+									maxlength="25" /> <span
 								class="field_tipinfo"></span></td>
 						</tr>
 					   <tr>
@@ -304,9 +305,8 @@
 					   </tr>
 					   <tr>
 							<td class="formlabel">备注</td>
-							<td><s:textfield name="remark" id="remark"
-									maxlength="50" class="{required}"/> 
-								<span class="field_tipinfo"></span></td>
+							<td><s:textfield name="remark" id="remark" maxlength="50"/> 
+							</td>
 						</tr>
 				  </table>
 				  </div>

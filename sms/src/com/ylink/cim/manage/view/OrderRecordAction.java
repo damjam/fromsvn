@@ -21,6 +21,7 @@ import com.ylink.cim.manage.service.OrderRecordService;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
+import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
 @Scope("prototype")
@@ -64,6 +65,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	@Override
 	public String toAdd() throws Exception {
 		initSelect();
+		model.setOrderDate(DateUtil.getCurrentDate());
 		return ADD;
 	}
 
