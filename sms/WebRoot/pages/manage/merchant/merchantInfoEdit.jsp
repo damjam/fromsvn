@@ -173,7 +173,7 @@
 					   <tr>
 						    <td class="formlabel nes">电话</td>
 						    <td>
-						    	<s:textfield name="mobile" id="mobile" maxlength="15" class="{required:true}"/>
+						    	<s:textfield name="mobile" id="mobile" maxlength="50" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
