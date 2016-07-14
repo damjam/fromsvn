@@ -12,8 +12,9 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/paginater.js" />
 		<f:css href="/css/page.css" />
-		<f:css href="/js/plugin/jquery-ui.min.css" />
-		<f:js src="/js/plugin/jquery-ui.js" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+		<script src="http://cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.js"></script>	
+		
 		<style type="text/css">
 body {
 	width: 96%;

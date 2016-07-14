@@ -7,13 +7,14 @@
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
 		<title></title>
-		<f:css href="/js/plugin/jquery-ui.min.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:css href="/css/page.css"/>
 		<f:js src="/js/jquery.js"/>
-		<f:js src="/js/plugin/jquery-ui.js" />
+		<script src="http://cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.js"></script>	
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
+		<f:js src="/js/plugin/jquery.validate.js"/>
 		<f:js src="/layer/layer.js"/>
 		<!-- 
 		<f:js src="/js/plugin/jquery.validate.js"/>		

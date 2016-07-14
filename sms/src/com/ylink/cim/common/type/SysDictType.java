@@ -23,6 +23,10 @@ public class SysDictType extends AbstractType {
 	public static final SysDictType ProductType = new SysDictType("产品", "ProductType");
 	public static final SysDictType CoutryType = new SysDictType("国家", "CountryType");
 	public static final SysDictType CarType = new SysDictType("汽车类型", "CarType");
+	public static final SysDictType FMaterialType = new SysDictType("脚垫材质", "FMaterialType");
+	public static final SysDictType BMaterialType = new SysDictType("后箱垫类型", "BMaterialType");
+	public static final SysDictType FColorType = new SysDictType("脚垫颜色类型", "FColorType");
+	public static final SysDictType BColorType = new SysDictType("后箱垫颜色类型", "BColorType");
 	protected SysDictType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

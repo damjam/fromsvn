@@ -11,15 +11,20 @@
 <title></title>
 
 <f:css href="/css/page.css" />
-<f:css href="/js/plugin/jquery-ui.min.css" />
+<!-- 
+<f:css href="/js/plugin/jquery-ui.min.css" /> -->
+<link href="http://cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 <f:js src="/js/jquery.min.js" />
 <f:js src="/js/plugin/jquery.metadata.js"/>
-<f:js src="/js/plugin/jquery.validate.js"/>	
+<f:js src="/js/plugin/jquery.validate.js"/>
 <f:js src="/js/sys.js" />
 <f:js src="/js/common.js" />
 <f:js src="/js/datePicker/WdatePicker.js" defer="defer" />
-<f:js src="/js/plugin/jquery-ui.js" />
+<!-- 
+<f:js src="/js/plugin/jquery-ui.js" /> -->
+<script src="http://cdn.bootcss.com/jqueryui/1.12.0-rc.2/jquery-ui.js"></script>
+
 <f:js src="/layer/layer.js"/>
 <script type="text/javascript">
 	function save() {
@@ -220,8 +225,8 @@
 		var rowHtml = '<tr class="product">';
 		rowHtml += '<td align="center"><input type="text" name="carModels" style="width: 120px;" autocomplete="off"/>&nbsp;</td>';
 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option><option value="丝圈">丝圈</option></td>';
-		rowHtml += '<td align="center"><input type="text" name="materials" style="width: 120px;"/>&nbsp;</td>';
-		rowHtml += '<td align="center"><input type="text" name="colors" style="width: 60px;"></td>';
+		rowHtml += '<td align="center"><input type="text" name="materials" class="material" style="width: 120px;"/>&nbsp;</td>';
+		rowHtml += '<td align="center"><input type="text" name="colors" class="color" style="width: 60px;"></td>';
 		rowHtml += '<td align="center"><input type="text" name="prices" style="width: 50px;" onblur="setAmount(this)"/>&nbsp;</td>';
 		rowHtml += '<td align="center"><input type="text" name="nums" style="width:30px;" maxlength="4" value="1" onblur="setAmount(this)"/></td>';
 		rowHtml += '<td align="center"><input type="text" name="amounts" style="width:50px;" maxlength="8" readonly="readonly" class="amount"/></td>';
@@ -231,6 +236,8 @@
 		SysStyle.setFormGridStyle();
 		SysStyle.setButtonStyle();
 		modelAuto();
+		addMaterialAuto();
+		addColorAuto();
 	}
 	function deleteThisRow(row) {
 		$(row).parent().parent().remove();
@@ -366,9 +373,9 @@
 									<option value="丝圈">丝圈</option>
 							</select></td>
 							<td align="center"><input type="text" name="materials"
-								style="width: 120px;" />&nbsp;</td>
+								style="width: 120px;" class="material"/>&nbsp;</td>
 							<td align="center"><input type="text" name="colors"
-								style="width: 60px;" />&nbsp;</td>
+								style="width: 60px;" class="color"/>&nbsp;</td>
 							<td align="center"><input type="text" name="prices"
 								style="width: 50px;" class="num" onblur="setAmount(this)" />&nbsp;
 							</td>
@@ -394,5 +401,85 @@
 			</div>
 		</div>
 	</form>
+	<script type="text/javascript">
+		function addMaterialAuto(){
+			$('.material').each(function(i, e) {
+				$(e).autocomplete({
+					delay : 10,
+					minLength : 0,
+					autoFocus:true,
+					source : function(request,
+							response) {
+						var keyword = $(e).val();
+						var productName = $(e).parent().parent().find("select[name='productNames']").val();
+						//var word = $('#search-content').val();
+						//word = encodeURI(word, "utf-8");
+						//alert(keyword);
+						$.ajax({
+							contentType : "application/x-www-form-urlencoded; charset=utf-8",
+							type : "post",
+							url : CONTEXT_PATH
+									+ "/orderRecord.do?action=loadMaterials&keyword="
+									+ keyword+'&productName='+productName,
+							dataType : "json",
+							data : {
+								top : 10,
+								key : request.term
+							},
+							success : function(data) {
+								response($.each(data.list, function(item) {
+									return item;
+								}));
+							}
+						});
+					},
+					select : function(event, ui) {
+						//$('#rangeType').val(ui.item.rangeType);
+					}
+				});
+			});
+		}
+		function addColorAuto(){
+			$('.color').each(function(i, e) {
+				$(e).autocomplete({
+					delay : 10,
+					minLength : 0,
+					autoFocus:true,
+					source : function(request,
+							response) {
+						var keyword = $(e).val();
+						var productName = $(e).parent().parent().find("select[name='productNames']").val();
+						//var word = $('#search-content').val();
+						//word = encodeURI(word, "utf-8");
+						//alert(keyword);
+						$.ajax({
+							contentType : "application/x-www-form-urlencoded; charset=utf-8",
+							type : "post",
+							url : CONTEXT_PATH
+									+ "/orderRecord.do?action=loadColors&keyword="
+									+ keyword+'&productName='+productName,
+							dataType : "json",
+							data : {
+								top : 10,
+								key : request.term
+							},
+							success : function(data) {
+								response($.each(data.list, function(item) {
+									return item;
+								}));
+							}
+						});
+					},
+					select : function(event, ui) {
+						//$('#rangeType').val(ui.item.rangeType);
+					}
+				});
+			});
+		}
+		$().ready(function(){
+			addMaterialAuto();
+			addColorAuto();
+		});
+	</script>
 </body>
 </html>

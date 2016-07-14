@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
+import com.ylink.cim.manage.domain.CarModel;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
 import com.ylink.cim.manage.service.OrderRecordService;
@@ -24,6 +26,8 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 @Scope("prototype")
 @Component
 public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRecord> {
@@ -157,6 +161,54 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		return "toMain";
 	}
 	
+	public String loadMaterials() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			JSONArray array = new JSONArray();
+			String keyword = request.getParameter("keyword");
+			String productName = request.getParameter("productName");
+			Map<String, String> map = null;
+			if(StringUtils.contains(productName, "Ω≈µÊ")){
+				map = ParaManager.getSysDict(SysDictType.FMaterialType.getValue());
+			} else if (StringUtils.contains(productName, "∫Ûœ‰µÊ")) {
+				map = ParaManager.getSysDict(SysDictType.BMaterialType.getValue());
+			}
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				array.add(entry.getKey());
+			}
+			object.put("status", "1");
+			object.put("list", array);
+			respond(response, object.toString());
+		}catch (Exception e) {
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
+	public String loadColors() throws Exception {
+		JSONObject object = new JSONObject();
+		try{
+			JSONArray array = new JSONArray();
+			String keyword = request.getParameter("keyword");
+			String productName = request.getParameter("productName");
+			Map<String, String> map = null;
+			if(StringUtils.contains(productName, "Ω≈µÊ")){
+				map = ParaManager.getSysDict(SysDictType.FColorType.getValue());
+			} else if (StringUtils.contains(productName, "∫Ûœ‰µÊ")) {
+				map = ParaManager.getSysDict(SysDictType.BColorType.getValue());
+			}
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				array.add(entry.getKey());
+			}
+			object.put("status", "1");
+			object.put("list", array);
+			respond(response, object.toString());
+		}catch (Exception e) {
+			object.put("status", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
 	@Override
 	public String detail() throws Exception {
 		return null;
