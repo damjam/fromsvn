@@ -291,7 +291,7 @@
 							<td class="formlabel">联系人</td>
 							<td><s:textfield name="contact" id="contact"
 									maxlength="25" class="{}" /> <span
-								class="field_tipinfo">不能为空</span></td>
+								class="field_tipinfo"></span></td>
 						</tr>
 						<tr>
 							<td class="formlabel nes">联系电话</td>
@@ -328,7 +328,7 @@
 							<td class="formlabel">备注</td>
 							<td><s:textfield name="remark" id="remark"
 									maxlength="50" class="{required}"/> 
-								<span class="field_tipinfo">不能为空</span></td>
+								<span class="field_tipinfo"></span></td>
 						</tr>
 					</table>
 				</div>
