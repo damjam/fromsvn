@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orderRecord" pageWidth="623" pageHeight="257" whenNoDataType="AllSectionsNoDetail" columnWidth="577" leftMargin="36" rightMargin="10" topMargin="16" bottomMargin="12" whenResourceMissingType="Empty">
 	<property name="ireport.zoom" value="1.610510000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="141"/>
+	<property name="ireport.y" value="77"/>
 	<parameter name="today" class="java.lang.String"/>
 	<parameter name="houseDesc" class="java.lang.String"/>
 	<parameter name="ownerName" class="java.lang.String"/>
@@ -432,9 +432,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="76">
+		<band height="36">
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="40" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="7" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -447,7 +447,7 @@
 				<text><![CDATA[专业批发：手工拼接全包围脚垫、全包围后箱垫、平板后箱垫、高中低档座垫]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="57" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="0" y="24" width="363" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
@@ -460,7 +460,7 @@
 				<text><![CDATA[地址：漯河市青山路(西华路口)转盘往北200米]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="394" y="57" width="183" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="394" y="24" width="183" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0"/>
 					<leftPen lineWidth="0.0"/>
