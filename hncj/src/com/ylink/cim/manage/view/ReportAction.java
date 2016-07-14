@@ -204,16 +204,23 @@ public class ReportAction extends BaseAction {
 		map.putAll(request.getParameterMap());
 		map.put("today", DateUtil.getCurrentDate());
 		// map.put("price", ParaManager.getWaterPrice());
-		HouseInfo houseInfo = depositBillDao.findById(HouseInfo.class,
-				bill.getHouseSn());
-		map.put("houseDesc", houseInfo.getHouseDesc());
+		if(StringUtils.isNotEmpty(bill.getHouseSn())){
+			HouseInfo houseInfo = depositBillDao.findById(HouseInfo.class,
+					bill.getHouseSn());
+			map.put("houseDesc", houseInfo.getHouseDesc());
+		}
 		map.put("chargeUser", getSessionUser(request).getUserName());
 		map.put("billSn", bill.getId());
 		map.put("amount", MoneyUtil.getFormatStr2(bill.getAmount()));
 		map.put("chineseAmount", " " + MoneyUtil.numToRMBStr(bill.getAmount()));
 		map.put("content", "Ñº½ð");
 		map.put("comName", comInfo.getName());
-		generateReportWithConn("depositBill.jasper", map, request, response);
+		String templateName = "depositBill.jasper";
+		if(StringUtils.isEmpty(bill.getHouseSn())) {
+			templateName = "merchantDepositBill.jasper";
+		}
+		generateReportWithConn(templateName, map, request, response);
+		
 		return null;
 	}
 

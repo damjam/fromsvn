@@ -25,7 +25,7 @@
         <property name="inoutType" type="java.lang.String">
             <column name="inout_type" length="2" />
         </property>
-        <property name="createDate" type="java.sql.Timestamp">
+        <property name="createDate" type="java.util.Date">
             <column name="create_date" length="19" />
         </property>
         <property name="createUser" type="java.lang.String">

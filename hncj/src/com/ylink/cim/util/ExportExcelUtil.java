@@ -298,6 +298,9 @@ public class ExportExcelUtil {
 					style.setAlignment(CellStyle.ALIGN_LEFT);
 				}else if ("right".equals(textAlign)) {
 					style.setAlignment(CellStyle.ALIGN_RIGHT);
+				}else {
+					//单元格默认居中
+					style.setAlignment(CellStyle.ALIGN_CENTER);
 				}
 				String dataFormat = rowRule.get("dataFormat");
 				if("0.00".equals(dataFormat)){

@@ -14,7 +14,7 @@ public class OwnerState extends AbstractState {
 	public static final OwnerState CANCEL = new OwnerState("ÒÑÏú»§", "01");
 
 	public static void setInReq(HttpServletRequest request) {
-		request.setAttribute("billStates", OwnerState.ALL.values());
+		request.setAttribute("ownerStates", OwnerState.ALL.values());
 	}
 
 	public static OwnerState valueOf(String value) throws Exception {

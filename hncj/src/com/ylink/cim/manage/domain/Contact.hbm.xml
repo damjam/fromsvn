@@ -19,7 +19,7 @@
         <property name="mobile" type="java.lang.String">
             <column name="MOBILE" length="100" not-null="true" />
         </property>
-        <property name="createDate" type="java.sql.Timestamp">
+        <property name="createDate" type="java.util.Date">
             <column name="CREATE_DATE" length="19" not-null="true" />
         </property>
         <property name="workUnit" type="java.lang.String">

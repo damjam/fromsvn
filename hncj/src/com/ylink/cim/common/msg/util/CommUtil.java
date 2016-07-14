@@ -654,7 +654,7 @@ public final class CommUtil {
 	/**
 	 * 获取完全格式的的日期格式
 	 * 
-	 * @return 格式如 20008-09-15 10:33:25:12
+	 * @return 格式如 2008-09-15 10:33:25:12
 	 */
 	public static String getFullDateTime() {
 		StringBuffer sb = new StringBuffer(30);

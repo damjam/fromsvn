@@ -20,6 +20,7 @@ public class SysDictType extends AbstractType {
 	public static final SysDictType FlatType = new SysDictType("公寓区楼号", "FlatType");
 	public static final SysDictType BranchPostType = new SysDictType("机构职位类型", "BranchPostType");
 	public static final SysDictType CenterPostType = new SysDictType("总部职位类型", "CenterPostType");
+	public static final SysDictType RoomConfig = new SysDictType("房间配置", "RoomConfig");
 	protected SysDictType(String name, String value) {
 		super(name, value);
 		ALL.put(value, this);

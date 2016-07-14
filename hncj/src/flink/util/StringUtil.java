@@ -3,6 +3,7 @@ package flink.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
 public abstract class StringUtil {
@@ -90,5 +91,18 @@ public abstract class StringUtil {
 			// TODO: handle exception
 		}
 		return result;
+	}
+	public static String array2String(String[] array) {
+		if (ArrayUtils.isEmpty(array)) {
+			return null;
+		}
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0,size = array.length; i < array.length; i++) {
+			builder.append(array[i]);
+			if (i < size-1) {
+				builder.append(",");
+			}
+		}
+		return builder.toString();
 	}
 }

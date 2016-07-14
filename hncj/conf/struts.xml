@@ -60,4 +60,6 @@
 	
 	<include file="struts/struts-admin.xml" />
 	<include file="struts/struts-manage.xml" />
+	<include file="struts/struts-rent.xml" />
+	<include file="struts/struts-investment.xml" />
 </struts>

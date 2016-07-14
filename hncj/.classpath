@@ -118,7 +118,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/rowset.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/saaj-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/serp-1.13.1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-api-1.5.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/slf4j-log4j12-1.5.11.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-aop-4.2.1.RELEASE.jar"/>
@@ -150,5 +149,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-3.14-20160307.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-3.14-20160307.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

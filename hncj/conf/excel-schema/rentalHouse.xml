@@ -9,7 +9,7 @@
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
 
-	<bean id="houseInfoImportRule" class="java.util.ArrayList">
+	<bean id="rentalHouseImportRule" class="java.util.ArrayList">
 		<constructor-arg>
 			<list>
 				<!-- 房屋编号 -->
@@ -18,29 +18,47 @@
 					<entry key="cellType" value="String"></entry>
 					<entry key="notNull" value="Y"></entry>
 				</map>
+				<!-- 出租状态 -->
+				<map>
+					<entry key="fieldName" value="stateName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
 				<!-- 面积 -->
 				<map>
 					<entry key="fieldName" value="area"></entry>
 					<entry key="cellType" value="Double"></entry>
-					<entry key="notNull" value="Y"></entry>
-				</map>
-				<!-- 交房状态-->
-				<map>
-					<entry key="fieldName" value="state"></entry>
-					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="Y"></entry>
-				</map>
-				<!-- 交房日期 -->
-				<map>
-					<entry key="fieldName" value="deliveryDate"></entry>
-					<entry key="cellType" value="Date"></entry>
 					<entry key="notNull" value="N"></entry>
 				</map>
-				<!-- 装修状态 -->
+				<!-- 户型-->
 				<map>
-					<entry key="fieldName" value="decorateState"></entry>
+					<entry key="fieldName" value="houseType"></entry>
 					<entry key="cellType" value="String"></entry>
-					<entry key="notNull" value="Y"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 装修类型 -->
+				<map>
+					<entry key="fieldName" value="decorateType"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 配置 -->
+				<map>
+					<entry key="fieldName" value="roomConfig"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 付款要求 -->
+				<map>
+					<entry key="fieldName" value="payRule"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 其他要求 -->
+				<map>
+					<entry key="fieldName" value="otherRule"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
 				</map>
 				<!-- 备注 -->
 				<map>
@@ -51,12 +69,17 @@
 			</list>
 		</constructor-arg>
 	</bean>
-	<bean id="houseInfoExportRule" class="java.util.ArrayList">
+	<bean id="rentalHouseExportRule" class="java.util.ArrayList">
 		<constructor-arg>
 			<list>
 				<!-- 房屋编号 -->
 				<map>
 					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 出租状态 -->
+				<map>
+					<entry key="fieldName" value="出租状态"></entry>
 					<entry key="cellType" value="String"></entry>
 				</map>
 				<!-- 面积 -->
@@ -65,14 +88,29 @@
 					<entry key="cellType" value="Double"></entry>
 					<entry key="textAlign" value="right"></entry>
 				</map>
-				<!-- 交房日期 -->
+				<!-- 户型 -->
 				<map>
-					<entry key="fieldName" value="交房日期"></entry>
-					<entry key="cellType" value="Date"></entry>
+					<entry key="fieldName" value="户型"></entry>
+					<entry key="cellType" value="String"></entry>
 				</map>
-				<!-- 装修状态 -->
+				<!-- 装修类型-->
 				<map>
-					<entry key="fieldName" value="装修状态"></entry>
+					<entry key="fieldName" value="装修类型"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 房间配置-->
+				<map>
+					<entry key="fieldName" value="房间配置"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 付款要求-->
+				<map>
+					<entry key="fieldName" value="付款要求"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 其他要求-->
+				<map>
+					<entry key="fieldName" value="其他要求"></entry>
 					<entry key="cellType" value="String"></entry>
 				</map>
 				<!-- 备注 -->
@@ -83,4 +121,7 @@
 			</list>
 		</constructor-arg>
 	</bean>
+	
+	
+	
 </beans>

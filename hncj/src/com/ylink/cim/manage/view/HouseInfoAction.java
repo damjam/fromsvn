@@ -107,7 +107,9 @@ public class HouseInfoAction extends BaseAction implements ModelDriven<HouseInfo
 		map.put("buildingNo", model.getBuildingNo());
 		map.put("unitNo", model.getUnitNo());
 		map.put("floor", model.getFloor());
-		map.put("branchNo", getSessionBranchNo(request));
+		if(!super.isHQ()){
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = houseInfoDao.findPager(map, null);//²»ÔÙ·ÖÒ³
 		List<List<List<Object>>> dataList = new ArrayList<>();
 		Map<String, List<List<Object>>> dataMap = new HashMap<>();

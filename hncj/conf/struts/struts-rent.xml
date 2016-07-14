@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="rent" extends="default" namespace="/">
+		<global-results>
+			<result name="import">/pages/manage/common/commonImport.jsp</result>
+		</global-results>
+		<!-- 房屋信息 -->
+		<action name="rentalHouse" class="rentalHouseAction">
+			<result name="list">/pages/rent/rentalHouse/rentalHouseList.jsp</result>
+			<result name="add">/pages/rent/rentalHouse/rentalHouseAdd.jsp</result>
+			<result name="edit">/pages/rent/rentalHouse/rentalHouseEdit.jsp</result>
+			<result name="toMain" type="redirect">rentalHouse.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<!-- 租客信息 -->
+		<action name="renterInfo" class="renterInfoAction">
+			<result name="list">/pages/rent/rentInfo/renterInfoList.jsp</result>
+			<result name="add">/pages/rent/rentInfo/renterInfoAdd.jsp</result>
+			<result name="edit">/pages/rent/rentInfo/renterInfoEdit.jsp</result>
+			<result name="toMain" type="redirect">renterInfo.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<!-- 租赁记录 -->
+		<action name="rentRecord" class="rentRecordAction">
+			<result name="list">/pages/rent/rentRecord/rentRecordList.jsp</result>
+			<result name="add">/pages/rent/rentRecord/rentRecordAdd.jsp</result>
+			<result name="edit">/pages/rent/rentRecord/rentRecordEdit.jsp</result>
+			<result name="toMain" type="redirect">rentRecord.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<!-- 租赁中心账户 -->
+		<action name="rentAcct" class="rentAcctAction">
+			<result name="list">/pages/rent/rentAcct/rentAcctList.jsp</result>
+			<result name="add">/pages/rent/rentAcct/rentAcctAdd.jsp</result>
+			<result name="edit">/pages/rent/rentAcct/rentAcctEdit.jsp</result>
+			<result name="toMain" type="redirect">rentAcct.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+	</package>
+</struts>
