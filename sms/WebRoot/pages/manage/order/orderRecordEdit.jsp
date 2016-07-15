@@ -264,7 +264,7 @@
 					   <tr>
 						    <td class="formlabel nes">客户名称</td>
 						    <td>
-						    	<s:textfield name="clientName" id="clientName" maxlength="10" class="{required:true} clientName"/>
+						    	<s:textfield name="clientName" id="clientName" maxlength="25" class="{required:true} clientName"/>
 						    	<a href="javascript:void(0)" class="popup-search" style="text-decoration: none;">
 									<i class="fa fa-search"></i>
 								</a>

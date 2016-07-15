@@ -11,12 +11,15 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.state.PayState;
+import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.MerchantInfo;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
+import com.ylink.cim.manage.service.AccountJournalService;
+import com.ylink.cim.manage.service.CarModelService;
 import com.ylink.cim.manage.service.OrderRecordService;
 import com.ylink.cim.util.CopyPropertyUtil;
 
@@ -35,6 +38,10 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private MerchantInfoDao merchantInfoDao;
+	@Autowired
+	private CarModelService carModelService;
+	@Autowired
+	private AccountJournalService accountJournalService;
 	@Override
 	public void save(OrderRecord model, UserInfo userInfo) throws BizException{
 		String orderId = IdFactoryHelper.getId(OrderRecord.class);
@@ -76,6 +83,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			OrderDetail detail = new OrderDetail();
 			detail.setOrderId(model.getId());
 			detail.setProductName(model.getProductNames()[i]);
+			String carModel = model.getCarModels()[i];
 			detail.setCarModel(model.getCarModels()[i]);
 			detail.setMaterial(model.getMaterials()[i]);
 			detail.setColor(model.getColors()[i]);
@@ -86,8 +94,12 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			detail.setId(IdFactoryHelper.getId(OrderDetail.class));
 			detail.setDeliState(DeliveryState.INIT.getValue());
 			orderRecordDao.save(detail);
+			//checkCarModel(carModel);
+			carModelService.addIfNotExist(carModel);
 		}
 	}
+
+	
 
 	@Override
 	public void delete(String id) {
@@ -129,6 +141,8 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		OrderRecord orderRecord = orderRecordDao.findByIdWithLock(id);
 		orderRecord.setPayState(PayState.PAID.getValue());
 		orderRecordDao.update(orderRecord);
+		//∂©µ• ’»Î
+		accountJournalService.add(TradeType.ORDER_INCOME.getValue(), orderRecord.getPayAmt(), id, "", sessionUser);
 	}
 
 	@Override

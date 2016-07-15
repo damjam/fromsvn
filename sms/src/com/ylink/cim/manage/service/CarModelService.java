@@ -7,4 +7,6 @@ public interface CarModelService {
 	void save(CarModel model);
 
 	void update(CarModel model);
+
+	void addIfNotExist(String carModel);
 }

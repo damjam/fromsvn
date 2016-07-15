@@ -64,12 +64,13 @@
 							<td>
 								<s:select name="inoutType" list="#request.inoutTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
 							</td>
+							<!-- 
 							<td class="formlabel">
 								交易类型
 							</td>
 							<td>
 								<s:select name="tradeType" list="#request.tradeTypes" listKey="value" listValue="name" headerKey="" headerValue="---全部---"></s:select>
-							</td>
+							</td> -->
 						</tr>
 						<c:if test="${sessionScope.isHQ == true}">
 							<tr>

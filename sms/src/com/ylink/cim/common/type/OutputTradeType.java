@@ -30,6 +30,8 @@ public class OutputTradeType extends AbstractType {
 	public static final OutputTradeType OUT_OTHER = new OutputTradeType("其他",
 			"19");
 
+	public static final TradeType STOCK_OUTCOME = new TradeType("进货支出", "进货支出");
+	
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("tradeTypes", OutputTradeType.ALL.values());
 	}

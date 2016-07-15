@@ -1,5 +1,8 @@
 package com.ylink.cim.manage.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,5 +26,18 @@ public class CarModelServiceImpl implements CarModelService {
 		model.setFirstLetters(Cn2PinYinHelper.cn2FirstSpell(model.getName()));
 		model.setPinyin(Cn2PinYinHelper.cn2Spell(model.getName()));
 		carModelDao.update(model);
+	}
+	@Override
+	public void addIfNotExist(String modelName) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("name", modelName);
+		boolean exist = carModelDao.isExist(modelName, null);
+		if(!exist){
+			CarModel carModel = new CarModel();
+			carModel.setFirstLetters(Cn2PinYinHelper.cn2FirstSpell(modelName));
+			carModel.setPinyin(Cn2PinYinHelper.cn2Spell(modelName));
+			carModel.setName(modelName);
+			carModelDao.save(carModel);
+		}
 	}
 }

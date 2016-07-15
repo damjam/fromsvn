@@ -13,4 +13,5 @@ public interface CarModelDao extends BaseDao {
 	public Paginater findByKeyword(String keyword, Pager pager);
 
 	public boolean isExist(String name, String brand);
+
 }

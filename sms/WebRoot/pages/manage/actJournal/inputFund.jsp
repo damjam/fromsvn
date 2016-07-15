@@ -69,7 +69,7 @@
 					   <tr>
 						    <td class="formlabel nes">交易类型</td>
 						    <td>
-						    	<s:select name="tradeType" id="tradeType" list="${'06':'内部充值','09','其他'}" listKey="value" listValue="name"></s:select>
+						    	<s:select name="tradeType" id="tradeType" list="#request.tradeTypes" listKey="value" listValue="name"></s:select>
 						    </td>
 					   </tr>
 					   <tr>
