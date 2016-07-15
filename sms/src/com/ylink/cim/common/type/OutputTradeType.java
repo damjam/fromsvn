@@ -11,26 +11,22 @@ public class OutputTradeType extends AbstractType {
 
 	public static Map<String, OutputTradeType> ALL = new LinkedHashMap<String, OutputTradeType>();
 
-	public static final OutputTradeType REFUND = new OutputTradeType("退押金",
-			"10");
-	public static final OutputTradeType ELECTRIC = new OutputTradeType("交电费",
-			"11");
-	public static final OutputTradeType SALARY = new OutputTradeType("支付工资",
-			"12");
-	public static final OutputTradeType DEVICE = new OutputTradeType("购买器材设备",
-			"13");
-	public static final OutputTradeType REPAIR = new OutputTradeType("支付维修费",
-			"14");
-	public static final OutputTradeType ADD_GAS = new OutputTradeType("加油",
-			"15");
-	public static final OutputTradeType WITHDRAW = new OutputTradeType(
-			"退业主预存款", "16");
-	public static final OutputTradeType INNER_WITHDRAW = new OutputTradeType(
-			"内部提现", "17");
-	public static final OutputTradeType OUT_OTHER = new OutputTradeType("其他",
-			"19");
-
-	public static final TradeType STOCK_OUTCOME = new TradeType("进货支出", "进货支出");
+	public static final TradeType ELECTRIC = new TradeType("电费", "电费");
+	public static final TradeType WATER_FEE = new TradeType("水费", "水费");
+	public static final TradeType CLEAN_FEE = new TradeType("卫生费", "卫生费");
+	public static final TradeType HOUSE_RENT = new TradeType("房租", "房租");
+	public static final TradeType SALARY = new TradeType("支付工资", "支付工资");
+	public static final TradeType MATERIAL = new TradeType("购买原材料", "购买原材料");
+	public static final TradeType REPAIR = new TradeType("设备维修维护费", "设备维修维护费");
+	public static final TradeType DEVICE = new TradeType("购买设备", "购买设备");
+	public static final TradeType ADD_GAS = new TradeType("加油", "加油");
+	public static final TradeType LEND_OUT = new TradeType("对外借款", "对外借款");
+	public static final TradeType PUBLIC_SPEND = new TradeType("行政支出", "行政支出");
+	public static final TradeType INNER_WITHDRAW = new TradeType("清算提现", "清算提现");
+	public static final TradeType GOODS_REFUND = new TradeType("退款", "退款");
+	public static final TradeType IN_REVERSE = new TradeType("冲正交易", "冲正交易");
+	public static final TradeType NORMAL_OUT = new TradeType("日常支出", "日常支出");
+	public static final TradeType OUT_OTHER = new TradeType("其他支出", "其他支出");
 	
 	public static void setInReq(HttpServletRequest request) {
 		request.setAttribute("tradeTypes", OutputTradeType.ALL.values());
