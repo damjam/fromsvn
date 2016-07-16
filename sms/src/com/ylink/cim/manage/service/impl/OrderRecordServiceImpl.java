@@ -27,7 +27,6 @@ import flink.IdFactoryHelper;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
-import sun.misc.Perf.GetPerfAction;
 
 @Component("orderRecordService")
 public class OrderRecordServiceImpl implements OrderRecordService {
@@ -50,13 +49,14 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		model.setCreateUser(userInfo.getUserName());
 		model.setState(OrderState.INIT.getValue());
 		model.setPayState(PayState.UNPAY.getValue());
+		model.setBranchNo(userInfo.getBranchNo());
 		orderRecordDao.save(model);
 		saveOrderDetails(model);
 		//
-		saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress());
+		saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress(), userInfo.getBranchNo());
 	}
 
-	private void saveClientInfo(String clientName, String clientTel, String address) {
+	private void saveClientInfo(String clientName, String clientTel, String address, String branchNo) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mrname", clientName);
 		map.put("mobile", clientTel);
@@ -68,6 +68,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			merchantInfo.setAddr(address);
 			merchantInfo.setCreateDate(DateUtil.getCurrent());
 			merchantInfo.setId(IdFactoryHelper.getId(MerchantInfo.class));
+			merchantInfo.setBranchNo(branchNo);
 			merchantInfoDao.save(merchantInfo);
 		}
 	}
@@ -93,7 +94,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 			//detail.setDeliType(model.getDeliTypes()[i]);
 			detail.setId(IdFactoryHelper.getId(OrderDetail.class));
 			detail.setDeliState(DeliveryState.INIT.getValue());
-			orderRecordDao.save(detail);
+			orderDetailDao.save(detail);
 			//checkCarModel(carModel);
 			carModelService.addIfNotExist(carModel);
 		}

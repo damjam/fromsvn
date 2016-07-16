@@ -3,7 +3,7 @@ package com.ylink.cim.manage.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class OrderRecord implements Serializable {
+public class OrderRecord extends BranchField implements Serializable {
 
 	/**
 	 * 

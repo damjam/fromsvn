@@ -15,5 +15,5 @@ public interface MerchantInfoDao extends BaseDao {
 
 	public List<MerchantInfo> findList(Map<String, Object> params);
 
-	public List<MerchantInfo> findByKeyword(String keyword);
+	public List<MerchantInfo> findByKeyword(String keyword, String branchNo);
 }

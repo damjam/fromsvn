@@ -88,7 +88,9 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	
+						 	<c:if test="${sessionScope.isHQ == true}">
+						 		<td>机构</td>
+						 	</c:if>
 						 	<td>商户名称</td>
 						 	<!-- 
 						    <td>行业类别</td>
@@ -107,7 +109,9 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								
+								<c:if test="${sessionScope.isHQ == true}">
+							 		<td>${element.branchName}</td>
+							 	</c:if>
 								<td>${element.mrname}</td>
 								<!-- 
 								<td>${element.industry} </td>

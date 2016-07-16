@@ -11,7 +11,7 @@
             <generator class="assigned"></generator>
         </id>
         <property name="tradeType" type="java.lang.String">
-            <column name="trade_type" length="12" />
+            <column name="trade_type" length="20" />
         </property>
         <property name="amount" type="java.lang.Double">
             <column name="amount" length="12" />
@@ -35,10 +35,10 @@
             <column name="REMARK" length="100" />
         </property>
         <property name="billId" type="java.lang.String">
-                <column name="BILL_ID" precision="22" scale="0" />
+            <column name="BILL_ID" precision="22" scale="0" />
         </property>
         <property name="branchNo" type="java.lang.String">
-				<column name="BRANCH_NO" length="20" />
+			<column name="BRANCH_NO" length="20" />
 		</property>    
     </class>
 </hibernate-mapping>

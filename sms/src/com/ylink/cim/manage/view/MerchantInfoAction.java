@@ -60,6 +60,11 @@ public class MerchantInfoAction extends BaseAction implements
 				params.put("id", model.getId());
 				merchantInfo = merchantInfoDao.findById(model.getId());
 			}
+			if (isHQ()) {//总部
+				params.put("branchNo", model.getBranchNo());
+			}else {//机构
+				params.put("branchNo", getSessionBranchNo(request));
+			}
 			if (merchantInfoDao.findList(params).size() >= 1) {
 				throw new BizException("商户名已存在，请重新指定");
 			}
@@ -106,6 +111,11 @@ public class MerchantInfoAction extends BaseAction implements
 		//params.put("branchNo", getSessionBranchNo(request));
 		params.put("mrname", request.getParameter("mrname"));
 		params.put("mobile", request.getParameter("mobile"));
+		if (isHQ()) {//总部
+			params.put("branchNo", model.getBranchNo());
+		}else {//机构
+			params.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = this.merchantInfoDao.findPager(params,
 				getPager(request,10));
 		saveQueryResult(request, paginater);
@@ -130,6 +140,11 @@ public class MerchantInfoAction extends BaseAction implements
 			Map<String, Object> map = getParaMap();
 			Assert.notEmpty(model.getMrname(), "不能为空");
 			map.put("mrname", model.getMrname());
+			if (isHQ()) {//总部
+				map.put("branchNo", model.getBranchNo());
+			}else {//机构
+				map.put("branchNo", getSessionBranchNo(request));
+			}
 			List<MerchantInfo> list = merchantInfoDao.findList(map);
 			if (list.size() > 0) {
 				MerchantInfo merchantInfo = list.get(0);
@@ -150,7 +165,7 @@ public class MerchantInfoAction extends BaseAction implements
 		try{
 			String keyword = request.getParameter("keyword");
 			Assert.notEmpty(keyword, "不能为空");
-			List<MerchantInfo> list = merchantInfoDao.findByKeyword(keyword);
+			List<MerchantInfo> list = merchantInfoDao.findByKeyword(keyword, getSessionBranchNo(request));
 			JSONArray array = new JSONArray();
 			for(int i=0; i<list.size(); i++){
 				MerchantInfo merchantInfo = list.get(i);

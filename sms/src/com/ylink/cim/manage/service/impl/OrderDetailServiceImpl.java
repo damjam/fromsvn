@@ -5,13 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.state.PayState;
+import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
+import com.ylink.cim.manage.service.AccountJournalService;
 import com.ylink.cim.manage.service.OrderDetailService;
 
 import flink.etc.Assert;
@@ -22,6 +25,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	private OrderDetailDao orderDetailDao;
 	@Autowired
 	private OrderRecordDao orderRecordDao;
+	@Autowired
+	private AccountJournalService accountJournalService;
 	@Override
 	public void save(OrderDetail model) {
 		model.setDeliState(DeliveryState.INIT.getValue());
@@ -29,7 +34,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public void returnGoods(String id, Double refundAmt) throws BizException {
+	public void returnGoods(String id, Double refundAmt, UserInfo userInfo) throws BizException {
 		OrderDetail orderDetail = orderDetailDao.findById(id);
 		Double amount = orderDetail.getAmount();
 		if (refundAmt == null || refundAmt == 0) {
@@ -53,7 +58,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 			orderRecord.setPayAmt(payAmt-refundAmt);
 		}else if (PayState.PAID.getValue().equals(payState)) {
 			//添加退款交易
-			
+			accountJournalService.deduct(TradeType.GOODS_REFUND.getValue(), refundAmt, "", "", userInfo);
 		}
 		orderRecordDao.update(orderRecord);
 		//TODO 变更库存

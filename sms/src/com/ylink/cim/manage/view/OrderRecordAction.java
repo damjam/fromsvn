@@ -55,6 +55,11 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		map.put("clientName", model.getClientName());
 		map.put("clientTel", model.getClientTel());
 		map.put("payState", model.getPayState());
+		if (isHQ()) {//总部
+			map.put("branchNo", model.getBranchNo());
+		}else {//机构
+			map.put("branchNo", getSessionBranchNo(request));
+		}
 		Paginater paginater = orderRecordDao.findPaginater(map, getPager(request));
 		saveQueryResult(request, paginater);
 		initSelect();
@@ -124,7 +129,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		}catch(Exception e){
 			e.printStackTrace();
 			setResult(false, "操作失败", request);
-			return toAdd();
+			return list();
 		}
 		return "toMain";
 	}

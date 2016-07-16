@@ -45,22 +45,19 @@ public class MerchantInfoDaoImpl extends BaseDaoImpl implements MerchantInfoDao 
 		helper.append("and mrname = ?", MapUtils.getString(params, "mrname"));
 		helper.append("and mobile = ?", MapUtils.getString(params, "mobile"));
 		helper.append("and remark = ?", MapUtils.getString(params, "remark"));
-		if (!StringUtils.equals(BranchType.HQ_0000.getValue(),
-				MapUtils.getString(params, "branchNo"))) {
-			helper.append("and branchNo = ?",
-					MapUtils.getString(params, "branchNo"));
-		}
+		helper.append("and branchNo = ?", MapUtils.getString(params, "branchNo"));
 		helper.append("order by id desc");
 		return super.getList(helper);
 	}
 
 	@Override
-	public List<MerchantInfo> findByKeyword(String keyword) {
+	public List<MerchantInfo> findByKeyword(String keyword, String branchNo) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from MerchantInfo t where 1=1");
 		helper.append("and (mrname like ?", keyword, MatchMode.ANYWHERE);
 		helper.append("or pinyin like ?", keyword, MatchMode.ANYWHERE);
 		helper.append("or firstLetters like ?)", keyword, MatchMode.ANYWHERE);
+		helper.append("and branchNo = ?", branchNo);
 		return super.getList(helper);
 	}
 }

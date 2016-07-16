@@ -119,7 +119,7 @@ public class OrderDetailAction extends CRUDAction implements ModelDriven<OrderDe
 	//退货,退货后库存增加
 	public String returnGoods() throws Exception {
 		try{
-			orderDetailService.returnGoods(model.getId(), model.getRefundAmt());
+			orderDetailService.returnGoods(model.getId(), model.getRefundAmt(), getSessionUser(request));
 			
 		}catch (Exception e) {
 			e.printStackTrace();
