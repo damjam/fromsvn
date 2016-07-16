@@ -53,7 +53,7 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		orderRecordDao.save(model);
 		saveOrderDetails(model);
 		//
-		saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress(), userInfo.getBranchNo());
+		//saveClientInfo(model.getClientName(), model.getClientTel(), model.getAddress(), userInfo.getBranchNo());
 	}
 
 	private void saveClientInfo(String clientName, String clientTel, String address, String branchNo) {
