@@ -22,6 +22,7 @@
 			<result name="reverse">/pages/manage/actJournal/reverse.jsp</result>
 			<result name="account_gather">/pages/manage/actJournal/accountGather.jsp</result>
 			<result name="trade_report">/pages/manage/actJournal/tradeReport.jsp</result>
+			<result name="toMain" type="redirect">accountJournal.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
 		<action name="merchantInfo" class="merchantInfoAction">
 			<result name="list">/pages/manage/merchant/merchantList.jsp</result>

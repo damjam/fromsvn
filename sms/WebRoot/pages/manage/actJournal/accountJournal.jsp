@@ -87,7 +87,8 @@
 								<input type="button" value="重置" id="btnClear" />&nbsp;
 								<input type="button" value="收入" onclick="addDeposit()"/>&nbsp;
 								<input type="button" value="支出" onclick="addWithdraw()"/>&nbsp;
-								<input type="button" value="冲正" onclick="addReverse()"/>&nbsp;
+								<!-- 
+								<input type="button" value="冲正" onclick="addReverse()"/>&nbsp; -->
 							</td>
 						</tr>
 					</table>

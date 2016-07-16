@@ -12,8 +12,8 @@ import com.ylink.cim.common.type.InputTradeType;
 import com.ylink.cim.common.type.TradeType;
 import com.ylink.cim.manage.dao.AccountJournalDao;
 import com.ylink.cim.manage.domain.AccountJournal;
-import com.ylink.cim.manage.domain.DepositBill;
 import com.ylink.cim.manage.domain.InnerAcct;
+import com.ylink.cim.manage.domain.OrderRecord;
 import com.ylink.cim.manage.service.AccountJournalService;
 
 import flink.consant.Constants;
@@ -82,6 +82,27 @@ public class AccountJournalServiceImpl implements AccountJournalService {
 		accountJournal.setTradeType(tradeType);
 		accountJournal.setBranchNo(userInfo.getBranchNo());
 		accountJournalDao.save(accountJournal);
+	}
+
+	@Override
+	public void reverse(String tradeType, String billId, String remark, UserInfo userInfo) throws BizException {
+		Double amount = 0d;
+		if (InputTradeType.ORDER_INCOME.getValue().equals(tradeType)) {
+			OrderRecord bill = accountJournalDao.findById(
+					OrderRecord.class, billId);
+			Assert.notNull(bill, "找不到账单");
+			accountJournalDao.lock(bill, LockMode.PESSIMISTIC_WRITE);
+			Assert.isTrue(BillState.PAID.getValue().equals(bill.getState()),
+					"只有已缴状态的账单才能冲正!");
+			amount = bill.getAmount();
+			bill.setState(BillState.REVERSE.getValue());
+			accountJournalDao.update(bill);
+		} else {
+			throw new BizException("无法对当前交易进行冲正!");
+		}
+		deduct(TradeType.IN_REVERSE.getValue(), amount, billId, remark,
+				userInfo);
+		
 	}
 
 	

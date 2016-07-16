@@ -119,7 +119,7 @@ public class AccountJournalAction extends BaseAction implements
 			e.printStackTrace();
 			return toWithdraw();
 		}
-		return list();
+		return "toMain";
 	}
 
 	public String deposit() throws Exception {
@@ -130,15 +130,34 @@ public class AccountJournalAction extends BaseAction implements
 			setResult(true, "操作成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
-			return toWithdraw();
+			return toDeposit();
 		} catch (Exception e) {
 			setResult(false, "操作失败", request);
 			e.printStackTrace();
-			return toWithdraw();
+			return toDeposit();
 		}
-		return list();
+		return "toMain";
 	}
 
+	public String reverse() throws Exception {
+		try {
+
+			accountJournalService.reverse(model.getTradeType(),
+					model.getBillId(), model.getRemark(),
+					getSessionUser(request));
+			model.setTradeType("");
+			setResult(true, "操作成功", request);
+		} catch (BizException e) {
+			setResult(false, e.getMessage(), request);
+			return toReverse();
+		} catch (Exception e) {
+			setResult(false, "操作失败", request);
+			e.printStackTrace();
+			return toReverse();
+		}
+		return this.list();
+	}
+	
 	@Override
 	public AccountJournal getModel() {
 		return model;
