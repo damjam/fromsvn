@@ -9,5 +9,7 @@ import flink.util.Paginater;
 public interface OrderRecordDao extends BaseDao {
 
 	public Paginater findPaginater(Map<String, Object> map, Pager pager);
+
+	public Map<String, Object> findSumInfo(Map<String, Object> map);
 	
 }

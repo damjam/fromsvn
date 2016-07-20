@@ -14,6 +14,7 @@
 		<f:js src="/js/common.js" />
 		<f:js src="/js/paginater.js" />
 		<f:js src="/layer/layer.js"/>
+		<f:js src="/js/datePicker/WdatePicker.js" defer="defer"/>
 		<script type="text/javascript">
 			$(function(){
 				
@@ -94,6 +95,13 @@
 							<td>
 								<s:textfield name="clientTel" id="clientTel" maxlength="10"/>
 							</td>
+							<td class="formlabel">
+								订购日期
+							</td>
+							<td>
+								<s:textfield name="beginOrderDate" id="startOrderDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="endOrderDate" id="endOrderDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
+							</td>
 						</tr>
 						<tr>
 						    <td></td>
@@ -106,6 +114,22 @@
 					</table>
 				</div>
 				<b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b>
+			</div>
+			<div class="tablebox" id="listDiv" style="display: block; margin: -10px 0 -30px 0;">
+			<!-- 汇总信息 -->
+				<table class="data_grid" style="margin:0 0 10px 0;width: 100%;border: 0;">
+					<caption>汇总信息</caption>
+					<thead>
+						<tr class="titlebg">
+							<td align="center">笔数</td>
+							<td align="center">合计金额（元）</td>
+						</tr>
+					</thead>
+					<tr>
+						<td align="center">${sumInfo.totalCnt}</td>
+						<td align="center"><fmt:formatNumber value="${sumInfo.totalAmt }" pattern="##0.00"/></td>
+					</tr>
+				</table>
 			</div>
 			<!-- 数据列表区 -->
 			<div class="tablebox">			

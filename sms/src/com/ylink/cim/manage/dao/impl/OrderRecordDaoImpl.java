@@ -35,4 +35,26 @@ public class OrderRecordDaoImpl extends BaseDaoImpl implements OrderRecordDao {
 		return super.getPageData(helper, pager);
 	}
 
+	@Override
+	public Map<String, Object> findSumInfo(Map<String, Object> params) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("select new map(count(t.id) as cnt, sum(t.amount) as sumAmt, t.state as state) from OrderRecord t where 1=1");
+		helper.append("and orderDate >= ?",
+				MapUtils.getString(params, "beginOrderDate"));
+		helper.append("and orderDate <= ?",
+				MapUtils.getString(params, "endOrderDate"));
+		helper.append("and id = ?", MapUtils.getString(params, "id"));
+		helper.append("and branchNo = ?",
+				MapUtils.getString(params, "branchNo"));
+		//helper.append("group by t.state");
+		Map<String, Object> sumInfo = (Map<String, Object>)super.getUniqueResult(helper);
+		sumInfo.put("totalCnt", (Long)sumInfo.get("cnt"));
+		Double sumAmt = 0d;
+		if(sumInfo.get("sumAmt") != null){
+			sumAmt = sumAmt;
+		}
+		sumInfo.put("totalAmt", sumAmt);
+		return sumInfo;
+	}
+
 }

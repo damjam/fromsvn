@@ -38,7 +38,27 @@ public class OrderRecord extends BranchField implements Serializable {
 	
 	private String remark;
 	
+	private String beginOrderDate;
 	
+	private String endOrderDate;
+	
+	
+	public String getBeginOrderDate() {
+		return beginOrderDate;
+	}
+
+	public void setBeginOrderDate(String beginOrderDate) {
+		this.beginOrderDate = beginOrderDate;
+	}
+
+	public String getEndOrderDate() {
+		return endOrderDate;
+	}
+
+	public void setEndOrderDate(String endOrderDate) {
+		this.endOrderDate = endOrderDate;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
