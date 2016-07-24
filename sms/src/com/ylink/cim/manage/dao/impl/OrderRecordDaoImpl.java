@@ -51,7 +51,7 @@ public class OrderRecordDaoImpl extends BaseDaoImpl implements OrderRecordDao {
 		sumInfo.put("totalCnt", (Long)sumInfo.get("cnt"));
 		Double sumAmt = 0d;
 		if(sumInfo.get("sumAmt") != null){
-			sumAmt = sumAmt;
+			sumAmt = (Double)sumInfo.get("sumAmt");
 		}
 		sumInfo.put("totalAmt", sumAmt);
 		return sumInfo;

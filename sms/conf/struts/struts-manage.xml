@@ -95,5 +95,14 @@
 			<result name="toMain" type="redirect">orderDetail.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 			<result name="detailList">/pages/manage/order/orderDetails.jsp</result>
 		</action>
+		<action name="storage" class="storageAction">
+			<result name="list">/pages/manage/storage/storageList.jsp</result>
+			<result name="edit">/pages/manage/storage/storageEdit.jsp</result>
+			<result name="add">/pages/manage/storage/storageAdd.jsp</result>
+			<result name="toMain" type="redirect">storage.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="storageJournal" class="storageJournalAction">
+			<result name="list">/pages/manage/storageJournal/storageJournalList.jsp</result>
+		</action>
 	</package>
 </struts>
