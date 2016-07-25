@@ -187,7 +187,12 @@
 								<td>${element.remark}</td>
 							    <td class="redlink">
 							    	<a href="javascript:instock('${element.id}')" ><i class="fa fa-plus-circle"></i></a>&nbsp;
-							    	<a href="javascript:outstock('${element.id}')" ><i class="fa fa-minus-circle"></i></a>
+							    	<c:if test="${element.num > 0}">
+							    		<a href="javascript:outstock('${element.id}')" ><i class="fa fa-minus-circle"></i></a>
+							    	</c:if>
+							    	<c:if test="${element.num == 0}">
+										<a href="javascript:delInfo('${element.id}')" >删除</a>&nbsp;    	
+							    	</c:if>
 							    </td>
 						    </tr>
 						</c:forEach>

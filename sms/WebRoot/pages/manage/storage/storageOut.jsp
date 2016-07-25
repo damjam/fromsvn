@@ -41,7 +41,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="${uri}?action=outstock" id="dataForm" method="post">
+	<form action="${uri}?action=outstock" id="dataForm" method="post" class="validate">
 	    <s:hidden name="id"/>
 		<div class="userbox">
 			<div>
@@ -61,7 +61,7 @@
 						<tr>    
 						    <td class="formlabel">订单号</td>
 						    <td>
-						    	<s:textfield name="orderId" id="orderId" maxlength="20" class="{required:true}"/>
+						    	<s:textfield name="orderId" id="orderId" maxlength="20"/>
 						    	<span class="field_tipinfo">如订单号为空，请在备注中说明出库原因</span>
 						    </td>
 					   </tr>

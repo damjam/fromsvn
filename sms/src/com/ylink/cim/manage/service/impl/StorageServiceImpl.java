@@ -54,11 +54,7 @@ public class StorageServiceImpl implements StorageService {
 		if(storage.getNum() < inoutNum){
 			throw new BizException("¿â´æ²»×ã");
 		}
-		if(storage.getNum() == inoutNum){
-			storageDao.delete(storage);
-			return;
-		}
-		int num = storage.getNum() - inoutNum;
+		int	num = storage.getNum() - inoutNum;
 		storage.setNum(num);
 		storageDao.update(storage);
 		storageJournalService.add(id, inoutNum, "³ö¿â", num, orderId, remark, userInfo);

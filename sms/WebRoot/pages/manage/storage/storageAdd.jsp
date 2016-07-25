@@ -69,7 +69,7 @@
 <body>
 
 <f:msg styleClass="msg"/>
-	<form action="${uri}?action=doAdd" id="dataForm" method="post">
+	<form action="${uri}?action=doAdd" id="dataForm" method="post" class="validate">
 		<div class="userbox">
 			<div>
 				<b class="b1"></b>

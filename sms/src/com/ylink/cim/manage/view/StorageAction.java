@@ -2,15 +2,12 @@ package com.ylink.cim.manage.view;
 
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.manage.dao.StorageDao;
-import com.ylink.cim.manage.dao.StorageJournalDao;
 import com.ylink.cim.manage.domain.Storage;
 import com.ylink.cim.manage.service.StorageService;
 
@@ -111,7 +108,7 @@ public class StorageAction extends CRUDAction implements ModelDriven<Storage> {
 	@Override
 	public String delete() throws Exception {
 		try{
-			storageService.update(model);
+			storageDao.deleteById(model.getId());
 			setSucResult(request);
 		}catch(Exception e){
 			setResult(false, e.getMessage(), request);
