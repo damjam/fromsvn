@@ -105,10 +105,14 @@
 				});
 			}
 			function outstock(id) {
+				/*
 				layer.prompt({formType:0,title:'请输入数量'},function(val){
 					var url="${uri}?action=outstock&id="+id+"&inoutNum="+val;
 					gotoUrl(url);
 				});
+				*/
+				var url = "${uri}?action=toOutstock&id="+id;
+				gotoUrl(url);
 			}
 			$(function() {
 			 	

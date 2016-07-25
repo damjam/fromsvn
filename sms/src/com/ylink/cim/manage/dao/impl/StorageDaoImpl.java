@@ -32,6 +32,7 @@ public class StorageDaoImpl extends BaseDaoImpl implements StorageDao {
 		helper.append("and material = ?", MapUtils.getString(params, "material"));
 		helper.append("and pattern = ?", MapUtils.getString(params, "pattern"));
 		helper.append("and carModel like ?", MapUtils.getString(params, "carModel"), MatchMode.ANYWHERE);
+		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}
 

@@ -2,6 +2,8 @@ package com.ylink.cim.manage.domain;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 public class StorageJournal extends BranchField {
 
 	private String id;
@@ -140,7 +142,7 @@ public class StorageJournal extends BranchField {
 	}
 
 	public void setShelf(String shelf) {
-		this.shelf = shelf;
+		this.shelf = StringUtils.upperCase(shelf);
 	}
 
 	public String getCode() {

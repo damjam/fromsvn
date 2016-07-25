@@ -126,7 +126,7 @@
 						    <td class="formlabel">备注</td>
 						    <td>
 						    	<s:textfield name="remark" id="remark" maxlength="25"/>
-						    	<span class="field_tipinfo">不能为空</span>
+						    	<span class="field_tipinfo"></span>
 						    </td>
 					   </tr>
 				  </table>

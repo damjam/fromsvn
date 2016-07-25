@@ -2,6 +2,7 @@ package com.ylink.cim.manage.view;
 
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -24,8 +25,6 @@ public class StorageAction extends CRUDAction implements ModelDriven<Storage> {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private StorageDao storageDao;
-	@Autowired
-	private StorageJournalDao storageJournalDao;
 	@Autowired
 	private StorageService storageService;
 	
@@ -95,7 +94,7 @@ public class StorageAction extends CRUDAction implements ModelDriven<Storage> {
 	}
 	public String outstock() throws Exception {
 		try{
-			storageService.outstock(model.getId(), model.getInoutNum(), getSessionUser(request));
+			storageService.outstock(model.getId(), model.getInoutNum(), model.getOrderId(), model.getRemark(), getSessionUser(request));
 			setSucResult(request);
 		}catch(Exception e){
 			setResult(false, e.getMessage(), request);
@@ -103,7 +102,11 @@ public class StorageAction extends CRUDAction implements ModelDriven<Storage> {
 		}
 		return "toMain";
 	}
-	
+	public String toOutstock() throws Exception {
+		Storage storage = storageDao.findById(model.getId());
+		BeanUtils.copyProperties(model, storage);
+		return "outstock";
+	}
 	@Override
 	public String delete() throws Exception {
 		try{

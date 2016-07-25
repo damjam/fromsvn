@@ -34,6 +34,9 @@
 		<property name="num" type="java.lang.Integer">
 			<column name="num"/>
 		</property>
+		<property name="inoutType" type="java.lang.Integer">
+			<column name="inoutType"/>
+		</property>
 		<property name="inoutNum" type="java.lang.Integer">
 			<column name="inout_num"/>
 		</property>

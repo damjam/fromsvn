@@ -12,6 +12,6 @@ public interface StorageJournalService {
 	
 	void update(StorageJournal storageJournal) throws BizException;
 
-	void add(String id, Integer inoutNum, String inoutType, int num, UserInfo userInfo);
+	void add(String id, Integer inoutNum, String inoutType, int num, String orderId, String remark, UserInfo userInfo);
 
 }

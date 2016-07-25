@@ -1,5 +1,7 @@
 package com.ylink.cim.manage.domain;
 
+import org.apache.commons.lang.StringUtils;
+
 public class Storage extends BranchField {
 
 	private String id;
@@ -26,8 +28,17 @@ public class Storage extends BranchField {
 	
 	private String remark;
 	
+	private String orderId;
 	
 	
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
 	public String getRemark() {
 		return remark;
 	}
@@ -105,7 +116,7 @@ public class Storage extends BranchField {
 	}
 
 	public void setShelf(String shelf) {
-		this.shelf = shelf;
+		this.shelf = StringUtils.upperCase(shelf);
 	}
 
 	public String getCode() {

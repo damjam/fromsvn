@@ -12,7 +12,7 @@ public interface StorageService {
 	
 	void update(Storage storage) throws BizException;
 
-	void outstock(String id, Integer inoutNum, UserInfo userInfo) throws BizException;
+	void outstock(String id, Integer inoutNum, String orderId, String remark, UserInfo userInfo) throws BizException;
 
 	void instock(String id, Integer inoutNum, UserInfo userInfo) throws BizException;
 }

@@ -34,7 +34,7 @@ public class StorageJournalServiceImpl implements StorageJournalService {
 	}
 
 	@Override
-	public void add(String id, Integer inoutNum, String inoutType, int num, UserInfo userInfo) {
+	public void add(String id, Integer inoutNum, String inoutType, int num, String orderId, String remark, UserInfo userInfo) {
 		Storage storage = storageDao.findById(id);
 		StorageJournal journal = new StorageJournal();
 		journal.setBranchNo(userInfo.getBranchNo());
@@ -50,6 +50,7 @@ public class StorageJournalServiceImpl implements StorageJournalService {
 		journal.setProduct(storage.getProduct());
 		journal.setProductType(storage.getProductType());
 		journal.setShelf(storage.getShelf());
+		journal.setRemark(remark);
 		storageJournalDao.save(journal);
 	}
 	
