@@ -131,6 +131,13 @@
 						    </td>
 						</tr>
 						<tr>
+							<td class="formlabel">出入库类型</td>
+						    <td>
+						    	<s:select list="#{'出库':'出库','入库':'入库'}" headerKey="" headerValue="--全部--" listKey="key" listValue="value" name="inoutType" id="inoutType" />
+						    </td>
+						</tr>
+						
+						<tr>
 						    <td></td>
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
@@ -146,14 +153,16 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >名称</td>
 						    <td >汽车品牌型号</td>
-						    <td >货架</td>
 						    <td >产品类型</td>
+						 	<td >名称</td>
+						    <td >货架</td>
 						    <td >出入库类型</td>
 						    <td >出入库数量</td>
 						    <td >当前数量</td>
 						    <td >录入时间</td>
+						    <td >录入人</td>
+						    <td >关联订单号</td>
 						    <td >备注</td>
 						    <!-- 
 						    <td >车型</td> -->
@@ -163,14 +172,16 @@
 					<f:showDataGrid name="list" msg=" " styleClass="data_grid">
 						<c:forEach items="${list}" var="element">
 							<tr align="center">
-								<td>${element.product}</td>
 								<td>${element.carModel}</td>
-								<td>${element.shelf}</td>
 								<td>${element.productType}</td>
+								<td>${element.product}</td>
+								<td>${element.shelf}</td>
 								<td>${element.inoutType}</td>
 								<td>${element.inoutNum}</td>
 								<td>${element.num}</td>
 								<td><fmt:formatDate value="${element.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+								<td>${element.createUser }</td>
+								<td>${element.orderId}</td>
 								<td>${element.remark}</td>
 							    <!-- 
 							    <td class="redlink">

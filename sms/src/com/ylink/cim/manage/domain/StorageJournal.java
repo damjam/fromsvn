@@ -38,7 +38,16 @@ public class StorageJournal extends BranchField {
 	
 	private Integer inoutNum;
 	
+	private String createUser;
 	
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
 	public Integer getInoutNum() {
 		return inoutNum;
 	}

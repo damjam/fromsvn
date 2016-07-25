@@ -33,6 +33,7 @@ public class StorageJournalDaoImpl extends BaseDaoImpl implements StorageJournal
 		helper.append("and pattern = ?", MapUtils.getString(params, "pattern"));
 		helper.append("and code = ?", MapUtils.getString(params, "code"));
 		helper.append("and carModel like ?", MapUtils.getString(params, "carModel"), MatchMode.ANYWHERE);
+		helper.append("and inoutType = ?", MapUtils.getString(params, "inoutType"));
 		helper.append("order by id desc");
 		return super.getPageData(helper, pager);
 	}

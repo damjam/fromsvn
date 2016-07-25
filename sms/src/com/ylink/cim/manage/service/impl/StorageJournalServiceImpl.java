@@ -38,6 +38,7 @@ public class StorageJournalServiceImpl implements StorageJournalService {
 		Storage storage = storageDao.findById(id);
 		StorageJournal journal = new StorageJournal();
 		journal.setBranchNo(userInfo.getBranchNo());
+		journal.setCreateUser(userInfo.getUserName());
 		journal.setId(IdFactoryHelper.getId(StorageJournal.class));
 		journal.setCarModel(storage.getCarModel());
 		journal.setColor(storage.getColor());
@@ -50,6 +51,7 @@ public class StorageJournalServiceImpl implements StorageJournalService {
 		journal.setProduct(storage.getProduct());
 		journal.setProductType(storage.getProductType());
 		journal.setShelf(storage.getShelf());
+		journal.setOrderId(orderId);
 		journal.setRemark(remark);
 		storageJournalDao.save(journal);
 	}

@@ -34,8 +34,8 @@
 		<property name="num" type="java.lang.Integer">
 			<column name="num"/>
 		</property>
-		<property name="inoutType" type="java.lang.Integer">
-			<column name="inoutType"/>
+		<property name="inoutType" type="java.lang.String">
+			<column name="inout_type"/>
 		</property>
 		<property name="inoutNum" type="java.lang.Integer">
 			<column name="inout_num"/>
@@ -54,6 +54,9 @@
 		</property>
 		<property name="createDate" type="java.util.Date">
 			<column name="create_date"/>
+		</property>
+		<property name="createUser" type="java.lang.String">
+			<column name="create_user"/>
 		</property>
 	</class>
 </hibernate-mapping>

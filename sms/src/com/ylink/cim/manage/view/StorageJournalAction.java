@@ -40,6 +40,7 @@ public class StorageJournalAction extends CRUDAction implements ModelDriven<Stor
 		params.put("shelf", model.getShelf());
 		params.put("carModel", model.getCarModel());
 		params.put("productType", model.getProductType());
+		params.put("inoutType", model.getInoutType());
 		Paginater paginater = storageJournalDao.findPager(params, getPager(request));
 		saveQueryResult(request, paginater);
 		return LIST;

@@ -97,14 +97,15 @@ public class StorageAction extends CRUDAction implements ModelDriven<Storage> {
 			storageService.outstock(model.getId(), model.getInoutNum(), model.getOrderId(), model.getRemark(), getSessionUser(request));
 			setSucResult(request);
 		}catch(Exception e){
+			e.printStackTrace();
 			setResult(false, e.getMessage(), request);
-			return list();
+			return toOutstock();
 		}
 		return "toMain";
 	}
 	public String toOutstock() throws Exception {
 		Storage storage = storageDao.findById(model.getId());
-		BeanUtils.copyProperties(model, storage);
+		model.setNum(storage.getNum());
 		return "outstock";
 	}
 	@Override

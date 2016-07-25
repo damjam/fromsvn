@@ -22,7 +22,7 @@
 		<script type="text/javascript">
 			$().ready(function(){
 				var inoutNum = $('#inoutNum').val();
-				if(inoutNum == '0'){
+				if(inoutNum == 0){
 					$('#inoutNum').val(1);
 				}
 			});
@@ -51,7 +51,7 @@
 				<b class="b4"></b>
 				<div class="contentb">
 					<table class="form_grid">
-					  <caption>${ACT.name}</caption>
+					  <caption>出库信息</caption>
 					   <tr>
 					   		<td class="formlabel">库存数量</td>
 						    <td>
@@ -61,7 +61,7 @@
 						<tr>    
 						    <td class="formlabel">订单号</td>
 						    <td>
-						    	<s:textfield name="orderId" id="orderId" maxlength="10" class="{required:true}"/>
+						    	<s:textfield name="orderId" id="orderId" maxlength="20" class="{required:true}"/>
 						    	<span class="field_tipinfo">如订单号为空，请在备注中说明出库原因</span>
 						    </td>
 					   </tr>
