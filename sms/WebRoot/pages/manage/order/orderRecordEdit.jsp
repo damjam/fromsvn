@@ -198,7 +198,7 @@
 		 		}
 		 		var rowHtml = '<tr class="product">';
 		 		rowHtml += '<td align="center"><input type="text" name="carModels" style="width: 120px;" autocomplete="off"/>&nbsp;</td>';
-		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option><option value="丝圈">丝圈</option></td>';
+		 		rowHtml += '<td align="center"><select name="productNames" style="width: 60px;"><option value="座垫">座垫</option><option value="脚垫">脚垫</option><option value="平板后箱垫">平板后箱垫</option><option value="全包围后箱垫">全包围后箱垫</option><option value="脚垫+丝圈">脚垫+丝圈</option></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="materials" class="material" style="width: 120px;"/>&nbsp;</td>';
 		 		rowHtml += '<td align="center"><input type="text" name="colors" class="color" style="width: 60px;"/></td>';
 		 		rowHtml += '<td align="center"><input type="text" name="prices" style="width: 50px;" onblur="setAmount(this)"/>&nbsp;</td>';
