@@ -82,7 +82,7 @@
 					   <tr>
 						    <td class="formlabel nes">商品类型</td>
 						    <td>
-						    	<s:select list="#{'脚垫':'脚垫','平板后箱垫':'平板后箱垫','全包围后箱垫':'全包围后箱垫','座垫':'座垫'}" listKey="key" listValue="value" name="productType" id="productType" />
+						    	<s:select list="#{'脚垫':'脚垫','平板后备箱垫':'平板后备箱垫','全包围后备箱垫':'全包围后备箱垫','座垫':'座垫'}" listKey="key" listValue="value" name="productType" id="productType" />
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>
@@ -94,9 +94,9 @@
 						    </td>
 					   </tr>
 					   <tr>
-						    <td class="formlabel nes">产品名称</td>
+						    <td class="formlabel nes">颜色/材质</td>
 						    <td>
-						    	<s:textfield name="product" id="product" maxlength="20" class="{required:true}"/>
+						    	<s:textfield name="material" id="material" maxlength="20" class="{required:true}"/>
 						    	<span class="field_tipinfo">不能为空</span>
 						    </td>
 					   </tr>

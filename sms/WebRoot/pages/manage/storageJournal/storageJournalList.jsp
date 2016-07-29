@@ -127,7 +127,7 @@
 							</td>
 							<td class="formlabel">商品类型</td>
 						    <td>
-						    	<s:select list="#{'脚垫':'脚垫','平板后箱垫':'平板后箱垫','全包围后箱垫':'全包围后箱垫','座垫':'座垫'}" headerKey="" headerValue="--全部--" listKey="key" listValue="value" name="productType" id="productType" />
+						    	<s:select list="#{'脚垫':'脚垫','平板后备箱垫':'平板后备箱垫','全包围后备箱垫':'全包围后备箱垫','座垫':'座垫'}" headerKey="" headerValue="--全部--" listKey="key" listValue="value" name="productType" id="productType" />
 						    </td>
 						</tr>
 						<tr>
@@ -155,7 +155,7 @@
 						 <tr align="center" class="titlebg">
 						    <td >汽车品牌型号</td>
 						    <td >产品类型</td>
-						 	<td >名称</td>
+						 	<td >颜色/材质</td>
 						    <td >货架</td>
 						    <td >出入库类型</td>
 						    <td >出入库数量</td>
@@ -174,7 +174,7 @@
 							<tr align="center">
 								<td>${element.carModel}</td>
 								<td>${element.productType}</td>
-								<td>${element.product}</td>
+								<td>${element.material}</td>
 								<td>${element.shelf}</td>
 								<td>${element.inoutType}</td>
 								<td>${element.inoutNum}</td>

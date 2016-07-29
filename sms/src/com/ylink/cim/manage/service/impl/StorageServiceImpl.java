@@ -31,8 +31,10 @@ public class StorageServiceImpl implements StorageService {
 	@Override
 	public void save(Storage storage, UserInfo userInfo) throws BizException {
 		storage.setBranchNo(userInfo.getBranchNo());
-		storage.setId(IdFactoryHelper.getId(Storage.class));
+		String id = IdFactoryHelper.getId(Storage.class);
+		storage.setId(id);
 		storageDao.save(storage);
+		storageJournalService.add(id, storage.getNum(), "Èë¿â", storage.getNum(), null, null, userInfo);
 	}
 
 	@Override
