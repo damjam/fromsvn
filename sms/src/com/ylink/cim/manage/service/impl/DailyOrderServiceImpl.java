@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 import com.ylink.cim.common.state.PayState;
 import com.ylink.cim.manage.dao.DailyOrderDao;
+import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.DailyOrder;
+import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.service.DailyOrderService;
 
 import flink.IdFactoryHelper;
@@ -27,6 +29,8 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 	private DailyOrderDao dailyOrderDao;
 	@Autowired
 	private OrderRecordDao orderRecordDao;
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 	@Override
 	public void exeDailySumTask(String id) throws BizException {
 		Date date = DateUtil.addMonths(DateUtil.getCurrent(), -1);
@@ -109,22 +113,50 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 			DailyOrder dailyOrder = dailyOrders.get(i);
 			String orderDate = dailyOrder.getOrderDate();
 			Map<String, Object> map = tmpMap.get(orderDate);
+			/*
 			dailyOrder.setFlatTrunkAmt(MapUtils.getDouble(map, "flatTrunkAmt"));
 			dailyOrder.setFlatTrunkCnt(MapUtils.getInteger(map, "flatTrunkCnt"));
 			dailyOrder.setFootpadAmt(MapUtils.getDouble(map, "footpadAmt"));
 			dailyOrder.setFootpadCnt(MapUtils.getInteger(map, "footpadCnt"));
-			dailyOrder.setPaidAmt(MapUtils.getDouble(map, "paidAmt"));
-			dailyOrder.setPaidCnt(MapUtils.getInteger(map, "paidCnt"));
-			dailyOrder.setUnpaidAmt(MapUtils.getDouble(map, "unpaidAmt"));
-			dailyOrder.setUnpaidCnt(MapUtils.getInteger(map, "unpaidCnt"));
 			dailyOrder.setWrapTrunkAmt(MapUtils.getDouble(map, "wrapTrunkAmt"));
 			dailyOrder.setWrapTrunkCnt(MapUtils.getInteger(map, "wrapTrunkCnt"));
 			dailyOrder.setSeatpadAmt(MapUtils.getDouble(map, "seatpadAmt"));
 			dailyOrder.setSeatpadCnt(MapUtils.getInteger(map, "seatpadCnt"));
 			dailyOrder.setSilkFootpadAmt(MapUtils.getDouble(map, "silkFootpadAmt"));
 			dailyOrder.setSilkFootpadCnt(MapUtils.getInteger(map, "silkFootpadCnt"));
+			*/
+			dailyOrder.setPaidAmt(MapUtils.getDouble(map, "paidAmt"));
+			dailyOrder.setPaidCnt(MapUtils.getInteger(map, "paidCnt"));
+			dailyOrder.setUnpaidAmt(MapUtils.getDouble(map, "unpaidAmt"));
+			dailyOrder.setUnpaidCnt(MapUtils.getInteger(map, "unpaidCnt"));
+			Map<String, Object> param = new HashMap<>();
+			param.put("orderDate", orderDate);
+			List<OrderDetail> details = orderDetailDao.findList(param);
+			for (int j = 0; j < details.size(); j++) {
+				OrderDetail orderDetail = details.get(j);
+				String productType = orderDetail.getProductName();
+				Integer num = orderDetail.getNum();
+				Double amount = orderDetail.getAmount();
+				if("½Åµæ".equals(productType)){
+					dailyOrder.setFootpadCnt(dailyOrder.getFootpadCnt()+num);
+					dailyOrder.setFootpadAmt(dailyOrder.getFootpadAmt()+amount);
+				}else if ("×ùµæ".equals(productType)) {
+					dailyOrder.setSeatpadCnt(dailyOrder.getSeatpadCnt()+num);
+					dailyOrder.setSeatpadAmt(dailyOrder.getSeatpadAmt()+amount);
+				}else if (productType.indexOf("È«°üÎ§") != -1) {
+					dailyOrder.setWrapTrunkCnt(dailyOrder.getWrapTrunkCnt()+num);
+					dailyOrder.setWrapTrunkAmt(dailyOrder.getWrapTrunkAmt()+amount);
+				}else if (productType.indexOf("Æ½°å") != -1) {
+					dailyOrder.setFlatTrunkCnt(dailyOrder.getFlatTrunkCnt()+num);
+					dailyOrder.setFlatTrunkAmt(dailyOrder.getFlatTrunkAmt()+amount);
+				}else if (productType.indexOf("Ë¿È¦") != -1) {
+					dailyOrder.setSilkFootpadCnt(dailyOrder.getSilkFootpadCnt()+num);
+					dailyOrder.setSilkFootpadAmt(dailyOrder.getSilkFootpadAmt()+amount);
+				}
+			}
 			dailyOrder.setTotalAmt(MapUtils.getDouble(map, "paidAmt")+MapUtils.getDouble(map, "unpaidAmt"));
 			dailyOrder.setTotalCnt(MapUtils.getInteger(map, "paidCnt")+MapUtils.getInteger(map, "unpaidCnt"));
+			
 			dailyOrderDao.update(dailyOrder);
 			dailyOrderDates.add(orderDate);
 		}
@@ -133,23 +165,51 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 			if(!dailyOrderDates.contains(key)){
 				DailyOrder dailyOrder = new DailyOrder();
 				dailyOrder.setOrderDate(key);
+				/*
 				dailyOrder.setFlatTrunkAmt(MapUtils.getDouble(map, "flatTrunkAmt"));
 				dailyOrder.setFlatTrunkCnt(MapUtils.getInteger(map, "flatTrunkCnt"));
 				dailyOrder.setFootpadAmt(MapUtils.getDouble(map, "footpadAmt"));
 				dailyOrder.setFootpadCnt(MapUtils.getInteger(map, "footpadCnt"));
-				dailyOrder.setPaidAmt(MapUtils.getDouble(map, "paidAmt"));
-				dailyOrder.setPaidCnt(MapUtils.getInteger(map, "paidCnt"));
-				dailyOrder.setUnpaidAmt(MapUtils.getDouble(map, "unpaidAmt"));
-				dailyOrder.setUnpaidCnt(MapUtils.getInteger(map, "unpaidCnt"));
 				dailyOrder.setWrapTrunkAmt(MapUtils.getDouble(map, "wrapTrunkAmt"));
 				dailyOrder.setWrapTrunkCnt(MapUtils.getInteger(map, "wrapTrunkCnt"));
 				dailyOrder.setSeatpadAmt(MapUtils.getDouble(map, "seatpadAmt"));
 				dailyOrder.setSeatpadCnt(MapUtils.getInteger(map, "seatpadCnt"));
 				dailyOrder.setSilkFootpadAmt(MapUtils.getDouble(map, "silkFootpadAmt"));
 				dailyOrder.setSilkFootpadCnt(MapUtils.getInteger(map, "silkFootpadCnt"));
+				*/
+				dailyOrder.setPaidAmt(MapUtils.getDouble(map, "paidAmt"));
+				dailyOrder.setPaidCnt(MapUtils.getInteger(map, "paidCnt"));
+				dailyOrder.setUnpaidAmt(MapUtils.getDouble(map, "unpaidAmt"));
+				dailyOrder.setUnpaidCnt(MapUtils.getInteger(map, "unpaidCnt"));
 				dailyOrder.setTotalAmt(MapUtils.getDouble(map, "paidAmt")+MapUtils.getDouble(map, "unpaidAmt"));
 				dailyOrder.setTotalCnt(MapUtils.getInteger(map, "paidCnt")+MapUtils.getInteger(map, "unpaidCnt"));
 				dailyOrder.setId(IdFactoryHelper.getId(DailyOrder.class));
+				
+				Map<String, Object> param = new HashMap<>();
+				param.put("orderDate", key);
+				List<OrderDetail> details = orderDetailDao.findList(param);
+				for (int i = 0; i < details.size(); i++) {
+					OrderDetail orderDetail = details.get(i);
+					String productType = orderDetail.getProductName();
+					Integer num = orderDetail.getNum();
+					Double amount = orderDetail.getAmount();
+					if("½Åµæ".equals(productType)){
+						dailyOrder.setFootpadCnt(dailyOrder.getFootpadCnt()+num);
+						dailyOrder.setFootpadAmt(dailyOrder.getFootpadAmt()+amount);
+					}else if ("×ùµæ".equals(productType)) {
+						dailyOrder.setSeatpadCnt(dailyOrder.getSeatpadCnt()+num);
+						dailyOrder.setSeatpadAmt(dailyOrder.getSeatpadAmt()+amount);
+					}else if (productType.indexOf("È«°üÎ§") != -1) {
+						dailyOrder.setWrapTrunkCnt(dailyOrder.getWrapTrunkCnt()+num);
+						dailyOrder.setWrapTrunkAmt(dailyOrder.getWrapTrunkAmt()+amount);
+					}else if (productType.indexOf("Æ½°å") != -1) {
+						dailyOrder.setFlatTrunkCnt(dailyOrder.getFlatTrunkCnt()+num);
+						dailyOrder.setFlatTrunkAmt(dailyOrder.getFlatTrunkAmt()+amount);
+					}else if (productType.indexOf("Ë¿È¦") != -1) {
+						dailyOrder.setSilkFootpadCnt(dailyOrder.getSilkFootpadCnt()+num);
+						dailyOrder.setSilkFootpadAmt(dailyOrder.getSilkFootpadAmt()+amount);
+					}
+				}
 				dailyOrderDao.save(dailyOrder);
 			}
 		}

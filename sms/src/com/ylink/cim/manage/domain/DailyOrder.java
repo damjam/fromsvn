@@ -6,37 +6,37 @@ public class DailyOrder extends BranchField {
 	
 	private String orderDate;
 	
-	private Integer paidCnt;
+	private Integer paidCnt = 0;
 	
-	private Double paidAmt;
+	private Double paidAmt = 0d;
 	
-	private Integer unpaidCnt;
+	private Integer unpaidCnt = 0;
 	
-	private Double unpaidAmt;
+	private Double unpaidAmt = 0d;
 	
-	private Integer footpadCnt;
+	private Integer footpadCnt = 0;
 	
-	private Double footpadAmt;
+	private Double footpadAmt = 0d;
 	
-	private Integer seatpadCnt;
+	private Integer seatpadCnt = 0;
 	
-	private Double seatpadAmt;
+	private Double seatpadAmt = 0d;
 	
-	private Integer wrapTrunkCnt;
+	private Integer wrapTrunkCnt = 0;
 	
-	private Double wrapTrunkAmt;
+	private Double wrapTrunkAmt = 0d;
 	
-	private Integer flatTrunkCnt;
+	private Integer flatTrunkCnt = 0;
 	
-	private Double flatTrunkAmt;
+	private Double flatTrunkAmt = 0d;
 	
-	private Integer silkFootpadCnt;
+	private Integer silkFootpadCnt = 0;
 	
-	private Double silkFootpadAmt;
+	private Double silkFootpadAmt = 0d;
 
-	private Integer totalCnt;
+	private Integer totalCnt = 0;
 	
-	private Double totalAmt;
+	private Double totalAmt = 0d;
 	
 	private String beginDate;
 	
@@ -132,6 +132,9 @@ public class DailyOrder extends BranchField {
 	}
 
 	public Double getFootpadAmt() {
+		if (footpadAmt == null) {
+			footpadAmt = 0d;
+		}
 		return footpadAmt;
 	}
 

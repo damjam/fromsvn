@@ -26,8 +26,8 @@
 					FormUtils.reset("queryForm");
 				});
 				
-				$('#btnAdd').click(function(){
-					var url="/dailyOrder.do?action=test";
+				$('#btnSum').click(function(){
+					var url="/dailyOrder.do?action=exeDailySum";
 					gotoUrl(url);   
 				});
 			});
@@ -96,7 +96,7 @@
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;
 								<input type="button" value="重置" id="btnClear" />&nbsp;
-								<input type="button" value="新增" id="btnAdd"/>
+								<input type="button" value="重新统计" id="btnSum"/>
 							</td>
 						</tr>
 					</table>

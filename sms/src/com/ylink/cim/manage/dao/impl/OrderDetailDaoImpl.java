@@ -44,9 +44,12 @@ public class OrderDetailDaoImpl extends BaseDaoImpl implements OrderDetailDao {
 		helper.append("and orderId = ?", MapUtils.getString(map, "orderId"));
 		helper.append("and deliState = ?", MapUtils.getString(map, "state"));
 		helper.append("and deliState <> ?", MapUtils.getString(map, "excludeState"));
+		helper.append("and orderId in (select id from OrderRecord where orderDate = ?)", MapUtils.getString(map, "orderDate"));
 		return super.getList(helper);
 	}
 
+	
+	
 	@Override
 	public List<OrderDetail> findUndelis(String orderId) {
 		QueryHelper helper = new QueryHelper();

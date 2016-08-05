@@ -41,8 +41,14 @@ public class DailyOrderAction extends BaseAction implements ModelDriven<DailyOrd
 		saveQueryResult(request, paginater);
 		return "dailySum";
 	}
-	public String test() throws Exception {
-		dailyOrderService.exeDailySumTask(null);
+	public String exeDailySum() throws Exception {
+		try {
+			dailyOrderService.exeDailySumTask(null);
+			setResult(true, "统计完成", request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setResult(false, "统计失败", request);
+		}
 		return dailySum();
 	}
 }

@@ -18,4 +18,5 @@ public interface OrderDetailDao extends BaseDao {
 	public List<OrderDetail> findList(Map<String, Object> map);
 
 	public List<OrderDetail> findUndelis(String orderId);
+	
 }
