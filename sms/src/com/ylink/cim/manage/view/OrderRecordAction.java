@@ -16,13 +16,11 @@ import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
-import com.ylink.cim.manage.domain.CarModel;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
 import com.ylink.cim.manage.service.OrderRecordService;
 
 import flink.etc.Assert;
-import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
@@ -42,7 +40,6 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	private OrderRecordService orderRecordService;
 	@Autowired
 	private OrderDetailDao orderDetailDao;
-	
 	public OrderRecord getModel() {
 		return model;
 	}
@@ -69,7 +66,8 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		initSelect();
 		return LIST;
 	}
-
+	
+	
 	private void initSelect() {
 		request.setAttribute("countryTypes", ParaManager.getSysDict(SysDictType.CoutryType.getValue()));
 		

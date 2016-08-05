@@ -1,5 +1,6 @@
 package com.ylink.cim.manage.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
@@ -55,6 +56,17 @@ public class OrderRecordDaoImpl extends BaseDaoImpl implements OrderRecordDao {
 		}
 		sumInfo.put("totalAmt", sumAmt);
 		return sumInfo;
+	}
+
+	@Override
+	public List<Map<String, Object>> findDailySum(String beginDate, String endDate) {
+		QueryHelper helper = new QueryHelper();
+		helper.append("select new map(orderDate as orderDate, payState as payState, count(id) as cnt, sum(amount) as amt) from OrderRecord where 1=1");
+		helper.append("and orderDate >= ?", beginDate);
+		helper.append("and orderDate <= ?", endDate);
+		helper.append("group by orderDate, payState");
+		//helper.append("order by id desc");
+		return super.getList(helper);
 	}
 
 }

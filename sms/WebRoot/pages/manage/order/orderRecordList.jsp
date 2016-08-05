@@ -99,7 +99,7 @@
 								订购日期
 							</td>
 							<td>
-								<s:textfield name="beginOrderDate" id="startOrderDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
+								<s:textfield name="beginOrderDate" id="beginOrderDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
 								<s:textfield name="endOrderDate" id="endOrderDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>
 							</td>
 						</tr>

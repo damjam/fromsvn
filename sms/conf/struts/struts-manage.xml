@@ -88,6 +88,11 @@
 			<result name="add">/pages/manage/order/orderRecordAdd.jsp</result>
 			<result name="toMain" type="redirect">orderRecord.do?action=list&amp;msg=${msg}&amp;result={result}</result>
 		</action>
+		<action name="dailyOrder" class="dailyOrderAction">
+			<result name="dailySum">/pages/manage/summary/dailySum.jsp</result>
+			<result name="monthSum">/pages/manage/summary/monthSum.jsp</result>
+			<result name="seansonSum">/pages/manage/summary/seansonSum.jsp</result>
+		</action>
 		<action name="orderDetail" class="orderDetailAction">
 			<result name="list">/pages/manage/order/orderDetailList.jsp</result>
 			<result name="edit">/pages/manage/order/orderDetailEdit.jsp</result>

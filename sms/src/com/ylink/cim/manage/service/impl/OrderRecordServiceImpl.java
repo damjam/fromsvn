@@ -1,9 +1,12 @@
 package com.ylink.cim.manage.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +15,11 @@ import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.state.PayState;
 import com.ylink.cim.common.type.TradeType;
+import com.ylink.cim.manage.dao.DailyOrderDao;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
+import com.ylink.cim.manage.domain.DailyOrder;
 import com.ylink.cim.manage.domain.MerchantInfo;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.domain.OrderRecord;
@@ -27,6 +32,7 @@ import flink.IdFactoryHelper;
 import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
+import flink.util.Paginater;
 
 @Component("orderRecordService")
 public class OrderRecordServiceImpl implements OrderRecordService {
@@ -41,6 +47,8 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 	private CarModelService carModelService;
 	@Autowired
 	private AccountJournalService accountJournalService;
+	@Autowired
+	private DailyOrderDao dailyOrderDao;
 	@Override
 	public void save(OrderRecord model, UserInfo userInfo) throws BizException{
 		String orderId = IdFactoryHelper.getId(OrderRecord.class);
@@ -153,4 +161,6 @@ public class OrderRecordServiceImpl implements OrderRecordService {
 		orderRecord.setState(OrderState.CANCELED.getValue());
 		orderRecordDao.update(orderRecord);
 	}
+
+	
 }
