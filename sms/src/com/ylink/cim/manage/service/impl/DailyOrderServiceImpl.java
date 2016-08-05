@@ -34,7 +34,6 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 	@Override
 	public void exeDailySumTask(String id) throws BizException {
 		Date date = DateUtil.addMonths(DateUtil.getCurrent(), -1);
-		
 		String beginDate = DateUtil.getDateYYYYMMDD(date);
 		String endDate = DateUtil.addDays(DateUtil.getCurrentDate(), -1, "yyyyMMdd");
 		List<Map<String, Object>> list = orderRecordDao.findDailySum(beginDate, endDate);
@@ -137,6 +136,7 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 				String productType = orderDetail.getProductName();
 				Integer num = orderDetail.getNum();
 				Double amount = orderDetail.getAmount();
+				/*
 				if("½Åµæ".equals(productType)){
 					dailyOrder.setFootpadCnt(dailyOrder.getFootpadCnt()+num);
 					dailyOrder.setFootpadAmt(dailyOrder.getFootpadAmt()+amount);
@@ -152,7 +152,7 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 				}else if (productType.indexOf("Ë¿È¦") != -1) {
 					dailyOrder.setSilkFootpadCnt(dailyOrder.getSilkFootpadCnt()+num);
 					dailyOrder.setSilkFootpadAmt(dailyOrder.getSilkFootpadAmt()+amount);
-				}
+				}*/
 			}
 			dailyOrder.setTotalAmt(MapUtils.getDouble(map, "paidAmt")+MapUtils.getDouble(map, "unpaidAmt"));
 			dailyOrder.setTotalCnt(MapUtils.getInteger(map, "paidCnt")+MapUtils.getInteger(map, "unpaidCnt"));
