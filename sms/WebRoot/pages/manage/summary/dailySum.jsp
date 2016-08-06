@@ -84,7 +84,7 @@
 						<caption>${ACT.name}</caption>
 						<tr>
 							<td class="formlabel">
-								日期
+								订购日期
 							</td>
 							<td>
 								<s:textfield name="beginDate" id="beginDate" maxlength="8" style="width:70px;" onclick="WdatePicker({dateFmt:'yyyyMMdd'})"/>&nbsp;-
@@ -109,16 +109,16 @@
 				<table class="data_grid">
 					<thead>
 						 <tr align="center" class="titlebg">
-						 	<td >日期</td>
+						 	<td >订购日期</td>
 						 	<td >订单数量</td>
 						    <td >订单总额</td>
+						    <td >已付款</td>
+						    <td >未付款</td>
 						    <td >脚垫</td>
 						    <td >座垫</td>
 						    <td >全包围后备箱垫</td>
 						    <td >平板后备箱垫</td>
 						    <td >脚垫+丝圈</td>
-						    <td >已付款</td>
-						    <td >未付款</td>
 						 </tr>
 					</thead>
 					
@@ -128,13 +128,13 @@
 								<td>${element.orderDate}</td>
 								<td>${element.totalCnt}</td>
 								<td><fmt:formatNumber value="${element.totalAmt}" pattern="##0.00"/></td>
+								<td>${element.paidCnt}/<fmt:formatNumber value="${element.paidAmt}" pattern="##0.00"/></td>
+							    <td>${element.unpaidCnt}/<fmt:formatNumber value="${element.unpaidAmt}" pattern="##0.00"/></td>
 								<td>${element.footpadCnt}/<fmt:formatNumber value="${element.footpadAmt}" pattern="##0.00"/></td>
 								<td>${element.seatpadCnt}/<fmt:formatNumber value="${element.seatpadAmt}" pattern="##0.00"/></td>
 								<td>${element.wrapTrunkCnt}/<fmt:formatNumber value="${element.wrapTrunkAmt}" pattern="##0.00"/></td>
 								<td>${element.flatTrunkCnt}/<fmt:formatNumber value="${element.flatTrunkAmt}" pattern="##0.00"/></td>
 								<td>${element.silkFootpadCnt}/<fmt:formatNumber value="${element.silkFootpadAmt}" pattern="##0.00"/></td>
-								<td>${element.paidCnt}/<fmt:formatNumber value="${element.paidAmt}" pattern="##0.00"/></td>
-							    <td>${element.unpaidCnt}/<fmt:formatNumber value="${element.unpaidAmt}" pattern="##0.00"/></td>
 						    </tr>
 						</c:forEach>
 					</f:showDataGrid>
