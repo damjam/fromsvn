@@ -66,7 +66,7 @@ public class SeckillController {
 		return result;
 	}
 	
-	@RequestMapping(value="/{seckillId}/{md5}/execution",method=RequestMethod.POST,
+	@RequestMapping(value="/{seckillId}/{md5}/execute",method=RequestMethod.GET,
 			produces={"application/json;charset=UTF-8"})
 	@ResponseBody
 	public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId")Integer seckillId, 

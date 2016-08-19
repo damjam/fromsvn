@@ -7,7 +7,7 @@ var seckill = {
 			return CONTEXT_PATH+'/seckill/'+seckillId+"/exposer";
 		},
 		killUrl:function(seckillId, md5){
-			return CONTEXT_PATH+'/seckill/'+seckill+'/'+md5+'/execute';
+			return CONTEXT_PATH+'/seckill/'+seckillId+'/'+md5+'/execute';
 		}
 	},
 	handleSeckill: function(seckillId, node){
@@ -20,25 +20,26 @@ var seckill = {
 					//开启秒杀
 					var md5 = exposer['md5'];
 					var killUrl = seckill.URL.killUrl(seckillId, md5);
-					console.log('killUrl'+killUrl);
-					$('#killBtn').one('click', function(){
+					console.log('killUrl:'+killUrl);
+					$('#killBtn').one('click',function(){
 						//只带killBtn
 						$(this).addClass('disabled');
 						//发送请求执行秒杀
-						$.post(killUrl, {}, function(result){
+						$.post(killUrl, {}, function(result) {
 							if(result && result['success']){
 								var seckillResult = result['data'];
-								var state = result['state'];
-								var stateInfo = result['stateInfo'];
+								var state = seckillResult['state'];
+								var stateInfo = seckillResult['stateInfo'];
 								if(state == 1){
 									var tip = '<span class="label label-success">'+stateInfo+'</span>';
 								}else {
 									var tip = '<span class="label label-danger">'+stateInfo+'</span>';
 								}
 								node.hide.html(tip).show();
+							}else{
+								console.log(result);
 							}
 						});
-						
 					});
 				}else{
 					//未开启
