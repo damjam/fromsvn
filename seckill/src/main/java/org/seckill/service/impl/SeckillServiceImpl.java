@@ -67,7 +67,7 @@ public class SeckillServiceImpl implements SeckillService {
 		}
 		seckill.setNumber(seckill.getNumber()-1);
 		seckillDao.update(seckill);
-		SeckillExecution seckillExcution = new SeckillExecution(id, SeckillStatEnum.SUCCESS);
+		SeckillExecution seckillExcution = new SeckillExecution(id, "1", "³É¹¦");
 		
 		SuccessKilled successKilled = new SuccessKilled();
 		successKilled.setCreateTime(DateUtil.getCurrent());

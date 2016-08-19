@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Hello World!
+<jsp:forward page="/seckill/list"></jsp:forward>
 </body>
 </html>

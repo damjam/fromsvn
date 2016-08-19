@@ -12,7 +12,6 @@ import org.seckill.entity.Seckill;
 import org.seckill.enums.SeckillStatEnum;
 import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
-import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import flink.etc.BizException;
 import flink.util.DateUtil;
 
 @Controller
@@ -57,7 +55,7 @@ public class SeckillController {
 	@RequestMapping(value="/{id}/exposer",method=RequestMethod.POST,
 			produces={"application/json;charset=UTF-8"})
 	@ResponseBody
-	public SeckillResult<Exposer> exposer(Integer id) {
+	public SeckillResult<Exposer> exposer(@PathVariable("id")Integer id) {
 		SeckillResult<Exposer> result = null;
 		try{
 			Exposer exposer = seckillService.exportSeckillUrl(id);
