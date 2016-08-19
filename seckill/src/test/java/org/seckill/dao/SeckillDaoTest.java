@@ -32,4 +32,5 @@ public class SeckillDaoTest {
 		Seckill seckill = seckillDao.findById(2);
 		System.out.println(ReflectionToStringBuilder.toString(seckill));
 	}
+	
 }

@@ -2,11 +2,11 @@ package org.seckill.dao;
 
 import java.util.List;
 
-import org.seckill.entity.SuccessKill;
+import org.seckill.entity.SuccessKilled;
 
 import flink.hibernate.BaseDao;
 
 public interface SuccessKilledDao extends BaseDao{
 
-	List<SuccessKill> findList(Integer id, String userPhone);
+	List<SuccessKilled> findList(Integer id, String userPhone);
 }

@@ -3,7 +3,7 @@ package org.seckill.dao.impl;
 import java.util.List;
 
 import org.seckill.dao.SuccessKilledDao;
-import org.seckill.entity.SuccessKill;
+import org.seckill.entity.SuccessKilled;
 import org.springframework.stereotype.Repository;
 
 import flink.hibernate.BaseDaoImpl;
@@ -13,13 +13,13 @@ public class SuccessKilledDaoImpl extends BaseDaoImpl implements SuccessKilledDa
 
 	@Override
 	protected Class getModelClass() {
-		return SuccessKill.class;
+		return SuccessKilled.class;
 	}
 
 	@Override
-	public List<SuccessKill> findList(Integer seckillId, String userPhone) {
+	public List<SuccessKilled> findList(Integer seckillId, String userPhone) {
 		QueryHelper helper = new QueryHelper();
-		helper.append("from SuccessKill where 1=1");
+		helper.append("from SuccessKilled where 1=1");
 		helper.append("and seckillId = ?", seckillId);
 		helper.append("and userPhone = ?", userPhone);
 		return super.getList(helper);

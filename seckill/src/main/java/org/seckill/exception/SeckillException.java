@@ -1,15 +1,12 @@
 package org.seckill.exception;
 
-public class SeckillException extends RuntimeException {
+import flink.etc.BizException;
 
-	public SeckillException(String message, Throwable cause) {
-		super(message, cause);
-		// TODO Auto-generated constructor stub
-	}
+public class SeckillException extends BizException {
+
 
 	public SeckillException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	
