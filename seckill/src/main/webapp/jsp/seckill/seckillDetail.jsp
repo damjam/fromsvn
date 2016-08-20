@@ -31,9 +31,6 @@
 				<span class="glyphicon glyphicon-time"></span>
 				<!-- 显示倒计时 -->
 				<span class="glyphicon" id="seckill-box"></span>
-				<span class="">
-					<button type="button" class="btn btn-primary" id="killBtn">开始秒杀</button>
-				</span>
 				</h3>
 			</div>
 		</div>

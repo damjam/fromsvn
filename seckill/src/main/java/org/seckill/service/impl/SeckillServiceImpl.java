@@ -11,6 +11,7 @@ import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.Seckill;
 import org.seckill.entity.SuccessKilled;
 import org.seckill.enums.SeckillStatEnum;
+import org.seckill.exception.RepeatKillException;
 import org.seckill.exception.SeckillCloseException;
 import org.seckill.exception.SeckillException;
 import org.seckill.service.SeckillService;
@@ -59,11 +60,11 @@ public class SeckillServiceImpl implements SeckillService {
 			throw new SeckillException("请求错误");
 		}
 		Seckill seckill = seckillDao.findByIdWithLock(id);
-		if(seckill.getNumber() <= 0){
+		if(seckill.getNumber() <= 0) {
 			throw new SeckillCloseException("库存不足");
 		}
 		if(successKilledDao.findList(id, userPhone).size()>0){
-			throw new SeckillCloseException("您已经秒杀过,不能再次秒杀");
+			throw new RepeatKillException("您已经秒杀过,不能再次秒杀");
 		}
 		seckill.setNumber(seckill.getNumber()-1);
 		seckillDao.update(seckill);

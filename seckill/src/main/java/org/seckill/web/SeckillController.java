@@ -66,25 +66,25 @@ public class SeckillController {
 		return result;
 	}
 	
-	@RequestMapping(value="/{seckillId}/{md5}/execute",method=RequestMethod.GET,
+	@RequestMapping(value="/{seckillId}/{md5}/execute",method=RequestMethod.POST,
 			produces={"application/json;charset=UTF-8"})
 	@ResponseBody
 	public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId")Integer seckillId, 
 			@PathVariable("md5")String md5, @CookieValue(value="userPhone", required=false)String userPhone) {
 		SeckillResult<SeckillExecution> result = null;
 		try {
-			if(StringUtils.isEmpty(userPhone)){
+			if(StringUtils.isEmpty(userPhone)) {
 				return new SeckillResult<SeckillExecution>(false, "Œ¥◊¢≤·");
 			}
 			SeckillExecution execution = seckillService.executeSeckill(seckillId, userPhone, md5);
 			result = new SeckillResult<SeckillExecution>(true, execution);
 		} catch (Exception e) {
 			if (e instanceof RepeatKillException) {
-				SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.REPEAT);
-				result = new SeckillResult<SeckillExecution>(false, execution);
+				SeckillExecution execution = new SeckillExecution(seckillId, "-1", "÷ÿ∏¥√Î…±");
+				result = new SeckillResult<SeckillExecution>(true, execution);
 			}else if (e instanceof SeckillCloseException) {
-				SeckillExecution execution = new SeckillExecution(seckillId, SeckillStatEnum.END);
-				result = new SeckillResult<SeckillExecution>(false, execution);
+				SeckillExecution execution = new SeckillExecution(seckillId, "0", "√Î…±Ω· ¯");
+				result = new SeckillResult<SeckillExecution>(true, execution);
 			}else {
 				result = new SeckillResult<SeckillExecution>(false, "ƒ⁄≤ø¥ÌŒÛ"+e.getMessage());
 			}

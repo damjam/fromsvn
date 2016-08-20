@@ -12,7 +12,7 @@ var seckill = {
 	},
 	handleSeckill: function(seckillId, node){
 		//显示秒杀地址
-		node.hide().html('<button class="btn btn-parimary btn-lg" id="killBtn"/>');
+		node.hide().html('<button class="btn btn-primary" id="killBtn">开始秒杀</button>');
 		$.post(seckill.URL.exposer(seckillId), {}, function(result){
 			if(result && result['success']){
 				var exposer = result['data'];
@@ -26,16 +26,18 @@ var seckill = {
 						$(this).addClass('disabled');
 						//发送请求执行秒杀
 						$.post(killUrl, {}, function(result) {
-							if(result && result['success']){
+							if(result && result['success']) {
 								var seckillResult = result['data'];
 								var state = seckillResult['state'];
 								var stateInfo = seckillResult['stateInfo'];
-								if(state == 1){
+								if(state == 1) {
 									var tip = '<span class="label label-success">'+stateInfo+'</span>';
 								}else {
 									var tip = '<span class="label label-danger">'+stateInfo+'</span>';
 								}
-								node.hide.html(tip).show();
+								node.hide().html(tip).show();
+							}else if(result && !result['success']){
+								node.hide().html(seckillResult['error']).show();
 							}else{
 								console.log(result);
 							}
@@ -53,6 +55,7 @@ var seckill = {
 				console.log('result'+result);
 			}
 		});
+		node.show();
 	},
 	validatePhone: function(phone){
 		if(phone && phone.length == 11 && !isNaN(phone)){
