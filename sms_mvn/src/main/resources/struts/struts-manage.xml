@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="manage" extends="default" namespace="/">
+		
+		<action name="reportAction" class="reportAction">
+		</action>
+		
+		<action name="account" class="accountAction">
+			<result name="list">/pages/manage/account/accountList.jsp</result>
+			<result name="withdraw">/pages/manage/account/withdraw.jsp</result>
+			<result name="deposit">/pages/manage/account/deposit.jsp</result>
+			<result name="detail_list">/pages/manage/account/accountDetailList.jsp</result>
+			<result name="toMain" type="redirect">account.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="accountJournal" class="accountJournalAction">
+			<result name="account_journal">/pages/manage/actJournal/accountJournal.jsp</result>
+			<result name="output_fund">/pages/manage/actJournal/outputFund.jsp</result>
+			<result name="intput_fund">/pages/manage/actJournal/inputFund.jsp</result>
+			<result name="reverse">/pages/manage/actJournal/reverse.jsp</result>
+			<result name="account_gather">/pages/manage/actJournal/accountGather.jsp</result>
+			<result name="trade_report">/pages/manage/actJournal/tradeReport.jsp</result>
+			<result name="toMain" type="redirect">accountJournal.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="merchantInfo" class="merchantInfoAction">
+			<result name="list">/pages/manage/merchant/merchantList.jsp</result>
+			<result name="popUp">/pages/popUp/popupMerchantInfo.jsp</result>
+			<result name="edit">/pages/manage/merchant/merchantInfoEdit.jsp</result>
+			<result name="toMain" type="redirect">merchantInfo.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		
+		<action name="contact" class="contactAction">
+			<result name="list">/pages/manage/contact/contactList.jsp</result>
+			<result name="edit">/pages/manage/contact/contact.jsp</result>
+			<result name="toMain" type="redirect">contact.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="generalBill" class="generalBillAction">
+			<result name="list">/pages/manage/charge/general/generalBillList.jsp</result>
+			<result name="add">/pages/manage/charge/general/generalBillAdd.jsp</result>
+			<result name="toMain" type="redirect">generalBill.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		
+		<action name="employee" class="employeeAction">
+			<result name="list">/pages/manage/employee/employeeList.jsp</result>
+			<result name="edit">/pages/manage/employee/employeeEdit.jsp</result>
+			<result name="add">/pages/manage/employee/employeeAdd.jsp</result>
+			<result name="transfer">/pages/manage/employee/empTransferAdd.jsp</result>
+			<result name="vocation">/pages/manage/employee/vocationAdd.jsp</result>
+			<result name="transferList">/pages/manage/employee/empTransferList.jsp</result>
+			<result name="detail">/pages/manage/employee/employeeDetail.jsp</result>
+			<result name="popup">/pages/popUp/popupEmployee.jsp</result>
+			<result name="toMain" type="redirect">employee.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="repair" class="repairAction">
+			<result name="list">/pages/manage/repair/repairList.jsp</result>
+			<result name="edit">/pages/manage/repair/repairEdit.jsp</result>
+			<result name="add">/pages/manage/repair/repairAdd.jsp</result>
+			<result name="detail">/pages/manage/repair/repairDetail.jsp</result>
+			<result name="trackList">/pages/manage/repair/repairTrackList.jsp</result>
+			<result name="trackAdd">/pages/manage/repair/repairTrackAdd.jsp</result>
+			<result name="toMain" type="redirect">repair.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="material" class="materialAction">
+			<result name="list">/pages/manage/material/materialList.jsp</result>
+			<result name="edit">/pages/manage/material/materialEdit.jsp</result>
+			<result name="add">/pages/manage/material/materialAdd.jsp</result>
+			<result name="detail">/pages/manage/material/materialDetail.jsp</result>
+			<result name="import">/pages/manage/material/materialImport.jsp</result>
+			<result name="toMain" type="redirect">material.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="carBrand" class="carBrandAction">
+			<result name="list">/pages/manage/carBrand/carBrandList.jsp</result>
+			<result name="edit">/pages/manage/carBrand/carBrandEdit.jsp</result>
+			<result name="add">/pages/manage/carBrand/carBrandAdd.jsp</result>
+			<result name="toMain" type="redirect">carBrand.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="carModel" class="carModelAction">
+			<result name="list">/pages/manage/carModel/carModelList.jsp</result>
+			<result name="edit">/pages/manage/carModel/carModelEdit.jsp</result>
+			<result name="add">/pages/manage/carModel/carModelAdd.jsp</result>
+			<result name="toMain" type="redirect">carModel.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="orderRecord" class="orderRecordAction">
+			<result name="list">/pages/manage/order/orderRecordList.jsp</result>
+			<result name="edit">/pages/manage/order/orderRecordEdit.jsp</result>
+			<result name="add">/pages/manage/order/orderRecordAdd.jsp</result>
+			<result name="toMain" type="redirect">orderRecord.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="dailyOrder" class="dailyOrderAction">
+			<result name="dailySum">/pages/manage/summary/dailySum.jsp</result>
+			<result name="monthSum">/pages/manage/summary/monthSum.jsp</result>
+			<result name="seansonSum">/pages/manage/summary/seansonSum.jsp</result>
+		</action>
+		<action name="orderDetail" class="orderDetailAction">
+			<result name="list">/pages/manage/order/orderDetailList.jsp</result>
+			<result name="edit">/pages/manage/order/orderDetailEdit.jsp</result>
+			<result name="add">/pages/manage/order/orderDetailAdd.jsp</result>
+			<result name="toMain" type="redirect">orderDetail.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+			<result name="detailList">/pages/manage/order/orderDetails.jsp</result>
+		</action>
+		<action name="storage" class="storageAction">
+			<result name="list">/pages/manage/storage/storageList.jsp</result>
+			<result name="edit">/pages/manage/storage/storageEdit.jsp</result>
+			<result name="add">/pages/manage/storage/storageAdd.jsp</result>
+			<result name="outstock">/pages/manage/storage/storageOut.jsp</result>
+			<result name="toMain" type="redirect">storage.do?action=list&amp;msg=${msg}&amp;result={result}</result>
+		</action>
+		<action name="storageJournal" class="storageJournalAction">
+			<result name="list">/pages/manage/storageJournal/storageJournalList.jsp</result>
+		</action>
+	</package>
+</struts>

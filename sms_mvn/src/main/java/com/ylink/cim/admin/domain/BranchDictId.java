@@ -1,0 +1,83 @@
+package com.ylink.cim.admin.domain;
+
+import java.io.Serializable;
+
+public class BranchDictId implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String dictValue;
+	
+	private String dictType;
+	
+	private String branchNo;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BranchDictId other = (BranchDictId) obj;
+		if (dictType == null) {
+			if (other.dictType != null)
+				return false;
+		} else if (!dictType.equals(other.dictType))
+			return false;
+		if (dictValue == null) {
+			if (other.dictValue != null)
+				return false;
+		} else if (!dictValue.equals(other.dictValue))
+			return false;
+		if (branchNo == null) {
+			if (other.branchNo != null)
+				return false;
+		} else if (!branchNo.equals(other.branchNo))
+			return false;
+		return true;
+	}
+
+	public String getDictType() {
+		return dictType;
+	}
+
+	public String getDictValue() {
+		return dictValue;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dictType == null) ? 0 : dictType.hashCode());
+		result = prime * result
+				+ ((dictValue == null) ? 0 : dictValue.hashCode());
+		return result;
+	}
+
+	
+	public void setDictType(String dictType) {
+		this.dictType = dictType;
+	}
+
+	
+	public void setDictValue(String dictValue) {
+		this.dictValue = dictValue;
+	}
+
+	public String getBranchNo() {
+		return branchNo;
+	}
+
+	public void setBranchNo(String branchNo) {
+		this.branchNo = branchNo;
+	}
+	
+	
+}

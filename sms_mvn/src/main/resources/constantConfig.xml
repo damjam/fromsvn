@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="mailServerConfig" class="com.flink.mail.MailConfig">
+		<property name="sendhost">
+			<value>smtp.exmail.qq.com</value>
+		</property>
+		<property name="sendPort">
+			<value>25</value>
+		</property>
+		<property name="sendUserName">
+			<value>test@szgold.com.cn</value>
+		</property>
+		<property name="sendPassword">
+			<value>Gold1234</value>
+		</property>
+	</bean>
+	<bean id="mobileMsgConfig" class="com.ylink.cim.common.util.MobileMsgConfig">
+		<property name="postUrl">
+			<value>http://119.145.36.52:8011/Com/smsinterface/DXBZJK.cfm</value>
+		</property>
+		<property name="account">
+			<value>oayy</value>
+		</property>
+		<property name="password">
+			<value>oayy</value>
+		</property>
+	</bean>
+	
+	<bean id="comInfo" class="com.ylink.cim.common.util.ComInfo">
+		<property name="name">
+			<value>漯河市众成汽车脚垫有限公司</value>
+		</property>
+		<property name="hqName">
+			<value></value>
+		</property>
+		<property name="groupWeb">
+			<value></value>
+		</property>
+		<property name="tel">
+			<value>18639996660</value>
+		</property>
+		<property name="cel">
+			<value></value>
+		</property>
+		<property name="email">
+			<value></value>
+		</property>
+		<property name="add">
+			<value>河南省漯河市</value>
+		</property>
+		<property name="sp">
+			<value>漯河市众成汽车配件销售管理系统</value>
+		</property>
+		<property name="tip">
+			<value>请使用最新版chrome浏览器获得最佳操作体验</value>
+		</property>
+	</bean>
+</beans>

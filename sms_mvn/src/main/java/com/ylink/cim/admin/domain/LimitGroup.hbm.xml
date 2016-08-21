@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.LimitGroup" table="LIMIT_GROUP">
+        <composite-id name="id" class="com.ylink.cim.admin.domain.LimitGroupId">
+            <key-property name="limitGroupId" type="java.lang.String">
+                <column name="LIMIT_GROUP_ID" length="20" />
+            </key-property>
+            <key-property name="limitId" type="java.lang.String">
+                <column name="LIMIT_ID" length="30" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.RoleInfo" table="ROLE_INFO">
+        <id name="roleId" type="java.lang.String">
+            <column name="ROLE_ID"/>
+        </id>
+        <property name="roleName" type="java.lang.String">
+            <column name="ROLE_NAME" not-null="true" />
+        </property>
+        
+         <property name="limitGroupId" type="java.lang.String">
+            <column name="limit_group_id" not-null="true" />
+        </property>
+        
+        <property name="remark" column="remark"></property>
+    </class>
+</hibernate-mapping>
