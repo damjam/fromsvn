@@ -43,7 +43,7 @@ public class DailyOrderAction extends BaseAction implements ModelDriven<DailyOrd
 	}
 	public String exeDailySum() throws Exception {
 		try {
-			dailyOrderService.exeDailySumTask(null);
+			dailyOrderService.dailySum();
 			setResult(true, "统计完成", request);
 		} catch (Exception e) {
 			e.printStackTrace();

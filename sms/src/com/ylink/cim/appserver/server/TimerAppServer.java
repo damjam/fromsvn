@@ -23,7 +23,7 @@ import flink.util.SpringContext;
  */
 @Component("timerAppServer")
 public class TimerAppServer implements IAppServer {
-	private static long sleepTime = 60000L;// 一分钟
+	private static long sleepTime = 600000L;// 十分钟
 	private Logger logger = Logger.getLogger(TimerAppServer.class);
 
 	@Autowired

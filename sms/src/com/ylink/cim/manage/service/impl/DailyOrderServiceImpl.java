@@ -17,6 +17,8 @@ import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.DailyOrder;
 import com.ylink.cim.manage.domain.OrderDetail;
 import com.ylink.cim.manage.service.DailyOrderService;
+import com.ylink.cim.sys.dao.TimerDoDao;
+import com.ylink.cim.sys.domain.TimerDo;
 
 import flink.IdFactoryHelper;
 import flink.etc.BizException;
@@ -31,8 +33,21 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 	private OrderRecordDao orderRecordDao;
 	@Autowired
 	private OrderDetailDao orderDetailDao;
+	@Autowired
+	private TimerDoDao timerDoDao;
 	@Override
-	public void exeDailySumTask(String id) throws BizException {
+	public void exeDailySumTask(String timerDoId) throws BizException {
+		TimerDo timerDo = timerDoDao.findByIdWithLock(timerDoId);
+		if (TimerDo.BUSINESS_SUCESS.equals(timerDo.getState())) {
+			return;
+		}
+		//执行统计
+		dailySum();
+		timerDo.setState(TimerDo.BUSINESS_SUCESS);
+		timerDoDao.update(timerDo);
+	}
+	@Override
+	public void dailySum() throws BizException {
 		Date date = DateUtil.addMonths(DateUtil.getCurrent(), -1);
 		String beginDate = DateUtil.getDateYYYYMMDD(date);
 		String endDate = DateUtil.addDays(DateUtil.getCurrentDate(), -1, "yyyyMMdd");
@@ -106,7 +121,7 @@ public class DailyOrderServiceImpl implements DailyOrderService {
 		params.put("beginDate", beginDate);
 		params.put("endDate", endDate);
 		Paginater paginater = dailyOrderDao.findPaginater(params, null); 
-		List<DailyOrder> dailyOrders = paginater.getList();
+		List<DailyOrder> dailyOrders = paginater.getList();//已保存汇总信息
 		List<String> dailyOrderDates = new ArrayList<String>();
 		for(int i=0; i<dailyOrders.size(); i++){
 			DailyOrder dailyOrder = dailyOrders.get(i);

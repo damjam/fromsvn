@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.MerchantInfoDao;
+import com.ylink.cim.manage.domain.Contact;
 import com.ylink.cim.manage.domain.MerchantInfo;
 
 import flink.hibernate.BaseDaoImpl;
