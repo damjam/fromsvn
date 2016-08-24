@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='GB2312'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.PrivilegeResource" table="PRIVILEGE_RESOURCE">
+        <id name="id" column="ID" type="long">
+           <generator class="assigned" />
+        </id>
+ 
+        <property name="limitId" column="LIMIT_ID" type="string"  not-null="true" />
+        <property name="url" column="URL" type="string" />
+        <property name="param" column="PARAM" type="string" />
+        <property name="isEntry" column="IS_ENTRY" type="string" />
+    </class>
+    
+</hibernate-mapping>

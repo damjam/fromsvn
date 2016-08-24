@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding='GB2312'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping >
+
+    <class name="com.ylink.cim.sys.domain.TimerDo" table="TIMER_DO">
+        <id name="id" type="java.lang.String">
+            <column name="id" precision="12" scale="0" />
+             <generator class="assigned" />
+        </id>
+        <property name="beanName" column="BEAN_NAME" type="string"  not-null="true" />
+        <property name="beanNameCh" column="BEAN_NAME_CH" type="string"  not-null="true" />
+        <property name="triggerDate" column="TRIGGERDATE" type="string"  not-null="true" />
+        <property name="triggerTime" column="TRIGGERTIME" type="string"  not-null="true" />
+        <property name="state" column="STATE" type="string"  not-null="true" />
+        <property name="remark" column="REMARK" type="string" />
+        <property name="groupNo" column="GROUPNO" type="string"   />
+        <property name="para1" type="java.lang.Long">
+            <column name="PARA1" precision="12" scale="0" />
+        </property>
+        <property name="para2" column="PARA2" type="string"  />
+    </class>
+    
+</hibernate-mapping>

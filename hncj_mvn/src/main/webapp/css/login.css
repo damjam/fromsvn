@@ -1,0 +1,68 @@
+/* -----------------------------------------------------------------------
+
+                Wucss 银联商务网上服务系统跨浏览器兼容CSS框架
+ 
+   * Copyright 2010-Present. See Website For More Info.
+   * 文件名称：Wucss网站CSS样式框架
+   * 兼容浏览器：IE6\IE7\火狐3\遨游2\世界之窗2\谷歌浏览器2\opera9\Safari4
+   * 设计师：FangZhengWu
+   * 技术支持：4008-333-222  www.gnete.com 
+   * 广州银联网络支付有限公司 
+   * 主要功能：对银联网络多渠道资金归集处理系统界面进行统一的跨浏览器样式控制
+
+----------------------------------------------------------------------- */
+
+*{margin:0;padding:0;}
+html{padding:0 !important;padding:100px 0;width:100%;height:100%;overflow:hidden;}
+body{padding:100px 0;padding:/**/0;height:100%;overflow: hidden;font-size:12px;color:#4c4948;background:#fff; font-family:Tahoma, Geneva, sans-serif;}
+a img {border:none;}
+img {vertical-align:text-bottom;}
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img {margin:0;}
+li ul, li ol {margin:0px;}
+ul, ol {margin:0 0 0 1.5em;}
+ul { list-style:none;}
+
+.clearfix:after, .head:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+.clearfix, .head {display:block;}
+.clear {clear:both;}
+.clearing {clear: both; display: block; font-size:0px; display:none; overflow:hidden; line-height:0; height:0px}
+body.fullwidth {min-width:960px;}
+
+
+/* 登录口区域布局 */
+.top{position:absolute;top:0;width:100%;height:100px;background:#fff;text-align:center;}
+.topbg{background:url('../images/top_center.jpg') repeat-x; height:39px; width:100%;}
+.toptext{float:left; font-size:14px; font-weight:bold; line-height:39px; vertical-align:middle; color:#FFF; padding-left:7px;}
+.topshadow{background:url(../images/top_shadow.jpg) repeat-x; height:20px; width:100%;}
+
+.middle{position: absolute!important;position: relative;top:100px!important;top:0;bottom:100px;width:100%;height:auto!important;height:100%;background:#fff;text-align:center;overflow: auto;}
+.middlebox{margin:0 auto; text-align:center; width:800px;}
+.gonggao{height:23px; line-height:23px; vertical-align:middle;}
+
+.footer{position:absolute;bottom:0;width:100%;height:100px;background:#ccc;text-align:center;}
+.footshadow{background:url(../images/bottom_shadow.jpg) repeat-x; height:56px; width:100%;}
+.foottext{background:url(../images/bottom_bg.jpg) repeat-x; height:44px; line-height:44px; vertical-align:middle;width:100%;}
+.textleft{float:left; padding-left:15px;}
+.textright{float:right; padding-right:15px;}
+
+.mainleft{border-right: #dadada 1px solid; padding-right: 50px; margin-top: 50px; float: left; margin-bottom: 50px; width: 42%; padding-top: 20px; height: 270px; text-align: right}
+.mainright{margin-top: 50px; float: right; margin-bottom: 50px; width: 50%; color: #4c4948; padding-top: 20px; height: 270px; text-align:left;}
+
+.formbox{float:left; width:100%;}
+.formleft{width:56px; height:43px;overflow:hidden; float:left; line-height:43px; vertical-align:middle; text-align:right; padding-right:8px; font-size:14px; font-weight:bold;}
+.formright{width:300px;height:35px;overflow:hidden; float:left;line-height:35px; vertical-align:middle;color:#4c4948; padding-top:8px;}
+.forminput{background:url(../images/inputbg_text.gif) repeat-x;width:258px;height:25px;border:1px solid #c3c3c3;overflow:hidden; font-size:14px;color:#4c4948; font-weight:bold; font-family:Tahoma, Geneva, sans-serif; padding:0px 0px 0px 5px; *padding:0px 0px 0px 5px; _padding:0px 0px 0px 5px; line-height:25px; vertical-align:middle;}
+
+input:focus, input.sffocus {background: #cfc;border:1px solid #090;}
+
+.formbtbox{width:300px;height:43px;overflow:hidden; float:left;line-height:43px; vertical-align:middle;color:#4c4948; padding-top:6px;}
+.formbt{width:153px; height:43px;float:left;line-height:43px; vertical-align:middle;font-size:14px;padding:0px; border:none;}
+
+/* 通用链接色 */
+a:link {color: #4c4948;text-decoration: none;}
+a:visited {color: #4c4948;text-decoration: none;}
+a:hover {color: #ff0000; text-decoration:underline;}
+a:focus{outline:0;}
+
+/* 特殊红色文字 */
+.redfont {color: #ff0000;}

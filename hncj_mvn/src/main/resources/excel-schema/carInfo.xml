@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<bean id="carInfoImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 车牌号 -->
+				<map>
+					<entry key="fieldName" value="carSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 品牌 -->
+				<map>
+					<entry key="fieldName" value="brand"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 型号-->
+				<map>
+					<entry key="fieldName" value="model"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车主姓名-->
+				<map>
+					<entry key="fieldName" value="ownerName"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车主电话-->
+				<map>
+					<entry key="fieldName" value="ownerCel"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车主房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 车位号-->
+				<map>
+					<entry key="fieldName" value="parkingSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="carInfoExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 车位号 -->
+				<map>
+					<entry key="fieldName" value="车位号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!--品牌型号-->
+				<map>
+					<entry key="fieldName" value="品牌型号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车主姓名-->
+				<map>
+					<entry key="fieldName" value="车主姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车主电话 -->
+				<map>
+					<entry key="fieldName" value="车主电话"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车主房屋编号 -->
+				<map>
+					<entry key="fieldName" value="车主房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 车位号 -->
+				<map>
+					<entry key="fieldName" value="车位号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 创建时间 -->
+				<map>
+					<entry key="fieldName" value="创建时间"></entry>
+					<entry key="cellType" value="DateTime"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

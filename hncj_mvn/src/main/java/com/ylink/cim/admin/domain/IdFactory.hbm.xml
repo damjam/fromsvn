@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.ylink.cim.admin.domain.IdFactory" table="id_factory">
+        <id name="seqIdName" column="seq_id_name">
+        	<generator class="assigned"></generator>
+        </id>
+        
+        <property name="initValue" column="init_value"></property>
+        <property name="currentValue" column="current_value"></property>
+        <property name="stepValue" column="step_value"></property>
+        <property name="fillValue" column="fill_value"></property>
+        <property name="maxLength" column="max_length"></property>
+        <property name="dateLength" column="date_length"></property>
+        <property name="direction" column="direction"></property>
+        <property name="remark" column="remark"></property>
+        <property name="prefix" column="prefix"></property>
+    </class>
+    
+</hibernate-mapping>

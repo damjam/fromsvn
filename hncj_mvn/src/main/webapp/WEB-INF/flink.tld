@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<taglib xmlns= "http://java.sun.com/xml/ns/j2ee"
+		xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation= "http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+		version="2.0"> 
+
+	<tlib-version>1.0</tlib-version>
+
+	<tag>
+		<name>msg</name>
+		<tag-class>flink.web.tag.Msg</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>js</name>
+		<tag-class>flink.web.tag.Js</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>src</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>defer</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>css</name>
+		<tag-class>flink.web.tag.Css</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>href</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>sfix</name>
+		<tag-class>flink.web.tag.Sfix</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>length</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>paginate</name>
+		<tag-class>flink.web.tag.Paginate</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>formIndex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>showSummary</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>tidy</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>			
+		</attribute>
+		
+		<attribute>
+			<name>navigateStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>			
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>pspan</name>
+		<tag-class>flink.web.tag.PrivilegeTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>pid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>showDataGrid</name>
+		<tag-class>flink.web.tag.ShowDataGridTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>msg</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>styleId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>styleClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>showTopbar</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>symbol</name>
+		<tag-class>flink.web.tag.SymbolTrans</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>symbol</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>type</name>
+		<tag-class>flink.web.tag.TypeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>formatDate</name>
+		<tag-class>flink.web.tag.FormatDate</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>sourcePattern</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>targetPattern</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>state</name>
+		<tag-class>flink.web.tag.StateTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>property</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>dTree</name>
+		<tag-class>flink.web.tag.DTree</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>jsSrc</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>imgSrc</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>displayDivId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>folderLinks</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>useSelection</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>useCookies</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>userLines</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>useIcons</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>useStatusText</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>closeSameLevel</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>inOrder</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>check</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>dataListName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>buffer</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>cssSrc</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>initCheckDataName</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+</taglib>

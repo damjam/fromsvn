@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-lazy-init="false"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+
+	<!-- 装修服务费导入格式 -->           
+	<bean id="decorateServiceBillImportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 账单号 -->
+				<map>
+					<entry key="fieldName" value="id"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="houseSn"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 付款金额-->
+				<map>
+					<entry key="fieldName" value="paidAmount"></entry>
+					<entry key="cellType" value="Double"></entry>
+					<entry key="notNull" value="Y"></entry>
+				</map>
+				<!-- 收款人-->
+				<map>
+					<entry key="fieldName" value="chargeUser"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="remark"></entry>
+					<entry key="cellType" value="String"></entry>
+					<entry key="notNull" value="N"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>	
+	<!-- 装修服务费导出格式 -->           
+	<bean id="decorateServiceBillExportRule" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<!-- 账单号 -->
+				<map>
+					<entry key="fieldName" value="账单号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 房屋编号 -->
+				<map>
+					<entry key="fieldName" value="房屋编号"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 业主姓名 -->
+				<map>
+					<entry key="fieldName" value="业主姓名"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 房屋面积-->
+				<map>
+					<entry key="fieldName" value="房屋面积"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 上料费-->
+				<map>
+					<entry key="fieldName" value="电梯上料费"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 垃圾清运费单价-->
+				<map>
+					<entry key="fieldName" value="垃圾清运费单价"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 垃圾清运费-->
+				<map>
+					<entry key="fieldName" value="垃圾清运费"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 合计金额-->
+				<map>
+					<entry key="fieldName" value="合计金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 实收金额-->
+				<map>
+					<entry key="fieldName" value="实收金额"></entry>
+					<entry key="cellType" value="Double"></entry>
+				</map>
+				<!-- 缴费时间-->
+				<map>
+					<entry key="fieldName" value="缴费时间"></entry>
+					<entry key="cellType" value="DateTime"></entry>
+				</map>
+				<!-- 收款人-->
+				<map>
+					<entry key="fieldName" value="收款人"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 状态-->
+				<map>
+					<entry key="fieldName" value="状态"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+				<!-- 备注 -->
+				<map>
+					<entry key="fieldName" value="备注"></entry>
+					<entry key="cellType" value="String"></entry>
+				</map>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>	

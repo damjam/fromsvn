@@ -1,0 +1,62 @@
+.box_bg {
+	position: absolute;
+	width: 522px;
+	height: 249px;
+	background: #f1f1f1;
+	margin: 11px 5px 5px 5px;
+	z-index: 1;
+}
+
+.box_con {
+	position: absolute;
+	width: 520px;
+	height: 249px;
+	margin-top: 6px;
+	border: 1px solid #d6d6d6;
+	background: #fff;
+	z-index: 2;
+}
+
+.box_top {
+	position: absolute;
+	width: 58px;
+	height: 7px;
+	font-size: 1px;
+	background: transparent url(../images/pinc.gif) no-repeat -46px -31px;
+	z-index: 3;
+}
+
+.close_bar {
+	width: 520px;
+	text-align: right;
+}
+
+button.close {
+	margin: 3px 3px 0 0;
+	cursor: pointer;
+	height: 11px;
+	border: 0;
+	padding: 0;
+	background: url("../images/close_11.gif") no-repeat 0 0;
+	width: 13px;
+}
+
+.c_link {
+	float: left;
+	padding: 3px;
+	text-align: center;
+	width: 18%;
+	line-height: 180%;
+}
+
+.provTitle {
+	background: #FFFFFF;
+	text-align: center;
+	height: 100px;
+}
+
+.provText {
+	font-weight: bold;
+	color: #000000;
+	font-size: 14px;
+}
