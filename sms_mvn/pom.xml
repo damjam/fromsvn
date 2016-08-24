@@ -171,14 +171,83 @@
 		    <artifactId>commons-httpclient</artifactId>
 		    <version>3.1</version>
 		</dependency>
+		<!--  
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
 		    <version>3.5.2</version>
 		    <scope>system</scope>
-		    <!-- project.basedir为内置属性，其值为pom.xml所在的路径 -->
 		    <systemPath>${project.basedir}\src\main\webapp\WEB-INF\lib\jasperreports-3.5.2.jar</systemPath> 
 		</dependency>
+		-->
+		<!-- 
+		<dependency>
+		    <groupId>zhfont</groupId>
+		    <artifactId>zhfont</artifactId>
+		    <version>1.0.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}\src\main\webapp\WEB-INF\lib\zhfont.jar</systemPath> 
+		</dependency> -->
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>6.3.0</version>
+		    <exclusions>
+				<exclusion>
+					<groupId>com.ibm.icu</groupId>
+    				<artifactId>icu4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queries</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queryparser</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-analyzers-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-sandbox</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 报表生成pdf时需要用此jar包，否则中文不能正常显示 -->
+		<!-- 
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itext-asian</artifactId>
+		    <version>5.2.0</version>
+		</dependency>
+		 -->
+		 
+		<dependency>
+		    <groupId>itextAsian</groupId>
+		    <artifactId>itextAsian</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}\src\main\webapp\WEB-INF\lib\iTextAsian.jar</systemPath> 
+		</dependency>
+		<!-- 
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>5.5.9</version>
+		</dependency> -->
+		
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>6.0.0</version>
+		</dependency>
+		
 		<dependency>
 		    <groupId>flink_mail</groupId>
 		    <artifactId>flink_mail</artifactId>
@@ -198,8 +267,5 @@
 		    <version>1.8.9</version>
 		</dependency>
 		
-		
-  		
-  		
   </dependencies>
 </project>

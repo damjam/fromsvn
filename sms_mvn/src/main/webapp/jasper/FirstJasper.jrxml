@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-08-23T20:04:47 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FirstJasper" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="270" columnSpacing="15" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" uuid="b5f94ae6-fba6-4ec3-97dd-5108ffacbf96">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OneEmptyRecord.xml"/>
+	<style name="Sans_Normal" isDefault="true" fontName="DejaVu Sans" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="Sans_Bold" isBold="true" isItalic="false"/>
+	<style name="Sans_Italic" isBold="false" isItalic="true"/>
+	<style name="Serif_Normal" fontName="DejaVu Serif" fontSize="10" isBold="false" isItalic="false"/>
+	<style name="Serif_Bold" fontName="DejaVu Serif" fontSize="10" isBold="true" isItalic="false"/>
+	<style name="OrderIdStyle" style="Sans_Normal">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{OrderID} % 10 == 0]]></conditionExpression>
+			<style forecolor="#FF0000" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="MaxOrderID" class="java.lang.Integer"/>
+	<parameter name="SummaryImage" class="java.awt.Image"/>
+	<queryString>
+		<![CDATA[SELECT * FROM Orders WHERE OrderID <= $P{MaxOrderID} ORDER BY ShipCountry]]>
+	</queryString>
+	<field name="ShippedDate" class="java.sql.Timestamp"/>
+	<field name="ShipCountry" class="java.lang.String"/>
+	<field name="RequiredDate" class="java.sql.Timestamp"/>
+	<field name="CustomerID" class="java.lang.String"/>
+	<field name="OrderID" class="java.lang.Integer"/>
+	<field name="ShipName" class="java.lang.String"/>
+	<field name="ShipVia" class="java.lang.Integer"/>
+	<field name="ShipPostalCode" class="java.lang.String"/>
+	<field name="OrderDate" class="java.sql.Timestamp"/>
+	<field name="ShipCity" class="java.lang.String"/>
+	<field name="ShipAddress" class="java.lang.String"/>
+	<field name="EmployeeID" class="java.lang.Integer"/>
+	<field name="ShipRegion" class="java.lang.String"/>
+	<field name="Freight" class="java.lang.Double"/>
+	<variable name="FirstLetter" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$F{ShipCountry}.substring(0, 1).toUpperCase()]]></variableExpression>
+	</variable>
+	<variable name="FreightSumFirstLetterGroup" class="java.lang.Double" resetType="Group" resetGroup="FirstLetterGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{Freight}]]></variableExpression>
+	</variable>
+	<variable name="FreightSumCountryGroup" class="java.lang.Double" resetType="Group" resetGroup="CountryGroup" calculation="Sum">
+		<variableExpression><![CDATA[$F{Freight}]]></variableExpression>
+	</variable>
+	<variable name="FreightSumColumn" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{Freight}]]></variableExpression>
+	</variable>
+	<variable name="FreightSumPage" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{Freight}]]></variableExpression>
+	</variable>
+	<variable name="FreightSumReport" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{Freight}]]></variableExpression>
+	</variable>
+	<variable name="DateHighestCountryGroup" class="java.sql.Timestamp" resetType="Group" resetGroup="CountryGroup" calculation="Highest">
+		<variableExpression><![CDATA[$F{OrderDate}]]></variableExpression>
+	</variable>
+	<variable name="RegionCountCountryGroup" class="java.lang.Integer" resetType="Group" resetGroup="CountryGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{ShipRegion}]]></variableExpression>
+	</variable>
+	<variable name="FirstLetterStartPageNumber" class="java.lang.Integer" resetType="Group" resetGroup="FirstLetterGroup" calculation="Sum">
+		<variableExpression><![CDATA[$V{FirstLetterGroup_COUNT} <= 1 ? $V{PAGE_NUMBER} : 0]]></variableExpression>
+	</variable>
+	<group name="FirstLetterGroup" isStartNewColumn="true" isReprintHeaderOnEachPage="true" minHeightToStartNewPage="200">
+		<groupExpression><![CDATA[$V{FirstLetter}]]></groupExpression>
+	</group>
+	<group name="BreakGroup">
+		<groupExpression><![CDATA[$V{BreakGroup_COUNT} > 5]]></groupExpression>
+		<groupHeader>
+			<band height="5"/>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="100">
+			<elementGroup>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="585f4d7d-90c0-4cea-83e7-c8487105cfe4"/>
+				</line>
+			</elementGroup>
+			<staticText>
+				<reportElement style="Sans_Italic" x="180" y="40" width="375" height="15" uuid="9f64142a-f431-4f4d-ac96-972a818e2d1d"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[(c)2001-2014 by teodord]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45">
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="40" uuid="aa9b7b94-ae73-425c-8ea3-036c522f2f4e"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="555" height="25" uuid="7833499d-34a9-4403-a2d6-2943297ae5e4"/>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Northwind Order List]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnFooter>
+		<band height="11"/>
+	</columnFooter>
+</jasperReport>

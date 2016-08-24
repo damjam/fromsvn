@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-08-24T01:17:12 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="newOrderRecord" pageWidth="623" pageHeight="257" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="583" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="df5d24d2-adff-4761-9c4e-1083c211c798">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OneEmptyRecord.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="orderId" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<staticText>
+				<reportElement x="300" y="10" width="150" height="18" uuid="c80d9b30-a42d-441a-9027-013c236f71a7"/>
+				<textElement textAlignment="Center">
+					<font fontName="黑体" pdfFontName="" pdfEncoding=""/>
+				</textElement>
+				<text><![CDATA[汉字111124]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="22" width="100" height="30" uuid="8eaac844-8b04-41ed-bea7-6b98c41f173a"/>
+				<textElement>
+					<font fontName="黑体"/>
+				</textElement>
+				<text><![CDATA[hhhhhhh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="30" width="221" height="14" uuid="b1de23ac-1127-4611-9db6-42097f9a3b0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="黑体" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[漯河众成汽车脚垫厂商品订货单汉字]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>

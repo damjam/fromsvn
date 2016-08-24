@@ -14,13 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.sun.java.swing.plaf.motif.resources.motif;
 import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.InoutType;
 import com.ylink.cim.common.type.TradeType;
@@ -29,7 +27,6 @@ import com.ylink.cim.common.util.MoneyUtil;
 import com.ylink.cim.manage.dao.AccountDao;
 import com.ylink.cim.manage.dao.AccountDetailDao;
 import com.ylink.cim.manage.dao.AccountJournalDao;
-import com.ylink.cim.manage.dao.AdrentBillDao;
 import com.ylink.cim.manage.dao.DepositBillDao;
 import com.ylink.cim.manage.dao.GeneralBillDao;
 import com.ylink.cim.manage.dao.OrderDetailDao;
@@ -43,8 +40,9 @@ import flink.util.AmountUtils;
 import flink.util.DateUtil;
 import flink.util.SpringContext;
 import flink.web.BaseAction;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -53,6 +51,7 @@ import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.FileBufferedOutputStream;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.ExporterInput;
 
 /**
  * 
@@ -111,7 +110,10 @@ public class ReportAction extends BaseAction {
 		map.put("orderId", id);
 		map.put("amountStr", MoneyUtil.getFormatStr2(record.getPayAmt()));
 		map.put("remark", record.getRemark());
-		generateReportWithConn("orderRecord.jasper", map, request, response);
+		//generateReportWithConn("orderRecord-3.jasper", map, request, response);
+		generateReportWithConn("newOrderRecord.jasper", map, request, response);
+		//generateReportWithConn("sample3.jasper", map, request, response);
+		//generateReportWithConn("FirstJasper.jasper", map, request, response);
 		return null;
 	}
 
@@ -278,7 +280,7 @@ public class ReportAction extends BaseAction {
 		return null;
 	}
 
-
+	/*
 	private void generateReportWithData(String jasperFileName,
 			Map<String, Object> parameters, List<?> data,
 			HttpServletRequest request, HttpServletResponse response)
@@ -287,7 +289,7 @@ public class ReportAction extends BaseAction {
 		path = path.endsWith(File.separator) ? path : path + File.separator;
 		String fullPath = path + "jasper" + File.separator + jasperFileName;
 		JasperReport jasperReport = (JasperReport) JRLoader
-				.loadObject(fullPath);
+				.loadObject(new File(fullPath));
 		JasperPrint jasperPrint = null;
 		if (data != null) {
 			JRMapCollectionDataSource ds = new JRMapCollectionDataSource(data);
@@ -300,7 +302,9 @@ public class ReportAction extends BaseAction {
 		if (jasperPrint != null) {
 			FileBufferedOutputStream fbos = new FileBufferedOutputStream();
 			JRPdfExporter exporter = new JRPdfExporter();
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, fbos);
+			
+			exporter.setConfiguration(configuration);
+			exporter.setExporterOutput(fbos);
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "pdfÎÄ¼þ");
 			try {
@@ -325,8 +329,8 @@ public class ReportAction extends BaseAction {
 				}
 			}
 		}
-	}
-
+	}*/
+	
 	private void generateReportWithConn(String jasperFileName,
 			Map<String, Object> parameters, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -340,11 +344,21 @@ public class ReportAction extends BaseAction {
 		response.setContentType("application/pdf");
 		ServletOutputStream ouputStream = null;
 		try {
+			
 			ouputStream = response.getOutputStream();
+			/*
 			byte[] bytepdf = JasperRunManager.runReportToPdf(fullPath,
 					parameters, conn);
 			response.setContentLength(bytepdf.length);
 			ouputStream.write(bytepdf, 0, bytepdf.length);
+			
+			JasperFillManager.fillReportToFile(fullPath, parameters, new JREmptyDataSource());
+			*/
+			JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile(fullPath);
+			JasperPrint jasperPrint = JasperFillManager
+					.fillReport(jasperReport, parameters, conn);
+			JasperExportManager.exportReportToPdfStream(jasperPrint, ouputStream);
+			//JasperExportManager.exportReportToPdfFile(jasperPrint, "c://xxx.pdf");
 		} catch (JRException e) {
 			e.printStackTrace();
 		} finally {
