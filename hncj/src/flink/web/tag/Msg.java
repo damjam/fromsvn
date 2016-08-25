@@ -10,7 +10,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.apache.commons.lang.StringUtils;
 
 public class Msg extends SimpleTagSupport {
-	private static final long serialVersionUID = 1L;
 	private String styleClass;
 	private String style;
 

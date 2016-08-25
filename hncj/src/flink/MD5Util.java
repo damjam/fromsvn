@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class MD5Util {
 	public static void main(String[] args) {
-		System.out.print(MD5Util.MD5("111111"));
+		System.out.print(MD5Util.MD5("ajskdkfl"));
 		
 	}
 
