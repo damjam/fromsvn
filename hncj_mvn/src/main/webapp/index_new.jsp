@@ -7,7 +7,7 @@
 		<%@ include file="/pages/common/sys.jsp" %>
 		
 		<title></title>
-		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 		<f:css href="/macadmin/css/style.css"/>
 		

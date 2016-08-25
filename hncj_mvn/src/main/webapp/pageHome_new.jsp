@@ -6,9 +6,9 @@
 	<head>
 		<%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
-		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
-	    <link href="http://cdn.bootcss.com/jqueryui/1.11.3/jquery-ui.css" rel="stylesheet">
+	    <link href="https://cdn.bootcss.com/jqueryui/1.11.3/jquery-ui.css" rel="stylesheet">
 		<f:css href="/macadmin/css/style.css"/>
 		<f:css href="/macadmin/css/widgets.css"/>
 		<f:css href="/macadmin/css/jquery.onoff.css"/>
