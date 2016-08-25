@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ModelDriven;
-import com.ylink.cim.common.state.EmployeeState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.SexType;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
@@ -222,7 +220,7 @@ public class EmployeeAction extends BaseAction implements ModelDriven<Employee> 
 		Map<String, List<List<Object>>> dataMap = new HashMap<>();
 		List<String> sheetNameList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			Employee employee = (Employee)list.get(i);
+			Employee employee = list.get(i);
 			String branchNo = employee.getBranchNo();
 			String branchName = ParaManager.getBranches(true).get(branchNo);
 			List<List<Object>> tmpList = dataMap.get(branchName);

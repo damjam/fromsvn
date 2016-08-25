@@ -21,7 +21,6 @@ public class UserLogDaoImpl extends BaseDaoImpl implements UserLogDao {
 	}
 
 	/**
-	 * 查询结果转化成hashMap
 	 * 
 	 * @param pageDataBySql
 	 * @return

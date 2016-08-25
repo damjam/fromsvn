@@ -1,7 +1,5 @@
 package com.ylink.cim.admin.dao;
 
-import java.util.Date;
-
 import com.ylink.cim.admin.domain.SysParm;
 
 import flink.hibernate.BaseDao;
@@ -21,7 +19,7 @@ public interface SysParmDao extends BaseDao {
 	public SysParm findSysParmById(String id) throws Exception;
 
 	/**
-	 * »ñÈ¡Á÷×ªµ¥¼Æ·Ñ²ÎÊıÉèÖÃĞòºÅ
+	 * è·å–æµè½¬å•è®¡è´¹å‚æ•°è®¾ç½®åºå·
 	 * 
 	 * @return
 	 */
@@ -32,13 +30,13 @@ public interface SysParmDao extends BaseDao {
 	public Paginater getPageList(Pager pager, SysParm sysParm) throws Exception;
 
 	/**
-	 * »ñÈ¡ÏµÍ³²ÎÊı±íÖĞÄ³ÌõÊı¾İĞÅÏ¢
+	 * è·å–ç³»ç»Ÿå‚æ•°è¡¨ä¸­æŸæ¡æ•°æ®ä¿¡æ¯
 	 * 
 	 * */
 	public SysParm getSysParmInfo(String code);
 
 	/**
-	 * ÊÇ·ñ²ÎÊıÒÑ¾­´æÔÚ
+	 * æ˜¯å¦å‚æ•°å·²ç»å­˜åœ¨
 	 * 
 	 * @param code
 	 * @return
@@ -53,7 +51,7 @@ public interface SysParmDao extends BaseDao {
 	public void updateSysParm(SysParm sysParm) throws Exception;
 
 	/**
-	 * ĞŞ¸ÄÏµÍ³²ÎÊı±íĞÅÏ¢
+	 * ä¿®æ”¹ç³»ç»Ÿå‚æ•°è¡¨ä¿¡æ¯
 	 * 
 	 * */
 	public void updSysParm(SysParm sysParm);

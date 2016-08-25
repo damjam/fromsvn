@@ -30,6 +30,7 @@ import com.ylink.cim.util.ExportExcelUtil;
 import flink.etc.Assert;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 import flink.util.StringUtil;
@@ -99,7 +100,7 @@ public class RentalHouseAction extends CRUDAction implements ModelDriven<RentalH
 	public String doAdd() throws Exception {
 		try{
 			RentalHouse rentalHouse = rentalHouseDao.findById(model.getHouseSn());
-			Assert.isNull(rentalHouse, LogUtils.r("已存在编号为{?}的房屋信息",model.getHouseSn()));
+			Assert.isNull(rentalHouse, MsgUtils.r("已存在编号为{?}的房屋信息",model.getHouseSn()));
 			String roomConfig = StringUtil.array2String(model.getConfigArray());
 			model.setRoomConfig(roomConfig);
 			rentalHouseService.save(model, getSessionUser(request));

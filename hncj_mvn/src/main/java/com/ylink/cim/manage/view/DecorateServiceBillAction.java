@@ -233,7 +233,7 @@ public class DecorateServiceBillAction extends BaseAction implements ModelDriven
 		Map<String, List<List<Object>>> dataMap = new HashMap<>();
 		List<String> buildingList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			DecorateServiceBill bill = (DecorateServiceBill)list.get(i);
+			DecorateServiceBill bill = list.get(i);
 			String houseSn = bill.getHouseSn();
 			String buildingNo = houseSn.split("-")[0];
 			List<List<Object>> tmpList = dataMap.get(buildingNo);

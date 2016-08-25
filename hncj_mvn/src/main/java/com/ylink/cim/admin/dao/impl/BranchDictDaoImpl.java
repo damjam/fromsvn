@@ -17,7 +17,7 @@ import flink.util.Paginater;
 public class BranchDictDaoImpl extends BaseDaoImpl implements BranchDictDao {
 
 	@Override
-	protected Class getModelClass() {
+	protected Class<?> getModelClass() {
 
 		return BranchDict.class;
 	}

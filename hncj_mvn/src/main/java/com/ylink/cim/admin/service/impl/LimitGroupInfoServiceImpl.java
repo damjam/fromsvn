@@ -71,7 +71,7 @@ public class LimitGroupInfoServiceImpl implements LimitGroupInfoService {
 		if (null == limitGroupInfo.getLimitIds()
 				|| limitGroupInfo.getLimitIds().length == 0) {
 			ExceptionUtils.logBizException(LimitGroupInfoService.class,
-					"ÇëÑ¡ÔñÈ¨ÏŞµã");
+					"è¯·é€‰æ‹©æƒé™ç‚¹");
 		}
 
 		try {

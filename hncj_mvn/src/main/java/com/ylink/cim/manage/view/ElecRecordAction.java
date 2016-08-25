@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +30,7 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONObject;
 
 @Scope("prototype")
 @Component

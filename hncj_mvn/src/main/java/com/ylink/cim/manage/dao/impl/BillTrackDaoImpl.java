@@ -7,7 +7,6 @@ import org.apache.commons.collections.MapUtils;
 import org.springframework.stereotype.Component;
 
 import com.ylink.cim.common.state.BillTrackState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.manage.dao.BillTrackDao;
 import com.ylink.cim.manage.domain.BillTrack;
 

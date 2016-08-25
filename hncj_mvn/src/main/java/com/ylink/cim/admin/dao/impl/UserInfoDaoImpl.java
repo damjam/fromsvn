@@ -22,18 +22,6 @@ import flink.util.Paginater;
 import flink.util.WebResource;
 
 /**
- * <p>
- * Title: ÓÃ»§¹ÜÀí
- * </p>
- * <p>
- * Description:²éÑ¯¡¢ĞÂÔö¡¢ĞŞ¸Ä
- * </p>
- * <p>
- * Copyright: Copyright (c) 2004
- * </p>
- * <p>
- * Company: ÑãÁª
- * </p>
  *
  * @version 1.0
  */
@@ -94,7 +82,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	}
 
 	/**
-	 * »ñÈ¡×ÓÈ¨ÏŞÁĞ±í
+	 * è·å–å­æƒé™åˆ—è¡¨
 	 * 
 	 * @param parentPrivId
 	 * @return
@@ -107,7 +95,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	}
 
 	/**
-	 * ÓÃ»§È¨ÏŞ¹ıÂË
+	 * ç”¨æˆ·æƒé™è¿‡æ»¤
 	 * 
 	 * @param userId
 	 * @param helper
@@ -120,7 +108,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	}
 
 	/**
-	 * »ñÈ¡ÓÃ»§ËùÓĞÈ¨ÏŞµãµÄsqlÓï¾ä
+	 * è·å–ç”¨æˆ·æ‰€æœ‰æƒé™ç‚¹çš„sqlè¯­å¥
 	 * 
 	 * @param userId
 	 * @return
@@ -128,7 +116,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	private String getSqlStrForUserPriv(String userId) {
 		String condtion = "";
 		UserInfo userInfo = (UserInfo) findById(userId);
-		if (!userInfo.getUserType().equals(UserType.SUPER_ADMIN.getValue())) {// ²»ÊÇ²âÊÔ
+		if (!userInfo.getUserType().equals(UserType.SUPER_ADMIN.getValue())) {// ä¸æ˜¯æµ‹è¯•
 			condtion = "select rp.LIMIT_ID from ROLE_PRIVILEGE rp left join USER_ROLE ur on rp.ROLE_ID = ur.ROLE_ID "
 					+ "where ur.USER_ID='" + userId + "'";
 
@@ -148,7 +136,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<WebResource> getPrivilegeResources(List<IPrivilege> listOfPriv) {
-		if (listOfPriv == null || listOfPriv.size() == 0) {// Ã»ÓĞÈ¨ÏŞµÄ£¬Ôò·µ»Ø¿ÕµÄÁĞ±í
+		if (listOfPriv == null || listOfPriv.size() == 0) {// æ²¡æœ‰æƒé™çš„ï¼Œåˆ™è¿”å›ç©ºçš„åˆ—è¡¨
 			return new ArrayList<WebResource>();
 		}
 		StringBuilder sb = new StringBuilder();
@@ -165,7 +153,7 @@ public class UserInfoDaoImpl extends BaseDaoImpl implements UserInfoDao {
 	}
 
 	/**
-	 * ĞòºÅ¸ñÊ½»¯:Á½Î»Êı×Ö
+	 * åºå·æ ¼å¼åŒ–:ä¸¤ä½æ•°å­—
 	 */
 	private static DecimalFormat formatOfSeq = new DecimalFormat("00");
 

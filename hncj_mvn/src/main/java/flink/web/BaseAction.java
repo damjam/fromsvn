@@ -579,7 +579,7 @@ public abstract class BaseAction extends RootAction {
 		Map<String, String[]> paraMap = request.getParameterMap();
 		JSONObject json = new JSONObject();
 		for (Map.Entry<String, String[]> entry : paraMap.entrySet()) {
-			String key = (String) entry.getKey();
+			String key = entry.getKey();
 			if (StringUtils.isEmpty(key) || "updateSymbol".equals(key)
 					|| "msg".equals(key)) {
 				continue;

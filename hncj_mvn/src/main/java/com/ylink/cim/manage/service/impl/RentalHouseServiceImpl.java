@@ -20,6 +20,7 @@ import flink.etc.Assert;
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 @Component("rentalHouseService")
 public class RentalHouseServiceImpl implements RentalHouseService {
 
@@ -45,7 +46,7 @@ public class RentalHouseServiceImpl implements RentalHouseService {
 	@Override
 	public void release(String houseSn) throws BizException {
 		RentalHouse rentalHouse = rentalHouseDao.findByIdWithLock(houseSn);
-		Assert.notNull(rentalHouse, LogUtils.r("不存在房屋编号为{?}的房屋信息", houseSn));
+		Assert.notNull(rentalHouse, MsgUtils.r("不存在房屋编号为{?}的房屋信息", houseSn));
 		rentalHouse.setState(RentState.STATE_00.getValue());
 		rentalHouseDao.update(rentalHouse);
 	}
@@ -53,8 +54,8 @@ public class RentalHouseServiceImpl implements RentalHouseService {
 	@Override
 	public void occupy(String houseSn) throws BizException {
 		RentalHouse rentalHouse = rentalHouseDao.findByIdWithLock(houseSn);
-		Assert.notNull(rentalHouse, LogUtils.r("不存在房屋编号为{?}的房屋信息", houseSn));
-		Assert.equals(rentalHouse.getState(), RentState.STATE_00.getValue(), LogUtils.r("房间{?}已出租，无法再次出租", houseSn));
+		Assert.notNull(rentalHouse, MsgUtils.r("不存在房屋编号为{?}的房屋信息", houseSn));
+		Assert.equals(rentalHouse.getState(), RentState.STATE_00.getValue(), MsgUtils.r("房间{?}已出租，无法再次出租", houseSn));
 		rentalHouse.setState(RentState.STATE_01.getValue());
 		rentalHouseDao.update(rentalHouse);
 	}
@@ -65,7 +66,7 @@ public class RentalHouseServiceImpl implements RentalHouseService {
 		map.put("houseSn", houseSn);
 		map.put("state", RenterState.LIVEIN.getValue());
 		List<RenterInfo> list = renterInfoDao.findList(map);
-		Assert.isEmpty(list, LogUtils.r("房屋编号{?}存在对应的租客信息，无法删除", houseSn));
+		Assert.isEmpty(list, MsgUtils.r("房屋编号{?}存在对应的租客信息，无法删除", houseSn));
 		rentalHouseDao.deleteById(houseSn);
 	}
 	

@@ -34,7 +34,6 @@ import flink.util.WebResource;
  */
 public class UserLogFilter extends HttpServlet implements Filter {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(UserLogFilter.class);
 	private IdFactoryService idFactoryService = (IdFactoryService) SpringContext
 			.getService("idFactoryService");
 	private FilterConfig filterConfig;

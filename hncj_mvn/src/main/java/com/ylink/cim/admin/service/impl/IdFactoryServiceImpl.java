@@ -27,7 +27,7 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 
 		IdFactory idFactory = this.idFactoryDao.getIdFactory(seqIdName);
 		if (null == idFactory) {
-			//ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "²»´æÔÚ¶ÔµÄid: " + seqIdName);
+			//ExceptionUtils.logBizException(IdFactoryDaoImpl.class, "ä¸å­˜åœ¨å¯¹çš„id: " + seqIdName);
 			idFactory = new IdFactory();
 			idFactory.setSeqIdName(seqIdName);
 			idFactory.setInitValue("1000");
@@ -38,7 +38,7 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 		if (StringUtils.isEmpty(idFactory.getInitValue())) {
 			idFactory.setInitValue("1000");
 			// ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class,
-			// "Î´ÉèÖÃ³õÊ¼Öµ");
+			// "æœªè®¾ç½®åˆå§‹å€¼");
 		}
 
 		if (StringUtils.isEmpty(idFactory.getCurrentValue())) {
@@ -52,7 +52,7 @@ public class IdFactoryServiceImpl implements IdFactoryService {
 		if (StringUtils.isEmpty(idFactory.getDirection())) {
 			idFactory.setDirection(Constants.LEFT);
 			// ExceptionUtils.logBizException(IdFactoryHibernateDaoImpl.class,
-			// "Î´ÉèÖÃÌî³ä·½Ïò");
+			// "æœªè®¾ç½®å¡«å……æ–¹å‘");
 		}
 		/*
 		 * if(StringUtils.isEmpty(idFactory.getFillValue())){

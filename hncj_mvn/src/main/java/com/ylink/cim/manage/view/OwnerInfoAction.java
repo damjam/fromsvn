@@ -25,12 +25,13 @@ import com.ylink.cim.manage.dao.OwnerInfoDao;
 import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.AccountService;
 import com.ylink.cim.manage.service.OwnerInfoService;
-import com.ylink.cim.util.ReadExcelUtil;
 import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.util.SpringContext;
 import flink.util.StringUtil;
@@ -182,7 +183,7 @@ public class OwnerInfoAction extends BaseAction implements
 			}
 			ownerInfoService.importOwnerInfo(list, getSessionUser(request));
 			*/
-			String msg = LogUtils.r("操作完成，共导入{?}条记录", totalCnt);
+			String msg = MsgUtils.r("操作完成，共导入{?}条记录", totalCnt);
 			setResult(true, msg, request);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -13,7 +13,6 @@ import com.ylink.cim.admin.domain.UserInfo;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.manage.dao.CarInfoDao;
 import com.ylink.cim.manage.domain.CarInfo;
-import com.ylink.cim.manage.domain.ParkingInfo;
 import com.ylink.cim.manage.service.CarInfoService;
 
 import flink.IdFactoryHelper;

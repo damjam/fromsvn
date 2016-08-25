@@ -66,14 +66,14 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 			if (StringUtils.isEmpty(id)) {
 				Map<String, Object> params = getParaMap();
 				params.put("mobile", model.getMobile());
-				Assert.isEmpty(contactDao.findList(params), LogUtils.r("手机号码{?}已存在", model.getMobile()));
+				Assert.isEmpty(contactDao.findList(params), MsgUtils.r("手机号码{?}已存在", model.getMobile()));
 				contactService.save(model, getSessionUser(request));
 			}else {
 				Contact contact = contactDao.findById(id);
 				Map<String, Object> params = getParaMap();
 				params.put("mobile", model.getMobile());
 				params.put("excludeId", model.getId());
-				Assert.isEmpty(contactDao.findList(params), LogUtils.r("手机号码{?}已存在", model.getMobile()));
+				Assert.isEmpty(contactDao.findList(params), MsgUtils.r("手机号码{?}已存在", model.getMobile()));
 				
 				CopyPropertyUtil.copyPropertiesIgnoreNull(model, contact);
 				contactService.update(contact);
@@ -138,7 +138,7 @@ public class ContactAction extends BaseAction implements ModelDriven<Contact> {
 		String branchNo = super.getSessionBranchNo(request);
 		List<List<Object>> dataList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			Contact info = (Contact)list.get(i);
+			Contact info = list.get(i);
 			List<Object> obj = new ArrayList<>();
 			obj.add(info.getContactName());
 			obj.add(info.getSex());

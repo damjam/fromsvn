@@ -33,8 +33,6 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 	private UserLogService userLogService;
 	@Autowired
 	private PrivilegeDao privilegeDao;
-	@Autowired
-	private IdFactoryService idFactoryService;
 
 	private UserLog model = new UserLog();
 

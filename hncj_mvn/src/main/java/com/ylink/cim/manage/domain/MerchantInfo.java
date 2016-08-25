@@ -45,10 +45,12 @@ public class MerchantInfo extends BranchField implements java.io.Serializable {
 		this.busiScope = busiScope;
 	}
 
+	@Override
 	public String getBranchNo() {
 		return branchNo;
 	}
 
+	@Override
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}

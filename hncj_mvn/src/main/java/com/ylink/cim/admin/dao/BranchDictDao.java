@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ylink.cim.admin.domain.BranchDict;
-import com.ylink.cim.admin.domain.BranchDictId;
 
 import flink.hibernate.BaseDao;
 import flink.util.Pager;

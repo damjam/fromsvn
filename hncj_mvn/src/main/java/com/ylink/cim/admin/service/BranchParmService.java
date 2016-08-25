@@ -7,7 +7,6 @@ import flink.util.Pager;
 import flink.util.Paginater;
 
 /**
- * 系统参数管理
  * 
  * 
  */
@@ -18,7 +17,6 @@ public interface BranchParmService {
 	public Paginater findAll(Pager pager, BranchParam sysParm) throws BizException;
 
 	/**
-	 * 锁定指定记录
 	 * 
 	 * @param code
 	 * @return

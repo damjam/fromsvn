@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * ¸üĞÂÓÃ»§
+	 * æ›´æ–°ç”¨æˆ·
 	 */
 	@Override
 	public void updateUserInfo(UserInfo userInfo) throws BizException {
@@ -46,16 +46,16 @@ public class UserServiceImpl implements UserService {
 
 	public String saveUserInfo(Map<String, String> map, UserInfo operUser)
 			throws BizException {
-		// 0,ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÖØ¸´
+		// 0,åˆ¤æ–­ç”¨æˆ·åæ˜¯å¦é‡å¤
 		String loginId = map.get("loginId");
 
-		// 1£¬±£´æÓÃ»§
+		// 1ï¼Œä¿å­˜ç”¨æˆ·
 		UserInfo user = new UserInfo();
 		user.setLoginId(loginId);
 
 		this.userInfoDao.save(user);
 
-		String result = "±àºÅ£º" + loginId + "  ÃÜÂë£º";
+		String result = "ç¼–å·ï¼š" + loginId + "  å¯†ç ï¼š";
 		return result;
 	}
 
@@ -70,12 +70,12 @@ public class UserServiceImpl implements UserService {
 			throws BizException {
 		String userId = map.get("userId");
 
-		// 0,ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÖØ¸´
+		// 0,åˆ¤æ–­ç”¨æˆ·åæ˜¯å¦é‡å¤
 		String loginId = map.get("loginId");
 
 		UserInfo user = (UserInfo) userInfoDao.findById(userId);
 		if (user == null) {
-			throw new BizException(userId + "¶ÔÓ¦µÄÓÃ»§²»´æÔÚ£¡");
+			throw new BizException(userId + "å¯¹åº”çš„ç”¨æˆ·ä¸å­˜åœ¨ï¼");
 		}
 
 		this.userInfoDao.update(user);
@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserInfo(String userId) throws BizException {
 		this.userInfoDao.deleteById(userId);
-		//É¾³ı¶ÔÓ¦µÄ½ÇÉ«°ó¶¨
+		//åˆ é™¤å¯¹åº”çš„è§’è‰²ç»‘å®š
 		userRoleDao.delRoleByUser(userId);
 	}
 

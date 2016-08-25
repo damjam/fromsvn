@@ -21,7 +21,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	private BranchParmDao branchParmDao;
 
 	/**
-	 * ¸ù¾İÖ÷¼üÉ¾³ı¼ÇÂ¼
+	 * æ ¹æ®ä¸»é”®åˆ é™¤è®°å½•
 	 */
 	@Override
 	public void delete(String id) throws BizException {
@@ -35,7 +35,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	}
 
 	/**
-	 * ·ÖÒ³²éÑ¯
+	 * åˆ†é¡µæŸ¥è¯¢
 	 * 
 	 * @param pager
 	 * @return
@@ -56,7 +56,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	}
 
 	/**
-	 * ´«ÈëcodeµÄ±àÂë¼´¿É,Í¨¹ı²ÎÊıÊµÀı·µ»Ø
+	 * ä¼ å…¥codeçš„ç¼–ç å³å¯,é€šè¿‡å‚æ•°å®ä¾‹è¿”å›
 	 * 
 	 * @throws BizException
 	 */
@@ -71,7 +71,7 @@ public class BranchParmServiceImpl implements BranchParmService {
 	public void save(BranchParam branchParm) throws BizException {
 		try {
 			if (branchParmDao.findById(branchParm.getCode()) != null) {
-				throw new Exception("¸ÃÊı¾İÒÑ¾­´æÔÚ!" + branchParm.getCode());
+				throw new Exception("è¯¥æ•°æ®å·²ç»å­˜åœ¨!" + branchParm.getCode());
 			}
 			this.branchParmDao.save(branchParm);
 		} catch (Exception e) {

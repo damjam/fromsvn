@@ -16,7 +16,7 @@ public class BranchParmDaoImpl extends BaseDaoImpl implements BranchParmDao {
 
 	
 	@Override
-	protected Class getModelClass() {
+	protected Class<?> getModelClass() {
 		return BranchParam.class;
 	}
 

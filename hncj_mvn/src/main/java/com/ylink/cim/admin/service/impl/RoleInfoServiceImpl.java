@@ -106,7 +106,6 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 		 return this.roleInfoDao.findById(roleInfo.getRoleId())!=null;
 	}
 
-	//通过权限组id查角色
 	@Override
 	public List<RoleInfo> queryRoleInfoByLimitGroupId(String limitGroupId)
 			throws BizException {

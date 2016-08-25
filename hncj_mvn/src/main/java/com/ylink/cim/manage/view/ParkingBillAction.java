@@ -3,8 +3,6 @@ package com.ylink.cim.manage.view;
 import java.util.Date;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,6 +23,7 @@ import flink.etc.BizException;
 import flink.util.DateUtil;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONObject;
 
 @Scope("prototype")
 @Component
@@ -55,12 +54,12 @@ public class ParkingBillAction extends BaseAction implements
 			model.setHouseSn("");
 			model.setCarSn("");
 			model.setParkingSn("");
-			setResult(true, "Êý¾ÝÒÑ±£´æ", request);
+			setResult(true, "ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toAdd();
 		} catch (Exception e) {
-			setResult(false, "±£´æÊ§°Ü" + e.getMessage(), request);
+			setResult(false, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½" + e.getMessage(), request);
 			return toAdd();
 		}
 		return list();
@@ -75,9 +74,9 @@ public class ParkingBillAction extends BaseAction implements
 		map.put("id", model.getId());
 		map.put("year", model.getYear());
 		map.put("branchNo", model.getBranchNo());
-		if (isHQ()) {//×Ü²¿
+		if (isHQ()) {//ï¿½Ü²ï¿½
 			map.put("branchNo", model.getBranchNo());
-		}else {//»ú¹¹
+		}else {//ï¿½ï¿½
 			map.put("branchNo", getSessionBranchNo(request));
 		}
 		Paginater paginater = parkingBillDao.findPager(map, getPager(request));
@@ -92,11 +91,11 @@ public class ParkingBillAction extends BaseAction implements
 		try {
 			String id = request.getParameter("id");
 			billService.chargeParkingFee(id, getSessionUser(request));
-			setResult(true, "²Ù×÷³É¹¦", request);
+			setResult(true, "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 		} catch (Exception e) {
-			setResult(false, "²Ù×÷Ê§°Ü", request);
+			setResult(false, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½", request);
 		}
 		return list();
 	}
@@ -106,9 +105,9 @@ public class ParkingBillAction extends BaseAction implements
 			String id = request.getParameter("id");
 			billService.deleteBill(ParkingBill.class, id,
 					getSessionUser(request));
-			setResult(true, "²Ù×÷³É¹¦", request);
+			setResult(true, "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½", request);
 		} catch (Exception e) {
-			setResult(false, "É¾³ýÊ§°Ü", request);
+			setResult(false, "É¾ï¿½ï¿½Ê§ï¿½ï¿½", request);
 			e.printStackTrace();
 		}
 		return list();
@@ -121,7 +120,7 @@ public class ParkingBillAction extends BaseAction implements
 		try {
 			String houseSn = request.getParameter("houseSn");
 			Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
-					"±àºÅÎª" + houseSn + "µÄ·¿ÎÝÐÅÏ¢²»´æÔÚ!");
+					"ï¿½ï¿½ï¿½Îª" + houseSn + "ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
@@ -129,7 +128,7 @@ public class ParkingBillAction extends BaseAction implements
 			}
 			// return null;
 		} catch (Exception e) {
-			setResult(false, "Ê§°Ü", request);
+			setResult(false, "Ê§ï¿½ï¿½", request);
 			e.printStackTrace();
 			jsonObject.put("error", e.getMessage());
 			respond(response, jsonObject.toString());
@@ -148,7 +147,7 @@ public class ParkingBillAction extends BaseAction implements
 		try {
 			String houseSn = request.getParameter("houseSn");
 			// Assert.notNull(parkingBillDao.findById(HouseInfo.class, houseSn),
-			// "±àºÅÎª" + houseSn + "µÄ·¿ÎÝÐÅÏ¢²»´æÔÚ!");
+			// "ï¿½ï¿½ï¿½Îª" + houseSn + "ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 			OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, getSessionBranchNo(request));
 			if (ownerInfo != null) {
 				ownerName = ownerInfo.getOwnerName();
@@ -183,7 +182,7 @@ public class ParkingBillAction extends BaseAction implements
 			// amount =
 			// Double.parseDouble(priceStr)*Integer.parseInt(monthNumStr);
 		} catch (Exception e) {
-			setResult(false, "Ê§°Ü", request);
+			setResult(false, "Ê§ï¿½ï¿½", request);
 			e.printStackTrace();
 			endDateStr = "";
 		}

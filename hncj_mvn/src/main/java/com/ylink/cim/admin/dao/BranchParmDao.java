@@ -14,5 +14,4 @@ public interface BranchParmDao extends BaseDao {
 			throws Exception;
 
 
-	
 }

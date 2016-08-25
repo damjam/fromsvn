@@ -54,10 +54,12 @@ public class AccountJournal extends BranchField implements java.io.Serializable 
 		this.year = year;
 	}
 
+	@Override
 	public String getBranchNo() {
 		return branchNo;
 	}
 
+	@Override
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}

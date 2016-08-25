@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,7 @@ import flink.util.DateUtil;
 import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.BaseAction;
+import net.sf.json.JSONObject;
 
 /**
  * 系统参数管理action

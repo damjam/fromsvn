@@ -22,14 +22,14 @@ public class SysParmServiceImpl implements SysParmService {
 
 	
 	/**
-	 * ¸ù¾İÖ÷¼üÉ¾³ı¼ÇÂ¼
+	 * æ ¹æ®ä¸»é”®åˆ é™¤è®°å½•
 	 */
 	@Override
 	public void delete(String id) throws BizException {
 
 		try {
 			if (!sysParmDao.hasParm(id)) {
-				throw new Exception("²»´æÔÚÒªÉ¾³ıµÄ¼ÇÂ¼!");
+				throw new Exception("ä¸å­˜åœ¨è¦åˆ é™¤çš„è®°å½•!");
 			}
 			this.sysParmDao.deleteSysParmById(id);
 		} catch (Exception e) {
@@ -39,7 +39,7 @@ public class SysParmServiceImpl implements SysParmService {
 	}
 
 	/**
-	 * ·ÖÒ³²éÑ¯
+	 * åˆ†é¡µæŸ¥è¯¢
 	 * 
 	 * @param pager
 	 * @return
@@ -60,7 +60,7 @@ public class SysParmServiceImpl implements SysParmService {
 	}
 
 	/**
-	 * ´«ÈëcodeµÄ±àÂë¼´¿É,Í¨¹ı²ÎÊıÊµÀı·µ»Ø
+	 * ä¼ å…¥codeçš„ç¼–ç å³å¯,é€šè¿‡å‚æ•°å®ä¾‹è¿”å›
 	 * 
 	 * @throws BizException
 	 */
@@ -89,7 +89,7 @@ public class SysParmServiceImpl implements SysParmService {
 	public void save(SysParm sysParm) throws BizException {
 		try {
 			if (sysParmDao.hasParm(sysParm.getCode())) {
-				throw new Exception("¸ÃÊı¾İÒÑ¾­´æÔÚ!"+sysParm.getCode());
+				throw new Exception("è¯¥æ•°æ®å·²ç»å­˜åœ¨!"+sysParm.getCode());
 			}
 
 			this.sysParmDao.saveSysParm(sysParm);

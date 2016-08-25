@@ -34,17 +34,17 @@ public class UserLogServiceImpl implements
 
 	@Override
 	public void saveUserLog(UserLog userLog) throws BizException {
-		// ¼ì²éÊı¾İ
-		Assert.notEmpty(userLog.getUserId(), "ËùÊôÓÃ»§±àºÅ²»ÄÜÎª¿Õ");
-		// Assert.notEmpty(userLog.getBranchNo(), "ËùÊô»ú¹¹±àºÅ²»ÄÜÎª¿Õ");
-		// Assert.notEmpty(userLog.getLimitId(), "ËùÊôÄ£¿é±àºÅ²»ÄÜÎª¿Õ");
-		Assert.notEmpty(userLog.getLogType(), "ÈÕÖ¾ÀàÀàĞÍ²»ÄÜÎª¿Õ");
+		// æ£€æŸ¥æ•°æ®
+		Assert.notEmpty(userLog.getUserId(), "æ‰€å±ç”¨æˆ·ç¼–å·ä¸èƒ½ä¸ºç©º");
+		// Assert.notEmpty(userLog.getBranchNo(), "æ‰€å±æœºæ„ç¼–å·ä¸èƒ½ä¸ºç©º");
+		// Assert.notEmpty(userLog.getLimitId(), "æ‰€å±æ¨¡å—ç¼–å·ä¸èƒ½ä¸ºç©º");
+		Assert.notEmpty(userLog.getLogType(), "æ—¥å¿—ç±»ç±»å‹ä¸èƒ½ä¸ºç©º");
 
 		if (Constants.LOG_USER_TYPE.indexOf(userLog.getLogType()) < 0) {
-			throw new BizException("ÈÕÖ¾ÀàĞÍ·Ç·¨");
+			throw new BizException("æ—¥å¿—ç±»å‹éæ³•");
 		}
 
-		Assert.notEmpty(userLog.getContent(), "ÈÕÖ¾ÄÚÈİ²»ÄÜÎª¿Õ");
+		Assert.notEmpty(userLog.getContent(), "æ—¥å¿—å†…å®¹ä¸èƒ½ä¸ºç©º");
 
 		this.userLogDao.save(userLog);
 	}

@@ -10,7 +10,6 @@ import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.ylink.cim.common.state.BillState;
-import com.ylink.cim.common.type.BranchType;
 import com.ylink.cim.common.type.IcCardType;
 import com.ylink.cim.manage.dao.IcDepositDao;
 import com.ylink.cim.manage.domain.IcDeposit;

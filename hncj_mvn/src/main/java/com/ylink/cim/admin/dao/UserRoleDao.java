@@ -14,7 +14,7 @@ public interface UserRoleDao extends BaseDao {
 	public Paginater getUserRolePageList(UserRole userRole, Pager pager);
 
 	/**
-	 * 获取待分配的角色
+	 * 鑾峰彇寰呭垎閰嶇殑瑙掕壊
 	 * 
 	 * @param userId
 	 * @return

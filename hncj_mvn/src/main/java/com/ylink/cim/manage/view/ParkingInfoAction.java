@@ -177,7 +177,7 @@ public class ParkingInfoAction extends BaseAction implements
 		String branchNo = super.getSessionBranchNo(request);
 		List<List<Object>> dataList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			ParkingInfo info = (ParkingInfo)list.get(i);
+			ParkingInfo info = list.get(i);
 			List<Object> obj = new ArrayList<>();
 			obj.add(info.getSn());
 			obj.add(info.getOwnerName());

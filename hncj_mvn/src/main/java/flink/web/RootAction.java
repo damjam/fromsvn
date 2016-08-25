@@ -16,7 +16,6 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.ylink.cim.common.util.ParaManager;
 
 import flink.consant.ActionConstant;
 import flink.util.Paginater;

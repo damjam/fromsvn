@@ -1,6 +1,7 @@
 package com.ylink.cim.sys.dao;
 
 import java.util.List;
+
 import com.ylink.cim.sys.domain.TimerDo;
 
 import flink.hibernate.BaseDao;

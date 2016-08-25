@@ -10,7 +10,6 @@ import flink.util.Paginater;
 public interface UserLogService {
 
 	/**
-	 * 获取分页差性能数据
 	 * 
 	 * @return
 	 */
@@ -18,7 +17,6 @@ public interface UserLogService {
 			UserInfo userInfo) throws BizException;
 
 	/**
-	 * 保存用户日志
 	 * 
 	 * @param userLog
 	 */

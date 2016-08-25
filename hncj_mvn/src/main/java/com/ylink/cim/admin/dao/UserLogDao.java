@@ -14,7 +14,7 @@ import flink.util.Paginater;
 public interface UserLogDao extends BaseDao {
 
 	/**
-	 * 日志列表查询
+	 * 鏃ュ織鍒楄〃鏌ヨ
 	 * 
 	 * @param UserLog
 	 * @return

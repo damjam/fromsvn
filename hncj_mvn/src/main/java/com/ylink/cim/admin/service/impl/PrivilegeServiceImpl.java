@@ -19,7 +19,7 @@ public class PrivilegeServiceImpl implements PrivilegeService {
 	public void savePrivilege(Privilege privilege) throws BizException {
 
 		if (null != this.privilegeDao.findById(privilege.getLimitId())) {
-			throw new BizException("È¨ÏŞµã  " + privilege.getLimitId() + ",ÒÑ¾­´æÔÚ");
+			throw new BizException("æƒé™ç‚¹  " + privilege.getLimitId() + ",å·²ç»å­˜åœ¨");
 		}
 
 		this.privilegeDao.save(privilege);

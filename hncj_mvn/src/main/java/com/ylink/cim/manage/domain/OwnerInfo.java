@@ -68,10 +68,12 @@ public class OwnerInfo extends BranchField implements java.io.Serializable {
 		this.instancyTel = instancyTel;
 	}
 
+	@Override
 	public String getBranchNo() {
 		return branchNo;
 	}
 
+	@Override
 	public void setBranchNo(String branchNo) {
 		this.branchNo = branchNo;
 	}

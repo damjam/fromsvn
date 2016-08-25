@@ -29,8 +29,8 @@ import com.ylink.cim.manage.domain.OwnerInfo;
 import com.ylink.cim.manage.service.BillService;
 import com.ylink.cim.manage.service.ExportService;
 import com.ylink.cim.manage.service.ImportService;
-import com.ylink.cim.util.ReadExcelUtil;
 import com.ylink.cim.util.ExportExcelUtil;
+import com.ylink.cim.util.ReadExcelUtil;
 
 import flink.etc.Assert;
 import flink.etc.BizException;
@@ -262,7 +262,7 @@ public class CommonServiceBillAction extends BaseAction implements
 		Map<String, List<List<Object>>> dataMap = new HashMap<>();
 		List<String> buildingList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			CommonServiceBill bill = (CommonServiceBill)list.get(i);
+			CommonServiceBill bill = list.get(i);
 			String houseSn = bill.getHouseSn();
 			String buildingNo = houseSn.split("-")[0];
 			List<List<Object>> tmpList = dataMap.get(buildingNo);

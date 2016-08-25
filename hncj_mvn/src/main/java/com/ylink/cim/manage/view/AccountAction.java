@@ -159,7 +159,7 @@ public class AccountAction extends BaseAction implements ModelDriven<Account> {
 		String branchNo = super.getSessionBranchNo(request);
 		List<List<Object>> dataList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			Account info = (Account)list.get(i);
+			Account info = list.get(i);
 			List<Object> obj = new ArrayList<>();
 			obj.add(info.getHouseSn());
 			obj.add(info.getOwnerName());

@@ -3,12 +3,12 @@ package com.ylink.cim.util;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.log4j.Logger;
+
+import net.sf.json.JSONObject;
 
 public class IpAddrUtil {
 

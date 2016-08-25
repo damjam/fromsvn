@@ -17,7 +17,7 @@ public interface PrivilegeDao extends BaseDao {
 	String SERVICE_NAME = "privilegeDao";
 
 	/**
-	 * »ñÈ¡È¨ÏŞµã¶ÔÓ¦µÄËùÓĞµÄ×ÊÔ´
+	 * è·å–æƒé™ç‚¹å¯¹åº”çš„æ‰€æœ‰çš„èµ„æº
 	 * 
 	 * @param privs
 	 * @return
@@ -27,7 +27,7 @@ public interface PrivilegeDao extends BaseDao {
 	public Paginater getPrivilegePageList(Privilege privilege, Pager pager);
 
 	/**
-	 * »ñÈ¡Ò»¸ö½ÇÉ«µÄÈ¨ÏŞÊ÷
+	 * è·å–ä¸€ä¸ªè§’è‰²çš„æƒé™æ ‘
 	 * 
 	 * @param roleId
 	 * @return
@@ -37,26 +37,26 @@ public interface PrivilegeDao extends BaseDao {
 			throws BizException;
 
 	/**
-	 * »ñµÃÈ¨ÏŞÊ÷
+	 * è·å¾—æƒé™æ ‘
 	 * 
-	 * @paramµÚÒ»¸öÈ¨ÏŞÁĞ±í
-	 * @paramÈ¨ÏŞ×éID
+	 * @paramç¬¬ä¸€ä¸ªæƒé™åˆ—è¡¨
+	 * @paramæƒé™ç»„ID
 	 * @return List(PrivilegeRoleTree)
 	 */
 	public List<PrivilegeTreeNode> getRoleTree(String limitGroupId);
 
 	/**
-	 * »ñµÃÈ¨ÏŞÊ÷
+	 * è·å¾—æƒé™æ ‘
 	 * 
-	 * @paramµÚÒ»¸öÈ¨ÏŞÁĞ±í
-	 * @paramÈ¨ÏŞ×éID
+	 * @paramç¬¬ä¸€ä¸ªæƒé™åˆ—è¡¨
+	 * @paramæƒé™ç»„ID
 	 * @return List(PrivilegeRoleTree)
 	 */
 	public List<PrivilegeTreeNode> getRoleTree();
 
 	/**
 	 * 
-	 * »ñÈ¡È¨ÏŞµã
+	 * è·å–æƒé™ç‚¹
 	 * 
 	 * */
 	public List<Map> getLimitGroupPrivilege(String limitGroupId);

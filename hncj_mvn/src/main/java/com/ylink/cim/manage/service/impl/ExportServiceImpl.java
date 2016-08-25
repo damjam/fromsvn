@@ -28,7 +28,7 @@ public class ExportServiceImpl implements ExportService {
 		Map<String, List<List<Object>>> dataMap = new HashMap<>();
 		List<String> buildingList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			CommonServiceBill bill = (CommonServiceBill)list.get(i);
+			CommonServiceBill bill = list.get(i);
 			String houseSn = bill.getHouseSn();
 			String buildingNo = houseSn.split("-")[0];
 			List<List<Object>> tmpList = dataMap.get(buildingNo);

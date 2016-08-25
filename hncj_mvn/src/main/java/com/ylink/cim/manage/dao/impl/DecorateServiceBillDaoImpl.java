@@ -82,6 +82,7 @@ public class DecorateServiceBillDaoImpl extends BaseDaoImpl implements DecorateS
 		}
 	}
 
+	@Override
 	public List<DecorateServiceBill> findList(Map<String, Object> params) {
 		QueryHelper helper = new QueryHelper();
 		helper.append("from DecorateServiceBill where 1=1");

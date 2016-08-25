@@ -44,17 +44,17 @@ public class SysLogServiceImpl implements SysLogService {
 	@Override
 	public void saveSysLog(SysLog sysLog) throws BizException {
 
-		Assert.notEmpty(sysLog.getLimitId(), "Ä£¿é±àºÅ²»ÄÜÎª¿Õ");
-		Assert.notEmpty(sysLog.getLogType(), "ÈÕÖ¾ÀàĞÍ²»ÄÜÎª¿Õ");
-		Assert.notEmpty(sysLog.getLogClass(), "ÈÕÖ¾ÖÖÀà²»ÄÜÎª¿Õ");
-		Assert.notEmpty(sysLog.getContent(), "ÈÕÖ¾ÄÚÈİ²»ÄÜÎª¿Õ");
+		Assert.notEmpty(sysLog.getLimitId(), "æ¨¡å—ç¼–å·ä¸èƒ½ä¸ºç©º");
+		Assert.notEmpty(sysLog.getLogType(), "æ—¥å¿—ç±»å‹ä¸èƒ½ä¸ºç©º");
+		Assert.notEmpty(sysLog.getLogClass(), "æ—¥å¿—ç§ç±»ä¸èƒ½ä¸ºç©º");
+		Assert.notEmpty(sysLog.getContent(), "æ—¥å¿—å†…å®¹ä¸èƒ½ä¸ºç©º");
 		String content = sysLog.getContent();
 		if (content != null) {
 			content = content.replaceAll("\\s*|\t|\r|\n", "");
 		}
 		content = StringUtils.abbreviate(content, 250);
 		if (null == sysLog.getCreateTime()) {
-			throw new BizException("ÈÕÖ¾´´½¨Ê±¼ä²»ÄÜÎª¿Õ");
+			throw new BizException("æ—¥å¿—åˆ›å»ºæ—¶é—´ä¸èƒ½ä¸ºç©º");
 		}
 
 		this.sysLogDao.save(sysLog);
@@ -93,7 +93,7 @@ public class SysLogServiceImpl implements SysLogService {
 
 			sysLogDao.save(log);
 		} catch (Exception e) {
-			// ±£´æÈÕÖ¾³ö´í²»Å×³öÒì³£.
+			// ä¿å­˜æ—¥å¿—å‡ºé”™ä¸æŠ›å‡ºå¼‚å¸¸.
 			logger.debug(e, e);
 		}
 	}

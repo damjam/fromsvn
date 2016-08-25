@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Ïß³ÌÃû×Ö°ïÖúÀà
+ * çº¿ç¨‹åå­—å¸®åŠ©ç±»
  *
  */
 public class ThreadNameHelper {
 	
 	/**
-	 * ·Ö×éÏß³Ì×éµÄ µ±Ç°×î´óµÄĞòºÅ
+	 * åˆ†ç»„çº¿ç¨‹ç»„çš„ å½“å‰æœ€å¤§çš„åºå·
 	 */
 	public static Map<String,Integer> mapOfMaxNum = new HashMap<String, Integer>();
 	
 	/**
-	 * ÉèÖÃÏß³ÌµÄÃû×Ö  Ïß³ÌµÄÃû×ÖÓÉÇ°×º+_+Êı×Ö×é³É
-	 * @param thread Ïß³Ì
-	 * @param preOfName  Ãû×ÖµÄÇ°ÖÃ¡£
+	 * è®¾ç½®çº¿ç¨‹çš„åå­—  çº¿ç¨‹çš„åå­—ç”±å‰ç¼€+_+æ•°å­—ç»„æˆ
+	 * @param thread çº¿ç¨‹
+	 * @param preOfName  åå­—çš„å‰ç½®ã€‚
 	 */
 	public static synchronized void setThreadName(Thread thread,String preOfName){
 		Integer maxNum = mapOfMaxNum.get(preOfName);

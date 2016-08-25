@@ -179,7 +179,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 		String branchNo = super.getSessionBranchNo(request);
 		List<List<Object>> dataList = new ArrayList<>();
 		for (int i = 0, size = list.size(); i < size; i++) {
-			CarInfo info = (CarInfo)list.get(i);
+			CarInfo info = list.get(i);
 			List<Object> obj = new ArrayList<>();
 			obj.add(info.getCarSn());
 			obj.add(info.getBrand()+info.getModel());

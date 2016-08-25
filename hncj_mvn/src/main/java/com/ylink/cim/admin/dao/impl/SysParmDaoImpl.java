@@ -1,10 +1,5 @@
 package com.ylink.cim.admin.dao.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Component;

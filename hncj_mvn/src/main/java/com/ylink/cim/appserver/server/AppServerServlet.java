@@ -46,6 +46,5 @@ public class AppServerServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

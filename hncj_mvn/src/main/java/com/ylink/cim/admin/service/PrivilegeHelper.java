@@ -16,7 +16,7 @@ import com.ylink.cim.admin.domain.PrivilegeResource;
 import flink.util.IPrivilege;
 
 /**
- * È¨ÏŞ¸¨ÖúÀà.
+ * æƒé™è¾…åŠ©ç±».
  * 
  * 
  *
@@ -26,11 +26,11 @@ public abstract class PrivilegeHelper {
 	private static Log log = LogFactory.getLog(PrivilegeHelper.class);
 
 	/**
-	 * »ñÈ¡È¨ÏŞµÄ×ÓÈ¨ÏŞ.
+	 * è·å–æƒé™çš„å­æƒé™.
 	 * 
 	 * @param parent
 	 * @param privileges
-	 *            µ±Ç°ËùÓĞµÄËùÓĞÈ¨ÏŞ
+	 *            å½“å‰æ‰€æœ‰çš„æ‰€æœ‰æƒé™
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -40,12 +40,12 @@ public abstract class PrivilegeHelper {
 
 		for (Iterator<Privilege> i = privileges.iterator(); i.hasNext();) {
 			Privilege privilege = i.next();
-			if (privilege.isUsedToTree()) {// ÒÑ¾­Ê¹ÓÃÁËµÄ²»²ÎÓëÑ­»·
+			if (privilege.isUsedToTree()) {// å·²ç»ä½¿ç”¨äº†çš„ä¸å‚ä¸å¾ªç¯
 				continue;
 			}
 			if (isChild(privilege, parent)) {
 				privilege.setChildren(getChildren(privilege, privileges));
-				if (privilege.isMenu()) {// ÊÇÄ¿Â¼²Å¼ÓÈëµ½Ä¿Â¼Ê÷ÖĞ
+				if (privilege.isMenu()) {// æ˜¯ç›®å½•æ‰åŠ å…¥åˆ°ç›®å½•æ ‘ä¸­
 					result.add(privilege);
 				}
 				privilege.setUsedToTree(true);
@@ -56,7 +56,7 @@ public abstract class PrivilegeHelper {
 	}
 
 	/**
-	 * ²éÕÒ¸¸½Úµã.
+	 * æŸ¥æ‰¾çˆ¶èŠ‚ç‚¹.
 	 * 
 	 * @param privilege
 	 * @param privileges
@@ -78,7 +78,7 @@ public abstract class PrivilegeHelper {
 	}
 
 	/**
-	 * ¸ù¾İ±àºÅ²éÕÒÈ¨ÏŞ¶ÔÏó.
+	 * æ ¹æ®ç¼–å·æŸ¥æ‰¾æƒé™å¯¹è±¡.
 	 * 
 	 * @param code
 	 * @param privileges
@@ -96,13 +96,13 @@ public abstract class PrivilegeHelper {
 	}
 
 	/**
-	 * Éú³ÉÈ¨ÏŞÄ¿Â¼Ê÷£¨ÈôÊÇÒ¶×Ó½Úµã£¬½«±»ÅÅ³ı£©
+	 * ç”Ÿæˆæƒé™ç›®å½•æ ‘ï¼ˆè‹¥æ˜¯å¶å­èŠ‚ç‚¹ï¼Œå°†è¢«æ’é™¤ï¼‰
 	 * 
 	 * @param root
 	 * @param privileges
-	 *            µ±Ç°ËùÓĞµÄËùÓĞÈ¨ÏŞ
+	 *            å½“å‰æ‰€æœ‰çš„æ‰€æœ‰æƒé™
 	 * @param map
-	 *            È¨ÏŞºÍÈ¨ÏŞ×ÊÔ´Ö®¼äµÄÓ³Éä
+	 *            æƒé™å’Œæƒé™èµ„æºä¹‹é—´çš„æ˜ å°„
 	 * @return
 	 */
 	public static IPrivilege getPrivilegeTree(IPrivilege root,
@@ -118,7 +118,7 @@ public abstract class PrivilegeHelper {
 		long first = System.currentTimeMillis();
 		List<IPrivilege> children = getChildren(root, ps);
 		long next = System.currentTimeMillis();
-		log.debug("È¨ÏŞÊ÷¹¹ÔìÊ±¼ä£º" + (next - first));
+		log.debug("æƒé™æ ‘æ„é€ æ—¶é—´ï¼š" + (next - first));
 
 		Privilege pRoot = (Privilege) root;
 		pRoot.setUsedToTree(true);
@@ -127,7 +127,7 @@ public abstract class PrivilegeHelper {
 	}
 
 	/**
-	 * Ç°ÕßÊÇ·ñÎªºóÕßµÄ×ÓÈ¨ÏŞ.
+	 * å‰è€…æ˜¯å¦ä¸ºåè€…çš„å­æƒé™.
 	 * 
 	 * @param privilege
 	 * @param parent

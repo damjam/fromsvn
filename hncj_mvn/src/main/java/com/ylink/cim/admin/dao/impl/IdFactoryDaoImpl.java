@@ -28,7 +28,7 @@ public class IdFactoryDaoImpl extends BaseDaoImpl implements IdFactoryDao {
 	}
 
 	@Override
-	protected Class getModelClass() {
+	protected Class<?> getModelClass() {
 
 		return IdFactory.class;
 	}

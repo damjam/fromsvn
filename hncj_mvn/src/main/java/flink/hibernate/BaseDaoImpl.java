@@ -34,6 +34,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	/**
 	 * 清理session.
 	 */
+	@Override
 	public void clear() {
 		this.currentSession().clear();
 		/*
@@ -45,6 +46,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		});*/
 	}
 	
+	@Override
 	public void flush() {
 		this.getHibernateTemplate().execute(new HibernateCallback() {
 			@Override
@@ -57,8 +59,10 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		});
 	}
 	
+	@Override
 	public void evict(final Object entity) {
 		this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException{
 				session.evict(entity);
 				return null;
@@ -66,8 +70,10 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		});
 	}
 	
+	@Override
 	public void refresh(final Object entity) {
 		this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				session.refresh(entity);
 				return null;
@@ -75,8 +81,10 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		});
 	}
 	
+	@Override
 	public void flushAndClear() {
 		this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				session.flush();
 				session.clear();
@@ -85,14 +93,17 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		});
 	}
 	
+	@Override
 	public List findAll() {
 		return findAll(getModelClass());
 	}
 	
+	@Override
 	public List findAll(Class clazz) {
 		return this.getHibernateTemplate().loadAll(clazz);
 	}
 
+	@Override
 	public List findAll(String orderProperty, String orderType) {
 		HqlHelper helper = new HqlHelper(getModelClass());
 		helper.orderBy(orderProperty, orderType);
@@ -100,22 +111,27 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		return getList(helper);
 	}
 
+	@Override
 	public void deleteById(Serializable id) {
 		this.getHibernateTemplate().delete(this.findById(id));
 	}
 
+	@Override
 	public void delete(Object entity) {
 		this.getHibernateTemplate().delete(entity);
 	}
 
+	@Override
 	public void saveOrUpdate(Object entity) {
 		this.getHibernateTemplate().saveOrUpdate(entity);
 	}
 
+	@Override
 	public Serializable save(Object entity) {
 		return this.getHibernateTemplate().save(entity);
 	}
 
+	@Override
 	public Serializable save(Object entity, boolean flush, boolean clear) {
 		Serializable pk = save(entity);
 		
@@ -130,26 +146,32 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		return pk;
 	}
 	
+	@Override
 	public void update(Object entity) {
 		this.getHibernateTemplate().update(entity);
 	}
 
+	@Override
 	public <E> E findById(Serializable id) {
 		return findById(getModelClass(), id);
 	}
 	
+	@Override
 	public <E> E findByIdWithLock(Serializable id) {
 		return findByIdWithLock(id, getModelClass());
 	}
 	
+	@Override
 	public <E> E findByIdWithLock(Serializable id, Class model) {
 		return findByIdWithLock(id, model, true);
 	}
 	
+	@Override
 	public <E> E findByIdWithLock(Serializable id, boolean wait) {
 		return findByIdWithLock(id, getModelClass(), wait);
 	}
 	
+	@Override
 	public <E> E findByIdWithLock(Serializable id, Class model, boolean wait) {
 		if (id == null) {
 			return null;
@@ -160,6 +182,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		return (E) getHibernateTemplate().get(model, id, mode);
 	}
 	
+	@Override
 	public <E> E findById(Class model, Serializable id) {
 		if (id == null) {
 			return null;
@@ -181,6 +204,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected List getList(final StringBuffer hql, final List params) {
 		return (List)this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) {
 				return session.createQuery(hql.toString())
 						.setParameters(params.toArray(), getParamTypes(params))
@@ -191,6 +215,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int execute(final String hql) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session){
 				int count = session.createQuery(hql).executeUpdate();
 				
@@ -201,6 +226,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int executeSql(final String sql) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				int count = session.createSQLQuery(sql).executeUpdate();
 				
@@ -211,6 +237,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int execute(final String hql, final Object param) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				int count = session.createQuery(hql).setParameter(0, param).executeUpdate();
 				
@@ -221,6 +248,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int executeSql(final String sql, final Object param) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				int count = session.createSQLQuery(sql).setParameter(0, param).executeUpdate();
 				
@@ -231,6 +259,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int execute(final String hql, final List params) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				int count = session.createQuery(hql)
 						.setParameters(params.toArray(), getParamTypes(params))
@@ -247,6 +276,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected int executeSql(final String sql, final List params) {
 		return ((Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				int count = session.createSQLQuery(sql)
 					.setParameters(params.toArray(), getParamTypes(params))
@@ -271,7 +301,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		List paramTypes = new ArrayList();
 		
 		for (Iterator i = params.iterator(); i.hasNext();) {
-			Object param = (Object) i.next();
+			Object param = i.next();
 			//paramTypes.add(TypeFactory.heuristicType(param.getClass().getName()));
 			TypeResolver typeResolver = new TypeResolver();
 			Type type = typeResolver.heuristicType(param.getClass().getName());
@@ -308,7 +338,8 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 * @since 2007-12-03
 	 */
 	protected List getList(final HqlHelper helper) {
-		return (List)this.getHibernateTemplate().execute(new HibernateCallback() {
+		return (List<?>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.list(session);
 			}
@@ -325,6 +356,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected List getList(final QueryHelper helper, final String alias, final LockMode lockMode) {
 		return (List)this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.list(session, alias, lockMode);
 			}
@@ -341,6 +373,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResult(final QueryHelper helper, final String alias, final LockMode lockMode) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.getUniqueResult(session, alias, lockMode);
 			}
@@ -360,6 +393,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResult(final StringBuffer hql, final List params) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return session.createQuery(hql.toString())
 						.setParameters(params.toArray(), getParamTypes(params))
@@ -381,15 +415,18 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResult(final QueryHelper helper) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.getUniqueResult(session);
 			}
 		});
 	}
 	
+	@Override
 	public Object getUniqueResult(Class clazz, String property, Object value) {
 		final HqlHelper helper = new HqlHelper(clazz).append("where " + property + " = ?", value);
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.getUniqueResult(session);
 			}
@@ -399,15 +436,18 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	protected Object getUniqueResult(String property, Object value) {
 		final HqlHelper helper = new HqlHelper(getModelClass()).append("where " + property + " = ?", value);
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.getUniqueResult(session);
 			}
 		});
 	}
 	
+	@Override
 	public List<?> getResults(String property, Object value) {
 		final HqlHelper helper = new HqlHelper(getModelClass()).append("where " + property + " = ?", value);
 		return (List<?>)this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.list(session);
 			}
@@ -432,6 +472,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResult(final String hql) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return session.createQuery(hql).uniqueResult();
 			}
@@ -502,6 +543,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Paginater getPageData(final QueryHelper helper, final long pageNumber, final int pageSize) {
 		return (Paginater) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				Paginater paginater = new Paginater(helper.getRecordCount(session), pageNumber, pageSize);
 				
@@ -527,6 +569,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected List getListBySql(final QueryHelper helper) {
 		return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.listBySql(session);
 			}
@@ -535,6 +578,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected List getListBySql(final QueryHelper helper, final ResultTransformer transformer) {
 		return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.listBySql(session, transformer);
 			}
@@ -543,6 +587,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	
 	protected List getListBySql(final String sql) {
 		return (List) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				QueryHelper helper = new QueryHelper();
 				helper.append(sql);
@@ -563,6 +608,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResultBySql(final QueryHelper helper) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				return helper.getUniqueResultBySql(session);
 			}
@@ -580,6 +626,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Object getUniqueResultBySql(final String sql) {
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				QueryHelper helper = new QueryHelper();
 				helper.append(sql);
@@ -598,6 +645,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Paginater getPageDataBySql(final QueryHelper helper, final Paginater paginater) {
 		return (Paginater) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				List list = helper.getSQLQuery(session)
 					.setMaxResults(paginater.getPageSize())
@@ -619,6 +667,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Paginater getPageDataBySql(final QueryHelper helper, final Pager pager) {
 		return (Paginater) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) throws HibernateException {
 				Paginater paginater = new Paginater(helper.getRecordCountBySql(session), pager.getPageNumber(), pager.getPageSize());
 				
@@ -642,6 +691,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	protected Paginater getPageDataBySql(final QueryHelper helper, final Pager pager, final ResultTransformer transformer) {
 		return (Paginater) this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) {
 				if (pager == null) {
 					List list = getListBySql(helper, transformer);
@@ -694,7 +744,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 	 */
 	public String strsCondition(List<String> listOfStr) {
 		if(listOfStr == null){return null;}
-		return this.strsCondition((String[]) listOfStr.toArray(new String[listOfStr.size()]));
+		return this.strsCondition(listOfStr.toArray(new String[listOfStr.size()]));
 	}
 
 	/**
@@ -711,6 +761,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		return result.substring(1);
 	}
 
+	@Override
 	public void lock(Object entity, LockMode lockMode) {
 		this.getHibernateTemplate().lock(entity, lockMode);
 	}
@@ -733,12 +784,14 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 		}
 		return helper;
 	}
+	@Override
 	public Long findCountByParam(Class<?> clazz, Map<String, Object> params, String idKey, Object idValue) {
 		QueryHelper helper = getQueryHelper(clazz, params, idKey, idValue);
 		Object obj = getUniqueResult(helper);
 		Map<String, Object> map = (Map<String, Object>)obj;
 		return (Long)map.get("count");
 	}
+	@Override
 	public Object getUniqueResult(Class clazz, Map<String, Object> params){
 		final HqlHelper helper = new HqlHelper(clazz);
 		helper.append("where 1=1");
@@ -748,6 +801,7 @@ public abstract class BaseDaoImpl extends RootDao implements BaseDao {
 			helper.append("and " + key + " = ?", value);
 		}
 		return this.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
 			public Object doInHibernate(Session session) {
 				return helper.getUniqueResult(session);
 			}

@@ -36,6 +36,7 @@ import flink.etc.Symbol;
 import flink.util.AmountUtils;
 import flink.util.DateUtil;
 import flink.util.LogUtils;
+import flink.util.MsgUtils;
 
 @Component("accountService")
 public class AccountServiceImpl implements AccountService {
@@ -194,7 +195,7 @@ public class AccountServiceImpl implements AccountService {
 				params.put("houseSn", houseSn);
 				params.put("branchNo", sessionUser.getBranchNo());
 				OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, sessionUser.getBranchNo());
-				Assert.notNull(ownerInfo, LogUtils.r("房屋编号为{?}的业主信息不存在", houseSn));
+				Assert.notNull(ownerInfo, MsgUtils.r("房屋编号为{?}的业主信息不存在", houseSn));
 				Assert.isEmpty(accountDao.findList(params), "房屋编号为"+houseSn+"的账户信息已存在");
 				try{
 					BeanUtils.populate(info, map);
@@ -219,8 +220,8 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public void openAcct(String houseSn, Double amount, UserInfo userInfo) throws BizException {
 		OwnerInfo ownerInfo = ownerInfoDao.getNormalOwner(houseSn, userInfo.getBranchNo());
-		Assert.notNull(ownerInfo, LogUtils.r("找不到房屋编号为{?}的业主信息", houseSn));
-		Assert.isNull(accountDao.findById(ownerInfo.getId()), LogUtils.r("房屋编号为{?}的业主已开通账户,不可重新开户", houseSn));
+		Assert.notNull(ownerInfo, MsgUtils.r("找不到房屋编号为{?}的业主信息", houseSn));
+		Assert.isNull(accountDao.findById(ownerInfo.getId()), MsgUtils.r("房屋编号为{?}的业主已开通账户,不可重新开户", houseSn));
 		Account account = new Account();
 		account.setId(ownerInfo.getId());
 		account.setOwnerName(ownerInfo.getOwnerName());

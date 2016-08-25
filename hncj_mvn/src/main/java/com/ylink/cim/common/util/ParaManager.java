@@ -187,7 +187,7 @@ public abstract class ParaManager {
 	private static void initSysParm() {
 		List<SysParm> list = sysParmDao.findAll();
 		for(int i=0,size=list.size(); i<size; i++){
-			SysParm parm = (SysParm) list.get(i);
+			SysParm parm = list.get(i);
 			String parmvalue = parm.getParvalue();
 			if (parm.getParvalue() == null) {
 				parmvalue = "";
@@ -198,7 +198,7 @@ public abstract class ParaManager {
 	private static void initBranchParm() {
 		List<BranchParam> list = branchParmDao.findAll();
 		for(int i=0,size=list.size(); i<size; i++){
-			BranchParam parm = (BranchParam) list.get(i);
+			BranchParam parm = list.get(i);
 			String parmvalue = parm.getParvalue();
 			if (parm.getParvalue() == null) {
 				parmvalue = "";
