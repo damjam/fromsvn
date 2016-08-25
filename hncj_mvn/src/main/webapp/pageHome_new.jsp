@@ -18,11 +18,10 @@
 		<f:css href="/macadmin/css/bootstrap-datetimepicker.min.css"/>
 		<f:css href="/macadmin/css/fullcalendar.css"/>
 		<f:css href="/macadmin/css/prettyPhoto.css"/>
-		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
-		<f:js src="/js/jquery.js"/>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
-		<f:js src="/js/jquery.js" />
+		<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
 		<f:js src="/js/common.js"/>
 		<f:js src="/macadmin/js/jquery.dataTables.min.js"/>
 		<script type="text/javascript">

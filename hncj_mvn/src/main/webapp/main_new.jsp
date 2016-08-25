@@ -8,9 +8,9 @@
 		<%@ include file="/pages/common/sys.jsp" %>
 		<%@ include file="/pages/common/taglibs.jsp" %>
 		<title>${comInfo.sp}</title>
-		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
-	    <link href="http://cdn.bootcss.com/jqueryui/1.11.3/jquery-ui.css" rel="stylesheet">
+	    <link href="https://cdn.bootcss.com/jqueryui/1.11.3/jquery-ui.css" rel="stylesheet">
 		<f:css href="/macadmin/css/style.css"/>
 		<f:css href="/macadmin/css/widgets.css"/>
 		<f:css href="/macadmin/css/jquery.onoff.css"/>
@@ -20,10 +20,10 @@
 		<f:css href="/macadmin/css/bootstrap-datetimepicker.min.css"/>
 		<f:css href="/macadmin/css/fullcalendar.css"/>
 		<f:css href="/macadmin/css/prettyPhoto.css"/>
-		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
-		<f:js src="/js/jquery.js"/>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="http://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
+		<script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/jqueryui/1.11.4/jquery-ui.js"></script>
 		
 		<f:js src="/macadmin/js/jquery.onoff.min.js"/>
 		<f:js src="/macadmin/js/jquery.cleditor.min.js"/>
@@ -42,7 +42,7 @@
 		
 		<f:js src="/macadmin/js/custom.js"/>
 		
-		<script src="http://cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery.nicescroll/3.6.8/jquery.nicescroll.min.js"></script>
 		<f:js src="/js/biz/main.js"/>
 		<f:js src="/js/common.js"/>
 		

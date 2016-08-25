@@ -8,7 +8,7 @@
 		<title>操作超时</title>
 		<f:css href="/css/page.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">	
-		<f:js src="/js/jquery.js"/>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/plugin/jquery.blockUI.js"/>
 		<script>
 			$(function(){

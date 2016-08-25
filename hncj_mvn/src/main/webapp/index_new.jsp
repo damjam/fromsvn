@@ -54,12 +54,12 @@
     padding:0;
 }	
 		</style>
-		<f:js src="/js/jquery.js"/>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/usbkey.js"/>
 		<f:js src="/js/common.js"/>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/md5.js"/>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<f:js src="/layer/layer.js"/>
 		<script type="text/javascript">
 			$(function() {

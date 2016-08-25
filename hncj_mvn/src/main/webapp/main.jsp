@@ -10,7 +10,7 @@
 		<title>${comInfo.sp}</title>
 		<f:css href="/css/screen.css" />
 		<f:css href="/css/menutree.css" />
-		<f:js src="/js/jquery.js"/>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/biz/main.js"/>
 
 		<!--显示隐藏左侧菜单代码-->

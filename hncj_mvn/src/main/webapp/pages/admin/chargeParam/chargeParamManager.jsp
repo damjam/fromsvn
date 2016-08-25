@@ -6,7 +6,7 @@
 <head>
       	<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
-		<f:css href="/css/jquery-ui-1.7.2.custom.css" />
+		<link href="https://cdn.bootcss.com/jqueryui/1.12.0/jquery-ui.min.css" rel="stylesheet">
 		<f:css href="/css/page.css" />
 		<f:js src="/js/paginater.js" />
 		<f:js src="/js/jquery.js" />
@@ -15,7 +15,7 @@
 		<f:js src="/js/sys.js" />
 		<f:js src="/js/common.js" />
 		
-		<f:js src="/js/plugin/jquery-ui.js" />
+		<script src="https://cdn.bootcss.com/jqueryui/1.12.0/jquery-ui.min.js"></script>
 		
 		<script type="text/javascript">
 			$(function() {

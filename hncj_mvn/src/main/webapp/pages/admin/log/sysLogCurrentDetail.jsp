@@ -5,7 +5,7 @@
 	<%@ page language="java" contentType="text/html; charset=utf-8"%>
 	<%response.setHeader("Cache-Control", "no-cache");%>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<%@ include file="/pages/common/meta.jsp"%>
 		<%@ include file="/pages/common/sys.jsp"%>
 		<%@ include file="/pages/common/taglibs.jsp" %>

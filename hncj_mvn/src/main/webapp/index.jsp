@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <%@ include file="/pages/common/sys.jsp" %>
 <html>
     
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=7" />
         <meta http-equiv="Content-Language" content="zh-cn">
         <meta name="description" content="" />

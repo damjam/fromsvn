@@ -4,11 +4,11 @@
 <%@ include file="/pages/common/taglibs.jsp" %>
 <html lang="zh-cn"> 
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <%@ include file="/pages/common/meta.jsp" %>
 		<%@ include file="/pages/common/sys.jsp" %>
 
-		<f:js src="/js/jquery.js"/>
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/sys.js"/>
 		<f:js src="/js/paginater.js"/>
 		<f:js src="/js/plugin/jquery.validate.js"/>

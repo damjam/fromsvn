@@ -15,27 +15,26 @@
 		<f:js src="/js/paginater.js" />
 		<f:js src="/js/common.js" />
 		<f:css href="/css/page.css" />
-		<f:css href="/css/jquery-ui-1.7.2.custom.css" />
 
 		<script type="text/javascript">
-	$(function() {
-		//定时计划增加
-		$('#btnTimerAdd').click(
-			function() {
-				var url="/timer.do?action=toEdit";
-				gotoUrl(url);
+			$(function() {
+				//定时计划增加
+				$('#btnTimerAdd').click(
+					function() {
+						var url="/timer.do?action=toEdit";
+						gotoUrl(url);
+					});
+		
+				//定时计划清除
+				$('#btnTimerClear').click(function() {
+					FormUtils.reset();
+				});
 			});
-
-		//定时计划清除
-		$('#btnTimerClear').click(function() {
-			FormUtils.reset();
-		});
-	});
-	$().ready(function(){
-		var height = document.body.scrollHeight;
-		parent.adjustHeight(height, 0);
-	});
-</script>
+			$().ready(function(){
+				var height = document.body.scrollHeight;
+				parent.adjustHeight(height, 0);
+			});
+		</script>
 	</head>
 
 	<body>

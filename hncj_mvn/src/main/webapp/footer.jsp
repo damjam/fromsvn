@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=GBK"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
 <div class="footer">
 	<div class="footshadow"></div>
 	<div class="foottext">
 		<div class="textleft" style="display: inline;text-align: left;">
-			${comInfo.tip}&nbsp;<a href="http://softdl.360tpcdn.com/Chrome/Chromestable_49.0.2623.75.exe" target="_blank" style="color: red;">╣Ц╢кобть</a>
+			${comInfo.tip}&nbsp;<a href="http://softdl.360tpcdn.com/Chrome/Chromestable_49.0.2623.75.exe" target="_blank" style="color: red;">Г┌╧Ф╜╓Д╦▀Х╫╫</a>
 		</div>
 		<div class="textright" style="display: inline;text-align: right;">
-			<a href="${comInfo.groupWeb}" title="╥цнй╧ы╥╫мЬу╬" target="_blank">╡Щ╫╗╣ь╡З╪╞ме</a>
-			╣Г╩╟ё╨${comInfo.tel}
+			<a href="${comInfo.groupWeb}" title="Х╝©И≈╝Е╝≤Ф√╧Г╫▒Г╚≥" target="_blank">Ф≤▄Е╩╨Е°╟Д╨╖И⌡├Е⌡╒</a>
+			Г■╣Х╞²О╪ ${comInfo.tel}
 		</div>
 	</div>
 </div>
