@@ -9,10 +9,10 @@
 		<title></title>
 		
 		<f:css href="/css/page.css"/>
-		<link href="http://cdn.bootcss.com/chosen/1.5.1/chosen.css" rel="stylesheet">
+		<link href="https://cdn.bootcss.com/chosen/1.5.1/chosen.css" rel="stylesheet">
 		
-		<f:js src="/dtree/wtree.js"/>
 		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<f:js src="/dtree/wtree.js"/>
 		<f:js src="/js/plugin/jquery.metadata.js"/>
 		<f:js src="/js/plugin/jquery.validate.js"/>		
 		<f:js src="/js/sys.js"/>
