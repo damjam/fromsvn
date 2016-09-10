@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="css/page.css" type="text/css"
 	media="screen, projection" />
-<f:js src="/js/jquery.js" />
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 <f:js src="/js/sys.js" />
 <f:js src="/js/paginater.js" />
 <f:js src="/js/common.js" />

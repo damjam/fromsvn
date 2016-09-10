@@ -13,7 +13,7 @@
 		<title></title>
 
 		<f:css href="/css/page.css" />
-		<f:js src="/js/jquery.js" />
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/plugin/jquery.metadata.js" />
 		<f:js src="/js/plugin/jquery.validate.js" />
 

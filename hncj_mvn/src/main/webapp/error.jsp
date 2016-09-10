@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="css/page.css" type="text/css"
 			media="screen, projection" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">	
-		<f:js src="/js/jquery.js" />
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/common.js" />
 		<script type="text/javascript">
 <!--

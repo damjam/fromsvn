@@ -9,7 +9,7 @@
 		<link href="https://cdn.bootcss.com/jqueryui/1.12.0/jquery-ui.min.css" rel="stylesheet">
 		<f:css href="/css/page.css" />
 		<f:js src="/js/paginater.js" />
-		<f:js src="/js/jquery.js" />
+		<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<f:js src="/js/plugin/jquery.validate.js" />
 		<f:js src="/js/plugin/jquery.metadata.js" />
 		<f:js src="/js/sys.js" />

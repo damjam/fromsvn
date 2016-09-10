@@ -5,13 +5,13 @@ var SAVE_IMAGE = "<img src='" + CONTEXT_PATH + "/images/ajax_saving.gif'/>";
 
 var _tracer = null;
 var _times = 0;
-var _MAX_TIMES = 10; // ÏµÍ³²ÎÊı
-var _INTERVAL = 2000; // ÏµÍ³²ÎÊı
+var _MAX_TIMES = 10; // ç³»ç»Ÿå‚æ•°
+var _INTERVAL = 2000; // ç³»ç»Ÿå‚æ•°
 
 var _INVALID_CHAR = "'<>/&";
 
 /**
- * ÊÇ·ñº¬ÓĞÎŞĞ§×Ö·û.
+ * æ˜¯å¦å«æœ‰æ— æ•ˆå­—ç¬¦.
  */
 function containsInvalid(s) {
 	if (s == null) {
@@ -28,7 +28,7 @@ function containsInvalid(s) {
 }
 
 /**
- * ¶¨Ê±Ö´ĞĞ²éÑ¯½á¹û
+ * å®šæ—¶æ‰§è¡ŒæŸ¥è¯¢ç»“æœ
  * 
  */
 function startTracker(func) {
@@ -38,7 +38,7 @@ function startTracker(func) {
 }
 
 /**
- * ÏÔÊ¾³É¹¦µÄÍ¼Æ¬
+ * æ˜¾ç¤ºæˆåŠŸçš„å›¾ç‰‡
  *
  */
 function showRightImg(targetId){
@@ -46,7 +46,7 @@ function showRightImg(targetId){
 }
 
 /**
- * ÏÔÊ¾´íÎóµÄÍ¼Æ¬
+ * æ˜¾ç¤ºé”™è¯¯çš„å›¾ç‰‡
  *
  */
 function showFaultImg(targetId){
@@ -54,7 +54,7 @@ function showFaultImg(targetId){
 }
 
 /**
- * µÃµ½µ±Ç°Ò³ÃæÑéÖ¤½á¹û
+ * å¾—åˆ°å½“å‰é¡µé¢éªŒè¯ç»“æœ
  * 
  */
 function isValidate(){
@@ -68,11 +68,11 @@ function isValidate(){
 }
 
 /**
- * ±íµ¥token.
+ * è¡¨å•token.
  */
 YToken = {
 	/**
-	 * Éú³ÉËæ»úÊı.
+	 * ç”Ÿæˆéšæœºæ•°.
 	 */
 	callId: function() {
 		var random = Math.floor(Math.random() * 10001);
@@ -80,7 +80,7 @@ YToken = {
 	},
 	
 	/**
-	 * ÔÚ±íµ¥ÄÚ²¿´´½¨Ëæ»úÊıtoken.
+	 * åœ¨è¡¨å•å†…éƒ¨åˆ›å»ºéšæœºæ•°token.
 	 */
 	create: function(jqueryForm) {
 		if (jqueryForm.find('input[name="TOKEN-KEY"]').length == 0) {
@@ -91,14 +91,14 @@ YToken = {
 	},
 	
 	/**
-	 * »ñÈ¡±íµ¥ÄÚ²¿Ëæ»úÊıtoken.
+	 * è·å–è¡¨å•å†…éƒ¨éšæœºæ•°token.
 	 */
 	get: function(jqueryForm) {
 		return jqueryForm.find('input[name="TOKEN-KEY"]').val();
 	},
 	
 	/**
-	 * Çå¿Õ±íµ¥ÄÚ²¿Ëæ»úÊıtoken.
+	 * æ¸…ç©ºè¡¨å•å†…éƒ¨éšæœºæ•°token.
 	 */
 	clear: function(jqueryForm) {
 		jqueryForm.find('input[name="TOKEN-KEY"]').val('');
@@ -106,7 +106,7 @@ YToken = {
 }
 
 /**
- * Ò³ÃæÊÇ·ñÓĞ·µ»Ø½á¹û
+ * é¡µé¢æ˜¯å¦æœ‰è¿”å›ç»“æœ
  */
 function hasResult(){
 	var result = $('input[name="result"]').val();
@@ -117,25 +117,25 @@ function hasResult(){
 }
 
 /**
- * µÃµ½·µ»ØÏûÏ¢
+ * å¾—åˆ°è¿”å›æ¶ˆæ¯
  */
 function getMessage(){
 	return $('input[name="message"]').val();
 }
 
 /**
- * µÃµ½·µ»Ø½á¹û
+ * å¾—åˆ°è¿”å›ç»“æœ
  */
 function getResult(){
 	return $('input[name="result"]').val();
 }
 
 /**
- * ÏÔÊ¾TIP
- * @param result ³É¹¦ OR Ê§°Ü
- * @param message ·µ»Ø½á¹û
- * @param isHide ³É¹¦µÄĞÅÏ¢ÊÇ·ñÒş²Ø
- * @param isReset ÊÇ·ñÖØÉèÒ³ÃæÉÏµÄ±íµ¥
+ * æ˜¾ç¤ºTIP
+ * @param result æˆåŠŸ OR å¤±è´¥
+ * @param message è¿”å›ç»“æœ
+ * @param isHide æˆåŠŸçš„ä¿¡æ¯æ˜¯å¦éšè—
+ * @param isReset æ˜¯å¦é‡è®¾é¡µé¢ä¸Šçš„è¡¨å•
  */
 function showTip(result, message, isHide, isReset){
 	if (isHide == undefined || isHide == null) {
@@ -160,15 +160,15 @@ function showTip(result, message, isHide, isReset){
 }
 
 /**
- * Òş²ØTIP
+ * éšè—TIP
  */
 function hideTip(){
 	$('#tip').slideUp("slow");
 }
 
 /**
- * Íê³ÉÑéÖ¤, ¸ù¾İÊÇ·ñÓĞĞ§ÏÔÊ¾ÌáÊ¾ĞÅÏ¢.
- * @tgt jquery¶ÔÏó.
+ * å®ŒæˆéªŒè¯, æ ¹æ®æ˜¯å¦æœ‰æ•ˆæ˜¾ç¤ºæç¤ºä¿¡æ¯.
+ * @tgt jqueryå¯¹è±¡.
  */
 function finishValidate(tgt, isValid) {
 	var tipSpan = tgt.find('+ span');
@@ -189,7 +189,7 @@ function finishValidate(tgt, isValid) {
 
 FormUtils = {
 	/**
-	 * È«Ñ¡È«Çå¸´Ñ¡¿ò
+	 * å…¨é€‰å…¨æ¸…å¤é€‰æ¡†
 	 */
 	selectAll: function(target, checkboxName) {
 		var roleIds = document.getElementsByName(checkboxName);
@@ -199,7 +199,7 @@ FormUtils = {
 	},
 	
 	/**
-	 * »ñÈ¡¸´Ñ¡¿òÑ¡ÖĞµÄÖµ. ÒÔ","·Ö¸ô.
+	 * è·å–å¤é€‰æ¡†é€‰ä¸­çš„å€¼. ä»¥","åˆ†éš”.
 	 */
 	getCheckedValues: function(checkboxName) {
 		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").map(function(){
@@ -208,7 +208,7 @@ FormUtils = {
 	},
 	
 	/**
-	 * »ñÈ¡¸´Ñ¡¿òÑ¡ÖĞµÄÖµ. Êı×éĞÎÊ½.
+	 * è·å–å¤é€‰æ¡†é€‰ä¸­çš„å€¼. æ•°ç»„å½¢å¼.
 	 */
 	getCheckedArrayValues: function(checkboxName) {
 		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").map(function(){
@@ -217,49 +217,49 @@ FormUtils = {
 	},
 	
 	/**
-	 * ÊÇ·ñÓĞÑ¡ÖĞ¸´Ñ¡¿ò
+	 * æ˜¯å¦æœ‰é€‰ä¸­å¤é€‰æ¡†
 	 */
 	hasSelected: function(checkboxName) {
 		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").length > 0;
 	},
 	
 	/**
-	 * Ñ¡ÖĞ¸´Ñ¡¿òµÄ¸öÊı.
+	 * é€‰ä¸­å¤é€‰æ¡†çš„ä¸ªæ•°.
 	 */
 	getSelectedCount: function(checkboxName) {
 		return $("input[type='checkbox'][name='"+checkboxName+"']:checked").length;
 	},
 	
 	/**
-	 * »ñÈ¡Òş²ØÓòµÄÖµ. ÒÔ","·Ö¸ô.
+	 * è·å–éšè—åŸŸçš„å€¼. ä»¥","åˆ†éš”.
 	 */
 	getHiddenTextValuesStr: function(textName) {
 		return $('input:hidden[name="' + textName + '"]').map(function(){return $(this).val();}).get().join(",");
 	},
 	
 	/**
-	 * ÊÇ·ñÓĞÑ¡ÖĞµ¥Ñ¡¿ò
+	 * æ˜¯å¦æœ‰é€‰ä¸­å•é€‰æ¡†
 	 */
 	hasRadio: function(radioboxName) {
 		return $('input[name="' + radioboxName + '"]:checked').length > 0;
 	},
 	
 	/**
-	 * ÊÇ·ñÓĞÑ¡ÖĞµ¥Ñ¡¿ò
+	 * æ˜¯å¦æœ‰é€‰ä¸­å•é€‰æ¡†
 	 */
 	getRadioedValue: function(radioboxName) {
 		return $('input[name="' + radioboxName + '"]:checked').val();
 	},
 	
 	/**
-	 * ±íµ¥ÖØÖÃ
+	 * è¡¨å•é‡ç½®
 	 */
 	reset: function(param, ignores) {
-		//Çå³ı±íµ¥ÖĞµÄÊı¾İ£¬¿ÉÒÔ´«formµÄid,form¶ÔÏó,µ±Ç°¶ÔÏó,Ò²¿ÉÊ²Ã´¶¼²»´«
+		//æ¸…é™¤è¡¨å•ä¸­çš„æ•°æ®ï¼Œå¯ä»¥ä¼ formçš„id,formå¯¹è±¡,å½“å‰å¯¹è±¡,ä¹Ÿå¯ä»€ä¹ˆéƒ½ä¸ä¼ 
 		var form;
 		if(!param){
-			 var event = window.event; // ÊÂ¼ş     
-        	 var target = event.target || event.srcElement; // »ñµÃÊÂ¼şÔ´ 
+			 var event = window.event; // äº‹ä»¶     
+        	 var target = event.target || event.srcElement; // è·å¾—äº‹ä»¶æº 
        		 form = target.form;
 		}
 		if(typeof param == 'object'){
@@ -278,8 +278,8 @@ FormUtils = {
 	},
 	
 	/**
-	 * Çå¿Õ¶ÔÏó
-	 * @param obj Jquery¶ÔÏó
+	 * æ¸…ç©ºå¯¹è±¡
+	 * @param obj Jqueryå¯¹è±¡
 	 */
 	clearData: function(obj, ignores) {
 		if (obj != null && obj != undefined && obj.length > 0){
@@ -293,7 +293,7 @@ FormUtils = {
 					if(id.indexOf('pageSize') != -1 || id.indexOf('goPageIndex') != -1){
 						flag = false;
 					}
-					//¹ıÂËÎŞĞèÖØÖÃµÄÔªËØ
+					//è¿‡æ»¤æ— éœ€é‡ç½®çš„å…ƒç´ 
 					if(ignores && ignores.length > 0){
 						for(var i=0; i<ignores.length; i++){
 							if(id == ignores[i]){
@@ -316,14 +316,14 @@ FormUtils = {
 	},
 	
 	/**
-	 * Ìá½»µÚÒ»¸ö¼ÓÈëÁîÅÆµÄform.
+	 * æäº¤ç¬¬ä¸€ä¸ªåŠ å…¥ä»¤ç‰Œçš„form.
 	 */
 	submitFirstTokenForm: function() {
 		this.submitTokenForm(0);
 	},
 	
 	/**
-	 * Ìá½»µÚÒ»¸ö¼ÓÈëÁîÅÆµÄform.
+	 * æäº¤ç¬¬ä¸€ä¸ªåŠ å…¥ä»¤ç‰Œçš„form.
 	 */
 	submitTokenForm: function(formIndex) {
 		var form = $('form:eq(' + formIndex + ')');
@@ -336,7 +336,7 @@ FormUtils = {
 };
 
 /**
- * ÅĞ¶ÏÊı×éÔªËØÊÇ·ñÏàÍ¬.
+ * åˆ¤æ–­æ•°ç»„å…ƒç´ æ˜¯å¦ç›¸åŒ.
  */
 function equalArray(array1, array2) {
 	if (!$.isArray(array1) || !$.isArray(array2)) {
@@ -378,7 +378,7 @@ function isDisplay(domId) {
 	return (display == 'block' || display == 'inline' || display == '');
 }
 /**
- * °ÑÆÕÍ¨Êı×Ö×ª»»Îª½ğ¶îÀàĞÍµÄÊı×Ö
+ * æŠŠæ™®é€šæ•°å­—è½¬æ¢ä¸ºé‡‘é¢ç±»å‹çš„æ•°å­—
  * @param {Object} money
  * @return {TypeName} 
  */
@@ -420,13 +420,13 @@ function formatToCurrency(money) {
 }
 
 /**
- * ½ğ¶î¸ñÊ½»¯
+ * é‡‘é¢æ ¼å¼åŒ–
  * 
  * @param 
- *            money ½ğ¶î
+ *            money é‡‘é¢
  * @param 
- *            t ´óĞ´½ğ¶îÏÖÊµµÄÎ»ÖÃµÄID
- * @param t1 Òş²ØINPUTÄÚÈİ,ÓÃÓÚÒ³ÃæÍùºó´«µİ,Èç¹ûÃ»ÓĞ´«¿Õ×Ö·û´®
+ *            t å¤§å†™é‡‘é¢ç°å®çš„ä½ç½®çš„ID
+ * @param t1 éšè—INPUTå†…å®¹,ç”¨äºé¡µé¢å¾€åä¼ é€’,å¦‚æœæ²¡æœ‰ä¼ ç©ºå­—ç¬¦ä¸²
  */
 function formatCurrency(money, t, t1) {
 	var num = money.value;
@@ -449,7 +449,7 @@ function formatCurrency(money, t, t1) {
 		if(amount>=10000000000000){
 			money.select();
 			money.focus();
-			$(money).parent().find('span.error_tipinfo').text('ÇëÊäÈëÕıÈ·¸ñÊ½µÄ½ğ¶î').show();
+			$(money).parent().find('span.error_tipinfo').text('è¯·è¾“å…¥æ­£ç¡®æ ¼å¼çš„é‡‘é¢').show();
 			$(money).parent().find('span.field_tipinfo').hide();
 			$('#'+t).html('');
 			$('#'+t1).html('');
@@ -469,7 +469,7 @@ function formatCurrency(money, t, t1) {
 			z = num.substring(0, st);
 			for (var i = 0; i < Math.floor((z.length - (1 + i)) / 3); i++) {
 				z = z.substring(0, z.length - (4 * i + 3)) 
-				+ ','//²»Òª¶ººÅ
+				+ ','//ä¸è¦é€—å·
 				+ z.substring(z.length - (4 * i + 3));
 			}
 			result = z + "." + x;
@@ -482,7 +482,7 @@ function formatCurrency(money, t, t1) {
 				num = num.substring(0, num.length - (4 * i + 3)) + ','
 						+ num.substring(num.length - (4 * i + 3));
 			
-			//²»Òª½ğ¶î¶ººÅ
+			//ä¸è¦é‡‘é¢é€—å·
 			/*for (var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
 				num = num.substring(0, num.length - (4 * i + 3)) + ''
 						+ num.substring(num.length - (4 * i + 3));*/
@@ -502,118 +502,118 @@ function formatCurrency(money, t, t1) {
 	$(ida).text(sda);
 }
 /**
- * ½ğ¶îĞ¡Ğ´×ªºº×Ö´óĞ´js·½·¨
+ * é‡‘é¢å°å†™è½¬æ±‰å­—å¤§å†™jsæ–¹æ³•
  * 
  * @author jcj
  * @param {}
- *            Êı×Ö½ğ¶î
- * @return {}ÖĞÎÄ½ğ¶î
+ *            æ•°å­—é‡‘é¢
+ * @return {}ä¸­æ–‡é‡‘é¢
  */
 function arabia_to_chinese(num) {
 
 	
 	for (i = num.length - 1; i >= 0; i--) {
-		num = num.replace(",", "")// Ìæ»»tomoney()ÖĞµÄ¡°,¡±
-		num = num.replace(" ", "")// Ìæ»»tomoney()ÖĞµÄ¿Õ¸ñ
+		num = num.replace(",", "")// æ›¿æ¢tomoney()ä¸­çš„â€œ,â€
+		num = num.replace(" ", "")// æ›¿æ¢tomoney()ä¸­çš„ç©ºæ ¼
 	}
-	num = num.replace("£¤", "")// Ìæ»»µô¿ÉÄÜ³öÏÖµÄ£¤×Ö·û
+	num = num.replace("ï¿¥", "")// æ›¿æ¢æ‰å¯èƒ½å‡ºç°çš„ï¿¥å­—ç¬¦
 
-	// ---×Ö·û´¦ÀíÍê±Ï£¬¿ªÊ¼×ª»»£¬×ª»»²ÉÓÃÇ°ºóÁ½²¿·Ö·Ö±ğ×ª»»---/
+	// ---å­—ç¬¦å¤„ç†å®Œæ¯•ï¼Œå¼€å§‹è½¬æ¢ï¼Œè½¬æ¢é‡‡ç”¨å‰åä¸¤éƒ¨åˆ†åˆ†åˆ«è½¬æ¢---/
 	part = num.split(".");
 	newchar = "";
-	// Ğ¡ÊıµãÇ°½øĞĞ×ª»¯
+	// å°æ•°ç‚¹å‰è¿›è¡Œè½¬åŒ–
 	for (i = part[0].length - 1; i >= 0; i--) {
 		if (part[0].length > 14) {
-			//alert("ÇëÊäÈëÕıÈ·µÄ½ğ¶î");
+			//alert("è¯·è¾“å…¥æ­£ç¡®çš„é‡‘é¢");
 			return "";
-		}// ÈôÊıÁ¿³¬¹ıÊ°ÒÚµ¥Î»£¬ÌáÊ¾
+		}// è‹¥æ•°é‡è¶…è¿‡æ‹¾äº¿å•ä½ï¼Œæç¤º
 		tmpnewchar = "";
 		perchar = part[0].charAt(i);
 		switch (perchar) {
 			case "0" :
-				tmpnewchar = "Áã" + tmpnewchar;
+				tmpnewchar = "é›¶" + tmpnewchar;
 				break;
 			case "1" :
-				tmpnewchar = "Ò¼" + tmpnewchar;
+				tmpnewchar = "å£¹" + tmpnewchar;
 				break;
 			case "2" :
-				tmpnewchar = "·¡" + tmpnewchar;
+				tmpnewchar = "è´°" + tmpnewchar;
 				break;
 
 			case "3" :
-				tmpnewchar = "Èş" + tmpnewchar;
+				tmpnewchar = "å" + tmpnewchar;
 				break;
 			case "4" :
-				tmpnewchar = "ËÁ" + tmpnewchar;
+				tmpnewchar = "è‚†" + tmpnewchar;
 				break;
 			case "5" :
-				tmpnewchar = "Îé" + tmpnewchar;
+				tmpnewchar = "ä¼" + tmpnewchar;
 				break;
 			case "6" :
-				tmpnewchar = "Â½" + tmpnewchar;
+				tmpnewchar = "é™†" + tmpnewchar;
 				break;
 			case "7" :
-				tmpnewchar = "Æâ" + tmpnewchar;
+				tmpnewchar = "æŸ’" + tmpnewchar;
 				break;
 			case "8" :
-				tmpnewchar = "°Æ" + tmpnewchar;
+				tmpnewchar = "æŒ" + tmpnewchar;
 				break;
 			case "9" :
-				tmpnewchar = "¾Á" + tmpnewchar;
+				tmpnewchar = "ç–" + tmpnewchar;
 				break;
 		}
 		switch (part[0].length - i - 1) {
 			case 0 :
-				tmpnewchar = tmpnewchar + "Ôª";
+				tmpnewchar = tmpnewchar + "å…ƒ";
 				break;
 			case 1 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "Ê°";
+					tmpnewchar = tmpnewchar + "æ‹¾";
 				break;
 			case 2 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "°Û";
+					tmpnewchar = tmpnewchar + "ä½°";
 				break;
 			case 3 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "Çª";
+					tmpnewchar = tmpnewchar + "ä»Ÿ";
 				break;
 			case 4 :
-				tmpnewchar = tmpnewchar + "Íò";
+				tmpnewchar = tmpnewchar + "ä¸‡";
 				break;
 			case 5 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "Ê°";
+					tmpnewchar = tmpnewchar + "æ‹¾";
 				break;
 			case 6 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "°Û";
+					tmpnewchar = tmpnewchar + "ä½°";
 				break;
 			case 7 :
 				if (perchar != 0)
-					tmpnewchar = tmpnewchar + "Çª";
+					tmpnewchar = tmpnewchar + "ä»Ÿ";
 				break;
 			case 8 :
-				tmpnewchar = tmpnewchar + "ÒÚ";
+				tmpnewchar = tmpnewchar + "äº¿";
 				break;
 			case 9 :
-				tmpnewchar = tmpnewchar + "Ê°";
+				tmpnewchar = tmpnewchar + "æ‹¾";
 				break;
 			case 10 :
-				tmpnewchar = tmpnewchar + "°Û";
+				tmpnewchar = tmpnewchar + "ä½°";
 				break;
 			case 11 :
-				tmpnewchar = tmpnewchar + "Çª";
+				tmpnewchar = tmpnewchar + "ä»Ÿ";
 				break;
 			case 12 :
-				tmpnewchar = tmpnewchar + "Íò";
+				tmpnewchar = tmpnewchar + "ä¸‡";
 				break;
 		}
 		newchar = tmpnewchar + newchar;
 		
 	}
 	
-	// Ğ¡ÊıµãÖ®ºó½øĞĞ×ª»¯
+	// å°æ•°ç‚¹ä¹‹åè¿›è¡Œè½¬åŒ–
 	if (num.indexOf(".") != -1) {
 		if (part[1].length > 2) {
 			part[1] = part[1].substr(0, 2)
@@ -623,69 +623,69 @@ function arabia_to_chinese(num) {
 			perchar = part[1].charAt(i)
 			switch (perchar) {
 				case "0" :
-					tmpnewchar = "Áã" + tmpnewchar;
+					tmpnewchar = "é›¶" + tmpnewchar;
 					break;
 				case "1" :
-					tmpnewchar = "Ò¼" + tmpnewchar;
+					tmpnewchar = "å£¹" + tmpnewchar;
 					break;
 				case "2" :
-					tmpnewchar = "·¡" + tmpnewchar;
+					tmpnewchar = "è´°" + tmpnewchar;
 					break;
 				case "3" :
-					tmpnewchar = "Èş" + tmpnewchar;
+					tmpnewchar = "å" + tmpnewchar;
 					break;
 				case "4" :
-					tmpnewchar = "ËÁ" + tmpnewchar;
+					tmpnewchar = "è‚†" + tmpnewchar;
 					break;
 				case "5" :
-					tmpnewchar = "Îé" + tmpnewchar;
+					tmpnewchar = "ä¼" + tmpnewchar;
 					break;
 				case "6" :
-					tmpnewchar = "Â½" + tmpnewchar;
+					tmpnewchar = "é™†" + tmpnewchar;
 					break;
 				case "7" :
-					tmpnewchar = "Æâ" + tmpnewchar;
+					tmpnewchar = "æŸ’" + tmpnewchar;
 					break;
 				case "8" :
-					tmpnewchar = "°Æ" + tmpnewchar;
+					tmpnewchar = "æŒ" + tmpnewchar;
 					break;
 				case "9" :
-					tmpnewchar = "¾Á" + tmpnewchar;
+					tmpnewchar = "ç–" + tmpnewchar;
 					break;
 			}
 			if (i == 0)
-				tmpnewchar = tmpnewchar + "½Ç";
+				tmpnewchar = tmpnewchar + "è§’";
 			if (i == 1)
-				tmpnewchar = tmpnewchar + "·Ö";
+				tmpnewchar = tmpnewchar + "åˆ†";
 			newchar = newchar + tmpnewchar;
 		}
 	}
 	
-	// Ìæ»»ËùÓĞÎŞÓÃºº×Ö
-	while (newchar.search("ÁãÁã") != -1)
-		newchar = newchar.replace("ÁãÁã", "Áã");
-	newchar = newchar.replace("ÁãÒÚ", "ÒÚ");
-	newchar = newchar.replace("ÒÚÍò", "ÒÚ");
-	newchar = newchar.replace("ÁãÍò", "Íò");
-	newchar = newchar.replace("ÁãÔª", "Ôª");
-	newchar = newchar.replace("Áã½Ç", "");
-	newchar = newchar.replace("Áã·Ö", "");
+	// æ›¿æ¢æ‰€æœ‰æ— ç”¨æ±‰å­—
+	while (newchar.search("é›¶é›¶") != -1)
+		newchar = newchar.replace("é›¶é›¶", "é›¶");
+	newchar = newchar.replace("é›¶äº¿", "äº¿");
+	newchar = newchar.replace("äº¿ä¸‡", "äº¿");
+	newchar = newchar.replace("é›¶ä¸‡", "ä¸‡");
+	newchar = newchar.replace("é›¶å…ƒ", "å…ƒ");
+	newchar = newchar.replace("é›¶è§’", "");
+	newchar = newchar.replace("é›¶åˆ†", "");
 	
-	if (newchar.charAt(newchar.length - 1) == "Ôª"
-			|| newchar.charAt(newchar.length - 1) == "½Ç")
-		newchar = newchar + "Õû"
-	if(newchar.substr(0,1)=='Ôª'){
+	if (newchar.charAt(newchar.length - 1) == "å…ƒ"
+			|| newchar.charAt(newchar.length - 1) == "è§’")
+		newchar = newchar + "æ•´"
+	if(newchar.substr(0,1)=='å…ƒ'){
 		newchar.substring(1,newchar.length-1);
 	}
-	if(newchar=='ÔªÕû'){
-		newchar='ÁãÔªÕû';
+	if(newchar=='å…ƒæ•´'){
+		newchar='é›¶å…ƒæ•´';
 	}
 	
-	if(newchar.substr(0,1)=='Ôª'){
+	if(newchar.substr(0,1)=='å…ƒ'){
 		newchar=newchar.substr(1,newchar.length-1);
 	}
-	if(newchar=='ÔªÕû'){
-		newchar='ÁãÔªÕû';
+	if(newchar=='å…ƒæ•´'){
+		newchar='é›¶å…ƒæ•´';
 	}
 	return newchar;
 	
@@ -695,7 +695,7 @@ function formtMoney(amount,t) {
 	
 	var val = $('#'+t).text();
 	var len = val.length;
-	//Èç¹ûÊäÈëÊı¾İÒÔĞ¡Êıµã½áÎ²£¬½«ÆäÈ¥µô
+	//å¦‚æœè¾“å…¥æ•°æ®ä»¥å°æ•°ç‚¹ç»“å°¾ï¼Œå°†å…¶å»æ‰
 	if(val.substr(len-1,1)=='.'){
 		val = val.substr(0,len-1);
 		var amountVal = $(amount).val();
@@ -760,7 +760,7 @@ function formtMoney(a) {
 	}
 }*/
 /**
- * È¡µÃÑ¡ÖĞµÄcheckbox¶ÔÏó
+ * å–å¾—é€‰ä¸­çš„checkboxå¯¹è±¡
  * @param {Object} name
  * @return {TypeName} 
  */
@@ -792,18 +792,18 @@ function getConfirmInfo(cbName, tdIndex){
 		var fbill = bill.replace(/,/g, "");
 		amount += parseFloat(fbill);
 	}
-	var desc = "×Ü±ÊÊı:"+k+", "+"×Ü½ğ¶î:"+formatToCurrency(amount)+".\n";
-	desc += "È·ÈÏÌá½»?";
+	var desc = "æ€»ç¬”æ•°:"+k+", "+"æ€»é‡‘é¢:"+formatToCurrency(amount)+".\n";
+	desc += "ç¡®è®¤æäº¤?";
 	return desc;
 }
 /**
- * È¡Ê±¼ä£¬¾«È·µ½·Ö£¬Ä¬ÈÏÎª00:00
+ * å–æ—¶é—´ï¼Œç²¾ç¡®åˆ°åˆ†ï¼Œé»˜è®¤ä¸º00:00
  */
 function setStartTime(){
 	WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', startDate:'%y-%M-%d 00:00:00'});
 }
 /**
- * È¡Ê±¼ä£¬¾«È·µ½·Ö£¬Ä¬ÈÏÎª23:59
+ * å–æ—¶é—´ï¼Œç²¾ç¡®åˆ°åˆ†ï¼Œé»˜è®¤ä¸º23:59
  */
 function setEndTime(){
 	WdatePicker({dateFmt:'yyyy-MM-dd HH:mm', startDate:'%y-%M-%d 23:59:59'});
