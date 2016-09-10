@@ -475,42 +475,6 @@ public class ReportAction extends BaseAction {
 		return null;
 	}
 
-	private void generateReportWithData(String jasperFileName,
-			Map<String, Object> parameters, List<?> data,
-			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		String path = request.getSession().getServletContext().getRealPath("/");
-		path = path.endsWith(File.separator) ? path : path + File.separator;
-		String fullPath = path + "jasper" + File.separator + jasperFileName;
-		JasperReport jasperReport = (JasperReport) JRLoader
-				.loadObjectFromFile(fullPath);
-		JasperPrint jasperPrint = null;
-		OutputStream outputStream = response.getOutputStream();
-		if (data != null) {
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data);
-			jasperPrint = JasperFillManager.fillReport(jasperReport,
-					parameters, dataSource);
-		} else {
-			jasperPrint = JasperFillManager
-					.fillReport(jasperReport, parameters);
-		}
-		
-		if (jasperPrint != null) {
-			try {
-				JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
-			} catch (JRException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					outputStream.flush();
-					outputStream.close();
-				} catch (Exception e) {
-					e.getMessage();
-				}
-			}
-		}
-	}
-
 	private void generateReportWithConn(String jasperFileName,
 			Map<String, Object> parameters, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -522,7 +486,7 @@ public class ReportAction extends BaseAction {
 		Connection conn = p.getConnection();
 		response.reset();
 		response.setContentType("application/pdf");
-		ServletOutputStream ouputStream = null;
+		ServletOutputStream ouputStream = response.getOutputStream();
 		try {
 			JasperReport jasperReport = (JasperReport)JRLoader.loadObjectFromFile(fullPath);
 			JasperPrint jasperPrint = JasperFillManager

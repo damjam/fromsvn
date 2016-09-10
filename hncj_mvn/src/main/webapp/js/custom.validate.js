@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	// ×Ö·û×îĞ¡³¤¶ÈÑéÖ¤£¨Ò»¸öÖĞÎÄ×Ö·û³¤¶ÈÎª2£©
+	// å­—ç¬¦æœ€å°é•¿åº¦éªŒè¯ï¼ˆä¸€ä¸ªä¸­æ–‡å­—ç¬¦é•¿åº¦ä¸º2ï¼‰
 	jQuery.validator.addMethod("stringMinLength", function(value, element, param) {
 		var length = value.length;
 		for ( var i = 0; i < value.length; i++) {
@@ -8,9 +8,9 @@ $(document).ready(function() {
 			}
 		}
 		return this.optional(element) || (length >= param);
-	}, $.validator.format("³¤¶È²»ÄÜĞ¡ÓÚ{0}!"));
+	}, $.validator.format("é•¿åº¦ä¸èƒ½å°äº{0}!"));
 	
-	// ×Ö·û×î´ó³¤¶ÈÑéÖ¤£¨Ò»¸öÖĞÎÄ×Ö·û³¤¶ÈÎª2£©
+	// å­—ç¬¦æœ€å¤§é•¿åº¦éªŒè¯ï¼ˆä¸€ä¸ªä¸­æ–‡å­—ç¬¦é•¿åº¦ä¸º2ï¼‰
 	jQuery.validator.addMethod("stringMaxLength", function(value, element, param) {
 		var length = value.length;
 		for ( var i = 0; i < value.length; i++) {
@@ -19,47 +19,47 @@ $(document).ready(function() {
 			}
 		}
 		return this.optional(element) || (length <= param);
-	}, $.validator.format("³¤¶È²»ÄÜ´óÓÚ{0}!"));
+	}, $.validator.format("é•¿åº¦ä¸èƒ½å¤§äº{0}!"));
 	
-	// ×Ö·ûÑéÖ¤       
+	// å­—ç¬¦éªŒè¯       
 	jQuery.validator.addMethod("stringCheck", function(value, element) {       
 		return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);       
-	}, "Ö»ÄÜ°üÀ¨ÖĞÎÄ×Ö¡¢Ó¢ÎÄ×ÖÄ¸¡¢Êı×ÖºÍÏÂ»®Ïß");
+	}, "åªèƒ½åŒ…æ‹¬ä¸­æ–‡å­—ã€è‹±æ–‡å­—æ¯ã€æ•°å­—å’Œä¸‹åˆ’çº¿");
 	
-	// ×Ö·ûÑéÖ¤       
+	// å­—ç¬¦éªŒè¯       
 	jQuery.validator.addMethod("stringNum", function(value, element) {       
 		return this.optional(element) || /^[A-Za-z0-9]+$/.test(value);       
-	}, "Ö»ÄÜ°üÀ¨Ó¢ÎÄ×ÖÄ¸¡¢Êı×Ö");
+	}, "åªèƒ½åŒ…æ‹¬è‹±æ–‡å­—æ¯ã€æ•°å­—");
 
-	// Éí·İÖ¤ºÅÂëÑéÖ¤       
+	// èº«ä»½è¯å·ç éªŒè¯       
 	jQuery.validator.addMethod("isIdCardNo", function(value, element) { 
 		return this.optional(element) || /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/.test(value)||/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[A-Z])$/.test(value);       
-	}, "ÇëÕıÈ·ÊäÈëÄúµÄÉí·İÖ¤ºÅÂë");
+	}, "è¯·æ­£ç¡®è¾“å…¥æ‚¨çš„èº«ä»½è¯å·ç ");
 	
-	// ÊÖ»úºÅÂëÑéÖ¤
+	// æ‰‹æœºå·ç éªŒè¯
 	jQuery.validator.addMethod("isMobile", function(value, element) {
 		var length = value.length;
 		var mobile = /0?(13|14|15|18)[0-9]{9}/;
 		return this.optional(element) || (length == 11 && mobile.test(value));
-	}, "ÇëÕıÈ·ÌîĞ´ÄúµÄÊÖ»úºÅÂë");
+	}, "è¯·æ­£ç¡®å¡«å†™æ‚¨çš„æ‰‹æœºå·ç ");
 	
-	// µç»°ºÅÂëÑéÖ¤       
+	// ç”µè¯å·ç éªŒè¯       
 	jQuery.validator.addMethod("isTel", function(value, element) {       
-		var tel = /^\d{3,4}-?\d{7,9}$/;    //µç»°ºÅÂë¸ñÊ½010-12345678   
+		var tel = /^\d{3,4}-?\d{7,9}$/;    //ç”µè¯å·ç æ ¼å¼010-12345678   
 		return this.optional(element) || (tel.test(value));       
-	}, "ÇëÕıÈ·ÌîĞ´ÄúµÄµç»°ºÅÂë"); 
+	}, "è¯·æ­£ç¡®å¡«å†™æ‚¨çš„ç”µè¯å·ç "); 
 	
-	// ÁªÏµµç»°(ÊÖ»ú/µç»°½Ô¿É)ÑéÖ¤   
+	// è”ç³»ç”µè¯(æ‰‹æœº/ç”µè¯çš†å¯)éªŒè¯   
 	jQuery.validator.addMethod("isPhone", function(value,element) {   
 		var length = value.length;   
 		var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;   
 		var tel = /^\d{3,4}-?\d{7,9}$/;   
 		return this.optional(element) || (tel.test(value) || mobile.test(value));   
-	}, "ÇëÕıÈ·ÌîĞ´ÄúµÄÁªÏµµç»°");
+	}, "è¯·æ­£ç¡®å¡«å†™æ‚¨çš„è”ç³»ç”µè¯");
 	
-	// ÓÊÕş±àÂëÑéÖ¤       
+	// é‚®æ”¿ç¼–ç éªŒè¯       
 	jQuery.validator.addMethod("isZipCode", function(value, element) {       
 		var tel = /^[0-9]{6}$/;       
 		return this.optional(element) || (tel.test(value));       
-	}, "ÇëÕıÈ·ÌîĞ´ÄúµÄÓÊÕş±àÂë");    
+	}, "è¯·æ­£ç¡®å¡«å†™æ‚¨çš„é‚®æ”¿ç¼–ç ");    
 });

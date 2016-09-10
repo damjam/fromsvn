@@ -1,20 +1,20 @@
 /**
- * usbkey ¹¤¾ßÀà.
+ * usbkey å·¥å…·ç±».
  * @author aps-mhc
  */
 USBKey = {
 	/**
-	 * ¼ì²é¿ª¹Ø, Y:¼ì²é,N:²»¼ì²é
+	 * æ£€æŸ¥å¼€å…³, Y:æ£€æŸ¥,N:ä¸æ£€æŸ¥
 	 */
 	checkSwitch: 'Y',
 	 
 	/**
-	 * ocx¿Ø¼şÃû³Æ.
+	 * ocxæ§ä»¶åç§°.
 	 */
 	ocxName: 'SignOcx.cab',
 	
 	/**
-	 * ocx¿Ø¼şID
+	 * ocxæ§ä»¶ID
 	 */
 	ocxId: 'signOcx',
 
@@ -23,7 +23,7 @@ USBKey = {
 	rnBoxId: '__randomNo',
 	
 	/**
-	 * »ñÈ¡ocx ¿Ø¼ş, Èç¹û²»´æÔÚÔò´´½¨, Ìí¼Óµ½body×îºó.
+	 * è·å–ocx æ§ä»¶, å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»º, æ·»åŠ åˆ°bodyæœ€å.
 	 */
 	getOcx: function() {
 		var id = this.ocxId;
@@ -36,7 +36,7 @@ USBKey = {
 	},
 	
 	/**
-	 * Ç©Ãû.
+	 * ç­¾å.
 	 * @return true/false
 	 */
 	signMsg: function(randomBox, keyBox) {
@@ -55,14 +55,14 @@ USBKey = {
 	    $('#' + randomBox).val(randomNo);
 	    $('#' + keyBox).val(signinfo);
 		if(signinfo==""){
-			alert("Ç©ÃûÊ§°Ü¡£ÇëÁªÏµ¹ÜÀíÔ±¡£")
+			alert("ç­¾åå¤±è´¥ã€‚è¯·è”ç³»ç®¡ç†å‘˜ã€‚")
 			return false;
 		}
 
 		return true;
 	},
 	/**
-	 * Ç©Ãû.
+	 * ç­¾å.
 	 * @return true/false
 	 */
 	signFile: function(fileName, keyBox) {
@@ -80,7 +80,7 @@ USBKey = {
 		var signinfo = ocx.Signfile("",fileName);
 	    $('#' + keyBox).val(signinfo); 
 		if(signinfo==""){
-			alert("Ç©ÃûÊ§°Ü¡£ÇëÁªÏµ¹ÜÀíÔ±¡£")
+			alert("ç­¾åå¤±è´¥ã€‚è¯·è”ç³»ç®¡ç†å‘˜ã€‚")
 			return false;
 		}
 
@@ -88,7 +88,7 @@ USBKey = {
 	},
 	
 	/**
-	 * Ç©Ãû. ÔÚformÖĞÉú³ÉrandomNoºÍkeyÁ½¸öÒş²ØÓò, ²¢ÉèÖÃÖµ.
+	 * ç­¾å. åœ¨formä¸­ç”ŸæˆrandomNoå’Œkeyä¸¤ä¸ªéšè—åŸŸ, å¹¶è®¾ç½®å€¼.
 	 */
 	signFormMsg: function(formId) {
 		if (this.checkSwitch != 'Y') {
@@ -101,7 +101,7 @@ USBKey = {
 		return this.signMsg(this.rnBoxId, this.keyBoxId);
 	},
 	/**
-	 * Ç©Ãû. ÔÚformÖĞÉú³ÉrandomNoºÍkeyÁ½¸öÒş²ØÓò, ²¢ÉèÖÃÖµ.
+	 * ç­¾å. åœ¨formä¸­ç”ŸæˆrandomNoå’Œkeyä¸¤ä¸ªéšè—åŸŸ, å¹¶è®¾ç½®å€¼.
 	 */
 	signFileMsg: function(formId,fileId) {
 		if (this.checkSwitch != 'Y') {
@@ -115,7 +115,7 @@ USBKey = {
 	},
 	
 	/**
-	 * ´´½¨keyºÍrandomNoµÄÒş²ØÓò.
+	 * åˆ›å»ºkeyå’ŒrandomNoçš„éšè—åŸŸ.
 	 */
 	createKeyBox: function($f, keyBoxId, rnBoxId) {
 		var $key = $f.find('#' + keyBoxId);
@@ -131,8 +131,8 @@ USBKey = {
 	},
 	
 	/**
-	 * ¼ì²é¿Ø¼şÊÇ·ñÒÑ°²×°.
-	 * @param prom ÊÇ·ñÌáÊ¾.
+	 * æ£€æŸ¥æ§ä»¶æ˜¯å¦å·²å®‰è£….
+	 * @param prom æ˜¯å¦æç¤º.
 	 */
 	isInstalled: function(prom) {
   		if(typeof(signOcx) == "object"){
@@ -141,19 +141,19 @@ USBKey = {
 			}
 		}
 		if (prom) {
-			alert('Î´°²×°USBKEY¿Ø¼ş');
+			alert('æœªå®‰è£…USBKEYæ§ä»¶');
 		}
 		return false;
 		
 	},
 	
 	/**
-	 * ÑéÖ¤µ±Ç°µÇÂ¼ÓÃ»§key ÊÇ·ñÕıÈ·.
-	 * @param successFn ÑéÖ¤³É¹¦»Øµ÷º¯Êı ÎŞ²ÎÊı
-	 * @param failureFn ÑéÖ¤Ê§°Ü»Øµ÷º¯Êı ÎŞ²ÎÊı
+	 * éªŒè¯å½“å‰ç™»å½•ç”¨æˆ·key æ˜¯å¦æ­£ç¡®.
+	 * @param successFn éªŒè¯æˆåŠŸå›è°ƒå‡½æ•° æ— å‚æ•°
+	 * @param failureFn éªŒè¯å¤±è´¥å›è°ƒå‡½æ•° æ— å‚æ•°
 	 */
 	validateKey: function(successFn, failureFn) {
-		// ²»¼ì²éÊ±Ö±½ÓÖ´ĞĞfn, ²¢ÍË³ö.
+		// ä¸æ£€æŸ¥æ—¶ç›´æ¥æ‰§è¡Œfn, å¹¶é€€å‡º.
 		if (this.checkSwitch != 'Y') {
 			successFn();
 			return;
@@ -167,16 +167,16 @@ USBKey = {
 		var rn = Math.round(Math.random() * 10000);
 		var sign = ocx.Signature("",rn);
 		if (sign == "") {
-			alert('ÇëÈ·ÈÏÊÇ·ñÒÑ¾­²åÈëUSBKEY');
+			alert('è¯·ç¡®è®¤æ˜¯å¦å·²ç»æ’å…¥USBKEY');
 			return false;
 		}
 		
-		// È¡key²ÎÊı.
+		// å–keyå‚æ•°.
 		var param = {'__signinfo':sign, '__randomNo':rn};
 		
 		$.get(CONTEXT_PATH + '/checkUser.do?action=checkKey', param, function(data) {
 			if (data != 'success') {
-				alert('ÑéÖ¤Ê§°Ü');
+				alert('éªŒè¯å¤±è´¥');
 				
 				if (failureFn) {
 					failureFn();
