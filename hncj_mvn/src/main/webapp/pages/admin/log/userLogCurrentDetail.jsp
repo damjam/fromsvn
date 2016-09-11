@@ -26,9 +26,14 @@
 	</head>
 	<body>
 		<div class="userbox">
-			<div class="widget">
-				<table class="data_table">
-					<caption class="widget-head">${ACT.name}</caption>
+			<div class="widget" style="height: 200px;">
+				<div class="widget-head">
+                  <div class="pull-left">${ACT.name}</div>
+                  <div class="widget-icons pull-right">
+                   
+                  </div>
+                  </div>  
+					<table class="data_table">
 						<tr>
 							<td height="30" align="center" colspan="4">
 								<span
@@ -89,7 +94,6 @@
 				</table>
 			</div>
 		</div>
-
 		<!--版权区域-->
 		<div class="bottom">
 			<jsp:include flush="true" page="/pages/layout/copyright.jsp"></jsp:include>

@@ -51,7 +51,7 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 		saveQueryResult(request, paginater);
 		UserLogType.setInReq(request);
 		String msg = MsgUtils.r("用户日志查询成功");
-		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
+		//super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "success";
 	}
 
@@ -69,7 +69,7 @@ public class UserLogAction extends BaseAction implements ModelDriven<UserLog> {
 		UserLog userLog = userLogService.getUserLogDtl(model.getId());
 		request.setAttribute("userLog", userLog);
 		String msg = MsgUtils.r("查看用户日志成功");
-		super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
+		//super.logSuccess(request, UserLogType.SEARCH.getValue(), msg);
 		return "detail";
 	}
 

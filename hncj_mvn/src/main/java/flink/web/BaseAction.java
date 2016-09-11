@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -27,6 +26,7 @@ import com.ylink.cim.admin.domain.UserLog;
 import com.ylink.cim.admin.service.IdFactoryService;
 import com.ylink.cim.admin.service.SysLogService;
 import com.ylink.cim.admin.service.UserLogService;
+import com.ylink.cim.common.type.UserLogType;
 import com.ylink.cim.common.util.ParaManager;
 
 import flink.IdFactoryHelper;
@@ -139,12 +139,12 @@ public abstract class BaseAction extends RootAction {
 			final String methodName) {
 		e.printStackTrace();
 		try {
-			String limitId = getCurPrivilegeCode(request);
+			//String limitId = getCurPrivilegeCode(request);
 			String forward = (String) request.getAttribute(FORWARD);
 			String error = "";
 			if (e instanceof BizException || e instanceof RuntimeBizException) {
 				String msg = e.getMessage();
-				error = ObjectUtils.toString(getLog(request));
+				error = msg;
 				setResult(false, msg, request);
 			} else if (e instanceof DataAccessResourceFailureException) {
 				error = "数据库连接异常，请检查网络连接";
@@ -152,14 +152,15 @@ public abstract class BaseAction extends RootAction {
 			} else {
 				error = "系统错误，操作失败！";
 				setResult(false, error, request);
-				logErrorWithReason(request, limitId, error, error);
 				logger.debug(error, e);
 			}
-			logErrorWithReason(request, limitId, error, error);
+			logError(request, UserLogType.OTHER.getValue(), error);
 			if (StringUtils.isNotEmpty(forward)) {
+				//可自定义异常页面
 				return forward;
 			}
 		} catch (Exception ex) {
+			e.printStackTrace();
 			logger.debug(ex, ex);
 		}
 

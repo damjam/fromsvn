@@ -1,5 +1,6 @@
 package flink.web;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,12 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 		if (logger.isErrorEnabled()) {
 			logger.error(e.getMessage(), e);
 		}
+		if (e instanceof InvocationTargetException) {
+			String message = ((InvocationTargetException) e).getTargetException().getMessage();
+			request.setAttribute("msg", message);
+		}else {
+			request.setAttribute("msg", "系统错误，请与管理员联系");
+		}
 		return ActionConstant.FAILURE;
 	}
 
@@ -91,8 +98,16 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 			logger.error(e);
 			e.printStackTrace();
 			//this.addActionError(this.getText("error.msg"));
-			request.setAttribute("msg", e.getMessage());
-			return RESULT_ERROR;
+			if (logger.isErrorEnabled()) {
+				logger.error(e.getMessage(), e);
+			}
+			if (e instanceof InvocationTargetException) {
+				String message = ((InvocationTargetException) e).getTargetException().getMessage();
+				request.setAttribute("msg", message);
+			}else {
+				request.setAttribute("msg", "系统错误，请与管理员联系");
+			}
+			return ActionConstant.FAILURE;
 		}
 	}
 	
