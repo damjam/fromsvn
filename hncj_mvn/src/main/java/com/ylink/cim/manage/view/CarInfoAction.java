@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -99,7 +100,7 @@ public class CarInfoAction extends BaseAction implements ModelDriven<CarInfo>{
 			e.printStackTrace();
 			return toEdit();
 		}
-		return "toMain";
+		return list();
 	}
 
 	@Override

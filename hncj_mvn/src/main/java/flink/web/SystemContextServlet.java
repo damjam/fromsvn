@@ -16,7 +16,8 @@ public class SystemContextServlet extends HttpServlet {
 
 		SpringContext.getInstance().initContext(getServletContext());
 		getServletContext().setAttribute("comInfo", SpringContext.getService("comInfo"));
-
+		ParaManager.initContextPath(getServletContext());
+		ParaManager.initContextParam(getServletConfig());
 		ParaManager.init();
 
 	}

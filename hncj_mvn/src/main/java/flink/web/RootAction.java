@@ -16,6 +16,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.ylink.cim.common.util.ParaManager;
 
 import flink.consant.ActionConstant;
 import flink.util.Paginater;
@@ -37,6 +38,7 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	protected Map<String, Object> session;
 	protected String action;
 	private String uri;
+	
 	public String getUri() {
 		return uri;
 	}
@@ -197,6 +199,10 @@ public abstract class RootAction extends ActionSupport implements SessionAware,S
 	}
 	public void setSuccessFlag(String successFlag) {
 		this.successFlag = successFlag;
+	}
+	
+	public String getProtocal() {
+		return ParaManager.getProtocal();
 	}
 	
 }

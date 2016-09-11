@@ -84,6 +84,10 @@
 			<param-name>serverType</param-name>
 			<param-value>admin</param-value>
 		</init-param>
+		<init-param>
+			<param-name>protocal</param-name>
+			<param-value>https</param-value>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>

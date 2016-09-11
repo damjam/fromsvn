@@ -629,4 +629,7 @@ public abstract class BaseAction extends RootAction {
 	public Map<String, String> getAllBranches(){
 		return ParaManager.getBranches(true);
 	}
+	public String getProtocal() {
+		return ParaManager.getProtocal();
+	}
 }

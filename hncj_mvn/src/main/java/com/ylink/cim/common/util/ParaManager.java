@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.MapUtils;
@@ -29,24 +31,21 @@ import flink.util.SpringContext;
 public abstract class ParaManager {
 	private static Log log = LogFactory.getLog(ParaManager.class);
 
-	private static SysParmDao sysParmDao = (SysParmDao) SpringContext
-			.getService("sysParmDao");
-	private static BranchParmDao branchParmDao = (BranchParmDao) SpringContext
-			.getService("branchParmDao");
-	private static SysDictDao sysDictDao = (SysDictDao) SpringContext
-			.getService("sysDictDao");
+	private static SysParmDao sysParmDao = (SysParmDao) SpringContext.getService("sysParmDao");
+	private static BranchParmDao branchParmDao = (BranchParmDao) SpringContext.getService("branchParmDao");
+	private static SysDictDao sysDictDao = (SysDictDao) SpringContext.getService("sysDictDao");
 
-	private static BranchDictDao branchDictDao = (BranchDictDao)SpringContext
-			.getService("branchDictDao");
+	private static BranchDictDao branchDictDao = (BranchDictDao) SpringContext.getService("branchDictDao");
 	// 系统参数.
 	private static Map<String, String> paraMap = new ConcurrentHashMap<String, String>();
-	
+
 	private static Map<String, String> branchParaMap = new ConcurrentHashMap<String, String>();
 
 	private static Map<String, Map<String, String>> sysDictMap = new ConcurrentHashMap<String, Map<String, String>>();
 	//
 	private static Map<String, Map<String, String>> branchDictMap = new ConcurrentHashMap<String, Map<String, String>>();
-	
+	private static String contextPath = "";
+	private static String protocal = "";
 	// 刷新间隔时间
 	private static long sleepTime = 10 * 60 * 1000;
 
@@ -61,16 +60,18 @@ public abstract class ParaManager {
 
 		return paraMap.get(key);
 	}
+
 	public static String getBranchPara(final String branchNo, final String key) {
 		if (branchParaMap.size() == 0) {
 			init();
 		}
-		String value = branchParaMap.get(branchNo+key);
+		String value = branchParaMap.get(branchNo + key);
 		if (StringUtils.isEmpty(value)) {
 			value = getPara(key);
 		}
 		return value;
 	}
+
 	/**
 	 * @return 密码过期时限（以天计）
 	 */
@@ -93,20 +94,22 @@ public abstract class ParaManager {
 		initBranchDict();
 	}
 
+	
+
 	private static void initBranchDict() {
 		branchDictMap.clear();
 		List<BranchDict> list = branchDictDao.findByParam(MapUtils.EMPTY_MAP);
 		for (int i = 0; i < list.size(); i++) {
 			BranchDict branchDict = list.get(i);
-			
+
 			String branchNo = branchDict.getId().getBranchNo();
 			String dictType = branchDict.getId().getDictType();
 			String dictValue = branchDict.getId().getDictValue();
-			if (branchDictMap.get(branchNo+dictType) == null) {
+			if (branchDictMap.get(branchNo + dictType) == null) {
 				Map<String, String> map = new HashMap<String, String>();
-				branchDictMap.put(branchNo+dictType, map);
+				branchDictMap.put(branchNo + dictType, map);
 			}
-			branchDictMap.get(branchNo+dictType).put(dictValue, branchDict.getDictName());
+			branchDictMap.get(branchNo + dictType).put(dictValue, branchDict.getDictName());
 		}
 	}
 
@@ -114,8 +117,9 @@ public abstract class ParaManager {
 		if (branchDictMap.size() == 0) {
 			initBranchDict();
 		}
-		return branchDictMap.get(branchNo+dictType);
+		return branchDictMap.get(branchNo + dictType);
 	}
+
 	private static void initSysDict() {
 		sysDictMap.clear();
 		List<SysDict> list = sysDictDao.findByParam(MapUtils.EMPTY_MAP);
@@ -125,22 +129,23 @@ public abstract class ParaManager {
 				Map<String, String> map = new HashMap<String, String>();
 				sysDictMap.put(sysDict.getId().getDictType(), map);
 			}
-			sysDictMap.get(sysDict.getId().getDictType()).put(
-					sysDict.getId().getDictValue(), sysDict.getDictName());
+			sysDictMap.get(sysDict.getId().getDictType()).put(sysDict.getId().getDictValue(), sysDict.getDictName());
 		}
 	}
+
 	public static Map<String, String> getSysDict(String dictType) {
 		if (sysDictMap.size() == 0) {
 			initSysDict();
 		}
 		return sysDictMap.get(dictType);
 	}
+
 	public static Map<String, String> getAllPositions() {
 		Map<String, String> map = getSysDict(SysDictType.BranchPostType.getValue());
 		map.putAll(getSysDict(SysDictType.CenterPostType.getValue()));
 		return map;
 	}
-	
+
 	public static Map<String, String> getBranches(boolean containHQ) {
 		Map<String, String> branchMap = getSysDict(SysDictType.BranchType.getValue());
 		if (!containHQ) {
@@ -148,6 +153,7 @@ public abstract class ParaManager {
 		}
 		return branchMap;
 	}
+
 	public static String getSysDictName(String dictType, String value) {
 		if (sysDictMap.size() == 0) {
 			initSysDict();
@@ -155,20 +161,16 @@ public abstract class ParaManager {
 		return sysDictMap.get(dictType).get(value);
 	}
 
-	public static void setDictInReq(HttpServletRequest request,
-			SysDictType dictType) {
-		request.setAttribute(StringUtils.uncapitalize(dictType.getValue())
-				+ "s", getSysDict(dictType.getValue()));
+	public static void setDictInReq(HttpServletRequest request, SysDictType dictType) {
+		request.setAttribute(StringUtils.uncapitalize(dictType.getValue()) + "s", getSysDict(dictType.getValue()));
 	}
 
-	public static void setDictInReq(HttpServletRequest request,
-			SysDictType dictType, String name) {
+	public static void setDictInReq(HttpServletRequest request, SysDictType dictType, String name) {
 		request.setAttribute(name, getSysDict(dictType.getValue()));
 
 	}
 
-	public static void setDictInReq(HttpServletRequest request,
-			SysDictType[] dictTypes) {
+	public static void setDictInReq(HttpServletRequest request, SysDictType[] dictTypes) {
 		if (ArrayUtils.isEmpty(dictTypes)) {
 			return;
 		}
@@ -186,7 +188,7 @@ public abstract class ParaManager {
 
 	private static void initSysParm() {
 		List<SysParm> list = sysParmDao.findAll();
-		for(int i=0,size=list.size(); i<size; i++){
+		for (int i = 0, size = list.size(); i < size; i++) {
 			SysParm parm = list.get(i);
 			String parmvalue = parm.getParvalue();
 			if (parm.getParvalue() == null) {
@@ -195,17 +197,19 @@ public abstract class ParaManager {
 			paraMap.put(parm.getCode(), parmvalue);
 		}
 	}
+
 	private static void initBranchParm() {
 		List<BranchParam> list = branchParmDao.findAll();
-		for(int i=0,size=list.size(); i<size; i++){
+		for (int i = 0, size = list.size(); i < size; i++) {
 			BranchParam parm = list.get(i);
 			String parmvalue = parm.getParvalue();
 			if (parm.getParvalue() == null) {
 				parmvalue = "";
 			}
-			branchParaMap.put(parm.getBranchNo()+parm.getCode(), parmvalue);
+			branchParaMap.put(parm.getBranchNo() + parm.getCode(), parmvalue);
 		}
 	}
+
 	public static void refresh() {
 		while (true) {
 			try {
@@ -235,9 +239,9 @@ public abstract class ParaManager {
 	}
 
 	public static String getContextPath() {
-		return paraMap.get("contextPath");
+		return contextPath;
 	}
-
+	
 	public static boolean isProductMode() {
 		String isProductMode = paraMap.get("0100");
 		return Symbol.YES.equals(isProductMode);
@@ -266,8 +270,7 @@ public abstract class ParaManager {
 	}
 
 	public static String getLightPrice(String buildingNo) {
-		Map<String, String> rentTypes = getSysDict(SysDictType.RentType
-				.getValue());
+		Map<String, String> rentTypes = getSysDict(SysDictType.RentType.getValue());
 		if (rentTypes.get(buildingNo) != null) {
 			return getRentLightPrice();
 		} else {
@@ -309,10 +312,11 @@ public abstract class ParaManager {
 	public static String getCleanPrice() {
 		return getPara("cleanPrice");
 	}
+
 	public static String getCleanPrice(String branchNo) {
-		if(StringUtils.isEmpty(branchNo)){
+		if (StringUtils.isEmpty(branchNo)) {
 			return getCleanPrice();
-		}else {
+		} else {
 			String value = getBranchPara(branchNo, "cleanPrice");
 			if (StringUtils.isEmpty(value)) {
 				value = getCleanPrice();
@@ -320,6 +324,7 @@ public abstract class ParaManager {
 			return value;
 		}
 	}
+
 	public static String getLiftBasePrice() {
 		return getPara("1500");
 	}
@@ -336,15 +341,16 @@ public abstract class ParaManager {
 		return getPara("1101");
 	}
 
-	public static String getHouseSnFormat(String branchNo){
-		String value =  getBranchPara(branchNo, "houseSnFmt");
+	public static String getHouseSnFormat(String branchNo) {
+		String value = getBranchPara(branchNo, "houseSnFmt");
 		if (StringUtils.isEmpty(value)) {
 			value = getPara("houseSnFmt");
 		}
 		return value;
 	}
-	public static String getExcelType(String branchNo){
-		String value =  getBranchPara(branchNo, "excelType");
+
+	public static String getExcelType(String branchNo) {
+		String value = getBranchPara(branchNo, "excelType");
 		if (StringUtils.isEmpty(value)) {
 			value = getPara("excelType");
 		}
@@ -352,5 +358,18 @@ public abstract class ParaManager {
 			value = "xlsx";
 		}
 		return value;
+	}
+
+	public static String getProtocal() {
+		return protocal;
+	}
+
+	public static void initContextPath(ServletContext servletContext) {
+		contextPath = servletContext.getContextPath();
+	}
+
+	public static void initContextParam(ServletConfig servletConfig) {
+		protocal = servletConfig.getInitParameter("protocal");
+		
 	}
 }
