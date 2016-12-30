@@ -64,9 +64,10 @@
 				window.open(CONTEXT_PATH+'/reportAction.do?action=orderRecord&id='+id);
 			}
 			function pay(id){
-				var url="${uri}?action=pay&id="+id;
 				if(confirm('确认操作?')){
-					gotoUrl(url);  
+					var url="${uri}?action=pay&id="+id;
+					$('#queryForm').attr('action', url);
+					$('#queryForm').submit();
 				}
 			}
 			
@@ -177,7 +178,7 @@
 							    		<a href="javascript:changeState('${element.id}','04')" >退货</a>
 							    	</c:if> -->
 							    	<c:if test="${element.payState eq '00' && element.state eq '02'}">
-							    		<a href="javascript:pay('${element.id}')" >收款确认</a>
+							    		<a href="javascript:pay('${element.id}')" >确认收款</a>
 							    	</c:if>
 							    	<c:if test="${element.state ne '09'}">
 							    		<a href="javascript:detail('${element.id}')" >查看明细</a>

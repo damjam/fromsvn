@@ -117,11 +117,14 @@ public class CarModelAction extends CRUDAction implements ModelDriven<CarModel> 
 		try{
 			JSONArray array = new JSONArray();
 			String keyword = request.getParameter("keyword");
-			String brand = request.getParameter("brand");
 			Paginater paginater = carModelDao.findByKeyword(keyword, getPager(request));
 			for(int i=0, size = paginater.getList().size(); i<size; i++){
 				CarModel carModel = (CarModel)paginater.getList().get(i);
-				array.add(carModel.getBrand()+"-"+carModel.getName());
+				if(StringUtils.isNotEmpty(carModel.getBrand())){
+					array.add(carModel.getBrand()+"-"+carModel.getName());
+				}else {
+					array.add(carModel.getName());
+				}
 			}
 			object.put("status", "1");
 			object.put("list", array);

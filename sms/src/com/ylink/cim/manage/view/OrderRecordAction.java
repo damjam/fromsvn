@@ -14,6 +14,7 @@ import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.common.util.SendMsgUtilAlidayu;
 import com.ylink.cim.manage.dao.OrderDetailDao;
 import com.ylink.cim.manage.dao.OrderRecordDao;
 import com.ylink.cim.manage.domain.OrderDetail;
@@ -22,6 +23,7 @@ import com.ylink.cim.manage.service.OrderRecordService;
 
 import flink.etc.Assert;
 import flink.util.DateUtil;
+import flink.util.MsgUtils;
 import flink.util.Paginater;
 import flink.web.CRUDAction;
 import net.sf.json.JSONArray;
@@ -133,7 +135,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 			setResult(false, "操作失败", request);
 			return list();
 		}
-		return "toMain";
+		return list();
 	}
 	public String changeState() throws Exception {
 		try{
@@ -220,5 +222,38 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	public String detail() throws Exception {
 		return null;
 	}
-	
+	//发短信
+	public String sendTextMsg() {
+		JSONObject object = new JSONObject();
+		try{
+			String id = model.getId();
+			OrderRecord orderRecord = orderRecordDao.findById(id);
+			String clientTel = orderRecord.getClientTel();
+			Map<String, Object> map = getParaMap();
+			map.put("orderId", id);
+			List<OrderDetail> list = orderDetailDao.findList(map);
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0,size=list.size(); i < size; i++) {
+				OrderDetail orderDetail = list.get(i);
+				builder.append(orderDetail.getProductName());
+				if(i != size-1){
+					builder.append(",");
+				}
+			}
+			String template = "SMS_13785268";
+			String productNames = builder.toString();
+			String expressCom = "百世汇通";
+			String expressNo = "28347838743";
+			String comTel = " 18303952238";
+			String param = MsgUtils.r("\"a\":\"{?}\",\"b\":\"{?}\",\"c\":\"{?}\",\"d\":\"{?}\"", productNames, expressCom, expressNo, comTel);
+			param = "{"+param+"}";
+			SendMsgUtilAlidayu.sendNotice(template, param, clientTel);
+			object.put("state", "1");
+			
+		}catch(Exception e){
+			object.put("state", "0");
+		}
+		respond(response, object.toString());
+		return null;
+	}
 }

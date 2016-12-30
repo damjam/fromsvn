@@ -5,6 +5,8 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.log4j.Logger;
 
 import flink.util.SpringContext;
@@ -117,6 +119,7 @@ public class SendMobilMsgUtil {
 					"gbk"));
 			logger.debug(result);
 			post.releaseConnection();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import com.ylink.cim.common.util.ParaManager;
+import com.ylink.cim.common.util.ReadProperties;
 
 import flink.util.SpringContext;
 
@@ -18,7 +19,7 @@ public class SystemContextServlet extends HttpServlet {
 		getServletContext().setAttribute("comInfo", SpringContext.getService("comInfo"));
 
 		ParaManager.init();
-
+		
 	}
 
 }

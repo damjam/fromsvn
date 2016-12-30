@@ -12,6 +12,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.hssf.util.HSSFColor.RED;
 
 import com.ylink.cim.admin.dao.BranchDictDao;
 import com.ylink.cim.admin.dao.BranchParmDao;
@@ -47,6 +48,7 @@ public abstract class ParaManager {
 	//
 	private static Map<String, Map<String, String>> branchDictMap = new ConcurrentHashMap<String, Map<String, String>>();
 	
+	private static Map<String, String> propertiesMap = new ConcurrentHashMap<String, String>();
 	// 刷新间隔时间
 	private static long sleepTime = 10 * 60 * 1000;
 
@@ -54,12 +56,18 @@ public abstract class ParaManager {
 		return Integer.parseInt(getPara(key));
 	}
 
-	private static String getPara(final String key) {
+	public static String getPara(final String key) {
 		if (paraMap.size() == 0) {
 			init();
 		}
 
 		return paraMap.get(key);
+	}
+	public static String getProperty(final String key) {
+		if (propertiesMap.size() == 0) {
+			init();
+		}
+		return propertiesMap.get(key);
 	}
 	public static String getBranchPara(final String branchNo, final String key) {
 		if (branchParaMap.size() == 0) {
@@ -87,6 +95,14 @@ public abstract class ParaManager {
 		initBranchParm();
 		initSysDict();
 		initBranchDict();
+		initProperties();
+	}
+
+	private static void initProperties() {
+		ReadProperties properties = new ReadProperties("alipai.properties");
+		propertiesMap.put("url", properties.getValByKey("url"));
+		propertiesMap.put("appKey", properties.getValByKey("appKey"));
+		propertiesMap.put("appSecret", properties.getValByKey("appSecret"));
 	}
 
 	private static void initBranchDict() {

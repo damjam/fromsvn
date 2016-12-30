@@ -4,7 +4,7 @@
 %>
 <script type="text/javascript">
 	CONTEXT_PATH = '<%=_contextPath%>';
-	var loginUrl = CONTEXT_PATH+'/${tag}';
+	var loginUrl = CONTEXT_PATH;
 	function toHomePage(){
 		window.location.href = CONTEXT_PATH+'/pageHome.jsp';
 	}
