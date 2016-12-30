@@ -35,19 +35,23 @@
 				$('#queryForm').submit();
 			}
 			function delInfo(id){
-				if(window.confirm("确认删除?")){
+				layer.confirm("确认删除?", {
+					  btn: ['确定','取消'] //按钮
+				}, function(){
 					gotoUrl('${uri}?action=delete&id='+id);
-				}
+				});
 			}
 			function updateInfo(id){
 				var url="${uri}?action=toEdit&id="+id;
 				gotoUrl(url);  
 			}
 			function cancel(id){
-				if(confirm('确认取消订单?')){
+				layer.confirm('确认取消订单?', {
+					  btn: ['确定','取消'] //按钮
+				}, function(){
 					var url="${uri}?action=cancel&id="+id;
 					gotoUrl(url);  
-				}
+				});
 			}
 			function detail(id){
 				var url = CONTEXT_PATH+'/orderDetail.do?action=detailList&orderId='+id;
@@ -64,11 +68,13 @@
 				window.open(CONTEXT_PATH+'/reportAction.do?action=orderRecord&id='+id);
 			}
 			function pay(id){
-				if(confirm('确认操作?')){
+				layer.confirm('确认收款?', {
+					  btn: ['确定','取消'] //按钮
+				}, function(){
 					var url="${uri}?action=pay&id="+id;
 					$('#queryForm').attr('action', url);
 					$('#queryForm').submit();
-				}
+				});
 			}
 			
 		</script> 
