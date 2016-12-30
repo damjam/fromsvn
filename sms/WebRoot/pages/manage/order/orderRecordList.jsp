@@ -111,6 +111,20 @@
 							</td>
 						</tr>
 						<tr>
+							<td class="formlabel">
+								订单状态
+							</td>
+							<td>
+								<s:select list="#request.orderStates" name="state" listKey="value" listValue="name" headerKey="" headerValue="---请选择---"/>
+							</td>
+							<td class="formlabel">
+								付款状态
+							</td>
+							<td>
+								<s:select list="#request.payStates" name="payState" listKey="value" listValue="name" headerKey="" headerValue="---请选择---"/>
+							</td>
+						</tr>
+						<tr>
 						    <td></td>
 							<td colspan="5">
 								<input type="button" value="查询" id="btnQry"/>&nbsp;

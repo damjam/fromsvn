@@ -110,7 +110,7 @@ public class AccountJournalAction extends BaseAction implements
 			accountJournalService.deduct(model.getTradeType(),
 					model.getAmount(), "", model.getRemark(),
 					getSessionUser(request));
-			setResult(true, "操作成功", request);
+			setSucResult("操作成功", request);
 		} catch (BizException e) {
 			setResult(false, e.getMessage(), request);
 			return toWithdraw();

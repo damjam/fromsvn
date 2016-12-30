@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ModelDriven;
 import com.ylink.cim.common.state.DeliveryState;
 import com.ylink.cim.common.state.OrderState;
+import com.ylink.cim.common.state.PayState;
 import com.ylink.cim.common.type.SysDictType;
 import com.ylink.cim.common.util.ParaManager;
 import com.ylink.cim.common.util.SendMsgUtilAlidayu;
@@ -53,6 +54,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 		Map<String, Object> map = getParaMap();
 		map.put("clientName", model.getClientName());
 		map.put("clientTel", model.getClientTel());
+		map.put("state", model.getState());
 		map.put("payState", model.getPayState());
 		map.put("beginOrderDate", model.getBeginOrderDate());
 		map.put("endOrderDate", model.getEndOrderDate());
@@ -72,7 +74,8 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	
 	private void initSelect() {
 		request.setAttribute("countryTypes", ParaManager.getSysDict(SysDictType.CoutryType.getValue()));
-		
+		PayState.setInReq(request);
+		OrderState.setInReq(request);
 	}
 
 	@Override
@@ -129,7 +132,7 @@ public class OrderRecordAction extends CRUDAction implements ModelDriven<OrderRe
 	public String pay() throws Exception {
 		try{
 			orderRecordService.pay(model.getId(), getSessionUser(request));
-			setSucResult(request);
+			setResult(true, "操作成功", request);
 		}catch(Exception e){
 			e.printStackTrace();
 			setResult(false, "操作失败", request);
